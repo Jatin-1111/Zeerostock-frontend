@@ -78,7 +78,7 @@ export default function Footer() {
               </p>
               <p>
                 <Link href="#" className="hover:text-gray-900">
-                  Need Product
+                  Need Finance
                 </Link>
               </p>
             </div>
@@ -90,7 +90,7 @@ export default function Footer() {
               <input
                 type="email"
                 placeholder="Email"
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-gray-400"
+                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 text-gray-800"
               />
               <button className="px-4 py-2 bg-gray-900 text-white rounded-lg text-sm hover:bg-gray-800 transition-colors">
                 →
@@ -108,10 +108,10 @@ export default function Footer() {
             <div className="flex gap-4">
               <Link
                 href="#"
-                className="w-8 h-8 bg-white border border-gray-300 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors"
+                className="w-8 h-8 bg-white border border-gray-800 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors"
               >
                 <svg
-                  className="w-4 h-4"
+                  className="w-4 h-4 text-gray-700"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -121,10 +121,10 @@ export default function Footer() {
               </Link>
               <Link
                 href="#"
-                className="w-8 h-8 bg-white border border-gray-300 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors"
+                className="w-8 h-8 bg-white border border-gray-800 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors"
               >
                 <svg
-                  className="w-4 h-4"
+                  className="w-4 h-4 text-gray-700"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -133,10 +133,10 @@ export default function Footer() {
               </Link>
               <Link
                 href="#"
-                className="w-8 h-8 bg-white border border-gray-300 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors"
+                className="w-8 h-8 bg-white border border-gray-800 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors"
               >
                 <svg
-                  className="w-4 h-4"
+                  className="w-4 h-4 text-gray-700"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -145,10 +145,10 @@ export default function Footer() {
               </Link>
               <Link
                 href="#"
-                className="w-8 h-8 bg-white border border-gray-300 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors"
+                className="w-8 h-8 bg-white border border-gray-800 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors"
               >
                 <svg
-                  className="w-4 h-4"
+                  className="w-4 h-4 text-gray-700"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >

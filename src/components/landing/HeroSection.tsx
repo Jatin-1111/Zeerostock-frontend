@@ -17,7 +17,7 @@ export default function HeroSection() {
         </div>
 
         <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-12">
-          <button className="px-8 py-3 bg-white border-2 border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-colors flex items-center gap-2">
+          <button className="px-8 py-3 bg-white border-2 border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-white transition-colors flex items-center gap-2">
             Start Selling
             <svg
               className="w-5 h-5"
@@ -33,7 +33,7 @@ export default function HeroSection() {
               />
             </svg>
           </button>
-          <button className="px-8 py-3 bg-white border-2 border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-colors flex items-center gap-2">
+          <button className="px-8 py-3 bg-white border-2 border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-white transition-colors flex items-center gap-2">
             Start Buying
             <svg
               className="w-5 h-5"

@@ -75,7 +75,7 @@ export default function TestimonialsSection() {
               <p className="text-gray-500 text-sm mb-6">
                 45% reduction in bearing costs
               </p>
-              <button className="px-8 py-3 border-2 border-gray-800 rounded-lg text-gray-900 font-medium hover:bg-gray-50 transition-colors">
+              <button className="px-8 py-3 border-2 border-gray-800 rounded-lg text-gray-900 font-medium hover:bg-white transition-colors">
                 {testimonials[currentIndex].caseStudy}
               </button>
             </div>

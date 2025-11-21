@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-gray-100 border-t border-gray-200">
+    <footer className="w-full bg-gray-100 border-t border-gray-200 relative z-10">
       <div className="container mx-auto px-6 py-12">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-8">
           <div>
@@ -108,7 +108,7 @@ export default function Footer() {
             <div className="flex gap-4">
               <Link
                 href="#"
-                className="w-8 h-8 bg-white border border-gray-800 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors"
+                className="w-8 h-8 bg-white border border-gray-800 rounded-full flex items-center justify-center hover:bg-white transition-colors"
               >
                 <svg
                   className="w-4 h-4 text-gray-700"
@@ -121,7 +121,7 @@ export default function Footer() {
               </Link>
               <Link
                 href="#"
-                className="w-8 h-8 bg-white border border-gray-800 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors"
+                className="w-8 h-8 bg-white border border-gray-800 rounded-full flex items-center justify-center hover:bg-white transition-colors"
               >
                 <svg
                   className="w-4 h-4 text-gray-700"
@@ -133,7 +133,7 @@ export default function Footer() {
               </Link>
               <Link
                 href="#"
-                className="w-8 h-8 bg-white border border-gray-800 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors"
+                className="w-8 h-8 bg-white border border-gray-800 rounded-full flex items-center justify-center hover:bg-white transition-colors"
               >
                 <svg
                   className="w-4 h-4 text-gray-700"
@@ -145,7 +145,7 @@ export default function Footer() {
               </Link>
               <Link
                 href="#"
-                className="w-8 h-8 bg-white border border-gray-800 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors"
+                className="w-8 h-8 bg-white border border-gray-800 rounded-full flex items-center justify-center hover:bg-white transition-colors"
               >
                 <svg
                   className="w-4 h-4 text-gray-700"

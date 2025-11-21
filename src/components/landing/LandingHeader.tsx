@@ -12,20 +12,20 @@ export default function Header() {
 
         <nav className="hidden md:flex items-center gap-4">
           <Link
-            href="#"
-            className="px-6 py-2 border border-gray-800 text-gray-900 hover:bg-gray-50 transition-colors"
+            href="/home"
+            className="px-6 py-2 border border-gray-800 text-gray-900 hover:bg-white transition-colors"
           >
             Home
           </Link>
           <Link
             href="#"
-            className="px-6 py-2 border border-gray-800 text-gray-900 hover:bg-gray-50 transition-colors"
+            className="px-6 py-2 border border-gray-800 text-gray-900 hover:bg-white transition-colors"
           >
             About Us
           </Link>
           <Link
             href="#"
-            className="px-6 py-2 border border-gray-800 text-gray-900 hover:bg-gray-50 transition-colors"
+            className="px-6 py-2 border border-gray-800 text-gray-900 hover:bg-white transition-colors"
           >
             Contact
           </Link>

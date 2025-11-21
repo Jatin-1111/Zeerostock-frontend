@@ -8,7 +8,7 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-8">
+    <div className="min-h-screen bg-white flex items-center justify-center px-4 py-8">
       <div className="w-full max-w-md bg-white border-2 border-gray-200 rounded-lg p-8">
         <div className="mb-6">
           <label className="block text-sm font-medium text-gray-700 mb-3">
@@ -20,7 +20,7 @@ export default function LoginPage() {
               onClick={() => setUserType("buyer")}
               className={`py-8 border-2 rounded-lg transition-colors ${
                 userType === "buyer"
-                  ? "border-gray-900 bg-gray-50"
+                  ? "border-gray-900 bg-white"
                   : "border-gray-300 hover:border-gray-400"
               }`}
             >
@@ -40,7 +40,7 @@ export default function LoginPage() {
               onClick={() => setUserType("supplier")}
               className={`py-8 border-2 rounded-lg transition-colors ${
                 userType === "supplier"
-                  ? "border-gray-900 bg-gray-50"
+                  ? "border-gray-900 bg-white"
                   : "border-gray-300 hover:border-gray-400"
               }`}
             >
@@ -145,7 +145,7 @@ export default function LoginPage() {
 
           <button
             type="button"
-            className="w-full py-3 border-2 text-gray-800 border-gray-300 rounded font-medium hover:bg-gray-50 transition-colors flex items-center justify-center gap-2"
+            className="w-full py-3 border-2 text-gray-800 border-gray-300 rounded font-medium hover:bg-white transition-colors flex items-center justify-center gap-2"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path

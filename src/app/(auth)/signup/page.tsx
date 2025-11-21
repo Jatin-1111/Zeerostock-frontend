@@ -8,7 +8,7 @@ export default function SignUpPage() {
   const [agreedToTerms, setAgreedToTerms] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-8">
+    <div className="min-h-screen bg-white flex items-center justify-center px-4 py-8">
       <div className="w-full max-w-md bg-white border-2 border-gray-200 rounded-lg p-8">
         <div className="text-center mb-8">
           <h1 className="text-2xl font-bold text-gray-900 mb-2">
@@ -206,7 +206,7 @@ export default function SignUpPage() {
 
           <button
             type="button"
-            className="w-full py-3 border-2 text-gray-800 border-gray-300 rounded font-medium hover:bg-gray-50 transition-colors flex items-center justify-center gap-2"
+            className="w-full py-3 border-2 text-gray-800 border-gray-300 rounded font-medium hover:bg-white transition-colors flex items-center justify-center gap-2"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path

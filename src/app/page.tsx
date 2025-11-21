@@ -1,10 +1,9 @@
-import Header from "@/components/Header";
-import HeroSection from "@/components/HeroSection";
-import FeaturesSection from "@/components/FeaturesSection";
-import BenefitsSection from "@/components/BenefitsSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import CTASection from "@/components/CTASection";
-import Footer from "@/components/Footer";
+import HeroSection from "@/components/landing/HeroSection";
+import FeaturesSection from "@/components/landing/FeaturesSection";
+import BenefitsSection from "@/components/landing/BenefitsSection";
+import TestimonialsSection from "@/components/landing/TestimonialsSection";
+import CTASection from "@/components/landing/CTASection";
+import Header from "@/components/landing/LandingHeader";
 
 export default function Home() {
   return (
@@ -17,7 +16,6 @@ export default function Home() {
         <TestimonialsSection />
         <CTASection />
       </main>
-      <Footer />
     </div>
   );
 }

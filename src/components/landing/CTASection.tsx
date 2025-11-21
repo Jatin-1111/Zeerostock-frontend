@@ -16,7 +16,7 @@ export default function CTASection() {
           <button className="px-8 py-4 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors">
             Sign Up Now
           </button>
-          <button className="px-8 py-4 bg-white border-2 border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors">
+          <button className="px-8 py-4 bg-white border-2 border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-white transition-colors">
             Schedule Demo
           </button>
         </div>

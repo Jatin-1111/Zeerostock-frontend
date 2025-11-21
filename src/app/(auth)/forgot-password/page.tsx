@@ -13,7 +13,7 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-8">
+    <div className="min-h-screen bg-white flex items-center justify-center px-4 py-8">
       <div className="w-full max-w-md bg-white border-2 border-gray-200 rounded-lg p-8 relative">
         <button
           className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"

@@ -120,7 +120,7 @@ export default function MyOrdersPage() {
         <div className="mt-8 text-center">
           <p className="text-sm text-gray-600">
             redirect to track shipment{" "}
-            <Link href="/track-order" className="text-blue-600 underline">
+            <Link href="/buyer/track-order" className="text-blue-600 underline">
               on-click
             </Link>
           </p>

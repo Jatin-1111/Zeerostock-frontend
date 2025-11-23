@@ -276,9 +276,9 @@ export default function BuyerSidebar() {
                 My Orders
               </Link>
               <Link
-                href="/track-order"
+                href="/buyer/track-order"
                 className={`flex items-center gap-3 px-3 py-2 rounded text-sm ${
-                  isActive("/track-order")
+                  isActive("/buyer/track-order")
                     ? "bg-gray-100 text-gray-900 font-medium"
                     : "text-gray-900 hover:bg-gray-100"
                 }`}

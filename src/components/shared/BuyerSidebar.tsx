@@ -83,6 +83,18 @@ export default function BuyerSidebar() {
                 >
                   My Quotes
                 </Link>
+                <Link
+                  href="/buyer/my-orders"
+                  className="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-100"
+                >
+                  My Orders
+                </Link>
+                <Link
+                  href="/buyer/wishlist"
+                  className="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-100"
+                >
+                  Wishlist
+                </Link>
               </div>
             )}
           </div>
@@ -140,9 +152,9 @@ export default function BuyerSidebar() {
                 My RFQs
               </Link>
               <Link
-                href="/buyer/saved"
+                href="/buyer/wishlist"
                 className={`flex items-center gap-3 px-3 py-2 rounded text-sm ${
-                  isActive("/buyer/saved")
+                  isActive("/buyer/wishlist")
                     ? "bg-gray-100 text-gray-900 font-medium"
                     : "text-gray-900 hover:bg-gray-100"
                 }`}
@@ -157,10 +169,56 @@ export default function BuyerSidebar() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
-                    d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                   />
                 </svg>
-                Saved Items
+                Wishlist
+              </Link>
+              <Link
+                href="/buyer/my-quotes"
+                className={`flex items-center gap-3 px-3 py-2 rounded text-sm ${
+                  isActive("/buyer/my-quotes")
+                    ? "bg-gray-100 text-gray-900 font-medium"
+                    : "text-gray-900 hover:bg-gray-100"
+                }`}
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  />
+                </svg>
+                My Quotes
+              </Link>
+              <Link
+                href="/buyer/post-rfq"
+                className={`flex items-center gap-3 px-3 py-2 rounded text-sm ${
+                  isActive("/buyer/post-rfq")
+                    ? "bg-gray-100 text-gray-900 font-medium"
+                    : "text-gray-900 hover:bg-gray-100"
+                }`}
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 4v16m8-8H4"
+                  />
+                </svg>
+                Post RFQ
               </Link>
               <Link
                 href="/buyer/insights"
@@ -195,9 +253,9 @@ export default function BuyerSidebar() {
             </h3>
             <nav className="space-y-1">
               <Link
-                href="/buyer/orders"
+                href="/buyer/my-orders"
                 className={`flex items-center gap-3 px-3 py-2 rounded text-sm ${
-                  isActive("/buyer/orders")
+                  isActive("/buyer/my-orders")
                     ? "bg-gray-100 text-gray-900 font-medium"
                     : "text-gray-900 hover:bg-gray-100"
                 }`}
@@ -215,7 +273,7 @@ export default function BuyerSidebar() {
                     d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
                   />
                 </svg>
-                Order History
+                My Orders
               </Link>
               <Link
                 href="/track-order"

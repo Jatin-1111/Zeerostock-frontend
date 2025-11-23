@@ -53,7 +53,7 @@ export default function Header() {
               href="/about"
               className="px-4 py-2 border-2 border-gray-900 rounded font-medium text-gray-900 hover:bg-gray-50 transition-colors"
             >
-              About U
+              About Us
             </Link>
             <Link
               href="/buyer"

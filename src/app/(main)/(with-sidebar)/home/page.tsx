@@ -1,12 +1,12 @@
 import Sidebar from "@/components/shared/Sidebar";
-import HeroSectionV1 from "@/components/home-v1/HeroSectionV1";
-import PlatformSection from "@/components/home-v1/PlatformSection";
-import UniqueFeaturesSection from "@/components/home-v1/UniqueFeaturesSection";
-import TrendingListingsSection from "@/components/home-v1/TrendingListingsSection";
-import HowItWorksSection from "@/components/home-v1/HowItWorksSection";
-import ROICalculatorSection from "@/components/home-v1/ROICalculatorSection";
-import TestimonialsSectionV1 from "@/components/home-v1/TestimonialsSectionV1";
-import FinalCTASection from "@/components/home-v1/FinalCTASection";
+import HeroSectionV1 from "@/components/home/HeroSectionV1";
+import PlatformSection from "@/components/home/PlatformSection";
+import UniqueFeaturesSection from "@/components/home/UniqueFeaturesSection";
+import TrendingListingsSection from "@/components/home/TrendingListingsSection";
+import HowItWorksSection from "@/components/home/HowItWorksSection";
+import ROICalculatorSection from "@/components/home/ROICalculatorSection";
+import TestimonialsSectionV1 from "@/components/home/TestimonialsSectionV1";
+import FinalCTASection from "@/components/home/FinalCTASection";
 
 export default function HomeV1Page() {
   return (

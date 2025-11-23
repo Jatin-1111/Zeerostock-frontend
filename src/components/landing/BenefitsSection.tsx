@@ -26,9 +26,9 @@ export default function BenefitsSection() {
             <div className="space-y-3 mb-8">
               {benefits.map((benefit, index) => (
                 <div key={index} className="flex items-center gap-3">
-                  <div className="w-6 h-6 rounded-full border-2 border-green-500 flex items-center justify-center shrink-0">
+                  <div className="w-6 h-6 rounded-full border-2 border-gray-900 flex items-center justify-center shrink-0">
                     <svg
-                      className="w-4 h-4 text-green-500"
+                      className="w-4 h-4 text-gray-900"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"

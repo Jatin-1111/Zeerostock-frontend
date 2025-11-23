@@ -56,7 +56,7 @@ export default function Header() {
               About U
             </Link>
             <Link
-              href="/buyers"
+              href="/buyer"
               className="px-4 py-2 border-2 border-gray-900 rounded font-medium text-gray-900 hover:bg-gray-50 transition-colors"
             >
               Buyers
@@ -143,7 +143,7 @@ export default function Header() {
                       My Orders
                     </Link>
                     <Link
-                      href="/settings"
+                      href="/buyer/settings"
                       className="block px-4 py-2 text-gray-900 hover:bg-gray-100 transition-colors"
                       onClick={() => setIsUserMenuOpen(false)}
                     >

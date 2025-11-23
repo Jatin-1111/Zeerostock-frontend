@@ -1,4 +1,3 @@
-import CartSidebar from "@/components/cart/CartSidebar";
 import CartItems from "@/components/cart/CartItems";
 import OrderSummary from "@/components/cart/OrderSummary";
 import RelatedProducts from "@/components/cart/RelatedProducts";
@@ -7,8 +6,6 @@ export default function CartPage() {
   return (
     <div className="min-h-screen bg-white">
       <div className="flex">
-        <CartSidebar />
-
         <div className="flex-1 p-4 md:p-8">
           <div className="max-w-7xl mx-auto">
             {/* Page Header */}

@@ -9,7 +9,7 @@ import CTASection from "@/components/buyer/CTASection";
 
 export default function BuyerLandingPage() {
   return (
-    <div className="bg-white">
+    <div className="bg-white p-10">
       <HeroSection />
       <WhyChooseSection />
       <TestimonialsSection />

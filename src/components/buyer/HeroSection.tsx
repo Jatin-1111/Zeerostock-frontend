@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export default function HeroSection() {
   return (
-    <section className="bg-white py-20 px-6">
-      <div className="max-w-6xl mx-auto">
+    <section className="bg-white p-8">
+      <div className="w-full mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <p className="text-sm text-gray-600 mb-4">For Smart Buyers</p>

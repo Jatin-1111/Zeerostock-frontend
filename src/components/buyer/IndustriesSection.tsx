@@ -1,6 +1,6 @@
 export default function IndustriesSection() {
   return (
-    <section className="bg-gray-50 py-20 px-6">
+    <section className="bg-white py-20 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">

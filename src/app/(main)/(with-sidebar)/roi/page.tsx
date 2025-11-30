@@ -10,7 +10,7 @@ export default function ROIPage() {
     <div className="bg-white min-h-screen">
       <div className="max-w-full mx-auto">
         {/* Header */}
-        <div className="text-center mb-8 px-6 py-32">
+        <div className="text-center mb-8 px-6 py-14">
           <div className="inline-flex items-center gap-2 px-4 py-1 bg-gray-100 border border-gray-900 rounded-full mb-4">
             <svg
               className="w-4 h-4 text-gray-900"
@@ -41,7 +41,7 @@ export default function ROIPage() {
         <div className="bg-black h-0.5 mb-12" />
 
         {/* Calculator */}
-        <div className="bg-white px-6 py-8 border-2 border-gray-900 rounded mb-12 max-w-6xl mx-auto">
+        <div className="bg-white px-6 py-8 border-2 border-gray-900 rounded mb-12 max-w-7xl mx-auto">
           <Calculator type={activeTab} />
         </div>
 

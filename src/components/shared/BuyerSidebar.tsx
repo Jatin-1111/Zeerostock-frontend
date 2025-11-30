@@ -72,19 +72,19 @@ export default function BuyerSidebar() {
                   Dashboard
                 </Link>
                 <Link
-                  href="/buyer/post-rfq"
+                  href="/buyer/rfq"
                   className="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-100"
                 >
                   Post RFQ
                 </Link>
                 <Link
-                  href="/buyer/my-quotes"
+                  href="/buyer/quotes"
                   className="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-100"
                 >
                   My Quotes
                 </Link>
                 <Link
-                  href="/buyer/my-orders"
+                  href="/buyer/orders"
                   className="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-100"
                 >
                   My Orders
@@ -175,9 +175,9 @@ export default function BuyerSidebar() {
                 Wishlist
               </Link>
               <Link
-                href="/buyer/my-quotes"
+                href="/buyer/quotes"
                 className={`flex items-center gap-3 px-3 py-2 rounded text-sm ${
-                  isActive("/buyer/my-quotes")
+                  isActive("/buyer/quotes")
                     ? "bg-gray-100 text-gray-900 font-medium"
                     : "text-gray-900 hover:bg-gray-100"
                 }`}
@@ -198,9 +198,9 @@ export default function BuyerSidebar() {
                 My Quotes
               </Link>
               <Link
-                href="/buyer/post-rfq"
+                href="/buyer/rfq"
                 className={`flex items-center gap-3 px-3 py-2 rounded text-sm ${
-                  isActive("/buyer/post-rfq")
+                  isActive("/buyer/rfq")
                     ? "bg-gray-100 text-gray-900 font-medium"
                     : "text-gray-900 hover:bg-gray-100"
                 }`}
@@ -253,9 +253,9 @@ export default function BuyerSidebar() {
             </h3>
             <nav className="space-y-1">
               <Link
-                href="/buyer/my-orders"
+                href="/buyer/orders"
                 className={`flex items-center gap-3 px-3 py-2 rounded text-sm ${
-                  isActive("/buyer/my-orders")
+                  isActive("/buyer/orders")
                     ? "bg-gray-100 text-gray-900 font-medium"
                     : "text-gray-900 hover:bg-gray-100"
                 }`}

@@ -29,10 +29,7 @@ export default function SettingsSidebar({
   return (
     <div className="w-full lg:w-64 space-y-2">
       <div className="mb-6">
-        <div className="flex items-center gap-2 mb-2">
-          <SettingsIcon className="w-5 h-5 text-gray-900" />
-          <h2 className="text-xl font-bold text-gray-900">Settings</h2>
-        </div>
+        <h2 className="text-xl font-bold text-gray-900 mb-1">Settings</h2>
         <p className="text-sm text-gray-500">
           Manage your account and preferences
         </p>
@@ -44,14 +41,14 @@ export default function SettingsSidebar({
           <button
             key={item.id}
             onClick={() => onTabChange(item.id)}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded border-2 text-left transition-colors ${
+            className={`w-full flex items-center gap-3 px-4 py-3 border text-left transition-colors ${
               activeTab === item.id
                 ? "bg-gray-900 text-white border-gray-900"
-                : "bg-white text-gray-900 border-gray-900 hover:bg-gray-50"
+                : "bg-white text-gray-900 border-gray-300 hover:bg-gray-50"
             }`}
           >
             <Icon className="w-5 h-5" />
-            <span className="font-medium">{item.label}</span>
+            <span className="text-sm">{item.label}</span>
           </button>
         );
       })}

@@ -87,7 +87,7 @@ export default function SecuritySettings() {
                       sessionTimeout: e.target.value,
                     })
                   }
-                  className="w-48 px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
+                  className="w-48 px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-black"
                 />
               </div>
             </div>

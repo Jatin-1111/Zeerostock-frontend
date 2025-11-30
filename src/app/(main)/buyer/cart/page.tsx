@@ -7,7 +7,7 @@ export default function CartPage() {
     <div className="min-h-screen bg-white">
       <div className="flex">
         <div className="flex-1 p-4 md:p-8">
-          <div className="max-w-7xl mx-auto">
+          <div className="max-w-8xl mx-auto">
             {/* Page Header */}
             <div className="mb-6 flex items-center justify-between">
               <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-3">

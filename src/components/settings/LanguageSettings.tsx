@@ -60,7 +60,7 @@ export default function LanguageSettings() {
                 onChange={(e) =>
                   setFormData({ ...formData, language: e.target.value })
                 }
-                className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
+                className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-black"
               />
             </div>
 
@@ -72,7 +72,7 @@ export default function LanguageSettings() {
                 onChange={(e) =>
                   setFormData({ ...formData, region: e.target.value })
                 }
-                className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
+                className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-black"
               />
             </div>
           </div>
@@ -93,7 +93,7 @@ export default function LanguageSettings() {
                 onChange={(e) =>
                   setFormData({ ...formData, dateFormat: e.target.value })
                 }
-                className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
+                className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-black"
               />
             </div>
 
@@ -107,7 +107,7 @@ export default function LanguageSettings() {
                 onChange={(e) =>
                   setFormData({ ...formData, timeFormat: e.target.value })
                 }
-                className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
+                className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-black"
               />
             </div>
 
@@ -121,7 +121,7 @@ export default function LanguageSettings() {
                 onChange={(e) =>
                   setFormData({ ...formData, currency: e.target.value })
                 }
-                className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
+                className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 text-black"
               />
             </div>
           </div>

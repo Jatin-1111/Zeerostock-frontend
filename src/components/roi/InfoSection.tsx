@@ -1,7 +1,7 @@
 export default function InfoSection() {
   return (
     <section className="bg-white py-12">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
           Understanding ROI Calculations
         </h2>

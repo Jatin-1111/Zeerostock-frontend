@@ -1,24 +1,28 @@
 export default function CTASection() {
   return (
-    <section className="w-full bg-linear-to-b from-gray-50 to-white py-20 px-6 border-t border-gray-200">
-      <div className="container mx-auto max-w-4xl text-center">
-        <h2 className="text-4xl font-bold text-gray-900 mb-6">
-          Ready to Transform Your Business?
-        </h2>
-        <p className="text-lg text-gray-600 mb-8">
-          Join thousands of businesses already monetizing their surplus
-          inventory
-          <br />
-          value
-        </p>
+    <section className="w-full bg-[#eefbf6] py-16">
+      <div className="max-w-[1440px] mx-auto px-20 flex justify-center">
+        <div className="w-[1276px] h-[399px] bg-[#39ac7a] rounded-[30px] overflow-hidden flex flex-col items-center justify-center px-16 text-center">
+          {/* Headline */}
+          <h2 className="text-[45px] leading-normal font-semibold text-white mb-5 font-['Poppins']">
+            Ready to Transform Your Business
+          </h2>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button className="px-8 py-4 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors">
-            Sign Up Now
-          </button>
-          <button className="px-8 py-4 bg-white border-2 border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-white transition-colors">
-            Schedule Demo
-          </button>
+          {/* Subtitle */}
+          <p className="text-[22px] font-semibold text-gray-700 mb-12 font-['Poppins']">
+            Join thousands of businesses already maximizing their surplus
+            inventory value
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex items-center gap-[90px]">
+            <button className="w-[280px] h-[59px] bg-[#1E3A8A] text-white text-[22px] font-semibold rounded-xl hover:bg-[#0a2540]/90 transition-colors font-['Poppins']">
+              Sign Up Free
+            </button>
+            <button className="w-[280px] h-[60px] bg-white text-[#2aae7a] text-[22px] font-semibold rounded-xl hover:bg-white/90 transition-colors font-['Poppins']">
+              Schedule Demo
+            </button>
+          </div>
         </div>
       </div>
     </section>

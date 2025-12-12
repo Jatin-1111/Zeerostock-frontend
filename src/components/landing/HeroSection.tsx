@@ -1,82 +1,51 @@
 export default function HeroSection() {
   return (
-    <section className="relative w-full bg-linear-to-b from-gray-50 to-white py-20 px-6">
-      <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-12">
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-            Transform Surplus Into
-            <br />
-            Revenue Today
-          </h1>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            The only B2B marketplace you need to buy, sell, or broker surplus
-            inventory
-            <br />
-            with complete trust and transparency.
-          </p>
-        </div>
+    <section className="relative w-full h-[751px] mt-[93px] overflow-hidden shadow-[0px_1px_4px_0px_rgba(24,181,34,0.25)]">
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <img
+          src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1442&h=800&fit=crop&q=80"
+          alt="Industrial warehouse background"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-600/40 via-red-600/30 to-orange-700/40" />
+      </div>
 
-        <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-12">
-          <button className="px-8 py-3 bg-white border-2 border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-white transition-colors flex items-center gap-2">
+      {/* Content */}
+      <div className="relative h-full max-w-[1440px] mx-auto px-6 flex flex-col items-center justify-center">
+        {/* Main Headline */}
+        <h1 className="text-center mb-6 max-w-[850px]">
+          <span className="text-[100px] leading-[1.1] font-extrabold font-['Poppins']">
+            <span className="text-white">Transform Surplus </span>
+            <span className="text-white">into </span>
+            <span className="text-[#2aae7a]">Revenue Today</span>
+          </span>
+        </h1>
+
+        {/* Subtitle */}
+        <p className="text-center text-white text-[20px] leading-[25px] font-semibold max-w-[830px] mb-12 font-['Poppins']">
+          The only B2B marketplace you need to buy, sell or broker surplus
+          inventory with complete trust and transparency
+        </p>
+
+        {/* CTA Buttons */}
+        <div className="flex items-center gap-8 mb-32">
+          <button className="w-[280px] h-[70px] bg-[#022778] text-white text-[22px] font-semibold rounded-xl hover:bg-[#022778]/90 transition-colors font-['Poppins']">
             Start Selling
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
           </button>
-          <button className="px-8 py-3 bg-white border-2 border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-white transition-colors flex items-center gap-2">
+          <button className="w-[280px] h-[70px] bg-white text-[#2aae7a] text-[22px] font-semibold rounded-xl hover:bg-white/90 transition-colors font-['Poppins']">
             Start Buying
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
           </button>
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-12 md:gap-16 text-sm text-gray-600 mb-8">
-          <div className="text-center">
-            <span className="font-semibold">10,000+ Users</span>
+        {/* Stats Bar */}
+        <div className="absolute bottom-0 left-0 right-0 h-[76px] flex items-center justify-center">
+          <div className="flex items-center justify-center gap-16 text-white text-[24px] font-bold font-['Poppins']">
+            <span>10,000 Businesses Connected</span>
+            <span>$50M+ Inventory Traded</span>
+            <span>97% Success Rate</span>
+            <span>24/7 Support</span>
           </div>
-          <div className="text-center">
-            <span className="font-semibold">$50M+ Volume</span>
-          </div>
-          <div className="text-center">
-            <span className="font-semibold">95% Success Rate</span>
-          </div>
-        </div>
-
-        <div className="flex justify-center">
-          <svg
-            className="w-8 h-8 text-gray-400"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 14l-7 7m0 0l-7-7m7 7V3"
-            />
-          </svg>
         </div>
       </div>
     </section>

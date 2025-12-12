@@ -4,7 +4,6 @@ import TestimonialsSection from "@/components/supplier-landing/TestimonialsSecti
 import CategoriesSection from "@/components/supplier-landing/CategoriesSection";
 import ToolsSection from "@/components/supplier-landing/ToolsSection";
 import HowItWorksSection from "@/components/supplier-landing/HowItWorksSection";
-import PricingSection from "@/components/supplier-landing/PricingSection";
 import FAQSection from "@/components/supplier-landing/FAQSection";
 
 export default function SupplierDashboardPage() {
@@ -16,7 +15,6 @@ export default function SupplierDashboardPage() {
       <CategoriesSection />
       <ToolsSection />
       <HowItWorksSection />
-      <PricingSection />
       <FAQSection />
     </div>
   );

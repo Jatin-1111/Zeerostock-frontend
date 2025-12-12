@@ -119,7 +119,7 @@ export default function PrivacySettings() {
                 </svg>
                 Export My Data
               </button>
-              <button className="px-6 py-2.5 bg-red-600 border-2 border-gray-900 text-white rounded font-medium hover:bg-red-700 flex items-center gap-2">
+              <button className="px-6 py-2.5 bg-red-6w00 border-2 border-gray-900 text-white rounded font-medium hover:bg-red-700 flex items-center gap-2">
                 <svg
                   className="w-4 h-4 text-white"
                   fill="none"

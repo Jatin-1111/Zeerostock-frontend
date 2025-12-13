@@ -1,26 +1,33 @@
 "use client";
 
 import { useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function TestimonialsSection() {
   const testimonials = [
     {
       company: "TechFlow Industries",
       industry: "Electronics",
-      savings: "$2.3M",
-      recovery: "Recovered",
-      caseStudy: "Read Case Study",
-      quote:
-        "Zeerostock helped us recover millions in our surplus inventory within just 48 days of registration.",
+      savings: "$2.3M Recovered",
+      impact: "45% reduction in holding costs",
+      image:
+        "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=900&h=515&fit=crop&q=80",
     },
     {
-      company: "BuildRight Construction",
-      industry: "Materials",
-      savings: "$870K",
-      recovery: "savings",
-      caseStudy: "View Details",
-      quote:
-        "15% labour on sales in less than 30 days with zero hassle or intermediaries.",
+      company: "BuildRight Materials",
+      industry: "Construction",
+      savings: "$1.8M Recovered",
+      impact: "60% faster inventory turnover",
+      image:
+        "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=900&h=515&fit=crop&q=80",
+    },
+    {
+      company: "GlobalTech Solutions",
+      industry: "Technology",
+      savings: "$3.1M Recovered",
+      impact: "35% cost reduction achieved",
+      image:
+        "https://images.unsplash.com/photo-1552664730-d307ca884978?w=900&h=515&fit=crop&q=80",
     },
   ];
 
@@ -37,72 +44,93 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section className="w-full bg-white py-20 px-6 border-t border-gray-200">
-      <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            Real Results from Real Businesses
+    <section className="relative w-full bg-[#f0fdf7] py-20">
+      <div className="max-w-[1440px] mx-auto px-20">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-[48px] leading-tight font-bold text-[#0A2540] mb-4 font-['Poppins']">
+            Real Results from{" "}
+            <span className="text-[#2aae7a]">Real Businesses</span>
           </h2>
-          <p className="text-gray-600">
-            See how companies like yours are monetizing value from surplus
+          <p className="text-[18px] text-[#6B7280] font-['Poppins']">
+            See how companies like yours are maximizing value from surplus
             inventory
           </p>
         </div>
 
-        <div className="relative max-w-4xl mx-auto">
-          <div className="relative bg-white border-2 border-gray-800 rounded-lg p-12">
-            <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 z-10">
-              <button
-                onClick={prevTestimonial}
-                className="relative w-0 h-0 border-t-38 border-t-transparent border-r-46 border-r-white border-b-38 border-b-transparent hover:opacity-80 transition-opacity"
-                aria-label="Previous testimonial"
-              >
-                <div className="absolute top-1/2 left-0 -translate-y-1/2 w-0 h-0 border-t-40 border-t-transparent border-r-48 border-r-gray-800 border-b-40 border-b-transparent"></div>
+        {/* Carousel Container */}
+        <div className="relative flex items-center justify-center gap-6">
+          {/* Left Preview Card */}
+          <div className="w-[140px] h-[400px] rounded-[32px] overflow-hidden brightness-[0.4]">
+            <img
+              src={
+                testimonials[
+                  (currentIndex - 1 + testimonials.length) % testimonials.length
+                ].image
+              }
+              alt="Preview"
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          {/* Left Arrow */}
+          <button
+            onClick={prevTestimonial}
+            className="absolute left-[50px] top-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg z-20 hover:bg-gray-50 transition-colors"
+            aria-label="Previous testimonial"
+          >
+            <ChevronLeft className="w-6 h-6 text-[#0A2540]" strokeWidth={3} />
+          </button>
+
+          {/* Main Card */}
+          <div className="relative w-[700px] h-[450px] rounded-[32px] overflow-hidden shadow-2xl">
+            <img
+              src={testimonials[currentIndex].image}
+              alt={testimonials[currentIndex].company}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+
+            <div className="relative h-full flex flex-col items-center justify-center p-10 text-center">
+              {/* Content */}
+              <div className="mb-8">
+                <p className="text-[36px] leading-tight font-bold text-[#2aae7a] mb-3 font-['Poppins']">
+                  {testimonials[currentIndex].savings}
+                </p>
+                <h3 className="text-[36px] leading-tight font-bold text-white mb-2 font-['Poppins']">
+                  {testimonials[currentIndex].company}
+                </h3>
+                <p className="text-[24px] leading-normal font-semibold text-white mb-3 font-['Poppins']">
+                  {testimonials[currentIndex].industry}
+                </p>
+                <p className="text-[20px] font-normal text-white/90 font-['Poppins']">
+                  {testimonials[currentIndex].impact}
+                </p>
+              </div>
+
+              {/* CTA Button */}
+              <button className="w-full max-w-[400px] py-4 bg-[#2aae7a] rounded-xl text-[20px] font-semibold text-white hover:bg-[#2aae7a]/90 transition-colors font-['Poppins']">
+                Read Case Study
               </button>
             </div>
+          </div>
 
-            <div className="text-center py-8">
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                {testimonials[currentIndex].company}
-              </h3>
-              <p className="text-gray-600 mb-6">
-                {testimonials[currentIndex].industry}
-              </p>
-              <p className="text-4xl font-bold text-green-600 mb-6">
-                {testimonials[currentIndex].savings}{" "}
-                {testimonials[currentIndex].recovery}
-              </p>
-              <p className="text-gray-500 text-sm mb-6">
-                45% reduction in bearing costs
-              </p>
-              <button className="px-8 py-3 border-2 border-gray-800 rounded-lg text-gray-900 font-medium hover:bg-white transition-colors">
-                {testimonials[currentIndex].caseStudy}
-              </button>
-            </div>
+          {/* Right Arrow */}
+          <button
+            onClick={nextTestimonial}
+            className="absolute right-[50px] top-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg z-20 hover:bg-gray-50 transition-colors"
+            aria-label="Next testimonial"
+          >
+            <ChevronRight className="w-6 h-6 text-[#0A2540]" strokeWidth={3} />
+          </button>
 
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10">
-              <button
-                onClick={nextTestimonial}
-                className="relative w-0 h-0 border-t-38 border-t-transparent border-l-46 border-l-white border-b-38 border-b-transparent hover:opacity-80 transition-opacity"
-                aria-label="Next testimonial"
-              >
-                <div className="absolute top-1/2 right-0 -translate-y-1/2 w-0 h-0 border-t-40 border-t-transparent border-l-48 border-l-gray-800 border-b-40 border-b-transparent"></div>
-              </button>
-            </div>
-
-            <div className="flex justify-center gap-3 mt-6">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`transition-all ${
-                    index === currentIndex
-                      ? "w-12 h-1 bg-gray-400 rounded-full"
-                      : "w-3 h-3 bg-gray-300 rounded-full"
-                  }`}
-                />
-              ))}
-            </div>
+          {/* Right Preview Card */}
+          <div className="w-[140px] h-[400px] rounded-[32px] overflow-hidden brightness-[0.4]">
+            <img
+              src={testimonials[(currentIndex + 1) % testimonials.length].image}
+              alt="Preview"
+              className="w-full h-full object-cover"
+            />
           </div>
         </div>
       </div>

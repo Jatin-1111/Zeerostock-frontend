@@ -10,7 +10,7 @@ export default function ProductInfo() {
     <div className="space-y-6">
       {/* Breadcrumb */}
       <div className="flex items-center gap-2 text-sm text-gray-600">
-        <Link href="/" className="hover:text-gray-900">
+        <Link href="/home" className="hover:text-gray-900">
           Back to Marketplace
         </Link>
         <span>/</span>

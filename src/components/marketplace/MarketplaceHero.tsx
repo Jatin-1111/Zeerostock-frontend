@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import EnhancedSearchInput from "@/components/search/EnhancedSearchInput";
 
 export default function MarketplaceHero() {
   return (
@@ -14,16 +17,10 @@ export default function MarketplaceHero() {
 
       {/* Search Bar */}
       <div className="max-w-3xl mx-auto mb-6">
-        <div className="relative flex gap-2">
-          <input
-            type="text"
-            placeholder="Search surplus products, suppliers..."
-            className="flex-1 px-4 py-3 border border-gray-300 text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400"
-          />
-          <button className="px-6 py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors">
-            Search
-          </button>
-        </div>
+        <EnhancedSearchInput
+          placeholder="Search surplus products, suppliers..."
+          showPopularSearches={true}
+        />
       </div>
 
       {/* Sponsored Products */}

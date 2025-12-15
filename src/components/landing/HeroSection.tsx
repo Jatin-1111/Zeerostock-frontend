@@ -1,4 +1,11 @@
+"use client";
+
+import Link from "next/link";
+import { useAuth } from "@/contexts/AuthContext";
+
 export default function HeroSection() {
+  const { isAuthenticated, user } = useAuth();
+
   return (
     <section className="relative w-full h-[751px] mt-[93px] overflow-hidden shadow-[0px_1px_4px_0px_rgba(24,181,34,0.25)]">
       {/* Background Image */}
@@ -30,12 +37,39 @@ export default function HeroSection() {
 
         {/* CTA Buttons */}
         <div className="flex items-center gap-8 mb-32">
-          <button className="w-[280px] h-[70px] bg-[#022778] text-white text-[22px] font-semibold rounded-xl hover:bg-[#022778]/90 transition-colors font-['Poppins']">
-            Start Selling
-          </button>
-          <button className="w-[280px] h-[70px] bg-white text-[#2aae7a] text-[22px] font-semibold rounded-xl hover:bg-white/90 transition-colors font-['Poppins']">
-            Start Buying
-          </button>
+          {isAuthenticated && user ? (
+            // Logged In User - Go to Dashboard
+            <>
+              <Link
+                href="/buyer/dashboard"
+                className="w-[280px] h-[70px] bg-[#022778] text-white text-[22px] font-semibold rounded-xl hover:bg-[#022778]/90 transition-colors font-['Poppins'] flex items-center justify-center"
+              >
+                Go to Dashboard
+              </Link>
+              <Link
+                href="/marketplace"
+                className="w-[280px] h-[70px] bg-white text-[#2aae7a] text-[22px] font-semibold rounded-xl hover:bg-white/90 transition-colors font-['Poppins'] flex items-center justify-center"
+              >
+                Browse Marketplace
+              </Link>
+            </>
+          ) : (
+            // Logged Out User - Signup/Explore
+            <>
+              <Link
+                href="/signup"
+                className="w-[280px] h-[70px] bg-[#022778] text-white text-[22px] font-semibold rounded-xl hover:bg-[#022778]/90 transition-colors font-['Poppins'] flex items-center justify-center"
+              >
+                Start Selling
+              </Link>
+              <Link
+                href="/signup"
+                className="w-[280px] h-[70px] bg-white text-[#2aae7a] text-[22px] font-semibold rounded-xl hover:bg-white/90 transition-colors font-['Poppins'] flex items-center justify-center"
+              >
+                Start Buying
+              </Link>
+            </>
+          )}
         </div>
 
         {/* Stats Bar */}

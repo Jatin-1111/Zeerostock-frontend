@@ -1,3 +1,7 @@
+"use client";
+
+import EnhancedSearchInput from "@/components/search/EnhancedSearchInput";
+
 export default function ExploreProductGrid() {
   const products = Array(20).fill({
     title: "Industrial Steel Pipes",
@@ -13,30 +17,11 @@ export default function ExploreProductGrid() {
       <div className="bg-white border-b border-gray-200 p-4 mb-6 sticky top-0 z-10">
         <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
           <div className="flex-1 w-full md:w-auto">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search thousands products here and get results..."
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
-              />
-              <svg
-                className="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-            </div>
+            <EnhancedSearchInput
+              placeholder="Search thousands products here and get results..."
+              showPopularSearches={true}
+            />
           </div>
-          <button className="px-6 py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors">
-            Sort
-          </button>
         </div>
       </div>
 

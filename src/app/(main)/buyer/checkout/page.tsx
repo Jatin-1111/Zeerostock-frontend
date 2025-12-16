@@ -1,26 +1,119 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import ProgressSteps from "@/components/checkout/ProgressSteps";
 import ShippingAddress from "@/components/checkout/ShippingAddress";
 import PaymentMethod from "@/components/checkout/PaymentMethod";
 import ReviewOrder from "@/components/checkout/ReviewOrder";
 import OrderSummary from "@/components/checkout/OrderSummary";
+import { buyerService } from "@/services/buyer.service";
+import { cartService } from "@/services/cart.service";
+import type { Address, CreateOrderRequest } from "@/types/buyer.types";
 
 type Step = 1 | 2 | 3;
 
 export default function CheckoutPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [currentStep, setCurrentStep] = useState<Step>(1);
+  const [isPlacingOrder, setIsPlacingOrder] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const subtotal = 16125.0;
-  const savings = 13264.75;
-  const tax = 1290.0;
-  const shipping = 0;
+  // Checkout data
+  const [checkoutSessionId, setCheckoutSessionId] = useState<string | null>(
+    null
+  );
+  const [selectedShippingAddress, setSelectedShippingAddress] =
+    useState<Address | null>(null);
+  const [selectedBillingAddress, setSelectedBillingAddress] =
+    useState<Address | null>(null);
+  const [paymentMethod, setPaymentMethod] = useState<"cod" | "online" | "upi">(
+    "cod"
+  );
+  const [paymentDetails, setPaymentDetails] = useState<any>(null);
+  const [orderNotes, setOrderNotes] = useState<string>("");
 
-  const handlePlaceOrder = () => {
-    router.push("/buyer/order-confirmation");
+  // Cart summary (fetch from session or cart)
+  const [cartSummary, setCartSummary] = useState({
+    subtotal: 0,
+    savings: 0,
+    tax: 0,
+    shipping: 0,
+    total: 0,
+  });
+
+  useEffect(() => {
+    // Get checkout session from URL or create one
+    const sessionId = searchParams.get("sessionId");
+    if (sessionId) {
+      setCheckoutSessionId(sessionId);
+    } else {
+      // Create checkout session from cart
+      createCheckoutSession();
+    }
+  }, []);
+
+  const createCheckoutSession = async () => {
+    try {
+      const response = await cartService.createCheckoutSession({});
+      if (response.success && response.data) {
+        setCheckoutSessionId(response.data.sessionId);
+        // Update cart summary from response
+        if (response.data.pricingSummary) {
+          setCartSummary({
+            subtotal: response.data.pricingSummary.itemSubtotal || 0,
+            savings: response.data.pricingSummary.totalSavings || 0,
+            tax: response.data.pricingSummary.gstAmount || 0,
+            shipping: response.data.pricingSummary.shippingCharges || 0,
+            total: response.data.pricingSummary.finalPayableAmount || 0,
+          });
+        }
+      }
+    } catch (err) {
+      console.error("Error creating checkout session:", err);
+      setError("Failed to initialize checkout");
+    }
+  };
+
+  const handlePlaceOrder = async () => {
+    if (!checkoutSessionId || !selectedShippingAddress) {
+      setError("Please complete all required fields");
+      return;
+    }
+
+    setIsPlacingOrder(true);
+    setError(null);
+
+    try {
+      const orderData: CreateOrderRequest = {
+        checkoutSessionId,
+        shippingAddressId: selectedShippingAddress.id,
+        billingAddressId: selectedBillingAddress?.id,
+        paymentMethod,
+        paymentDetails,
+        orderNotes,
+      };
+
+      const response = await buyerService.createOrder(orderData);
+
+      if (response.success && response.data) {
+        // Redirect to order confirmation page with order ID
+        router.push(
+          `/buyer/order-confirmation?orderId=${response.data.orderId}`
+        );
+      } else {
+        setError(response.message || "Failed to create order");
+      }
+    } catch (err: any) {
+      console.error("Error placing order:", err);
+      setError(
+        err.response?.data?.message ||
+          "Failed to place order. Please try again."
+      );
+    } finally {
+      setIsPlacingOrder(false);
+    }
   };
 
   return (
@@ -63,6 +156,12 @@ export default function CheckoutPage() {
 
         <div className="h-0.5 bg-black" />
 
+        {error && (
+          <div className="mx-8 mt-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-600">
+            {error}
+          </div>
+        )}
+
         {/* Progress Steps */}
         <div className="pt-10">
           <ProgressSteps currentStep={currentStep} />
@@ -73,18 +172,37 @@ export default function CheckoutPage() {
           {/* Left Side - Step Content */}
           <div className="lg:col-span-2">
             {currentStep === 1 && (
-              <ShippingAddress onContinue={() => setCurrentStep(2)} />
+              <ShippingAddress
+                selectedAddress={selectedShippingAddress}
+                onAddressSelect={setSelectedShippingAddress}
+                onContinue={() => {
+                  if (!selectedShippingAddress) {
+                    setError("Please select a shipping address");
+                    return;
+                  }
+                  setCurrentStep(2);
+                }}
+              />
             )}
             {currentStep === 2 && (
               <PaymentMethod
+                selectedMethod={paymentMethod}
+                onMethodSelect={setPaymentMethod}
+                onPaymentDetailsChange={setPaymentDetails}
                 onContinue={() => setCurrentStep(3)}
                 onBack={() => setCurrentStep(1)}
               />
             )}
             {currentStep === 3 && (
               <ReviewOrder
+                shippingAddress={selectedShippingAddress}
+                billingAddress={selectedBillingAddress}
+                paymentMethod={paymentMethod}
+                orderNotes={orderNotes}
+                onNotesChange={setOrderNotes}
                 onBack={() => setCurrentStep(2)}
                 onPlaceOrder={handlePlaceOrder}
+                isPlacingOrder={isPlacingOrder}
               />
             )}
           </div>
@@ -92,10 +210,10 @@ export default function CheckoutPage() {
           {/* Right Side - Order Summary */}
           <div className="lg:col-span-1">
             <OrderSummary
-              subtotal={subtotal}
-              savings={savings}
-              tax={tax}
-              shipping={shipping}
+              subtotal={cartSummary.subtotal}
+              savings={cartSummary.savings}
+              tax={cartSummary.tax}
+              shipping={cartSummary.shipping}
             />
           </div>
         </div>

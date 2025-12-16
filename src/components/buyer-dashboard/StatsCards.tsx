@@ -1,34 +1,42 @@
 "use client";
 
 import { FileText, Clock, DollarSign, ShoppingBag } from "lucide-react";
+import type { OrderStats } from "@/types/buyer.types";
 
-export default function StatsCards() {
-  const stats = [
+interface StatsCardsProps {
+  stats: OrderStats | null;
+  isLoading: boolean;
+}
+
+export default function StatsCards({ stats, isLoading }: StatsCardsProps) {
+  const statsData = [
     {
-      label: "Active RFQs",
-      value: "3",
-      icon: FileText,
-    },
-    {
-      label: "Pending Quotes",
-      value: "1",
-      icon: Clock,
-    },
-    {
-      label: "Total Savings",
-      value: "₹85,570",
-      icon: DollarSign,
+      label: "Total Orders",
+      value: isLoading ? "-" : (stats?.totalOrders || 0).toString(),
+      icon: ShoppingBag,
     },
     {
       label: "Active Orders",
-      value: "2",
-      icon: ShoppingBag,
+      value: isLoading ? "-" : (stats?.activeOrders || 0).toString(),
+      icon: Clock,
+    },
+    {
+      label: "Completed Orders",
+      value: isLoading ? "-" : (stats?.completedOrders || 0).toString(),
+      icon: FileText,
+    },
+    {
+      label: "Total Spent",
+      value: isLoading
+        ? "-"
+        : `₹${(stats?.totalSpent || 0).toLocaleString("en-IN")}`,
+      icon: DollarSign,
     },
   ];
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-      {stats.map((stat, index) => {
+      {statsData.map((stat, index) => {
         const Icon = stat.icon;
         return (
           <div
@@ -38,7 +46,13 @@ export default function StatsCards() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600 mb-2">{stat.label}</p>
-                <p className="text-3xl font-bold text-gray-900">{stat.value}</p>
+                <p className="text-3xl font-bold text-gray-900">
+                  {isLoading ? (
+                    <span className="animate-pulse bg-gray-200 h-8 w-20 block rounded"></span>
+                  ) : (
+                    stat.value
+                  )}
+                </p>
               </div>
               <Icon className="w-12 h-12 text-gray-900" />
             </div>

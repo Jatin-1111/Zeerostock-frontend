@@ -1,4 +1,12 @@
-export default function ProductDescription() {
+import { ProductDetail } from "@/types/api.types";
+
+interface ProductDescriptionProps {
+  product: ProductDetail;
+}
+
+export default function ProductDescription({
+  product,
+}: ProductDescriptionProps) {
   return (
     <div className="bg-white border-2 border-gray-200 rounded-lg p-8">
       <h2 className="text-2xl font-bold text-gray-900 mb-6">
@@ -6,132 +14,164 @@ export default function ProductDescription() {
       </h2>
 
       <p className="text-gray-700 mb-6 leading-relaxed">
-        High-quality Grade A36 industrial steel pipes, ideal for construction,
-        plumbing, and structural applications. These pipes are manufactured to
-        ASTM A36 specifications and feature excellent weldability,
-        machinability, and durability. Available in bulk quantities with
-        verified quality certifications. Perfect for contractors, manufacturers,
-        and industrial buyers looking for cost-effective surplus steel
-        solutions.
+        {product.description || "No description available for this product."}
       </p>
 
+      {/* Condition Badge */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">
-          Key Features:
-        </h3>
-        <ul className="space-y-2">
-          {[
-            "ASTM A36 certified",
-            "Excellent weldability",
-            "High tensile strength",
-            "Corrosion resistant",
-            "Verified quality",
-            "Bulk availability",
-          ].map((feature, index) => (
-            <li key={index} className="flex items-center gap-3 text-gray-700">
-              <svg
-                className="w-5 h-5 text-green-600 shrink-0"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              {feature}
-            </li>
-          ))}
-        </ul>
+        <span
+          className={`inline-block px-4 py-2 rounded-full text-sm font-semibold ${
+            product.condition === "new"
+              ? "bg-green-100 text-green-800"
+              : product.condition === "like-new"
+              ? "bg-blue-100 text-blue-800"
+              : product.condition === "good"
+              ? "bg-yellow-100 text-yellow-800"
+              : "bg-gray-100 text-gray-800"
+          }`}
+        >
+          Condition:{" "}
+          {product.condition.charAt(0).toUpperCase() +
+            product.condition.slice(1).replace("-", " ")}
+        </span>
       </div>
 
       <div className="grid md:grid-cols-2 gap-6">
-        <div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">
-            Technical Specifications
-          </h3>
-          <div className="space-y-3">
-            <div className="flex justify-between py-2 border-b border-gray-200">
-              <span className="text-gray-600">Material Grade</span>
-              <span className="font-semibold text-gray-900">ASTM A36</span>
+        {/* Technical Specifications */}
+        {product.specifications &&
+          Object.keys(product.specifications).length > 0 && (
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                Technical Specifications
+              </h3>
+              <div className="space-y-3">
+                {Object.entries(product.specifications).map(([key, value]) => (
+                  <div
+                    key={key}
+                    className="flex justify-between py-2 border-b border-gray-200"
+                  >
+                    <span className="text-gray-600 capitalize">
+                      {key.replace(/_/g, " ")}
+                    </span>
+                    <span className="font-semibold text-gray-900">
+                      {String(value)}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="flex justify-between py-2 border-b border-gray-200">
-              <span className="text-gray-600">Heat Treatment</span>
-              <span className="font-semibold text-gray-900">6161º-6190º</span>
-            </div>
-            <div className="flex justify-between py-2 border-b border-gray-200">
-              <span className="text-gray-600">Coating</span>
-              <span className="font-semibold text-gray-900">Hot Indian</span>
-            </div>
-            <div className="flex justify-between py-2 border-b border-gray-200">
-              <span className="text-gray-600">Diameter Range</span>
-              <span className="font-semibold text-gray-900">
-                2&quot; - 12&quot;
-              </span>
-            </div>
-            <div className="flex justify-between py-2 border-b border-gray-200">
-              <span className="text-gray-600">Length</span>
-              <span className="font-semibold text-gray-900">20ft standard</span>
-            </div>
-            <div className="flex justify-between py-2 border-b border-gray-200">
-              <span className="text-gray-600">Certification</span>
-              <span className="font-semibold text-gray-900">
-                API 5L, ASTM A36
-              </span>
-            </div>
-          </div>
-        </div>
+          )}
 
+        {/* Shipping Information */}
         <div>
           <h3 className="text-lg font-semibold text-gray-900 mb-4">
-            Shipping Information
+            Shipping & Delivery
           </h3>
           <div className="space-y-3">
+            {product.city && product.state && (
+              <div className="flex justify-between py-2 border-b border-gray-200">
+                <span className="text-gray-600">Ships From</span>
+                <span className="font-semibold text-gray-900">
+                  {product.city}, {product.state}
+                </span>
+              </div>
+            )}
+            {product.stockQuantity && (
+              <div className="flex justify-between py-2 border-b border-gray-200">
+                <span className="text-gray-600">Available Stock</span>
+                <span className="font-semibold text-gray-900">
+                  {product.stockQuantity} units
+                </span>
+              </div>
+            )}
+            {product.minimumOrderQuantity && (
+              <div className="flex justify-between py-2 border-b border-gray-200">
+                <span className="text-gray-600">Minimum Order</span>
+                <span className="font-semibold text-gray-900">
+                  {product.minimumOrderQuantity} units
+                </span>
+              </div>
+            )}
+            {product.shippingInfo && (
+              <div className="flex justify-between py-2 border-b border-gray-200">
+                <span className="text-gray-600">Shipping Info</span>
+                <span className="font-semibold text-gray-900">
+                  {product.shippingInfo}
+                </span>
+              </div>
+            )}
             <div className="flex justify-between py-2 border-b border-gray-200">
-              <span className="text-gray-600">Weight</span>
-              <span className="font-semibold text-gray-900">
-                1.5 tonne per unit
-              </span>
-            </div>
-            <div className="flex justify-between py-2 border-b border-gray-200">
-              <span className="text-gray-600">Dimensions</span>
-              <span className="font-semibold text-gray-900">
-                6.1ft × 06m × 50m
-              </span>
-            </div>
-            <div className="flex justify-between py-2 border-b border-gray-200">
-              <span className="text-gray-600">Shipping Cost</span>
-              <span className="font-semibold text-gray-900">
-                Calculated at checkout
-              </span>
-            </div>
-            <div className="flex justify-between py-2 border-b border-gray-200">
-              <span className="text-gray-600">Packaging</span>
-              <span className="font-semibold text-gray-900">
-                via Courier Delivery
-              </span>
-            </div>
-            <div className="flex justify-between py-2 border-b border-gray-200">
-              <span className="text-gray-600">Delivery</span>
-              <span className="font-semibold text-gray-900">
-                7-14 business days
+              <span className="text-gray-600">Listing Type</span>
+              <span className="font-semibold text-gray-900 capitalize">
+                {product.listingType}
               </span>
             </div>
           </div>
         </div>
       </div>
 
+      {/* Warranty & Return Policy */}
+      <div className="grid md:grid-cols-2 gap-6 mt-8 pt-6 border-t border-gray-200">
+        {product.warranty && (
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-3">
+              Warranty Information
+            </h3>
+            <p className="text-gray-700 leading-relaxed">{product.warranty}</p>
+          </div>
+        )}
+
+        {product.returnPolicy && (
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-3">
+              Return Policy
+            </h3>
+            <p className="text-gray-700 leading-relaxed">
+              {product.returnPolicy}
+            </p>
+          </div>
+        )}
+
+        {!product.warranty && !product.returnPolicy && (
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-3">
+              Terms & Conditions
+            </h3>
+            <p className="text-gray-700 leading-relaxed">
+              Please contact the seller for warranty and return policy
+              information.
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* Category & Industry Tags */}
       <div className="mt-8 pt-6 border-t border-gray-200">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">
-          Return Policy
+        <h3 className="text-lg font-semibold text-gray-900 mb-3">
+          Product Tags
         </h3>
-        <p className="text-gray-700 leading-relaxed">
-          30-day return policy (if unused). Buyer responsible for return
-          shipping costs.
-        </p>
+        <div className="flex flex-wrap gap-2">
+          {product.category && (
+            <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
+              {product.category.name}
+            </span>
+          )}
+          {product.industry && (
+            <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">
+              {product.industry.name}
+            </span>
+          )}
+          {product.isFeatured && (
+            <span className="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-sm">
+              ⭐ Featured
+            </span>
+          )}
+          {product.isSponsored && (
+            <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">
+              💎 Sponsored
+            </span>
+          )}
+        </div>
       </div>
     </div>
   );

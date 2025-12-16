@@ -62,34 +62,61 @@ export const marketplaceService = {
   /**
    * Get today's featured deals (high discount products)
    */
-  async getFeaturedDeals(
-    limit: number = 12
-  ): Promise<ApiResponse<{ deals: Product[] }>> {
-    return apiRequest("get", "/marketplace/featured-deals", undefined, {
-      params: { limit },
-    });
+  async getFeaturedDeals(limit: number = 12): Promise<ApiResponse<Product[]>> {
+    const response = await apiRequest<{ deals: Product[]; count: number }>(
+      "get",
+      "/marketplace/featured-deals",
+      undefined,
+      {
+        params: { limit },
+      }
+    );
+
+    // Transform response to return deals array directly
+    return {
+      ...response,
+      data: response.data?.deals || [],
+    };
   },
 
   /**
    * Get sponsored listings
    */
-  async getSponsored(
-    limit: number = 10
-  ): Promise<ApiResponse<{ sponsored: Product[] }>> {
-    return apiRequest("get", "/marketplace/sponsored", undefined, {
-      params: { limit },
-    });
+  async getSponsored(limit: number = 10): Promise<ApiResponse<Product[]>> {
+    const response = await apiRequest<{ sponsored: Product[]; count: number }>(
+      "get",
+      "/marketplace/sponsored",
+      undefined,
+      {
+        params: { limit },
+      }
+    );
+
+    // Transform response to return sponsored array directly
+    return {
+      ...response,
+      data: response.data?.sponsored || [],
+    };
   },
 
   /**
    * Get trending products
    */
-  async getTrending(
-    limit: number = 20
-  ): Promise<ApiResponse<{ trending: Product[] }>> {
-    return apiRequest("get", "/marketplace/trending", undefined, {
-      params: { limit },
-    });
+  async getTrending(limit: number = 20): Promise<ApiResponse<Product[]>> {
+    const response = await apiRequest<{ trending: Product[]; count: number }>(
+      "get",
+      "/marketplace/trending",
+      undefined,
+      {
+        params: { limit },
+      }
+    );
+
+    // Transform response to return trending array directly
+    return {
+      ...response,
+      data: response.data?.trending || [],
+    };
   },
 
   /**

@@ -16,6 +16,8 @@ export const metadata: Metadata = {
     "Connect with verified buyers and suppliers. Trade surplus inventory efficiently.",
 };
 
+export const dynamic = "force-dynamic";
+
 export default function RootLayout({
   children,
 }: Readonly<{

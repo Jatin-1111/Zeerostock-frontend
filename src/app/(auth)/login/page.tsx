@@ -5,8 +5,6 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
 
-export const dynamic = "force-dynamic";
-
 export default function LoginPage() {
   const [userType, setUserType] = useState<"buyer" | "supplier">("buyer");
   const [showPassword, setShowPassword] = useState(false);

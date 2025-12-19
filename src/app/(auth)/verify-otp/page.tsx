@@ -6,8 +6,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import toast from "react-hot-toast";
 
-export const dynamic = "force-dynamic";
-
 function VerifyOTPContent() {
   const router = useRouter();
   const searchParams = useSearchParams();

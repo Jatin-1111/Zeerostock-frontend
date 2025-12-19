@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import ProgressSteps from "@/components/checkout/ProgressSteps";
 import ShippingAddress from "@/components/checkout/ShippingAddress";
@@ -10,10 +10,19 @@ import OrderSummary from "@/components/checkout/OrderSummary";
 import { buyerService } from "@/services/buyer.service";
 import { cartService } from "@/services/cart.service";
 import type { Address, CreateOrderRequest } from "@/types/buyer.types";
+import type { CartItem } from "@/types/api.types";
 
 type Step = 1 | 2 | 3;
 
-export default function CheckoutPage() {
+interface PaymentDetails {
+  method: "cod" | "online" | "upi";
+  upiId?: string;
+  cardNumber?: string;
+  cardExpiry?: string;
+  cardCvv?: string;
+}
+
+function CheckoutContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [currentStep, setCurrentStep] = useState<Step>(1);
@@ -26,15 +35,19 @@ export default function CheckoutPage() {
   );
   const [selectedShippingAddress, setSelectedShippingAddress] =
     useState<Address | null>(null);
-  const [selectedBillingAddress, setSelectedBillingAddress] =
-    useState<Address | null>(null);
+  // Billing address is optional, defaults to shipping address if not provided
+  const [selectedBillingAddress] = useState<Address | null>(null);
+  const [shippingMethod, setShippingMethod] = useState<string>("standard");
   const [paymentMethod, setPaymentMethod] = useState<"cod" | "online" | "upi">(
     "cod"
   );
-  const [paymentDetails, setPaymentDetails] = useState<any>(null);
+  const [paymentDetails, setPaymentDetails] = useState<PaymentDetails | null>(
+    null
+  );
   const [orderNotes, setOrderNotes] = useState<string>("");
 
-  // Cart summary (fetch from session or cart)
+  // Cart items and summary
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [cartSummary, setCartSummary] = useState({
     subtotal: 0,
     savings: 0,
@@ -52,27 +65,85 @@ export default function CheckoutPage() {
       // Create checkout session from cart
       createCheckoutSession();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const createCheckoutSession = async () => {
     try {
-      const response = await cartService.createCheckoutSession({});
+      console.log("Starting checkout session creation...");
+      const response = await cartService.createCheckoutSession();
+      console.log("Checkout session response:", response);
+
       if (response.success && response.data) {
         setCheckoutSessionId(response.data.sessionId);
+
+        // Store cart items
+        if (response.data.cartItems) {
+          setCartItems(response.data.cartItems);
+        }
+
         // Update cart summary from response
         if (response.data.pricingSummary) {
+          const shippingCost =
+            shippingMethod === "express"
+              ? 100
+              : shippingMethod === "overnight"
+              ? 250
+              : 0;
           setCartSummary({
             subtotal: response.data.pricingSummary.itemSubtotal || 0,
-            savings: response.data.pricingSummary.totalSavings || 0,
+            savings:
+              (response.data.pricingSummary.discountAmount || 0) +
+              (response.data.pricingSummary.couponDiscount || 0),
             tax: response.data.pricingSummary.gstAmount || 0,
-            shipping: response.data.pricingSummary.shippingCharges || 0,
-            total: response.data.pricingSummary.finalPayableAmount || 0,
+            shipping: shippingCost,
+            total:
+              (response.data.pricingSummary.finalPayableAmount || 0) +
+              shippingCost,
           });
+        }
+      } else {
+        console.error("Checkout session failed:", response);
+        const errorMessage =
+          response.message || "Failed to initialize checkout";
+
+        // Handle specific error codes
+        if (response.errorCode === "CART_EMPTY") {
+          setError("Your cart is empty. Please add items before checkout.");
+          setTimeout(() => router.push("/buyer/cart"), 2000);
+        } else if (response.errorCode === "AUTHENTICATION_REQUIRED") {
+          setError("Please log in to continue with checkout.");
+          setTimeout(() => router.push("/login"), 2000);
+        } else {
+          setError(errorMessage);
         }
       }
     } catch (err) {
       console.error("Error creating checkout session:", err);
-      setError("Failed to initialize checkout");
+      const error = err as any;
+
+      // Check if it's an authentication error
+      if (
+        error?.response?.status === 401 ||
+        error?.errorCode === "UNAUTHORIZED"
+      ) {
+        setError("Please log in to continue with checkout.");
+        setTimeout(() => router.push("/login?redirect=/buyer/checkout"), 2000);
+        return;
+      }
+
+      // Check if it's a cart empty error
+      if (error?.errorCode === "CART_EMPTY") {
+        setError("Your cart is empty. Please add items before checkout.");
+        setTimeout(() => router.push("/buyer/cart"), 2000);
+        return;
+      }
+
+      setError(
+        error.response?.data?.message ||
+          error.message ||
+          "Failed to initialize checkout. Please ensure you have items in your cart and are logged in."
+      );
     }
   };
 
@@ -86,16 +157,44 @@ export default function CheckoutPage() {
     setError(null);
 
     try {
+      // Build order data, only including defined values
       const orderData: CreateOrderRequest = {
         checkoutSessionId,
         shippingAddressId: selectedShippingAddress.id,
-        billingAddressId: selectedBillingAddress?.id,
         paymentMethod,
-        paymentDetails,
-        orderNotes,
       };
 
+      // Add optional billing address
+      if (selectedBillingAddress?.id) {
+        orderData.billingAddressId = selectedBillingAddress.id;
+      }
+
+      // Add payment details if present
+      if (paymentDetails) {
+        const details: any = {};
+        if (paymentDetails.method === "online") {
+          details.transactionId = "pending";
+        }
+        if (paymentDetails.upiId) {
+          details.upiId = paymentDetails.upiId;
+        }
+        if (paymentDetails.cardNumber) {
+          details.cardLast4 = paymentDetails.cardNumber.slice(-4);
+        }
+        // Only add paymentDetails if it has any properties
+        if (Object.keys(details).length > 0) {
+          orderData.paymentDetails = details;
+        }
+      }
+
+      // Add order notes if present
+      if (orderNotes && orderNotes.trim()) {
+        orderData.orderNotes = orderNotes.trim();
+      }
+
+      console.log("Placing order with data:", orderData);
       const response = await buyerService.createOrder(orderData);
+      console.log("Order response:", response);
 
       if (response.success && response.data) {
         // Redirect to order confirmation page with order ID
@@ -103,14 +202,31 @@ export default function CheckoutPage() {
           `/buyer/order-confirmation?orderId=${response.data.orderId}`
         );
       } else {
+        console.error("Order creation failed:", response);
         setError(response.message || "Failed to create order");
       }
-    } catch (err: any) {
+    } catch (err) {
       console.error("Error placing order:", err);
-      setError(
-        err.response?.data?.message ||
-          "Failed to place order. Please try again."
-      );
+      const error = err as any;
+
+      // Extract detailed error message
+      let errorMessage = "Failed to place order. Please try again.";
+
+      if (error.response?.data?.message) {
+        errorMessage = error.response.data.message;
+      } else if (error.response?.data?.error) {
+        errorMessage = error.response.data.error;
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+
+      console.error("Detailed error:", {
+        message: errorMessage,
+        status: error.response?.status,
+        data: error.response?.data,
+      });
+
+      setError(errorMessage);
     } finally {
       setIsPlacingOrder(false);
     }
@@ -175,11 +291,29 @@ export default function CheckoutPage() {
               <ShippingAddress
                 selectedAddress={selectedShippingAddress}
                 onAddressSelect={setSelectedShippingAddress}
+                selectedShippingMethod={shippingMethod}
+                onShippingMethodSelect={(method) => {
+                  setShippingMethod(method);
+                  // Update shipping cost in cart summary
+                  const shippingCost =
+                    method === "express"
+                      ? 100
+                      : method === "overnight"
+                      ? 250
+                      : 0;
+                  setCartSummary((prev) => ({
+                    ...prev,
+                    shipping: shippingCost,
+                    total:
+                      prev.subtotal + prev.tax + shippingCost - prev.savings,
+                  }));
+                }}
                 onContinue={() => {
                   if (!selectedShippingAddress) {
                     setError("Please select a shipping address");
                     return;
                   }
+                  setError(null);
                   setCurrentStep(2);
                 }}
               />
@@ -188,16 +322,23 @@ export default function CheckoutPage() {
               <PaymentMethod
                 selectedMethod={paymentMethod}
                 onMethodSelect={setPaymentMethod}
-                onPaymentDetailsChange={setPaymentDetails}
-                onContinue={() => setCurrentStep(3)}
+                onPaymentDetailsChange={(details) =>
+                  setPaymentDetails({ method: paymentMethod, ...details })
+                }
+                onContinue={() => {
+                  setError(null);
+                  setCurrentStep(3);
+                }}
                 onBack={() => setCurrentStep(1)}
               />
             )}
             {currentStep === 3 && (
               <ReviewOrder
+                cartItems={cartItems}
                 shippingAddress={selectedShippingAddress}
                 billingAddress={selectedBillingAddress}
                 paymentMethod={paymentMethod}
+                shippingMethod={shippingMethod}
                 orderNotes={orderNotes}
                 onNotesChange={setOrderNotes}
                 onBack={() => setCurrentStep(2)}
@@ -219,5 +360,19 @@ export default function CheckoutPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function CheckoutPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          Loading checkout...
+        </div>
+      }
+    >
+      <CheckoutContent />
+    </Suspense>
   );
 }

@@ -1,20 +1,82 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import {
+  getSettings,
+  updateNotificationPreferences,
+} from "@/services/settings.service";
+import type { NotificationPreferences } from "@/types/buyer.types";
 
 export default function NotificationSettings() {
-  const [notifications, setNotifications] = useState({
+  const [notifications, setNotifications] = useState<NotificationPreferences>({
     email: true,
-    sms: true,
+    sms: false,
     push: true,
     marketing: true,
-    digest: true,
+    digest: false,
     alerts: true,
   });
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
 
-  const toggleNotification = (key: keyof typeof notifications) => {
-    setNotifications({ ...notifications, [key]: !notifications[key] });
+  useEffect(() => {
+    loadSettings();
+  }, []);
+
+  const loadSettings = async () => {
+    try {
+      setLoading(true);
+      const response = await getSettings();
+
+      if (response.success && response.data) {
+        setNotifications(response.data.notifications);
+      }
+    } catch (err: any) {
+      console.error("Failed to load settings:", err);
+      setError(err.message || "Failed to load settings");
+    } finally {
+      setLoading(false);
+    }
   };
+
+  const toggleNotification = async (key: keyof typeof notifications) => {
+    const newValue = !notifications[key];
+    const updatedNotifications = { ...notifications, [key]: newValue };
+
+    // Optimistic update
+    setNotifications(updatedNotifications);
+    setSaving(true);
+    setError(null);
+    setSuccess(null);
+
+    try {
+      const response = await updateNotificationPreferences({ [key]: newValue });
+
+      if (response.success) {
+        setSuccess("Notification preferences updated");
+        setTimeout(() => setSuccess(null), 3000);
+      } else {
+        throw new Error(response.message || "Update failed");
+      }
+    } catch (err: any) {
+      console.error("Failed to update notification settings:", err);
+      setError(err.message || "Failed to update settings");
+      // Revert on error
+      setNotifications({ ...notifications, [key]: !newValue });
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-12">
+        <div className="text-gray-500">Loading settings...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -22,6 +84,18 @@ export default function NotificationSettings() {
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Notifications</h1>
         <p className="text-gray-500">Manage your notification preferences</p>
       </div>
+
+      {/* Success/Error Messages */}
+      {success && (
+        <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded">
+          {success}
+        </div>
+      )}
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded">
+          {error}
+        </div>
+      )}
 
       {/* Notification Preferences */}
       <div className="border-2 border-gray-900 rounded p-6">

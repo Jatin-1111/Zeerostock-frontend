@@ -3,14 +3,34 @@
 import Link from "next/link";
 import { useState } from "react";
 
-export default function Sidebar() {
-  const [isOpen, setIsOpen] = useState(false);
+interface SidebarProps {
+  isOpen?: boolean;
+  onToggle?: (isOpen: boolean) => void;
+}
+
+export default function Sidebar({
+  isOpen: externalIsOpen,
+  onToggle,
+}: SidebarProps = {}) {
+  const [internalIsOpen, setInternalIsOpen] = useState(false);
+
+  // Use external state if provided, otherwise use internal state
+  const isOpen = externalIsOpen !== undefined ? externalIsOpen : internalIsOpen;
+
+  const handleToggle = () => {
+    const newState = !isOpen;
+    if (onToggle) {
+      onToggle(newState);
+    } else {
+      setInternalIsOpen(newState);
+    }
+  };
 
   return (
     <>
       {/* Mobile menu button */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={handleToggle}
         className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-white border border-gray-300 rounded"
       >
         <svg
@@ -292,7 +312,7 @@ export default function Sidebar() {
       {isOpen && (
         <div
           className="lg:hidden fixed inset-0 bg-black/80 bg-opacity-50 z-30"
-          onClick={() => setIsOpen(false)}
+          onClick={handleToggle}
         />
       )}
     </>

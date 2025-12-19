@@ -1,12 +1,17 @@
 import { create } from "zustand";
 import { cartService } from "@/services/cart.service";
-import { Cart } from "@/types/api.types";
+import { Cart, CartItem, CartPricing } from "@/types/api.types";
 import toast from "react-hot-toast";
 
 interface CartState {
   cart: Cart | null;
   loading: boolean;
   error: string | null;
+
+  // Computed properties
+  items: CartItem[];
+  itemCount: number;
+  pricing: CartPricing | null;
 
   // Actions
   fetchCart: () => Promise<void>;
@@ -24,17 +29,38 @@ export const useCartStore = create<CartState>((set, get) => ({
   loading: false,
   error: null,
 
+  // Computed properties - these will be updated whenever cart changes
+  items: [],
+  itemCount: 0,
+  pricing: null,
+
   // Fetch cart
   fetchCart: async () => {
+    console.log("=== cartStore.fetchCart called ===");
     set({ loading: true, error: null });
     try {
+      console.log("Calling cartService.getCart...");
       const response = await cartService.getCart();
+      console.log("cartService.getCart response:", response);
+
       if (response.success && response.data) {
-        set({ cart: response.data, loading: false });
+        console.log("Setting cart data:", response.data);
+        console.log("Items in cart:", response.data.items?.length || 0);
+
+        // Update cart and derived properties
+        set({
+          cart: response.data,
+          items: response.data.items || [],
+          itemCount: response.data.itemCount || 0,
+          pricing: response.data.summary || response.data.pricing || null,
+          loading: false,
+        });
       } else {
+        console.log("Failed to fetch cart:", response.message);
         set({ loading: false, error: response.message });
       }
     } catch (error: unknown) {
+      console.error("Error in fetchCart:", error);
       set({
         loading: false,
         error: error instanceof Error ? error.message : "Failed to fetch cart",
@@ -44,10 +70,18 @@ export const useCartStore = create<CartState>((set, get) => ({
 
   // Add to cart
   addToCart: async (productId: string, quantity: number) => {
+    console.log("=== cartStore.addToCart called ===");
+    console.log("Product ID:", productId);
+    console.log("Quantity:", quantity);
+
     try {
+      console.log("Calling cartService.addToCart...");
       const response = await cartService.addToCart(productId, quantity);
+      console.log("cartService response:", response);
+
       if (response.success) {
         // Refresh cart after adding
+        console.log("Fetching updated cart...");
         await get().fetchCart();
         toast.success("Added to cart!");
         return true;
@@ -104,7 +138,12 @@ export const useCartStore = create<CartState>((set, get) => ({
     try {
       const response = await cartService.clearCart();
       if (response.success) {
-        set({ cart: null });
+        set({
+          cart: null,
+          items: [],
+          itemCount: 0,
+          pricing: null,
+        });
         toast.success("Cart cleared");
         return true;
       }

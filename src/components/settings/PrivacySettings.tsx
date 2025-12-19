@@ -1,16 +1,78 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import {
+  getSettings,
+  updatePrivacySettings,
+} from "@/services/settings.service";
+import type { PrivacySettings } from "@/types/buyer.types";
 
-export default function PrivacySettings() {
-  const [privacy, setPrivacy] = useState({
+export default function PrivacySettingsComponent() {
+  const [privacy, setPrivacy] = useState<PrivacySettings>({
     dataSharing: true,
     analytics: true,
   });
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
 
-  const togglePrivacy = (key: keyof typeof privacy) => {
-    setPrivacy({ ...privacy, [key]: !privacy[key] });
+  useEffect(() => {
+    loadSettings();
+  }, []);
+
+  const loadSettings = async () => {
+    try {
+      setLoading(true);
+      const response = await getSettings();
+
+      if (response.success && response.data) {
+        setPrivacy(response.data.privacy);
+      }
+    } catch (err: any) {
+      console.error("Failed to load settings:", err);
+      setError(err.message || "Failed to load settings");
+    } finally {
+      setLoading(false);
+    }
   };
+
+  const togglePrivacy = async (key: keyof PrivacySettings) => {
+    const newValue = !privacy[key];
+    const updatedPrivacy = { ...privacy, [key]: newValue };
+
+    // Optimistic update
+    setPrivacy(updatedPrivacy);
+    setSaving(true);
+    setError(null);
+    setSuccess(null);
+
+    try {
+      const response = await updatePrivacySettings({ [key]: newValue });
+
+      if (response.success) {
+        setSuccess("Privacy settings updated");
+        setTimeout(() => setSuccess(null), 3000);
+      } else {
+        throw new Error(response.message || "Update failed");
+      }
+    } catch (err: any) {
+      console.error("Failed to update privacy settings:", err);
+      setError(err.message || "Failed to update settings");
+      // Revert on error
+      setPrivacy({ ...privacy, [key]: !newValue });
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-12">
+        <div className="text-gray-500">Loading settings...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -18,6 +80,18 @@ export default function PrivacySettings() {
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Privacy</h1>
         <p className="text-gray-500">Control your privacy and data settings</p>
       </div>
+
+      {/* Success/Error Messages */}
+      {success && (
+        <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded">
+          {success}
+        </div>
+      )}
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded">
+          {error}
+        </div>
+      )}
 
       {/* Privacy Controls */}
       <div className="border-2 border-gray-900 rounded p-6">

@@ -40,7 +40,7 @@ export default function Header() {
         {/* Navigation */}
         <nav className="flex items-center gap-8">
           <Link
-            href="/"
+            href="/home"
             className="text-white text-[20px] font-medium hover:text-white/90 transition-colors font-['Poppins']"
           >
             Home

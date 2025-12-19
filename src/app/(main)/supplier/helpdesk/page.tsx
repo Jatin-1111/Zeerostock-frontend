@@ -298,7 +298,7 @@ export default function HelpDesk() {
                   <input
                     type="text"
                     placeholder="Brief description of the issue"
-                    className="w-full px-4 py-2 border border-gray-300 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900"
+                    className="w-full px-4 py-2 border border-gray-300 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 text-black placeholder:text-black text-black placeholder:text-black"
                   />
                 </div>
 
@@ -307,7 +307,7 @@ export default function HelpDesk() {
                   <label className="block text-sm font-medium text-gray-900 mb-2">
                     Severity
                   </label>
-                  <select className="w-full px-4 py-2 border border-gray-300 text-sm text-gray-600 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900">
+                  <select className="w-full px-4 py-2 border border-gray-300 text-sm text-gray-600 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 text-black">
                     <option>Select severity</option>
                     {severityLevels.map((level) => (
                       <option key={level.value} value={level.value}>
@@ -375,7 +375,7 @@ export default function HelpDesk() {
                 <textarea
                   rows={4}
                   placeholder="Describe what happened, when it happened, and any error messages..."
-                  className="w-full px-4 py-2 border border-gray-300 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 resize-none"
+                  className="w-full px-4 py-2 border border-gray-300 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 resize-none text-black placeholder:text-black text-black placeholder:text-black"
                 />
               </div>
 
@@ -387,7 +387,7 @@ export default function HelpDesk() {
                 <textarea
                   rows={4}
                   placeholder="1st 2p, 2, Click on..., 3. Enter..., 4.See error"
-                  className="w-full px-4 py-2 border border-gray-300 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 resize-none"
+                  className="w-full px-4 py-2 border border-gray-300 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 resize-none text-black placeholder:text-black text-black placeholder:text-black"
                 />
               </div>
 
@@ -446,7 +446,7 @@ export default function HelpDesk() {
                 <textarea
                   rows={6}
                   placeholder="Tell us what you love about Zeerostock, or what we could improve..."
-                  className="w-full px-4 py-3 border border-gray-300 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 resize-none"
+                  className="w-full px-4 py-3 border border-gray-300 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 resize-none text-black placeholder:text-black text-black placeholder:text-black"
                 />
               </div>
 
@@ -462,3 +462,4 @@ export default function HelpDesk() {
     </div>
   );
 }
+

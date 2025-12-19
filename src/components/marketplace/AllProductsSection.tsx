@@ -28,12 +28,13 @@ export default function AllProductsSection() {
       }
 
       const response = await marketplaceService.getProducts(filters);
-      if (response.success && response.data) {
-        const productsList = Array.isArray(response.data.products)
+      if (response?.success && response?.data) {
+        const productsList = Array.isArray(response.data?.products)
           ? response.data.products
           : [];
         setProducts(productsList);
       } else {
+        console.warn("No products data received:", response);
         setProducts([]);
       }
     } catch (error) {

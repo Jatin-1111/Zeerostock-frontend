@@ -22,7 +22,11 @@ export default function LoginPage() {
     }
 
     setLoading(true);
-    const success = await login({ identifier, password });
+    const success = await login({
+      identifier,
+      password,
+      requestedRole: userType,
+    });
     setLoading(false);
 
     if (success) {
@@ -37,7 +41,7 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-white flex items-center justify-center px-4 py-8">
-      <div className="w-full max-w-md bg-white border-2 border-gray-200 rounded-lg p-8">
+      <div className="w-full max-w-md bg-white border-2 border-gray-200 rounded-lg p-8 placeholder:text-gray-400">
         <div className="mb-6">
           <label className="block text-sm font-medium text-gray-700 mb-3">
             Login as:
@@ -98,7 +102,7 @@ export default function LoginPage() {
               onChange={(e) => setIdentifier(e.target.value)}
               required
               disabled={loading}
-              className="w-full px-3 py-2 border text-gray-800 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:bg-gray-100"
+              className="w-full px-3 py-2 border text-black border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:bg-gray-100 placeholder:text-gray-400"
             />
           </div>
 
@@ -114,7 +118,7 @@ export default function LoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 disabled={loading}
-                className="w-full px-3 py-2 border text-gray-800 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:bg-gray-100"
+                className="w-full px-3 py-2 border text-black border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:bg-gray-100 placeholder:text-gray-400"
               />
               <button
                 type="button"

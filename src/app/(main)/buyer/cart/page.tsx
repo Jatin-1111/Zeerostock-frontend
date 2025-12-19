@@ -1,6 +1,7 @@
 import CartItems from "@/components/cart/CartItems";
 import OrderSummary from "@/components/cart/OrderSummary";
 import RelatedProducts from "@/components/cart/RelatedProducts";
+import CartDebugPanel from "@/components/cart/CartDebugPanel";
 
 export default function CartPage() {
   return (
@@ -36,7 +37,7 @@ export default function CartPage() {
                 <CartItems />
               </div>
 
-              <div>
+              <div className="flex flex-col gap-6">
                 <OrderSummary />
                 <RelatedProducts />
               </div>

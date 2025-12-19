@@ -1,20 +1,78 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { User, MapPin, Mail, Phone, Save } from "lucide-react";
+import { getSettings, updateAccountInfo } from "@/services/settings.service";
+import type { AccountInfo } from "@/types/buyer.types";
 
 export default function AccountSettings() {
-  const [formData, setFormData] = useState({
-    firstName: "John",
-    lastName: "Smith",
-    email: "john.smith@company.com",
-    phone: "+91 8088808008",
-    street: "123 Business Park",
-    city: "john.smith@company.com",
-    state: "+91 8088808008",
-    zip: "+91 8088808008",
+  const [formData, setFormData] = useState<AccountInfo>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    companyName: "",
+    gstNumber: "",
     bio: "",
+    street: "",
+    city: "",
+    state: "",
+    zip: "",
   });
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+
+  useEffect(() => {
+    loadSettings();
+  }, []);
+
+  const loadSettings = async () => {
+    try {
+      setLoading(true);
+      const response = await getSettings();
+
+      if (response.success && response.data) {
+        setFormData(response.data.account);
+      }
+    } catch (err: any) {
+      console.error("Failed to load settings:", err);
+      setError(err.message || "Failed to load settings");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSave = async () => {
+    setSaving(true);
+    setError(null);
+    setSuccess(null);
+
+    try {
+      const response = await updateAccountInfo(formData);
+
+      if (response.success) {
+        setSuccess("Account information updated successfully");
+        setTimeout(() => setSuccess(null), 3000);
+      } else {
+        throw new Error(response.message || "Update failed");
+      }
+    } catch (err: any) {
+      console.error("Failed to update account:", err);
+      setError(err.message || "Failed to update account information");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-12">
+        <div className="text-gray-500">Loading settings...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -26,6 +84,18 @@ export default function AccountSettings() {
           Manage your personal information and account details
         </p>
       </div>
+
+      {/* Success/Error Messages */}
+      {success && (
+        <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded">
+          {success}
+        </div>
+      )}
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded">
+          {error}
+        </div>
+      )}
 
       {/* Personal Information */}
       <div className="border border-gray-900 p-6">
@@ -187,9 +257,13 @@ export default function AccountSettings() {
 
       {/* Save Button */}
       <div className="flex justify-end">
-        <button className="px-6 py-2.5 bg-white border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-50 flex items-center gap-2">
+        <button
+          onClick={handleSave}
+          disabled={saving}
+          className="px-6 py-2.5 bg-white border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+        >
           <Save className="w-4 h-4 text-gray-900" />
-          Save Changes
+          {saving ? "Saving..." : "Save Changes"}
         </button>
       </div>
     </div>

@@ -352,7 +352,21 @@ export const buyerService = {
   async addAddress(
     data: CreateAddressRequest
   ): Promise<ApiResponse<{ address: Address }>> {
-    return apiRequest("post", "/buyer/profile/address", data);
+    // Transform snake_case to camelCase for backend API
+    const payload = {
+      contactName: data.contact_name,
+      contactPhone: data.contact_phone,
+      addressLine1: data.address_line1,
+      addressLine2: data.address_line2,
+      city: data.city,
+      state: data.state,
+      pincode: data.pincode,
+      landmark: data.landmark,
+      addressType: data.address_type,
+      isDefault: data.is_default,
+      label: data.label,
+    };
+    return apiRequest("post", "/buyer/profile/address", payload);
   },
 
   /**
@@ -364,7 +378,25 @@ export const buyerService = {
     addressId: string,
     data: UpdateAddressRequest
   ): Promise<ApiResponse<{ address: Address }>> {
-    return apiRequest("put", `/buyer/profile/address/${addressId}`, data);
+    // Transform snake_case to camelCase for backend API
+    const payload: any = {};
+    if (data.contact_name !== undefined)
+      payload.contactName = data.contact_name;
+    if (data.contact_phone !== undefined)
+      payload.contactPhone = data.contact_phone;
+    if (data.address_line1 !== undefined)
+      payload.addressLine1 = data.address_line1;
+    if (data.address_line2 !== undefined)
+      payload.addressLine2 = data.address_line2;
+    if (data.city !== undefined) payload.city = data.city;
+    if (data.state !== undefined) payload.state = data.state;
+    if (data.pincode !== undefined) payload.pincode = data.pincode;
+    if (data.landmark !== undefined) payload.landmark = data.landmark;
+    if (data.address_type !== undefined)
+      payload.addressType = data.address_type;
+    if (data.is_default !== undefined) payload.isDefault = data.is_default;
+    if (data.label !== undefined) payload.label = data.label;
+    return apiRequest("put", `/buyer/profile/address/${addressId}`, payload);
   },
 
   /**

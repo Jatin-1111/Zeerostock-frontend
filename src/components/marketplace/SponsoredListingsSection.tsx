@@ -14,12 +14,13 @@ export default function SponsoredListingsSection() {
       try {
         setIsLoading(true);
         const response = await marketplaceService.getSponsored();
-        if (response.success && response.data) {
+        if (response?.success && response?.data) {
           const sponsoredList = Array.isArray(response.data)
             ? response.data.slice(0, 3)
             : [];
           setListings(sponsoredList);
         } else {
+          console.warn("No sponsored listings data received:", response);
           setListings([]);
         }
       } catch (error) {
@@ -137,7 +138,7 @@ export default function SponsoredListingsSection() {
                   {listing?.originalPrice &&
                     listing.originalPrice > (listing.price || 0) && (
                       <span className="text-sm text-gray-500 line-through">
-                        ₹{listing.priceBefore.toLocaleString("en-IN")}
+                        ₹{listing.originalPrice.toLocaleString("en-IN")}
                       </span>
                     )}
                   <span className="flex items-center gap-1 text-xs text-gray-600 ml-auto">

@@ -48,14 +48,14 @@ export default function OrderSummary({
 
       <div className="mt-6 space-y-3">
         <label className="flex items-start gap-2">
-          <input type="checkbox" className="w-4 h-4 mt-0.5" />
+          <input type="checkbox" className="w-4 h-4 mt-0.5 text-black" />
           <span className="text-sm text-gray-700">
             Secure checkout with SSL encryption
           </span>
         </label>
 
         <label className="flex items-start gap-2">
-          <input type="checkbox" className="w-4 h-4 mt-0.5" />
+          <input type="checkbox" className="w-4 h-4 mt-0.5 text-black" />
           <span className="text-sm text-gray-700">
             Fast shipping and handling
           </span>

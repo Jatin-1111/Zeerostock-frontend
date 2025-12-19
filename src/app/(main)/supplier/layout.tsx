@@ -1,4 +1,10 @@
+"use client";
+
 import SupplierSidebar from "@/components/shared/SupplierSidebar";
+import RoleGuard from "@/components/guards/RoleGuard";
+
+// Force dynamic rendering for all supplier pages
+export const dynamic = "force-dynamic";
 
 export default function SupplierLayout({
   children,
@@ -6,9 +12,11 @@ export default function SupplierLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen bg-white">
-      <SupplierSidebar />
-      <main className="flex-1">{children}</main>
-    </div>
+    <RoleGuard allowedRole="supplier">
+      <div className="flex min-h-screen bg-white">
+        <SupplierSidebar />
+        <main className="flex-1">{children}</main>
+      </div>
+    </RoleGuard>
   );
 }

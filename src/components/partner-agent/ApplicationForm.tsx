@@ -85,7 +85,7 @@ export default function ApplicationForm() {
                   value={formData.firstName}
                   onChange={handleChange}
                   placeholder="John"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 font-['Poppins']"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 font-['Poppins'] text-black placeholder:text-black"
                 />
               </div>
               <div>
@@ -98,7 +98,7 @@ export default function ApplicationForm() {
                   value={formData.lastName}
                   onChange={handleChange}
                   placeholder="Doe"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 font-['Poppins']"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 font-['Poppins'] text-black placeholder:text-black"
                 />
               </div>
             </div>
@@ -136,7 +136,7 @@ export default function ApplicationForm() {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="user.example@company.com"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 font-['Poppins']"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 font-['Poppins'] text-black placeholder:text-black"
                 />
               </div>
               <div>
@@ -149,7 +149,7 @@ export default function ApplicationForm() {
                   value={formData.phone}
                   onChange={handleChange}
                   placeholder="+1 (555) 000-0000"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 font-['Poppins']"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 font-['Poppins'] text-black placeholder:text-black"
                 />
               </div>
             </div>
@@ -193,7 +193,7 @@ export default function ApplicationForm() {
                   value={formData.country}
                   onChange={handleChange}
                   placeholder="United States"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 font-['Poppins']"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 font-['Poppins'] text-black placeholder:text-black"
                 />
               </div>
               <div>
@@ -206,7 +206,7 @@ export default function ApplicationForm() {
                   value={formData.state}
                   onChange={handleChange}
                   placeholder="California"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 font-['Poppins']"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 font-['Poppins'] text-black placeholder:text-black"
                 />
               </div>
             </div>
@@ -245,7 +245,7 @@ export default function ApplicationForm() {
                     value={formData.company}
                     onChange={handleChange}
                     placeholder="Company Name"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 font-['Poppins']"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 font-['Poppins'] text-black placeholder:text-black"
                   />
                 </div>
                 <div>
@@ -258,7 +258,7 @@ export default function ApplicationForm() {
                     value={formData.profileUrl}
                     onChange={handleChange}
                     placeholder="https://linkedin.com/in/yourprofile"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 font-['Poppins']"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 font-['Poppins'] text-black placeholder:text-black"
                   />
                 </div>
               </div>
@@ -273,7 +273,7 @@ export default function ApplicationForm() {
                   value={formData.experience}
                   onChange={handleChange}
                   placeholder="Briefly describe your background"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 font-['Poppins']"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 font-['Poppins'] text-black placeholder:text-black"
                 />
               </div>
 
@@ -287,7 +287,7 @@ export default function ApplicationForm() {
                   value={formData.portfolio}
                   onChange={handleChange}
                   placeholder="e.g., Manufacturing, Pharmaceuticals, Energy"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 font-['Poppins']"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 font-['Poppins'] text-black placeholder:text-black"
                 />
               </div>
             </div>
@@ -325,7 +325,7 @@ export default function ApplicationForm() {
                   value={formData.license}
                   onChange={handleChange}
                   placeholder="Yes/No (If yes, provide details)"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 font-['Poppins']"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 font-['Poppins'] text-black placeholder:text-black"
                 />
               </div>
 
@@ -339,7 +339,7 @@ export default function ApplicationForm() {
                   value={formData.website}
                   onChange={handleChange}
                   placeholder="https://www.yoursite.com"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 font-['Poppins']"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 font-['Poppins'] text-black placeholder:text-black"
                 />
               </div>
 
@@ -353,7 +353,7 @@ export default function ApplicationForm() {
                   onChange={handleChange}
                   placeholder="Describe any relevant experience or provide testimonials"
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 font-['Poppins'] resize-none"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 font-['Poppins'] resize-none text-black placeholder:text-black"
                 />
               </div>
 
@@ -367,7 +367,7 @@ export default function ApplicationForm() {
                   value={formData.zeerostock}
                   onChange={handleChange}
                   placeholder="e.g., LinkedIn, Google, Referral"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 font-['Poppins']"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 font-['Poppins'] text-black placeholder:text-black"
                 />
               </div>
 
@@ -381,7 +381,7 @@ export default function ApplicationForm() {
                   onChange={handleChange}
                   placeholder="Tell us about your motivations and goals (optional)"
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 font-['Poppins'] resize-none"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 font-['Poppins'] resize-none text-black placeholder:text-black"
                 />
               </div>
             </div>
@@ -395,7 +395,7 @@ export default function ApplicationForm() {
                 name="agreeTerms"
                 checked={formData.agreeTerms}
                 onChange={handleChange}
-                className="mt-1 w-4 h-4 border-gray-300 rounded"
+                className="mt-1 w-4 h-4 border-gray-300 rounded text-black"
               />
               <label className="text-[13px] text-gray-700 font-['Poppins']">
                 I agree to the agent terms and conditions, and understand that

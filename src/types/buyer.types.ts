@@ -353,51 +353,53 @@ export interface ChangePasswordRequest {
 // ADDRESS TYPES
 // =====================================================
 
-export type AddressType = "home" | "office" | "other" | "shipping" | "billing";
+export type AddressType = "shipping" | "billing" | "both";
 
 export interface Address {
   id: string;
-  userId: string;
-  fullName: string;
-  phone: string;
-  alternatePhone: string | null;
-  addressLine1: string;
-  addressLine2: string | null;
+  user_id: string;
+  contact_name: string;
+  contact_phone: string;
+  address_line1: string;
+  address_line2: string | null;
   city: string;
   state: string;
   pincode: string;
   landmark: string | null;
-  addressType: AddressType;
-  isDefault: boolean;
-  createdAt: string;
-  updatedAt: string;
+  address_type: AddressType;
+  is_default: boolean;
+  label?: string | null;
+  country?: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface CreateAddressRequest {
-  fullName: string;
-  phone: string;
-  alternatePhone?: string;
-  addressLine1: string;
-  addressLine2?: string;
+  contact_name: string;
+  contact_phone: string;
+  address_line1: string;
+  address_line2?: string;
   city: string;
   state: string;
   pincode: string;
   landmark?: string;
-  addressType: AddressType;
-  isDefault?: boolean;
+  address_type: AddressType;
+  is_default?: boolean;
+  label?: string;
 }
 
 export interface UpdateAddressRequest {
-  fullName?: string;
-  phone?: string;
-  alternatePhone?: string;
-  addressLine1?: string;
-  addressLine2?: string;
+  contact_name?: string;
+  contact_phone?: string;
+  address_line1?: string;
+  address_line2?: string;
   city?: string;
   state?: string;
   pincode?: string;
   landmark?: string;
-  addressType?: AddressType;
+  address_type?: AddressType;
+  is_default?: boolean;
+  label?: string;
 }
 
 // =====================================================
@@ -545,47 +547,288 @@ export interface DashboardData {
 // QUOTE/RFQ TYPES (for future implementation)
 // =====================================================
 
-export type QuoteStatus =
-  | "pending"
-  | "received"
-  | "accepted"
-  | "rejected"
-  | "expired";
+// =====================================================
+// RFQ AND QUOTE TYPES
+// =====================================================
 
-export interface Quote {
+export type RFQStatus = "active" | "closed" | "expired" | "fulfilled";
+export type QuoteStatus = "pending" | "accepted" | "rejected" | "expired";
+export type RFQUnit =
+  | "pieces"
+  | "kg"
+  | "lbs"
+  | "tons"
+  | "liters"
+  | "gallons"
+  | "meters"
+  | "feet"
+  | "boxes"
+  | "pallets"
+  | "other";
+
+export interface RFQAttachment {
+  fileName: string;
+  fileUrl: string;
+  fileSize?: number;
+  fileType?: string;
+}
+
+export interface Category {
   id: string;
-  rfqId: string;
-  supplierId: string;
-  supplierName: string;
-  quoteNumber: string;
-  status: QuoteStatus;
-  unitPrice: number;
-  quantity: number;
-  totalPrice: number;
-  deliveryDays: number;
-  paymentTerms: string;
-  validUntil: string;
-  notes: string | null;
-  createdAt: string;
+  name: string;
+  slug: string;
+  description?: string;
+  isActive: boolean;
+}
+
+export interface Industry {
+  id: string;
+  name: string;
+  slug: string;
+  description?: string;
+  isActive: boolean;
+}
+
+export interface Supplier {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  companyName: string;
+  phone?: string;
+  profileImage?: string;
+}
+
+export interface Product {
+  id: string;
+  name: string;
+  sku: string;
+  description?: string;
+  imageUrl?: string;
+  price?: number;
 }
 
 export interface RFQ {
   id: string;
   rfqNumber: string;
-  productTitle: string;
-  category: string;
+  buyerId: string;
+  title: string;
+  categoryId: string;
+  industryId: string;
   quantity: number;
-  targetPrice: number | null;
-  description: string;
-  specifications: Record<string, any>;
-  attachments: string[];
-  deliveryLocation: string;
-  expectedDeliveryDate: string | null;
-  status: "open" | "quoted" | "closed" | "expired";
-  quotesCount: number;
-  quotes: Quote[];
-  createdAt: string;
+  unit: RFQUnit;
+  budgetMin?: number;
+  budgetMax?: number;
+  requiredByDate?: string;
+  detailedRequirements?: string;
+  preferredLocation?: string;
+  durationDays: number;
+  status: RFQStatus;
+  attachments?: RFQAttachment[];
+  viewCount: number;
+  quoteCount: number;
   expiresAt: string;
+  createdAt: string;
+  updatedAt: string;
+  category?: Category;
+  industry?: Industry;
+  buyer?: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    companyName: string;
+  };
+  quotes?: Quote[];
+}
+
+export interface Quote {
+  id: string;
+  quoteNumber: string;
+  rfqId: string;
+  supplierId: string;
+  buyerId: string;
+  productId?: string;
+  quotePrice: number;
+  quantity: number;
+  deliveryDays: number;
+  validUntil: string;
+  status: QuoteStatus;
+  notes?: string;
+  termsAndConditions?: string;
+  warranty?: string;
+  paymentTerms?: string;
+  discount?: number;
+  discountPercentage?: number;
+  acceptedAt?: string;
+  rejectionReason?: string;
+  buyerNotes?: string;
+  createdAt: string;
+  updatedAt: string;
+  supplier?: Supplier;
+  product?: Product;
+  rfq?: RFQ;
+  messages?: QuoteMessage[];
+  unreadMessageCount?: number;
+}
+
+export interface QuoteMessage {
+  id: string;
+  quoteId: string;
+  senderId: string;
+  receiverId: string;
+  message: string;
+  isRead: boolean;
+  attachments?: RFQAttachment[];
+  createdAt: string;
+  updatedAt: string;
+  sender?: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    companyName: string;
+  };
+  receiver?: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    companyName: string;
+  };
+}
+
+export interface RFQStats {
+  totalRFQs: number;
+  activeRFQs: number;
+  closedRFQs: number;
+  expiredRFQs: number;
+  fulfilledRFQs: number;
+  avgQuotesPerRFQ: number;
+  avgResponseTime: number;
+}
+
+export interface QuoteStats {
+  totalQuotes: number;
+  pendingQuotes: number;
+  acceptedQuotes: number;
+  rejectedQuotes: number;
+  unreadMessages: number;
+  avgResponseTime: number;
+}
+
+export interface CreateRFQRequest {
+  title: string;
+  categoryId: string;
+  industryId: string;
+  quantity: number;
+  unit: RFQUnit;
+  budgetMin?: number;
+  budgetMax?: number;
+  requiredByDate?: string;
+  detailedRequirements?: string;
+  preferredLocation?: string;
+  durationDays?: number;
+  attachments?: RFQAttachment[];
+}
+
+export interface UpdateRFQRequest extends Partial<CreateRFQRequest> {}
+
+export interface RFQFilters extends PaginationParams {
+  status?: RFQStatus;
+  category?: string;
+  industry?: string;
+  search?: string;
+  sortBy?: "createdAt" | "updatedAt" | "expiresAt" | "quoteCount";
+  sortOrder?: "ASC" | "DESC";
+}
+
+export interface QuoteFilters extends PaginationParams {
+  status?: QuoteStatus;
+  rfqId?: string;
+  search?: string;
+  sortBy?:
+    | "createdAt"
+    | "updatedAt"
+    | "quotePrice"
+    | "deliveryDays"
+    | "validUntil";
+  sortOrder?: "ASC" | "DESC";
+}
+
+export interface AcceptQuoteRequest {
+  createOrder?: boolean;
+  shippingAddressId?: string;
+  notes?: string;
+}
+
+export interface RejectQuoteRequest {
+  reason: string;
+}
+
+export interface SendMessageRequest {
+  message: string;
+  attachments?: RFQAttachment[];
+}
+
+// =====================================================
+// SETTINGS TYPES
+// =====================================================
+
+export interface NotificationPreferences {
+  email: boolean;
+  sms: boolean;
+  push: boolean;
+  marketing: boolean;
+  digest: boolean;
+  alerts: boolean;
+}
+
+export interface PrivacySettings {
+  dataSharing: boolean;
+  analytics: boolean;
+}
+
+export interface LanguagePreferences {
+  language: string;
+  region: string;
+  dateFormat: string;
+  timeFormat: string;
+  currency: string;
+}
+
+export interface AccountInfo {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  companyName: string;
+  gstNumber?: string;
+  bio?: string;
+  street?: string;
+  city?: string;
+  state?: string;
+  zip?: string;
+}
+
+export interface UserSettings {
+  account: AccountInfo;
+  notifications: NotificationPreferences;
+  privacy: PrivacySettings;
+  language: LanguagePreferences;
+}
+
+export type SettingsSection =
+  | "account"
+  | "notifications"
+  | "privacy"
+  | "language";
+
+export interface UpdateSettingsRequest {
+  section: SettingsSection;
+  data:
+    | Partial<AccountInfo>
+    | Partial<NotificationPreferences>
+    | Partial<PrivacySettings>
+    | Partial<LanguagePreferences>;
 }
 
 // =====================================================

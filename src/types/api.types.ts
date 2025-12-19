@@ -170,13 +170,37 @@ export interface Industry {
 
 // Cart Types
 export interface CartItem {
-  id: string;
+  itemId: string; // Backend returns itemId, not id
+  cartItemId?: string; // Alias for itemId
   productId: string;
-  product: Product;
+  title: string;
+  slug?: string | null;
+  image?: string | null;
   quantity: number;
   price: number;
-  subtotal: number;
+  originalPrice?: number;
+  discountPercent?: number;
+  gstPercent?: number;
+  listingType?: string;
+  condition?: string;
+  unit?: string;
+  category?: string | null; // Category name as string
+  seller?: {
+    id: string | null;
+    name: string;
+    verified: boolean;
+  };
+  availability?: {
+    isAvailable: boolean;
+    priceChanged: boolean;
+    stockChanged: boolean;
+    currentStock: number;
+  };
+  available?: boolean; // Convenience field for quick check
   addedAt: string;
+  // Computed fields
+  subtotal?: number; // Can be computed: price * quantity
+  product?: Product; // Legacy support
 }
 
 export interface CartPricing {
@@ -189,15 +213,54 @@ export interface CartPricing {
   savings?: number;
 }
 
+export interface PricingSummary {
+  itemSubtotal: number;
+  discountAmount: number;
+  couponDiscount: number;
+  subtotalAfterDiscounts: number;
+  gstAmount: number;
+  shippingCharges: number;
+  platformFee: number;
+  finalPayableAmount: number;
+  totalSavings: number;
+  couponDetails?: {
+    code: string;
+    discountType: string;
+    discountValue: number;
+  } | null;
+  itemsBreakdown?: Array<{
+    itemId: string;
+    productId: string;
+    title: string;
+    quantity: number;
+    unitPrice: number;
+    discount: number;
+    subtotal: number;
+  }>;
+}
+
+export interface CheckoutSessionResponse {
+  sessionToken: string;
+  sessionId: string;
+  cartItems: CartItem[];
+  itemCount: number;
+  pricingSummary: PricingSummary;
+  expiresAt: string;
+  expiresIn: number;
+}
+
 export interface Cart {
   items: CartItem[];
   itemCount: number;
-  pricing: CartPricing;
+  summary: CartPricing; // Backend returns "summary" not "pricing"
+  pricing?: CartPricing; // Alias for backward compatibility
   coupon?: {
     code: string;
     discount: number;
     type: "percentage" | "fixed";
   };
+  hasIssues?: boolean;
+  warnings?: string[];
 }
 
 // Homepage Types
@@ -317,6 +380,7 @@ export interface SignupFormData {
 export interface LoginFormData {
   identifier: string; // email or mobile
   password: string;
+  requestedRole?: "buyer" | "supplier" | "admin"; // Optional role selection
 }
 
 export interface OTPVerifyData {

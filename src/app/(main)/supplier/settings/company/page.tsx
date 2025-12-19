@@ -42,7 +42,7 @@ export default function CompanyInformation() {
               <input
                 type="text"
                 defaultValue="Sarah's Manufacturing Ltd"
-                className="w-full px-4 py-3 border-2 border-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 text-black"
+                className="w-full px-4 py-3 border-2 border-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 text-black placeholder:text-black"
               />
             </div>
 
@@ -54,7 +54,7 @@ export default function CompanyInformation() {
               <textarea
                 rows={6}
                 defaultValue="Leading manufacturer of industrial components with 20+ years of experience in delivering high-quality products to global markets. We specialize in precision engineering and maintain strict quality control standards."
-                className="w-full px-4 py-3 border-2 border-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 resize-none text-black"
+                className="w-full px-4 py-3 border-2 border-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 resize-none text-black placeholder:text-black"
               />
             </div>
 
@@ -123,7 +123,7 @@ export default function CompanyInformation() {
                 <input
                   type="url"
                   defaultValue="https://sarahsmanufacturing.com"
-                  className="w-full pl-12 pr-4 py-3 border-2 border-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 text-black"
+                  className="w-full pl-12 pr-4 py-3 border-2 border-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 text-black placeholder:text-black"
                 />
               </div>
             </div>
@@ -138,7 +138,7 @@ export default function CompanyInformation() {
                 <input
                   type="tel"
                   defaultValue="+91 (555) 123-4567"
-                  className="w-full pl-12 pr-4 py-3 border-2 border-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 text-black"
+                  className="w-full pl-12 pr-4 py-3 border-2 border-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 text-black placeholder:text-black"
                 />
               </div>
             </div>
@@ -200,3 +200,4 @@ export default function CompanyInformation() {
     </div>
   );
 }
+

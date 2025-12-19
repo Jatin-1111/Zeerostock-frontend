@@ -1,8 +1,12 @@
 import { apiRequest } from "@/lib/api-client";
-import { Cart, CartItem, ApiResponse } from "@/types/api.types";
+import {
+  Cart,
+  CartItem,
+  ApiResponse,
+  CheckoutSessionResponse,
+} from "@/types/api.types";
 
-const SESSION_KEY =
-  process.env.NEXT_PUBLIC_SESSION_KEY || "zeerostock_guest_session";
+const SESSION_KEY = "zeerostock_guest_session"; // Remove environment variable to ensure consistency
 
 // Helper to generate guest session ID
 const generateSessionId = (): string => {
@@ -11,13 +15,31 @@ const generateSessionId = (): string => {
 
 // Helper to get or create session ID
 const getSessionId = (): string => {
-  if (typeof window === "undefined") return "";
+  if (typeof window === "undefined") {
+    console.log("getSessionId: Running on server side, returning empty string");
+    return "";
+  }
+
+  console.log("getSessionId: SESSION_KEY =", SESSION_KEY);
+  console.log("getSessionId: localStorage keys:", Object.keys(localStorage));
 
   let sessionId = localStorage.getItem(SESSION_KEY);
+  console.log(
+    `getSessionId: Retrieved from localStorage['${SESSION_KEY}']:`,
+    sessionId
+  );
+
   if (!sessionId) {
     sessionId = generateSessionId();
+    console.log("getSessionId: Generated new session ID:", sessionId);
     localStorage.setItem(SESSION_KEY, sessionId);
+    console.log("getSessionId: Stored in localStorage['${SESSION_KEY}']");
+
+    // Verify it was stored
+    const verify = localStorage.getItem(SESSION_KEY);
+    console.log("getSessionId: Verification read:", verify);
   }
+
   return sessionId;
 };
 
@@ -29,8 +51,49 @@ export const cartService = {
     productId: string,
     quantity: number
   ): Promise<ApiResponse<{ cartItem: CartItem }>> {
+    // Validate inputs
+    if (!productId) {
+      return {
+        success: false,
+        message: "Product ID is required",
+      };
+    }
+
+    if (!quantity || quantity < 1) {
+      return {
+        success: false,
+        message: "Quantity must be at least 1",
+      };
+    }
+
     const sessionId = getSessionId();
-    return apiRequest("post", "/cart/add", { productId, quantity, sessionId });
+    console.log("cartService.addToCart: sessionId =", sessionId);
+    console.log("cartService.addToCart: sending request with", {
+      productId,
+      quantity,
+      sessionId,
+    });
+
+    try {
+      const result = await apiRequest<{ cartItem: CartItem }>(
+        "post",
+        "/cart/add",
+        {
+          productId,
+          quantity,
+          sessionId,
+        }
+      );
+      console.log("cartService.addToCart: received response", result);
+      return result;
+    } catch (error) {
+      console.error("cartService.addToCart: error", error);
+      return {
+        success: false,
+        message: "Failed to add item to cart",
+        error: error instanceof Error ? error.message : "Unknown error",
+      };
+    }
   },
 
   /**
@@ -41,19 +104,28 @@ export const cartService = {
     city?: string,
     pincode?: string
   ): Promise<ApiResponse<Cart>> {
-    const params: Record<string, string> = {};
+    const sessionId = getSessionId();
+    console.log("cartService.getCart: sessionId =", sessionId);
+    const params: Record<string, string> = { sessionId };
     if (state) params.state = state;
     if (city) params.city = city;
     if (pincode) params.pincode = pincode;
 
-    return apiRequest("get", "/cart", undefined, { params });
+    const result = await apiRequest<Cart>("get", "/cart", undefined, {
+      params,
+    });
+    console.log("cartService.getCart: result =", result);
+    return result;
   },
 
   /**
    * Get cart item count
    */
   async getCartCount(): Promise<ApiResponse<{ count: number }>> {
-    return apiRequest("get", "/cart/count");
+    const sessionId = getSessionId();
+    return apiRequest("get", "/cart/count", undefined, {
+      params: { sessionId },
+    });
   },
 
   /**
@@ -63,21 +135,84 @@ export const cartService = {
     itemId: string,
     quantity: number
   ): Promise<ApiResponse<{ cartItem: CartItem }>> {
-    return apiRequest("put", `/cart/update/${itemId}`, { quantity });
+    // Validate inputs
+    if (!itemId) {
+      return {
+        success: false,
+        message: "Item ID is required",
+      };
+    }
+
+    if (!quantity || quantity < 1) {
+      return {
+        success: false,
+        message: "Quantity must be at least 1",
+      };
+    }
+
+    const sessionId = getSessionId();
+    console.log(
+      "cartService.updateCartItem: sessionId =",
+      sessionId,
+      "itemId =",
+      itemId
+    );
+
+    try {
+      return await apiRequest("put", `/cart/update/${itemId}`, {
+        quantity,
+        sessionId,
+      });
+    } catch (error) {
+      console.error("cartService.updateCartItem: error", error);
+      return {
+        success: false,
+        message: "Failed to update cart item",
+        error: error instanceof Error ? error.message : "Unknown error",
+      };
+    }
   },
 
   /**
    * Remove item from cart
    */
   async removeFromCart(itemId: string): Promise<ApiResponse<void>> {
-    return apiRequest("delete", `/cart/remove/${itemId}`);
+    // Validate input
+    if (!itemId) {
+      return {
+        success: false,
+        message: "Item ID is required",
+      };
+    }
+
+    const sessionId = getSessionId();
+    console.log(
+      "cartService.removeFromCart: sessionId =",
+      sessionId,
+      "itemId =",
+      itemId
+    );
+
+    try {
+      return await apiRequest("delete", `/cart/remove/${itemId}`, undefined, {
+        params: { sessionId },
+      });
+    } catch (error) {
+      console.error("cartService.removeFromCart: error", error);
+      return {
+        success: false,
+        message: "Failed to remove item from cart",
+        error: error instanceof Error ? error.message : "Unknown error",
+      };
+    }
   },
 
   /**
    * Clear entire cart
    */
   async clearCart(): Promise<ApiResponse<void>> {
-    return apiRequest("delete", "/cart/clear");
+    const sessionId = getSessionId();
+    return apiRequest("delete", "/cart/clear", { sessionId });
   },
 
   /**
@@ -86,14 +221,16 @@ export const cartService = {
   async applyCoupon(
     couponCode: string
   ): Promise<ApiResponse<{ discount: number; newTotal: number }>> {
-    return apiRequest("post", "/cart/apply-coupon", { couponCode });
+    const sessionId = getSessionId();
+    return apiRequest("post", "/cart/apply-coupon", { couponCode, sessionId });
   },
 
   /**
    * Remove applied coupon
    */
   async removeCoupon(): Promise<ApiResponse<{ newTotal: number }>> {
-    return apiRequest("post", "/cart/remove-coupon");
+    const sessionId = getSessionId();
+    return apiRequest("post", "/cart/remove-coupon", { sessionId });
   },
 
   /**
@@ -109,7 +246,10 @@ export const cartService = {
       }>;
     }>
   > {
-    return apiRequest("get", "/cart/validate");
+    const sessionId = getSessionId();
+    return apiRequest("get", "/cart/validate", undefined, {
+      params: { sessionId },
+    });
   },
 
   /**
@@ -137,11 +277,11 @@ export const cartService = {
   /**
    * Create checkout session (requires authentication)
    */
-  async createCheckoutSession(data: {
-    shippingAddress: Record<string, unknown>;
-    billingAddress: Record<string, unknown>;
-  }): Promise<ApiResponse<{ checkoutSessionId: string }>> {
-    return apiRequest("post", "/cart/checkout", data);
+  async createCheckoutSession(data?: {
+    shippingAddress?: Record<string, unknown>;
+    billingAddress?: Record<string, unknown>;
+  }): Promise<ApiResponse<CheckoutSessionResponse>> {
+    return apiRequest("post", "/cart/checkout", data || {});
   },
 
   /**

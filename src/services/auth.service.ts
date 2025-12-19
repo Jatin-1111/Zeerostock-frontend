@@ -276,4 +276,47 @@ export const authService = {
     if (typeof window === "undefined") return null;
     return localStorage.getItem(TOKEN_KEY);
   },
+
+  /**
+   * Switch between buyer and supplier roles
+   */
+  async switchRole(
+    newRole: "buyer" | "supplier",
+    password?: string
+  ): Promise<
+    ApiResponse<{
+      currentRole: string;
+      availableRoles: string[];
+      accessToken: string;
+      refreshToken: string;
+    }>
+  > {
+    const response = await apiRequest<{
+      currentRole: string;
+      availableRoles: string[];
+      accessToken: string;
+      refreshToken: string;
+    }>("post", "/auth/switch-role", { newRole, password });
+
+    if (response.success && response.data) {
+      const { accessToken, refreshToken } = response.data;
+
+      // Update tokens
+      localStorage.setItem(TOKEN_KEY, accessToken);
+      localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
+
+      // Update user data with new role
+      const userData = this.getStoredUser();
+      if (userData) {
+        userData.activeRole = response.data.currentRole as
+          | "buyer"
+          | "supplier"
+          | "admin";
+        userData.roles = response.data.availableRoles;
+        localStorage.setItem(USER_DATA_KEY, JSON.stringify(userData));
+      }
+    }
+
+    return response;
+  },
 };

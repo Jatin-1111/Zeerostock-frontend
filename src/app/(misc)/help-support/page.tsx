@@ -343,7 +343,7 @@ export default function HelpSupportPage() {
                     <input
                       type="text"
                       placeholder="Search for videos..."
-                      className="w-full h-[48px] px-4 pr-10 border-2 border-gray-900 rounded-lg text-[14px] font-['Poppins'] focus:outline-none focus:ring-2 focus:ring-gray-900"
+                      className="w-full h-[48px] px-4 pr-10 border-2 border-gray-900 rounded-lg text-[14px] font-['Poppins'] focus:outline-none focus:ring-2 focus:ring-gray-900 text-black placeholder:text-black"
                     />
                     <svg
                       className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"

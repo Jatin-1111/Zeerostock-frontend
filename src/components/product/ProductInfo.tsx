@@ -1,16 +1,38 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { ProductDetail } from "@/types/api.types";
+import { useRouter } from "next/navigation";
+import { useCartStore } from "@/stores/cartStore";
 
 interface ProductInfoProps {
-  product: ProductDetail;
+  product: {
+    product: {
+      [key: string]: unknown;
+    };
+    reviewStats?: {
+      [key: string]: unknown;
+    };
+    auction?: {
+      [key: string]: unknown;
+    };
+    isWatching?: boolean;
+  };
 }
 
-export default function ProductInfo({ product }: ProductInfoProps) {
-  const [quantity, setQuantity] = useState(product.minimumOrderQuantity || 1);
-  const [bidAmount, setBidAmount] = useState(product.price);
+export default function ProductInfo({ product: data }: ProductInfoProps) {
+  const router = useRouter();
+  const { addToCart } = useCartStore();
+  const product = data.product;
+  const auction = data.auction;
+
+  const [bidAmount, setBidAmount] = useState(
+    (auction?.current_bid as number) || (product.price as number)
+  );
+  const [quantity, setQuantity] = useState(
+    (product.minimum_order_quantity as number) || 1
+  );
+  const [message, setMessage] = useState("");
+  const [isAddingToCart, setIsAddingToCart] = useState(false);
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat("en-IN", {
@@ -20,353 +42,278 @@ export default function ProductInfo({ product }: ProductInfoProps) {
     }).format(price);
   };
 
-  const formatTimeLeft = (seconds?: number | null) => {
-    if (!seconds) return null;
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    return `${hours}H : ${minutes}M`;
+  const isAuction = product.listing_type === "auction";
+  const estimatedTotal = bidAmount * quantity;
+  const minimumIncrement = (auction?.min_increment as number) || 20000;
+  const productStock = (product.quantity as number) || 0;
+  const minOrderQty = (product.minimum_order_quantity as number) || 1;
+
+  const handleAddToCart = async () => {
+    console.log("=== Add to Cart clicked ===");
+    console.log("Product ID:", product.id);
+    console.log("Quantity:", quantity);
+    console.log("Stock:", productStock);
+
+    // Validation
+    if (!product.id) {
+      console.error("Product ID is missing!");
+      setMessage("Invalid product");
+      return;
+    }
+
+    if (isAuction) {
+      setMessage("Auction items cannot be added to cart");
+      return;
+    }
+
+    if (quantity < minOrderQty) {
+      setMessage(`Minimum order quantity is ${minOrderQty}`);
+      return;
+    }
+
+    if (productStock > 0 && quantity > productStock) {
+      setMessage(`Only ${productStock} units available`);
+      return;
+    }
+
+    setIsAddingToCart(true);
+    setMessage("");
+
+    try {
+      const result = await addToCart(product.id as string, quantity);
+      console.log("Add to cart result:", result);
+
+      if (!result) {
+        setMessage("Failed to add to cart");
+      }
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+      setMessage("An error occurred");
+    } finally {
+      setIsAddingToCart(false);
+    }
   };
 
-  const estimatedTotal = bidAmount * quantity;
-  const isAuction = product.listingType === "auction";
+  const handleBuyNow = async () => {
+    console.log("=== Buy Now clicked ===");
+    console.log("Product ID:", product.id);
+    console.log("Quantity:", quantity);
+
+    // Validation
+    if (!product.id) {
+      console.error("Product ID is missing!");
+      setMessage("Invalid product");
+      return;
+    }
+
+    if (isAuction) {
+      setMessage("Auction items cannot be purchased directly");
+      return;
+    }
+
+    if (quantity < minOrderQty) {
+      setMessage(`Minimum order quantity is ${minOrderQty}`);
+      return;
+    }
+
+    if (productStock > 0 && quantity > productStock) {
+      setMessage(`Only ${productStock} units available`);
+      return;
+    }
+
+    setIsAddingToCart(true);
+    setMessage("");
+
+    try {
+      const result = await addToCart(product.id as string, quantity);
+      console.log("Buy now add to cart result:", result);
+
+      if (result) {
+        router.push("/buyer/cart");
+      } else {
+        setMessage("Failed to add to cart");
+        setIsAddingToCart(false);
+      }
+    } catch (error) {
+      console.error("Error in buy now:", error);
+      setMessage("An error occurred");
+      setIsAddingToCart(false);
+    }
+  };
 
   return (
-    <div className="space-y-6">
-      {/* Breadcrumb */}
-      <div className="flex items-center gap-2 text-sm text-gray-600">
-        <Link href="/marketplace" className="hover:text-gray-900">
-          Back to Marketplace
-        </Link>
-        {product.category && (
-          <>
-            <span>/</span>
-            <span className="text-gray-900">{product.category.name}</span>
-          </>
-        )}
-        {product.industry && (
-          <>
-            <span>/</span>
-            <span className="text-gray-900">{product.industry.name}</span>
-          </>
-        )}
-      </div>
+    <div className="bg-white rounded-[15px] shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)] p-6 h-fit">
+      {/* Title */}
+      <h1 className="text-[25.5px] font-semibold font-['Poppins'] text-[#1e3a8a] leading-normal mb-3">
+        {product.title as string}
+      </h1>
 
-      {/* Title and Price */}
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          {product.title}
-        </h1>
-        <p className="text-gray-600 mb-4">
-          {product.condition} • {product.city}, {product.state}
-        </p>
-
-        <div className="flex items-baseline gap-3 mb-4">
-          <span className="text-4xl font-bold text-gray-900">
-            {formatPrice(product.price)}
-          </span>
-          {product.originalPrice && product.originalPrice > product.price && (
-            <span className="text-2xl text-gray-500 line-through">
-              {formatPrice(product.originalPrice)}
-            </span>
-          )}
-        </div>
-
-        <p className="text-sm text-gray-600 mb-2">
-          {product.minimumOrderQuantity &&
-            `MOQ: ${product.minimumOrderQuantity} units`}
-        </p>
-        <p className="text-sm text-gray-600 mb-4">
-          Product ID: {product.productId.substring(0, 8)}
-        </p>
-      </div>
-
-      {/* Statistics */}
-      <div className="flex items-center gap-6 py-4 border-t border-b border-gray-200">
-        {isAuction && product.timeLeft && (
-          <div className="flex items-center gap-2">
-            <svg
-              className="w-5 h-5 text-gray-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-            <div>
-              <p className="text-xs text-gray-600">Time Remaining</p>
-              <p className="text-sm font-semibold text-gray-900">
-                {formatTimeLeft(product.timeLeft)}
-              </p>
-            </div>
-          </div>
-        )}
-
-        {product.views !== undefined && (
-          <div className="flex items-center gap-2">
-            <svg
-              className="w-5 h-5 text-gray-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-              />
-            </svg>
-            <div>
-              <p className="text-xs text-gray-600">Views</p>
-              <p className="text-sm font-semibold text-gray-900">
-                {product.views}
-              </p>
-            </div>
-          </div>
-        )}
-
-        {product.watchers !== undefined && (
-          <div className="flex items-center gap-2">
-            <svg
-              className="w-5 h-5 text-gray-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-              />
-            </svg>
-            <div>
-              <p className="text-xs text-gray-600">Watching</p>
-              <p className="text-sm font-semibold text-gray-900">
-                {product.watchers}
-              </p>
-            </div>
-          </div>
-        )}
-
-        {product.stockQuantity !== undefined && (
-          <div className="flex items-center gap-2">
-            <svg
-              className="w-5 h-5 text-gray-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
-              />
-            </svg>
-            <div>
-              <p className="text-xs text-gray-600">Stock</p>
-              <p className="text-sm font-semibold text-gray-900">
-                {product.stockQuantity}
-              </p>
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* Place Your Bid / Order */}
-      <div className="bg-white rounded-lg p-6 border border-gray-200">
-        <h3 className="font-semibold text-gray-900 mb-4">
-          {isAuction ? "Place Your Bid" : "Order Details"}
-        </h3>
-
+      {/* Badges */}
+      <div className="flex items-center gap-2.25 mb-4.5">
+        <span className="px-2.25 py-0.75 bg-[#eeffef] text-[#2aae7a] text-[11.25px] font-medium font-['Poppins'] rounded-[60px]">
+          {(product.category as { name?: string })?.name || "Materials"}
+        </span>
         {isAuction && (
-          <div className="mb-4">
-            <label className="block text-sm text-gray-700 mb-2">
-              Bid Amount
+          <span className="px-2.25 py-0.75 bg-[#eeffef] text-[#2aae7a] text-[11.25px] font-medium font-['Poppins'] rounded-[60px]">
+            Auction
+          </span>
+        )}
+        <span className="px-2.25 py-0.75 bg-[#eeffef] text-[#2aae7a] text-[11.25px] font-medium font-['Poppins'] rounded-[60px] capitalize">
+          {product.condition as string}
+        </span>
+      </div>
+
+      {/* Price */}
+      <div className="mb-4.5">
+        <div className="flex items-baseline gap-3 mb-1.5">
+          <span className="text-[30px] font-semibold font-['Poppins'] text-[#0d1b2a]">
+            {formatPrice(product.price as number)}
+          </span>
+          {(() => {
+            if (
+              product.original_price &&
+              typeof product.original_price === "number" &&
+              typeof product.price === "number" &&
+              product.original_price > product.price
+            ) {
+              return (
+                <span className="text-[18px] font-medium font-['Poppins'] text-[#bebebe] line-through">
+                  {formatPrice(product.original_price)}
+                </span>
+              );
+            }
+            return null;
+          })()}
+        </div>
+        <p className="text-[18px] font-medium font-['Inter'] text-[#bebebe] tracking-[0.375px]">
+          per {(product.unit as string) || "unit"} /{" "}
+          {(product.stock_quantity as number) ||
+            (product.quantity as number) ||
+            0}{" "}
+          {(product.unit as string) || "units"} available
+        </p>
+      </div>
+
+      {/* Minimum Bid for Auction */}
+      {isAuction && (
+        <p className="text-[15px] font-medium font-['Inter'] text-[#bebebe] tracking-[0.375px] mb-4.5">
+          minimum bid{" "}
+          {formatPrice(
+            (auction?.current_bid as number) || (product.price as number)
+          )}
+        </p>
+      )}
+
+      {/* Watching Section */}
+      {/* <div className="flex items-center gap-2.25 mb-4.5">
+        <Eye className="w-4.5 h-4.5 text-[#bebebe]" />
+        <span className="text-[18px] font-medium font-['Inter'] text-[#0d1b2a]">
+          Watching:{" "}
+          <span className="font-semibold">
+            {(product.views as number) || 47}
+          </span>
+        </span>
+      </div> */}
+
+      {/* Action Buttons */}
+      {!isAuction && (
+        <div className="space-y-2.25">
+          <button
+            onClick={handleBuyNow}
+            disabled={isAddingToCart}
+            className="w-full bg-[#1e3a8a] text-white text-[15px] font-semibold font-['Poppins'] py-3 rounded-[7.5px] hover:bg-[#1e3a8a]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isAddingToCart ? "Adding..." : "Buy Now"}
+          </button>
+          <button
+            onClick={handleAddToCart}
+            disabled={isAddingToCart}
+            className="w-full bg-white border-2 border-[#1e3a8a] text-[#1e3a8a] text-[15px] font-semibold font-['Poppins'] py-3 rounded-[7.5px] hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isAddingToCart ? "Adding..." : "Add to Cart"}
+          </button>
+        </div>
+      )}
+
+      {/* Place Your Bid Section */}
+      {isAuction && (
+        <div className="mb-6">
+          <h3 className="text-base font-semibold text-gray-900 mb-4">
+            Place Your Bid
+          </h3>
+
+          {/* Bid Amount */}
+          <div className="mb-3">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Bid Amount (per tona)
+            </label>
+            <div className="relative">
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-600">
+                ₹
+              </span>
+              <input
+                type="number"
+                value={bidAmount}
+                onChange={(e) => setBidAmount(Number(e.target.value))}
+                className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                min={
+                  (auction?.current_bid as number) || (product.price as number)
+                }
+                step={minimumIncrement}
+              />
+            </div>
+            <p className="text-xs text-gray-500 mt-1">
+              Minimum increment: ₹{minimumIncrement.toLocaleString()}
+            </p>
+          </div>
+
+          {/* Quantity */}
+          <div className="mb-3">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Quantity (tona)
             </label>
             <input
               type="number"
-              value={bidAmount}
-              onChange={(e) =>
-                setBidAmount(parseFloat(e.target.value) || product.price)
-              }
-              placeholder={formatPrice(product.price)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
+              value={quantity}
+              onChange={(e) => setQuantity(Number(e.target.value))}
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+              min={(product.minimum_order_quantity as number) || 1}
             />
-            <p className="text-xs text-gray-600 mt-1">
-              Current price: {formatPrice(product.price)}
+          </div>
+
+          {/* Message */}
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Message Sales team (Optional)
+            </label>
+            <textarea
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Any specific requirements or questions"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-transparent resize-none h-20"
+            />
+          </div>
+
+          {/* Estimated Total */}
+          <div className="bg-gray-50 rounded-lg p-4 mb-4">
+            <div className="flex items-center justify-between mb-1">
+              <span className="text-sm font-medium text-gray-700">
+                Estimated Total:
+              </span>
+              <span className="text-2xl font-bold text-gray-900">
+                {formatPrice(estimatedTotal)}
+              </span>
+            </div>
+            <p className="text-xs text-gray-600">
+              {quantity} tona x {formatPrice(bidAmount)}
             </p>
           </div>
-        )}
 
-        <div className="mb-4">
-          <label className="block text-sm text-gray-700 mb-2">
-            Quantity
-            {product.minimumOrderQuantity &&
-              ` (MOQ: ${product.minimumOrderQuantity})`}
-          </label>
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() =>
-                setQuantity(
-                  Math.max(product.minimumOrderQuantity || 1, quantity - 1)
-                )
-              }
-              className="w-10 h-10 border border-gray-300 rounded flex items-center justify-center hover:bg-gray-100"
-            >
-              -
-            </button>
-            <input
-              type="number"
-              value={quantity}
-              onChange={(e) => {
-                const val = parseInt(e.target.value) || 1;
-                setQuantity(Math.max(product.minimumOrderQuantity || 1, val));
-              }}
-              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-center focus:outline-none focus:ring-2 focus:ring-gray-400"
-            />
-            <button
-              onClick={() => setQuantity(quantity + 1)}
-              className="w-10 h-10 border border-gray-300 rounded flex items-center justify-center hover:bg-gray-100"
-            >
-              +
-            </button>
-            {product.stockQuantity && (
-              <span className="text-sm text-gray-600 ml-2">
-                Available: {product.stockQuantity}
-              </span>
-            )}
-          </div>
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-sm text-gray-700 mb-2">
-            Message to Seller (Optional)
-          </label>
-          <textarea
-            placeholder="Add a note to the seller if required"
-            rows={3}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
-          />
-        </div>
-      </div>
-
-      {/* Estimated Total */}
-      <div className="bg-white border border-gray-200 rounded-lg p-6">
-        <h3 className="font-semibold text-gray-900 mb-4">Estimated Total:</h3>
-        <div className="flex justify-between items-center text-2xl font-bold text-gray-900 mb-4">
-          <span>{formatPrice(estimatedTotal)}</span>
-          <span className="text-sm font-normal text-gray-600">
-            *taxes & fees extra
-          </span>
-        </div>
-
-        <div className="grid grid-cols-2 gap-3">
-          {isAuction ? (
-            <>
-              <button className="py-3 border-2 border-gray-900 text-gray-900 rounded-lg font-medium hover:bg-gray-900 hover:text-white transition-colors">
-                <span className="mr-2">₹</span>
-                Place Bid
-              </button>
-              <button className="py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors">
-                Buy Now
-              </button>
-            </>
-          ) : (
-            <>
-              <button className="py-3 border-2 border-gray-900 text-gray-900 rounded-lg font-medium hover:bg-gray-900 hover:text-white transition-colors">
-                Add to Cart
-              </button>
-              <button className="py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors">
-                Buy Now
-              </button>
-            </>
-          )}
-        </div>
-
-        <div className="flex items-center justify-center gap-4 mt-4">
-          <button className="flex items-center gap-2 text-sm text-gray-700 hover:text-gray-900">
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-              />
-            </svg>
-            Watchlist
+          {/* Place Bid Button */}
+          <button className="w-full bg-white border-2 border-gray-900 text-gray-900 font-medium py-3 rounded-lg hover:bg-gray-50 transition-colors mb-3 flex items-center justify-center gap-2">
+            <span>₹</span>
+            <span>Place Bid</span>
           </button>
-          <button className="flex items-center gap-2 text-sm text-gray-700 hover:text-gray-900">
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-              />
-            </svg>
-            Request Quote
-          </button>
-        </div>
-      </div>
-
-      {/* Seller Info */}
-      {product.seller && (
-        <div className="bg-white border border-gray-200 rounded-lg p-6">
-          <h3 className="font-semibold text-gray-900 mb-3">
-            Seller Information
-          </h3>
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
-              <span className="text-lg font-bold text-gray-600">
-                {product.seller.name.charAt(0).toUpperCase()}
-              </span>
-            </div>
-            <div>
-              <p className="font-medium text-gray-900">{product.seller.name}</p>
-              {product.seller.isVerified && (
-                <p className="text-sm text-green-600 flex items-center gap-1">
-                  <svg
-                    className="w-4 h-4"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  Verified Seller
-                </p>
-              )}
-            </div>
-          </div>
-          {product.seller.rating !== undefined && product.seller.rating > 0 && (
-            <div className="flex items-center gap-2 text-sm">
-              <span className="text-yellow-500">★</span>
-              <span className="font-medium">
-                {product.seller.rating.toFixed(1)}
-              </span>
-              <span className="text-gray-600">rating</span>
-            </div>
-          )}
         </div>
       )}
     </div>

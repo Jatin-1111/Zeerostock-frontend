@@ -1,37 +1,42 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Download } from "lucide-react";
 import Link from "next/link";
 import { buyerService } from "@/services/buyer.service";
-import type { Order } from "@/types/buyer.types";
+import type { OrderSummary } from "@/types/buyer.types";
 
 export default function MyOrdersPage() {
-  const [orders, setOrders] = useState<Order[]>([]);
+  const [orders, setOrders] = useState<OrderSummary[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [statusFilter, setStatusFilter] = useState<string>("all");
 
-  useEffect(() => {
-    fetchOrders();
-  }, [currentPage, statusFilter]);
-
-  const fetchOrders = async () => {
+  const fetchOrders = React.useCallback(async () => {
     try {
       setIsLoading(true);
       setError(null);
 
-      const params: any = { page: currentPage, limit: 10 };
+      const params: Record<string, string | number> = {
+        page: currentPage,
+        limit: 10,
+      };
       if (statusFilter !== "all") {
         params.status = statusFilter;
       }
 
+      console.log("Fetching orders with params:", params);
       const response = await buyerService.getOrderHistory(params);
+      console.log("Orders response:", response);
+
       if (response.success && response.data) {
-        setOrders(response.data.orders || []);
+        setOrders(response.data.items || []);
         setTotalPages(response.data.pagination?.totalPages || 1);
+        console.log("Orders loaded:", response.data.items?.length || 0);
+      } else {
+        console.error("Failed to fetch orders:", response);
       }
     } catch (err) {
       console.error("Error fetching orders:", err);
@@ -39,22 +44,51 @@ export default function MyOrdersPage() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [currentPage, statusFilter]);
+
+  useEffect(() => {
+    fetchOrders();
+  }, [fetchOrders]);
 
   const getStatusBadge = (status: string) => {
-    const statusConfig: Record<string, { bg: string; text: string; label: string }> = {
-      pending: { bg: "bg-yellow-100", text: "text-yellow-800", label: "Pending" },
-      confirmed: { bg: "bg-blue-100", text: "text-blue-800", label: "Confirmed" },
-      processing: { bg: "bg-purple-100", text: "text-purple-800", label: "Processing" },
-      shipped: { bg: "bg-indigo-100", text: "text-indigo-800", label: "Shipped" },
-      delivered: { bg: "bg-green-100", text: "text-green-800", label: "Delivered" },
+    const statusConfig: Record<
+      string,
+      { bg: string; text: string; label: string }
+    > = {
+      pending: {
+        bg: "bg-yellow-100",
+        text: "text-yellow-800",
+        label: "Pending",
+      },
+      confirmed: {
+        bg: "bg-blue-100",
+        text: "text-blue-800",
+        label: "Confirmed",
+      },
+      processing: {
+        bg: "bg-purple-100",
+        text: "text-purple-800",
+        label: "Processing",
+      },
+      shipped: {
+        bg: "bg-indigo-100",
+        text: "text-indigo-800",
+        label: "Shipped",
+      },
+      delivered: {
+        bg: "bg-green-100",
+        text: "text-green-800",
+        label: "Delivered",
+      },
       cancelled: { bg: "bg-red-100", text: "text-red-800", label: "Cancelled" },
       refunded: { bg: "bg-gray-100", text: "text-gray-800", label: "Refunded" },
     };
 
     const config = statusConfig[status] || statusConfig.pending;
     return (
-      <span className={`px-3 py-1 rounded-full text-xs font-medium ${config.bg} ${config.text}`}>
+      <span
+        className={`px-3 py-1 rounded-full text-xs font-medium ${config.bg} ${config.text}`}
+      >
         {config.label}
       </span>
     );
@@ -148,37 +182,49 @@ export default function MyOrdersPage() {
             <tbody className="divide-y divide-gray-200">
               {isLoading ? (
                 <tr>
-                  <td colSpan={6} className="px-6 py-8 text-center text-gray-500">
+                  <td
+                    colSpan={6}
+                    className="px-6 py-8 text-center text-gray-500"
+                  >
                     <div className="animate-pulse">Loading orders...</div>
                   </td>
                 </tr>
               ) : orders.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="px-6 py-8 text-center text-gray-500">
+                  <td
+                    colSpan={6}
+                    className="px-6 py-8 text-center text-gray-500"
+                  >
                     No orders found
                   </td>
                 </tr>
               ) : (
                 orders.map((order) => (
-                  <tr key={order.id} className="hover:bg-gray-50">
+                  <tr
+                    key={order.orderId || order.orderNumber}
+                    className="hover:bg-gray-50"
+                  >
                     <td className="px-6 py-4 text-sm text-gray-900 font-medium">
                       {order.orderNumber}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-900">
-                      {order.orderItems?.length || 0} item(s)
+                      {order.itemCount || 0} item(s)
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-900 font-medium">
-                      ₹{order.totalAmount?.toLocaleString("en-IN")}
+                      ₹
+                      {parseFloat(
+                        String(order.totalAmount || 0)
+                      ).toLocaleString("en-IN", { maximumFractionDigits: 2 })}
                     </td>
                     <td className="px-6 py-4 text-sm">
                       {getStatusBadge(order.status)}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-900">
-                      {new Date(order.createdAt).toLocaleDateString("en-IN")}
+                      {new Date(order.orderDate).toLocaleDateString("en-IN")}
                     </td>
                     <td className="px-6 py-4 text-sm">
                       <Link
-                        href={`/buyer/orders/${order.id}`}
+                        href={`/buyer/orders/${order.orderId}`}
                         className="text-blue-600 hover:text-blue-800 font-medium"
                       >
                         View Details
@@ -213,37 +259,6 @@ export default function MyOrdersPage() {
             </button>
           </div>
         )}
-      </div>
-    </div>
-  );
-}
-                    {order.status}
-                  </td>
-                  <td className="px-6 py-4 text-sm text-gray-900">
-                    {order.orderDate}
-                  </td>
-                  <td className="px-6 py-4 text-sm text-gray-900">
-                    {order.expectedDate}
-                  </td>
-                  <td className="px-6 py-4 text-sm">
-                    <button className="text-gray-900 hover:text-gray-700 font-medium">
-                      Actions
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <div className="mt-8 text-center">
-          <p className="text-sm text-gray-600">
-            redirect to track shipment{" "}
-            <Link href="/buyer/track-order" className="text-blue-600 underline">
-              on-click
-            </Link>
-          </p>
-        </div>
       </div>
     </div>
   );

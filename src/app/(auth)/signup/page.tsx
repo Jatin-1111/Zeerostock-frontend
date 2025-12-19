@@ -118,7 +118,7 @@ export default function SignUpPage() {
                 placeholder="Naveetha"
                 required
                 disabled={loading}
-                className="w-full px-3 py-2 border text-gray-800 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                className="w-full px-3 py-2 border text-gray-800 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed text-black placeholder:text-gray-400"
               />
             </div>
             <div>
@@ -133,7 +133,7 @@ export default function SignUpPage() {
                 placeholder="Titor"
                 required
                 disabled={loading}
-                className="w-full px-3 py-2 border text-gray-800 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                className="w-full px-3 py-2 border text-gray-800 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed text-black placeholder:text-gray-400"
               />
             </div>
           </div>
@@ -150,7 +150,7 @@ export default function SignUpPage() {
               placeholder="Acela Ltd."
               required
               disabled={loading}
-              className="w-full px-3 py-2 border text-gray-800 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed"
+              className="w-full px-3 py-2 border text-gray-800 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed text-black placeholder:text-gray-400"
             />
           </div>
 
@@ -163,7 +163,7 @@ export default function SignUpPage() {
               value={formData.businessType}
               onChange={handleChange}
               disabled={loading}
-              className="w-full px-3 py-2 border text-gray-800 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed"
+              className="w-full px-3 py-2 border text-gray-800 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed text-black"
             >
               <option value="">Select business type</option>
               <option value="manufacturer">Manufacturer</option>
@@ -185,7 +185,7 @@ export default function SignUpPage() {
                 onChange={handleChange}
                 placeholder="33AAACR0000M1Z5"
                 disabled={loading}
-                className="flex-1 px-3 py-2 border text-gray-800 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                className="flex-1 px-3 py-2 border text-gray-800 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed text-black placeholder:text-gray-400"
               />
               <span className="text-xs text-gray-500">include gst details</span>
             </div>
@@ -203,7 +203,7 @@ export default function SignUpPage() {
               placeholder="email@gmail.in"
               required
               disabled={loading}
-              className="w-full px-3 py-2 border text-gray-800 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed"
+              className="w-full px-3 py-2 border text-gray-800 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed text-black placeholder:text-gray-400"
             />
           </div>
 
@@ -219,7 +219,7 @@ export default function SignUpPage() {
                 onChange={handleChange}
                 placeholder="+91"
                 disabled={loading}
-                className="w-16 px-3 py-2 border text-gray-800 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                className="w-16 px-3 py-2 border text-gray-800 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed text-black placeholder:text-gray-400"
               />
               <input
                 type="tel"
@@ -229,7 +229,7 @@ export default function SignUpPage() {
                 placeholder="0123456789"
                 required
                 disabled={loading}
-                className="flex-1 px-3 py-2 border text-gray-800 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                className="flex-1 px-3 py-2 border text-gray-800 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed text-black placeholder:text-gray-400"
               />
             </div>
           </div>
@@ -248,7 +248,7 @@ export default function SignUpPage() {
                 required
                 minLength={8}
                 disabled={loading}
-                className="w-full px-3 py-2 border text-gray-800 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                className="w-full px-3 py-2 border text-gray-800 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed text-black placeholder:text-gray-400"
               />
               <button
                 type="button"
@@ -366,3 +366,4 @@ export default function SignUpPage() {
     </div>
   );
 }
+

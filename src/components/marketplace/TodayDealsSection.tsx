@@ -14,12 +14,13 @@ export default function TodayDealsSection() {
       try {
         setIsLoading(true);
         const response = await marketplaceService.getFeaturedDeals();
-        if (response.success && response.data) {
+        if (response?.success && response?.data) {
           const dealsList = Array.isArray(response.data)
             ? response.data.slice(0, 3)
             : [];
           setDeals(dealsList);
         } else {
+          console.warn("No featured deals data received:", response);
           setDeals([]);
         }
       } catch (error) {

@@ -72,26 +72,32 @@ export default function Header() {
             >
               About Us
             </Link>
-            <Link
-              href="/buyer"
-              className={`font-semibold text-[20px] leading-normal whitespace-nowrap transition-colors ${
-                isActive("/buyer")
-                  ? "text-[#58ea50]"
-                  : "text-white hover:text-[#58ea50]"
-              }`}
-            >
-              Buyer
-            </Link>
-            <Link
-              href="/supplier"
-              className={`font-semibold text-[20px] leading-normal whitespace-nowrap transition-colors ${
-                isActive("/supplier")
-                  ? "text-[#58ea50]"
-                  : "text-white hover:text-[#58ea50]"
-              }`}
-            >
-              Suppliers
-            </Link>
+            {/* Show Buyer link only if not logged in as supplier */}
+            {(!isAuthenticated || user?.activeRole !== "supplier") && (
+              <Link
+                href="/buyer"
+                className={`font-semibold text-[20px] leading-normal whitespace-nowrap transition-colors ${
+                  isActive("/buyer")
+                    ? "text-[#58ea50]"
+                    : "text-white hover:text-[#58ea50]"
+                }`}
+              >
+                Buyer
+              </Link>
+            )}
+            {/* Show Supplier link only if not logged in as buyer */}
+            {(!isAuthenticated || user?.activeRole !== "buyer") && (
+              <Link
+                href="/supplier"
+                className={`font-semibold text-[20px] leading-normal whitespace-nowrap transition-colors ${
+                  isActive("/supplier")
+                    ? "text-[#58ea50]"
+                    : "text-white hover:text-[#58ea50]"
+                }`}
+              >
+                Suppliers
+              </Link>
+            )}
             <Link
               href="/roi"
               className={`font-semibold text-[20px] leading-normal whitespace-nowrap transition-colors ${
@@ -175,7 +181,7 @@ export default function Header() {
                       {/* Menu Items */}
                       <div className="py-1">
                         <Link
-                          href="/buyer/dashboard"
+                          href={`/${user.activeRole}/dashboard`}
                           className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-900 hover:bg-gray-100 transition-colors"
                           onClick={() => setIsUserMenuOpen(false)}
                         >
@@ -195,7 +201,7 @@ export default function Header() {
                           Dashboard
                         </Link>
                         <Link
-                          href="/buyer/settings"
+                          href={`/${user.activeRole}/settings`}
                           className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-900 hover:bg-gray-100 transition-colors"
                           onClick={() => setIsUserMenuOpen(false)}
                         >

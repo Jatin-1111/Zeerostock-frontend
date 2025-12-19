@@ -76,7 +76,7 @@ export default function EnhancedSearchInput({
   const loadPopularSearches = async () => {
     try {
       const response = await searchService.getPopularSearches(5);
-      if (response.success && response.data) {
+      if (response?.success && response?.data?.popularSearches) {
         setPopularSearches(
           response.data.popularSearches.map((item) => item.query)
         );
@@ -89,7 +89,7 @@ export default function EnhancedSearchInput({
   const loadRecentSearches = async () => {
     try {
       const response = await searchService.getRecentSearches(5);
-      if (response.success && response.data) {
+      if (response?.success && response?.data?.recentSearches) {
         setRecentSearches(
           response.data.recentSearches.map((item) => item.query)
         );
@@ -287,3 +287,4 @@ export default function EnhancedSearchInput({
     </div>
   );
 }
+

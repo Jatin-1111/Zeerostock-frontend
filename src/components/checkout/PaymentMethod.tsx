@@ -2,72 +2,73 @@
 
 import { useState } from "react";
 
+interface PaymentDetails {
+  upiId: string;
+  cardNumber: string;
+  cardName: string;
+  expiryDate: string;
+  cvv: string;
+}
+
 interface PaymentMethodProps {
+  selectedMethod: "cod" | "online" | "upi";
+  onMethodSelect: (method: "cod" | "online" | "upi") => void;
+  onPaymentDetailsChange: (details: PaymentDetails) => void;
   onContinue: () => void;
   onBack: () => void;
 }
 
 export default function PaymentMethod({
+  selectedMethod,
+  onMethodSelect,
+  onPaymentDetailsChange,
   onContinue,
   onBack,
 }: PaymentMethodProps) {
-  const [selectedPayment, setSelectedPayment] = useState("credit-card");
-  const [sameAsShipping, setSameAsShipping] = useState(true);
-
-  const [cardDetails, setCardDetails] = useState({
+  const [paymentDetails, setPaymentDetails] = useState({
+    upiId: "",
     cardNumber: "",
+    cardName: "",
     expiryDate: "",
     cvv: "",
-    cardName: "",
   });
 
-  const [billingAddress, setBillingAddress] = useState({
-    firstName: "",
-    lastName: "",
-    companyName: "",
-    streetAddress: "",
-    city: "",
-    state: "",
-    zipCode: "",
-  });
+  const handleDetailsChange = (field: string, value: string) => {
+    const updated = { ...paymentDetails, [field]: value };
+    setPaymentDetails(updated);
+    onPaymentDetailsChange(updated);
+  };
 
   const paymentMethods = [
     {
-      id: "credit-card",
-      name: "Credit/Debit Card",
-      description: "Visa, Mastercard, American Express",
+      id: "cod" as const,
+      name: "Cash on Delivery (COD)",
+      description: "Pay with cash when your order is delivered",
+      fee: "No additional fee",
+      iconPath:
+        "M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z",
+    },
+    {
+      id: "online" as const,
+      name: "Online Payment",
+      description: "Credit/Debit Card, Net Banking",
+      fee: "Secure payment processing",
       iconPath:
         "M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z",
     },
     {
-      id: "escrow",
-      name: "Escrow Payment",
-      description:
-        "Recommended for high-value orders\nProcessing in escrow - Fee: 2.5% of order value",
+      id: "upi" as const,
+      name: "UPI Payment",
+      description: "Pay using UPI apps (GPay, PhonePe, Paytm)",
+      fee: "Instant payment confirmation",
       iconPath:
-        "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z",
-    },
-    {
-      id: "wire",
-      name: "Wire Transfer",
-      description:
-        "Direct bank transfer for large orders\nProcessing time: 1-3 business days - Fee: $0",
-      iconPath:
-        "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4",
-    },
-    {
-      id: "net",
-      name: "Net Terms",
-      description:
-        "For approved business accounts\nNet-30 payment terms available - Fee: No processing fee",
-      iconPath:
-        "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
+        "M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z",
     },
   ];
 
   return (
     <div className="space-y-6">
-      {/* Payment Method */}
+      {/* Payment Method Selection */}
       <div className="border-2 border-gray-900 rounded p-6">
         <div className="flex items-center gap-2 mb-6">
           <svg
@@ -91,7 +92,7 @@ export default function PaymentMethod({
             <label
               key={method.id}
               className={`flex items-start gap-3 p-4 border-2 rounded cursor-pointer transition-colors ${
-                selectedPayment === method.id
+                selectedMethod === method.id
                   ? "border-gray-900 bg-gray-50"
                   : "border-gray-300 hover:border-gray-400"
               }`}
@@ -100,8 +101,10 @@ export default function PaymentMethod({
                 type="radio"
                 name="payment"
                 value={method.id}
-                checked={selectedPayment === method.id}
-                onChange={(e) => setSelectedPayment(e.target.value)}
+                checked={selectedMethod === method.id}
+                onChange={(e) =>
+                  onMethodSelect(e.target.value as "cod" | "online" | "upi")
+                }
                 className="w-4 h-4 mt-1"
               />
               <div className="flex-1">
@@ -123,241 +126,162 @@ export default function PaymentMethod({
                     {method.name}
                   </span>
                 </div>
-                <div className="text-sm text-gray-500 mt-1 whitespace-pre-line">
+                <div className="text-sm text-gray-500 mt-1">
                   {method.description}
                 </div>
+                <div className="text-xs text-gray-400 mt-1">{method.fee}</div>
               </div>
             </label>
           ))}
         </div>
       </div>
 
-      {/* Payment Details (for credit card) */}
-      {selectedPayment === "credit-card" && (
+      {/* UPI Details */}
+      {selectedMethod === "upi" && (
         <div className="border-2 border-gray-900 rounded p-6">
           <h3 className="text-base font-bold text-gray-900 mb-4">
-            Payment Details
+            UPI Details
+          </h3>
+          <div>
+            <label className="block text-sm text-gray-900 mb-2">
+              UPI ID (Optional)
+            </label>
+            <input
+              type="text"
+              value={paymentDetails.upiId}
+              onChange={(e) => handleDetailsChange("upiId", e.target.value)}
+              placeholder="yourname@upi"
+              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-gray-900"
+            />
+            <p className="text-xs text-gray-500 mt-1">
+              You&apos;ll be redirected to your UPI app to complete payment
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* Card Details */}
+      {selectedMethod === "online" && (
+        <div className="border-2 border-gray-900 rounded p-6">
+          <h3 className="text-base font-bold text-gray-900 mb-4">
+            Card Details
           </h3>
 
           <div className="space-y-4">
             <div>
               <label className="block text-sm text-gray-900 mb-2">
-                Card Number
+                Card Number *
               </label>
               <input
                 type="text"
-                value={cardDetails.cardNumber}
+                value={paymentDetails.cardNumber}
                 onChange={(e) =>
-                  setCardDetails({ ...cardDetails, cardNumber: e.target.value })
+                  handleDetailsChange("cardNumber", e.target.value)
                 }
                 placeholder="1234 5678 9012 3456"
-                className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
+                maxLength={19}
+                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-gray-900"
               />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm text-gray-900 mb-2">
-                  Expiry Date
+                  Expiry Date *
                 </label>
                 <input
                   type="text"
-                  value={cardDetails.expiryDate}
+                  value={paymentDetails.expiryDate}
                   onChange={(e) =>
-                    setCardDetails({
-                      ...cardDetails,
-                      expiryDate: e.target.value,
-                    })
+                    handleDetailsChange("expiryDate", e.target.value)
                   }
                   placeholder="MM/YY"
-                  className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
+                  maxLength={5}
+                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-gray-900"
                 />
               </div>
               <div>
-                <label className="block text-sm text-gray-900 mb-2">CVV</label>
+                <label className="block text-sm text-gray-900 mb-2">
+                  CVV *
+                </label>
                 <input
                   type="text"
-                  value={cardDetails.cvv}
-                  onChange={(e) =>
-                    setCardDetails({ ...cardDetails, cvv: e.target.value })
-                  }
+                  value={paymentDetails.cvv}
+                  onChange={(e) => handleDetailsChange("cvv", e.target.value)}
                   placeholder="123"
-                  className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
+                  maxLength={4}
+                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-gray-900"
                 />
               </div>
             </div>
 
             <div>
               <label className="block text-sm text-gray-900 mb-2">
-                Name on Card
+                Name on Card *
               </label>
               <input
                 type="text"
-                value={cardDetails.cardName}
+                value={paymentDetails.cardName}
                 onChange={(e) =>
-                  setCardDetails({ ...cardDetails, cardName: e.target.value })
+                  handleDetailsChange("cardName", e.target.value)
                 }
-                placeholder="John Doe"
-                className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
+                placeholder="JOHN DOE"
+                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-gray-900"
               />
             </div>
+          </div>
+
+          <div className="mt-4 flex items-center gap-2 p-3 bg-blue-50 border border-blue-200 rounded">
+            <svg
+              className="w-5 h-5 text-blue-600 shrink-0"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+              />
+            </svg>
+            <p className="text-sm text-blue-800">
+              Your payment information is encrypted and secure
+            </p>
           </div>
         </div>
       )}
 
-      {/* Billing Address */}
-      <div className="border-2 border-gray-900 rounded p-6">
-        <div className="flex items-center gap-2 mb-4">
-          <svg
-            className="w-5 h-5 text-gray-900"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-            />
-          </svg>
-          <h2 className="text-lg font-bold text-gray-900">Billing Address</h2>
-        </div>
-
-        <label className="flex items-center gap-2 mb-4 cursor-pointer">
-          <input
-            type="checkbox"
-            checked={sameAsShipping}
-            onChange={(e) => setSameAsShipping(e.target.checked)}
-            className="w-4 h-4"
-          />
-          <span className="text-sm text-gray-900">
-            Note: Billing form fills if checked UNSEC4CTC0
-          </span>
-        </label>
-
-        {!sameAsShipping && (
-          <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm text-gray-900 mb-2">
-                  First Name
-                </label>
-                <input
-                  type="text"
-                  value={billingAddress.firstName}
-                  onChange={(e) =>
-                    setBillingAddress({
-                      ...billingAddress,
-                      firstName: e.target.value,
-                    })
-                  }
-                  className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
-                />
-              </div>
-              <div>
-                <label className="block text-sm text-gray-900 mb-2">
-                  Last Name
-                </label>
-                <input
-                  type="text"
-                  value={billingAddress.lastName}
-                  onChange={(e) =>
-                    setBillingAddress({
-                      ...billingAddress,
-                      lastName: e.target.value,
-                    })
-                  }
-                  className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm text-gray-900 mb-2">
-                Company Name
-              </label>
-              <input
-                type="text"
-                value={billingAddress.companyName}
-                onChange={(e) =>
-                  setBillingAddress({
-                    ...billingAddress,
-                    companyName: e.target.value,
-                  })
-                }
-                className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
+      {/* COD Information */}
+      {selectedMethod === "cod" && (
+        <div className="border-2 border-gray-900 rounded p-6">
+          <div className="flex items-start gap-3">
+            <svg
+              className="w-6 h-6 text-green-600 shrink-0"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
               />
-            </div>
-
+            </svg>
             <div>
-              <label className="block text-sm text-gray-900 mb-2">
-                Street Address
-              </label>
-              <input
-                type="text"
-                value={billingAddress.streetAddress}
-                onChange={(e) =>
-                  setBillingAddress({
-                    ...billingAddress,
-                    streetAddress: e.target.value,
-                  })
-                }
-                className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
-              />
-            </div>
-
-            <div className="grid grid-cols-3 gap-4">
-              <div>
-                <label className="block text-sm text-gray-900 mb-2">City</label>
-                <input
-                  type="text"
-                  value={billingAddress.city}
-                  onChange={(e) =>
-                    setBillingAddress({
-                      ...billingAddress,
-                      city: e.target.value,
-                    })
-                  }
-                  className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
-                />
-              </div>
-              <div>
-                <label className="block text-sm text-gray-900 mb-2">
-                  State
-                </label>
-                <input
-                  type="text"
-                  value={billingAddress.state}
-                  onChange={(e) =>
-                    setBillingAddress({
-                      ...billingAddress,
-                      state: e.target.value,
-                    })
-                  }
-                  className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
-                />
-              </div>
-              <div>
-                <label className="block text-sm text-gray-900 mb-2">
-                  ZIP Code
-                </label>
-                <input
-                  type="text"
-                  value={billingAddress.zipCode}
-                  onChange={(e) =>
-                    setBillingAddress({
-                      ...billingAddress,
-                      zipCode: e.target.value,
-                    })
-                  }
-                  className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
-                />
-              </div>
+              <h3 className="font-semibold text-gray-900 mb-2">
+                Cash on Delivery Selected
+              </h3>
+              <ul className="text-sm text-gray-600 space-y-1">
+                <li>• Pay with cash when your order is delivered</li>
+                <li>• No advance payment required</li>
+                <li>• Make sure to keep exact change ready</li>
+              </ul>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
       {/* Navigation */}
       <div className="flex justify-between">
@@ -369,9 +293,16 @@ export default function PaymentMethod({
         </button>
         <button
           onClick={onContinue}
-          className="px-6 py-2.5 bg-gray-900 text-white rounded font-medium hover:bg-gray-800"
+          disabled={
+            selectedMethod === "online" &&
+            (!paymentDetails.cardNumber ||
+              !paymentDetails.cardName ||
+              !paymentDetails.expiryDate ||
+              !paymentDetails.cvv)
+          }
+          className="px-6 py-2.5 bg-gray-900 text-white rounded font-medium hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Continue
+          Review Order
         </button>
       </div>
     </div>

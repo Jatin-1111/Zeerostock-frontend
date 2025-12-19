@@ -63,60 +63,85 @@ export const marketplaceService = {
    * Get today's featured deals (high discount products)
    */
   async getFeaturedDeals(limit: number = 12): Promise<ApiResponse<Product[]>> {
-    const response = await apiRequest<{ deals: Product[]; count: number }>(
-      "get",
-      "/marketplace/featured-deals",
-      undefined,
-      {
-        params: { limit },
-      }
-    );
+    try {
+      const response = await apiRequest<{ deals: Product[]; count: number }>(
+        "get",
+        "/marketplace/featured-deals",
+        undefined,
+        {
+          params: { limit },
+        }
+      );
 
-    // Transform response to return deals array directly
-    return {
-      ...response,
-      data: response.data?.deals || [],
-    };
+      // Transform response to return deals array directly
+      return {
+        ...response,
+        data: response?.data?.deals || [],
+      };
+    } catch (error) {
+      console.error("Error in getFeaturedDeals:", error);
+      return {
+        success: false,
+        data: [],
+        message: "Failed to fetch featured deals",
+      };
+    }
   },
 
   /**
    * Get sponsored listings
    */
   async getSponsored(limit: number = 10): Promise<ApiResponse<Product[]>> {
-    const response = await apiRequest<{ sponsored: Product[]; count: number }>(
-      "get",
-      "/marketplace/sponsored",
-      undefined,
-      {
+    try {
+      const response = await apiRequest<{
+        sponsored: Product[];
+        count: number;
+      }>("get", "/marketplace/sponsored", undefined, {
         params: { limit },
-      }
-    );
+      });
 
-    // Transform response to return sponsored array directly
-    return {
-      ...response,
-      data: response.data?.sponsored || [],
-    };
+      // Transform response to return sponsored array directly
+      return {
+        ...response,
+        data: response?.data?.sponsored || [],
+      };
+    } catch (error) {
+      console.error("Error in getSponsored:", error);
+      return {
+        success: false,
+        data: [],
+        message: "Failed to fetch sponsored listings",
+      };
+    }
   },
 
   /**
    * Get trending products
    */
   async getTrending(limit: number = 20): Promise<ApiResponse<Product[]>> {
-    const response = await apiRequest<{ trending: Product[]; count: number }>(
-      "get",
-      "/marketplace/trending",
-      undefined,
-      {
-        params: { limit },
-      }
-    );
+    try {
+      const response = await apiRequest<{ trending: Product[]; count: number }>(
+        "get",
+        "/marketplace/trending",
+        undefined,
+        {
+          params: { limit },
+        }
+      );
 
-    // Transform response to return trending array directly
-    return {
-      ...response,
-      data: response.data?.trending || [],
-    };
+      // Transform response to return trending array directly
+      return {
+        ...response,
+        data: response?.data?.trending || [],
+      };
+    } catch (error) {
+      console.error("Error in getTrending:", error);
+      return {
+        success: false,
+        data: [],
+        message: "Failed to fetch trending products",
+      };
+    }
   },
 
   /**

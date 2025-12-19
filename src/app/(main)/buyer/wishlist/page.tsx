@@ -40,7 +40,9 @@ export default function WishlistPage() {
       setRemovingId(productId);
       const response = await buyerService.removeFromWatchlist(productId);
       if (response.success) {
-        setItems((prev) => prev.filter((item) => item.product.id !== productId));
+        setItems((prev) =>
+          prev.filter((item) => item.product.id !== productId)
+        );
       }
     } catch (err) {
       console.error("Error removing from watchlist:", err);
@@ -52,16 +54,16 @@ export default function WishlistPage() {
 
   const getPriceChange = (item: WatchlistItem) => {
     if (!item.priceAtAdd || !item.product.priceAfter) return null;
-    
+
     const change = item.product.priceAfter - item.priceAtAdd;
     const percentChange = (change / item.priceAtAdd) * 100;
-    
+
     if (Math.abs(percentChange) < 1) return null;
-    
+
     return {
       amount: change,
       percent: percentChange,
-      isIncrease: change > 0
+      isIncrease: change > 0,
     };
   };
 
@@ -78,6 +80,7 @@ export default function WishlistPage() {
                     await buyerService.clearUnavailableItems();
                     fetchWatchlist();
                   } catch (err) {
+                    console.error("Failed to clear unavailable items:", err);
                     alert("Failed to clear unavailable items");
                   }
                 }
@@ -98,8 +101,11 @@ export default function WishlistPage() {
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} className="bg-white border-2 border-gray-900 rounded overflow-hidden">
-                <div className="bg-gray-200 aspect-[4/3] animate-pulse"></div>
+              <div
+                key={i}
+                className="bg-white border-2 border-gray-900 rounded overflow-hidden"
+              >
+                <div className="bg-gray-200 aspect-4/3 animate-pulse"></div>
                 <div className="p-4">
                   <div className="h-6 bg-gray-200 rounded mb-2 animate-pulse"></div>
                   <div className="h-4 bg-gray-200 rounded w-2/3 animate-pulse"></div>
@@ -110,9 +116,12 @@ export default function WishlistPage() {
         ) : items.length === 0 ? (
           <div className="text-center py-16">
             <Heart className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Your wishlist is empty</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">
+              Your wishlist is empty
+            </h2>
             <p className="text-gray-600 mb-6">
-              Start adding products to your wishlist to keep track of items you love
+              Start adding products to your wishlist to keep track of items you
+              love
             </p>
             <Link
               href="/marketplace"
@@ -132,7 +141,7 @@ export default function WishlistPage() {
                 >
                   {/* Product Image */}
                   <Link href={`/product/${item.product.slug}`}>
-                    <div className="relative bg-gray-100 aspect-[4/3] flex items-center justify-center overflow-hidden group">
+                    <div className="relative bg-gray-100 aspect-4/3 flex items-center justify-center overflow-hidden group">
                       {item.product.imageUrl ? (
                         <img
                           src={item.product.imageUrl}
@@ -142,10 +151,12 @@ export default function WishlistPage() {
                       ) : (
                         <span className="text-gray-400 text-sm">No Image</span>
                       )}
-                      
-                      {item.product.status !== "available" && (
+
+                      {item.product.status !== "active" && (
                         <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                          <span className="text-white font-bold">Not Available</span>
+                          <span className="text-white font-bold">
+                            Not Available
+                          </span>
                         </div>
                       )}
                     </div>
@@ -177,26 +188,35 @@ export default function WishlistPage() {
                       <span className="text-2xl font-bold text-gray-900">
                         ₹{item.product.priceAfter?.toLocaleString("en-IN")}
                       </span>
-                      {item.product.priceBefore && item.product.priceBefore > item.product.priceAfter && (
-                        <>
-                          <span className="text-sm text-gray-400 line-through">
-                            ₹{item.product.priceBefore.toLocaleString("en-IN")}
-                          </span>
-                          <span className="text-sm text-green-600 font-medium">
-                            {item.product.discountPercent}% off
-                          </span>
-                        </>
-                      )}
+                      {item.product.priceBefore &&
+                        item.product.priceBefore > item.product.priceAfter && (
+                          <>
+                            <span className="text-sm text-gray-400 line-through">
+                              ₹
+                              {item.product.priceBefore.toLocaleString("en-IN")}
+                            </span>
+                            <span className="text-sm text-green-600 font-medium">
+                              {item.product.discountPercent}% off
+                            </span>
+                          </>
+                        )}
                     </div>
 
                     {priceChange && (
-                      <div className={`text-xs mb-3 ${priceChange.isIncrease ? 'text-red-600' : 'text-green-600'}`}>
-                        {priceChange.isIncrease ? '↑' : '↓'} 
+                      <div
+                        className={`text-xs mb-3 ${
+                          priceChange.isIncrease
+                            ? "text-red-600"
+                            : "text-green-600"
+                        }`}
+                      >
+                        {priceChange.isIncrease ? "↑" : "↓"}
                         {Math.abs(priceChange.percent).toFixed(1)}% since added
                       </div>
                     )}
 
-                    {item.product.status === "available" && item.product.quantity > 0 ? (
+                    {item.product.status === "active" &&
+                    item.product.quantity > 0 ? (
                       <Link
                         href={`/product/${item.product.slug}`}
                         className="w-full px-4 py-2 bg-gray-900 text-white rounded font-medium hover:bg-gray-800 transition-colors flex items-center justify-center gap-2"
@@ -218,65 +238,6 @@ export default function WishlistPage() {
             })}
           </div>
         )}
-      </div>
-    </div>
-  );
-}
-                  Price alert: {product.priceAlert}
-                </p>
-
-                <div className="flex items-center gap-2 text-xs text-gray-600 mb-4">
-                  <svg
-                    className="w-4 h-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  <span>{product.timeLeft}</span>
-                </div>
-
-                {/* Action Buttons - 2x2 Grid */}
-                <div className="grid grid-cols-2 gap-2">
-                  <button className="px-4 py-2 bg-white border-2 border-gray-900 text-gray-900 rounded font-medium hover:bg-gray-50 transition-colors">
-                    Add to cart
-                  </button>
-                  <button className="px-4 py-2 bg-gray-900 text-white rounded font-medium hover:bg-gray-800 transition-colors">
-                    Buy Now
-                  </button>
-                  <button className="px-4 py-2 bg-white border-2 border-gray-900 text-gray-900 rounded font-medium hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
-                    <svg
-                      className="w-4 h-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                      />
-                    </svg>
-                    Alert
-                  </button>
-                  <Link
-                    href={`/product/${product.id}`}
-                    className="px-4 py-2 bg-gray-900 text-white rounded font-medium hover:bg-gray-800 transition-colors flex items-center justify-center"
-                  >
-                    View Details
-                  </Link>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
     </div>
   );

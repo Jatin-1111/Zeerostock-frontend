@@ -1,177 +1,278 @@
-import { ProductDetail } from "@/types/api.types";
+"use client";
+
+import { useState } from "react";
+import { Truck, ShieldCheck, Lock, BadgeCheck } from "lucide-react";
+
+interface Spec {
+  key: string;
+  value: string;
+  unit?: string;
+}
+
+interface ProductData {
+  description?: string;
+  city?: string;
+  state?: string;
+  return_policy?: string;
+  [key: string]: unknown;
+}
 
 interface ProductDescriptionProps {
-  product: ProductDetail;
+  product: {
+    product: ProductData;
+    specifications?: Record<string, Spec[]>;
+    [key: string]: unknown;
+  };
 }
 
 export default function ProductDescription({
   product,
 }: ProductDescriptionProps) {
+  const [activeTab, setActiveTab] = useState("description");
+  const productData = product.product;
+  const specifications = product.specifications;
+
   return (
-    <div className="bg-white border-2 border-gray-200 rounded-lg p-8">
-      <h2 className="text-2xl font-bold text-gray-900 mb-6">
-        Product Description
-      </h2>
-
-      <p className="text-gray-700 mb-6 leading-relaxed">
-        {product.description || "No description available for this product."}
-      </p>
-
-      {/* Condition Badge */}
-      <div className="mb-8">
-        <span
-          className={`inline-block px-4 py-2 rounded-full text-sm font-semibold ${
-            product.condition === "new"
-              ? "bg-green-100 text-green-800"
-              : product.condition === "like-new"
-              ? "bg-blue-100 text-blue-800"
-              : product.condition === "good"
-              ? "bg-yellow-100 text-yellow-800"
-              : "bg-gray-100 text-gray-800"
-          }`}
-        >
-          Condition:{" "}
-          {product.condition.charAt(0).toUpperCase() +
-            product.condition.slice(1).replace("-", " ")}
-        </span>
+    <div className="bg-white rounded-[15px] shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)] overflow-hidden">
+      {/* Tabs */}
+      <div className="relative border-b border-gray-200">
+        <div className="flex px-7.5">
+          <button
+            onClick={() => setActiveTab("description")}
+            className={`relative px-0 py-3 text-[21px] font-medium font-['Poppins'] transition-colors ${
+              activeTab === "description" ? "text-[#2aae7a]" : "text-[#0d1b2a]"
+            }`}
+          >
+            Description
+            {activeTab === "description" && (
+              <div className="absolute bottom-0 left-0 right-0 h-[2.25px] bg-[#2aae7a]" />
+            )}
+          </button>
+          <button
+            onClick={() => setActiveTab("specifications")}
+            className={`relative ml-[52.5px] px-0 py-3 text-[21px] font-medium font-['Poppins'] transition-colors ${
+              activeTab === "specifications"
+                ? "text-[#2aae7a]"
+                : "text-[#0d1b2a]"
+            }`}
+          >
+            Specifications
+            {activeTab === "specifications" && (
+              <div className="absolute bottom-0 left-0 right-0 h-[2.25px] bg-[#2aae7a]" />
+            )}
+          </button>
+          <button
+            onClick={() => setActiveTab("shipping")}
+            className={`relative ml-[52.5px] px-0 py-3 text-[21px] font-medium font-['Poppins'] transition-colors ${
+              activeTab === "shipping" ? "text-[#2aae7a]" : "text-[#0d1b2a]"
+            }`}
+          >
+            Shipping & Return
+            {activeTab === "shipping" && (
+              <div className="absolute bottom-0 left-0 right-0 h-[2.25px] bg-[#2aae7a]" />
+            )}
+          </button>
+        </div>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
-        {/* Technical Specifications */}
-        {product.specifications &&
-          Object.keys(product.specifications).length > 0 && (
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                Technical Specifications
-              </h3>
-              <div className="space-y-3">
-                {Object.entries(product.specifications).map(([key, value]) => (
-                  <div
-                    key={key}
-                    className="flex justify-between py-2 border-b border-gray-200"
-                  >
-                    <span className="text-gray-600 capitalize">
-                      {key.replace(/_/g, " ")}
-                    </span>
-                    <span className="font-semibold text-gray-900">
-                      {String(value)}
-                    </span>
+      {/* Tab Content */}
+      <div className="px-7.5 py-6">
+        {activeTab === "description" && (
+          <div>
+            <h2 className="text-[22.5px] font-medium font-['Poppins'] text-[#0d1b2a] mb-4.5">
+              Product description
+            </h2>
+            <p className="text-[18.75px] font-normal font-['Inter'] text-[#9c9c9c] leading-[24.75px] mb-9">
+              {(productData.description as string) ||
+                "High-quality structural steel coils manufactured to ASTM A36 specifications. These coils are perfect for construction projects, infrastructure development, and industrial applications. All materials come with full certification and quality guarantees."}
+            </p>
+
+            {/* Trust Badges - 2 columns with 2 rows */}
+            <div className="grid grid-cols-2 gap-x-15 gap-y-9">
+              <div className="flex items-start gap-3">
+                <div className="p-1.875 bg-[#eeffef] rounded-[7.5px] shrink-0">
+                  <Truck
+                    className="w-7.5 h-7.5 text-[#2aae7a]"
+                    strokeWidth={1.5}
+                  />
+                </div>
+                <div>
+                  <h4 className="text-[19.5px] font-medium font-['Poppins'] text-[#0d1b2a] mb-0">
+                    Fast Shipping
+                  </h4>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="p-1.875 bg-[#eeffef] rounded-[7.5px] shrink-0">
+                  <ShieldCheck
+                    className="w-7.5 h-7.5 text-[#2aae7a]"
+                    strokeWidth={1.5}
+                  />
+                </div>
+                <div>
+                  <h4 className="text-[19.5px] font-medium font-['Poppins'] text-[#0d1b2a] mb-0">
+                    Certified Materials
+                  </h4>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="p-1.875 bg-[#eeffef] rounded-[7.5px] shrink-0">
+                  <BadgeCheck
+                    className="w-7.5 h-7.5 text-[#2aae7a]"
+                    strokeWidth={1.5}
+                  />
+                </div>
+                <div>
+                  <h4 className="text-[19.5px] font-medium font-['Poppins'] text-[#0d1b2a] mb-0">
+                    Verified Supplier
+                  </h4>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="p-1.875 bg-[#eeffef] rounded-[7.5px] shrink-0">
+                  <Lock
+                    className="w-7.5 h-7.5 text-[#2aae7a]"
+                    strokeWidth={1.5}
+                  />
+                </div>
+                <div>
+                  <h4 className="text-[19.5px] font-medium font-['Poppins'] text-[#0d1b2a] mb-0">
+                    Secure Transactions
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeTab === "specifications" && (
+          <div>
+            <h2 className="text-[22.5px] font-medium font-['Poppins'] text-[#0d1b2a] mb-6">
+              Technical Specifications
+            </h2>
+
+            {specifications && Object.keys(specifications).length > 0 ? (
+              <div className="grid grid-cols-2 gap-x-15">
+                {Object.entries(specifications).map(([category, specs]) =>
+                  specs.map((spec, index: number) => (
+                    <div key={`${category}-${index}`}>
+                      <div className="py-3 border-b border-gray-200">
+                        <div className="text-[16.5px] font-normal font-['Inter'] text-[#9c9c9c] mb-1.5">
+                          {spec.key.replace(/_/g, " ")}
+                        </div>
+                        <div className="text-[18px] font-medium font-['Inter'] text-[#0d1b2a]">
+                          {spec.value} {spec.unit || ""}
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 gap-x-15">
+                <div>
+                  <div className="py-3 border-b border-gray-200">
+                    <div className="text-[16.5px] font-normal font-['Inter'] text-[#9c9c9c] mb-1.5">
+                      Material Grade
+                    </div>
+                    <div className="text-[18px] font-medium font-['Inter'] text-[#0d1b2a]">
+                      ASTM A36
+                    </div>
                   </div>
-                ))}
+                  <div className="py-3 border-b border-gray-200">
+                    <div className="text-[16.5px] font-normal font-['Inter'] text-[#9c9c9c] mb-1.5">
+                      Wall Thickness
+                    </div>
+                    <div className="text-[18px] font-medium font-['Inter'] text-[#0d1b2a]">
+                      0.25&quot;-0.5&quot;
+                    </div>
+                  </div>
+                  <div className="py-3 border-b border-gray-200">
+                    <div className="text-[16.5px] font-normal font-['Inter'] text-[#9c9c9c] mb-1.5">
+                      Coating
+                    </div>
+                    <div className="text-[18px] font-medium font-['Inter'] text-[#0d1b2a]">
+                      Mill Finish
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div className="py-3 border-b border-gray-200">
+                    <div className="text-[16.5px] font-normal font-['Inter'] text-[#9c9c9c] mb-1.5">
+                      Diameter Range
+                    </div>
+                    <div className="text-[18px] font-medium font-['Inter'] text-[#0d1b2a]">
+                      2&quot;-12&quot;
+                    </div>
+                  </div>
+                  <div className="py-3 border-b border-gray-200">
+                    <div className="text-[16.5px] font-normal font-['Inter'] text-[#9c9c9c] mb-1.5">
+                      Length
+                    </div>
+                    <div className="text-[18px] font-medium font-['Inter'] text-[#0d1b2a]">
+                      20ft standard
+                    </div>
+                  </div>
+                  <div className="py-3 border-b border-gray-200">
+                    <div className="text-[16.5px] font-normal font-['Inter'] text-[#9c9c9c] mb-1.5">
+                      Certification
+                    </div>
+                    <div className="text-[18px] font-medium font-['Inter'] text-[#0d1b2a]">
+                      API 5L, ASTM A36
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {activeTab === "shipping" && (
+          <div>
+            <h2 className="text-[22.5px] font-medium font-['Poppins'] text-[#0d1b2a] mb-6">
+              Shipping Information
+            </h2>
+
+            <div className="grid grid-cols-2 gap-x-15 mb-9">
+              <div>
+                <div className="py-3 border-b border-gray-200">
+                  <div className="text-[16.5px] font-normal font-['Inter'] text-[#9c9c9c] mb-1.5">
+                    Weight
+                  </div>
+                  <div className="text-[18px] font-medium font-['Inter'] text-[#0d1b2a]">
+                    25 tons per unit
+                  </div>
+                </div>
+                <div className="py-3 border-b border-gray-200">
+                  <div className="text-[16.5px] font-normal font-['Inter'] text-[#9c9c9c] mb-1.5">
+                    Shipping Cost
+                  </div>
+                  <div className="text-[18px] font-medium font-['Inter'] text-[#0d1b2a]">
+                    Calculated at checkout
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div className="py-3 border-b border-gray-200">
+                  <div className="text-[16.5px] font-normal font-['Inter'] text-[#9c9c9c] mb-1.5">
+                    Dimensions
+                  </div>
+                  <div className="text-[18px] font-medium font-['Inter'] text-[#0d1b2a]">
+                    2&quot;-12&quot;
+                  </div>
+                </div>
+                <div className="py-3 border-b border-gray-200">
+                  <div className="text-[16.5px] font-normal font-['Inter'] text-[#9c9c9c] mb-1.5">
+                    Estimated Delivery
+                  </div>
+                  <div className="text-[18px] font-medium font-['Inter'] text-[#0d1b2a]">
+                    7-10 business days
+                  </div>
+                </div>
               </div>
             </div>
-          )}
-
-        {/* Shipping Information */}
-        <div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">
-            Shipping & Delivery
-          </h3>
-          <div className="space-y-3">
-            {product.city && product.state && (
-              <div className="flex justify-between py-2 border-b border-gray-200">
-                <span className="text-gray-600">Ships From</span>
-                <span className="font-semibold text-gray-900">
-                  {product.city}, {product.state}
-                </span>
-              </div>
-            )}
-            {product.stockQuantity && (
-              <div className="flex justify-between py-2 border-b border-gray-200">
-                <span className="text-gray-600">Available Stock</span>
-                <span className="font-semibold text-gray-900">
-                  {product.stockQuantity} units
-                </span>
-              </div>
-            )}
-            {product.minimumOrderQuantity && (
-              <div className="flex justify-between py-2 border-b border-gray-200">
-                <span className="text-gray-600">Minimum Order</span>
-                <span className="font-semibold text-gray-900">
-                  {product.minimumOrderQuantity} units
-                </span>
-              </div>
-            )}
-            {product.shippingInfo && (
-              <div className="flex justify-between py-2 border-b border-gray-200">
-                <span className="text-gray-600">Shipping Info</span>
-                <span className="font-semibold text-gray-900">
-                  {product.shippingInfo}
-                </span>
-              </div>
-            )}
-            <div className="flex justify-between py-2 border-b border-gray-200">
-              <span className="text-gray-600">Listing Type</span>
-              <span className="font-semibold text-gray-900 capitalize">
-                {product.listingType}
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Warranty & Return Policy */}
-      <div className="grid md:grid-cols-2 gap-6 mt-8 pt-6 border-t border-gray-200">
-        {product.warranty && (
-          <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-3">
-              Warranty Information
-            </h3>
-            <p className="text-gray-700 leading-relaxed">{product.warranty}</p>
           </div>
         )}
-
-        {product.returnPolicy && (
-          <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-3">
-              Return Policy
-            </h3>
-            <p className="text-gray-700 leading-relaxed">
-              {product.returnPolicy}
-            </p>
-          </div>
-        )}
-
-        {!product.warranty && !product.returnPolicy && (
-          <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-3">
-              Terms & Conditions
-            </h3>
-            <p className="text-gray-700 leading-relaxed">
-              Please contact the seller for warranty and return policy
-              information.
-            </p>
-          </div>
-        )}
-      </div>
-
-      {/* Category & Industry Tags */}
-      <div className="mt-8 pt-6 border-t border-gray-200">
-        <h3 className="text-lg font-semibold text-gray-900 mb-3">
-          Product Tags
-        </h3>
-        <div className="flex flex-wrap gap-2">
-          {product.category && (
-            <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
-              {product.category.name}
-            </span>
-          )}
-          {product.industry && (
-            <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">
-              {product.industry.name}
-            </span>
-          )}
-          {product.isFeatured && (
-            <span className="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-sm">
-              ⭐ Featured
-            </span>
-          )}
-          {product.isSponsored && (
-            <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">
-              💎 Sponsored
-            </span>
-          )}
-        </div>
       </div>
     </div>
   );

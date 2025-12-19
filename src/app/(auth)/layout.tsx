@@ -5,9 +5,6 @@ export const metadata: Metadata = {
   description: "Authentication pages for Zeerostock",
 };
 
-export const dynamic = "force-dynamic";
-export const dynamicParams = true;
-
 export default function AuthLayout({
   children,
 }: Readonly<{

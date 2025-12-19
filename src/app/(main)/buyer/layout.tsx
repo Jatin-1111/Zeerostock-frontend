@@ -3,8 +3,6 @@
 import BuyerSidebar from "@/components/shared/BuyerSidebar";
 import RoleGuard from "@/components/guards/RoleGuard";
 
-export const dynamic = "force-dynamic";
-
 export default function BuyerLayout({
   children,
 }: Readonly<{

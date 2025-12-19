@@ -1,7 +1,5 @@
 import Sidebar from "@/components/shared/Sidebar";
 
-export const dynamic = "force-dynamic";
-
 export default function SidebarLayout({
   children,
 }: Readonly<{

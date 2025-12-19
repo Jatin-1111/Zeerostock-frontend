@@ -3,9 +3,6 @@
 import SupplierSidebar from "@/components/shared/SupplierSidebar";
 import RoleGuard from "@/components/guards/RoleGuard";
 
-// Force dynamic rendering for all supplier pages
-export const dynamic = "force-dynamic";
-
 export default function SupplierLayout({
   children,
 }: {

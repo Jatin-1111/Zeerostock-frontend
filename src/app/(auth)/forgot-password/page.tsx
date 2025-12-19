@@ -5,6 +5,8 @@ import Link from "next/link";
 import { authService } from "@/services/auth.service";
 import toast from "react-hot-toast";
 
+export const dynamic = "force-dynamic";
+
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -196,5 +198,3 @@ export default function ForgotPasswordPage() {
     </div>
   );
 }
-
-

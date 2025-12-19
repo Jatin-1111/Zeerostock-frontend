@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import toast from "react-hot-toast";
 
+export const dynamic = "force-dynamic";
+
 export default function SignUpPage() {
   const router = useRouter();
   const { signup } = useAuth();
@@ -366,4 +368,3 @@ export default function SignUpPage() {
     </div>
   );
 }
-

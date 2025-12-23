@@ -9,9 +9,12 @@ import {
   BarChart3,
   Settings,
   LogOut,
+  UserCog,
+  KeyRound,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const menuItems = [
   {
@@ -36,9 +39,40 @@ const menuItems = [
 
 export default function AdminSidebar() {
   const pathname = usePathname();
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
+
+  useEffect(() => {
+    // Check if user is super admin
+    const userStr = localStorage.getItem("admin_user");
+    if (userStr) {
+      try {
+        const user = JSON.parse(userStr);
+        console.log("Admin user data:", user); // Debug log
+
+        // Check multiple possible ways this could be stored
+        const isSuperAdminCheck =
+          user.isSuperAdmin === true ||
+          user.is_super_admin === true ||
+          user.roles?.includes("super_admin") ||
+          false;
+
+        console.log("Is super admin:", isSuperAdminCheck); // Debug log
+        setIsSuperAdmin(isSuperAdminCheck);
+      } catch (e) {
+        console.error("Failed to parse user data", e);
+      }
+    }
+  }, []);
 
   const isActive = (href: string) => {
     return pathname?.startsWith(href);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("admin_token");
+    localStorage.removeItem("admin_refresh_token");
+    localStorage.removeItem("admin_user");
+    window.location.href = "/admin-panel/login";
   };
 
   return (
@@ -69,24 +103,46 @@ export default function AdminSidebar() {
             </Link>
           );
         })}
+
+        {/* Admin Management - Only for Super Admin */}
+        {isSuperAdmin && (
+          <>
+            <div className="my-2 mx-4 border-t border-gray-200"></div>
+            <Link
+              href="/admin-panel/admin-management"
+              className={`flex items-center gap-3 px-4 py-5 text-[14px] transition-colors ${
+                isActive("/admin-panel/admin-management")
+                  ? "bg-black text-white"
+                  : "text-gray-600 hover:bg-gray-50"
+              }`}
+            >
+              <UserCog className="w-4 h-4" />
+              <span>Admin Management</span>
+            </Link>
+          </>
+        )}
       </nav>
 
       {/* Bottom Menu */}
       <div className="border-t border-gray-200">
         <Link
           href="/admin-panel/settings"
-          className="flex items-center gap-3 px-4 py-3 text-[14px] text-gray-600 hover:bg-gray-50 transition-colors"
+          className={`flex items-center gap-3 px-4 py-3 text-[14px] transition-colors ${
+            isActive("/admin-panel/settings")
+              ? "bg-black text-white"
+              : "text-gray-600 hover:bg-gray-50"
+          }`}
         >
           <Settings className="w-4 h-4" />
           <span>Settings</span>
         </Link>
-        <Link
-          href="/admin-panel/login"
-          className="flex items-center gap-3 px-4 py-3 text-[14px] text-gray-600 hover:bg-gray-50 transition-colors"
+        <button
+          onClick={handleLogout}
+          className="w-full flex items-center gap-3 px-4 py-3 text-[14px] text-gray-600 hover:bg-gray-50 transition-colors"
         >
           <LogOut className="w-4 h-4" />
           <span>Log Out</span>
-        </Link>
+        </button>
       </div>
     </aside>
   );

@@ -1,18 +1,61 @@
 "use client";
 
 import { useState } from "react";
-import { Eye, EyeOff, ShieldCheck } from "lucide-react";
-import Link from "next/link";
+import { Eye, EyeOff, ShieldCheck, AlertCircle } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function AdminLoginPage() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("");
+  const [adminId, setAdminId] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle admin login
-    console.log("Admin login:", { email, password });
+    setError("");
+    setLoading(true);
+
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/admin/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ adminId, password }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Login failed");
+      }
+
+      // Check if password change is required
+      if (data.requiresPasswordChange) {
+        // Store temp token and redirect to password change page
+        localStorage.setItem("admin_temp_token", data.data.tempToken);
+        localStorage.setItem("admin_id", data.data.adminId);
+        router.push("/admin-panel/change-password");
+        return;
+      }
+
+      // Store auth data
+      localStorage.setItem("admin_token", data.data.accessToken);
+      localStorage.setItem("admin_refresh_token", data.data.refreshToken);
+      localStorage.setItem("admin_user", JSON.stringify(data.data.user));
+
+      // Redirect to dashboard
+      router.push("/admin-panel/dashboard");
+    } catch (err: any) {
+      setError(err.message || "Invalid credentials. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -36,28 +79,42 @@ export default function AdminLoginPage() {
               Admin Log in
             </h2>
             <p className="text-[14px] text-[#6B7280]">
-              Welcome back. Please enter your details.
+              Enter your Admin ID and password to continue
             </p>
           </div>
 
+          {/* Error Message */}
+          {error && (
+            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
+              <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+              <div className="flex-1">
+                <p className="text-sm text-red-800">{error}</p>
+              </div>
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Email Field */}
+            {/* Admin ID Field */}
             <div>
               <label
-                htmlFor="email"
+                htmlFor="adminId"
                 className="block text-[16px] font-medium text-black mb-2"
               >
-                Email
+                Admin ID
               </label>
               <input
-                type="email"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                className="w-full px-4 py-3 border border-black text-[14px] text-black placeholder:text-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
+                type="text"
+                id="adminId"
+                value={adminId}
+                onChange={(e) => setAdminId(e.target.value.toUpperCase())}
+                placeholder="Enter your Admin ID (e.g., A3X7K9)"
+                className="w-full px-4 py-3 border border-black text-[14px] text-black placeholder:text-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent uppercase font-mono"
+                maxLength={6}
                 required
               />
+              <p className="mt-1 text-xs text-gray-500">
+                6-character alphanumeric ID provided by your administrator
+              </p>
             </div>
 
             {/* Password Field */}
@@ -93,22 +150,23 @@ export default function AdminLoginPage() {
               </div>
             </div>
 
-            {/* Forgot Password Link */}
+            {/* Contact Admin Note */}
             <div className="text-left">
-              <Link
-                href="/admin-panel/forgot-password"
-                className="text-[14px] text-[#6B7280] hover:text-black transition-colors"
-              >
-                Forgot password?
-              </Link>
+              <p className="text-[14px] text-[#6B7280]">
+                Don't have credentials?{" "}
+                <span className="text-black font-medium">
+                  Contact your system administrator
+                </span>
+              </p>
             </div>
 
             {/* Sign In Button */}
             <button
               type="submit"
-              className="w-full bg-black text-white text-[16px] font-medium py-3.5 hover:bg-gray-900 transition-colors"
+              disabled={loading}
+              className="w-full bg-black text-white text-[16px] font-medium py-3.5 hover:bg-gray-900 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
             >
-              Sign in
+              {loading ? "Signing in..." : "Sign in"}
             </button>
           </form>
 

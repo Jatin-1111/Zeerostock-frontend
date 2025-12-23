@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   List,
   Truck,
@@ -14,94 +14,195 @@ import {
 import { AdminLayout, StatsCard, PageHeader } from "@/components/admin-panel";
 import { useRouter } from "next/navigation";
 
+interface OrderItem {
+  itemId: string;
+  productTitle: string;
+  quantity: number;
+  finalPrice: string;
+  subtotal: string;
+  itemStatus: string;
+}
+
+interface Order {
+  id: string;
+  order_number: string;
+  created_at: string;
+  status: string;
+  total_amount: string;
+  shipping_address: {
+    company?: string;
+    firstName?: string;
+    lastName?: string;
+  };
+  shipping_partner?: string;
+  tracking_number?: string;
+  delivery_eta?: string;
+  order_items: OrderItem[];
+}
+
+interface Stats {
+  totalOrders: number;
+  inTransit: number;
+  pendingDispatch: number;
+  deliveryIssues: number;
+}
+
 export default function OrdersLogisticsPage() {
-  const [activeFilter, setActiveFilter] = useState("All");
+  const [activeFilter, setActiveFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [orders, setOrders] = useState<Order[]>([]);
+  const [stats, setStats] = useState<Stats>({
+    totalOrders: 0,
+    inTransit: 0,
+    pendingDispatch: 0,
+    deliveryIssues: 0,
+  });
+  const [loading, setLoading] = useState(true);
+  const [pagination, setPagination] = useState({ total: 0, totalPages: 0 });
   const router = useRouter();
 
-  const statsCards = [
-    {
-      title: "Total Orders",
-      value: "12,580",
-      change: "12% vs Last Month",
-      icon: List,
-    },
-    {
-      title: "Orders in transit",
-      value: "4,322",
-      change: "-4% vs Last Month",
-      icon: Truck,
-    },
-    {
-      title: "Pending dispatch",
-      value: "1,104",
-      change: "-1% efficiency drop",
-      icon: Clock,
-    },
-    {
-      title: "Delivery issues",
-      value: "76",
-      change: "-26% less issue (Good)",
-      icon: AlertTriangle,
-    },
+  const filterButtons = [
+    { label: "All", value: "all" },
+    { label: "Pending", value: "pending" },
+    { label: "Shipped", value: "shipped" },
+    { label: "In transit", value: "in_transit" },
   ];
 
-  const filterButtons = ["All", "Pending", "Shipped", "In transit"];
+  useEffect(() => {
+    fetchStats();
+    fetchOrders();
+  }, [currentPage, activeFilter, searchTerm]);
 
-  const ordersData = [
-    {
-      orderId: "#ORD-24912",
-      date: "Oct 24,2025",
-      buyer: "Tech Source Inc.",
-      supplier: "Global Parts Ltd.",
-      amount: "$450,000",
-      status: "In transit",
-      statusColor: "bg-blue-100 text-blue-700",
-      logistics: "DHL Express",
-      logisticsInfo: "Exp. Oct 26",
-      tracking: "TRK-695281",
-    },
-    {
-      orderId: "#ORD-24912",
-      date: "Oct 24,2025",
-      buyer: "Tech Source Inc.",
-      supplier: "Global Parts Ltd.",
-      amount: "$450,000",
-      status: "Delivered",
-      statusColor: "bg-gray-100 text-gray-700",
-      logistics: "FEDEX",
-      logisticsInfo: "Exp. Oct 26",
-      tracking: "TRK-695281",
-    },
-    {
-      orderId: "#ORD-24912",
-      date: "Oct 24,2025",
-      buyer: "Tech Source Inc.",
-      supplier: "Global Parts Ltd.",
-      amount: "$450,000",
-      status: "Pending dispatch",
-      statusColor: "bg-yellow-100 text-yellow-700",
-      logistics: "UPS Freight",
-      logisticsInfo: "Exp. Oct 26",
-      tracking: "TRK-695281",
-    },
-    {
-      orderId: "#ORD-24912",
-      date: "Oct 24,2025",
-      buyer: "Tech Source Inc.",
-      supplier: "Global Parts Ltd.",
-      amount: "$450,000",
-      status: "Shipped",
-      statusColor: "bg-purple-100 text-purple-700",
-      logistics: "DHL Express",
-      logisticsInfo: "Exp. Oct 26",
-      tracking: "TRK-695281",
-    },
-  ];
+  const fetchStats = async () => {
+    try {
+      const token = localStorage.getItem("admin_token");
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/orders/stats`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!response.ok) throw new Error("Failed to fetch stats");
+
+      const result = await response.json();
+      setStats(result.data);
+    } catch (err) {
+      console.error("Error fetching stats:", err);
+    }
+  };
+
+  const fetchOrders = async () => {
+    try {
+      setLoading(true);
+      const token = localStorage.getItem("admin_token");
+
+      const params = new URLSearchParams({
+        page: currentPage.toString(),
+        limit: "50",
+        ...(activeFilter !== "all" && { status: activeFilter }),
+        ...(searchTerm && { search: searchTerm }),
+      });
+
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/orders?${params}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!response.ok) throw new Error("Failed to fetch orders");
+
+      const result = await response.json();
+      setOrders(result.data.orders);
+      setPagination(result.data.pagination);
+    } catch (err) {
+      console.error("Error fetching orders:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleViewOrder = (orderId: string) => {
     router.push(`/admin-panel/orders/${orderId}`);
   };
+
+  const handleSearch = (value: string) => {
+    setSearchTerm(value);
+    setCurrentPage(1); // Reset to first page on search
+  };
+
+  const getStatusColor = (status: string) => {
+    const statusColors: Record<string, string> = {
+      delivered: "bg-gray-100 text-gray-700",
+      in_transit: "bg-blue-100 text-blue-700",
+      pending: "bg-yellow-100 text-yellow-700",
+      shipped: "bg-purple-100 text-purple-700",
+      processing: "bg-orange-100 text-orange-700",
+      cancelled: "bg-red-100 text-red-700",
+    };
+    return statusColors[status] || "bg-gray-100 text-gray-700";
+  };
+
+  const formatStatus = (status: string) => {
+    return status
+      .split("_")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
+
+  const getBuyerName = (shippingAddress: Order["shipping_address"]) => {
+    if (shippingAddress.company) return shippingAddress.company;
+    return `${shippingAddress.firstName || ""} ${
+      shippingAddress.lastName || ""
+    }`.trim();
+  };
+
+  const statsCards = [
+    {
+      title: "Total Orders",
+      value: stats.totalOrders.toString(),
+      change: `${pagination.total} orders`,
+      icon: List,
+    },
+    {
+      title: "Orders in transit",
+      value: stats.inTransit.toString(),
+      change: "Active shipments",
+      icon: Truck,
+    },
+    {
+      title: "Pending dispatch",
+      value: stats.pendingDispatch.toString(),
+      change: "Awaiting shipment",
+      icon: Clock,
+    },
+    {
+      title: "Delivery issues",
+      value: stats.deliveryIssues.toString(),
+      change: "Requires attention",
+      icon: AlertTriangle,
+    },
+  ];
+
+  if (loading && orders.length === 0) {
+    return (
+      <AdminLayout>
+        <PageHeader
+          title="Orders & Logistics"
+          description="Monitor order lifecycle, logistics progress, delays, and exceptions across the global supply chain."
+        />
+        <div className="flex justify-center items-center h-64">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
+        </div>
+      </AdminLayout>
+    );
+  }
 
   return (
     <AdminLayout>
@@ -129,15 +230,18 @@ export default function OrdersLogisticsPage() {
         <div className="flex items-center gap-2 p-4 border-b border-gray-200">
           {filterButtons.map((filter) => (
             <button
-              key={filter}
-              onClick={() => setActiveFilter(filter)}
+              key={filter.value}
+              onClick={() => {
+                setActiveFilter(filter.value);
+                setCurrentPage(1);
+              }}
               className={`px-4 py-1.5 text-[12px] font-medium transition-colors ${
-                activeFilter === filter
+                activeFilter === filter.value
                   ? "bg-black text-white"
                   : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
               }`}
             >
-              {filter}
+              {filter.label}
             </button>
           ))}
         </div>
@@ -148,7 +252,9 @@ export default function OrdersLogisticsPage() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
             <input
               type="text"
-              placeholder="order number / Logis. Org/i..."
+              placeholder="Search by order number, buyer, or tracking number..."
+              value={searchTerm}
+              onChange={(e) => handleSearch(e.target.value)}
               className="w-full pl-10 pr-4 py-2 border border-gray-300 text-[13px] text-black placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
             />
           </div>
@@ -164,122 +270,134 @@ export default function OrdersLogisticsPage() {
                 ORDER ID
               </th>
               <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
-                PARTIES (BUYER/
-                <br />
-                SUPPLIER)
+                BUYER
               </th>
               <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
-                Amount
+                AMOUNT
               </th>
               <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
-                Status
+                STATUS
               </th>
               <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
-                Logistics
+                LOGISTICS
               </th>
               <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
-                Tracking
+                TRACKING
+              </th>
+              <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
+                ACTIONS
               </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            {ordersData.map((order, index) => (
-              <tr key={index} className="hover:bg-gray-50">
-                <td className="px-4 py-4">
-                  <div className="text-[13px] font-medium text-black">
-                    {order.orderId}
-                  </div>
-                  <div className="text-[11px] text-gray-500">{order.date}</div>
-                </td>
-                <td className="px-4 py-4">
-                  <div className="mb-2">
-                    <div className="text-[12px] font-medium text-black">
-                      {order.buyer}
-                    </div>
-                  </div>
-                  <div>
-                    <div className="text-[11px] text-gray-600">
-                      V/s {order.supplier}
-                    </div>
-                    <div className="text-[10px] text-gray-500">S Ltd</div>
-                  </div>
-                </td>
-                <td className="px-4 py-4 text-[13px] text-black">
-                  {order.amount}
-                </td>
-                <td className="px-4 py-4">
-                  <span
-                    className={`px-3 py-1 rounded-full text-[11px] font-medium ${order.statusColor}`}
-                  >
-                    {order.status}
-                  </span>
-                </td>
-                <td className="px-4 py-4">
-                  <div className="text-[12px] font-medium text-black">
-                    {order.logistics}
-                  </div>
-                  <div className="text-[11px] text-gray-500">
-                    {order.logisticsInfo}
-                  </div>
-                </td>
-                <td className="px-4 py-4">
-                  <button
-                    onClick={() => handleViewOrder(order.orderId)}
-                    className="flex items-center gap-2 text-[11px] text-black hover:underline"
-                  >
-                    {order.tracking}
-                  </button>
+            {orders.length === 0 ? (
+              <tr>
+                <td colSpan={7} className="px-4 py-8 text-center">
+                  <p className="text-[13px] text-gray-500">
+                    No orders found. {searchTerm && "Try adjusting your search."}
+                  </p>
                 </td>
               </tr>
-            ))}
+            ) : (
+              orders.map((order) => (
+                <tr key={order.id} className="hover:bg-gray-50">
+                  <td className="px-4 py-4">
+                    <div className="text-[13px] font-medium text-black">
+                      {order.order_number}
+                    </div>
+                    <div className="text-[11px] text-gray-500">
+                      {new Date(order.created_at).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                      })}
+                    </div>
+                  </td>
+                  <td className="px-4 py-4">
+                    <div className="text-[12px] font-medium text-black">
+                      {getBuyerName(order.shipping_address)}
+                    </div>
+                    <div className="text-[11px] text-gray-500">
+                      {order.order_items?.length || 0} item(s)
+                    </div>
+                  </td>
+                  <td className="px-4 py-4">
+                    <div className="text-[13px] font-medium text-black">
+                      ${parseFloat(order.total_amount).toFixed(2)}
+                    </div>
+                  </td>
+                  <td className="px-4 py-4">
+                    <span
+                      className={`inline-block px-2 py-1 text-[11px] font-medium rounded ${getStatusColor(
+                        order.status
+                      )}`}
+                    >
+                      {formatStatus(order.status)}
+                    </span>
+                  </td>
+                  <td className="px-4 py-4">
+                    <div className="text-[12px] text-black">
+                      {order.shipping_partner || "Not assigned"}
+                    </div>
+                    {order.delivery_eta && (
+                      <div className="text-[11px] text-gray-500">
+                        ETA:{" "}
+                        {new Date(order.delivery_eta).toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                        })}
+                      </div>
+                    )}
+                  </td>
+                  <td className="px-4 py-4">
+                    <div className="text-[11px] text-gray-600 font-mono">
+                      {order.tracking_number || "N/A"}
+                    </div>
+                  </td>
+                  <td className="px-4 py-4">
+                    <button
+                      onClick={() => handleViewOrder(order.id)}
+                      className="text-black hover:text-gray-600"
+                    >
+                      <Eye className="w-4 h-4" />
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
 
       {/* Pagination */}
-      <div className="flex justify-between items-center">
-        <p className="text-[12px] text-gray-600">
-          Showing 1 to 4 of 100 results
-        </p>
-        <div className="flex items-center gap-1">
-          <button className="w-8 h-8 border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors">
-            <ChevronLeft className="w-4 h-4 text-gray-600" />
-          </button>
-          <button
-            className={`w-8 h-8 border flex items-center justify-center text-[12px] font-medium transition-colors ${
-              currentPage === 1
-                ? "bg-black text-white border-black"
-                : "border-gray-300 text-gray-700 hover:bg-gray-50"
-            }`}
-            onClick={() => setCurrentPage(1)}
-          >
-            1
-          </button>
-          <button
-            className={`w-8 h-8 border flex items-center justify-center text-[12px] font-medium transition-colors ${
-              currentPage === 2
-                ? "bg-black text-white border-black"
-                : "border-gray-300 text-gray-700 hover:bg-gray-50"
-            }`}
-            onClick={() => setCurrentPage(2)}
-          >
-            2
-          </button>
-          <button
-            className={`w-8 h-8 border flex items-center justify-center text-[12px] font-medium transition-colors ${
-              currentPage === 3
-                ? "bg-black text-white border-black"
-                : "border-gray-300 text-gray-700 hover:bg-gray-50"
-            }`}
-            onClick={() => setCurrentPage(3)}
-          >
-            3
-          </button>
-          <button className="w-8 h-8 border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors">
-            <ChevronRight className="w-4 h-4 text-gray-600" />
-          </button>
+      {pagination.totalPages > 1 && (
+        <div className="flex items-center justify-between bg-white border border-gray-200 px-6 py-3">
+          <p className="text-[13px] text-gray-600">
+            Showing {orders.length} of {pagination.total} orders
+          </p>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+              disabled={currentPage === 1}
+              className="p-2 border border-gray-300 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <span className="text-[13px] text-gray-600">
+              Page {currentPage} of {pagination.totalPages}
+            </span>
+            <button
+              onClick={() =>
+                setCurrentPage((prev) => Math.min(pagination.totalPages, prev + 1))
+              }
+              disabled={currentPage === pagination.totalPages}
+              className="p-2 border border-gray-300 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </AdminLayout>
   );
 }

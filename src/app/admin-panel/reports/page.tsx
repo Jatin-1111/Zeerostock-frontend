@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   DollarSign,
   Activity,
@@ -8,94 +8,230 @@ import {
   TrendingUp,
   ChevronDown,
   User,
+  Loader2,
 } from "lucide-react";
 import { AdminLayout, StatsCard, PageHeader } from "@/components/admin-panel";
 
+interface UserStats {
+  totalUsers: number;
+  activeUsers: number;
+  newUsers: number;
+  buyersCount: number;
+  suppliersCount: number;
+}
+
+interface VerificationStats {
+  pending_count: string;
+  verified_count: string;
+  rejected_count: string;
+}
+
+interface OrderStats {
+  totalOrders: number;
+  totalRevenue: string;
+  delivered: number;
+}
+
+interface LocationStats {
+  state: string;
+  users: number;
+  activeUsers: number;
+}
+
 export default function ReportsAnalyticsPage() {
   const [timeframe, setTimeframe] = useState("Last 6 Month");
+  const [loading, setLoading] = useState(true);
+  const [userStats, setUserStats] = useState<UserStats | null>(null);
+  const [verificationStats, setVerificationStats] =
+    useState<VerificationStats | null>(null);
+  const [orderStats, setOrderStats] = useState<OrderStats | null>(null);
+  const [locationStats, setLocationStats] = useState<LocationStats[]>([]);
+
+  useEffect(() => {
+    fetchReportsData();
+  }, []);
+
+  const fetchReportsData = async () => {
+    try {
+      setLoading(true);
+      const token = localStorage.getItem("admin_token");
+
+      const [usersRes, verificationsRes, ordersRes, locationRes] =
+        await Promise.all([
+          fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/stats`, {
+            headers: { Authorization: `Bearer ${token}` },
+          }),
+          fetch(
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/verification/stats`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          ),
+          fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/orders/stats`, {
+            headers: { Authorization: `Bearer ${token}` },
+          }),
+          fetch(
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/stats/by-location?limit=5`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          ),
+        ]);
+
+      if (usersRes.ok) {
+        const data = await usersRes.json();
+        setUserStats(data.data);
+      }
+
+      if (verificationsRes.ok) {
+        const data = await verificationsRes.json();
+        setVerificationStats(data.data);
+      }
+
+      if (ordersRes.ok) {
+        const data = await ordersRes.json();
+        setOrderStats(data.data);
+      }
+
+      if (locationRes.ok) {
+        const data = await locationRes.json();
+        setLocationStats(data.data || []);
+      }
+    } catch (error) {
+      console.error("Failed to fetch reports data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const statsCards = [
     {
       title: "Total Revenue",
-      value: "$12,42,827",
-      change: "+2.5%",
+      value: orderStats
+        ? `$${(parseFloat(orderStats.totalRevenue) / 1000).toFixed(1)}K`
+        : "$0",
+      change: "+2.5%", // TODO: Calculate from historical data
       icon: DollarSign,
     },
     {
       title: "Total Transactions",
-      value: "89,211",
-      change: "+2.5%",
+      value: orderStats ? orderStats.totalOrders.toLocaleString() : "0",
+      change: "+2.5%", // TODO: Calculate from historical data
       icon: Activity,
     },
     {
       title: "Active User",
-      value: "11,593",
-      change: "+0.8%",
+      value: userStats ? userStats.activeUsers.toLocaleString() : "0",
+      change: userStats
+        ? `+${((userStats.activeUsers / userStats.totalUsers) * 100).toFixed(
+            1
+          )}%`
+        : "+0%",
       icon: UserCheck,
     },
     {
-      title: "GMV",
-      value: "$3,00,642",
-      change: "+4.3%",
+      title: "Total Users",
+      value: userStats ? userStats.totalUsers.toLocaleString() : "0",
+      change: userStats
+        ? `+${((userStats.newUsers / userStats.totalUsers) * 100).toFixed(1)}%`
+        : "+0%",
       icon: TrendingUp,
     },
   ];
 
-  const regionalData = [
-    {
-      region: "Maharashtra",
-      transactionVolume: "3,120",
-      growth: "+5.2%",
-      avgOrderValue: "₹15,200",
-      marketShare: "35.0%",
-    },
-    {
-      region: "Gujarat",
-      transactionVolume: "3,120",
-      growth: "+8.1%",
-      avgOrderValue: "₹15,200",
-      marketShare: "20.7%",
-    },
-    {
-      region: "Delhi NCR",
-      transactionVolume: "3,120",
-      growth: "+5.2%",
-      avgOrderValue: "₹15,200",
-      marketShare: "16.0%",
-    },
-    {
-      region: "Tamil Nadu",
-      transactionVolume: "3,120",
-      growth: "-1.2%",
-      avgOrderValue: "₹11,300",
-      marketShare: "9.9%",
-    },
-    {
-      region: "Karnataka",
-      transactionVolume: "3,120",
-      growth: "+5.2%",
-      avgOrderValue: "₹25,500",
-      marketShare: "9.9%",
-    },
-  ];
+  const regionalData = locationStats.map((location) => {
+    const totalUsers = locationStats.reduce((sum, loc) => sum + loc.users, 0);
+    const marketShare =
+      totalUsers > 0 ? ((location.users / totalUsers) * 100).toFixed(1) : "0.0";
+
+    return {
+      region: location.state,
+      transactionVolume: location.users.toLocaleString(),
+      growth: "+0%", // TODO: Calculate from historical data
+      avgOrderValue: "₹0", // TODO: Calculate from order data by location
+      marketShare: `${marketShare}%`,
+    };
+  });
 
   const conversionMetrics = [
-    { label: "Visitor > User", value: "12.5%" },
-    { label: "Listing > Order", value: "5.8%" },
-    { label: "Cart Completion Rate:", value: "82.1%" },
+    { label: "Visitor > User", value: "0%" }, // TODO: Implement visitor tracking analytics
+    { label: "Listing > Order", value: "0%" }, // TODO: Implement product view to order conversion
+    {
+      label: "User Activation Rate:",
+      value:
+        userStats && userStats.totalUsers > 0
+          ? `${((userStats.activeUsers / userStats.totalUsers) * 100).toFixed(
+              1
+            )}%`
+          : "0%",
+    },
   ];
 
   const platformHealth = [
-    { label: "Trust Score:", value: "4.8/5" },
-    { label: "Dispute Rate:", value: "0.3%" },
-    { label: "Verification Rate:", value: "96.9%" },
+    {
+      label: "Trust Score:",
+      value: verificationStats
+        ? `${(
+            (parseInt(verificationStats.verified_count) /
+              (parseInt(verificationStats.verified_count) +
+                parseInt(verificationStats.rejected_count))) *
+            5
+          ).toFixed(1)}/5`
+        : "0/5",
+    },
+    {
+      label: "Dispute Rate:",
+      value: "0.3%", // TODO: Add dispute tracking in backend
+    },
+    {
+      label: "Verification Rate:",
+      value: verificationStats
+        ? `${(
+            (parseInt(verificationStats.verified_count) /
+              (parseInt(verificationStats.verified_count) +
+                parseInt(verificationStats.rejected_count) +
+                parseInt(verificationStats.pending_count))) *
+            100
+          ).toFixed(1)}%`
+        : "0%",
+    },
   ];
 
   const financialMetrics = [
-    { label: "Average Order Value:", value: "$13,950" },
-    { label: "Platform Fee Revenue:", value: "$871,975" },
-    { label: "Agent Commission:", value: "$249,135" },
+    {
+      label: "Average Order Value:",
+      value:
+        orderStats && orderStats.delivered > 0
+          ? `$${(parseFloat(orderStats.totalRevenue) / orderStats.delivered)
+              .toFixed(0)
+              .toLocaleString()}`
+          : "$0",
+    },
+    {
+      label: "Platform Fee Revenue:",
+      value: orderStats
+        ? `$${(parseFloat(orderStats.totalRevenue) * 0.07)
+            .toFixed(0)
+            .toLocaleString()}` // Assuming 7% platform fee
+        : "$0",
+    },
+    {
+      label: "Total Revenue:",
+      value: orderStats
+        ? `$${parseFloat(orderStats.totalRevenue).toFixed(0).toLocaleString()}`
+        : "$0",
+    },
   ];
+
+  if (loading) {
+    return (
+      <AdminLayout>
+        <div className="flex justify-center items-center h-64">
+          <Loader2 className="w-12 h-12 animate-spin text-black" />
+        </div>
+      </AdminLayout>
+    );
+  }
 
   return (
     <AdminLayout>

@@ -1,15 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  DollarSign,
-  TrendingUp,
-  Clock,
-  Users,
-  Eye,
-  MessageSquare,
-  Star,
-} from "lucide-react";
+import { BarChart3, TrendingUp, Clock } from "lucide-react";
 import { supplierService } from "@/services/supplier.service";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -164,171 +156,99 @@ export default function SupplierAnalytics() {
   );
 
   return (
-    <div className="min-h-screen bg-white">
-      <div className="w-full mx-auto p-6">
+    <div className="min-h-screen bg-[#eefbf6]">
+      <div className="w-full mx-auto px-6 py-6">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Analytics</h1>
-          <p className="text-sm text-gray-600">
-            Track your performance metrics and insights (Last 30 days)
-          </p>
+        <div className="mb-9">
+          <h1 className="text-3xl font-semibold text-[#0d1b2a]">Analytics</h1>
         </div>
 
         {/* Primary Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           {/* Total Revenue */}
-          <div className="bg-white border-2 border-gray-900 p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 bg-gray-100 border-2 border-gray-900 flex items-center justify-center">
-                <DollarSign className="w-6 h-6 text-gray-900" />
-              </div>
-              <div>
-                <p className="text-xs text-gray-600">Total Revenue</p>
-                <p className="text-3xl font-bold text-gray-900">
-                  ₹{(overview.total_revenue || 0).toLocaleString()}
-                </p>
-              </div>
-            </div>
-            <p
-              className={`text-xs font-medium ${
-                (overview.revenue_growth || 0) >= 0
-                  ? "text-green-600"
-                  : "text-red-600"
-              }`}
-            >
-              {(overview.revenue_growth || 0) >= 0 ? "+" : ""}
-              {(overview.revenue_growth || 0).toFixed(1)}% from last month
+          <div className="bg-white rounded-[15px] shadow-[0px_0px_4.5px_0px_rgba(24,181,34,0.25)] p-6 h-[208px] relative">
+            <p className="text-lg font-medium text-[#9c9c9c] mb-12">
+              Total Revenue
             </p>
+            <p className="text-[34px] font-semibold text-[#2aae7a] mb-6">
+              ₹{(overview.total_revenue || 0).toLocaleString()}
+            </p>
+            <p className="text-sm font-medium text-[#9c9c9c]">
+              via traditional procurement
+            </p>
+            <div className="absolute right-6 top-1/2 -translate-y-1/2 bg-[#eeffef] rounded-full p-4">
+              <BarChart3 className="w-[38px] h-[38px] text-[#2aae7a]" />
+            </div>
           </div>
 
-          {/* Response Rate (Win Rate equivalent) */}
-          <div className="bg-white border-2 border-gray-900 p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 bg-gray-100 border-2 border-gray-900 flex items-center justify-center">
-                <TrendingUp className="w-6 h-6 text-gray-900" />
-              </div>
-              <div>
-                <p className="text-xs text-gray-600">Response Rate</p>
-                <p className="text-3xl font-bold text-gray-900">
-                  {(overview.response_rate || 0).toFixed(1)}%
-                </p>
-              </div>
-            </div>
-            <p className="text-xs text-gray-600 font-medium">
-              {overview.total_inquiries || 0} total inquiries
+          {/* Quote Win Rate / Response Rate */}
+          <div className="bg-white rounded-[15px] shadow-[0px_0px_4.5px_0px_rgba(24,181,34,0.25)] p-6 h-[208px] relative">
+            <p className="text-lg font-medium text-[#9c9c9c] mb-12">
+              Quote Win Rate
             </p>
+            <p className="text-[34px] font-semibold text-[#a855f7] mb-6">
+              {(overview.response_rate || 0).toFixed(1)}%
+            </p>
+            <p className="text-sm font-medium text-[#9c9c9c]">
+              via traditional procurement
+            </p>
+            <div className="absolute right-6 top-1/2 -translate-y-1/2 bg-[#f3e8ff] rounded-full p-4">
+              <TrendingUp className="w-[38px] h-[38px] text-[#a855f7]" />
+            </div>
           </div>
 
           {/* Avg Response Time */}
-          <div className="bg-white border-2 border-gray-900 p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 bg-gray-100 border-2 border-gray-900 flex items-center justify-center">
-                <Clock className="w-6 h-6 text-gray-900" />
-              </div>
-              <div>
-                <p className="text-xs text-gray-600">Avg. Response Time</p>
-                <p className="text-3xl font-bold text-gray-900">
-                  {(overview.avg_response_hours || 0).toFixed(1)} hrs
-                </p>
-              </div>
+          <div className="bg-white rounded-[15px] shadow-[0px_0px_4.5px_0px_rgba(24,181,34,0.25)] p-6 h-[208px] relative">
+            <p className="text-lg font-medium text-[#9c9c9c] mb-12">
+              Avg. Response Time
+            </p>
+            <p className="text-[34px] font-semibold text-[#3b82f6] mb-6">
+              {(overview.avg_response_hours || 0).toFixed(1)}h
+            </p>
+            <p className="text-sm font-medium text-[#9c9c9c]">
+              via traditional procurement
+            </p>
+            <div className="absolute right-6 top-1/2 -translate-y-1/2 bg-[#dbeafe] rounded-full p-4">
+              <Clock className="w-[38px] h-[38px] text-[#3b82f6]" />
             </div>
-            <p className="text-xs text-green-600 font-medium">
-              Faster is better
-            </p>
-          </div>
-        </div>
-
-        {/* Secondary Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-          {/* Active Listings */}
-          <div className="bg-white border-2 border-gray-900 p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <Users className="w-5 h-5 text-gray-600" />
-              <p className="text-xs text-gray-600">Active Listings</p>
-            </div>
-            <p className="text-2xl font-bold text-gray-900">
-              {overview.active_listings || 0}
-            </p>
-            <p className="text-xs text-gray-500 mt-1">
-              +{overview.new_listings || 0} new this month
-            </p>
-          </div>
-
-          {/* Total Views */}
-          <div className="bg-white border-2 border-gray-900 p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <Eye className="w-5 h-5 text-gray-600" />
-              <p className="text-xs text-gray-600">Total Views</p>
-            </div>
-            <p className="text-2xl font-bold text-gray-900">
-              {(overview.total_views || 0).toLocaleString()}
-            </p>
-            <p className="text-xs text-gray-500 mt-1">Product impressions</p>
-          </div>
-
-          {/* Total Inquiries */}
-          <div className="bg-white border-2 border-gray-900 p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <MessageSquare className="w-5 h-5 text-gray-600" />
-              <p className="text-xs text-gray-600">Total Inquiries</p>
-            </div>
-            <p className="text-2xl font-bold text-gray-900">
-              {overview.total_inquiries || 0}
-            </p>
-            <p className="text-xs text-gray-500 mt-1">Customer requests</p>
-          </div>
-
-          {/* Average Rating */}
-          <div className="bg-white border-2 border-gray-900 p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <Star className="w-5 h-5 text-gray-600" />
-              <p className="text-xs text-gray-600">Avg. Rating</p>
-            </div>
-            <p className="text-2xl font-bold text-gray-900">
-              {overview.avg_rating ? overview.avg_rating.toFixed(1) : "N/A"}
-            </p>
-            <p className="text-xs text-gray-500 mt-1">Customer satisfaction</p>
           </div>
         </div>
 
         {/* Sales by Category Chart */}
-        <div className="bg-white border-2 border-gray-900 p-6">
-          <h2 className="text-lg font-bold text-gray-900 mb-6">
-            Revenue by Category (Top 10)
+        <div className="bg-white rounded-[15px] shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)] p-6 w-3/4">
+          <h2 className="text-[21px] font-medium text-[#0d1b2a] mb-9">
+            Sales by Category
           </h2>
 
           {salesByCategory.length > 0 ? (
             <div className="space-y-6">
-              {salesByCategory.map((item, index) => (
-                <div key={index}>
-                  <div className="flex items-center justify-between mb-2">
-                    <div>
-                      <span className="text-sm font-medium text-gray-900">
-                        {item.category}
-                      </span>
-                      <span className="text-xs text-gray-500 ml-2">
-                        ({item.listing_count} listings, {item.total_views}{" "}
-                        views)
-                      </span>
-                    </div>
-                    <span className="text-sm font-bold text-green-600">
-                      +₹{(item.revenue || 0).toLocaleString()}
-                    </span>
+              {salesByCategory.slice(0, 3).map((item, index) => (
+                <div key={index} className="flex items-center gap-4">
+                  <div className="w-[195px]">
+                    <p className="text-lg font-medium text-[#9c9c9c]">
+                      {item.category}
+                    </p>
                   </div>
-                  <div className="relative w-full h-8 bg-gray-100 border-2 border-gray-900">
+                  <div className="flex-1 relative">
+                    <div className="bg-[#eee] h-[6px] rounded-lg w-full" />
                     <div
-                      className="absolute left-0 top-0 h-full bg-blue-600 border-r-2 border-gray-900"
+                      className="absolute top-0 left-0 bg-[#2aae7a] h-[6px] rounded-lg"
                       style={{
                         width: `${(item.revenue / maxCategoryValue) * 100}%`,
                       }}
                     />
                   </div>
+                  <div className="w-[90px] text-right">
+                    <p className="text-lg font-semibold text-[#0d1b2a]">
+                      ₹{(item.revenue || 0).toLocaleString()}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="text-center py-8 text-gray-500">
-              <p>No category data available yet</p>
+            <div className="text-center py-9 text-[#9c9c9c]">
+              <p className="text-lg">No category data available yet</p>
               <p className="text-sm mt-2">
                 Start selling to see your performance by category
               </p>

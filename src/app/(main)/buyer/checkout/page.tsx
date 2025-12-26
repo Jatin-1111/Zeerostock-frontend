@@ -15,8 +15,7 @@ import type { CartItem } from "@/types/api.types";
 type Step = 1 | 2 | 3;
 
 interface PaymentDetails {
-  method: "cod" | "online" | "upi";
-  upiId?: string;
+  method: "card" | "escrow" | "wire" | "net-terms";
   cardNumber?: string;
   cardExpiry?: string;
   cardCvv?: string;
@@ -38,9 +37,9 @@ function CheckoutContent() {
   // Billing address is optional, defaults to shipping address if not provided
   const [selectedBillingAddress] = useState<Address | null>(null);
   const [shippingMethod, setShippingMethod] = useState<string>("standard");
-  const [paymentMethod, setPaymentMethod] = useState<"cod" | "online" | "upi">(
-    "cod"
-  );
+  const [paymentMethod, setPaymentMethod] = useState<
+    "card" | "escrow" | "wire" | "net-terms"
+  >("card");
   const [paymentDetails, setPaymentDetails] = useState<PaymentDetails | null>(
     null
   );
@@ -172,14 +171,11 @@ function CheckoutContent() {
       // Add payment details if present
       if (paymentDetails) {
         const details: any = {};
-        if (paymentDetails.method === "online") {
+        if (paymentDetails.method === "card") {
           details.transactionId = "pending";
-        }
-        if (paymentDetails.upiId) {
-          details.upiId = paymentDetails.upiId;
-        }
-        if (paymentDetails.cardNumber) {
-          details.cardLast4 = paymentDetails.cardNumber.slice(-4);
+          if (paymentDetails.cardNumber) {
+            details.cardLast4 = paymentDetails.cardNumber.slice(-4);
+          }
         }
         // Only add paymentDetails if it has any properties
         if (Object.keys(details).length > 0) {
@@ -233,60 +229,44 @@ function CheckoutContent() {
   };
 
   return (
-    <div className="min-h-screen bg-white py-12">
-      <div className="w-full mx-auto">
+    <div className="min-h-screen bg-[#EEFBF6] py-10">
+      <div className="max-w-[1440px] mx-auto px-15">
         {/* Header */}
-        <div className="flex justify-between items-center mb-8 px-8">
-          <div className="flex flex-col mb-2">
-            <button
-              onClick={() => router.push("/buyer/cart")}
-              className="flex items-center gap-2 text-gray-900 hover:text-gray-700"
+        <div className="mb-8">
+          <div className="text-center">
+            <h1
+              className="text-[27px] font-semibold text-[#0d1b2a]"
+              style={{
+                fontFamily: "Poppins",
+                lineHeight: "normal",
+              }}
             >
-              <span>←</span>
-              <span>Back to cart</span>
-            </button>
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">Checkout</h1>
-              <p className="text-gray-500 mt-1">
-                Secure payment and shipping information
-              </p>
-            </div>
-          </div>
-          <div className="flex items-center gap-2 text-gray-900">
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+              Checkout
+            </h1>
+            <p
+              className="text-[18px] font-medium text-[#9c9c9c]"
+              style={{ fontFamily: "Inter, sans-serif", lineHeight: "normal" }}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-              />
-            </svg>
-            <span className="font-medium">Secure Checkout</span>
+              Secure payment and shipping information
+            </p>
           </div>
         </div>
 
-        <div className="h-0.5 bg-black" />
-
         {error && (
-          <div className="mx-8 mt-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-600">
+          <div className="mb-5 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600">
             {error}
           </div>
         )}
 
         {/* Progress Steps */}
-        <div className="pt-10">
+        <div className="mb-9">
           <ProgressSteps currentStep={currentStep} />
         </div>
 
-        {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8 px-8">
+        {/* Main Content Flexbox */}
+        <div className="flex flex-col lg:flex-row gap-6 w-full max-w-[1440px]">
           {/* Left Side - Step Content */}
-          <div className="lg:col-span-2">
+          <div className="w-full lg:w-3/4">
             {currentStep === 1 && (
               <ShippingAddress
                 selectedAddress={selectedShippingAddress}
@@ -349,7 +329,7 @@ function CheckoutContent() {
           </div>
 
           {/* Right Side - Order Summary */}
-          <div className="lg:col-span-1">
+          <div className="w-full lg:w-1/4">
             <OrderSummary
               subtotal={cartSummary.subtotal}
               savings={cartSummary.savings}

@@ -45,8 +45,12 @@ export default function AdminManagementPage() {
   const fetchAdmins = async () => {
     try {
       const token = localStorage.getItem("admin_token");
+      console.log(
+        "Fetching admins from:",
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/admins`
+      );
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/admins`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/admins`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -54,11 +58,22 @@ export default function AdminManagementPage() {
         }
       );
 
-      if (!response.ok) throw new Error("Failed to fetch admins");
+      console.log("Fetch response status:", response.status);
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Error response:", errorData);
+        throw new Error(errorData.message || "Failed to fetch admins");
+      }
 
       const data = await response.json();
-      setAdmins(data.data);
+      console.log("Admins response data:", data);
+      // Handle both {data: [...]} and direct array responses
+      const adminsList = Array.isArray(data) ? data : data.data || [];
+      console.log("Setting admins list:", adminsList);
+      setAdmins(adminsList);
     } catch (err: any) {
+      console.error("Fetch admins error:", err);
       setError(err.message);
     } finally {
       setLoading(false);
@@ -224,7 +239,7 @@ function AdminRow({
     try {
       const token = localStorage.getItem("admin_token");
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/admins/${id}/${action}`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/admins/${id}/${action}`,
         {
           method: action === "delete" ? "DELETE" : "POST",
           headers: {
@@ -277,7 +292,9 @@ function AdminRow({
   return (
     <tr className="hover:bg-gray-50">
       <td className="px-6 py-4">
-        <span className="font-mono text-sm font-medium">{admin.adminId}</span>
+        <span className="font-mono text-sm font-medium text-gray-900">
+          {admin.adminId}
+        </span>
       </td>
       <td className="px-6 py-4 text-sm text-gray-900">{admin.name}</td>
       <td className="px-6 py-4 text-sm text-gray-600">{admin.email}</td>
@@ -386,7 +403,7 @@ function CreateAdminModal({
     try {
       const token = localStorage.getItem("admin_token");
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/admins`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/admins`,
         {
           method: "POST",
           headers: {
@@ -413,7 +430,7 @@ function CreateAdminModal({
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
         <h2 className="text-2xl font-bold text-black mb-4">Create New Admin</h2>
         <p className="text-sm text-gray-600 mb-6">
@@ -431,7 +448,7 @@ function CreateAdminModal({
               onChange={(e) =>
                 setFormData({ ...formData, firstName: e.target.value })
               }
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+              className="w-full px-3 py-2 text-black border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
               required
             />
           </div>
@@ -446,7 +463,7 @@ function CreateAdminModal({
               onChange={(e) =>
                 setFormData({ ...formData, lastName: e.target.value })
               }
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+              className="w-full px-3 py-2 text-black border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
               required
             />
           </div>
@@ -461,7 +478,7 @@ function CreateAdminModal({
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
               }
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+              className="w-full px-3 py-2 text-black border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
               required
             />
           </div>
@@ -475,7 +492,7 @@ function CreateAdminModal({
               onChange={(e) =>
                 setFormData({ ...formData, role: e.target.value })
               }
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+              className="w-full px-3 py-2 text-black border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
             >
               <option value="admin">Admin</option>
               <option value="super_admin">Super Admin</option>
@@ -486,7 +503,7 @@ function CreateAdminModal({
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+              className="flex-1 px-4 py-2 text-black border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
             >
               Cancel
             </button>

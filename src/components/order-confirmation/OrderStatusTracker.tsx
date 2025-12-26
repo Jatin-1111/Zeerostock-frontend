@@ -1,3 +1,5 @@
+import { Check, Lock, Timer, Truck, Home } from "lucide-react";
+
 interface StatusStep {
   title: string;
   description: string;
@@ -7,65 +9,117 @@ interface StatusStep {
 
 interface OrderStatusTrackerProps {
   steps: StatusStep[];
+  currentStatus?: string;
 }
 
-export default function OrderStatusTracker({ steps }: OrderStatusTrackerProps) {
+export default function OrderStatusTracker({
+  steps,
+  currentStatus = "Processing",
+}: OrderStatusTrackerProps) {
+  // Icon mapping for each step
+  const getIcon = (index: number) => {
+    const icons = [Check, Lock, Timer, Truck, Home];
+    return icons[index] || Check;
+  };
+
+  // Get icon background color based on status
+  const getIconBgColor = (status: string) => {
+    if (status === "completed") return "bg-[#2AAE7A]";
+    if (status === "current") return "bg-[#FFCC33]";
+    return "bg-[#F4F4F4]";
+  };
+
+  // Get text color based on status
+  const getTextColor = (status: string) => {
+    if (status === "pending") return "text-[#cdcdcd]";
+    return "text-[#0d1b2a]";
+  };
+
+  const getDescriptionColor = (status: string) => {
+    if (status === "pending") return "text-[#cdcdcd]";
+    return "text-[#9c9c9c]";
+  };
+
   return (
-    <div className="border-2 border-gray-900 rounded p-6 mb-6">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-lg font-bold text-gray-900">Order Status</h2>
-        <span className="text-sm text-blue-600 font-medium">Processing</span>
+    <div className="bg-white rounded-[15px] p-[23px] mb-5 shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)]">
+      {/* Header with Status Badge */}
+      <div className="flex items-center justify-between mb-8">
+        <h2 className="font-['Poppins'] font-medium text-[#0d1b2a] text-[18px] leading-normal">
+          Order Status
+        </h2>
+        <div className="bg-[#FFCC33] flex items-center gap-[8px] px-[19px] py-[5px] rounded-[100px]">
+          <Timer className="w-[17px] h-[17px] text-black" />
+          <span className="font-['Inter'] font-normal text-[15px] leading-[21px] text-black tracking-[0.5px]">
+            {currentStatus}
+          </span>
+        </div>
       </div>
 
-      <div className="space-y-4">
-        {steps.map((step, index) => (
-          <div key={index} className="flex gap-4">
-            {/* Status Icon */}
-            <div className="flex flex-col items-center">
-              <div
-                className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                  step.status === "completed"
-                    ? "bg-green-600"
-                    : step.status === "current"
-                    ? "bg-blue-600"
-                    : "bg-gray-300"
-                }`}
-              >
-                {step.status === "completed" ? (
-                  <svg
-                    className="w-5 h-5 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                ) : step.status === "current" ? (
-                  <div className="w-3 h-3 bg-white rounded-full"></div>
-                ) : (
-                  <div className="w-3 h-3 bg-gray-500 rounded-full"></div>
-                )}
-              </div>
-              {index < steps.length - 1 && (
-                <div className="w-0.5 h-12 bg-gray-300 my-1"></div>
-              )}
-            </div>
+      {/* Timeline */}
+      <div className="relative min-h-[400px]">
+        {/* Vertical Line - Dynamic height based on number of steps */}
+        {steps && steps.length > 1 && (
+          <div
+            className="absolute left-[20px] top-[20px] w-[2px] bg-[#e0e0e0]"
+            style={{ height: `${(steps.length - 1) * 82 + 41}px` }}
+          ></div>
+        )}
 
-            {/* Status Content */}
-            <div className="flex-1 pb-4">
-              <div className="flex items-center justify-between mb-1">
-                <h3 className="font-semibold text-gray-900">{step.title}</h3>
-                <span className="text-sm text-gray-500">{step.timestamp}</span>
-              </div>
-              <p className="text-sm text-gray-600">{step.description}</p>
-            </div>
-          </div>
-        ))}
+        {/* Status Steps */}
+        <div className="space-y-[41px]">
+          {steps && steps.length > 0 ? (
+            steps.map((step, index) => {
+              const Icon = getIcon(index);
+
+              return (
+                <div key={index} className="flex items-start gap-[19px]">
+                  {/* Status Icon */}
+                  <div
+                    className={`w-[41px] h-[41px] rounded-full flex items-center justify-center shrink-0 relative z-10 ${getIconBgColor(
+                      step.status
+                    )}`}
+                  >
+                    <Icon
+                      className="w-[26px] h-[26px] text-white"
+                      strokeWidth={1.5}
+                    />
+                  </div>
+
+                  {/* Status Content */}
+                  <div className="flex-1 flex items-start justify-between pt-[6px]">
+                    <div className="flex flex-col gap-[4px] max-w-[247px]">
+                      <h3
+                        className={`font-['Poppins'] font-medium text-[15px] leading-normal ${getTextColor(
+                          step.status
+                        )}`}
+                      >
+                        {step.title}
+                      </h3>
+                      <p
+                        className={`font-['Inter'] font-medium text-[14px] leading-normal ${getDescriptionColor(
+                          step.status
+                        )}`}
+                      >
+                        {step.description}
+                      </p>
+                    </div>
+
+                    {/* Timestamp */}
+                    <span
+                      className={`font-['Inter'] font-medium text-[14px] leading-normal whitespace-nowrap ml-4 ${getDescriptionColor(
+                        step.status
+                      )}`}
+                    >
+                      {step.timestamp}
+                    </span>
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            <div className="text-gray-500">No status steps available</div>
+          )}
+        </div>
       </div>
     </div>
   );

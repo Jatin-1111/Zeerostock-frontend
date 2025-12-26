@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import type { Address } from "@/types/buyer.types";
 import type { CartItem } from "@/types/api.types";
@@ -8,7 +9,7 @@ interface ReviewOrderProps {
   cartItems: CartItem[];
   shippingAddress: Address | null;
   billingAddress: Address | null;
-  paymentMethod: string;
+  paymentMethod: "card" | "escrow" | "wire" | "net-terms";
   shippingMethod?: string;
   orderNotes: string;
   onNotesChange: (notes: string) => void;
@@ -29,220 +30,494 @@ export default function ReviewOrder({
   onPlaceOrder,
   isPlacingOrder = false,
 }: ReviewOrderProps) {
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
+
+  const getPaymentMethodDisplay = () => {
+    switch (paymentMethod) {
+      case "card":
+        return {
+          title: "Credit/Debit Card",
+          subtitle: "Visa, Master Card, American Express",
+        };
+      case "escrow":
+        return {
+          title: "Escrow Payment",
+          subtitle: "Secure payment held until delivery",
+        };
+      case "wire":
+        return {
+          title: "Wire Transfer",
+          subtitle: "Direct bank transfer",
+        };
+      case "net-terms":
+        return {
+          title: "Net Terms",
+          subtitle: "Pay later with approved credit",
+        };
+      default:
+        return { title: "Payment Method", subtitle: "" };
+    }
+  };
+
+  const getShippingMethodDisplay = () => {
+    switch (shippingMethod) {
+      case "standard":
+        return {
+          title: "Standard Shipping",
+          subtitle: "5-7 business days",
+        };
+      case "expedited":
+        return {
+          title: "Expedited Shipping",
+          subtitle: "2-3 business days",
+        };
+      case "overnight":
+        return {
+          title: "Overnight Delivery",
+          subtitle: "1 business day",
+        };
+      case "freight":
+        return {
+          title: "Freight Shipping",
+          subtitle: "7-14 business days",
+        };
+      default:
+        return { title: "Standard Shipping", subtitle: "5-7 business days" };
+    }
+  };
+
+  const paymentDisplay = getPaymentMethodDisplay();
+  const shippingDisplay = getShippingMethodDisplay();
+
   return (
-    <div className="space-y-6">
-      {/* Order Summary */}
-      <div className="border-2 border-gray-900 rounded p-6">
-        <h2 className="text-lg font-bold text-gray-900 mb-4">Order Summary</h2>
-        <div className="space-y-4">
+    <div style={{ display: "flex", flexDirection: "column", gap: "19px" }}>
+      {/* Order Summary Section */}
+      <div
+        style={{
+          backgroundColor: "white",
+          borderRadius: "15px",
+          boxShadow: "0px 0px 4.5px 0px rgba(0,0,0,0.25)",
+          padding: "23px",
+          width: "100%",
+        }}
+      >
+        <h2
+          style={{
+            fontFamily: "Poppins, sans-serif",
+            fontWeight: 600,
+            fontSize: "18px",
+            color: "#0d1b2a",
+            marginBottom: "15px",
+          }}
+        >
+          Order Summary
+        </h2>
+        <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
           {cartItems && cartItems.length > 0 ? (
             cartItems.map((item) => (
               <div
                 key={item.itemId}
-                className="border-b border-gray-300 pb-4 last:border-b-0 last:pb-0"
+                style={{
+                  backgroundColor: "#fbfbfb",
+                  borderRadius: "15px",
+                  boxShadow: "0px 0px 3px 0px rgba(0,0,0,0.25)",
+                  padding: "18px 19px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "19px",
+                  height: "90px",
+                  width: "100%",
+                }}
               >
-                <div className="flex justify-between items-start gap-4">
-                  {item.image && (
+                {item.image && (
+                  <div
+                    style={{
+                      width: "79px",
+                      height: "54px",
+                      borderRadius: "8px",
+                      overflow: "hidden",
+                      flexShrink: 0,
+                    }}
+                  >
                     <Image
                       src={item.image}
                       alt={item.title}
-                      width={64}
-                      height={64}
-                      className="w-16 h-16 object-cover rounded border border-gray-200"
+                      width={79}
+                      height={54}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                      }}
                     />
-                  )}
-                  <div className="flex-1">
-                    <div className="font-medium text-gray-900">
-                      {item.title}
-                    </div>
-                    <div className="text-sm text-gray-500 mt-1">
-                      {item.category || "Product"}
-                    </div>
-                    <div className="text-sm text-gray-500">
-                      Qty: {item.quantity} @ ₹{item.price.toFixed(2)}
-                    </div>
-                    {(item.discountPercent ?? 0) > 0 && (
-                      <div className="text-xs text-green-600 mt-1">
-                        {item.discountPercent}% off
-                      </div>
-                    )}
                   </div>
-                  <div className="text-right font-bold text-gray-900">
-                    ₹{(item.quantity * item.price).toFixed(2)}
+                )}
+                <div
+                  style={{
+                    flex: 1,
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "2px",
+                  }}
+                >
+                  <div
+                    style={{
+                      fontFamily: "Poppins, sans-serif",
+                      fontWeight: 500,
+                      fontSize: "14px",
+                      color: "#0d1b2a",
+                    }}
+                  >
+                    {item.title}
                   </div>
+                  <div
+                    style={{
+                      fontFamily: "Inter, sans-serif",
+                      fontSize: "12px",
+                      color: "#9c9c9c",
+                      lineHeight: "18px",
+                    }}
+                  >
+                    by {item.seller?.name || item.category || "Supplier"}
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: "Inter, sans-serif",
+                      fontSize: "12px",
+                      color: "#9c9c9c",
+                      lineHeight: "18px",
+                    }}
+                  >
+                    Qty: {item.quantity} x {item.price.toFixed(2)}
+                  </div>
+                </div>
+                <div
+                  style={{
+                    fontFamily: "Poppins, sans-serif",
+                    fontWeight: 500,
+                    fontSize: "18px",
+                    color: "#0d1b2a",
+                    opacity: 0.8,
+                  }}
+                >
+                  <span
+                    style={{
+                      fontFamily: "Poppins, sans-serif",
+                      fontWeight: 700,
+                    }}
+                  >
+                    ₹
+                  </span>
+                  {(item.quantity * item.price).toFixed(0)}
                 </div>
               </div>
             ))
           ) : (
-            <div className="text-center text-gray-500 py-8">
+            <div
+              style={{
+                textAlign: "center",
+                color: "#9c9c9c",
+                padding: "30px",
+              }}
+            >
               No items in cart
             </div>
           )}
         </div>
       </div>
 
-      {/* Addresses and Shipping */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Shipping Address */}
-        {shippingAddress && (
-          <div className="border-2 border-gray-900 rounded p-6">
-            <h3 className="text-base font-bold text-gray-900 mb-3">
-              Shipping Address
-            </h3>
-            <div className="text-sm space-y-1">
-              <div className="font-medium">{shippingAddress.contact_name}</div>
-              <div>{shippingAddress.contact_phone}</div>
-              <div>{shippingAddress.address_line1}</div>
-              {shippingAddress.address_line2 && (
-                <div>{shippingAddress.address_line2}</div>
-              )}
-              <div>
-                {shippingAddress.city}, {shippingAddress.state} -{" "}
-                {shippingAddress.pincode}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Billing Address */}
-        {billingAddress && (
-          <div className="border-2 border-gray-900 rounded p-6">
-            <h3 className="text-base font-bold text-gray-900 mb-3">
-              Billing Address
-            </h3>
-            <div className="text-sm space-y-1">
-              <div className="font-medium">{billingAddress.contact_name}</div>
-              <div>{billingAddress.contact_phone}</div>
-              <div>{billingAddress.address_line1}</div>
-              {billingAddress.address_line2 && (
-                <div>{billingAddress.address_line2}</div>
-              )}
-              <div>
-                {billingAddress.city}, {billingAddress.state} -{" "}
-                {billingAddress.pincode}
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-
       {/* Payment and Shipping Method */}
-      <div className="grid grid-cols-2 gap-6">
-        <div className="border-2 border-gray-900 rounded p-6">
-          <div className="flex items-center gap-2 mb-4">
+      <div style={{ display: "flex", gap: "19px" }}>
+        {/* Payment Method */}
+        <div
+          style={{
+            backgroundColor: "white",
+            borderRadius: "15px",
+            boxShadow: "0px 0px 4.5px 0px rgba(0,0,0,0.25)",
+            padding: "23px",
+            flex: 1,
+            height: "116px",
+          }}
+        >
+          <h3
+            style={{
+              fontFamily: "Poppins, sans-serif",
+              fontWeight: 600,
+              fontSize: "18px",
+              color: "#0d1b2a",
+              marginBottom: "19px",
+            }}
+          >
+            Payment Method
+          </h3>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
             <svg
-              className="w-5 h-5 text-gray-900"
-              fill="none"
-              stroke="currentColor"
+              width="30"
+              height="30"
               viewBox="0 0 24 24"
+              fill="#0d1b2a"
+              style={{ flexShrink: 0 }}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
-              />
+              <rect x="2" y="5" width="20" height="14" rx="2" />
+              <path d="M2 10h20" fill="white" />
             </svg>
-            <h3 className="text-base font-bold text-gray-900">
-              Payment Method
-            </h3>
-          </div>
-          <div className="space-y-2">
-            <div className="font-medium text-gray-900">
-              {paymentMethod === "cod" && "Cash on Delivery"}
-              {paymentMethod === "online" && "Online Payment"}
-              {paymentMethod === "upi" && "UPI"}
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "2px" }}
+            >
+              <div
+                style={{
+                  fontFamily: "Poppins, sans-serif",
+                  fontWeight: 500,
+                  fontSize: "14px",
+                  color: "#0d1b2a",
+                }}
+              >
+                {paymentDisplay.title}
+              </div>
+              <div
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontWeight: 500,
+                  fontSize: "12px",
+                  color: "#9c9c9c",
+                }}
+              >
+                {paymentDisplay.subtitle}
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="border-2 border-gray-900 rounded p-6">
-          <div className="flex items-center gap-2 mb-4">
+        {/* Shipping Method */}
+        <div
+          style={{
+            backgroundColor: "white",
+            borderRadius: "15px",
+            boxShadow: "0px 0px 4.5px 0px rgba(0,0,0,0.25)",
+            padding: "23px",
+            flex: 1,
+            height: "116px",
+          }}
+        >
+          <h3
+            style={{
+              fontFamily: "Poppins, sans-serif",
+              fontWeight: 600,
+              fontSize: "18px",
+              color: "#0d1b2a",
+              marginBottom: "19px",
+            }}
+          >
+            Shipping Method
+          </h3>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
             <svg
-              className="w-5 h-5 text-gray-900"
-              fill="none"
-              stroke="currentColor"
+              width="30"
+              height="30"
               viewBox="0 0 24 24"
+              fill="#0d1b2a"
+              style={{ flexShrink: 0 }}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"
-              />
+              <path d="M1 3h15v13H1z" />
+              <path d="M16 8h2.343l2.122 2.121a1 1 0 01.293.707V16h-4.758" />
+              <circle cx="5.5" cy="18.5" r="2.5" />
+              <circle cx="18.5" cy="18.5" r="2.5" />
             </svg>
-            <h3 className="text-base font-bold text-gray-900">
-              Shipping Method
-            </h3>
-          </div>
-          <div className="space-y-2">
-            <div className="font-medium text-gray-900">
-              {shippingMethod === "standard" && "Standard Shipping"}
-              {shippingMethod === "express" && "Express Shipping"}
-              {shippingMethod === "overnight" && "Overnight Delivery"}
-            </div>
-            <div className="text-sm text-gray-500">
-              {shippingMethod === "standard" && "5-7 business days"}
-              {shippingMethod === "express" && "2-3 business days"}
-              {shippingMethod === "overnight" && "1 business day"}
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "2px" }}
+            >
+              <div
+                style={{
+                  fontFamily: "Poppins, sans-serif",
+                  fontWeight: 500,
+                  fontSize: "14px",
+                  color: "#0d1b2a",
+                }}
+              >
+                {shippingDisplay.title}
+              </div>
+              <div
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontWeight: 500,
+                  fontSize: "12px",
+                  color: "#9c9c9c",
+                }}
+              >
+                {shippingDisplay.subtitle}
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Order Notes */}
-      <div className="border-2 border-gray-900 rounded p-6">
-        <label className="block">
-          <span className="text-base font-bold text-gray-900 mb-2 block">
-            Order Notes (Optional)
-          </span>
-          <textarea
-            value={orderNotes}
-            onChange={(e) => onNotesChange(e.target.value)}
-            placeholder="Special instructions for your order..."
-            className="w-full px-4 py-3 border-2 border-gray-300 rounded focus:border-gray-900 focus:outline-none resize-none"
-            rows={3}
-          />
-        </label>
+      {/* Terms and Conditions Checkbox */}
+      <div
+        style={{
+          backgroundColor: "white",
+          borderRadius: "15px",
+          boxShadow: "0px 0px 4.5px 0px rgba(0,0,0,0.25)",
+          padding: "23px 19px",
+          display: "flex",
+          alignItems: "flex-start",
+          gap: "15px",
+          width: "100%",
+        }}
+      >
+        <div
+          onClick={() => setAgreedToTerms(!agreedToTerms)}
+          style={{
+            width: "23px",
+            height: "23px",
+            backgroundColor: agreedToTerms ? "#2aae7a" : "white",
+            border: `2px solid ${agreedToTerms ? "#2aae7a" : "#bebebe"}`,
+            borderRadius: "4px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            cursor: "pointer",
+            flexShrink: 0,
+            padding: "4px",
+          }}
+        >
+          {agreedToTerms && (
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 20 20"
+              fill="none"
+              stroke="white"
+              strokeWidth="2"
+            >
+              <path
+                d="M4 10l4 4 8-8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          )}
+        </div>
+        <div style={{ flex: 1 }}>
+          <div
+            style={{
+              fontFamily: "Poppins, sans-serif",
+              fontWeight: 500,
+              fontSize: "14px",
+              color: "#0d1b2a",
+              marginBottom: "10px",
+            }}
+          >
+            I agree to the Terms of Service and Privacy Policy
+          </div>
+          <div
+            style={{
+              fontFamily: "Poppins, sans-serif",
+              fontWeight: 500,
+              fontSize: "11px",
+              color: "#9c9c9c",
+              lineHeight: "17px",
+            }}
+          >
+            By placing this order, you agree to our terms and acknowledge that
+            you&apos;ve read our return policy.
+          </div>
+        </div>
       </div>
 
-      {/* Navigation */}
-      <div className="flex justify-between">
+      {/* Navigation Buttons */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          gap: "15px",
+          marginTop: "8px",
+          width: "100%",
+        }}
+      >
         <button
           onClick={onBack}
           disabled={isPlacingOrder}
-          className="px-6 py-2.5 border-2 border-gray-900 text-gray-900 rounded font-medium hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+          style={{
+            height: "45px",
+            padding: "11px 83px",
+            backgroundColor: "white",
+            border: "1px solid #9c9c9c",
+            borderRadius: "11px",
+            fontFamily: "Poppins, sans-serif",
+            fontWeight: 600,
+            fontSize: "15px",
+            color: "#9c9c9c",
+            cursor: isPlacingOrder ? "not-allowed" : "pointer",
+            opacity: isPlacingOrder ? 0.5 : 1,
+            lineHeight: "17px",
+          }}
         >
           Previous Step
         </button>
         <button
           onClick={onPlaceOrder}
           disabled={
-            isPlacingOrder || !shippingAddress || cartItems.length === 0
+            isPlacingOrder ||
+            !shippingAddress ||
+            cartItems.length === 0 ||
+            !agreedToTerms
           }
-          className="px-6 py-2.5 bg-gray-900 text-white rounded font-medium hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+          style={{
+            height: "45px",
+            padding: "11px 83px",
+            backgroundColor: "#1e3a8a",
+            border: "none",
+            borderRadius: "11px",
+            fontFamily: "Poppins, sans-serif",
+            fontWeight: 600,
+            fontSize: "15px",
+            color: "white",
+            cursor:
+              isPlacingOrder ||
+              !shippingAddress ||
+              cartItems.length === 0 ||
+              !agreedToTerms
+                ? "not-allowed"
+                : "pointer",
+            opacity:
+              isPlacingOrder ||
+              !shippingAddress ||
+              cartItems.length === 0 ||
+              !agreedToTerms
+                ? 0.5
+                : 1,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "8px",
+            lineHeight: "17px",
+          }}
         >
           {isPlacingOrder ? (
             <>
               <svg
-                className="animate-spin h-5 w-5 text-white"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
+                width="15"
+                height="15"
                 viewBox="0 0 24 24"
+                fill="none"
+                stroke="white"
+                strokeWidth="2"
+                style={{
+                  animation: "spin 1s linear infinite",
+                }}
               >
                 <circle
-                  className="opacity-25"
                   cx="12"
                   cy="12"
                   r="10"
-                  stroke="currentColor"
+                  strokeOpacity="0.25"
                   strokeWidth="4"
-                ></circle>
+                />
                 <path
-                  className="opacity-75"
-                  fill="currentColor"
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                ></path>
+                  fill="white"
+                  strokeOpacity="0.75"
+                />
               </svg>
               Placing Order...
             </>
@@ -251,6 +526,16 @@ export default function ReviewOrder({
           )}
         </button>
       </div>
+      <style jsx>{`
+        @keyframes spin {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+      `}</style>
     </div>
   );
 }

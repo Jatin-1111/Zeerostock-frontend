@@ -1,71 +1,415 @@
+"use client";
+
+import { useState } from "react";
+
 export default function CategorySection() {
+  const [showAll, setShowAll] = useState(false);
+
   const categories = [
     {
-      name: "All Categories",
-      iconPath:
-        "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4",
+      name: "Electronics",
+      icon: (
+        <svg
+          className="w-16 h-16"
+          viewBox="0 0 64 64"
+          fill="none"
+          stroke="currentColor"
+        >
+          <rect x="8" y="12" width="48" height="32" rx="2" strokeWidth="2" />
+          <path
+            d="M20 44h24M32 44v8M24 52h16"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+        </svg>
+      ),
+    },
+    {
+      name: "Industrial",
+      icon: (
+        <svg
+          className="w-16 h-16"
+          viewBox="0 0 64 64"
+          fill="none"
+          stroke="currentColor"
+        >
+          <path
+            d="M12 52h40M16 52V32l12-8v28M28 24l12-8v36"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <circle cx="22" cy="38" r="2" fill="currentColor" />
+          <circle cx="22" cy="46" r="2" fill="currentColor" />
+          <circle cx="34" cy="30" r="2" fill="currentColor" />
+          <circle cx="34" cy="38" r="2" fill="currentColor" />
+          <circle cx="34" cy="46" r="2" fill="currentColor" />
+        </svg>
+      ),
     },
     {
       name: "Construction",
-      iconPath:
-        "M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z",
+      icon: (
+        <svg
+          className="w-16 h-16"
+          viewBox="0 0 64 64"
+          fill="none"
+          stroke="currentColor"
+        >
+          <path
+            d="M32 8L8 28h8v20h40V28h8L32 8z"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path d="M28 48V36h8v12" strokeWidth="2" />
+        </svg>
+      ),
     },
     {
-      name: "Apparels",
-      iconPath:
-        "M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01",
+      name: "Agriculture",
+      icon: (
+        <svg
+          className="w-16 h-16"
+          viewBox="0 0 64 64"
+          fill="none"
+          stroke="currentColor"
+        >
+          <circle cx="32" cy="20" r="8" strokeWidth="2" />
+          <circle cx="16" cy="32" r="6" strokeWidth="2" />
+          <circle cx="48" cy="32" r="6" strokeWidth="2" />
+          <path
+            d="M32 28v24M24 40l-8 8M40 40l8 8"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+        </svg>
+      ),
     },
     {
-      name: "IT Hardware",
-      iconPath:
-        "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
+      name: "Cosmetics",
+      icon: (
+        <svg
+          className="w-16 h-16"
+          viewBox="0 0 64 64"
+          fill="none"
+          stroke="currentColor"
+        >
+          <path
+            d="M20 16h24v8H20zM22 24v24c0 2 1 4 3 4h14c2 0 3-2 3-4V24"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          <line
+            x1="28"
+            y1="12"
+            x2="28"
+            y2="16"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          <line
+            x1="36"
+            y1="12"
+            x2="36"
+            y2="16"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+        </svg>
+      ),
     },
     {
-      name: "FMCG",
-      iconPath:
-        "M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z",
+      name: "Appliances",
+      icon: (
+        <svg
+          className="w-16 h-16"
+          viewBox="0 0 64 64"
+          fill="none"
+          stroke="currentColor"
+        >
+          <rect x="12" y="8" width="40" height="48" rx="2" strokeWidth="2" />
+          <line x1="12" y1="20" x2="52" y2="20" strokeWidth="2" />
+          <circle cx="20" cy="14" r="2" fill="currentColor" />
+          <circle cx="28" cy="14" r="2" fill="currentColor" />
+          <circle cx="32" cy="36" r="10" strokeWidth="2" />
+          <path d="M32 30v6l4 4" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+      ),
     },
     {
-      name: "Auto Parts",
-      iconPath:
-        "M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2",
+      name: "Hand Tools",
+      icon: (
+        <svg
+          className="w-16 h-16"
+          viewBox="0 0 64 64"
+          fill="none"
+          stroke="currentColor"
+        >
+          <path
+            d="M16 32l16-16 16 16M20 28l-8 8 12 12 8-8"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path d="M36 20l8 8" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+      ),
     },
     {
-      name: "Chemicals",
-      iconPath:
-        "M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z",
+      name: "Decor",
+      icon: (
+        <svg
+          className="w-16 h-16"
+          viewBox="0 0 64 64"
+          fill="none"
+          stroke="currentColor"
+        >
+          <path
+            d="M32 8v8M32 48v8M48 32h8M8 32h8"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          <circle cx="32" cy="32" r="12" strokeWidth="2" />
+          <path d="M32 20c-4 0-8 2-8 8s4 8 8 8" strokeWidth="2" />
+        </svg>
+      ),
     },
     {
-      name: "Machinery",
-      iconPath:
-        "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z",
+      name: "Cleaning items",
+      icon: (
+        <svg
+          className="w-16 h-16"
+          viewBox="0 0 64 64"
+          fill="none"
+          stroke="currentColor"
+        >
+          <path
+            d="M24 16h16v12H24zM28 28v24M20 44h16c2 0 4 2 4 4v4H16v-4c0-2 2-4 4-4z"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <line
+            x1="28"
+            y1="12"
+            x2="28"
+            y2="16"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+        </svg>
+      ),
     },
-    { name: "All Categories", iconPath: "M12 6v6m0 0v6m0-6h6m-6 0H6" },
+    {
+      name: "Fasteners",
+      icon: (
+        <svg
+          className="w-16 h-16"
+          viewBox="0 0 64 64"
+          fill="none"
+          stroke="currentColor"
+        >
+          <path
+            d="M32 8v48M20 20l12-8 12 8M20 44l12 8 12-8"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <line x1="24" y1="32" x2="40" y2="32" strokeWidth="2" />
+        </svg>
+      ),
+    },
+    {
+      name: "Plumbing Materials",
+      icon: (
+        <svg
+          className="w-16 h-16"
+          viewBox="0 0 64 64"
+          fill="none"
+          stroke="currentColor"
+        >
+          <path
+            d="M16 32h12v12H16zM36 32h12v12H36zM28 26v20"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path d="M28 38h8v8h-8z" strokeWidth="2" />
+        </svg>
+      ),
+    },
+    {
+      name: "Electricals",
+      icon: (
+        <svg
+          className="w-16 h-16"
+          viewBox="0 0 64 64"
+          fill="none"
+          stroke="currentColor"
+        >
+          <path
+            d="M28 8h8l-4 20h8L24 56l8-24h-8l8-24z"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      ),
+    },
+    {
+      name: "Power Tools",
+      icon: (
+        <svg
+          className="w-16 h-16"
+          viewBox="0 0 64 64"
+          fill="none"
+          stroke="currentColor"
+        >
+          <rect x="20" y="24" width="24" height="28" rx="2" strokeWidth="2" />
+          <path
+            d="M26 16h12v8H26zM28 32h8M28 40h8"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          <circle cx="32" cy="46" r="3" strokeWidth="2" />
+        </svg>
+      ),
+    },
+    {
+      name: "PPE",
+      icon: (
+        <svg
+          className="w-16 h-16"
+          viewBox="0 0 64 64"
+          fill="none"
+          stroke="currentColor"
+        >
+          <path
+            d="M32 8c-8 0-16 4-16 12v8c0 8 8 12 16 12s16-4 16-12v-8c0-8-8-12-16-12z"
+            strokeWidth="2"
+          />
+          <path
+            d="M20 28c-4 2-8 6-8 12v8h40v-8c0-6-4-10-8-12"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          <line
+            x1="24"
+            y1="16"
+            x2="28"
+            y2="20"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          <line
+            x1="40"
+            y1="16"
+            x2="36"
+            y2="20"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+        </svg>
+      ),
+    },
+    {
+      name: "Abrasives",
+      icon: (
+        <svg
+          className="w-16 h-16"
+          viewBox="0 0 64 64"
+          fill="none"
+          stroke="currentColor"
+        >
+          <circle cx="32" cy="32" r="20" strokeWidth="2" />
+          <circle cx="32" cy="32" r="8" strokeWidth="2" />
+          <path
+            d="M32 12v8M32 44v8M52 32h-8M20 32h-8"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          <path
+            d="M44 20l-6 6M26 38l-6 6M44 44l-6-6M26 26l-6-6"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+        </svg>
+      ),
+    },
+    {
+      name: "Chisels & Drill bits",
+      icon: (
+        <svg
+          className="w-16 h-16"
+          viewBox="0 0 64 64"
+          fill="none"
+          stroke="currentColor"
+        >
+          <path
+            d="M16 16l8 8M24 24l16 16M40 40l8 8"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          <path d="M28 20h8v8h-8z" strokeWidth="2" />
+          <path
+            d="M36 28l12 12-4 4-12-12"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+        </svg>
+      ),
+    },
+    {
+      name: "Food Containers",
+      icon: (
+        <svg
+          className="w-16 h-16"
+          viewBox="0 0 64 64"
+          fill="none"
+          stroke="currentColor"
+        >
+          <path
+            d="M16 20h32v28H16z"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M20 20v-4c0-2 2-4 4-4h16c2 0 4 2 4 4v4"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          <line x1="16" y1="28" x2="48" y2="28" strokeWidth="2" />
+        </svg>
+      ),
+    },
   ];
 
+  const displayedCategories = showAll ? categories : categories.slice(0, 6);
+
   return (
-    <div className="bg-white p-6">
-      <h2 className="text-xl font-bold text-gray-900 mb-4">Shop by Category</h2>
-      <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-3">
-        {categories.map((category, index) => (
+    <div className="max-w-[1200px] mx-auto py-12 px-4">
+      <div className="flex justify-between items-center mb-8">
+        <h2 className="font-poppins font-semibold text-[28px] text-[#1a1a1a] m-0">
+          Shop by Category
+        </h2>
+        <button
+          onClick={() => setShowAll(!showAll)}
+          className="font-inter font-medium text-base text-gray-600 bg-transparent border-none cursor-pointer hover:text-[#2D4A9A] transition-colors"
+        >
+          {showAll ? "Show less" : "View all categories"}
+        </button>
+      </div>
+
+      <div className="grid grid-cols-6 gap-4">
+        {displayedCategories.map((category, index) => (
           <button
             key={index}
-            className="flex flex-col items-center gap-2 p-3 border border-gray-200 hover:shadow-md transition-shadow"
+            className="bg-white rounded-xl shadow-md p-6 flex flex-col items-center gap-4 border-none cursor-pointer hover:-translate-y-1 transition-transform duration-200"
           >
-            <svg
-              className="w-6 h-6 text-gray-900"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d={category.iconPath}
-              />
-            </svg>
-            <span className="text-xs text-center text-gray-700">
+            <div className="text-gray-700">{category.icon}</div>
+            <span className="font-poppins font-medium text-sm text-[#1a1a1a] text-center leading-tight">
               {category.name}
             </span>
           </button>

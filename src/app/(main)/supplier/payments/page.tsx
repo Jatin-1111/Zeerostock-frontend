@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { CreditCard } from "lucide-react";
 import { supplierService } from "@/services/supplier.service";
 import { useAuth } from "@/contexts/AuthContext";
 import PaymentMethodsStats from "@/components/payment-methods/PaymentMethodsStats";
@@ -172,22 +171,112 @@ export default function PaymentMethodsPage() {
     { id: "invoices", label: "Invoices" },
   ];
 
+  // Custom Card Icon SVG
+  const CardIcon = () => (
+    <svg
+      width="45"
+      height="45"
+      viewBox="0 0 45 45"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M31.875 15.9375H13.125C11.2275 15.9375 9.6875 17.4775 9.6875 19.375V31.875C9.6875 33.7725 11.2275 35.3125 13.125 35.3125H31.875C33.7725 35.3125 35.3125 33.7725 35.3125 31.875V19.375C35.3125 17.4775 33.7725 15.9375 31.875 15.9375Z"
+        stroke="#2AAE7A"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9.6875 23.4375H35.3125"
+        stroke="#2AAE7A"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M15.9375 29.6875H18.75"
+        stroke="#2AAE7A"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+
   return (
-    <div className="min-h-screen bg-white">
-      <div className="w-full mx-auto p-6">
-        {/* Page Header */}
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 bg-gray-100 border-2 border-gray-900 flex items-center justify-center">
-              <CreditCard className="w-6 h-6 text-gray-900" />
-            </div>
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">
-                Payment Methods
-              </h1>
-              <p className="text-sm text-gray-600">
-                Manage payment methods and transaction history
-              </p>
+    <div style={{ minHeight: "100vh" }}>
+      <div
+        style={{
+          width: "100%",
+          maxWidth: "1440px",
+          margin: "0 auto",
+          padding: "40px 80px",
+        }}
+      >
+        {/* Page Header with scaling */}
+        <div
+          style={{
+            transform: "scale(0.75)",
+            transformOrigin: "top left",
+            width: "133.33%",
+            marginBottom: "30px",
+          }}
+        >
+          <div
+            style={{
+              background: "white",
+              borderRadius: "20px",
+              boxShadow: "0px 0px 10px 0px rgba(24,181,34,0.25)",
+              padding: "20px 81px 20px 81px",
+              display: "flex",
+              alignItems: "center",
+              marginBottom: "71px",
+            }}
+          >
+            <div style={{ display: "flex", gap: "34px", alignItems: "center" }}>
+              {/* Icon Box */}
+              <div
+                style={{
+                  background: "#EEFFEF",
+                  borderRadius: "10px",
+                  boxShadow: "0px 0px 10px 0px rgba(24,181,34,0.25)",
+                  padding: "15px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <CardIcon />
+              </div>
+
+              {/* Text Content */}
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <h1
+                  style={{
+                    fontFamily: "Poppins, sans-serif",
+                    fontWeight: 600,
+                    fontSize: "36px",
+                    color: "#0D1B2A",
+                    lineHeight: "normal",
+                    margin: 0,
+                  }}
+                >
+                  Payment Method
+                </h1>
+                <p
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontWeight: 500,
+                    fontSize: "24px",
+                    color: "#9C9C9C",
+                    lineHeight: "normal",
+                    margin: 0,
+                  }}
+                >
+                  Manage payment method and transaction history
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -195,31 +284,88 @@ export default function PaymentMethodsPage() {
         {/* Stats Cards */}
         <PaymentMethodsStats summary={paymentSummary} />
 
-        {/* Tabs Navigation */}
-        <div className="inline-flex gap-0 mb-6 border-2 border-gray-900">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() =>
-                setActiveTab(
-                  tab.id as
-                    | "payment-methods"
-                    | "transaction-history"
-                    | "invoices"
-                )
-              }
-              className={`px-6 py-3 text-sm font-medium last:border-r-0 transition-colors bg-white text-black ${
-                activeTab === tab.id ? "border-2 border-gray-900" : ""
-              }`}
+        {/* Tabs Navigation with scaling */}
+        <div
+          style={{
+            transform: "scale(0.75)",
+            transformOrigin: "top left",
+            width: "133.33%",
+            marginBottom: "50px",
+            marginTop: "50px",
+          }}
+        >
+          <div style={{ position: "relative" }}>
+            {/* Horizontal line under all tabs */}
+            <div
+              style={{
+                position: "absolute",
+                bottom: "0",
+                left: "0",
+                right: "0",
+                height: "1px",
+                background: "#E5E7EB",
+              }}
+            />
+
+            {/* Tabs */}
+            <div
+              style={{
+                display: "flex",
+                gap: "65px",
+                position: "relative",
+                paddingLeft: "40px",
+              }}
             >
-              {tab.label}
-            </button>
-          ))}
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() =>
+                    setActiveTab(
+                      tab.id as
+                        | "payment-methods"
+                        | "transaction-history"
+                        | "invoices"
+                    )
+                  }
+                  style={{
+                    background: "transparent",
+                    border: "none",
+                    fontFamily: "Poppins, sans-serif",
+                    fontWeight: 500,
+                    fontSize: "20px",
+                    color: activeTab === tab.id ? "#2AAE7A" : "#0D1B2A",
+                    letterSpacing: "0.5px",
+                    lineHeight: "24px",
+                    padding: "8px 0",
+                    cursor: "pointer",
+                    position: "relative",
+                    transition: "color 0.2s ease",
+                  }}
+                >
+                  {tab.label}
+                  {/* Active underline */}
+                  {activeTab === tab.id && (
+                    <div
+                      style={{
+                        position: "absolute",
+                        bottom: "-1px",
+                        left: "0",
+                        right: "0",
+                        height: "3px",
+                        background: "#2AAE7A",
+                        borderRadius: "2px 2px 0 0",
+                      }}
+                    />
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Tab Content */}
         {activeTab === "payment-methods" && (
-          <div>
+          <div className="flex flex-col gap-6">
             <SavedPaymentMethods
               methods={[]}
               loading={false}

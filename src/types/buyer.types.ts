@@ -59,7 +59,14 @@ export type PaymentStatus =
   | "refunded"
   | "partially_refunded";
 
-export type PaymentMethod = "cod" | "online" | "upi";
+export type PaymentMethod =
+  | "cod"
+  | "online"
+  | "upi"
+  | "card"
+  | "escrow"
+  | "wire"
+  | "net-terms";
 
 export interface OrderItem {
   itemId: string;
@@ -326,7 +333,7 @@ export interface BuyerProfile {
   mobile: string;
   businessType: string | null;
   gstNumber: string | null;
-  role: string;
+  activeRole: string;
   isVerified: boolean;
   isActive: boolean;
   defaultShippingAddress: Address | null;

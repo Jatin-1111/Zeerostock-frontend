@@ -1,7 +1,10 @@
+import { Check, ArrowRight } from "lucide-react";
+
 interface NextStep {
   icon: string;
   title: string;
   description: string;
+  completed?: boolean;
 }
 
 interface WhatsNextProps {
@@ -10,38 +13,46 @@ interface WhatsNextProps {
 
 export default function WhatsNext({ steps }: WhatsNextProps) {
   return (
-    <div className="border-2 border-gray-900 rounded p-6 mb-6">
-      <h3 className="font-bold text-gray-900 mb-6">What&apos;s Next?</h3>
+    <div className="bg-white rounded-[15px] p-[23px] mb-5 shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)]">
+      <h3 className="font-['Poppins'] font-medium text-[#0d1b2a] text-[18px] leading-normal mb-[34px]">
+        What&apos;s Next?
+      </h3>
 
-      <div className="space-y-6">
+      <div className="space-y-[29px] mb-[41px]">
         {steps.map((step, index) => (
-          <div key={index} className="flex items-start gap-3">
-            <div className="w-8 h-8 bg-gray-900 text-white rounded-full flex items-center justify-center shrink-0 text-sm font-bold">
-              {step.icon}
+          <div key={index} className="flex items-start gap-[14px]">
+            {/* Icon */}
+            <div className="w-[33px] h-[33px] flex items-center justify-center flex-shrink-0">
+              {step.completed ? (
+                <div className="w-[18px] h-[18px] flex items-center justify-center">
+                  <Check
+                    className="w-[18px] h-[18px] text-[#2aae7a]"
+                    strokeWidth={2}
+                  />
+                </div>
+              ) : (
+                <div className="w-[27px] h-[27px] rounded-full border-[6px] border-gray-300"></div>
+              )}
             </div>
-            <div>
-              <h4 className="font-semibold text-gray-900 mb-1">{step.title}</h4>
-              <p className="text-sm text-gray-600">{step.description}</p>
+
+            {/* Content */}
+            <div className="flex-1 pt-[4px]">
+              <h4 className="font-['Poppins'] font-medium text-[#0d1b2a] text-[15px] leading-[21px] tracking-[0.4px] mb-[4px]">
+                {step.title}
+              </h4>
+              <p className="font-['Inter'] font-medium text-[#9c9c9c] text-[14px] leading-normal max-w-[232px]">
+                {step.description}
+              </p>
             </div>
           </div>
         ))}
       </div>
 
-      <button className="w-full mt-6 py-3 bg-gray-900 text-white rounded font-medium hover:bg-gray-800 flex items-center justify-center gap-2">
-        <span>Go to Dashboard</span>
-        <svg
-          className="w-4 h-4"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M14 5l7 7m0 0l-7 7m7-7H3"
-          />
-        </svg>
+      <button className="w-full max-w-[269px] mx-auto block bg-[#1e3a8a] text-white h-[45px] rounded-[11px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center justify-center gap-[15px]">
+        <span className="font-['Poppins'] font-semibold text-[15px] leading-[17px]">
+          Go to Dashboard
+        </span>
+        <ArrowRight className="w-[18px] h-[18px]" strokeWidth={2} />
       </button>
     </div>
   );

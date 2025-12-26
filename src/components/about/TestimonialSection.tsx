@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 
 export default function TestimonialSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -8,8 +9,27 @@ export default function TestimonialSection() {
   const testimonials = [
     {
       text: "Zeerostock transformed how we handle excess inventory. We've reduced holding costs by 45% and attracted serious buyers for components we thought were worthless.",
-      author: "— Supply Chain Manager, Tech/Pkg Industries",
+      author: "Sarah Mitchell",
+      company: "Global Tech Inc.",
       badge: "Verified Supplier",
+    },
+    {
+      text: "The platform's transparency and vetted buyer network gave us confidence to list our surplus materials. Within weeks, we cleared $200K in dead stock and recovered valuable warehouse space.",
+      author: "James Rodriguez",
+      company: "Industrial Solutions Ltd.",
+      badge: "Premium Member",
+    },
+    {
+      text: "Finding quality surplus inventory used to take weeks of phone calls. Now we source everything through Zeerostock - competitive pricing, reliable sellers, and seamless transactions every time.",
+      author: "Emily Chen",
+      company: "Manufacturing Plus Co.",
+      badge: "Top Buyer",
+    },
+    {
+      text: "The RFQ system changed our procurement process. We can now compare offers from multiple suppliers instantly and negotiate better deals on surplus components.",
+      author: "Michael Thompson",
+      company: "Tech Innovations Inc.",
+      badge: "Verified Buyer",
     },
   ];
 
@@ -24,75 +44,88 @@ export default function TestimonialSection() {
   };
 
   return (
-    <section className="bg-gray-50 py-20 px-6">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-4xl font-bold text-gray-900 mb-4 text-center">
-          Trusted by Industry Leaders
-        </h2>
-        <p className="text-xl text-gray-600 text-center mb-12">
-          See how businesses like yours are maximizing value from surplus
-          inventory
-        </p>
+    <section className="w-full bg-[#EEFBF6] py-16">
+      <div className="w-full max-w-full mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative w-full flex flex-col items-center">
+          {/* Title */}
+          <h2 className="font-poppins font-bold text-3xl sm:text-4xl lg:text-[50px] leading-tight lg:leading-[75px] text-center text-[#0d1b2a] mb-3">
+            <span className="text-[#2ec096]">Trusted</span> By Industry Leaders
+          </h2>
 
-        <div className="relative max-w-4xl mx-auto">
-          <div className="relative border-2 border-gray-900 rounded-lg p-12 bg-white">
-            {/* Left Arrow */}
-            <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 z-10">
+          {/* Subtitle */}
+          <p className="font-inter font-semibold text-base sm:text-lg lg:text-[24px] leading-relaxed lg:leading-[36px] text-center text-[#686868] max-w-3xl mb-16">
+            See how businesses like yours are maximizing value from surplus
+            inventory
+          </p>
+
+          {/* Testimonial Card Container */}
+          <div className="relative w-full max-w-2xl mx-auto px-12 sm:px-16">
+            <div className="relative bg-[#eeffef] rounded-[30px] p-8 sm:p-10 lg:p-12 min-h-[360px] flex flex-col justify-center shadow-sm">
+              {/* Left Arrow */}
               <button
                 onClick={prevTestimonial}
-                className="relative w-0 h-0 border-t-38 border-t-transparent border-r-46 border-r-white border-b-38 border-b-transparent hover:opacity-80 transition-opacity"
+                className="absolute left-[-40px] sm:left-[-50px] top-1/2 -translate-y-1/2 z-10 hover:opacity-80 transition-opacity bg-white rounded-full p-2 shadow-md"
                 aria-label="Previous testimonial"
               >
-                <div className="absolute top-1/2 left-0 -translate-y-1/2 w-0 h-0 border-t-40 border-t-transparent border-r-48 border-r-gray-900 border-b-40 border-b-transparent"></div>
+                <ChevronLeft className="w-6 h-6 text-[#2ec096]" />
               </button>
-            </div>
 
-            {/* Content */}
-            <div className="text-center py-8">
-              <div className="flex justify-center mb-6">
-                {[...Array(5)].map((_, i) => (
-                  <svg
-                    key={i}
-                    className="w-6 h-6 text-yellow-400 fill-current"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                  </svg>
-                ))}
+              {/* Content */}
+              <div className="text-center flex flex-col items-center gap-6">
+                {/* Quote */}
+                <p className="font-inter font-medium text-lg sm:text-xl lg:text-[22px] leading-relaxed lg:leading-[33px] text-[#686868]">
+                  &quot;{testimonials[currentIndex].text}&quot;
+                </p>
+
+                {/* Stars */}
+                <div className="flex justify-center gap-6 sm:gap-7 lg:gap-[31px]">
+                  {[...Array(5)].map((_, i) => (
+                    <Star
+                      key={i}
+                      className="w-[24px] h-[24px] fill-[#2ec096] text-[#2ec096]"
+                    />
+                  ))}
+                </div>
+
+                {/* Divider Line */}
+                <div className="w-full h-[1px] bg-gray-300 my-2" />
+
+                {/* Author Info */}
+                <div className="flex flex-col items-center gap-2">
+                  <p className="font-poppins font-bold text-xl sm:text-2xl lg:text-[28px] leading-tight lg:leading-[42px] text-black">
+                    {testimonials[currentIndex].author}
+                  </p>
+                  <p className="font-inter font-semibold text-lg sm:text-xl lg:text-[21px] leading-tight lg:leading-[25px] text-black">
+                    {testimonials[currentIndex].company}
+                  </p>
+                  <p className="font-inter font-medium text-sm sm:text-base lg:text-[15px] leading-relaxed lg:leading-[22px] text-[#3f3737]">
+                    {testimonials[currentIndex].badge}
+                  </p>
+                </div>
               </div>
-              <p className="text-lg text-gray-700 text-center mb-6 min-h-20">
-                &quot;{testimonials[currentIndex].text}&quot;
-              </p>
-              <p className="text-sm text-gray-900 font-medium">
-                {testimonials[currentIndex].author}
-              </p>
-              <p className="text-sm text-gray-600 mt-2">
-                {testimonials[currentIndex].badge}
-              </p>
-            </div>
 
-            {/* Right Arrow */}
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10">
+              {/* Right Arrow */}
               <button
                 onClick={nextTestimonial}
-                className="relative w-0 h-0 border-t-38 border-t-transparent border-l-46 border-l-white border-b-38 border-b-transparent hover:opacity-80 transition-opacity"
+                className="absolute right-[-40px] sm:right-[-50px] top-1/2 -translate-y-1/2 z-10 hover:opacity-80 transition-opacity bg-white rounded-full p-2 shadow-md"
                 aria-label="Next testimonial"
               >
-                <div className="absolute top-1/2 right-0 -translate-y-1/2 w-0 h-0 border-t-40 border-t-transparent border-l-48 border-l-gray-900 border-b-40 border-b-transparent"></div>
+                <ChevronRight className="w-6 h-6 text-[#2ec096]" />
               </button>
             </div>
 
-            {/* Dots */}
-            <div className="flex justify-center gap-3 mt-6">
+            {/* Dots Navigation */}
+            <div className="flex justify-center gap-4 mt-8">
               {testimonials.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentIndex(index)}
-                  className={`transition-all ${
+                  className={`w-[10px] h-[10px] rounded-full transition-colors ${
                     index === currentIndex
-                      ? "w-12 h-1 bg-gray-400 rounded-full"
-                      : "w-3 h-3 bg-gray-300 rounded-full"
+                      ? "bg-[#2ec096]"
+                      : "bg-[#d9d9d9] hover:bg-[#2ec096]"
                   }`}
+                  aria-label={`Go to testimonial ${index + 1}`}
                 />
               ))}
             </div>

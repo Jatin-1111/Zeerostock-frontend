@@ -61,6 +61,23 @@ export interface SupplierDashboardStats {
   }>;
 }
 
+export interface SupplierProfileData {
+  company_info: {
+    company_name: string;
+    website: string;
+    business_type: string;
+    description: string;
+    phone: string;
+    primary_categories: string[];
+  };
+  business_metrics: {
+    rating: number;
+    response_rate: number;
+    total_reviews: number;
+    member_since: number;
+  };
+}
+
 export interface SupplierOrder {
   id: string;
   order_number: string;
@@ -111,6 +128,13 @@ export interface UpdateListingData extends Partial<CreateListingData> {
 }
 
 export const supplierService = {
+  /**
+   * Get supplier profile with company info and business metrics
+   */
+  async getProfile(): Promise<ApiResponse<SupplierProfileData>> {
+    return apiRequest("get", "/supplier/profile");
+  },
+
   /**
    * Get all listings for the authenticated supplier
    */

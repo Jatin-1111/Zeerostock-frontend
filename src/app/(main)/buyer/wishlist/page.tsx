@@ -52,109 +52,307 @@ export default function WishlistPage() {
     }
   };
 
+  const clearUnavailableItems = async () => {
+    const unavailable = items.filter(
+      (item) => item.product.status !== "active"
+    );
+    if (unavailable.length === 0) {
+      alert("No unavailable items to clear");
+      return;
+    }
+    if (!confirm("Clear all unavailable items?")) return;
+
+    for (const item of unavailable) {
+      await handleRemove(item.product.id);
+    }
+  };
+
   const getPriceChange = (item: WatchlistItem) => {
     if (!item.priceAtAdd || !item.product.priceAfter) return null;
 
-    const change = item.product.priceAfter - item.priceAtAdd;
-    const percentChange = (change / item.priceAtAdd) * 100;
-
-    if (Math.abs(percentChange) < 1) return null;
+    const priceDiff = item.product.priceAfter - item.priceAtAdd;
+    const percentChange = (priceDiff / item.priceAtAdd) * 100;
 
     return {
-      amount: change,
-      percent: percentChange,
-      isIncrease: change > 0,
+      amount: Math.abs(priceDiff),
+      percent: Math.abs(percentChange),
+      isIncrease: priceDiff > 0,
     };
   };
 
   return (
-    <div className="min-h-screen bg-white p-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">My Wishlist</h1>
-          {items.length > 0 && (
-            <button
-              onClick={async () => {
-                if (confirm("Clear all unavailable items?")) {
-                  try {
-                    await buyerService.clearUnavailableItems();
-                    fetchWatchlist();
-                  } catch (err) {
-                    console.error("Failed to clear unavailable items:", err);
-                    alert("Failed to clear unavailable items");
-                  }
-                }
-              }}
-              className="px-4 py-2 text-sm text-gray-600 hover:text-gray-900"
-            >
-              Clear Unavailable Items
-            </button>
-          )}
+    <div
+      style={{
+        minHeight: "100vh",
+        backgroundColor: "#eefbf6",
+        padding: "45px 60px",
+      }}
+    >
+      <div style={{ maxWidth: "1440px", margin: "0 auto" }}>
+        {/* Header */}
+        <div
+          style={{
+            marginBottom: "30px",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <h1
+            style={{
+              fontSize: "27px",
+              fontWeight: 600,
+              fontFamily: "Poppins, sans-serif",
+              color: "#0d1b2a",
+              margin: 0,
+            }}
+          >
+            My Wishlist
+          </h1>
+          <button
+            onClick={clearUnavailableItems}
+            style={{
+              fontSize: "12px",
+              fontFamily: "Poppins, sans-serif",
+              fontWeight: 600,
+              color: "#1e3a8a",
+              backgroundColor: "transparent",
+              border: "none",
+              cursor: "pointer",
+              padding: "6px 12px",
+            }}
+          >
+            Clear Unavailable Items
+          </button>
         </div>
 
+        {/* Error Message */}
         {error && (
-          <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-600">
+          <div
+            style={{
+              marginBottom: "23px",
+              padding: "15px",
+              backgroundColor: "#fee",
+              border: "1px solid #fcc",
+              color: "#c33",
+              borderRadius: "8px",
+              fontFamily: "Inter, sans-serif",
+              fontSize: "12px",
+            }}
+          >
             {error}
           </div>
         )}
 
+        {/* Loading State */}
         {isLoading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, minmax(263px, 1fr))",
+              gap: "23px",
+            }}
+          >
+            {[...Array(6)].map((_, i) => (
               <div
                 key={i}
-                className="bg-white border-2 border-gray-900 rounded overflow-hidden"
+                style={{
+                  backgroundColor: "#fbfbfb",
+                  borderRadius: "11px",
+                  padding: "19px",
+                  boxShadow: "0px 0px 3px 0px rgba(0,0,0,0.15)",
+                }}
               >
-                <div className="bg-gray-200 aspect-4/3 animate-pulse"></div>
-                <div className="p-4">
-                  <div className="h-6 bg-gray-200 rounded mb-2 animate-pulse"></div>
-                  <div className="h-4 bg-gray-200 rounded w-2/3 animate-pulse"></div>
-                </div>
+                <div
+                  style={{
+                    width: "100%",
+                    aspectRatio: "4/3",
+                    backgroundColor: "#e5e5e5",
+                    borderRadius: "8px",
+                    marginBottom: "15px",
+                    animation: "pulse 2s infinite",
+                  }}
+                />
+                <div
+                  style={{
+                    height: "15px",
+                    backgroundColor: "#e5e5e5",
+                    borderRadius: "4px",
+                    marginBottom: "9px",
+                    animation: "pulse 2s infinite",
+                  }}
+                />
+                <div
+                  style={{
+                    height: "15px",
+                    backgroundColor: "#e5e5e5",
+                    borderRadius: "4px",
+                    width: "75%",
+                    animation: "pulse 2s infinite",
+                  }}
+                />
               </div>
             ))}
           </div>
         ) : items.length === 0 ? (
-          <div className="text-center py-16">
-            <Heart className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">
+          /* Empty State */
+          <div style={{ textAlign: "center", padding: "75px 0" }}>
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "60px",
+                height: "60px",
+                marginBottom: "23px",
+              }}
+            >
+              <Heart
+                style={{ width: "60px", height: "60px", color: "#9c9c9c" }}
+              />
+            </div>
+            <h2
+              style={{
+                fontSize: "24px",
+                fontWeight: 600,
+                fontFamily: "Poppins, sans-serif",
+                color: "#0d1b2a",
+                marginBottom: "11px",
+              }}
+            >
               Your wishlist is empty
             </h2>
-            <p className="text-gray-600 mb-6">
+            <p
+              style={{
+                fontSize: "13.5px",
+                fontFamily: "Inter, sans-serif",
+                color: "#9c9c9c",
+                marginBottom: "30px",
+              }}
+            >
               Start adding products to your wishlist to keep track of items you
               love
             </p>
             <Link
               href="/marketplace"
-              className="inline-block px-6 py-3 bg-gray-900 text-white rounded hover:bg-gray-800"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: "#1e3a8a",
+                color: "white",
+                padding: "11px 30px",
+                borderRadius: "8px",
+                fontSize: "13.5px",
+                fontWeight: 600,
+                fontFamily: "Poppins, sans-serif",
+                textDecoration: "none",
+                transition: "background-color 0.2s",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "#152d6b";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "#1e3a8a";
+              }}
             >
               Browse Products
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          /* Product Grid */
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, minmax(263px, 1fr))",
+              gap: "23px",
+            }}
+          >
             {items.map((item) => {
               const priceChange = getPriceChange(item);
+              const isAvailable = item.product.status === "active";
+
               return (
                 <div
                   key={item.id}
-                  className="bg-white border-2 border-gray-900 rounded overflow-hidden"
+                  style={{
+                    backgroundColor: "#fbfbfb",
+                    borderRadius: "11px",
+                    padding: "19px",
+                    boxShadow: "0px 0px 3px 0px rgba(0,0,0,0.15)",
+                    position: "relative",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
                 >
                   {/* Product Image */}
-                  <Link href={`/product/${item.product.slug}`}>
-                    <div className="relative bg-gray-100 aspect-4/3 flex items-center justify-center overflow-hidden group">
+                  <Link
+                    href={`/product/${item.product.slug}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <div
+                      style={{
+                        position: "relative",
+                        width: "100%",
+                        aspectRatio: "4/3",
+                        backgroundColor: "#f0f0f0",
+                        borderRadius: "8px",
+                        overflow: "hidden",
+                        marginBottom: "15px",
+                      }}
+                    >
                       {item.product.imageUrl ? (
                         <img
                           src={item.product.imageUrl}
                           alt={item.product.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                            transition: "transform 0.3s",
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.transform = "scale(1.05)";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.transform = "scale(1)";
+                          }}
                         />
                       ) : (
-                        <span className="text-gray-400 text-sm">No Image</span>
+                        <div
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            color: "#9c9c9c",
+                            fontFamily: "Inter, sans-serif",
+                            fontSize: "16px",
+                          }}
+                        >
+                          No Image
+                        </div>
                       )}
-
-                      {item.product.status !== "active" && (
-                        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                          <span className="text-white font-bold">
+                      {!isAvailable && (
+                        <div
+                          style={{
+                            position: "absolute",
+                            inset: 0,
+                            backgroundColor: "rgba(0, 0, 0, 0.6)",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <span
+                            style={{
+                              color: "white",
+                              fontSize: "20px",
+                              fontWeight: 600,
+                              fontFamily: "Poppins, sans-serif",
+                            }}
+                          >
                             Not Available
                           </span>
                         </div>
@@ -162,72 +360,222 @@ export default function WishlistPage() {
                     </div>
                   </Link>
 
+                  {/* Remove & Heart Buttons */}
                   <button
                     onClick={() => handleRemove(item.product.id)}
-                    disabled={removingId === item.product.id}
-                    className="absolute top-4 left-4 p-2 bg-white border border-gray-900 rounded hover:bg-gray-50 disabled:opacity-50"
+                    disabled={removingId === item.product.id || !isAvailable}
+                    style={{
+                      position: "absolute",
+                      top: "26px",
+                      left: "26px",
+                      backgroundColor: "white",
+                      border: "2px solid #0d1b2a",
+                      borderRadius: "6px",
+                      padding: "6px",
+                      cursor:
+                        removingId === item.product.id ? "wait" : "pointer",
+                      opacity: !isAvailable ? 0.5 : 1,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                    title="Remove from wishlist"
                   >
-                    <Trash2 className="w-4 h-4 text-gray-900" />
-                  </button>
-                  <button className="absolute top-4 right-4 p-2 bg-white rounded hover:bg-gray-50">
-                    <Heart className="w-5 h-5 text-gray-900 fill-gray-900" />
+                    <Trash2 style={{ width: "14px", height: "14px" }} />
                   </button>
 
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "26px",
+                      right: "26px",
+                      backgroundColor: "white",
+                      borderRadius: "6px",
+                      padding: "6px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Heart
+                      style={{
+                        width: "14px",
+                        height: "14px",
+                        fill: "#0d1b2a",
+                        color: "#0d1b2a",
+                      }}
+                    />
+                  </div>
+
                   {/* Product Details */}
-                  <div className="p-4">
-                    <Link href={`/product/${item.product.slug}`}>
-                      <h3 className="font-bold text-gray-900 mb-1 hover:text-blue-600">
+                  <div
+                    style={{
+                      flex: 1,
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <Link
+                      href={`/product/${item.product.slug}`}
+                      style={{ textDecoration: "none", marginBottom: "9px" }}
+                    >
+                      <h3
+                        style={{
+                          fontSize: "15px",
+                          fontWeight: 600,
+                          fontFamily: "Poppins, sans-serif",
+                          color: "#0d1b2a",
+                          margin: 0,
+                          lineHeight: "1.4",
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.color = "#1e3a8a";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.color = "#0d1b2a";
+                        }}
+                      >
                         {item.product.title}
                       </h3>
                     </Link>
-                    <p className="text-sm text-gray-600 mb-3">
-                      {item.product.city}, {item.product.state}
-                    </p>
 
-                    <div className="flex items-baseline gap-2 mb-2">
-                      <span className="text-2xl font-bold text-gray-900">
-                        ₹{item.product.priceAfter?.toLocaleString("en-IN")}
-                      </span>
-                      {item.product.priceBefore &&
-                        item.product.priceBefore > item.product.priceAfter && (
-                          <>
-                            <span className="text-sm text-gray-400 line-through">
-                              ₹
-                              {item.product.priceBefore.toLocaleString("en-IN")}
-                            </span>
-                            <span className="text-sm text-green-600 font-medium">
-                              {item.product.discountPercent}% off
-                            </span>
-                          </>
-                        )}
-                    </div>
-
-                    {priceChange && (
-                      <div
-                        className={`text-xs mb-3 ${
-                          priceChange.isIncrease
-                            ? "text-red-600"
-                            : "text-green-600"
-                        }`}
+                    {/* Location */}
+                    {(item.product.city || item.product.state) && (
+                      <p
+                        style={{
+                          fontSize: "11px",
+                          fontFamily: "Inter, sans-serif",
+                          color: "#9c9c9c",
+                          margin: "0 0 11px 0",
+                        }}
                       >
-                        {priceChange.isIncrease ? "↑" : "↓"}
-                        {Math.abs(priceChange.percent).toFixed(1)}% since added
-                      </div>
+                        {item.product.city}
+                        {item.product.city && item.product.state && ", "}
+                        {item.product.state}
+                      </p>
                     )}
 
-                    {item.product.status === "active" &&
-                    item.product.quantity > 0 ? (
+                    {/* Price */}
+                    <div style={{ marginBottom: "11px" }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "8px",
+                          flexWrap: "wrap",
+                        }}
+                      >
+                        <span
+                          style={{
+                            fontSize: "21px",
+                            fontWeight: 600,
+                            fontFamily: "Poppins, sans-serif",
+                            color: "#0d1b2a",
+                          }}
+                        >
+                          ₹{item.product.priceAfter?.toLocaleString()}
+                        </span>
+                        {item.product.priceBefore &&
+                          item.product.priceBefore >
+                            item.product.priceAfter && (
+                            <>
+                              <span
+                                style={{
+                                  fontSize: "12px",
+                                  fontFamily: "Inter, sans-serif",
+                                  color: "#9c9c9c",
+                                  textDecoration: "line-through",
+                                }}
+                              >
+                                ₹{item.product.priceBefore.toLocaleString()}
+                              </span>
+                              {item.product.discountPercent && (
+                                <span
+                                  style={{
+                                    backgroundColor: "#d4edda",
+                                    color: "#155724",
+                                    fontSize: "11px",
+                                    fontWeight: 600,
+                                    fontFamily: "Inter, sans-serif",
+                                    padding: "3px 8px",
+                                    borderRadius: "5px",
+                                  }}
+                                >
+                                  {item.product.discountPercent}% OFF
+                                </span>
+                              )}
+                            </>
+                          )}
+                      </div>
+
+                      {/* Price Change Since Added */}
+                      {priceChange && (
+                        <p
+                          style={{
+                            fontSize: "11px",
+                            fontFamily: "Inter, sans-serif",
+                            marginTop: "6px",
+                            margin: 0,
+                            color: priceChange.isIncrease
+                              ? "#dc3545"
+                              : "#28a745",
+                          }}
+                        >
+                          {priceChange.isIncrease ? "↑" : "↓"}{" "}
+                          {priceChange.percent.toFixed(1)}% since added
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Action Button */}
+                    {isAvailable ? (
                       <Link
                         href={`/product/${item.product.slug}`}
-                        className="w-full px-4 py-2 bg-gray-900 text-white rounded font-medium hover:bg-gray-800 transition-colors flex items-center justify-center gap-2"
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          gap: "10px",
+                          width: "100%",
+                          backgroundColor: "#1e3a8a",
+                          color: "white",
+                          padding: "12px",
+                          borderRadius: "11px",
+                          fontSize: "16px",
+                          fontWeight: 600,
+                          fontFamily: "Poppins, sans-serif",
+                          textDecoration: "none",
+                          marginTop: "auto",
+                          transition: "background-color 0.2s",
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = "#152d6b";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = "#1e3a8a";
+                        }}
                       >
-                        <ShoppingCart className="w-4 h-4" />
+                        <ShoppingCart
+                          style={{ width: "18px", height: "18px" }}
+                        />
                         View Product
                       </Link>
                     ) : (
                       <button
                         disabled
-                        className="w-full px-4 py-2 bg-gray-300 text-gray-500 rounded font-medium cursor-not-allowed"
+                        style={{
+                          width: "100%",
+                          backgroundColor: "#e5e5e5",
+                          color: "#9c9c9c",
+                          padding: "12px",
+                          borderRadius: "11px",
+                          border: "none",
+                          fontSize: "16px",
+                          fontWeight: 600,
+                          fontFamily: "Poppins, sans-serif",
+                          cursor: "not-allowed",
+                          marginTop: "auto",
+                        }}
                       >
                         Not Available
                       </button>
@@ -239,6 +587,14 @@ export default function WishlistPage() {
           </div>
         )}
       </div>
+
+      {/* Keyframes for pulse animation */}
+      <style>{`
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+      `}</style>
     </div>
   );
 }

@@ -8,7 +8,7 @@ import FAQSection from "@/components/supplier-landing/FAQSection";
 
 export default function SupplierDashboardPage() {
   return (
-    <div className="w-full mx-auto p-10">
+    <div className="w-full mx-auto">
       <HeroSection />
       <WhyChooseSection />
       <TestimonialsSection />

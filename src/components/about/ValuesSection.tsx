@@ -1,103 +1,78 @@
+import { Shield, Lightbulb, Leaf, Globe } from "lucide-react";
+
 export default function ValuesSection() {
+  const values = [
+    {
+      icon: Shield,
+      title: "Trust & Transparency",
+      description:
+        "Every transaction is executed with complete transparency and accountability",
+    },
+    {
+      icon: Lightbulb,
+      title: "Innovation First",
+      description:
+        "We continuously push boundaries to create better solutions for surplus trade",
+    },
+    {
+      icon: Leaf,
+      title: "Sustainability",
+      description:
+        "Reducing waste and environmental impact through smarter commerce",
+    },
+    {
+      icon: Globe,
+      title: "Global Impact",
+      description:
+        "Connecting businesses worldwide to create lasting positive change",
+    },
+  ];
+
   return (
-    <section className="bg-white py-20 px-6">
-      <div className="max-w-6xl mx-auto">
-        <p className="text-sm text-gray-600 mb-4">Our Values</p>
-        <h2 className="text-4xl font-bold text-gray-900 mb-4">
-          What Drives Us Forward
-        </h2>
-        <p className="text-xl text-gray-600 mb-12">
-          Our core values guide every decision we make and every relationship we
-          build
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="bg-white p-6 border-2 border-gray-900 rounded-lg">
-            <svg
-              className="w-8 h-8 text-gray-900 mb-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-              />
-            </svg>
-            <h3 className="text-lg font-bold text-gray-900 mb-2">
-              Cost & Transparency
-            </h3>
-            <p className="text-gray-600 text-sm">
-              Every transaction is executed with complete transparency and
-              accountability
+    <section className="w-full bg-[#EEFBF6] py-16">
+      <div className="w-full max-w-full mx-auto px-4 sm:px-6 lg:px-8">
+        <div>
+          <div className="relative w-full flex flex-col items-center">
+            {/* Title */}
+            <h2 className="font-poppins font-bold text-3xl sm:text-4xl lg:text-[52px] leading-tight lg:leading-[78px] text-center text-[#0d1b2a] mb-4">
+              What Drives Us <span className="text-[#2ec096]">Forward</span>
+            </h2>
+
+            {/* Subtitle */}
+            <p className="font-inter font-semibold text-base sm:text-lg lg:text-[20px] leading-relaxed lg:leading-[30px] text-center text-[#868181] max-w-3xl mb-16">
+              Our core values guide every decision we make and every
+              relationship we build
             </p>
-          </div>
-          <div className="bg-white p-6 border-2 border-gray-900 rounded-lg">
-            <svg
-              className="w-8 h-8 text-gray-900 mb-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-              />
-            </svg>
-            <h3 className="text-lg font-bold text-gray-900 mb-2">
-              Innovation First
-            </h3>
-            <p className="text-gray-600 text-sm">
-              We harness AI and data to drive continuous improvement and deliver
-              value
-            </p>
-          </div>
-          <div className="bg-white p-6 border-2 border-gray-900 rounded-lg">
-            <svg
-              className="w-8 h-8 text-gray-900 mb-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-              />
-            </svg>
-            <h3 className="text-lg font-bold text-gray-900 mb-2">
-              Sustainability
-            </h3>
-            <p className="text-gray-600 text-sm">
-              Reducing waste and promoting circular economy practices in every
-              transaction
-            </p>
-          </div>
-          <div className="bg-white p-6 border-2 border-gray-900 rounded-lg">
-            <svg
-              className="w-8 h-8 text-gray-900 mb-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-            <h3 className="text-lg font-bold text-gray-900 mb-2">
-              Global Reach
-            </h3>
-            <p className="text-gray-600 text-sm">
-              Connecting suppliers and buyers across borders to create a truly
-              global marketplace
-            </p>
+
+            {/* Values Grid */}
+            <div className="w-full max-w-7xl mx-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {values.map((value, index) => {
+                  const Icon = value.icon;
+                  return (
+                    <div
+                      key={index}
+                      className="bg-[#2aae7a] rounded-[30px] p-8 min-h-[285px] flex flex-col items-center justify-center text-center"
+                    >
+                      {/* Icon Circle */}
+                      <div className="w-[70px] h-[70px] bg-[#eeffef] rounded-full flex items-center justify-center mb-6">
+                        <Icon className="w-[40px] h-[40px] text-[#2aae7a]" />
+                      </div>
+
+                      {/* Title */}
+                      <h3 className="font-inter font-semibold text-[22px] leading-[33px] text-[#022778] mb-3">
+                        {value.title}
+                      </h3>
+
+                      {/* Description */}
+                      <p className="font-inter font-medium text-[16px] leading-[24px] text-white">
+                        {value.description}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
       </div>

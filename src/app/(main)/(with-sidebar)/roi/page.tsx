@@ -8,41 +8,79 @@ export default function ROIPage() {
 
   return (
     <div className="bg-white min-h-screen">
-      <div className="max-w-full mx-auto">
+      <div className="max-w-full mx-auto px-15 py-6">
         {/* Header */}
-        <div className="text-center mb-8 px-6 py-14">
-          <div className="inline-flex items-center gap-2 px-4 py-1 bg-gray-100 border border-gray-900 rounded-full mb-4">
+        <div className="relative bg-white rounded-[15px] shadow-[0px_1px_5px_0px_rgba(24,181,34,0.25)] mb-6 py-[23px] px-[38px] h-[164px]">
+          <div
+            className="absolute left-[38px] top-[23px] w-[56px] h-[56px] rounded-[8px] p-[11px] flex items-center justify-center"
+            style={{
+              backgroundImage:
+                "linear-gradient(-49.04957794666714deg, rgba(55, 195, 220, 1) 1.0683%, rgba(13, 158, 156, 1) 80.051%)",
+            }}
+          >
             <svg
-              className="w-4 h-4 text-gray-900"
-              fill="none"
-              stroke="currentColor"
+              className="w-[34px] h-[34px]"
               viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
             >
               <path
+                d="M9 2H15C16.1046 2 17 2.89543 17 4V20C17 21.1046 16.1046 22 15 22H9C7.89543 22 7 21.1046 7 20V4C7 2.89543 7.89543 2 9 2Z"
+                stroke="white"
+                strokeWidth="1.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+              />
+              <path
+                d="M10 18H14"
+                stroke="white"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M11 5H13"
+                stroke="white"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
-            <span className="text-sm font-medium text-gray-900">
-              ROI Calculator
-            </span>
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-3">
+          <h1
+            className="absolute left-[113px] top-[31px] text-[27px] font-semibold text-[#0d1b2a]"
+            style={{ fontFamily: "Poppins, sans-serif" }}
+          >
             ROI Calculator
           </h1>
-          <p className="text-lg text-gray-600">
-            Calculate your return on investment for buying or selling excess
-            inventory via Zeerostock
+          <p
+            className="absolute left-[38px] top-[98px] text-[18px] font-medium text-[#9c9c9c] w-[679px]"
+            style={{ fontFamily: "Inter, sans-serif" }}
+          >
+            Calculate your return on investment for buying or selling surplus
+            inventory on Zeerostocks
           </p>
         </div>
 
-        <div className="bg-black h-0.5 mb-12" />
-
         {/* Calculator */}
-        <div className="bg-white px-6 py-8 border-2 border-gray-900 rounded mb-12 max-w-7xl mx-auto">
+        <div className="mb-9">
           <Calculator type={activeTab} />
+        </div>
+
+        {/* Info Section Title */}
+        <div className="text-center mb-6">
+          <h2
+            className="text-[27px] font-semibold text-[#0d1b2a] mb-[11px]"
+            style={{ fontFamily: "Poppins, sans-serif" }}
+          >
+            Understanding ROI Calculations
+          </h2>
+          <p
+            className="text-[15px] font-medium text-[#9c9c9c]"
+            style={{ fontFamily: "Inter, sans-serif" }}
+          >
+            Learn how our calculator helps you make informed decisions
+          </p>
         </div>
 
         {/* Info Section */}

@@ -3,13 +3,15 @@
 import { useEffect, useState } from "react";
 import {
   Package,
-  Target,
+  MessageSquarePlus,
   TrendingUp,
   Clock,
   Plus,
   FileText,
   DollarSign,
   Eye,
+  Star,
+  Send,
 } from "lucide-react";
 import Link from "next/link";
 import {
@@ -72,7 +74,7 @@ export default function SupplierDashboard() {
   // Show role error if user is not in supplier mode
   if (roleError) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen bg-[#EEFBF6] flex items-center justify-center">
         <div className="text-center max-w-md p-6">
           <Package className="w-16 h-16 text-gray-400 mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-gray-900 mb-2">
@@ -139,135 +141,175 @@ export default function SupplierDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      <div className="w-full mx-auto p-6">
-        {/* Welcome Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Welcome back, {user?.companyName || user?.firstName}
-          </h1>
-          <p className="text-sm text-gray-600">
-            Here&apos;s your business overview
-          </p>
-          <p className="text-xs text-gray-500 mt-1">Last refreshed just now</p>
-        </div>
+    <div className="min-h-screen bg-[#EEFBF6]">
+      <div className="max-w-[1440px] mx-auto px-20 py-16">
+        <div className="flex justify-between">
+          {/* Welcome Header */}
+          <div className="mb-6">
+            <h1
+              className="text-[36px] font-semibold text-[#0d1b2a] mb-2"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
+              Welcome Back, {user?.companyName || user?.firstName}
+            </h1>
+            <p
+              className="text-2xl font-medium text-[#9c9c9c]"
+              style={{ fontFamily: "Inter, sans-serif" }}
+            >
+              Here&apos;s your business overview
+            </p>
+          </div>
 
-        {/* Action Buttons */}
-        <div className="flex gap-4 mb-8">
-          <Link
-            href="/supplier/inventory"
-            className="px-6 py-3 bg-green-600 text-white text-sm font-medium flex items-center gap-2 hover:bg-green-700 transition-colors"
-          >
-            <Plus className="w-4 h-4" />
-            Add Product
-          </Link>
-          <Link
-            href="/supplier/rfq"
-            className="px-6 py-3 bg-white border-2 border-gray-900 text-gray-900 text-sm font-medium flex items-center gap-2 hover:bg-gray-50 transition-colors"
-          >
-            <FileText className="w-4 h-4" />
-            Browse RFQs
-          </Link>
+          {/* Add Product Button */}
+          <div className="mb-8">
+            <Link
+              href="/supplier/inventory"
+              className="inline-flex items-center gap-2.5 px-5 py-[15px] bg-[#2aae7a] text-white text-xl font-semibold rounded-[15px] hover:bg-[#25996b] transition-colors"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
+              <Plus className="w-6 h-6" />
+              Add Product
+            </Link>
+          </div>
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {/* Active Listings */}
-          <div className="bg-white border-2 border-gray-900 p-6">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-gray-100 border-2 border-gray-900 flex items-center justify-center">
-                  <Package className="w-6 h-6 text-gray-900" />
-                </div>
-                <div>
-                  <p className="text-xs text-gray-600">Active Listings</p>
-                  <p className="text-3xl font-bold text-gray-900">
-                    {stats.listings.active_listings}
-                  </p>
-                </div>
-              </div>
-            </div>
-            <p className="text-xs text-blue-600">
+          <div
+            className="bg-white rounded-[20px] p-6 relative overflow-hidden"
+            style={{ boxShadow: "0px 0px 6px 0px rgba(24, 181, 34, 0.25)" }}
+          >
+            <p
+              className="text-xl font-medium text-[#9c9c9c] mb-2"
+              style={{ fontFamily: "Inter, sans-serif" }}
+            >
+              Active Listings
+            </p>
+            <p
+              className="text-[32px] font-semibold text-[#0d1b2a] mb-2"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
+              {stats.listings.active_listings}
+            </p>
+            <p
+              className="text-sm font-medium text-[#9c9c9c]"
+              style={{ fontFamily: "Inter, sans-serif" }}
+            >
               {formatNumber(stats.listings.total_views)} total views
             </p>
+            <div className="absolute right-6 top-1/2 -translate-y-1/2 w-[58px] h-[59px] flex items-center justify-center">
+              <Package className="w-8 h-8 text-[#2aae7a]" strokeWidth={1.5} />
+            </div>
           </div>
 
-          {/* Total Orders */}
-          <div className="bg-white border-2 border-gray-900 p-6">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-gray-100 border-2 border-gray-900 flex items-center justify-center">
-                  <Target className="w-6 h-6 text-gray-900" />
-                </div>
-                <div>
-                  <p className="text-xs text-gray-600">Total Orders</p>
-                  <p className="text-3xl font-bold text-gray-900">
-                    {stats.orders.total_orders}
-                  </p>
-                </div>
-              </div>
-            </div>
-            <p className="text-xs text-blue-600">
-              {stats.orders.delivered_orders} delivered
+          {/* RFQ Matches */}
+          <div
+            className="bg-white rounded-[20px] p-6 relative overflow-hidden"
+            style={{ boxShadow: "0px 0px 6px 0px rgba(24, 181, 34, 0.25)" }}
+          >
+            <p
+              className="text-xl font-medium text-[#9c9c9c] mb-2"
+              style={{ fontFamily: "Inter, sans-serif" }}
+            >
+              RFQ Matches
             </p>
+            <p
+              className="text-[32px] font-semibold text-[#0d1b2a] mb-2"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
+              5
+            </p>
+            <p
+              className="text-sm font-medium text-[#9c9c9c]"
+              style={{ fontFamily: "Inter, sans-serif" }}
+            >
+              Processing
+            </p>
+            <div className="absolute right-6 top-1/2 -translate-y-1/2 w-[60px] h-[60px] bg-[#dbeafe] rounded-full flex items-center justify-center">
+              <MessageSquarePlus
+                className="w-[30px] h-[30px] text-[#3b82f6]"
+                strokeWidth={1.5}
+              />
+            </div>
           </div>
 
           {/* Monthly Revenue */}
-          <div className="bg-white border-2 border-gray-900 p-6">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-gray-100 border-2 border-gray-900 flex items-center justify-center">
-                  <DollarSign className="w-6 h-6 text-gray-900" />
-                </div>
-                <div>
-                  <p className="text-xs text-gray-600">This Month</p>
-                  <p className="text-3xl font-bold text-gray-900">
-                    {formatCurrency(stats.orders.revenue_this_month)}
-                  </p>
-                </div>
-              </div>
-            </div>
-            <p className="text-xs text-gray-600">
-              Total: {formatCurrency(stats.orders.total_revenue)}
+          <div
+            className="bg-white rounded-[20px] p-6 relative overflow-hidden"
+            style={{ boxShadow: "0px 0px 6px 0px rgba(24, 181, 34, 0.25)" }}
+          >
+            <p
+              className="text-xl font-medium text-[#9c9c9c] mb-2"
+              style={{ fontFamily: "Inter, sans-serif" }}
+            >
+              Monthly Revenue
             </p>
+            <p
+              className="text-[32px] font-semibold text-[#2aae7a] mb-2"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
+              {formatCurrency(stats.orders.revenue_this_month)}
+            </p>
+            <p
+              className="text-sm font-medium text-[#2aae7a]"
+              style={{ fontFamily: "Inter, sans-serif" }}
+            >
+              +12% from last month
+            </p>
+            <div className="absolute right-6 top-1/2 -translate-y-1/2 w-[60px] h-[60px] bg-[#eeffef] rounded-full flex items-center justify-center">
+              <TrendingUp
+                className="w-[30px] h-[30px] text-[#2aae7a]"
+                strokeWidth={1.5}
+              />
+            </div>
           </div>
 
           {/* Pending Orders */}
-          <div className="bg-white border-2 border-gray-900 p-6">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-gray-100 border-2 border-gray-900 flex items-center justify-center">
-                  <Clock className="w-6 h-6 text-gray-900" />
-                </div>
-                <div>
-                  <p className="text-xs text-gray-600">Pending Orders</p>
-                  <p className="text-3xl font-bold text-gray-900">
-                    {stats.orders.pending_orders}
-                  </p>
-                </div>
-              </div>
-            </div>
-            <p className="text-xs text-blue-600">
-              {stats.orders.processing_orders} processing
+          <div
+            className="bg-white rounded-[20px] p-6 relative overflow-hidden"
+            style={{ boxShadow: "0px 0px 6px 0px rgba(24, 181, 34, 0.25)" }}
+          >
+            <p
+              className="text-xl font-medium text-[#9c9c9c] mb-2"
+              style={{ fontFamily: "Inter, sans-serif" }}
+            >
+              Pending Orders
             </p>
+            <p
+              className="text-[32px] font-semibold text-[#eab308] mb-2"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
+              {stats.orders.pending_orders}
+            </p>
+            <p
+              className="text-sm font-medium text-[#9c9c9c]"
+              style={{ fontFamily: "Inter, sans-serif" }}
+            >
+              Last 30 days
+            </p>
+            <div className="absolute right-6 top-1/2 -translate-y-1/2 w-[60px] h-[60px] bg-[#fef9c3] rounded-full flex items-center justify-center">
+              <Clock
+                className="w-[30px] h-[30px] text-[#eab308]"
+                strokeWidth={1.5}
+              />
+            </div>
           </div>
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Recent Activity */}
-          <div className="lg:col-span-2 bg-white border-2 border-gray-900 p-6">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-lg font-bold text-gray-900">
-                Recent Listings
-              </h2>
-              <Link
-                href="/supplier/listings"
-                className="text-xs text-blue-600 hover:underline"
-              >
-                View All
-              </Link>
-            </div>
+        <div className="grid grid-cols-1 lg:grid-cols-[825px_1fr] gap-6">
+          {/* Active Listings Performance */}
+          <div
+            className="bg-white rounded-[20px] p-6"
+            style={{ boxShadow: "0px 0px 6px 0px rgba(0, 0, 0, 0.25)" }}
+          >
+            <h2
+              className="text-2xl font-medium text-[#0d1b2a] mb-8"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
+              Active Listings Performance
+            </h2>
 
             {stats.recentActivity.length === 0 ? (
               <div className="text-center py-12">
@@ -281,13 +323,14 @@ export default function SupplierDashboard() {
                 </Link>
               </div>
             ) : (
-              <div className="space-y-4">
-                {stats.recentActivity.map((listing) => (
+              <div className="space-y-6">
+                {stats.recentActivity.slice(0, 3).map((listing) => (
                   <div
                     key={listing.id}
-                    className="flex items-center gap-4 p-4 border-2 border-gray-900"
+                    className="bg-[#fbfbfb] rounded-[20px] p-4 flex items-center gap-4 relative"
+                    style={{ boxShadow: "0px 0px 4px 0px rgba(0, 0, 0, 0.25)" }}
                   >
-                    <div className="w-24 h-24 bg-gray-200 border-2 border-gray-900 flex items-center justify-center shrink-0 overflow-hidden">
+                    <div className="w-[161px] h-[121px] bg-gray-200 rounded-[10px] flex items-center justify-center shrink-0 overflow-hidden">
                       {listing.image_url ? (
                         <img
                           src={listing.image_url}
@@ -299,31 +342,59 @@ export default function SupplierDashboard() {
                       )}
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-sm font-bold text-blue-600 mb-1 line-clamp-1">
+                      <h3
+                        className="text-[22px] font-medium text-black mb-2 line-clamp-1"
+                        style={{ fontFamily: "Inter, sans-serif" }}
+                      >
                         {listing.title}
                       </h3>
-                      <p className="text-xs text-gray-600 mb-2">
-                        Listed{" "}
-                        {new Date(listing.created_at).toLocaleDateString()}
-                      </p>
-                      <div className="flex items-center gap-4 text-xs text-gray-600">
-                        <span className="flex items-center gap-1">
-                          <Eye className="w-3 h-3" />
+                      <div className="flex items-center gap-2 mb-3">
+                        <span
+                          className="bg-[#eeffef] px-3 py-1 rounded-full text-[15px] font-medium text-[#2aae7a]"
+                          style={{ fontFamily: "Poppins, sans-serif" }}
+                        >
+                          Electronics
+                        </span>
+                        <span
+                          className="bg-[#eeffef] px-3 py-1 rounded-full text-[15px] font-medium text-[#2aae7a]"
+                          style={{ fontFamily: "Poppins, sans-serif" }}
+                        >
+                          Active
+                        </span>
+                      </div>
+                      <div
+                        className="flex items-center gap-6 text-base text-[#9c9c9c]"
+                        style={{ fontFamily: "Inter, sans-serif" }}
+                      >
+                        <span className="font-medium">
                           {listing.views_count} Views
                         </span>
-                        <span>{listing.watchers_count} Watching</span>
+                        <span className="font-medium">
+                          {listing.watchers_count} Watching
+                        </span>
+                        <span className="font-medium">12 Bids</span>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <p className="text-lg font-bold text-gray-900 mb-1">
+                    <div className="text-right self-start pt-2">
+                      <p
+                        className="text-[30px] font-semibold text-black mb-2"
+                        style={{ fontFamily: "Inter, sans-serif" }}
+                      >
                         {formatCurrency(listing.price_after)}
                       </p>
-                      <Link
-                        href={`/supplier/listings/${listing.id}/edit`}
-                        className="text-xs text-blue-600 hover:underline"
+                      <p
+                        className="text-xl font-medium text-[#9c9c9c] mb-8"
+                        style={{ fontFamily: "Inter, sans-serif" }}
                       >
-                        Edit
-                      </Link>
+                        600 units
+                      </p>
+                      <div
+                        className="flex items-center gap-2 text-[22px] text-[#0d1b2a]"
+                        style={{ fontFamily: "Poppins, sans-serif" }}
+                      >
+                        <Clock className="w-6 h-6" />
+                        <span className="font-medium">3d 14h</span>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -333,64 +404,119 @@ export default function SupplierDashboard() {
 
           {/* Right Sidebar */}
           <div className="space-y-6">
-            {/* Quick Stats */}
-            <div className="bg-white border-2 border-gray-900 p-6">
-              <h3 className="text-lg font-bold text-gray-900 mb-4">
-                Quick Stats
+            {/* Performance Insights */}
+            <div
+              className="bg-white rounded-[20px] p-6"
+              style={{ boxShadow: "0px 0px 6px 0px rgba(0, 0, 0, 0.25)" }}
+            >
+              <h3
+                className="text-2xl font-medium text-[#0d1b2a] mb-6"
+                style={{ fontFamily: "Poppins, sans-serif" }}
+              >
+                Performance Insights
               </h3>
-              <div className="space-y-3">
-                <div className="flex justify-between">
-                  <span className="text-xs text-gray-600">Total Listings</span>
-                  <span className="text-xs font-bold text-gray-900">
-                    {stats.listings.total_listings}
+
+              {/* Rating Display */}
+              <div className="flex items-center justify-center mb-6">
+                <p
+                  className="text-[39px] font-medium text-[#2aae7a]"
+                  style={{ fontFamily: "Poppins, sans-serif" }}
+                >
+                  4.8
+                </p>
+                <Star className="w-9 h-9 text-[#2aae7a] fill-[#2aae7a] ml-2" />
+              </div>
+              <p
+                className="text-xl font-medium text-[#9c9c9c] text-center mb-8"
+                style={{ fontFamily: "Inter, sans-serif" }}
+              >
+                Supplier Rating
+              </p>
+
+              {/* Metrics */}
+              <div className="space-y-4">
+                <div className="flex justify-between items-center">
+                  <span
+                    className="text-xl font-medium text-[#0d1b2a]"
+                    style={{ fontFamily: "Inter, sans-serif" }}
+                  >
+                    Response Rate
+                  </span>
+                  <span
+                    className="text-xl font-medium text-[#2aae7a]"
+                    style={{ fontFamily: "Inter, sans-serif" }}
+                  >
+                    98%
                   </span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-xs text-gray-600">Sold Listings</span>
-                  <span className="text-xs font-bold text-green-600">
-                    {stats.listings.sold_listings}
+                <div className="flex justify-between items-center">
+                  <span
+                    className="text-xl font-medium text-[#0d1b2a]"
+                    style={{ fontFamily: "Inter, sans-serif" }}
+                  >
+                    On-Time Delivery
+                  </span>
+                  <span
+                    className="text-xl font-medium text-[#2aae7a]"
+                    style={{ fontFamily: "Inter, sans-serif" }}
+                  >
+                    96%
                   </span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-xs text-gray-600">Total Watchers</span>
-                  <span className="text-xs font-bold text-blue-600">
-                    {stats.listings.total_watchers}
+                <div className="flex justify-between items-center">
+                  <span
+                    className="text-xl font-medium text-[#0d1b2a]"
+                    style={{ fontFamily: "Inter, sans-serif" }}
+                  >
+                    Quote Win Rate
                   </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-xs text-gray-600">Inquiries</span>
-                  <span className="text-xs font-bold text-purple-600">
-                    {stats.listings.total_inquiries}
+                  <span
+                    className="text-xl font-medium text-[#2aae7a]"
+                    style={{ fontFamily: "Inter, sans-serif" }}
+                  >
+                    36%
                   </span>
                 </div>
               </div>
             </div>
 
-            {/* Quick Actions */}
-            <div className="bg-white border-2 border-gray-900 p-6">
-              <h3 className="text-lg font-bold text-gray-900 mb-4">
-                Quick Actions
+            {/* Top RFQ Match */}
+            <div
+              className="bg-white rounded-[20px] p-6"
+              style={{ boxShadow: "0px 0px 6px 0px rgba(0, 0, 0, 0.25)" }}
+            >
+              <h3
+                className="text-2xl font-medium text-[#0d1b2a] mb-6"
+                style={{ fontFamily: "Poppins, sans-serif" }}
+              >
+                Top RFQ Match
               </h3>
-              <div className="space-y-2">
-                <Link
-                  href="/supplier/listings"
-                  className="block w-full py-2 px-4 text-sm border-2 border-gray-900 hover:bg-gray-100 transition-colors text-center"
-                >
-                  Manage Listings
-                </Link>
-                <Link
-                  href="/supplier/orders"
-                  className="block w-full py-2 px-4 text-sm border-2 border-gray-900 hover:bg-gray-100 transition-colors text-center"
-                >
-                  View Orders
-                </Link>
-                <Link
-                  href="/supplier/analytics"
-                  className="block w-full py-2 px-4 text-sm bg-gray-900 text-white hover:bg-gray-800 transition-colors text-center"
-                >
-                  View Analytics
-                </Link>
-              </div>
+              <p
+                className="text-xl font-medium text-[#0d1b2a] mb-1"
+                style={{ fontFamily: "Inter, sans-serif" }}
+              >
+                Industrial Electronic
+              </p>
+              <p
+                className="text-base font-medium text-[#9c9c9c] mb-4"
+                style={{ fontFamily: "Inter, sans-serif" }}
+              >
+                95% Match
+              </p>
+              <p
+                className="text-2xl font-semibold text-black mb-6"
+                style={{ fontFamily: "Inter, sans-serif" }}
+              >
+                ₹180,000
+              </p>
+              <Link
+                href="/supplier/rfq"
+                className="flex items-center justify-center gap-2.5 w-full py-[15px] bg-[#1e3a8a] text-white text-[15px] font-semibold rounded-xl hover:bg-[#1e40af] transition-colors"
+                style={{ fontFamily: "Poppins, sans-serif" }}
+              >
+                <Send className="w-5 h-5" />
+                Submit Quote
+              </Link>
             </div>
           </div>
         </div>

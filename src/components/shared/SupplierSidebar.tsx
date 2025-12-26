@@ -12,6 +12,15 @@ import {
   Menu,
   X,
   ShoppingBag,
+  Zap,
+  ShoppingCart,
+  CreditCard,
+  Eye,
+  ShieldCheck,
+  LogOut,
+  AlertCircle,
+  Mail,
+  ChevronLeft,
 } from "lucide-react";
 
 export default function SupplierSidebar() {
@@ -40,217 +49,223 @@ export default function SupplierSidebar() {
 
       {/* Sidebar */}
       <aside
-        className={`fixed lg:sticky top-0 left-0 h-screen lg:h-[calc(100vh-73px)] w-64 bg-white border-r border-gray-200 z-30 transform transition-transform duration-300 ease-in-out ${
+        className={`fixed lg:sticky top-0 left-0 h-screen lg:h-[calc(100vh-73px)] w-[263px] bg-white shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] z-30 transform transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } lg:translate-x-0 lg:top-[73px] overflow-y-auto`}
       >
-        <div className="p-6">
-          <h1 className="text-lg font-semibold text-gray-900 mb-6 pb-4 border-b border-gray-200">
-            Supplier Dashboard
+        {/* Header */}
+        <div className="h-[60px] border-b border-[#8B8B8B] flex items-center justify-center relative">
+          <h1
+            style={{ fontFamily: "Poppins, sans-serif" }}
+            className="font-medium text-[20px] text-[#1E3A8A] leading-normal"
+          >
+            Supplier Menu
           </h1>
+          <button className="absolute right-[15px] top-1/2 -translate-y-1/2">
+            <ChevronLeft className="w-5 h-5 text-gray-600" />
+          </button>
         </div>
 
-        <nav className="px-6 pb-24">
+        <nav className="px-1 pt-5 pb-[135px]">
           {/* INVENTORY MANAGEMENT Section */}
-          <div className="mb-8">
-            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">
-              INVENTORY MANAGEMENT
+          <div className="mb-[23px]">
+            <h3
+              style={{ fontFamily: "Poppins, sans-serif" }}
+              className="font-medium text-[19px] text-black leading-normal mb-[8px] px-[20px]"
+            >
+              Inventory Management
             </h3>
-            <div className="space-y-1">
+            <div className="space-y-0">
               <Link
                 href="/supplier/listings"
-                className={`flex items-center justify-between px-3 py-2 rounded text-sm ${
+                className={`flex items-center gap-[15px] px-[19px] py-[15px] rounded-[9px] relative ${
                   isActive("/supplier/listings")
-                    ? "bg-gray-100 text-gray-900 font-medium"
-                    : "text-gray-900 hover:bg-gray-100"
+                    ? "bg-[#EEFFEF] ml-[4px]"
+                    : "ml-[4px] hover:bg-gray-50"
                 }`}
               >
-                <div className="flex items-center gap-3">
-                  <Package className="w-5 h-5" />
-                  <span className="font-medium">My Listings</span>
-                </div>
+                {isActive("/supplier/listings") && (
+                  <div className="absolute left-[-4px] top-0 w-[4px] h-full bg-[#2AAE7A] rounded-br-[4px] rounded-tr-[4px]" />
+                )}
+                <Package
+                  className={`w-[19px] h-[19px] ${
+                    isActive("/supplier/listings")
+                      ? "text-[#2AAE7A]"
+                      : "text-[#8B8B8B]"
+                  }`}
+                />
+                <span
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                  className={`font-medium text-[17px] leading-normal ${
+                    isActive("/supplier/listings")
+                      ? "text-[#2AAE7A]"
+                      : "text-[#8B8B8B]"
+                  }`}
+                >
+                  My Listings
+                </span>
               </Link>
               <Link
                 href="/supplier/listings/new"
-                className={`flex items-center gap-3 px-3 py-2 rounded text-sm ${
-                  isActive("/supplier/listings/new")
-                    ? "bg-gray-100 text-gray-900 font-medium"
-                    : "text-gray-900 hover:bg-gray-100"
-                }`}
+                className="flex items-center gap-[15px] px-[19px] py-[15px] rounded-[9px] ml-[4px] hover:bg-gray-50"
               >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                <Zap className="w-[19px] h-[19px] text-[#8B8B8B]" />
+                <span
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                  className="font-medium text-[17px] text-[#8B8B8B] leading-normal"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 4v16m8-8H4"
-                  />
-                </svg>
-                <span className="font-medium">Add Product</span>
+                  Quick List
+                </span>
               </Link>
               <Link
                 href="/supplier/analytics"
-                className={`flex items-center gap-3 px-3 py-2 rounded text-sm ${
-                  isActive("/supplier/analytics")
-                    ? "bg-gray-100 text-gray-900 font-medium"
-                    : "text-gray-900 hover:bg-gray-100"
-                }`}
+                className="flex items-center gap-[15px] px-[19px] py-[15px] rounded-[9px] ml-[4px] hover:bg-gray-50"
               >
-                <BarChart3 className="w-5 h-5" />
-                <span className="font-medium">Analytics</span>
+                <BarChart3 className="w-[19px] h-[19px] text-[#8B8B8B]" />
+                <span
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                  className="font-medium text-[17px] text-[#8B8B8B] leading-normal"
+                >
+                  Performance
+                </span>
               </Link>
             </div>
           </div>
 
           {/* SALES & ORDERS Section */}
-          <div className="mb-8">
-            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">
-              SALES & ORDERS
+          <div className="mb-[23px]">
+            <h3
+              style={{ fontFamily: "Poppins, sans-serif" }}
+              className="font-medium text-[19px] text-black leading-normal mb-[8px] px-[20px]"
+            >
+              Sales &amp; Orders
             </h3>
-            <div className="space-y-1">
+            <div className="space-y-0">
               <Link
                 href="/supplier/orders"
-                className={`flex items-center gap-3 px-3 py-2 rounded text-sm ${
-                  isActive("/supplier/orders")
-                    ? "bg-gray-100 text-gray-900 font-medium"
-                    : "text-gray-900 hover:bg-gray-100"
-                }`}
+                className="flex items-center gap-[15px] px-[19px] py-[15px] rounded-[9px] ml-[4px] hover:bg-gray-50"
               >
-                <ShoppingBag className="w-5 h-5" />
-                <span className="font-medium">Orders</span>
+                <ShoppingCart className="w-[19px] h-[19px] text-[#8B8B8B]" />
+                <span
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                  className="font-medium text-[17px] text-[#8B8B8B] leading-normal"
+                >
+                  Order Management
+                </span>
               </Link>
               <Link
                 href="/supplier/dashboard"
-                className={`flex items-center gap-3 px-3 py-2 rounded text-sm ${
-                  isActive("/supplier/dashboard")
-                    ? "bg-gray-100 text-gray-900 font-medium"
-                    : "text-gray-900 hover:bg-gray-100"
-                }`}
+                className="flex items-center gap-[15px] px-[19px] py-[15px] rounded-[9px] ml-[4px] hover:bg-gray-50"
               >
-                <LayoutDashboard className="w-5 h-5" />
-                <span className="font-medium">Dashboard</span>
+                <LayoutDashboard className="w-[19px] h-[19px] text-[#8B8B8B]" />
+                <span
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                  className="font-medium text-[17px] text-[#8B8B8B] leading-normal"
+                >
+                  Dashboard
+                </span>
               </Link>
               <Link
                 href="/supplier/payments"
-                className={`flex items-center gap-3 px-3 py-2 rounded text-sm ${
-                  isActive("/supplier/payments")
-                    ? "bg-gray-100 text-gray-900 font-medium"
-                    : "text-gray-900 hover:bg-gray-100"
-                }`}
+                className="flex items-center gap-[15px] px-[19px] py-[15px] rounded-[9px] ml-[4px] hover:bg-gray-50"
               >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                <CreditCard className="w-[19px] h-[19px] text-[#8B8B8B]" />
+                <span
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                  className="font-medium text-[17px] text-[#8B8B8B] leading-normal"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
-                  />
-                </svg>
-                <span className="font-medium">Payments</span>
+                  Payments
+                </span>
+              </Link>
+              <Link
+                href="/supplier/market-analytics"
+                className="flex items-center gap-[15px] px-[19px] py-[15px] rounded-[9px] ml-[4px] hover:bg-gray-50"
+              >
+                <Eye className="w-[19px] h-[19px] text-[#8B8B8B]" />
+                <span
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                  className="font-medium text-[17px] text-[#8B8B8B] leading-normal"
+                >
+                  Market Analytics
+                </span>
               </Link>
             </div>
           </div>
 
           {/* ACCOUNT Section */}
-          <div className="mb-8">
-            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">
-              ACCOUNT
+          <div className="mb-[23px]">
+            <h3
+              style={{ fontFamily: "Poppins, sans-serif" }}
+              className="font-medium text-[19px] text-black leading-normal mb-[8px] px-[20px]"
+            >
+              Account
             </h3>
-            <div className="space-y-1">
+            <div className="space-y-0">
               <Link
                 href="/supplier/profile"
-                className={`flex items-center gap-3 px-3 py-2 rounded text-sm ${
-                  isActive("/supplier/profile")
-                    ? "bg-gray-100 text-gray-900 font-medium"
-                    : "text-gray-900 hover:bg-gray-100"
-                }`}
+                className="flex items-center gap-[15px] px-[19px] py-[15px] rounded-[9px] ml-[4px] hover:bg-gray-50"
               >
-                <User className="w-5 h-5" />
-                <span className="font-medium">Profile</span>
+                <User className="w-[19px] h-[19px] text-[#8B8B8B]" />
+                <span
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                  className="font-medium text-[17px] text-[#8B8B8B] leading-normal"
+                >
+                  Profile
+                </span>
               </Link>
               <Link
                 href="/supplier/settings"
-                className={`flex items-center gap-3 px-3 py-2 rounded text-sm ${
-                  isActive("/supplier/settings")
-                    ? "bg-gray-100 text-gray-900 font-medium"
-                    : "text-gray-900 hover:bg-gray-100"
-                }`}
+                className="flex items-center gap-[15px] px-[19px] py-[15px] rounded-[9px] ml-[4px] hover:bg-gray-50"
               >
-                <Settings className="w-5 h-5" />
-                <span className="font-medium">Settings</span>
+                <Settings className="w-[19px] h-[19px] text-[#8B8B8B]" />
+                <span
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                  className="font-medium text-[17px] text-[#8B8B8B] leading-normal"
+                >
+                  Settings
+                </span>
               </Link>
               <Link
                 href="/login"
-                className="flex items-center gap-3 px-3 py-2 text-red-600 hover:bg-red-50 rounded text-sm font-medium"
+                className="flex items-center gap-[15px] px-[19px] py-[15px] rounded-[9px] ml-[4px] hover:bg-red-50"
               >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                <LogOut className="w-[19px] h-[19px] text-[#FF0001]" />
+                <span
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                  className="font-medium text-[17px] text-[#FF0001] leading-normal"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-                  />
-                </svg>
-                Sign Out
+                  Sign Out
+                </span>
               </Link>
             </div>
           </div>
         </nav>
 
         {/* Footer Section */}
-        <div className="absolute bottom-0 left-0 right-0 px-6 py-4 border-t border-gray-200 bg-white space-y-2">
+        <div className="absolute bottom-[30px] left-1/2 -translate-x-1/2 w-[255px] bg-[#F0F0F0] rounded-[15px] overflow-hidden">
           <Link
-            href="/support"
-            className="flex items-center gap-3 px-3 py-2 text-sm text-gray-900 hover:bg-gray-100 rounded"
+            href="/supplier/contact"
+            className="flex items-center gap-[11px] px-[23px] py-[15px] hover:bg-gray-200 transition-colors"
           >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+            <AlertCircle className="w-[19px] h-[19px] text-black" />
+            <span
+              style={{ fontFamily: "Inter, sans-serif" }}
+              className="font-medium text-[17px] text-black leading-normal"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-            Help & Support
+              Help &amp; Support
+            </span>
           </Link>
           <Link
             href="/feedback"
-            className="flex items-center gap-3 px-3 py-2 text-sm text-gray-900 hover:bg-gray-100 rounded"
+            className="flex items-center gap-[11px] px-[23px] py-[13px] hover:bg-gray-200 transition-colors"
           >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+            <Mail className="w-[18px] h-[18px] text-black" />
+            <span
+              style={{ fontFamily: "Inter, sans-serif" }}
+              className="font-medium text-[17px] text-black leading-normal"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
-              />
-            </svg>
-            Send Feedback
+              Sent Feedback
+            </span>
           </Link>
         </div>
       </aside>

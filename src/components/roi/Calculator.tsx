@@ -26,128 +26,203 @@ export default function Calculator({ type }: CalculatorProps) {
     platformFees: "",
   });
 
+  const [isCalculated, setIsCalculated] = useState(false);
+
   const calculateBuyerROI = () => {
-    const purchase =
-      parseFloat(buyerInputs.purchasePrice) * parseFloat(buyerInputs.quantity);
-    const retail =
-      parseFloat(buyerInputs.retailPrice) * parseFloat(buyerInputs.quantity);
-    const logistics = parseFloat(buyerInputs.logisticsSavings) || 0;
-    const fees = parseFloat(buyerInputs.platformFees) || 0;
-    const totalSavings = retail - purchase - fees + logistics;
+    const purchasePrice = parseFloat(buyerInputs.purchasePrice) || 0;
+    const quantity = parseFloat(buyerInputs.quantity) || 0;
+    const retailPrice = parseFloat(buyerInputs.retailPrice) || 0;
+    const logisticsSavings = parseFloat(buyerInputs.logisticsSavings) || 0;
+    const procurementSavings = parseFloat(buyerInputs.procurementSavings) || 0;
+    const platformFee = parseFloat(buyerInputs.platformFees) || 0;
+
+    const totalBuyerCost =
+      purchasePrice * quantity -
+      logisticsSavings -
+      procurementSavings +
+      platformFee;
+    const totalExpectedRevenue = retailPrice * quantity;
+    const netProfit = totalExpectedRevenue - totalBuyerCost;
     const roi =
-      purchase > 0 ? ((totalSavings / purchase) * 100).toFixed(1) : "0";
-    return { roi, totalSavings, purchase };
+      totalBuyerCost > 0
+        ? ((netProfit / totalBuyerCost) * 100).toFixed(1)
+        : "0";
+
+    return { roi, netProfit, totalBuyerCost, totalExpectedRevenue };
   };
 
   const calculateSellerROI = () => {
-    const holding = parseFloat(sellerInputs.monthlyHoldingCost) || 0;
-    const reduced = parseFloat(sellerInputs.reducedHoldingCost) || 0;
-    const valueAdded = parseFloat(sellerInputs.marketplaceValueAdded) || 0;
-    const fees = parseFloat(sellerInputs.platformFees) || 0;
-    const netProceeds = reduced + valueAdded - fees;
-    const roi = holding > 0 ? ((netProceeds / holding) * 100).toFixed(1) : "0";
-    return { roi, netProceeds, holding };
+    const purchasePrice = parseFloat(buyerInputs.purchasePrice) || 0;
+    const quantity = parseFloat(buyerInputs.quantity) || 0;
+    const retailPrice = parseFloat(buyerInputs.retailPrice) || 0;
+    const monthlyHoldingCost = parseFloat(sellerInputs.monthlyHoldingCost) || 0;
+    const reducedHoldingCost = parseFloat(sellerInputs.reducedHoldingCost) || 0;
+    const marketplaceValueAdded =
+      parseFloat(sellerInputs.marketplaceValueAdded) || 0;
+    const platformFees = parseFloat(sellerInputs.platformFees) || 0;
+
+    const baselineHoldingCost = monthlyHoldingCost * quantity;
+    const totalSaleValue = retailPrice * quantity;
+    const totalSupplierCost =
+      purchasePrice * quantity +
+      reducedHoldingCost +
+      marketplaceValueAdded +
+      platformFees;
+    const netValueGained = totalSaleValue - totalSupplierCost;
+    const baseCost = purchasePrice * quantity;
+    const roi =
+      baseCost > 0 ? ((netValueGained / baseCost) * 100).toFixed(1) : "0";
+
+    return {
+      roi,
+      netValueGained,
+      totalSupplierCost,
+      totalSaleValue,
+      baselineHoldingCost,
+    };
   };
 
-  if (type === "buyer") {
-    const results = calculateBuyerROI();
+  const handleReset = () => {
+    setBuyerInputs({
+      purchasePrice: "",
+      retailPrice: "",
+      quantity: "",
+      logisticsSavings: "",
+      procurementSavings: "",
+      platformFees: "",
+    });
+    setSellerInputs({
+      monthlyHoldingCost: "",
+      reducedHoldingCost: "",
+      marketplaceValueAdded: "",
+      platformFees: "",
+    });
+    setIsCalculated(false);
+  };
 
-    return (
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Left Side - Input Form */}
-        <div className="space-y-6">
+  const handleCalculate = () => {
+    if (
+      parseFloat(buyerInputs.purchasePrice) > 0 &&
+      parseFloat(buyerInputs.retailPrice) > 0 &&
+      parseFloat(buyerInputs.quantity) > 0
+    ) {
+      setIsCalculated(true);
+    }
+  };
+
+  const results = type === "buyer" ? calculateBuyerROI() : calculateSellerROI();
+  const hasValues =
+    parseFloat(buyerInputs.purchasePrice) > 0 &&
+    parseFloat(buyerInputs.retailPrice) > 0 &&
+    parseFloat(buyerInputs.quantity) > 0;
+
+  return (
+    <div className="flex gap-4 w-full">
+      {/* Left Side - Input Form */}
+      <div className="flex-1 bg-white rounded-[15px] shadow-[0px_2px_5px_0px_rgba(0,0,0,0.25)] p-[23px] relative min-h-[750px]">
+        <h3
+          className="text-[20px] font-medium text-[#0d1b2a] mb-[15px]"
+          style={{ fontFamily: "Poppins, sans-serif" }}
+        >
+          ROI Calculator
+        </h3>
+        <p
+          className="text-[14px] font-medium text-[#9c9c9c] mb-[38px]"
+          style={{ fontFamily: "Inter, sans-serif" }}
+        >
+          Calculate your return on investment for buying or selling surplus
+          inventory on Zeerostocks
+        </p>
+
+        <h4
+          className="text-[17px] font-semibold text-[#0d1b2a] mb-[23px]"
+          style={{ fontFamily: "Poppins, sans-serif" }}
+        >
+          Basic Information
+        </h4>
+
+        <div className="grid grid-cols-2 gap-[16px] mb-[47px]">
           <div>
-            <div className="flex items-center gap-2 mb-1">
-              <svg
-                className="w-5 h-5 text-gray-900"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                />
-              </svg>
-              <h3 className="text-lg font-bold text-gray-900">
-                ROI Calculator
-              </h3>
-            </div>
-            <p className="text-sm text-gray-500 mb-6">
-              Enter your basic information to calculate potential returns
-            </p>
-
-            <div className="space-y-4">
-              <h4 className="text-base font-bold text-gray-900">
-                Basic Information
-              </h4>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm text-gray-700 mb-2">
-                    Purchase Price (per unit)
-                  </label>
-                  <input
-                    type="text"
-                    value={buyerInputs.purchasePrice}
-                    onChange={(e) =>
-                      setBuyerInputs({
-                        ...buyerInputs,
-                        purchasePrice: e.target.value,
-                      })
-                    }
-                    placeholder="e.g., 50"
-                    className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm text-gray-700 mb-2">
-                    Expected Retail Price
-                  </label>
-                  <input
-                    type="text"
-                    value={buyerInputs.retailPrice}
-                    onChange={(e) =>
-                      setBuyerInputs({
-                        ...buyerInputs,
-                        retailPrice: e.target.value,
-                      })
-                    }
-                    placeholder="e.g., 80"
-                    className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm text-gray-700 mb-2">
-                  Quantity (units)
-                </label>
-                <input
-                  type="text"
-                  value={buyerInputs.quantity}
-                  onChange={(e) =>
-                    setBuyerInputs({ ...buyerInputs, quantity: e.target.value })
-                  }
-                  placeholder="e.g., 100"
-                  className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
-                />
-              </div>
-            </div>
+            <label
+              className="block text-[15px] font-medium text-[#9c9c9c] mb-[5px]"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
+              Purchase Price (per unit)
+            </label>
+            <input
+              type="text"
+              value={buyerInputs.purchasePrice}
+              onChange={(e) =>
+                setBuyerInputs({
+                  ...buyerInputs,
+                  purchasePrice: e.target.value,
+                })
+              }
+              placeholder="e.g., 50"
+              className="w-full h-[42px] px-[12px] py-[12px] border border-[#bebebe] rounded-[8px] text-[12px] text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+              style={{ fontFamily: "Roboto, sans-serif" }}
+            />
           </div>
 
-          {/* Advanced Options Collapsible */}
-          <div className="border-2 border-gray-900 rounded">
-            <button
-              onClick={() => setAdvancedOpen(!advancedOpen)}
-              className="w-full px-4 py-3 flex items-center justify-between text-left"
+          <div>
+            <label
+              className="block text-[15px] font-medium text-[#9c9c9c] mb-[5px]"
+              style={{ fontFamily: "Poppins, sans-serif" }}
             >
-              <div className="flex items-center gap-2">
+              Expected Retail Price
+            </label>
+            <input
+              type="text"
+              value={buyerInputs.retailPrice}
+              onChange={(e) =>
+                setBuyerInputs({
+                  ...buyerInputs,
+                  retailPrice: e.target.value,
+                })
+              }
+              placeholder="e.g., 80"
+              className="w-full h-[42px] px-[12px] py-[12px] border border-[#bebebe] rounded-[8px] text-[12px] text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+              style={{ fontFamily: "Roboto, sans-serif" }}
+            />
+          </div>
+        </div>
+
+        <div className="mb-[38px]">
+          <label
+            className="block text-[15px] font-medium text-[#9c9c9c] mb-[5px]"
+            style={{ fontFamily: "Poppins, sans-serif" }}
+          >
+            Quantity (units)
+          </label>
+          <input
+            type="text"
+            value={buyerInputs.quantity}
+            onChange={(e) =>
+              setBuyerInputs({ ...buyerInputs, quantity: e.target.value })
+            }
+            placeholder="e.g., 1000"
+            className="w-full h-[42px] px-[12px] py-[12px] border border-[#bebebe] rounded-[8px] text-[12px] text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+            style={{ fontFamily: "Roboto, sans-serif" }}
+          />
+        </div>
+
+        {/* Advanced Options */}
+        <div className="mb-[20px]">
+          {advancedOpen && (
+            <div className="bg-white border border-[#bebebe] rounded-[15px] p-[15px] mb-[15px]">
+              {/* Header with title and arrow */}
+              <button
+                onClick={() => setAdvancedOpen(!advancedOpen)}
+                className="flex items-center justify-between w-full mb-[15px]"
+              >
+                <h4
+                  className="text-[16.5px] font-semibold text-[#0d1b2a]"
+                  style={{ fontFamily: "Poppins, sans-serif" }}
+                >
+                  Advance Options
+                </h4>
                 <svg
-                  className="w-5 h-5 text-gray-900"
+                  className="w-[21px] h-[21px] text-[#0d1b2a] transition-transform"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -156,73 +231,56 @@ export default function Calculator({ type }: CalculatorProps) {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
-                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    d="M19 9l-7 7-7-7"
                   />
                 </svg>
-                <span className="font-medium text-gray-900">
-                  Advanced Options
-                </span>
+              </button>
+
+              {/* Segmented Control Tabs */}
+              <div className="bg-[rgba(120,120,128,0.12)] rounded-[11px] p-[1.5px] mb-[15px] flex">
+                <button
+                  onClick={() => setAdvancedTab("buyer")}
+                  className={`flex-1 py-[9px] rounded-[11px] text-[13px] font-semibold transition-all relative ${
+                    advancedTab === "buyer" ? "text-white" : "text-[#9c9c9c]"
+                  }`}
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                >
+                  {advancedTab === "buyer" && (
+                    <div className="absolute inset-0 bg-[#2aae7a] rounded-[11px] shadow-[0px_3px_8px_0px_rgba(0,0,0,0.12),0px_3px_1px_0px_rgba(0,0,0,0.04)] border-[0.5px] border-[rgba(0,0,0,0.04)]"></div>
+                  )}
+                  <span className="relative z-10">Buyer Advance</span>
+                </button>
+                <button
+                  onClick={() => setAdvancedTab("seller")}
+                  className={`flex-1 py-[9px] rounded-[11px] text-[13px] font-semibold transition-all relative ${
+                    advancedTab === "seller" ? "text-white" : "text-[#9c9c9c]"
+                  }`}
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                >
+                  {advancedTab === "seller" && (
+                    <div className="absolute inset-0 bg-[#2aae7a] rounded-[11px] shadow-[0px_3px_8px_0px_rgba(0,0,0,0.12),0px_3px_1px_0px_rgba(0,0,0,0.04)] border-[0.5px] border-[rgba(0,0,0,0.04)]"></div>
+                  )}
+                  <span className="relative z-10">Seller Advanced</span>
+                </button>
               </div>
-              <span className="text-gray-900">{advancedOpen ? "∧" : "∨"}</span>
-            </button>
 
-            {advancedOpen && (
-              <div className="px-4 pb-4 space-y-4 border-t-2 border-gray-900">
-                {/* Internal Tabs */}
-                <div className="flex gap-2 mt-4">
-                  <button
-                    onClick={() => setAdvancedTab("buyer")}
-                    className={`px-4 py-2 text-sm font-medium rounded ${
-                      advancedTab === "buyer"
-                        ? "bg-gray-900 text-white"
-                        : "border border-gray-900 text-gray-900"
-                    }`}
+              {/* Buyer Advanced Fields */}
+              {advancedTab === "buyer" && (
+                <>
+                  <h5
+                    className="text-[15.75px] font-semibold text-[#0d1b2a] mb-[15px]"
+                    style={{ fontFamily: "Poppins, sans-serif" }}
                   >
-                    Buyer Advanced
-                  </button>
-                  <button
-                    onClick={() => setAdvancedTab("seller")}
-                    className={`px-4 py-2 text-sm font-medium rounded ${
-                      advancedTab === "seller"
-                        ? "bg-gray-900 text-white"
-                        : "border border-gray-900 text-gray-900"
-                    }`}
-                  >
-                    Seller Advanced
-                  </button>
-                </div>
-
-                {advancedTab === "buyer" && (
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-2">
-                      <svg
-                        className="w-5 h-5 text-gray-900"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                        />
-                      </svg>
-                      <h4 className="text-base font-bold text-gray-900">
-                        Advanced Buyer Analysis
-                      </h4>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
+                    Advance Buyer Analysis
+                  </h5>
+                  <div className="space-y-[15px]">
+                    <div className="grid grid-cols-2 gap-[26px]">
                       <div>
-                        <label className="block text-sm text-gray-700 mb-2">
-                          Logistics Savings
+                        <label
+                          className="block text-[15px] font-medium text-[#9c9c9c] mb-[8px]"
+                          style={{ fontFamily: "Poppins, sans-serif" }}
+                        >
+                          Logistics Saving
                         </label>
                         <input
                           type="text"
@@ -233,14 +291,18 @@ export default function Calculator({ type }: CalculatorProps) {
                               logisticsSavings: e.target.value,
                             })
                           }
-                          placeholder="e.g., 5"
-                          className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
+                          placeholder="e.g., 1500"
+                          className="w-full h-[42px] px-[12px] py-[3px] border border-[#bebebe] rounded-[8px] text-[12px] text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+                          style={{ fontFamily: "Roboto, sans-serif" }}
                         />
                       </div>
 
                       <div>
-                        <label className="block text-sm text-gray-700 mb-2">
-                          Procurement Savings
+                        <label
+                          className="block text-[15px] font-medium text-[#9c9c9c] mb-[8px]"
+                          style={{ fontFamily: "Poppins, sans-serif" }}
+                        >
+                          Procurement Saving
                         </label>
                         <input
                           type="text"
@@ -251,14 +313,18 @@ export default function Calculator({ type }: CalculatorProps) {
                               procurementSavings: e.target.value,
                             })
                           }
-                          placeholder="e.g., 5-5%"
-                          className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
+                          placeholder="e.g., 2-5%"
+                          className="w-full h-[42px] px-[12px] py-[3px] border border-[#bebebe] rounded-[8px] text-[12px] text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+                          style={{ fontFamily: "Roboto, sans-serif" }}
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm text-gray-700 mb-2">
+                      <label
+                        className="block text-[15px] font-medium text-[#9c9c9c] mb-[8px]"
+                        style={{ fontFamily: "Poppins, sans-serif" }}
+                      >
                         Platform Fees
                       </label>
                       <input
@@ -271,24 +337,30 @@ export default function Calculator({ type }: CalculatorProps) {
                           })
                         }
                         placeholder="e.g., 500"
-                        className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
+                        className="w-full h-[42px] px-[12px] py-[3px] border border-[#bebebe] rounded-[8px] text-[12px] text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+                        style={{ fontFamily: "Roboto, sans-serif" }}
                       />
                     </div>
                   </div>
-                )}
+                </>
+              )}
 
-                {advancedTab === "seller" && (
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-2">
-                      <span className="text-lg">₹</span>
-                      <h4 className="text-base font-bold text-gray-900">
-                        Advanced Seller Analysis
-                      </h4>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
+              {/* Seller Advanced Fields */}
+              {advancedTab === "seller" && (
+                <>
+                  <h5
+                    className="text-[15.75px] font-semibold text-[#0d1b2a] mb-[15px]"
+                    style={{ fontFamily: "Poppins, sans-serif" }}
+                  >
+                    Advance Seller Analysis
+                  </h5>
+                  <div className="space-y-[15px]">
+                    <div className="grid grid-cols-2 gap-[26px]">
                       <div>
-                        <label className="block text-sm text-gray-700 mb-2">
+                        <label
+                          className="block text-[15px] font-medium text-[#9c9c9c] mb-[8px]"
+                          style={{ fontFamily: "Poppins, sans-serif" }}
+                        >
                           Monthly Holding Cost (per unit)
                         </label>
                         <input
@@ -300,13 +372,17 @@ export default function Calculator({ type }: CalculatorProps) {
                               monthlyHoldingCost: e.target.value,
                             })
                           }
-                          placeholder="e.g., 100"
-                          className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
+                          placeholder="e.g., 200"
+                          className="w-full h-[42px] px-[12px] py-[3px] border border-[#bebebe] rounded-[8px] text-[12px] text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+                          style={{ fontFamily: "Roboto, sans-serif" }}
                         />
                       </div>
 
                       <div>
-                        <label className="block text-sm text-gray-700 mb-2">
+                        <label
+                          className="block text-[15px] font-medium text-[#9c9c9c] mb-[8px]"
+                          style={{ fontFamily: "Poppins, sans-serif" }}
+                        >
                           Reduced Holding Cost
                         </label>
                         <input
@@ -319,15 +395,19 @@ export default function Calculator({ type }: CalculatorProps) {
                             })
                           }
                           placeholder="e.g., 1500"
-                          className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
+                          className="w-full h-[42px] px-[12px] py-[3px] border border-[#bebebe] rounded-[8px] text-[12px] text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+                          style={{ fontFamily: "Roboto, sans-serif" }}
                         />
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-2 gap-[26px]">
                       <div>
-                        <label className="block text-sm text-gray-700 mb-2">
-                          Marketplace min value added
+                        <label
+                          className="block text-[15px] font-medium text-[#9c9c9c] mb-[8px]"
+                          style={{ fontFamily: "Poppins, sans-serif" }}
+                        >
+                          Marketplace mim value added
                         </label>
                         <input
                           type="text"
@@ -339,12 +419,16 @@ export default function Calculator({ type }: CalculatorProps) {
                             })
                           }
                           placeholder="e.g., 10%"
-                          className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
+                          className="w-full h-[42px] px-[12px] py-[3px] border border-[#bebebe] rounded-[8px] text-[12px] text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+                          style={{ fontFamily: "Roboto, sans-serif" }}
                         />
                       </div>
 
                       <div>
-                        <label className="block text-sm text-gray-700 mb-2">
+                        <label
+                          className="block text-[15px] font-medium text-[#9c9c9c] mb-[8px]"
+                          style={{ fontFamily: "Poppins, sans-serif" }}
+                        >
                           Platform Fees
                         </label>
                         <input
@@ -357,21 +441,27 @@ export default function Calculator({ type }: CalculatorProps) {
                             })
                           }
                           placeholder="e.g., 500"
-                          className="w-full px-3 py-2 border border-gray-900 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
+                          className="w-full h-[42px] px-[12px] py-[3px] border border-[#bebebe] rounded-[8px] text-[12px] text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+                          style={{ fontFamily: "Roboto, sans-serif" }}
                         />
                       </div>
                     </div>
                   </div>
-                )}
-              </div>
-            )}
-          </div>
+                </>
+              )}
+            </div>
+          )}
 
-          {/* Calculate and Reset Buttons */}
-          <div className="flex gap-3">
-            <button className="flex-1 px-6 py-2.5 bg-white border-2 border-gray-900 text-gray-900 rounded font-medium hover:bg-gray-50 flex items-center justify-center gap-2">
+          {/* Collapsed state button */}
+          {!advancedOpen && (
+            <button
+              onClick={() => setAdvancedOpen(!advancedOpen)}
+              className="flex items-center justify-between w-full py-[8px] text-[16.5px] font-semibold text-[#0d1b2a] hover:text-[#1e3a8a] transition-colors"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
+              <span>Advance Options</span>
               <svg
-                className="w-5 h-5 text-gray-900"
+                className="w-[21px] h-[21px] transition-transform rotate-180"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -380,66 +470,213 @@ export default function Calculator({ type }: CalculatorProps) {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                  d="M19 9l-7 7-7-7"
                 />
               </svg>
+            </button>
+          )}
+        </div>
+
+        {/* Calculate and Reset Buttons */}
+        <div className="bg-white pt-[15px] pb-0">
+          <div className="flex gap-[19px]">
+            <button
+              onClick={handleCalculate}
+              className="flex-1 h-[45px] bg-[#1e3a8a] rounded-[11px] text-white text-[15px] font-semibold hover:bg-[#152e6e] transition-colors"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
               Calculate ROI
             </button>
-            <button className="px-6 py-2.5 border-2 border-gray-900 text-gray-900 rounded font-medium hover:bg-gray-50">
+            <button
+              onClick={handleReset}
+              className="w-[150px] h-[45px] bg-white border-[0.5px] border-[#9c9c9c] rounded-[8px] text-[#9c9c9c] text-[12px] font-semibold hover:bg-gray-50 transition-colors"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
               Reset
             </button>
           </div>
         </div>
-
-        {/* Right Side - Results & Display */}
-        <div className="space-y-6">
-          <div className="border-2 border-gray-900 rounded p-8 text-center h-fit">
-            <p className="text-xs text-gray-500 text-right mb-4">
-              Display Results Here
-            </p>
-            <div className="w-32 h-32 mx-auto bg-white border-2 border-gray-900 flex items-center justify-center mb-4">
-              <svg
-                className="w-20 h-20 text-gray-900"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
-                />
-              </svg>
-            </div>
-            <h3 className="text-lg font-bold text-gray-900 mb-2">
-              Ready to Calculate
-            </h3>
-            <p className="text-sm text-gray-600">
-              Enter your purchase details above to see detailed ROI
-              <br />
-              projections and profitability analysis.
-            </p>
-          </div>
-
-          <div className="border-2 border-gray-900 rounded p-6">
-            <h3 className="text-base font-bold text-gray-900 mb-4 text-center">
-              Ready to get started?
-            </h3>
-            <div className="flex gap-3">
-              <button className="flex-1 px-4 py-2 border-2 border-gray-900 text-gray-900 rounded text-sm font-medium hover:bg-gray-50">
-                Browse Inventory
-              </button>
-              <button className="flex-1 px-4 py-2 border-2 border-gray-900 text-gray-900 rounded text-sm font-medium hover:bg-gray-50">
-                List Your Inventory
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
-    );
-  }
 
-  // Not used - handled in buyer section above
-  return null;
+      {/* Right Side - Results & Display */}
+      <div className="flex-1 bg-white rounded-[15px] shadow-[0px_2px_5px_0px_rgba(0,0,0,0.25)] h-[750px] flex flex-col">
+        {!isCalculated ? (
+          <>
+            <div className="flex-1 mx-[19px] mt-[30px] mb-[20px] border border-[#9c9c9c] flex flex-col items-center justify-center">
+              <div className="w-[53px] h-[53px] bg-[#f2f2f2] rounded-[8px] p-[11px] flex items-center justify-center mb-[11px]">
+                <svg
+                  className="w-[30px] h-[30px]"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9 2H15C16.1046 2 17 2.89543 17 4V20C17 21.1046 16.1046 22 15 22H9C7.89543 22 7 21.1046 7 20V4C7 2.89543 7.89543 2 9 2Z"
+                    stroke="#9c9c9c"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M10 18H14"
+                    stroke="#9c9c9c"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M11 5H13"
+                    stroke="#9c9c9c"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+              <h3
+                className="text-[17px] font-semibold text-[#9c9c9c] mb-[9px]"
+                style={{ fontFamily: "Poppins, sans-serif" }}
+              >
+                Ready to calculate
+              </h3>
+              <p
+                className="text-[14px] font-medium text-[#9c9c9c] text-center max-w-[293px] px-3"
+                style={{ fontFamily: "Inter, sans-serif" }}
+              >
+                Enter your purchase details to see detailed ROI projections and
+                profitability analysis
+              </p>
+            </div>
+
+            <div className="px-[19px] pb-[20px]">
+              <div className="border-t border-[#9c9c9c] pt-[20px]">
+                <h3
+                  className="text-[17px] font-medium text-[#9c9c9c] text-center mb-[27px]"
+                  style={{ fontFamily: "Poppins, sans-serif" }}
+                >
+                  Ready to get started?
+                </h3>
+                <div className="flex gap-[14px]">
+                  <button
+                    className="flex-1 h-[45px] bg-[#2aae7a] rounded-[11px] text-white text-[15px] font-medium hover:bg-[#259b6c] transition-colors"
+                    style={{ fontFamily: "Poppins, sans-serif" }}
+                  >
+                    Browse Inventory
+                  </button>
+                  <button
+                    className="flex-1 h-[45px] border-[0.5px] border-[#1e3a8a] rounded-[8px] text-[#1e3a8a] text-[15px] font-medium hover:bg-blue-50 transition-colors"
+                    style={{ fontFamily: "Poppins, sans-serif" }}
+                  >
+                    List Your Inventory
+                  </button>
+                </div>
+              </div>
+            </div>
+          </>
+        ) : (
+          <div className="p-[23px] h-full flex flex-col overflow-y-auto">
+            <h3
+              className="text-[20px] font-semibold text-[#0d1b2a] mb-[20px]"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
+              Your ROI Results
+            </h3>
+
+            {/* ROI Percentage Display */}
+            <div className="bg-gradient-to-r from-[#37c3dc] to-[#0d9e9c] rounded-[15px] p-[20px] mb-[20px]">
+              <p
+                className="text-[13px] font-medium text-white mb-[6px]"
+                style={{ fontFamily: "Inter, sans-serif" }}
+              >
+                Return on Investment
+              </p>
+              <div className="flex items-baseline gap-[8px]">
+                <span
+                  className="text-[36px] font-bold text-white"
+                  style={{ fontFamily: "Poppins, sans-serif" }}
+                >
+                  {results.roi}%
+                </span>
+                <span
+                  className="text-[14px] font-medium text-white/80"
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                >
+                  ROI
+                </span>
+              </div>
+            </div>
+
+            {/* Breakdown Details */}
+            <div className="space-y-[12px]">
+              <div className="bg-[#f8f9fa] rounded-[11px] p-[12px]">
+                <p
+                  className="text-[11px] font-medium text-[#9c9c9c] mb-[4px]"
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                >
+                  {type === "buyer" ? "Total Investment" : "Total Cost"}
+                </p>
+                <p
+                  className="text-[18px] font-semibold text-[#0d1b2a]"
+                  style={{ fontFamily: "Poppins, sans-serif" }}
+                >
+                  ₹
+                  {type === "buyer"
+                    ? "totalBuyerCost" in results
+                      ? results.totalBuyerCost.toLocaleString()
+                      : "0"
+                    : "totalSupplierCost" in results
+                    ? results.totalSupplierCost.toLocaleString()
+                    : "0"}
+                </p>
+              </div>
+
+              <div className="bg-[#f8f9fa] rounded-[11px] p-[12px]">
+                <p
+                  className="text-[11px] font-medium text-[#9c9c9c] mb-[4px]"
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                >
+                  {type === "buyer" ? "Expected Revenue" : "Total Sale Value"}
+                </p>
+                <p
+                  className="text-[18px] font-semibold text-[#0d1b2a]"
+                  style={{ fontFamily: "Poppins, sans-serif" }}
+                >
+                  ₹
+                  {type === "buyer"
+                    ? "totalExpectedRevenue" in results
+                      ? results.totalExpectedRevenue.toLocaleString()
+                      : "0"
+                    : "totalSaleValue" in results
+                    ? results.totalSaleValue.toLocaleString()
+                    : "0"}
+                </p>
+              </div>
+
+              <div className="bg-[#2aae7a]/10 border border-[#2aae7a] rounded-[11px] p-[12px]">
+                <p
+                  className="text-[11px] font-medium text-[#2aae7a] mb-[4px]"
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                >
+                  {type === "buyer" ? "Net Profit" : "Net Value Gained"}
+                </p>
+                <p
+                  className="text-[18px] font-semibold text-[#2aae7a]"
+                  style={{ fontFamily: "Poppins, sans-serif" }}
+                >
+                  ₹
+                  {type === "buyer"
+                    ? "netProfit" in results
+                      ? results.netProfit.toLocaleString()
+                      : "0"
+                    : "netValueGained" in results
+                    ? results.netValueGained.toLocaleString()
+                    : "0"}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }

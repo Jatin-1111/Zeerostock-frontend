@@ -11,7 +11,7 @@ export interface VerificationDraft {
 export interface VerificationStatus {
   status: "not_started" | "pending" | "approved" | "rejected" | "under_review";
   verification: any;
-  role: any;
+  userRole: any;
   hasDraft: boolean;
   draft?: VerificationDraft;
 }

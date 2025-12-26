@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { Upload, Package } from "lucide-react";
+import { Upload, ChevronDown } from "lucide-react";
 import { supplierService } from "@/services/supplier.service";
 import { marketplaceService } from "@/services/marketplace.service";
 import { useAuth } from "@/contexts/AuthContext";
@@ -70,6 +70,7 @@ export default function NewListing() {
       return;
     }
     fetchCategories();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, router]);
 
   const fetchCategories = async () => {
@@ -328,255 +329,410 @@ export default function NewListing() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      <div className="max-w-6xl mx-auto p-8">
-        {/* Header */}
-        <div className="mb-6">
-          <h1 className="text-xl font-medium text-gray-900">My Inventory</h1>
-        </div>
+    <div className="min-h-screen bg-[#EEFBF6]">
+      <div className="max-w-[1440px] mx-auto px-20 py-8">
+        {/* Page Title */}
+        <h1
+          className="text-[27px] font-semibold text-[#0d1b2a] mb-5"
+          style={{ fontFamily: "Poppins, sans-serif" }}
+        >
+          My Inventory
+        </h1>
 
         {/* Form Container */}
-        <form onSubmit={handleSubmit} className="border border-gray-300 p-8">
-          <div className="grid grid-cols-1 gap-6">
-            {/* Row 1: Product Title and Listing Type */}
-            <div className="grid grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-normal text-gray-900 mb-2">
-                  Product Title*
-                </label>
-                <input
-                  type="text"
-                  name="title"
-                  value={formData.title}
-                  onChange={handleInputChange}
-                  placeholder="Ex: Industrial Steel Pipes - Grade A36"
-                  required
-                  className="w-full px-3 py-2 border border-gray-300 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 text-black"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-normal text-gray-900 mb-2">
-                  Listing Type*
-                </label>
-                <select
-                  name="listingType"
-                  value={formData.listingType}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-3 py-2 border border-gray-300 text-sm text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900"
-                >
-                  <option value="">Please listing type</option>
-                  <option value="fixed">Fixed Price</option>
-                  <option value="auction">Auction</option>
-                  <option value="negotiable">Negotiable</option>
-                </select>
-              </div>
-            </div>
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white rounded-[15px] p-[23px] relative w-full"
+          style={{
+            boxShadow: "0px 0px 6px 0px rgba(0, 0, 0, 0.25)",
+            minHeight: "791px",
+          }}
+        >
+          {/* Product Title */}
+          <div className="absolute left-[23px] top-[22px]">
+            <label
+              className="text-[17px] font-medium text-[#0d1b2a]"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
+              Product Title<span className="text-red-600">*</span>
+            </label>
+          </div>
+          <div
+            className="absolute left-[23px] top-[52px]"
+            style={{ width: "calc(50% - 33px)" }}
+          >
+            <input
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleInputChange}
+              placeholder="eg., Industrial Electronic Components"
+              required
+              className="w-full h-[42px] px-3 py-2 border border-[#bebebe] rounded-[8px] text-sm text-black placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a] focus:border-[#0d1b2a]"
+              style={{ fontFamily: "Roboto, sans-serif" }}
+            />
+          </div>
 
-            {/* Row 2: Category, Condition, and Location */}
-            <div className="grid grid-cols-3 gap-6">
-              <div>
-                <label className="block text-sm font-normal text-gray-900 mb-2">
-                  Category*
-                </label>
-                <select
-                  name="categoryId"
-                  value={formData.categoryId}
-                  onChange={handleInputChange}
-                  required
-                  disabled={categoriesLoading}
-                  className="w-full px-3 py-2 border border-gray-300 text-sm text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 disabled:bg-gray-100"
-                >
-                  <option value="">
-                    {categoriesLoading ? "Loading..." : "Select category"}
+          {/* Listing Type */}
+          <div
+            className="absolute top-[22px]"
+            style={{ left: "calc(50% + 10px)" }}
+          >
+            <label
+              className="text-[17px] font-medium text-[#0d1b2a]"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
+              Listing Type<span className="text-red-600">*</span>
+            </label>
+          </div>
+          <div
+            className="absolute top-[52px]"
+            style={{ left: "calc(50% + 10px)", width: "calc(50% - 33px)" }}
+          >
+            <div className="relative">
+              <select
+                name="listingType"
+                value={formData.listingType}
+                onChange={handleInputChange}
+                required
+                className="w-full h-[42px] px-3 py-2 border border-[#bebebe] rounded-[8px] text-sm appearance-none text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a] focus:border-[#0d1b2a]"
+                style={{ fontFamily: "Roboto, sans-serif" }}
+              >
+                <option value="">Select Type</option>
+                <option value="fixed">Fixed Price</option>
+                <option value="negotiable">Negotiable</option>
+                <option value="auction">Auction</option>
+              </select>
+              <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#9c9c9c] pointer-events-none" />
+            </div>
+          </div>
+
+          {/* Category */}
+          <div className="absolute left-[23px] top-[124px]">
+            <label
+              className="text-[17px] font-medium text-[#0d1b2a]"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
+              Category<span className="text-red-600">*</span>
+            </label>
+          </div>
+          <div
+            className="absolute left-[23px] top-[154px]"
+            style={{ width: "calc(50% - 33px)" }}
+          >
+            <div className="relative">
+              <select
+                name="categoryId"
+                value={formData.categoryId}
+                onChange={handleInputChange}
+                required
+                disabled={categoriesLoading}
+                className="w-full h-[42px] px-3 py-2 border border-[#bebebe] rounded-[8px] text-sm appearance-none text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a] focus:border-[#0d1b2a] disabled:bg-gray-100"
+                style={{ fontFamily: "Roboto, sans-serif" }}
+              >
+                <option value="">
+                  {categoriesLoading ? "Loading..." : "Select category"}
+                </option>
+                {categories.map((cat) => (
+                  <option key={cat.id} value={cat.id}>
+                    {cat.name}
                   </option>
-                  {categories.map((cat) => (
-                    <option key={cat.id} value={cat.id}>
-                      {cat.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-normal text-gray-900 mb-2">
-                  Condition*
-                </label>
-                <select
-                  name="condition"
-                  value={formData.condition}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-3 py-2 border border-gray-300 text-sm text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900"
-                >
-                  <option value="">Select condition</option>
-                  <option value="new">New</option>
-                  <option value="like-new">Like New</option>
-                  <option value="good">Good</option>
-                  <option value="fair">Fair</option>
-                  <option value="refurbished">Refurbished</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-normal text-gray-900 mb-2">
-                  Location*
-                </label>
-                <input
-                  type="text"
-                  name="city"
-                  value={formData.city}
-                  onChange={handleInputChange}
-                  placeholder="Ex: Mumbai, Maharashtra"
-                  required
-                  className="w-full px-3 py-2 border border-gray-300 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 text-black"
-                />
-              </div>
+                ))}
+              </select>
+              <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#9c9c9c] pointer-events-none" />
             </div>
+          </div>
 
-            {/* Row 3: Quantity, Units, and Price */}
-            <div className="grid grid-cols-3 gap-6">
-              <div>
-                <label className="block text-sm font-normal text-gray-900 mb-2">
-                  Quantity*
-                </label>
-                <input
-                  type="number"
-                  name="quantity"
-                  value={formData.quantity}
-                  onChange={handleInputChange}
-                  placeholder="Enter qty"
-                  required
-                  min="1"
-                  className="w-full px-3 py-2 border border-gray-300 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 text-black"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-normal text-gray-900 mb-2">
-                  Units*
-                </label>
-                <select
-                  name="unit"
-                  value={formData.unit}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-3 py-2 border border-gray-300 text-sm text-black focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900"
-                >
-                  <option value="pieces">Pieces</option>
-                  <option value="kg">Kilograms</option>
-                  <option value="tons">Tons</option>
-                  <option value="liters">Liters</option>
-                  <option value="meters">Meters</option>
-                  <option value="boxes">Boxes</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-normal text-gray-900 mb-2">
-                  Price*
-                </label>
-                <input
-                  type="number"
-                  name="priceAfter"
-                  value={formData.priceAfter}
-                  onChange={handleInputChange}
-                  placeholder="Enter price per unit"
-                  required
-                  step="0.01"
-                  className="w-full px-3 py-2 border border-gray-300 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 text-black"
-                />
-              </div>
+          {/* Condition */}
+          <div
+            className="absolute top-[124px]"
+            style={{ left: "calc(50% + 10px)" }}
+          >
+            <label
+              className="text-[17px] font-medium text-[#0d1b2a]"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
+              Condition<span className="text-red-600">*</span>
+            </label>
+          </div>
+          <div
+            className="absolute top-[154px]"
+            style={{ left: "calc(50% + 10px)", width: "calc(50% - 33px)" }}
+          >
+            <div className="relative">
+              <select
+                name="condition"
+                value={formData.condition}
+                onChange={handleInputChange}
+                required
+                className="w-full h-[42px] px-3 py-2 border border-[#bebebe] rounded-[8px] text-sm appearance-none text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a] focus:border-[#0d1b2a]"
+                style={{ fontFamily: "Roboto, sans-serif" }}
+              >
+                <option value="">Select condition</option>
+                <option value="new">New</option>
+                <option value="like-new">Like New</option>
+                <option value="good">Good</option>
+                <option value="fair">Fair</option>
+                <option value="refurbished">Refurbished</option>
+              </select>
+              <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#9c9c9c] pointer-events-none" />
             </div>
+          </div>
 
-            {/* Row 4: Product Description and Product Images */}
-            <div className="grid grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-normal text-gray-900 mb-2">
-                  Product Description*
-                </label>
-                <textarea
-                  name="description"
-                  value={formData.description}
-                  onChange={handleInputChange}
-                  rows={8}
-                  placeholder="Detailed description of the product, specifications, material, quality etc"
-                  required
-                  className="w-full px-3 py-2 border border-gray-300 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 resize-none text-black"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-normal text-gray-900 mb-2">
-                  Product Images*
-                </label>
-                <div
-                  onDrop={handleDrop}
-                  onDragOver={handleDragOver}
-                  className="border-2 border-dashed border-gray-300 p-6 flex flex-col items-center justify-center h-[calc(100%-2rem)] cursor-pointer hover:border-gray-400 transition-colors"
-                  onClick={() => fileInputRef.current?.click()}
-                >
-                  <Upload className="w-12 h-12 text-gray-300 mb-3" />
-                  <p className="text-sm text-gray-600 mb-1">
-                    Drag & drop images here, or click to select!
-                  </p>
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      fileInputRef.current?.click();
-                    }}
-                    disabled={uploadingImages}
-                    className="mt-3 px-4 py-2 bg-white border border-gray-900 text-sm font-medium text-gray-900 hover:bg-gray-50 transition-colors disabled:opacity-50"
-                  >
-                    {uploadingImages ? "Uploading..." : "Choose Files"}
-                  </button>
-                  <input
-                    ref={fileInputRef}
-                    type="file"
-                    multiple
-                    accept="image/*"
-                    onChange={handleFileSelect}
-                    className="hidden"
-                  />
-                </div>
-                {uploadedImages.length > 0 && (
-                  <div className="mt-2 grid grid-cols-3 gap-2">
-                    {uploadedImages.map((url, index) => (
+          {/* Location */}
+          <div className="absolute left-[23px] top-[226px]">
+            <label
+              className="text-[17px] font-medium text-[#0d1b2a]"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
+              Location<span className="text-red-600">*</span>
+            </label>
+          </div>
+          <div
+            className="absolute left-[23px] top-[256px]"
+            style={{ width: "calc(33.33% - 30px)" }}
+          >
+            <div className="relative">
+              <input
+                type="text"
+                name="city"
+                value={formData.city}
+                onChange={handleInputChange}
+                placeholder="Select Location"
+                required
+                className="w-full h-[42px] px-3 py-2 border border-[#bebebe] rounded-[8px] text-sm text-black placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a] focus:border-[#0d1b2a]"
+                style={{ fontFamily: "Roboto, sans-serif" }}
+              />
+              <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#9c9c9c] pointer-events-none" />
+            </div>
+          </div>
+
+          {/* Quantity */}
+          <div
+            className="absolute top-[226px]"
+            style={{ left: "calc(33.33% + 3px)" }}
+          >
+            <label
+              className="text-[17px] font-medium text-[#0d1b2a]"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
+              Quantity<span className="text-red-600">*</span>
+            </label>
+          </div>
+          <div
+            className="absolute top-[256px]"
+            style={{ left: "calc(33.33% + 3px)", width: "calc(33.33% - 20px)" }}
+          >
+            <input
+              type="number"
+              name="quantity"
+              value={formData.quantity}
+              onChange={handleInputChange}
+              placeholder="eg., 20,000 - 50,000"
+              required
+              min="1"
+              className="w-full h-[42px] px-3 py-2 border border-[#bebebe] rounded-[8px] text-sm text-black placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a] focus:border-[#0d1b2a]"
+              style={{ fontFamily: "Roboto, sans-serif" }}
+            />
+          </div>
+
+          {/* Units */}
+          <div
+            className="absolute top-[226px]"
+            style={{ left: "calc(66.66% - 7px)" }}
+          >
+            <label
+              className="text-[17px] font-medium text-[#0d1b2a]"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
+              Units<span className="text-red-600">*</span>
+            </label>
+          </div>
+          <div
+            className="absolute top-[256px]"
+            style={{ left: "calc(66.66% - 7px)", width: "calc(33.33% - 16px)" }}
+          >
+            <div className="relative">
+              <select
+                name="unit"
+                value={formData.unit}
+                onChange={handleInputChange}
+                required
+                className="w-full h-[42px] px-3 py-2 border border-[#bebebe] rounded-[8px] text-sm appearance-none text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a] focus:border-[#0d1b2a]"
+                style={{ fontFamily: "Roboto, sans-serif" }}
+              >
+                <option value="">Select Units</option>
+                <option value="pieces">Pieces</option>
+                <option value="kg">Kilograms</option>
+                <option value="tons">Tons</option>
+                <option value="liters">Liters</option>
+                <option value="meters">Meters</option>
+                <option value="units">Units</option>
+                <option value="boxes">Boxes</option>
+                <option value="pallets">Pallets</option>
+              </select>
+              <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#9c9c9c] pointer-events-none" />
+            </div>
+          </div>
+
+          {/* Price */}
+          <div className="absolute left-[23px] top-[328px]">
+            <label
+              className="text-[17px] font-medium text-[#0d1b2a]"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
+              Price<span className="text-red-600">*</span>
+            </label>
+          </div>
+          <div
+            className="absolute left-[23px] top-[358px]"
+            style={{ width: "calc(50% - 33px)" }}
+          >
+            <input
+              type="number"
+              name="priceAfter"
+              value={formData.priceAfter}
+              onChange={handleInputChange}
+              placeholder="e.g., $20000-$50000"
+              required
+              step="0.01"
+              className="w-full h-[42px] px-3 py-2 border border-[#bebebe] rounded-[8px] text-sm text-black placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a] focus:border-[#0d1b2a]"
+              style={{ fontFamily: "Roboto, sans-serif" }}
+            />
+          </div>
+
+          {/* Product Images */}
+          <div
+            className="absolute top-[328px]"
+            style={{ left: "calc(50% + 10px)" }}
+          >
+            <label
+              className="text-[17px] font-medium text-[#0d1b2a]"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
+              Product images<span className="text-red-600">*</span>
+            </label>
+          </div>
+          <div
+            className="absolute top-[360px] h-[314px]"
+            style={{ left: "calc(50% + 10px)", width: "calc(50% - 33px)" }}
+          >
+            <div
+              onClick={() => fileInputRef.current?.click()}
+              onDrop={handleDrop}
+              onDragOver={handleDragOver}
+              className="w-full h-full border-2 border-dashed border-[#9c9c9c] rounded-[15px] flex flex-col items-center justify-center cursor-pointer hover:border-[#2aae7a] transition-colors relative"
+            >
+              <Upload className="w-[38px] h-[38px] text-[#9c9c9c] mb-9" />
+              <p
+                className="text-[13px] font-medium text-[#2aae7a] mb-3"
+                style={{ fontFamily: "Inter, sans-serif" }}
+              >
+                Drop & drag images here or click to select
+              </p>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  fileInputRef.current?.click();
+                }}
+                disabled={uploadingImages}
+                className="px-4 py-2 bg-[#f2f2f2] text-[#9c9c9c] text-base font-medium rounded-[11px] hover:bg-gray-300 transition-colors disabled:opacity-50"
+                style={{ fontFamily: "Poppins, sans-serif" }}
+              >
+                {uploadingImages ? "Uploading..." : "Choose Files"}
+              </button>
+              <input
+                ref={fileInputRef}
+                type="file"
+                multiple
+                accept="image/*"
+                onChange={handleFileSelect}
+                className="hidden"
+              />
+
+              {/* Display uploaded images */}
+              {uploadedImages.length > 0 && (
+                <div className="absolute bottom-4 left-4 right-4 flex gap-2 flex-wrap">
+                  {uploadedImages.map((url, index) => (
+                    <div
+                      key={index}
+                      className="w-16 h-16 rounded-lg overflow-hidden border-2 border-[#2aae7a]"
+                    >
                       <img
-                        key={index}
                         src={url}
                         alt={`Upload ${index + 1}`}
-                        className="w-full h-16 object-cover border border-gray-300"
+                        className="w-full h-full object-cover"
                       />
-                    ))}
-                  </div>
-                )}
-              </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
+          </div>
 
-            {/* Row 5: Listing Duration */}
-            <div className="grid grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-normal text-gray-900 mb-2">
-                  Listing Duration*
-                </label>
-                <input
-                  type="date"
-                  name="expiresAt"
-                  value={formData.expiresAt}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 text-sm focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 text-black"
-                />
-              </div>
-            </div>
+          {/* Product Description */}
+          <div className="absolute left-[23px] top-[430px]">
+            <label
+              className="text-[17px] font-medium text-[#0d1b2a]"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
+              Product description
+            </label>
+          </div>
+          <div
+            className="absolute left-[23px] top-[460px]"
+            style={{ width: "calc(50% - 33px)" }}
+          >
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleInputChange}
+              rows={6}
+              placeholder="Describe your specific requirements, quality standards, certifications needed etc."
+              required
+              className="w-full h-[113px] px-3 py-2 border border-[#bebebe] rounded-[8px] text-sm text-black placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a] focus:border-[#0d1b2a] resize-none"
+              style={{ fontFamily: "Roboto, sans-serif" }}
+            />
+          </div>
 
-            {/* Submit Button */}
-            <div className="mt-6">
-              <button
-                type="submit"
-                disabled={loading || uploadingImages}
-                className="w-full px-6 py-3 bg-black text-white text-sm font-medium hover:bg-gray-900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-              >
-                <Package className="w-4 h-4" />
-                {loading ? "Listing Product..." : "List Product"}
-              </button>
+          {/* Listing Duration */}
+          <div className="absolute left-[23px] top-[602px]">
+            <label
+              className="text-[17px] font-medium text-[#0d1b2a]"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
+              Listing Duration<span className="text-red-600">*</span>
+            </label>
+          </div>
+          <div
+            className="absolute left-[23px] top-[632px]"
+            style={{ width: "calc(50% - 33px)" }}
+          >
+            <div className="relative">
+              <input
+                type="date"
+                name="expiresAt"
+                value={formData.expiresAt}
+                onChange={handleInputChange}
+                placeholder="Select duration"
+                className="w-full h-[42px] px-3 py-2 border border-[#bebebe] rounded-[8px] text-sm text-black placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a] focus:border-[#0d1b2a]"
+                style={{ fontFamily: "Roboto, sans-serif" }}
+              />
+              <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#9c9c9c] pointer-events-none" />
             </div>
+          </div>
+
+          {/* Submit Button */}
+          <div className="absolute left-[23px] top-[724px] w-[191px]">
+            <button
+              type="submit"
+              disabled={loading || uploadingImages}
+              className="w-full h-[45px] px-4 py-3 bg-[#1e3a8a] text-white text-base font-semibold rounded-[11px] hover:bg-[#1e40af] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
+              {loading ? "Creating..." : "List Product"}
+            </button>
           </div>
         </form>
       </div>

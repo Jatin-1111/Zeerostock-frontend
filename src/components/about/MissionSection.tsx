@@ -1,32 +1,58 @@
 export default function MissionSection() {
   return (
-    <section className="bg-white py-20 px-6">
-      <div className="max-w-6xl mx-auto">
-        <p className="text-sm text-gray-600 mb-4">Our Mission</p>
-        <h2 className="text-4xl font-bold text-gray-900 mb-6 max-w-4xl">
-          Building a Sustainable Future Through Smart Commerce
-        </h2>
-        <p className="text-lg text-gray-600 mb-12 max-w-3xl">
-          Every year, billions of dollars in surplus inventory goes to waste. We
-          believe there&apos;s a better way. By connecting suppliers, buyers
-          through intelligent matching and transparent pricing.
-        </p>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          <div>
-            <div className="text-4xl font-bold text-gray-900 mb-2">$2.4B+</div>
-            <p className="text-sm text-gray-600">Total Transaction Volume</p>
-          </div>
-          <div>
-            <div className="text-4xl font-bold text-gray-900 mb-2">10,000+</div>
-            <p className="text-sm text-gray-600">Active Businesses</p>
-          </div>
-          <div>
-            <div className="text-4xl font-bold text-gray-900 mb-2">95%</div>
-            <p className="text-sm text-gray-600">Customer Satisfaction</p>
-          </div>
-          <div>
-            <div className="text-4xl font-bold text-gray-900 mb-2">50+</div>
-            <p className="text-sm text-gray-600">Countries Served</p>
+    <section className="w-full bg-[#EEFBF6] py-16">
+      <div className="w-full max-w-full mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative w-full flex flex-col items-center">
+          {/* Title */}
+          <h2 className="font-poppins font-semibold text-4xl sm:text-5xl lg:text-[52px] leading-tight lg:leading-[70px] text-center text-[#0d1b2a] max-w-4xl mb-6 px-4">
+            Building a Sustainable Future Through{" "}
+            <span className="text-[#2ec096]">Smart Commerce</span>
+          </h2>
+
+          {/* Description */}
+          <p className="font-inter font-semibold text-base sm:text-lg lg:text-[21px] leading-relaxed lg:leading-[25px] text-center text-[#868181] max-w-5xl mb-16 px-4">
+            Every year, billions of dollars in surplus inventory goes to waste.
+            We believe there&apos;s a better way, By connecting suppliers with
+            buyers through intelligent matching
+          </p>
+
+          {/* Stats Grid */}
+          <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto px-4">
+            {/* Active Businesses */}
+            <div className="bg-[#eeffef] rounded-[30px] shadow-[0px_0px_10px_0px_rgba(24,181,34,0.5)] h-[140px] flex flex-col items-center justify-center text-center px-4">
+              <p className="font-inter font-semibold text-[18px] text-black mb-2">
+                Active Businesses
+              </p>
+              <p className="font-inter font-bold text-[40px] text-black">
+                10,000+
+              </p>
+            </div>
+
+            {/* Total Transaction Volume */}
+            <div className="bg-[#eeffef] rounded-[30px] shadow-[0px_0px_10px_0px_rgba(24,181,34,0.5)] h-[140px] flex flex-col items-center justify-center text-center px-4">
+              <p className="font-inter font-semibold text-[18px] text-black mb-2">
+                Total Transaction Volume
+              </p>
+              <p className="font-inter font-bold text-[40px] text-black">
+                $2.4B+
+              </p>
+            </div>
+
+            {/* Customer Satisfaction */}
+            <div className="bg-[#eeffef] rounded-[30px] shadow-[0px_0px_10px_0px_rgba(24,181,34,0.5)] h-[140px] flex flex-col items-center justify-center text-center px-4">
+              <p className="font-inter font-semibold text-[18px] text-black mb-2">
+                Customer Satisfaction
+              </p>
+              <p className="font-inter font-bold text-[40px] text-black">95%</p>
+            </div>
+
+            {/* Countries Served */}
+            <div className="bg-[#eeffef] rounded-[30px] shadow-[0px_0px_10px_0px_rgba(24,181,34,0.5)] h-[140px] flex flex-col items-center justify-center text-center px-4">
+              <p className="font-inter font-semibold text-[18px] text-black mb-2">
+                Countries Served
+              </p>
+              <p className="font-inter font-bold text-[40px] text-black">50+</p>
+            </div>
           </div>
         </div>
       </div>

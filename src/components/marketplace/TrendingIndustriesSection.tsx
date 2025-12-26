@@ -1,47 +1,113 @@
 export default function TrendingIndustriesSection() {
+  const iconChart =
+    "https://www.figma.com/api/mcp/asset/360fc98d-2ff6-4b5a-bb40-b552feb4e7ca";
+  const industryImage =
+    "https://www.figma.com/api/mcp/asset/5e482c2a-ed50-4db0-99d5-b03d01aac5b5";
+
   const industries = [
-    { name: "Construction", percentage: "85%" },
-    { name: "Technology", percentage: "72%" },
-    { name: "Manufacturing", percentage: "68%" },
-    { name: "Pharma", percentage: "54%" },
-    { name: "Agri-export", percentage: "48%" },
-    { name: "Healthcare", percentage: "42%" },
+    { name: "Construction", image: industryImage },
+    { name: "Technology", image: industryImage },
+    { name: "Manufacturing", image: industryImage },
+    { name: "Pharma", image: industryImage },
+    { name: "Agri-export", image: industryImage },
+    { name: "Healthcare", image: industryImage },
   ];
 
   return (
-    <div className="bg-white p-6">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-bold text-gray-900">
+    <div
+      style={{
+        maxWidth: "960px",
+        margin: "0 auto",
+        padding: "45px 0",
+      }}
+    >
+      {/* Header with icon and title */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "15px",
+          marginBottom: "29px",
+        }}
+      >
+        <img
+          src={iconChart}
+          alt="Chart"
+          style={{
+            width: "29px",
+            height: "29px",
+          }}
+        />
+        <h2
+          style={{
+            fontFamily: "Poppins, sans-serif",
+            fontWeight: 600,
+            fontSize: "26px",
+            color: "#0d1b2a",
+            margin: 0,
+          }}
+        >
           Trending Industries
         </h2>
-        <span className="text-sm text-gray-600">All trades →</span>
+        <div
+          style={{
+            background: "#FFF1C2",
+            borderRadius: "4px",
+            padding: "2px 11px",
+            marginLeft: "15px",
+          }}
+        >
+          <span
+            style={{
+              fontFamily: "Poppins, sans-serif",
+              fontWeight: 500,
+              fontSize: "15px",
+              color: "#0d1b2a",
+            }}
+          >
+            Hot Markets
+          </span>
+        </div>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      {/* Industries grid */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(6, 138px)",
+          gap: "15px",
+          justifyContent: "space-between",
+        }}
+      >
         {industries.map((industry, index) => (
           <div
             key={index}
-            className="text-center p-4 border border-gray-200 hover:shadow-md transition-shadow"
+            style={{
+              width: "138px",
+              height: "138px",
+              background: "white",
+              borderRadius: "50%",
+              overflow: "hidden",
+              cursor: "pointer",
+              boxShadow: "0px 0px 4px 0px rgba(24,181,34,0.25)",
+              transition: "transform 0.2s",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "scale(1.05)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "scale(1)";
+            }}
           >
-            <div className="w-16 h-16 mx-auto mb-3 bg-gray-100 rounded-full flex items-center justify-center">
-              <svg
-                className="w-8 h-8 text-gray-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
-                />
-              </svg>
-            </div>
-            <h3 className="text-sm font-semibold text-gray-900 mb-1">
-              {industry.name}
-            </h3>
-            <p className="text-xs text-gray-600">{industry.percentage}</p>
+            <img
+              src={industry.image}
+              alt={industry.name}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+            />
           </div>
         ))}
       </div>

@@ -1,3 +1,5 @@
+import { Phone, Truck } from "lucide-react";
+
 interface OrderSummaryConfirmProps {
   subtotal: number;
   itemCount: number;
@@ -15,69 +17,93 @@ export default function OrderSummaryConfirm({
   shipping,
   total,
 }: OrderSummaryConfirmProps) {
+  const isFreeShipping =
+    typeof shipping === "string" && shipping.toLowerCase() === "free";
+
   return (
-    <div className="border-2 border-gray-900 rounded p-6 mb-6">
-      <h3 className="font-bold text-gray-900 mb-4">Order Summary</h3>
+    <div className="bg-white rounded-[15px] p-[23px] mb-5 shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)]">
+      {/* Title */}
+      <h3 className="font-['Poppins'] font-medium text-[#0d1b2a] text-[18px] leading-normal mb-6">
+        Order Summary
+      </h3>
 
-      <div className="space-y-3">
-        <div className="flex justify-between text-sm text-gray-900">
-          <span>Subtotal ({itemCount} Items)</span>
-          <span>${subtotal.toFixed(2)}</span>
+      {/* Summary Items */}
+      <div className="space-y-4 mb-[35px]">
+        {/* Subtotal */}
+        <div className="flex items-center justify-between">
+          <span className="font-['Inter'] font-medium text-[#9c9c9c] text-[15px] leading-normal">
+            Subtotal ({itemCount} items)
+          </span>
+          <span className="font-['Inter'] font-semibold text-[#bebebe] text-[15px] leading-[18px] tracking-[0.5px]">
+            ₹{subtotal.toLocaleString()}
+          </span>
         </div>
 
-        <div className="flex justify-between text-sm text-green-600">
-          <span>Total Savings</span>
-          <span>-${savings.toFixed(2)}</span>
+        {/* Total Savings */}
+        <div className="flex items-center justify-between">
+          <span className="font-['Inter'] font-medium text-[#2aae7a] text-[15px] leading-normal">
+            Total Saving
+          </span>
+          <span className="font-['Inter'] font-semibold text-[#2aae7a] text-[15px] leading-[18px] tracking-[0.5px]">
+            -₹{savings.toLocaleString()}
+          </span>
         </div>
 
-        <div className="flex justify-between text-sm text-gray-900">
-          <span>Estimated Tax</span>
-          <span>${tax.toFixed(2)}</span>
+        {/* Estimated Tax */}
+        <div className="flex items-center justify-between">
+          <span className="font-['Inter'] font-medium text-[#9c9c9c] text-[15px] leading-normal">
+            Estimated Tax
+          </span>
+          <span className="font-['Inter'] font-semibold text-[#bebebe] text-[15px] leading-[18px] tracking-[0.5px]">
+            ₹{tax.toLocaleString()}
+          </span>
         </div>
 
-        <div className="flex justify-between text-sm text-gray-900">
-          <span>Shipping</span>
-          <span>{shipping}</span>
-        </div>
-
-        <div className="border-t-2 border-gray-900 pt-3 flex justify-between">
-          <span className="font-bold text-gray-900">Total</span>
-          <span className="font-bold text-gray-900">${total.toFixed(2)}</span>
+        {/* Shipping */}
+        <div className="flex items-center justify-between">
+          <span className="font-['Inter'] font-medium text-[#9c9c9c] text-[15px] leading-normal">
+            Shipping
+          </span>
+          <span
+            className={`font-['Inter'] font-semibold text-[15px] leading-[18px] tracking-[0.5px] ${
+              isFreeShipping ? "text-[#2aae7a]" : "text-[#bebebe]"
+            }`}
+          >
+            {isFreeShipping ? "Free" : `₹${shipping}`}
+          </span>
         </div>
       </div>
 
-      <div className="mt-4 space-y-2">
-        <div className="flex items-center gap-2 text-sm text-gray-700">
-          <svg
-            className="w-4 h-4 text-gray-900"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-            />
-          </svg>
-          <span>Secure checkout with SSL encryption</span>
+      {/* Divider */}
+      <div className="h-[2px] bg-gray-300 mb-[22px]"></div>
+
+      {/* Total */}
+      <div className="flex items-center justify-between mb-[51px]">
+        <span className="font-['Poppins'] font-semibold text-[#0d1b2a] text-[23px] leading-normal">
+          Total :
+        </span>
+        <span className="font-['Inter'] font-semibold text-[#2aae7a] text-[23px] leading-[18px] tracking-[0.5px]">
+          ₹
+          {total.toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}
+        </span>
+      </div>
+
+      {/* Footer Icons */}
+      <div className="space-y-[11px]">
+        <div className="flex items-center gap-2">
+          <Phone className="w-[18px] h-[18px] text-[#bebebe]" />
+          <span className="font-['Inter'] font-medium text-[#bebebe] text-[14px] leading-[18px] tracking-[0.5px]">
+            SSL Secure Checkout
+          </span>
         </div>
-        <div className="flex items-center gap-2 text-sm text-gray-700">
-          <svg
-            className="w-4 h-4 text-gray-900"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"
-            />
-          </svg>
-          <span>Fast shipping and handling</span>
+        <div className="flex items-center gap-2">
+          <Truck className="w-[18px] h-[18px] text-[#bebebe]" />
+          <span className="font-['Inter'] font-medium text-[#bebebe] text-[14px] leading-[18px] tracking-[0.5px]">
+            Fast Shipping Options
+          </span>
         </div>
       </div>
     </div>

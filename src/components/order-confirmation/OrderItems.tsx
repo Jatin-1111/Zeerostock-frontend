@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface OrderItem {
   id: number;
   name: string;
@@ -7,6 +9,8 @@ interface OrderItem {
   rating: number;
   status: string;
   trackingId: string;
+  image?: string;
+  estimatedDate?: string;
 }
 
 interface OrderItemsProps {
@@ -17,92 +21,117 @@ export default function OrderItems({ items }: OrderItemsProps) {
   // Handle case where items might be empty or have missing data
   if (!items || items.length === 0) {
     return (
-      <div className="border-2 border-gray-900 rounded p-6 mb-6">
-        <h2 className="text-lg font-bold text-gray-900 mb-4">Order Items:</h2>
-        <p className="text-gray-600">Loading order items...</p>
+      <div className="bg-white rounded-[15px] p-[20px] mb-5 shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)]">
+        <h2 className="font-['Poppins'] font-medium text-[#0d1b2a] text-[18px] leading-normal mb-3">
+          Order Items:
+        </h2>
+        <p className="font-['Inter'] font-medium text-[#9c9c9c] text-[15px]">
+          Loading order items...
+        </p>
       </div>
     );
   }
 
   return (
-    <div className="border-2 border-gray-900 rounded p-6 mb-6">
-      <h2 className="text-lg font-bold text-gray-900 mb-4">Order Items:</h2>
+    <div className="bg-white rounded-[15px] p-[20px] mb-5 shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)]">
+      <h2 className="font-['Poppins'] font-medium text-[#0d1b2a] text-[18px] leading-normal mb-3">
+        Order Items:
+      </h2>
 
-      <div className="space-y-4">
+      <div className="space-y-[26px]">
         {items.map((item) => (
-          <div key={item.id} className="border-b border-gray-300 pb-4">
-            <div className="flex gap-4">
-              {/* Product Image Placeholder */}
-              <div className="w-24 h-24 border-2 border-gray-900 rounded flex items-center justify-center bg-gray-50">
-                <svg
-                  className="w-12 h-12 text-gray-900"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+          <div
+            key={item.id}
+            className="bg-[#fbfbfb] rounded-[15px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] p-[11px] relative h-[176px]"
+          >
+            <div className="flex gap-[13px] h-full">
+              {/* Product Image */}
+              <div className="w-[121px] h-[91px] rounded-[8px] overflow-hidden shrink-0 bg-gray-200 relative">
+                {item.image ? (
+                  <Image
+                    src={item.image}
+                    alt={item.name || "Product"}
+                    fill
+                    className="object-cover"
+                    onError={(e) => {
+                      e.currentTarget.style.display = "none";
+                      if (e.currentTarget.parentElement) {
+                        e.currentTarget.parentElement.innerHTML = `
+                          <div class="w-full h-full flex items-center justify-center bg-gray-300">
+                            <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                            </svg>
+                          </div>
+                        `;
+                      }
+                    }}
                   />
-                </svg>
-              </div>
-
-              {/* Product Details */}
-              <div className="flex-1">
-                <div className="flex justify-between items-start mb-2">
-                  <div>
-                    <h3 className="font-semibold text-gray-900">
-                      {item.name || "Product"}
-                    </h3>
-                    <p className="text-sm text-gray-600 flex items-center gap-1">
-                      by {item.seller || "Seller"}
-                      {item.rating && (
-                        <span className="ml-2 flex items-center gap-1">
-                          <svg
-                            className="w-4 h-4 text-gray-900"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                          {item.rating}
-                        </span>
-                      )}
-                    </p>
-                    {item.price !== undefined && (
-                      <p className="text-sm text-gray-600 mt-1">
-                        Qty: {item.quantity || 1} @ $
-                        {(item.price || 0).toFixed(2)}
-                      </p>
-                    )}
-                  </div>
-                  <div className="text-right">
-                    {item.price !== undefined && (
-                      <p className="font-bold text-gray-900">
-                        ${((item.quantity || 1) * (item.price || 0)).toFixed(2)}
-                      </p>
-                    )}
-                    <p className="text-xs text-gray-500 mt-1">
-                      Ships: {item.status || "Processing"}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Tracking ID */}
-                {item.trackingId && (
-                  <div className="bg-gray-50 px-3 py-2 rounded mt-2 inline-block">
-                    <p className="text-xs text-gray-600">
-                      Tracking ID:{" "}
-                      <span className="font-mono text-gray-900">
-                        {item.trackingId}
-                      </span>
-                    </p>
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-gray-300">
+                    <svg
+                      className="w-16 h-16 text-gray-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+                      />
+                    </svg>
                   </div>
                 )}
               </div>
+
+              {/* Product Details */}
+              <div className="flex-1 flex flex-col">
+                {/* Product Name */}
+                <h3 className="font-['Inter'] font-medium text-[18px] leading-normal text-black mb-[11px]">
+                  {item.name || "Product"}
+                </h3>
+
+                {/* Seller */}
+                <p className="font-['Inter'] font-medium text-[15px] leading-normal text-[#9c9c9c] mb-[19px]">
+                  by {item.seller || "Seller"}
+                </p>
+
+                {/* Quantity and Price */}
+                <p className="font-['Inter'] font-medium text-[15px] leading-normal text-[#9c9c9c]">
+                  Qty: {item.quantity || 1} / Price:{" "}
+                  <span className="font-['Inter'] font-bold">₹</span>
+                  {(item.price || 0).toFixed(2)}
+                </p>
+              </div>
+
+              {/* Right Side - Price and Date */}
+              <div className="flex flex-col items-end justify-start pt-[11px]">
+                {/* Total Price */}
+                <p className="font-['Inter'] font-semibold text-[23px] leading-normal text-black mb-[13px]">
+                  ₹{((item.quantity || 1) * (item.price || 0)).toLocaleString()}
+                </p>
+
+                {/* Estimated Date */}
+                {(item.estimatedDate || item.status) && (
+                  <p className="font-['Inter'] font-medium text-[15px] leading-normal text-[#9c9c9c]">
+                    Est. Date: {item.estimatedDate || item.status}
+                  </p>
+                )}
+              </div>
             </div>
+
+            {/* Tracking ID Section */}
+            {item.trackingId && (
+              <div className="absolute bottom-0 left-0 right-0 h-[51px] flex items-center px-[15px] border-t border-gray-300">
+                <span className="font-['Inter'] font-medium text-[14px] leading-normal text-black">
+                  Tracking ID:
+                </span>
+                <span className="font-['Inter'] font-medium text-[14px] leading-normal text-[#9c9c9c] ml-auto">
+                  {item.trackingId}
+                </span>
+              </div>
+            )}
           </div>
         ))}
       </div>

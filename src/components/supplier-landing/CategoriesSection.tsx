@@ -5,68 +5,76 @@ export default function CategoriesSection() {
     {
       name: "Manufacturing Equipment",
       demand: "High demand",
-      demandColor: "text-green-600",
-      subtitle: "CNC machines, industrial robots, production lines",
+      subtitle: "CNC machines, industrial robots, production lines.",
       description:
         "Heavy machinery and production equipment from factory closures or upgrades.",
     },
     {
       name: "Raw Materials",
       demand: "Very high demand",
-      demandColor: "text-green-600",
-      subtitle: "Steel, aluminum, chemicals, textiles",
+      subtitle: "Steel, aluminum, chemicals, textiles.",
       description:
         "Excess raw materials from overstock, cancelled orders, or production changes.",
     },
     {
       name: "Electronics & IT",
       demand: "Extremely high demand",
-      demandColor: "text-green-600",
-      subtitle: "Servers, networking equipment, components",
+      subtitle: "Servers, networking equipment, components.",
       description:
         "Technology hardware from data center upgrades and corporate refreshes.",
     },
     {
       name: "Construction Materials",
       demand: "High demand",
-      demandColor: "text-green-600",
-      subtitle: "Lumber, concrete, steel beams, equipment",
+      subtitle: "Lumber, concrete, steel beams, equipment.",
       description:
         "Building materials from project cancellations or surplus orders.",
     },
   ];
 
   return (
-    <div className="bg-white p-14">
-      <h2 className="text-3xl font-bold text-gray-900 mb-2 text-center">
-        High-Demand Inventory Categories
-      </h2>
-      <p className="text-gray-600 text-center mb-8">
-        Our platform has active buyers seeking these types of surplus inventory
-        right now.
-      </p>
+    <div className="w-full bg-[#EEFBF6] px-[60px] py-[75px]">
+      {/* Content Container */}
+      <div className="max-w-[1320px] mx-auto">
+        {/* Heading Section */}
+        <div className="text-center mb-[86px]">
+          <h2 className="text-[39px] leading-[52px] font-medium text-[#0d1b2a] mb-[11px]">
+            <span className="text-[#2ec096]">High Demand</span> Inventory
+            Categories
+          </h2>
+          <p className="text-[18px] font-semibold text-[#9c9c9c]">
+            Our platform has active buyers seeking these types of surplus
+            inventory right now.
+          </p>
+        </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {categories.map((category, index) => (
-          <div key={index} className="bg-white p-6">
-            <div className="flex items-start justify-between mb-3">
-              <h3 className="text-xl font-bold text-gray-900">
+        {/* Categories Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-[88px] gap-y-[156px]">
+          {categories.map((category, index) => (
+            <div
+              key={index}
+              className="bg-[#eeffef] rounded-[30px] shadow-[0px_0px_10px_0px_rgba(24,181,34,0.5)] p-[23px] pb-[33px] relative h-[139.65px] max-w-[95%] overflow-visible"
+            >
+              {/* Category Title */}
+              <h3 className="text-[19px] leading-normal font-semibold text-[#022778] mb-[18px]">
                 {category.name}
               </h3>
-              <span className={`text-sm font-medium ${category.demandColor}`}>
-                {category.demand}
-              </span>
+
+              {/* Demand Badge - Positioned to top right */}
+              <div className="absolute top-[26px] right-[23px] bg-[#2aae7a] rounded-[60px] px-[9px] py-[2px]">
+                <p className="text-[11px] leading-normal font-medium text-white whitespace-nowrap">
+                  {category.demand}
+                </p>
+              </div>
+
+              {/* Description Text */}
+              <p className="text-[11px] leading-normal font-medium text-[#727272]">
+                <span className="inline">{category.subtitle}</span>{" "}
+                <span className="inline">{category.description}</span>
+              </p>
             </div>
-
-            <p className="text-sm font-medium text-gray-900 mb-2">
-              {category.subtitle}
-            </p>
-
-            <p className="text-sm text-gray-600 leading-relaxed">
-              {category.description}
-            </p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

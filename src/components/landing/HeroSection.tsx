@@ -57,7 +57,7 @@ export default function HeroSection() {
             // Logged Out User - Signup/Explore
             <>
               <Link
-                href="/signup"
+                href="/become-supplier"
                 className="w-[280px] h-[70px] bg-[#022778] text-white text-[22px] font-semibold rounded-xl hover:bg-[#022778]/90 transition-colors font-['Poppins'] flex items-center justify-center"
               >
                 Start Selling

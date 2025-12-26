@@ -27,12 +27,12 @@ function MarketplaceContent() {
 
   // Otherwise, show the default marketplace page
   return (
-    <div className="max-w-full">
+    <div className="max-w-full bg-[#EEFBF6] py-16">
       <MarketplaceHero />
       <CategorySection />
-      <TodayDealsSection />
-      <TrendingIndustriesSection />
-      <SponsoredListingsSection />
+      {/* <TodayDealsSection /> */}
+      {/* <TrendingIndustriesSection /> */}
+      {/* <SponsoredListingsSection /> */}
       <AllProductsSection />
       <MarketplaceCTASection />
       <WhyChooseSection />

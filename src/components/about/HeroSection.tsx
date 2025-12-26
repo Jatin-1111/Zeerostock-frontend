@@ -1,37 +1,45 @@
 import Link from "next/link";
 
 export default function HeroSection() {
+  const imgFrame427322673 =
+    "https://www.figma.com/api/mcp/asset/813ae249-45b4-4e8c-85b3-bbf097f5c237";
+
   return (
-    <section className="bg-white py-20 px-6">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <h1 className="text-5xl font-bold text-gray-900 mb-6">
-              Transforming Global Surplus Trade
-            </h1>
-            <p className="text-lg text-gray-600 mb-8">
-              We&apos;re on a mission to optimize waste and minimize value by
-              connecting suppliers with surplus inventory to buyers around the
-              world.
-            </p>
-            <div className="flex items-center gap-4">
-              <Link
-                href="/marketplace"
-                className="px-8 py-3 bg-white border-2 border-gray-900 text-gray-900 rounded-lg font-medium hover:bg-gray-50 transition-colors"
-              >
-                Start Marketplace
-              </Link>
-              <Link
-                href="/about"
-                className="px-8 py-3 bg-white border-2 border-gray-900 text-gray-900 rounded-lg font-medium hover:bg-gray-50 transition-colors"
-              >
-                Learn About
-              </Link>
-            </div>
-          </div>
-          <div className="bg-gray-200 rounded-lg h-96 flex items-center justify-center border-2 border-gray-900">
-            <span className="text-gray-400">Image/Illustration</span>
-          </div>
+    <section className="relative w-full h-[600px] shadow-md overflow-hidden py-10">
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <img
+          alt=""
+          className="absolute h-full w-full object-cover"
+          src={imgFrame427322673}
+        />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 flex flex-col justify-center items-start h-full px-10 gap-5">
+        <h1 className="font-poppins font-semibold text-5xl md:text-6xl leading-tight text-center text-gray-900 max-w-2xl">
+          Transforming <span className="text-emerald-500">Global Surplus</span>{" "}
+          Trade
+        </h1>
+        <p className="font-inter font-semibold text-lg md:text-xl leading-normal text-center text-gray-500 max-w-2xl">
+          Connect suppliers, buyers and agents with trust, transparency and
+          speed
+        </p>
+
+        {/* CTA Buttons */}
+        <div className="flex gap-4 mt-2 ml-32">
+          <Link
+            href="/join"
+            className="bg-blue-900 text-white font-medium px-8 py-3 rounded-lg hover:bg-blue-800 transition-colors"
+          >
+            Join Our Mission
+          </Link>
+          <Link
+            href="/careers"
+            className="bg-white text-blue-900 font-medium px-8 py-3 rounded-lg border-2 border-blue-900 hover:bg-gray-50 transition-colors"
+          >
+            View Careers
+          </Link>
         </div>
       </div>
     </section>

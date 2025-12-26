@@ -1,36 +1,71 @@
 "use client";
 
 import Link from "next/link";
-import { FileText, Plus } from "lucide-react";
+import { Plus, MessageSquare } from "lucide-react";
+import { useEffect, useState } from "react";
 
-export default function DashboardHeader() {
+interface DashboardHeaderProps {
+  userName?: string;
+}
+
+export default function DashboardHeader({ userName }: DashboardHeaderProps) {
+  const [displayName, setDisplayName] = useState("there");
+
+  useEffect(() => {
+    console.log("DashboardHeader received userName:", userName);
+
+    if (userName && userName.trim()) {
+      setDisplayName(userName);
+    } else {
+      // Try to get from localStorage as fallback
+      const userStr = localStorage.getItem("user");
+      if (userStr) {
+        try {
+          const user = JSON.parse(userStr);
+          const name =
+            user.firstName || user.first_name || user.name || "there";
+          console.log("Using localStorage name:", name);
+          setDisplayName(name);
+        } catch (e) {
+          console.error("Failed to parse user data");
+        }
+      }
+    }
+  }, [userName]);
+
   return (
-    <div className="bg-white px-8 py-6">
-      <div className="max-w-full mx-auto">
-        <div className="flex items-start justify-between">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-1">
-              Welcome back, Mihir
-            </h1>
-            <p className="text-gray-600">Heres your procurement overview</p>
-          </div>
-          <div className="flex items-center gap-3">
-            <Link
-              href="/buyer/rfq"
-              className="px-6 py-2.5 bg-gray-900 text-white rounded font-medium hover:bg-gray-800 transition-colors flex items-center gap-2"
-            >
-              <Plus className="w-4 h-4" />
-              Post New RFQ
-            </Link>
-            <Link
-              href="/buyer/quotes"
-              className="px-6 py-2.5 bg-white border-2 border-gray-900 text-gray-900 rounded font-medium hover:bg-gray-50 transition-colors flex items-center gap-2"
-            >
-              <FileText className="w-4 h-4" />
-              My Quotes
-            </Link>
-          </div>
-        </div>
+    <div className="flex items-center justify-between mb-5">
+      <div className="flex flex-col">
+        <h1
+          className="text-[27px] font-semibold text-[#0d1b2a] leading-normal"
+          style={{ fontFamily: "Poppins, sans-serif" }}
+        >
+          Welcome Back, {displayName}
+        </h1>
+        <p
+          className="text-[18px] font-medium text-[#9c9c9c] leading-normal mt-1"
+          style={{ fontFamily: "Inter, sans-serif" }}
+        >
+          Here's your procurement overview
+        </p>
+      </div>
+      <div className="flex items-center gap-3">
+        <Link
+          href="/buyer/rfq"
+          className="h-[45px] px-[45px] bg-[#1e3a8a] text-white rounded-[11px] font-semibold text-[15px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center gap-[8px]"
+          style={{ fontFamily: "Poppins, sans-serif" }}
+        >
+          <Plus className="w-5 h-5" />
+          Post New RFQ
+        </Link>
+        <Link
+          href="/buyer/quotes"
+          className="h-[45px] px-[45px] bg-white border border-[#9c9c9c] text-[#9c9c9c] rounded-[11px] font-semibold text-[15px] hover:bg-gray-50 transition-colors flex items-center gap-[8px] relative"
+          style={{ fontFamily: "Poppins, sans-serif" }}
+        >
+          <MessageSquare className="w-5 h-5" />
+          My Quotes
+        </Link>
       </div>
     </div>
   );

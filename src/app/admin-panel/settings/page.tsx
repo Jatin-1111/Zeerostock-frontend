@@ -152,7 +152,7 @@ export default function ChangePasswordPage() {
 
         {/* Success Message */}
         {success && (
-          <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center gap-3">
+          <div className="mb-6 p-4 max-w-2xl bg-green-50 border border-green-200 rounded-lg flex items-center gap-3">
             <CheckCircle className="w-5 h-5 text-green-600" />
             <p className="text-sm text-green-800">{success}</p>
             <button

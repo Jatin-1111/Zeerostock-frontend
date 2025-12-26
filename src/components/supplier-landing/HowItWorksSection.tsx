@@ -6,61 +6,71 @@ export default function HowItWorksSection() {
       number: 1,
       title: "List Your Inventory",
       description:
-        "Upload detailed listings with photos, specifications, and condition reports.",
-      highlight: "Our AI suggests optimal pricing and categorization",
+        "Upload detailed listings with photos, specifications, and condition reports. Our AI suggests optimal pricing and categorization",
     },
     {
       number: 2,
       title: "Get Discovered",
       description:
-        "Automatic promotion to relevant buyers through AI matching and search optimization.",
-      highlight: "Track views, inquiries, and buyer interest in real-time",
+        "Automatic promotion to relevant buyers through AI matching and search optimization. Track views, inquiries, and buyer interest in real-time",
     },
     {
       number: 3,
       title: "Negotiate & Close",
       description:
-        "Communicate with Zeerostock team through secure messaging and finalize terms.",
-      highlight: "Access buyer verification reports and credit information",
+        "Communicate with Zeerostock team through secure messaging and finalize terms. Access buyer verification reports and credit information",
     },
     {
       number: 4,
       title: "Get Paid",
       description:
-        "Secure payment processing with fast payouts after delivery confirmation.",
-      highlight: "Multiple payout options with detailed transaction reporting",
+        "Secure payment processing with fast payouts after delivery confirmation. Multiple payout options with detailed transaction reporting",
     },
   ];
 
   return (
-    <div className="bg-white p-14">
-      <h2 className="text-3xl font-bold text-gray-900 mb-2 text-center">
-        How Selling Works
-      </h2>
-      <p className="text-gray-600 text-center mb-12">
-        Simple, efficient process to convert surplus inventory into revenue
-      </p>
+    <div className="w-full bg-[#EEFBF6] px-[60px] py-[75px]">
+      <div className="max-w-[1320px] mx-auto">
+        {/* Heading Section */}
+        <div className="text-center mb-[91px]">
+          <h2 className="text-[39px] leading-[59px] font-medium text-[#0d1b2a] mb-[11px]">
+            How <span className="text-[#2ec096]">Selling Works</span>
+          </h2>
+          <p className="text-[18px] font-semibold text-[#9c9c9c]">
+            Simple, efficient process to convert surplus inventory into revenue
+          </p>
+        </div>
 
-      <div className="space-y-8">
-        {steps.map((step) => (
-          <div key={step.number} className="flex gap-6 items-start">
-            {/* Number Circle */}
-            <div className="w-12 h-12 border-2 border-gray-900 rounded-full flex items-center justify-center font-bold text-xl shrink-0 text-black">
-              {step.number}
-            </div>
+        {/* Steps Grid with Line */}
+        <div className="relative">
+          {/* Horizontal Line positioned absolutely above circles */}
+          <div className="absolute top-[23px] left-0 right-0 h-[3px] bg-[#d1d1d1]" />
 
-            {/* Content */}
-            <div className="flex-1">
-              <h3 className="text-lg font-bold text-gray-900 mb-2">
-                {step.title}
-              </h3>
-              <p className="text-sm text-gray-600 mb-1">{step.description}</p>
-              <p className="text-sm font-medium text-gray-900">
-                {step.highlight}
-              </p>
-            </div>
+          {/* Steps Grid */}
+          <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[45px]">
+            {steps.map((step) => (
+              <div
+                key={step.number}
+                className="flex flex-col items-center text-center"
+              >
+                {/* Number Circle */}
+                <div className="w-[47px] h-[47px] bg-[#eeffef] border-2 border-[#2aae7a] rounded-[75px] flex items-center justify-center font-semibold text-[23px] text-black mb-[62px] relative z-10">
+                  {step.number}
+                </div>
+
+                {/* Content */}
+                <div>
+                  <h3 className="text-[15px] leading-normal font-medium text-[#0d1b2a] mb-[12px]">
+                    {step.title}
+                  </h3>
+                  <p className="text-[11px] leading-normal text-[#9c9c9c]">
+                    {step.description}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     </div>
   );

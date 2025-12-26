@@ -3,7 +3,6 @@
 import { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { buyerService } from "@/services/buyer.service";
-import OrderHeader from "@/components/order-confirmation/OrderHeader";
 import OrderStatusTracker from "@/components/order-confirmation/OrderStatusTracker";
 import OrderItems from "@/components/order-confirmation/OrderItems";
 import ShippingPaymentInfo from "@/components/order-confirmation/ShippingPaymentInfo";
@@ -11,7 +10,6 @@ import EscrowProtection from "@/components/order-confirmation/EscrowProtection";
 import OrderSummaryConfirm from "@/components/order-confirmation/OrderSummaryConfirm";
 import OrderActions from "@/components/order-confirmation/OrderActions";
 import NeedHelp from "@/components/order-confirmation/NeedHelp";
-import TrackOrder from "@/components/order-confirmation/TrackOrder";
 import WhatsNext from "@/components/order-confirmation/WhatsNext";
 
 function OrderConfirmationContent() {
@@ -21,6 +19,7 @@ function OrderConfirmationContent() {
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [order, setOrder] = useState<any>(null);
 
   useEffect(() => {
@@ -95,54 +94,75 @@ function OrderConfirmationContent() {
         orderNumber: order.orderNumber,
         trackingNumber: order.trackingNumber,
         placedDate: new Date(order.createdAt).toLocaleDateString("en-US"),
-        statusSteps:
-          order.tracking && order.tracking.length > 0
-            ? order.tracking.map((track: any) => ({
-                title: track.title,
-                description: track.description,
-                timestamp: new Date(track.timestamp).toLocaleString("en-US"),
-                status: track.isMilestone
-                  ? ("completed" as const)
-                  : ("pending" as const),
-              }))
-            : [
-                {
-                  title: "Order Placed",
-                  description: "Your order has been confirmed",
-                  timestamp: new Date(order.createdAt).toLocaleString("en-US"),
-                  status: "completed" as const,
-                },
-                {
-                  title: "Processing",
-                  description: "Supplier is processing your items",
-                  timestamp: "Expected soon",
-                  status:
-                    order.status === "processing"
-                      ? ("current" as const)
-                      : ("pending" as const),
-                },
-                {
-                  title: "Shipped",
-                  description: "Items shipped from suppliers",
-                  timestamp: "Expected soon",
-                  status:
-                    order.status === "shipped"
-                      ? ("current" as const)
-                      : ("pending" as const),
-                },
-                {
-                  title: "Delivered",
-                  description: "Package at your door",
-                  timestamp: order.deliveryEta
-                    ? new Date(order.deliveryEta).toLocaleDateString("en-US")
-                    : "TBD",
-                  status:
-                    order.status === "delivered"
-                      ? ("completed" as const)
-                      : ("pending" as const),
-                },
-              ],
+        statusSteps: [
+          {
+            title: "Order Placed",
+            description: "Your order has been confirmed and is being processed",
+            timestamp: new Date(order.createdAt).toLocaleString("en-US"),
+            status: "completed" as const,
+          },
+          {
+            title: "Payment Secure",
+            description: "Payment secured successfully",
+            timestamp: new Date(order.createdAt).toLocaleString("en-US"),
+            status:
+              order.status === "confirmed" ||
+              order.status === "processing" ||
+              order.status === "shipped" ||
+              order.status === "delivered"
+                ? ("completed" as const)
+                : ("pending" as const),
+          },
+          {
+            title: "Processing",
+            description: "Supplier is processing your items",
+            timestamp:
+              order.status === "processing" ||
+              order.status === "shipped" ||
+              order.status === "delivered"
+                ? new Date(order.createdAt).toLocaleString("en-US")
+                : "Expected soon",
+            status:
+              order.status === "processing"
+                ? ("current" as const)
+                : order.status === "shipped" || order.status === "delivered"
+                ? ("completed" as const)
+                : ("pending" as const),
+          },
+          {
+            title: "Shipped",
+            description: "Items shipped from suppliers",
+            timestamp:
+              order.status === "shipped" || order.status === "delivered"
+                ? new Date(order.updatedAt || order.createdAt).toLocaleString(
+                    "en-US"
+                  )
+                : "Expected soon",
+            status:
+              order.status === "shipped"
+                ? ("current" as const)
+                : order.status === "delivered"
+                ? ("completed" as const)
+                : ("pending" as const),
+          },
+          {
+            title: "Delivered",
+            description: "Package at your door",
+            timestamp: order.deliveryEta
+              ? new Date(order.deliveryEta).toLocaleDateString("en-US")
+              : order.status === "delivered"
+              ? new Date(order.updatedAt || order.createdAt).toLocaleString(
+                  "en-US"
+                )
+              : "TBD",
+            status:
+              order.status === "delivered"
+                ? ("completed" as const)
+                : ("pending" as const),
+          },
+        ],
         items:
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           order.items?.map((item: any) => ({
             id: item.itemId || item.productId,
             name: item.productTitle,
@@ -323,19 +343,94 @@ function OrderConfirmationContent() {
       };
 
   return (
-    <div className="min-h-screen bg-white py-8">
-      <div className="w-full px-8 mx-auto">
-        {/* Header */}
-        <OrderHeader
-          orderNumber={orderData.orderNumber}
-          placedDate={orderData.placedDate}
-          trackingNumber={orderData.trackingNumber}
-        />
+    <div className="min-h-screen bg-[#EEFBF6] py-8">
+      <div className="max-w-[1440px] mx-auto px-20">
+        {/* Success Icon and Header */}
+        <div className="flex flex-col items-center mb-5">
+          {/* Large Success Checkmark Icon */}
+          <div className="w-[98px] h-[98px] mb-3 flex items-center justify-center">
+            <svg
+              width="98"
+              height="98"
+              viewBox="0 0 130 130"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="65" cy="65" r="65" fill="#2AAE7A" />
+              <path
+                d="M35 65L55 85L95 45"
+                stroke="#EEF8F6"
+                strokeWidth="8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+
+          {/* Order Confirmed Heading */}
+          <h1 className="text-[30px] font-semibold text-[#0D1B2A] mb-2 font-['Poppins']">
+            Order Confirmed!
+          </h1>
+          <p className="text-[18px] text-[#9C9C9C] font-medium">
+            Thank you for your order. We&apos;ve received your order and will
+            process it shortly
+          </p>
+        </div>
+
+        {/* Order Metadata */}
+        <div className="flex justify-center gap-6 mb-5">
+          <div className="flex items-center gap-2">
+            <svg
+              width="11"
+              height="14"
+              viewBox="0 0 15 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M1 4h13v12H1z" stroke="#0D1B2A" strokeWidth="1.5" />
+              <path
+                d="M4 1v3M11 1v3M1 7h13"
+                stroke="#0D1B2A"
+                strokeWidth="1.5"
+              />
+            </svg>
+            <span className="text-[14px] text-[#0D1B2A]">
+              Order #{orderData.orderNumber}
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
+            <svg
+              width="17"
+              height="17"
+              viewBox="0 0 22 22"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                x="2"
+                y="3"
+                width="18"
+                height="17"
+                rx="2"
+                stroke="#0D1B2A"
+                strokeWidth="1.5"
+              />
+              <path
+                d="M2 8h18M7 1v3M15 1v3"
+                stroke="#0D1B2A"
+                strokeWidth="1.5"
+              />
+            </svg>
+            <span className="text-[14px] text-[#0D1B2A]">
+              Placed on {orderData.placedDate}
+            </span>
+          </div>
+        </div>
 
         {/* Two Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_418px] gap-5">
           {/* Left Column - Main Content */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="space-y-5">
             <OrderStatusTracker steps={orderData.statusSteps} />
             <OrderItems items={orderData.items} />
             <ShippingPaymentInfo
@@ -351,7 +446,7 @@ function OrderConfirmationContent() {
           </div>
 
           {/* Right Column - Sidebar */}
-          <div className="lg:col-span-1 space-y-6">
+          <div className="space-y-5">
             <OrderSummaryConfirm
               subtotal={orderData.orderSummary.subtotal}
               itemCount={orderData.orderSummary.itemCount}
@@ -362,7 +457,6 @@ function OrderConfirmationContent() {
             />
             <OrderActions />
             <NeedHelp />
-            <TrackOrder />
             <WhatsNext steps={orderData.whatsNextSteps} />
           </div>
         </div>

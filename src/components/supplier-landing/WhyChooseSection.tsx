@@ -1,14 +1,14 @@
 "use client";
 
-import { TrendingUp, Globe, Zap, Shield } from "lucide-react";
+import { DollarSign, Globe, Zap, Shield } from "lucide-react";
 
 export default function WhyChooseSection() {
   const benefits = [
     {
-      icon: TrendingUp,
+      icon: DollarSign,
       title: "Maximize Revenue Recovery",
       description:
-        "Convert surplus inventory into cash flow with our networks of verified buyers.",
+        "Convert surplus inventory into cash flow with our global network of verified buyers.",
     },
     {
       icon: Globe,
@@ -31,30 +31,50 @@ export default function WhyChooseSection() {
   ];
 
   return (
-    <div className="bg-white p-14">
-      <h2 className="text-3xl font-bold text-gray-900 mb-2 text-center">
-        Why Leading Suppliers Choose Zeerostock
-      </h2>
-      <p className="text-gray-600 text-center mb-8">
-        Transform your surplus inventory challenges into revenue opportunities
-        with our proven platform.
-      </p>
+    <div className="w-full bg-[#EEFBF6] px-[60px] py-[75px]">
+      {/* Content Container */}
+      <div className="max-w-[1320px] mx-auto">
+        {/* Heading Section */}
+        <div className="text-center mb-[67px]">
+          <h2 className="text-[39px] leading-[52px] font-medium text-[#0d1b2a] mb-[11px]">
+            Why Leading Suppliers Choose{" "}
+            <span className="text-[#2ec096]">Zeerostock</span>
+          </h2>
+          <p className="text-[18px] font-semibold text-[#9c9c9c]">
+            Transform your surplus inventory challenges into revenue
+            opportunities with our proven platform.
+          </p>
+        </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {benefits.map((benefit, index) => (
-          <div
-            key={index}
-            className="bg-white p-6 text-center transition-shadow"
-          >
-            <div className="flex justify-center mb-4">
-              <div className="w-12 h-12 rounded-full flex items-center justify-center">
-                <benefit.icon className="w-6 h-6 text-black" />
+        {/* Benefits Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[17px]">
+          {benefits.map((benefit, index) => (
+            <div
+              key={index}
+              className="bg-[#2aae7a] rounded-[30px] shadow-[0px_0px_10px_0px_rgba(24,181,34,0.5)] p-[23px] pt-[23px] pb-[23px] text-center overflow-hidden h-[215px] flex flex-col"
+            >
+              {/* Icon Container */}
+              <div className="flex justify-center mb-[15px]">
+                <div className="w-[53px] h-[53px] bg-[#eeffef] rounded-[45px] flex items-center justify-center p-[11px]">
+                  <benefit.icon
+                    className="w-[30px] h-[30px] text-[#2aae7a]"
+                    strokeWidth={2}
+                  />
+                </div>
               </div>
+
+              {/* Title */}
+              <h3 className="text-[17px] leading-[20px] font-semibold text-[#022778] mb-[15px]">
+                {benefit.title}
+              </h3>
+
+              {/* Description */}
+              <p className="text-[12px] leading-normal font-semibold text-white">
+                {benefit.description}
+              </p>
             </div>
-            <h3 className="font-bold text-gray-900 mb-2">{benefit.title}</h3>
-            <p className="text-sm text-gray-600">{benefit.description}</p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

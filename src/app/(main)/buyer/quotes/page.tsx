@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  CheckCircle,
-  MessageCircle,
-  XCircle,
-  AlertCircle,
-  Search,
-} from "lucide-react";
+import { Clock, MessageSquare, CheckCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 import quoteService from "@/services/quote.service";
 import type { Quote, QuoteStatus, QuoteFilters } from "@/types/buyer.types";
@@ -40,7 +34,12 @@ export default function MyQuotesPage() {
     try {
       setLoading(true);
       setError(null);
-      const response = await quoteService.getMyQuotes(filters);
+      // Remove empty search parameter to avoid validation errors
+      const cleanFilters = { ...filters };
+      if (!cleanFilters.search) {
+        delete cleanFilters.search;
+      }
+      const response = await quoteService.getMyQuotes(cleanFilters);
 
       if (response.success && response.data) {
         setQuotes(response.data.items || []);
@@ -136,302 +135,323 @@ export default function MyQuotesPage() {
   // Format date
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-IN", {
-      day: "numeric",
-      month: "short",
+      day: "2-digit",
+      month: "2-digit",
       year: "numeric",
     });
   };
 
-  // Get status badge color
-  const getStatusColor = (status: QuoteStatus) => {
+  // Get status badge styling
+  const getStatusBadge = (status: QuoteStatus) => {
     switch (status) {
       case "pending":
-        return "bg-yellow-100 text-yellow-800 border-yellow-300";
+        return {
+          bg: "bg-[#fc3]",
+          text: "text-black",
+          icon: <Clock className="w-[22px] h-[22px]" />,
+          label: "Pending",
+        };
       case "accepted":
-        return "bg-green-100 text-green-800 border-green-300";
+        return {
+          bg: "bg-[#2aae7a]",
+          text: "text-white",
+          icon: <CheckCircle className="w-[16px] h-[16px]" />,
+          label: "Completed",
+        };
       case "rejected":
-        return "bg-red-100 text-red-800 border-red-300";
+        return {
+          bg: "bg-red-500",
+          text: "text-white",
+          icon: <Clock className="w-[22px] h-[22px]" />,
+          label: "Rejected",
+        };
       case "expired":
-        return "bg-gray-100 text-gray-800 border-gray-300";
+        return {
+          bg: "bg-gray-500",
+          text: "text-white",
+          icon: <Clock className="w-[22px] h-[22px]" />,
+          label: "Expired",
+        };
       default:
-        return "bg-gray-100 text-gray-800 border-gray-300";
+        return {
+          bg: "bg-gray-500",
+          text: "text-white",
+          icon: <Clock className="w-[22px] h-[22px]" />,
+          label: status,
+        };
     }
   };
 
   return (
-    <div className="min-h-screen bg-white p-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">My Quotes</h1>
+    <div className="min-h-screen bg-[#eefbf6] px-[60px] py-[100px]">
+      {/* Page Title */}
+      <h1
+        className="text-[27px] font-semibold text-[#0d1b2a] mb-[43px]"
+        style={{ fontFamily: "Poppins, sans-serif" }}
+      >
+        My Quotes
+      </h1>
 
-          {/* Filters */}
-          <div className="flex items-center gap-4">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Search quotes..."
-                value={filters.search || ""}
-                onChange={(e) =>
-                  setFilters({ ...filters, search: e.target.value, page: 1 })
-                }
-                className="pl-10 pr-4 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-gray-900"
-              />
-            </div>
+      {/* Divider Line */}
+      <div className="w-full h-[1px] bg-gray-300 mb-[30px]" />
 
-            <select
-              value={filters.status || ""}
-              onChange={(e) =>
-                setFilters({
-                  ...filters,
-                  status: e.target.value as QuoteStatus | undefined,
-                  page: 1,
-                })
-              }
-              className="px-4 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-gray-900"
+      {/* Loading State */}
+      {loading ? (
+        <div className="flex items-center justify-center py-12">
+          <div className="text-center">
+            <div className="animate-spin h-8 w-8 border-4 border-[#1e3a8a] border-t-transparent rounded-full mx-auto mb-4"></div>
+            <p
+              className="text-[#0d1b2a]"
+              style={{ fontFamily: "Inter, sans-serif" }}
             >
-              <option value="">All Status</option>
-              <option value="pending">Pending</option>
-              <option value="accepted">Accepted</option>
-              <option value="rejected">Rejected</option>
-              <option value="expired">Expired</option>
-            </select>
-          </div>
-        </div>
-
-        {/* Error Message */}
-        {error && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-200 flex items-center gap-3">
-            <AlertCircle className="w-5 h-5 text-red-600 shrink-0" />
-            <p className="text-sm text-red-800">{error}</p>
-          </div>
-        )}
-
-        {/* Loading State */}
-        {loading ? (
-          <div className="flex items-center justify-center py-12">
-            <div className="text-center">
-              <div className="animate-spin h-8 w-8 border-4 border-gray-900 border-t-transparent rounded-full mx-auto mb-4"></div>
-              <p className="text-gray-600">Loading quotes...</p>
-            </div>
-          </div>
-        ) : quotes.length === 0 ? (
-          <div className="text-center py-12">
-            <MessageCircle className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">
-              No quotes found
-            </h3>
-            <p className="text-gray-600">
-              You haven&apos;t received any quotes yet. Create an RFQ to get
-              started.
+              Loading quotes...
             </p>
           </div>
-        ) : (
-          <>
-            <div className="space-y-6">
-              {quotes.map((quote) => (
-                <div
-                  key={quote.id}
-                  className="bg-white border-2 border-gray-900 rounded p-6"
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex-1">
-                      <div className="flex items-start justify-between mb-3">
-                        <div>
-                          <h2 className="text-xl font-bold text-gray-900 mb-1">
-                            {quote.rfq?.title || "RFQ Title"}
-                          </h2>
-                          <p className="text-sm text-gray-600">
-                            Quote #{quote.quoteNumber}
-                          </p>
-                        </div>
-                        <span
-                          className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(
-                            quote.status
-                          )}`}
-                        >
-                          {quote.status.toUpperCase()}
-                        </span>
-                      </div>
-
-                      <div className="flex items-center gap-4 mb-4">
-                        <span className="text-sm font-medium text-gray-900">
-                          Supplier: {quote.supplier?.companyName || "Unknown"}
-                        </span>
-                        {quote.supplier?.phone && (
-                          <span className="text-sm text-gray-600">
-                            📞 {quote.supplier.phone}
-                          </span>
-                        )}
-                        {quote.unreadMessageCount &&
-                          quote.unreadMessageCount > 0 && (
-                            <span className="px-2 py-1 bg-red-500 text-white text-xs rounded-full">
-                              {quote.unreadMessageCount} new messages
-                            </span>
-                          )}
-                      </div>
-
-                      <div className="grid grid-cols-4 gap-6">
-                        <div>
-                          <p className="text-xs text-gray-600 mb-1">
-                            Quote Price
-                          </p>
-                          <p className="text-lg font-bold text-gray-900">
-                            {formatCurrency(quote.quotePrice)}
-                          </p>
-                          {quote.discountPercentage &&
-                            quote.discountPercentage > 0 && (
-                              <p className="text-xs text-green-600 font-medium">
-                                Save {quote.discountPercentage}%
-                              </p>
-                            )}
-                        </div>
-
-                        <div>
-                          <p className="text-xs text-gray-600 mb-1">Quantity</p>
-                          <p className="text-sm font-medium text-gray-900">
-                            {quote.quantity} units
-                          </p>
-                        </div>
-
-                        <div>
-                          <p className="text-xs text-gray-600 mb-1">Delivery</p>
-                          <p className="text-sm font-medium text-gray-900">
-                            {quote.deliveryDays} days
-                          </p>
-                        </div>
-
-                        <div>
-                          <p className="text-xs text-gray-600 mb-1">
-                            Valid Until
-                          </p>
-                          <p className="text-sm font-medium text-gray-900">
-                            {formatDate(quote.validUntil)}
-                          </p>
-                        </div>
-                      </div>
-
-                      {quote.notes && (
-                        <div className="mt-4 p-3 bg-gray-50 rounded">
-                          <p className="text-xs text-gray-600 mb-1">Notes:</p>
-                          <p className="text-sm text-gray-900">{quote.notes}</p>
-                        </div>
-                      )}
-                    </div>
+        </div>
+      ) : quotes.length === 0 ? (
+        <div className="text-center py-12">
+          <MessageSquare className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+          <h3
+            className="text-[18px] font-medium text-[#0d1b2a] mb-2"
+            style={{ fontFamily: "Inter, sans-serif" }}
+          >
+            No quotes found
+          </h3>
+          <p
+            className="text-[#9c9c9c]"
+            style={{ fontFamily: "Inter, sans-serif" }}
+          >
+            You haven&apos;t received any quotes yet. Create an RFQ to get
+            started.
+          </p>
+        </div>
+      ) : (
+        <div className="space-y-[30px]">
+          {quotes.map((quote) => {
+            const statusBadge = getStatusBadge(quote.status);
+            return (
+              <div
+                key={quote.id}
+                className="bg-[#fbfbfb] rounded-[15px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] overflow-hidden"
+              >
+                {/* Quote Header */}
+                <div className="px-[21px] py-[15px] flex items-center justify-between">
+                  <div>
+                    <h2
+                      className="text-[18px] font-medium text-black mb-[8px]"
+                      style={{ fontFamily: "Inter, sans-serif" }}
+                    >
+                      {quote.rfq?.title || "RFQ Title"}
+                    </h2>
+                    <p
+                      className="text-[15px] font-medium text-[#9c9c9c]"
+                      style={{ fontFamily: "Inter, sans-serif" }}
+                    >
+                      Supplier: {quote.supplier?.companyName || "Unknown"}
+                    </p>
                   </div>
 
-                  <div className="flex items-center gap-3">
-                    {quote.status === "pending" && (
-                      <>
-                        <button
-                          onClick={() => handleAcceptQuote(quote.id)}
-                          disabled={acceptingQuoteId === quote.id}
-                          className="px-6 py-2 bg-gray-900 text-white rounded font-medium hover:bg-gray-800 transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                          {acceptingQuoteId === quote.id ? (
-                            <>
-                              <div className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></div>
-                              Accepting...
-                            </>
-                          ) : (
-                            <>
-                              <CheckCircle className="w-4 h-4" />
-                              Accept Quote
-                            </>
-                          )}
-                        </button>
-                        <button
-                          onClick={() => openRejectModal(quote.id)}
-                          disabled={rejectingQuoteId === quote.id}
-                          className="px-6 py-2 bg-white border-2 border-gray-900 text-gray-900 rounded font-medium hover:bg-gray-50 transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                          <XCircle className="w-4 h-4" />
-                          Decline
-                        </button>
-                      </>
-                    )}
-                    <button className="px-6 py-2 bg-white border-2 border-gray-900 text-gray-900 rounded font-medium hover:bg-gray-50 transition-colors flex items-center gap-2">
-                      <MessageCircle className="w-4 h-4" />
-                      Message
-                    </button>
+                  {/* Status Badge */}
+                  <div
+                    className={`${statusBadge.bg} ${statusBadge.text} px-[15px] py-[5px] rounded-[100px] flex items-center gap-[8px]`}
+                  >
+                    {statusBadge.icon}
+                    <span
+                      className="text-[15px] font-normal tracking-[0.5px]"
+                      style={{ fontFamily: "Inter, sans-serif" }}
+                    >
+                      {statusBadge.label}
+                    </span>
                   </div>
                 </div>
-              ))}
-            </div>
 
-            {/* Pagination */}
-            {pagination.totalPages > 1 && (
-              <div className="mt-8 flex items-center justify-center gap-2">
-                <button
-                  onClick={() =>
-                    setFilters({ ...filters, page: pagination.page - 1 })
-                  }
-                  disabled={pagination.page === 1}
-                  className="px-4 py-2 border border-gray-300 rounded text-sm font-medium hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  Previous
-                </button>
-                <span className="px-4 py-2 text-sm text-gray-600">
-                  Page {pagination.page} of {pagination.totalPages}
-                </span>
-                <button
-                  onClick={() =>
-                    setFilters({ ...filters, page: pagination.page + 1 })
-                  }
-                  disabled={pagination.page === pagination.totalPages}
-                  className="px-4 py-2 border border-gray-300 rounded text-sm font-medium hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  Next
-                </button>
+                {/* Quote Details Grid */}
+                <div className="px-[28px] pt-[18px] pb-[22px] grid grid-cols-4 gap-[22px]">
+                  <div>
+                    <p
+                      className="text-[20px] font-medium text-[#9c9c9c] mb-[16px]"
+                      style={{ fontFamily: "Inter, sans-serif" }}
+                    >
+                      Quote Price
+                    </p>
+                    <p
+                      className="text-[26px] font-medium text-black"
+                      style={{ fontFamily: "Inter, sans-serif" }}
+                    >
+                      <span className="font-bold">₹</span>
+                      {(quote.quotePrice || 0).toLocaleString("en-IN")}
+                    </p>
+                    {quote.rfq?.budgetMin && quote.rfq?.budgetMax && (
+                      <p
+                        className="text-[15px] font-medium text-black mt-[3px]"
+                        style={{ fontFamily: "Inter, sans-serif" }}
+                      >
+                        <span className="font-bold">₹</span>
+                        {(quote.rfq.budgetMax || 0).toLocaleString("en-IN")}
+                      </p>
+                    )}
+                  </div>
+
+                  <div>
+                    <p
+                      className="text-[15px] font-medium text-[#9c9c9c] mb-[12px]"
+                      style={{ fontFamily: "Inter, sans-serif" }}
+                    >
+                      Delivery
+                    </p>
+                    <p
+                      className="text-[20px] font-medium text-black"
+                      style={{ fontFamily: "Inter, sans-serif" }}
+                    >
+                      {quote.deliveryDays} Days
+                    </p>
+                  </div>
+
+                  <div>
+                    <p
+                      className="text-[15px] font-medium text-[#9c9c9c] mb-[12px]"
+                      style={{ fontFamily: "Inter, sans-serif" }}
+                    >
+                      Validity
+                    </p>
+                    <p
+                      className="text-[20px] font-medium text-black"
+                      style={{ fontFamily: "Inter, sans-serif" }}
+                    >
+                      {formatDate(quote.validUntil)}
+                    </p>
+                  </div>
+
+                  <div>
+                    <p
+                      className="text-[15px] font-medium text-[#9c9c9c] mb-[12px]"
+                      style={{ fontFamily: "Inter, sans-serif" }}
+                    >
+                      RFQ ID
+                    </p>
+                    <p
+                      className="text-[20px] font-medium text-black"
+                      style={{ fontFamily: "Inter, sans-serif" }}
+                    >
+                      {quote.quoteNumber}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Divider */}
+                <div className="mx-[24px] h-[1px] bg-gray-300" />
+
+                {/* Action Buttons */}
+                <div className="px-[117px] py-[22px] flex items-center justify-center gap-[19px]">
+                  {quote.status === "pending" && (
+                    <button
+                      onClick={() => handleAcceptQuote(quote.id)}
+                      disabled={acceptingQuoteId === quote.id}
+                      className="bg-[#1e3a8a] text-white w-[191px] h-[45px] rounded-[11px] text-[15px] font-semibold hover:bg-[#152d6b] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      style={{ fontFamily: "Poppins, sans-serif" }}
+                    >
+                      {acceptingQuoteId === quote.id
+                        ? "Accepting..."
+                        : "Accept Quote"}
+                    </button>
+                  )}
+
+                  <button
+                    className="border border-[#9c9c9c] w-[191px] h-[45px] rounded-[11px] flex items-center justify-center gap-[11px] text-[#898989] text-[15px] font-medium hover:bg-gray-50 transition-colors"
+                    style={{ fontFamily: "Poppins, sans-serif" }}
+                  >
+                    <MessageSquare className="w-[18px] h-[18px]" />
+                    <span>Help Desk</span>
+                  </button>
+                </div>
               </div>
-            )}
-          </>
-        )}
+            );
+          })}
+        </div>
+      )}
 
-        {/* Reject Modal */}
-        {showRejectModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-              <h3 className="text-lg font-bold text-gray-900 mb-4">
-                Reject Quote
-              </h3>
-              <p className="text-sm text-gray-600 mb-4">
-                Please provide a reason for rejecting this quote:
-              </p>
-              <textarea
-                value={rejectReason}
-                onChange={(e) => setRejectReason(e.target.value)}
-                placeholder="Enter reason..."
-                rows={4}
-                className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-gray-900 resize-none mb-4"
+      {/* Pagination */}
+      {pagination.totalPages > 1 && (
+        <div className="mt-[45px] flex items-center justify-center gap-[15px]">
+          <button
+            onClick={() =>
+              setFilters({ ...filters, page: pagination.page - 1 })
+            }
+            disabled={pagination.page === 1}
+            className="px-[30px] py-[15px] bg-[#1e3a8a] text-white rounded-[10px] text-[18px] font-medium hover:bg-[#152d6b] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            style={{ fontFamily: "Inter, sans-serif" }}
+          >
+            Previous
+          </button>
+          <span
+            className="text-[14px] font-medium text-[#0d1b2a]"
+            style={{ fontFamily: "Inter, sans-serif" }}
+          >
+            Page {pagination.page} of {pagination.totalPages}
+          </span>
+          <button
+            onClick={() =>
+              setFilters({ ...filters, page: pagination.page + 1 })
+            }
+            disabled={pagination.page === pagination.totalPages}
+            className="px-[30px] py-[15px] bg-[#1e3a8a] text-white rounded-[10px] text-[18px] font-medium hover:bg-[#152d6b] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            style={{ fontFamily: "Inter, sans-serif" }}
+          >
+            Next
+          </button>
+        </div>
+      )}
+
+      {/* Reject Modal */}
+      {showRejectModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-[15px] p-[30px] max-w-md w-full mx-4 shadow-[0px_0px_8px_0px_rgba(0,0,0,0.3)]">
+            <h3
+              className="text-[18px] font-bold text-[#0d1b2a] mb-[15px]"
+              style={{ fontFamily: "Inter, sans-serif" }}
+            >
+              Reject Quote
+            </h3>
+            <p
+              className="text-[12px] text-[#9c9c9c] mb-[15px]"
+              style={{ fontFamily: "Inter, sans-serif" }}
+            >
+              Please provide a reason for rejecting this quote:
+            </p>
+            <textarea
+              value={rejectReason}
+              onChange={(e) => setRejectReason(e.target.value)}
+              placeholder="Enter reason..."
+              rows={4}
+              className="w-full px-[11px] py-[9px] border border-gray-300 rounded-[8px] text-[12px] focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] resize-none mb-[15px]"
+              style={{ fontFamily: "Inter, sans-serif" }}
+              disabled={!!rejectingQuoteId}
+            />
+            <div className="flex items-center gap-[11px]">
+              <button
+                onClick={handleRejectQuote}
+                disabled={!!rejectingQuoteId || !rejectReason.trim()}
+                className="flex-1 px-[15px] py-[9px] bg-red-600 text-white rounded-[8px] text-[12px] font-medium hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                style={{ fontFamily: "Inter, sans-serif" }}
+              >
+                {rejectingQuoteId ? "Rejecting..." : "Confirm Reject"}
+              </button>
+              <button
+                onClick={() => {
+                  setShowRejectModal(false);
+                  setRejectReason("");
+                  setSelectedQuoteForReject(null);
+                }}
                 disabled={!!rejectingQuoteId}
-              />
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={handleRejectQuote}
-                  disabled={!!rejectingQuoteId || !rejectReason.trim()}
-                  className="flex-1 px-4 py-2 bg-red-600 text-white rounded font-medium hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {rejectingQuoteId ? "Rejecting..." : "Confirm Reject"}
-                </button>
-                <button
-                  onClick={() => {
-                    setShowRejectModal(false);
-                    setRejectReason("");
-                    setSelectedQuoteForReject(null);
-                  }}
-                  disabled={!!rejectingQuoteId}
-                  className="flex-1 px-4 py-2 bg-white border-2 border-gray-300 text-gray-900 rounded font-medium hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  Cancel
-                </button>
-              </div>
+                className="flex-1 px-[15px] py-[9px] bg-white border-2 border-gray-300 text-[#0d1b2a] rounded-[8px] text-[12px] font-medium hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                style={{ fontFamily: "Inter, sans-serif" }}
+              >
+                Cancel
+              </button>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
-
-

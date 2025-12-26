@@ -10,7 +10,7 @@ export default function SupplierLayout({
 }) {
   return (
     <RoleGuard allowedRole="supplier">
-      <div className="flex min-h-screen bg-white">
+      <div className="flex min-h-screen bg-[#EEFBF6]">
         <SupplierSidebar />
         <main className="flex-1">{children}</main>
       </div>

@@ -30,88 +30,73 @@ export default function ShippingPaymentInfo({
   escrowAmount,
 }: ShippingPaymentInfoProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
       {/* Shipping Address */}
-      <div className="border-2 border-gray-900 rounded p-6">
-        <div className="flex items-center gap-2 mb-4">
-          <svg
-            className="w-5 h-5 text-gray-900"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-            />
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-            />
-          </svg>
-          <h3 className="font-bold text-gray-900">Shipping Address</h3>
-        </div>
-        <div className="text-sm text-gray-700 space-y-1">
-          <p className="font-medium">{shippingAddress.name}</p>
-          <p>{shippingAddress.company}</p>
-          <p>{shippingAddress.street}</p>
-          <p>{shippingAddress.city}</p>
-          <p className="pt-2">{shippingAddress.phone}</p>
+      <div className="bg-white rounded-[15px] p-[23px] shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)]">
+        <h3 className="font-['Poppins'] font-medium text-[#0d1b2a] text-[18px] leading-normal mb-5">
+          Shipping Address
+        </h3>
+        <div className="space-y-0">
+          <p className="font-['Poppins'] font-normal text-[#9c9c9c] text-[15px] leading-[23px] whitespace-pre-wrap">
+            {shippingAddress.name}
+            {"\n"}
+            {shippingAddress.company}
+            {"\n"}
+            {shippingAddress.street}
+            {"\n"}
+            {shippingAddress.city}
+          </p>
+          <p className="font-['Poppins'] font-normal text-[#9c9c9c] text-[15px] leading-[17px] pt-[9px]">
+            {shippingAddress.phone}
+          </p>
         </div>
       </div>
 
       {/* Payment & Shipping */}
-      <div className="border-2 border-gray-900 rounded p-6">
-        <div className="mb-4">
-          <div className="flex items-center gap-2 mb-2">
-            <svg
-              className="w-5 h-5 text-gray-900"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
-              />
-            </svg>
-            <h3 className="font-bold text-gray-900">Payment & Shipping</h3>
-          </div>
+      <div className="bg-white rounded-[15px] p-[23px] shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)]">
+        <h3 className="font-['Poppins'] font-medium text-[#0d1b2a] text-[18px] leading-normal mb-[28px]">
+          Payment &amp; Shipping
+        </h3>
 
+        <div className="space-y-[11px]">
           {/* Payment Method */}
-          <div className="mb-4">
-            <p className="text-xs text-gray-500 mb-1">Payment Method</p>
-            <p className="text-sm font-medium text-gray-900">
+          <div className="flex items-center justify-between">
+            <span className="font-['Poppins'] font-normal text-[#9c9c9c] text-[13px] leading-[17px]">
+              Payment Method
+            </span>
+            <span className="font-['Poppins'] font-medium text-black text-[13px] leading-[17px]">
               {paymentInfo.method}
-            </p>
+            </span>
           </div>
 
           {/* Payment Status */}
-          <div className="mb-4">
-            <p className="text-xs text-gray-500 mb-1">Payment Status</p>
-            <p className="text-sm font-medium text-gray-900">
+          <div className="flex items-center justify-between">
+            <span className="font-['Poppins'] font-normal text-[#9c9c9c] text-[13px] leading-[17px]">
+              Payment Status
+            </span>
+            <span className="font-['Poppins'] font-medium text-black text-[13px] leading-[17px]">
               {paymentInfo.status}
-            </p>
+            </span>
           </div>
 
           {/* Shipping Method */}
-          <div className="mb-4">
-            <p className="text-xs text-gray-500 mb-1">Shipping Method</p>
-            <p className="text-sm font-medium text-gray-900">
+          <div className="flex items-center justify-between">
+            <span className="font-['Poppins'] font-normal text-[#9c9c9c] text-[13px] leading-[17px]">
+              Shipping Method
+            </span>
+            <span className="font-['Poppins'] font-medium text-black text-[13px] leading-[17px]">
               {shippingInfo.method}
-            </p>
+            </span>
           </div>
 
-          {/* Escrow Release */}
-          <div className="bg-gray-50 p-3 rounded">
-            <p className="text-xs text-gray-500 mb-1">Escrow Release</p>
-            <p className="text-sm font-medium text-gray-900">{escrowAmount}</p>
+          {/* Invoice Received / Escrow Release */}
+          <div className="flex items-center justify-between">
+            <span className="font-['Poppins'] font-normal text-[#9c9c9c] text-[13px] leading-[17px]">
+              Invoice Received
+            </span>
+            <span className="font-['Poppins'] font-medium text-black text-[13px] leading-[17px]">
+              {escrowAmount || shippingInfo.date}
+            </span>
           </div>
         </div>
       </div>

@@ -6,6 +6,7 @@ import {
   updatePrivacySettings,
 } from "@/services/settings.service";
 import type { PrivacySettings } from "@/types/buyer.types";
+import { Bell, Download, Trash2 } from "lucide-react";
 
 export default function PrivacySettingsComponent() {
   const [privacy, setPrivacy] = useState<PrivacySettings>({
@@ -66,171 +67,466 @@ export default function PrivacySettingsComponent() {
     }
   };
 
+  const handleExportData = () => {
+    // TODO: Implement data export functionality
+    console.log("Export data clicked");
+  };
+
+  const handleDeleteAccount = () => {
+    // TODO: Implement account deletion with confirmation
+    if (
+      window.confirm(
+        "Are you sure you want to delete your account? This action cannot be undone."
+      )
+    ) {
+      console.log("Delete account confirmed");
+      // API call would go here
+    }
+  };
+
   if (loading) {
     return (
-      <div className="flex items-center justify-center py-12">
-        <div className="text-gray-500">Loading settings...</div>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "90px 0",
+        }}
+      >
+        <div
+          style={{
+            color: "#9c9c9c",
+            fontSize: "15px",
+            fontFamily: "Poppins, sans-serif",
+          }}
+        >
+          Loading settings...
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Privacy</h1>
-        <p className="text-gray-500">Control your privacy and data settings</p>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "22.5px",
+        width: "100%",
+      }}
+    >
+      {/* Title Section */}
+      <div style={{ display: "flex", flexDirection: "column", gap: "7.5px" }}>
+        <h1
+          style={{
+            fontSize: "26.25px",
+            fontFamily: "Poppins, sans-serif",
+            fontWeight: 600,
+            color: "#0d1b2a",
+            margin: 0,
+            lineHeight: "normal",
+          }}
+        >
+          Privacy
+        </h1>
+        <p
+          style={{
+            fontSize: "15px",
+            fontFamily: "Inter, sans-serif",
+            fontWeight: 500,
+            color: "#9c9c9c",
+            margin: 0,
+            lineHeight: "normal",
+          }}
+        >
+          Control your privacy and data setting
+        </p>
       </div>
 
       {/* Success/Error Messages */}
       {success && (
-        <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded">
+        <div
+          style={{
+            backgroundColor: "#dcfce7",
+            border: "1px solid #86efac",
+            color: "#166534",
+            padding: "12px 15px",
+            borderRadius: "9px",
+            fontSize: "12.75px",
+            fontFamily: "Poppins, sans-serif",
+          }}
+        >
           {success}
         </div>
       )}
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded">
+        <div
+          style={{
+            backgroundColor: "#fee2e2",
+            border: "1px solid #fca5a5",
+            color: "#991b1b",
+            padding: "12px 15px",
+            borderRadius: "9px",
+            fontSize: "12.75px",
+            fontFamily: "Poppins, sans-serif",
+          }}
+        >
           {error}
         </div>
       )}
 
-      {/* Privacy Controls */}
-      <div className="border-2 border-gray-900 rounded p-6">
-        <div className="flex items-center gap-2 mb-6">
-          <svg
-            className="w-5 h-5 text-gray-900"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+      {/* Privacy Control Card */}
+      <div
+        style={{
+          backgroundColor: "white",
+          borderRadius: "15px",
+          boxShadow: "0px 2px 6px 0px rgba(0, 0, 0, 0.25)",
+          padding: "0",
+          width: "100%",
+          minHeight: "409.5px",
+          position: "relative",
+        }}
+      >
+        {/* Card Header */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "15px",
+            padding: "22.5px 22.5px 15px 22.5px",
+          }}
+        >
+          <Bell size={19.5} strokeWidth={2} color="#0d1b2a" />
+          <h2
+            style={{
+              fontSize: "18px",
+              fontFamily: "Inter, sans-serif",
+              fontWeight: 600,
+              color: "#0d1b2a",
+              margin: 0,
+              lineHeight: "normal",
+            }}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-            />
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-            />
-          </svg>
-          <h2 className="text-lg font-bold text-gray-900">Privacy Controls</h2>
+            Privacy Control
+          </h2>
         </div>
 
-        <div className="space-y-6">
-          {/* Data & Analytics */}
-          <div>
-            <h3 className="text-base font-bold text-gray-900 mb-4">
-              Data & Analytics
-            </h3>
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <div>
-                  <div className="font-medium text-gray-900">Data Sharing</div>
-                  <div className="text-sm text-gray-500">
-                    Share anonymized data for platform improvement
-                  </div>
-                </div>
-                <button
-                  onClick={() => togglePrivacy("dataSharing")}
-                  className={`relative w-12 h-6 rounded-full transition-colors ${
-                    privacy.dataSharing ? "bg-gray-900" : "bg-gray-300"
-                  }`}
-                >
-                  <div
-                    className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform ${
-                      privacy.dataSharing ? "right-1" : "left-1"
-                    }`}
-                  />
-                </button>
-              </div>
+        {/* Top Divider Line */}
+        <div
+          style={{
+            width: "100%",
+            height: "1px",
+            backgroundColor: "#e5e7eb",
+            marginTop: "15px",
+          }}
+        />
 
-              <div className="flex items-center justify-between">
-                <div>
-                  <div className="font-medium text-gray-900">
-                    Analytics Tracking
-                  </div>
-                  <div className="text-sm text-gray-500">
-                    Allow usage analytics for better experience
-                  </div>
-                </div>
-                <button
-                  onClick={() => togglePrivacy("analytics")}
-                  className={`relative w-12 h-6 rounded-full transition-colors ${
-                    privacy.analytics ? "bg-gray-900" : "bg-gray-300"
-                  }`}
-                >
-                  <div
-                    className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform ${
-                      privacy.analytics ? "right-1" : "left-1"
-                    }`}
-                  />
-                </button>
-              </div>
-            </div>
+        {/* Data Sharing Toggle Row */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "26.25px 26.25px",
+            minHeight: "36.75px",
+          }}
+        >
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "6.75px" }}
+          >
+            <p
+              style={{
+                fontSize: "12.75px",
+                fontFamily: "Poppins, sans-serif",
+                fontWeight: 500,
+                color: "#0d1b2a",
+                margin: 0,
+                lineHeight: "normal",
+              }}
+            >
+              Data sharing
+            </p>
+            <p
+              style={{
+                fontSize: "11.25px",
+                fontFamily: "Inter, sans-serif",
+                fontWeight: 400,
+                color: "#747474",
+                margin: 0,
+                lineHeight: "normal",
+              }}
+            >
+              Share anonymized data for platform improvement
+            </p>
           </div>
+          <button
+            onClick={() => togglePrivacy("dataSharing")}
+            style={{
+              position: "relative",
+              width: "38.25px",
+              height: "23.25px",
+              backgroundColor: privacy.dataSharing
+                ? "#2aae7a"
+                : "rgba(120, 120, 128, 0.16)",
+              borderRadius: "100px",
+              border: "none",
+              cursor: "pointer",
+              transition: "background-color 0.3s",
+              flexShrink: 0,
+            }}
+          >
+            <div
+              style={{
+                position: "absolute",
+                width: "20.25px",
+                height: "20.25px",
+                backgroundColor: "white",
+                borderRadius: "100px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                [privacy.dataSharing ? "right" : "left"]: "1.5px",
+                boxShadow:
+                  "0px 0px 0px 1px rgba(0, 0, 0, 0.04), 0px 3px 8px 0px rgba(0, 0, 0, 0.15), 0px 3px 1px 0px rgba(0, 0, 0, 0.06)",
+                transition: "left 0.3s, right 0.3s",
+              }}
+            />
+          </button>
+        </div>
 
-          {/* Data Export & Deletion */}
-          <div>
-            <h3 className="text-base font-bold text-gray-900 mb-4">
-              Data Export & Deletion
-            </h3>
-            <div className="flex gap-3">
-              <button className="px-6 py-2.5 bg-white border-2 border-gray-900 text-gray-900 rounded font-medium hover:bg-gray-50 flex items-center gap-2">
-                <svg
-                  className="w-4 h-4 text-gray-900"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                  />
-                </svg>
-                Export My Data
-              </button>
-              <button className="px-6 py-2.5 bg-red-6w00 border-2 border-gray-900 text-white rounded font-medium hover:bg-red-700 flex items-center gap-2">
-                <svg
-                  className="w-4 h-4 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                  />
-                </svg>
-                Delete Account
-              </button>
-            </div>
+        {/* Analytics Tracking Toggle Row */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "26.25px 26.25px",
+            minHeight: "36.75px",
+          }}
+        >
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "6.75px" }}
+          >
+            <p
+              style={{
+                fontSize: "12.75px",
+                fontFamily: "Poppins, sans-serif",
+                fontWeight: 500,
+                color: "#0d1b2a",
+                margin: 0,
+                lineHeight: "normal",
+              }}
+            >
+              Analytics Tracking
+            </p>
+            <p
+              style={{
+                fontSize: "11.25px",
+                fontFamily: "Inter, sans-serif",
+                fontWeight: 400,
+                color: "#747474",
+                margin: 0,
+                lineHeight: "normal",
+              }}
+            >
+              Allow analytics tracking for better expreience
+            </p>
           </div>
+          <button
+            onClick={() => togglePrivacy("analytics")}
+            style={{
+              position: "relative",
+              width: "38.25px",
+              height: "23.25px",
+              backgroundColor: privacy.analytics
+                ? "#2aae7a"
+                : "rgba(120, 120, 128, 0.16)",
+              borderRadius: "100px",
+              border: "none",
+              cursor: "pointer",
+              transition: "background-color 0.3s",
+              flexShrink: 0,
+            }}
+          >
+            <div
+              style={{
+                position: "absolute",
+                width: "20.25px",
+                height: "20.25px",
+                backgroundColor: "white",
+                borderRadius: "100px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                [privacy.analytics ? "right" : "left"]: "1.5px",
+                boxShadow:
+                  "0px 0px 0px 1px rgba(0, 0, 0, 0.04), 0px 3px 8px 0px rgba(0, 0, 0, 0.15), 0px 3px 1px 0px rgba(0, 0, 0, 0.06)",
+                transition: "left 0.3s, right 0.3s",
+              }}
+            />
+          </button>
+        </div>
+
+        {/* Middle Divider Line */}
+        <div
+          style={{
+            width: "calc(100% - 52.5px)",
+            height: "1px",
+            backgroundColor: "#e5e7eb",
+            marginLeft: "26.25px",
+          }}
+        />
+
+        {/* Data Export & Deletion Section */}
+        <div
+          style={{
+            padding: "26.25px 26.25px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "6.75px",
+          }}
+        >
+          <p
+            style={{
+              fontSize: "12.75px",
+              fontFamily: "Poppins, sans-serif",
+              fontWeight: 500,
+              color: "#0d1b2a",
+              margin: 0,
+              lineHeight: "normal",
+            }}
+          >
+            Data Export & Deletion
+          </p>
+          <p
+            style={{
+              fontSize: "11.25px",
+              fontFamily: "Inter, sans-serif",
+              fontWeight: 400,
+              color: "#747474",
+              margin: 0,
+              lineHeight: "normal",
+            }}
+          >
+            Export your data or permanently delete your account
+          </p>
+        </div>
+
+        {/* Action Buttons */}
+        <div
+          style={{
+            display: "flex",
+            gap: "18.75px",
+            padding: "0 26.25px 26.25px 26.25px",
+          }}
+        >
+          {/* Export My Data Button */}
+          <button
+            onClick={handleExportData}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "7.5px",
+              padding: "11.25px 82.5px",
+              backgroundColor: "white",
+              border: "1px solid #007bff",
+              borderRadius: "9px",
+              cursor: "pointer",
+              height: "41.25px",
+              flexShrink: 0,
+            }}
+          >
+            <Download size={21.75} strokeWidth={2} color="#007bff" />
+            <span
+              style={{
+                fontSize: "15px",
+                fontFamily: "Poppins, sans-serif",
+                fontWeight: 500,
+                color: "#007bff",
+                lineHeight: "16.5px",
+              }}
+            >
+              Export My Data
+            </span>
+          </button>
+
+          {/* Delete Account Button */}
+          <button
+            onClick={handleDeleteAccount}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "7.5px",
+              padding: "11.25px 82.5px",
+              backgroundColor: "#e53935",
+              border: "none",
+              borderRadius: "9px",
+              cursor: "pointer",
+              height: "41.25px",
+              flexShrink: 0,
+            }}
+          >
+            <Trash2 size={19.5} strokeWidth={2} color="white" />
+            <span
+              style={{
+                fontSize: "15px",
+                fontFamily: "Poppins, sans-serif",
+                fontWeight: 500,
+                color: "white",
+                lineHeight: "16.5px",
+              }}
+            >
+              Delete Account
+            </span>
+          </button>
         </div>
       </div>
 
-      {/* Save Button */}
-      <div className="flex justify-end">
-        <button className="px-6 py-2.5 bg-white border-2 border-gray-900 text-gray-900 rounded font-medium hover:bg-gray-50 flex items-center gap-2">
-          <svg
-            className="w-4 h-4 text-gray-900"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+      {/* Save Changes Button */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          marginTop: "15px",
+        }}
+      >
+        <button
+          onClick={() => {
+            // Settings are saved automatically on toggle, but this provides explicit save option
+            setSuccess("All changes saved successfully");
+            setTimeout(() => setSuccess(null), 3000);
+          }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "7.5px",
+            padding: "11.25px 82.5px",
+            backgroundColor: "#1e3a8a",
+            border: "none",
+            borderRadius: "9px",
+            cursor: "pointer",
+            height: "48.75px",
+          }}
+        >
+          <Download
+            size={21}
+            strokeWidth={2}
+            color="white"
+            style={{ transform: "rotate(180deg)" }}
+          />
+          <span
+            style={{
+              fontSize: "15px",
+              fontFamily: "Poppins, sans-serif",
+              fontWeight: 600,
+              color: "white",
+              lineHeight: "16.5px",
+            }}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"
-            />
-          </svg>
-          Save Changes
+            Save Changes
+          </span>
         </button>
       </div>
     </div>

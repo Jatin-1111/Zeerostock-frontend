@@ -41,14 +41,20 @@ export default function PostRFQPage() {
           rfqService.getIndustries(),
         ]);
 
-        if (categoriesRes.success && categoriesRes.data?.categories) {
-          setCategories(categoriesRes.data.categories);
+        // Handle categories - check both nested and direct data
+        if (categoriesRes.success) {
+          const cats =
+            categoriesRes.data?.categories || categoriesRes.data || [];
+          setCategories(Array.isArray(cats) ? cats : []);
         }
-        if (industriesRes.success && industriesRes.data?.industries) {
-          setIndustries(industriesRes.data.industries);
+
+        // Handle industries - check both nested and direct data
+        if (industriesRes.success) {
+          const inds =
+            industriesRes.data?.industries || industriesRes.data || [];
+          setIndustries(Array.isArray(inds) ? inds : []);
         }
       } catch (err) {
-        console.error("Failed to load dropdown data:", err);
         setError("Failed to load form data. Please refresh the page.");
       } finally {
         setLoadingData(false);
@@ -131,14 +137,19 @@ export default function PostRFQPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white p-8">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Post New RFQ</h1>
+    <div className="min-h-screen bg-white px-15 py-6">
+      <div className="max-w-[885px] mx-auto">
+        <h1
+          className="text-[27px] font-semibold text-[#0d1b2a] mb-6"
+          style={{ fontFamily: "Poppins, sans-serif" }}
+        >
+          Post New RFQ
+        </h1>
 
         {/* Success Message */}
         {success && (
-          <div className="mb-6 p-4 bg-green-50 border border-green-200 flex items-center gap-3">
-            <Check className="w-5 h-5 text-green-600 shrink-0" />
+          <div className="mb-5 p-3 bg-green-50 border border-green-200 flex items-center gap-2 rounded-[8px]">
+            <Check className="w-4 h-4 text-green-600 shrink-0" />
             <p className="text-sm text-green-800">
               RFQ created successfully! Suppliers will start sending quotes
               soon.
@@ -148,50 +159,60 @@ export default function PostRFQPage() {
 
         {/* Error Message */}
         {error && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-200 flex items-center gap-3">
-            <AlertCircle className="w-5 h-5 text-red-600 shrink-0" />
+          <div className="mb-5 p-3 bg-red-50 border border-red-200 flex items-center gap-2 rounded-[8px]">
+            <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
             <p className="text-sm text-red-800">{error}</p>
           </div>
         )}
 
         <form
           onSubmit={handleSubmit}
-          className="bg-white border border-gray-900 p-8"
+          className="bg-white rounded-[15px] shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)] p-[23px]"
         >
           {/* Product Title */}
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-900 mb-2">
-              Product Title*
+            <label
+              className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
+              Product Title<span className="text-red-600">*</span>
             </label>
             <input
               type="text"
-              placeholder="e.g., Industrial Electronics Components"
+              placeholder="eg., Industrial Electronic Components"
               value={formData.title}
               onChange={(e) =>
                 setFormData({ ...formData, title: e.target.value })
               }
-              className="w-full px-3 py-2 border border-gray-900 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-900"
+              className="w-full h-[56px] px-4 border border-[#bebebe] rounded-[10px] text-[16px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+              style={{ fontFamily: "Roboto, sans-serif" }}
               required
               disabled={loading}
             />
           </div>
 
           {/* Category and Industry */}
-          <div className="grid grid-cols-2 gap-6 mb-6">
+          <div className="grid grid-cols-2 gap-[30px] mb-6">
             <div>
-              <label className="block text-sm font-medium text-gray-900 mb-2">
-                Category*
+              <label
+                className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]"
+                style={{ fontFamily: "Poppins, sans-serif" }}
+              >
+                Category<span className="text-red-600">*</span>
               </label>
               <select
                 value={formData.categoryId}
                 onChange={(e) =>
                   setFormData({ ...formData, categoryId: e.target.value })
                 }
-                className="w-full px-3 py-2 border border-gray-900 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-900"
+                className="w-full h-[42px] px-3 border border-[#bebebe] rounded-[8px] text-[12px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe] appearance-none bg-white"
+                style={{ fontFamily: "Roboto, sans-serif" }}
                 required
                 disabled={loading}
               >
-                <option value="">Select Category</option>
+                <option value="" className="text-[#9c9c9c]">
+                  Select Category
+                </option>
                 {categories.map((cat) => (
                   <option key={cat.id} value={cat.id}>
                     {cat.name}
@@ -201,19 +222,25 @@ export default function PostRFQPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-900 mb-2">
-                Industry*
+              <label
+                className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]"
+                style={{ fontFamily: "Poppins, sans-serif" }}
+              >
+                Industry<span className="text-red-600">*</span>
               </label>
               <select
                 value={formData.industryId}
                 onChange={(e) =>
                   setFormData({ ...formData, industryId: e.target.value })
                 }
-                className="w-full px-3 py-2 border border-gray-900 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-900"
+                className="w-full h-[42px] px-3 border border-[#bebebe] rounded-[8px] text-[12px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe] appearance-none bg-white"
+                style={{ fontFamily: "Roboto, sans-serif" }}
                 required
                 disabled={loading}
               >
-                <option value="">Select Industry</option>
+                <option value="" className="text-[#9c9c9c]">
+                  Select industry
+                </option>
                 {industries.map((ind) => (
                   <option key={ind.id} value={ind.id}>
                     {ind.name}
@@ -224,19 +251,23 @@ export default function PostRFQPage() {
           </div>
 
           {/* Quantity and Unit */}
-          <div className="grid grid-cols-2 gap-6 mb-6">
+          <div className="grid grid-cols-2 gap-[30px] mb-6">
             <div>
-              <label className="block text-sm font-medium text-gray-900 mb-2">
-                Quantity*
+              <label
+                className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]"
+                style={{ fontFamily: "Poppins, sans-serif" }}
+              >
+                Quantity<span className="text-red-600">*</span>
               </label>
               <input
                 type="number"
-                placeholder="e.g., 500"
+                placeholder="eg., 500"
                 value={formData.quantity || ""}
                 onChange={(e) =>
                   setFormData({ ...formData, quantity: Number(e.target.value) })
                 }
-                className="w-full px-3 py-2 border border-gray-900 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-900"
+                className="w-full h-[42px] px-3 border border-[#bebebe] rounded-[8px] text-[12px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+                style={{ fontFamily: "Roboto, sans-serif" }}
                 required
                 min="1"
                 disabled={loading}
@@ -244,19 +275,25 @@ export default function PostRFQPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-900 mb-2">
-                Unit*
+              <label
+                className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]"
+                style={{ fontFamily: "Poppins, sans-serif" }}
+              >
+                Unit
               </label>
               <select
                 value={formData.unit}
                 onChange={(e) =>
                   setFormData({ ...formData, unit: e.target.value as RFQUnit })
                 }
-                className="w-full px-3 py-2 border border-gray-900 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-900"
+                className="w-full h-[42px] px-3 border border-[#bebebe] rounded-[8px] text-[12px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe] appearance-none bg-white"
+                style={{ fontFamily: "Roboto, sans-serif" }}
                 required
                 disabled={loading}
               >
-                <option value="">Select Unit</option>
+                <option value="" className="text-[#9c9c9c]">
+                  Select Unit
+                </option>
                 {units.map((group) => (
                   <optgroup key={group.category} label={group.category}>
                     {group.items.map((unit) => (
@@ -271,71 +308,78 @@ export default function PostRFQPage() {
           </div>
 
           {/* Budget Range and Required by Date */}
-          <div className="grid grid-cols-2 gap-6 mb-6">
+          <div className="grid grid-cols-2 gap-[30px] mb-6">
             <div>
-              <label className="block text-sm font-medium text-gray-900 mb-2">
-                Budget Min (₹)
+              <label
+                className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]"
+                style={{ fontFamily: "Poppins, sans-serif" }}
+              >
+                Budge Range
               </label>
               <input
-                type="number"
-                placeholder="e.g., 20000"
-                value={formData.budgetMin || ""}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    budgetMin: Number(e.target.value) || undefined,
-                  })
+                type="text"
+                placeholder="eg., 20,000 - 50,000"
+                value={
+                  formData.budgetMin && formData.budgetMax
+                    ? `${formData.budgetMin} - ${formData.budgetMax}`
+                    : ""
                 }
-                className="w-full px-3 py-2 border border-gray-900 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-900"
-                min="0"
+                onChange={(e) => {
+                  const value = e.target.value;
+                  const parts = value.split("-").map((p) => p.trim());
+                  if (parts.length === 2) {
+                    setFormData({
+                      ...formData,
+                      budgetMin:
+                        Number(parts[0].replace(/,/g, "")) || undefined,
+                      budgetMax:
+                        Number(parts[1].replace(/,/g, "")) || undefined,
+                    });
+                  } else if (value === "") {
+                    setFormData({
+                      ...formData,
+                      budgetMin: undefined,
+                      budgetMax: undefined,
+                    });
+                  }
+                }}
+                className="w-full h-[42px] px-3 border border-[#bebebe] rounded-[8px] text-[12px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+                style={{ fontFamily: "Roboto, sans-serif" }}
                 disabled={loading}
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-900 mb-2">
-                Budget Max (₹)
+              <label
+                className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]"
+                style={{ fontFamily: "Poppins, sans-serif" }}
+              >
+                Required by Date
               </label>
               <input
-                type="number"
-                placeholder="e.g., 50000"
-                value={formData.budgetMax || ""}
+                type="date"
+                placeholder="dd-mm-yy"
+                value={formData.requiredByDate || ""}
                 onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    budgetMax: Number(e.target.value) || undefined,
-                  })
+                  setFormData({ ...formData, requiredByDate: e.target.value })
                 }
-                className="w-full px-3 py-2 border border-gray-900 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-900"
-                min="0"
+                className="w-full h-[42px] px-3 border border-[#bebebe] rounded-[8px] text-[12px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+                style={{ fontFamily: "Roboto, sans-serif" }}
                 disabled={loading}
               />
             </div>
-          </div>
-
-          {/* Required by Date */}
-          <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-900 mb-2">
-              Required by Date
-            </label>
-            <input
-              type="date"
-              value={formData.requiredByDate || ""}
-              onChange={(e) =>
-                setFormData({ ...formData, requiredByDate: e.target.value })
-              }
-              className="w-full px-3 py-2 border border-gray-900 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-900"
-              disabled={loading}
-            />
           </div>
 
           {/* Detailed Requirements */}
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-900 mb-2">
+            <label
+              className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]"
+              style={{ fontFamily: "Poppins, sans-serif" }}
+            >
               Detailed Requirements
             </label>
             <textarea
-              placeholder="Describe your specific requirements, quality standards, certifications needed, etc."
+              placeholder="Describe your specific requirements, quality standards, certifications needed etc."
               value={formData.detailedRequirements || ""}
               onChange={(e) =>
                 setFormData({
@@ -344,59 +388,73 @@ export default function PostRFQPage() {
                 })
               }
               rows={4}
-              className="w-full px-3 py-2 border border-gray-900 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-900 resize-none"
+              className="w-full px-3 py-2 border border-[#bebebe] rounded-[8px] text-[12px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe] resize-none"
+              style={{ fontFamily: "Roboto, sans-serif" }}
               disabled={loading}
             />
           </div>
 
-          {/* Preferred Location */}
-          <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-900 mb-2">
-              Preferred Location
-            </label>
-            <input
-              type="text"
-              placeholder="e.g., Within 100 KM of Mumbai"
-              value={formData.preferredLocation || ""}
-              onChange={(e) =>
-                setFormData({ ...formData, preferredLocation: e.target.value })
-              }
-              className="w-full px-3 py-2 border border-gray-900 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-900"
-              disabled={loading}
-            />
-          </div>
+          {/* Preferred Location and RFQ Duration */}
+          <div className="grid grid-cols-2 gap-[30px] mb-9">
+            <div>
+              <label
+                className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]"
+                style={{ fontFamily: "Poppins, sans-serif" }}
+              >
+                Preferred Location
+              </label>
+              <input
+                type="text"
+                placeholder="eg., Within 100 km of mumbai"
+                value={formData.preferredLocation || ""}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    preferredLocation: e.target.value,
+                  })
+                }
+                className="w-full h-[42px] px-3 border border-[#bebebe] rounded-[8px] text-[12px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+                style={{ fontFamily: "Roboto, sans-serif" }}
+                disabled={loading}
+              />
+            </div>
 
-          {/* RFQ Duration */}
-          <div className="mb-8">
-            <label className="block text-sm font-medium text-gray-900 mb-2">
-              RFQ Duration*
-            </label>
-            <select
-              value={formData.durationDays}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  durationDays: Number(e.target.value),
-                })
-              }
-              className="w-full px-3 py-2 border border-gray-900 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-900"
-              required
-              disabled={loading}
-            >
-              {durations.map((duration) => (
-                <option key={duration.value} value={duration.value}>
-                  {duration.label}
-                </option>
-              ))}
-            </select>
+            <div>
+              <label
+                className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]"
+                style={{ fontFamily: "Poppins, sans-serif" }}
+              >
+                RFQ Duration<span className="text-red-600">*</span>
+              </label>
+              <select
+                value={formData.durationDays}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    durationDays: Number(e.target.value),
+                  })
+                }
+                className="w-full h-[42px] px-3 border border-[#bebebe] rounded-[8px] text-[12px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe] appearance-none bg-white"
+                style={{ fontFamily: "Roboto, sans-serif" }}
+                required
+                disabled={loading}
+              >
+                {durations.map((duration) => (
+                  <option key={duration.value} value={duration.value}>
+                    {duration.label}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
           {/* Submit Button */}
-          <div className="flex justify-end">
+          <div className="flex justify-center">
             <button
               type="submit"
               disabled={loading}
-              className="px-8 py-3 bg-gray-900 text-white text-sm font-medium hover:bg-gray-800 transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-[191px] h-[45px] bg-[#1e3a8a] text-white text-[15px] font-semibold rounded-[11px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center justify-center gap-[11px] disabled:opacity-50 disabled:cursor-not-allowed"
+              style={{ fontFamily: "Poppins, sans-serif" }}
             >
               {loading ? (
                 <>
@@ -416,5 +474,3 @@ export default function PostRFQPage() {
     </div>
   );
 }
-
-

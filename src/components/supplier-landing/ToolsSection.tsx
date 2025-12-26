@@ -6,7 +6,7 @@ import {
   TrendingUp,
   ShieldCheck,
   Megaphone,
-  Globe,
+  Truck,
 } from "lucide-react";
 
 export default function ToolsSection() {
@@ -33,7 +33,7 @@ export default function ToolsSection() {
       icon: ShieldCheck,
       title: "Buyer Verification",
       description:
-        "Specialized tools for large-volume purchases including price discounts and consolidated shipping.",
+        "Specialized tools for large-volume purchases including volume discounts and consolidated shipping.",
     },
     {
       icon: Megaphone,
@@ -42,7 +42,7 @@ export default function ToolsSection() {
         "Detailed product descriptions, photos, and third-party inspection reports ensure quality standards.",
     },
     {
-      icon: Globe,
+      icon: Truck,
       title: "Integrated Logistics",
       description:
         "Integrated shipping solutions with tracking, insurance, and customs handling for international purchases.",
@@ -50,27 +50,47 @@ export default function ToolsSection() {
   ];
 
   return (
-    <div className="bg-white p-14">
-      <h2 className="text-3xl font-bold text-gray-900 mb-2 text-center">
-        Powerful Tools for Successful Selling
-      </h2>
-      <p className="text-gray-600 text-center mb-8">
-        Everything you need to list, promote, and sell your surplus inventory
-        efficiently.
-      </p>
+    <div className="w-full bg-[#eeffef] px-[60px] py-[75px]">
+      <div className="max-w-[1320px] mx-auto">
+        {/* Heading Section */}
+        <div className="text-center mb-[67px]">
+          <h2 className="text-[39px] leading-[52px] font-medium text-[#0d1b2a] mb-[11px]">
+            Powerful Tools for{" "}
+            <span className="text-[#2ec096]">Successful Selling</span>
+          </h2>
+          <p className="text-[18px] font-semibold text-[#9c9c9c]">
+            Everything you need to list, promote, and sell your surplus
+            inventory efficiently.
+          </p>
+        </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {tools.map((tool, index) => (
-          <div key={index} className="bg-white">
-            <div className="flex items-start gap-3 mb-3">
-              <tool.icon className="w-5 h-5 text-gray-900 flex-shrink-0 mt-1" />
-              <h3 className="font-bold text-gray-900">{tool.title}</h3>
+        {/* Tools Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-[60px] gap-y-[60px]">
+          {tools.map((tool, index) => (
+            <div
+              key={index}
+              className="bg-[#2aae7a] rounded-[30px] overflow-hidden min-h-[215px] flex flex-col items-center text-center px-[19px] pt-[23px] pb-[23px]"
+            >
+              {/* Icon Container */}
+              <div className="bg-[#eeffef] rounded-[45px] p-[11px] flex items-center justify-center mb-[23px]">
+                <tool.icon
+                  className="w-[30px] h-[30px] text-[#2aae7a]"
+                  strokeWidth={2}
+                />
+              </div>
+
+              {/* Title */}
+              <h3 className="text-[17px] leading-[20px] font-semibold text-[#022778] mb-[15px]">
+                {tool.title}
+              </h3>
+
+              {/* Description */}
+              <p className="text-[12px] leading-[16px] font-semibold text-white">
+                {tool.description}
+              </p>
             </div>
-            <p className="text-sm text-gray-600 leading-relaxed">
-              {tool.description}
-            </p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

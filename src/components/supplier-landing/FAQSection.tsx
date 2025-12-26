@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronUp } from "lucide-react";
 
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -39,39 +39,49 @@ export default function FAQSection() {
   };
 
   return (
-    <div className="bg-white p-14">
-      <h2 className="text-3xl font-bold text-gray-900 mb-2 text-center">
-        Frequently Asked Questions
-      </h2>
-      <p className="text-gray-600 text-center mb-8">
-        Quick answers to common questions
-      </p>
+    <div className="w-full bg-[#EEFBF6] px-[60px] py-[75px]">
+      <div className="max-w-[1320px] mx-auto">
+        {/* Heading Section */}
+        <div className="text-center mb-[130px]">
+          <h2 className="text-[39px] leading-[59px] font-medium text-[#0d1b2a] mb-[11px]">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-[18px] font-semibold text-[#9c9c9c]">
+            Quick answers to common questions
+          </p>
+        </div>
 
-      <div className="max-w-3xl mx-auto space-y-6">
-        {faqs.map((faq, index) => (
-          <div key={index} className="bg-white">
-            <button
-              onClick={() => toggleFAQ(index)}
-              className="w-full flex items-start justify-between text-left"
+        {/* FAQ List */}
+        <div className="space-y-[30px]">
+          {faqs.map((faq, index) => (
+            <div
+              key={index}
+              className="bg-[#fbfbfb] rounded-[15px] shadow-[0px_3px_4px_0px_rgba(0,0,0,0.25)] overflow-hidden"
             >
-              <span className="font-bold text-gray-900 pr-4">
-                {faq.question}
-              </span>
-              <ChevronDown
-                className={`w-5 h-5 text-gray-900 transition-transform shrink-0 mt-0.5 ${
-                  openIndex === index ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-            {openIndex === index && (
-              <div className="mt-2">
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  {faq.answer}
-                </p>
-              </div>
-            )}
-          </div>
-        ))}
+              <button
+                onClick={() => toggleFAQ(index)}
+                className="w-full flex items-center justify-between px-[23px] py-[23px] text-left"
+              >
+                <span className="text-[20px] leading-[21px] font-medium text-[#0d1b2a] tracking-[0.5px] pr-4">
+                  {faq.question}
+                </span>
+                <ChevronUp
+                  className={`w-[21px] h-[21px] text-[#0d1b2a] transition-transform shrink-0 ${
+                    openIndex === index ? "" : "rotate-180"
+                  }`}
+                  strokeWidth={2}
+                />
+              </button>
+              {openIndex === index && (
+                <div className="px-[23px] pb-[23px]">
+                  <p className="text-[15px] leading-[21px] font-medium text-[#9c9c9c] tracking-[0.5px]">
+                    {faq.answer}
+                  </p>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

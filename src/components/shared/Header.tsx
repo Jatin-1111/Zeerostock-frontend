@@ -75,7 +75,7 @@ export default function Header() {
             {/* Show Buyer link only if not logged in as supplier */}
             {(!isAuthenticated || user?.activeRole !== "supplier") && (
               <Link
-                href="/buyer"
+                href="/buyer/dashboard"
                 className={`font-semibold text-[20px] leading-normal whitespace-nowrap transition-colors ${
                   isActive("/buyer")
                     ? "text-[#58ea50]"

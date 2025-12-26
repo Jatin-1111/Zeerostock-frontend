@@ -1,13 +1,12 @@
-import { ExternalLink } from "lucide-react";
-
 export default function TrackOrder() {
   return (
-    <div className="border-2 border-gray-900 rounded p-6 mb-6">
-      <h3 className="font-bold text-gray-900 mb-4">Track Your Order</h3>
+    <div className="bg-white rounded-[20px] pt-[30px] pb-[30px]">
+      <h3 className="font-['Poppins'] font-medium text-[#0d1b2a] text-[24px] leading-normal text-center mb-[30px]">
+        Track Your Order
+      </h3>
 
-      <button className="w-full py-2.5 bg-gray-900 text-white rounded font-medium hover:bg-gray-800 flex items-center justify-center gap-2">
-        <span>Order Tracking</span>
-        <ExternalLink className="w-4 h-4" />
+      <button className="w-full max-w-[359px] mx-auto block bg-[#1e3a8a] text-white font-['Poppins'] font-semibold text-[20px] leading-[22px] h-[60px] rounded-[15px] hover:bg-[#1e3a8a]/90 transition-colors">
+        Order Tracking
       </button>
     </div>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { User, MapPin, Mail, Phone, Save } from "lucide-react";
+import { User, MapPin, Save } from "lucide-react";
 import { getSettings, updateAccountInfo } from "@/services/settings.service";
 import type { AccountInfo } from "@/types/buyer.types";
 
@@ -69,47 +69,141 @@ export default function AccountSettings() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div className="text-gray-500">Loading settings...</div>
+        <div style={{ color: "#6b7280" }}>Loading settings...</div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
+    <div style={{ display: "flex", flexDirection: "column", gap: "22.5px" }}>
+      {/* Header Section */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
+        <h1
+          style={{
+            fontFamily: "Poppins, sans-serif",
+            fontSize: "26.25px",
+            fontWeight: 600,
+            color: "#0d1b2a",
+            marginBottom: "6px",
+            lineHeight: "1.2",
+          }}
+        >
           Account Settings
         </h1>
-        <p className="text-sm text-gray-500">
+        <p
+          style={{
+            fontFamily: "Poppins, sans-serif",
+            fontSize: "12.75px",
+            color: "#0d1b2a",
+            fontWeight: 400,
+          }}
+        >
           Manage your personal information and account details
         </p>
       </div>
 
       {/* Success/Error Messages */}
       {success && (
-        <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded">
+        <div
+          style={{
+            backgroundColor: "#f0fdf4",
+            border: "1px solid #86efac",
+            color: "#166534",
+            padding: "9px 12px",
+            borderRadius: "6px",
+          }}
+        >
           {success}
         </div>
       )}
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded">
+        <div
+          style={{
+            backgroundColor: "#fef2f2",
+            border: "1px solid #fecaca",
+            color: "#991b1b",
+            padding: "9px 12px",
+            borderRadius: "6px",
+          }}
+        >
           {error}
         </div>
       )}
 
-      {/* Personal Information */}
-      <div className="border border-gray-900 p-6">
-        <div className="flex items-center gap-2 mb-6">
-          <User className="w-5 h-5 text-gray-900" />
-          <h2 className="text-base font-semibold text-gray-900">
+      {/* Personal Information Section */}
+      <div
+        style={{
+          backgroundColor: "white",
+          borderRadius: "15px",
+          boxShadow: "0px 1.5px 4.5px 0px rgba(0,0,0,0.25)",
+          padding: "18px",
+          position: "relative",
+        }}
+      >
+        {/* Section Header */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "15px",
+            marginBottom: "30px",
+          }}
+        >
+          <User
+            style={{ width: "19.5px", height: "19.5px", color: "#0d1b2a" }}
+          />
+          <h2
+            style={{
+              fontFamily: "Inter, sans-serif",
+              fontSize: "18px",
+              fontWeight: 600,
+              color: "#0d1b2a",
+            }}
+          >
             Personal Information
           </h2>
         </div>
 
-        <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+        {/* Divider Line */}
+        <div
+          style={{
+            position: "absolute",
+            left: 0,
+            top: "67.5px",
+            width: "100%",
+            height: "1px",
+            backgroundColor: "#e5e7eb",
+          }}
+        />
+
+        {/* Form Fields */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "22.5px",
+            marginTop: "22.5px",
+          }}
+        >
+          {/* First Row: First Name and Last Name */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "22.5px",
+            }}
+          >
             <div>
-              <label className="block text-sm font-medium text-gray-900 mb-2">
+              <label
+                style={{
+                  display: "block",
+                  fontFamily: "Poppins, sans-serif",
+                  fontSize: "12.75px",
+                  fontWeight: 500,
+                  color: "#0d1b2a",
+                  marginBottom: "10.5px",
+                }}
+              >
                 First Name
               </label>
               <input
@@ -118,11 +212,30 @@ export default function AccountSettings() {
                 onChange={(e) =>
                   setFormData({ ...formData, firstName: e.target.value })
                 }
-                className="w-full px-3 py-2 border border-gray-900 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-900"
+                style={{
+                  width: "100%",
+                  height: "42px",
+                  padding: "0 12px",
+                  border: "1px solid #bebebe",
+                  borderRadius: "7.5px",
+                  fontFamily: "Roboto, sans-serif",
+                  fontSize: "12px",
+                  color: "#0d1b2a",
+                  outline: "none",
+                }}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-900 mb-2">
+              <label
+                style={{
+                  display: "block",
+                  fontFamily: "Poppins, sans-serif",
+                  fontSize: "12.75px",
+                  fontWeight: 500,
+                  color: "#0d1b2a",
+                  marginBottom: "10.5px",
+                }}
+              >
                 Last Name
               </label>
               <input
@@ -131,60 +244,164 @@ export default function AccountSettings() {
                 onChange={(e) =>
                   setFormData({ ...formData, lastName: e.target.value })
                 }
-                className="w-full px-3 py-2 border border-gray-900 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-900"
+                style={{
+                  width: "100%",
+                  height: "42px",
+                  padding: "0 12px",
+                  border: "1px solid #bebebe",
+                  borderRadius: "7.5px",
+                  fontFamily: "Roboto, sans-serif",
+                  fontSize: "12px",
+                  color: "#0d1b2a",
+                  outline: "none",
+                }}
               />
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          {/* Second Row: Email and Phone */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "22.5px",
+            }}
+          >
             <div>
-              <div className="flex items-center gap-2 mb-2">
-                <Mail className="w-4 h-4 text-gray-900" />
-                <label className="block text-sm font-medium text-gray-900">
-                  Email Address
-                </label>
-              </div>
+              <label
+                style={{
+                  display: "block",
+                  fontFamily: "Poppins, sans-serif",
+                  fontSize: "12.75px",
+                  fontWeight: 500,
+                  color: "#0d1b2a",
+                  marginBottom: "10.5px",
+                }}
+              >
+                Email Address
+              </label>
               <input
                 type="email"
                 value={formData.email}
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
                 }
-                className="w-full px-3 py-2 border border-gray-900 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-900"
+                style={{
+                  width: "100%",
+                  height: "42px",
+                  padding: "0 12px",
+                  border: "1px solid #bebebe",
+                  borderRadius: "7.5px",
+                  fontFamily: "Roboto, sans-serif",
+                  fontSize: "12px",
+                  color: "#0d1b2a",
+                  outline: "none",
+                }}
               />
             </div>
             <div>
-              <div className="flex items-center gap-2 mb-2">
-                <Phone className="w-4 h-4 text-gray-900" />
-                <label className="block text-sm font-medium text-gray-900">
-                  Phone Number
-                </label>
-              </div>
+              <label
+                style={{
+                  display: "block",
+                  fontFamily: "Poppins, sans-serif",
+                  fontSize: "12.75px",
+                  fontWeight: 500,
+                  color: "#0d1b2a",
+                  marginBottom: "10.5px",
+                }}
+              >
+                Phone Number
+              </label>
               <input
                 type="tel"
                 value={formData.phone}
                 onChange={(e) =>
                   setFormData({ ...formData, phone: e.target.value })
                 }
-                className="w-full px-3 py-2 border border-gray-900 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-900"
+                style={{
+                  width: "100%",
+                  height: "42px",
+                  padding: "0 12px",
+                  border: "1px solid #bebebe",
+                  borderRadius: "7.5px",
+                  fontFamily: "Roboto, sans-serif",
+                  fontSize: "12px",
+                  color: "#0d1b2a",
+                  outline: "none",
+                }}
               />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Address Information */}
-      <div className="border border-gray-900 p-6">
-        <div className="flex items-center gap-2 mb-6">
-          <MapPin className="w-5 h-5 text-gray-900" />
-          <h2 className="text-base font-semibold text-gray-900">
+      {/* Address Information Section */}
+      <div
+        style={{
+          backgroundColor: "white",
+          borderRadius: "15px",
+          boxShadow: "0px 1.5px 4.5px 0px rgba(0,0,0,0.25)",
+          padding: "18px",
+          position: "relative",
+        }}
+      >
+        {/* Section Header */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "15px",
+            marginBottom: "30px",
+          }}
+        >
+          <MapPin
+            style={{ width: "19.5px", height: "19.5px", color: "#0d1b2a" }}
+          />
+          <h2
+            style={{
+              fontFamily: "Inter, sans-serif",
+              fontSize: "18px",
+              fontWeight: 600,
+              color: "#0d1b2a",
+            }}
+          >
             Address Information
           </h2>
         </div>
 
-        <div className="space-y-4">
+        {/* Divider Line */}
+        <div
+          style={{
+            position: "absolute",
+            left: 0,
+            top: "67.5px",
+            width: "100%",
+            height: "1px",
+            backgroundColor: "#e5e7eb",
+          }}
+        />
+
+        {/* Form Fields */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "22.5px",
+            marginTop: "22.5px",
+          }}
+        >
+          {/* Street Address */}
           <div>
-            <label className="block text-sm font-medium text-gray-900 mb-2">
+            <label
+              style={{
+                display: "block",
+                fontFamily: "Poppins, sans-serif",
+                fontSize: "12.75px",
+                fontWeight: 500,
+                color: "#0d1b2a",
+                marginBottom: "10.5px",
+              }}
+            >
               Street Address
             </label>
             <input
@@ -193,13 +410,39 @@ export default function AccountSettings() {
               onChange={(e) =>
                 setFormData({ ...formData, street: e.target.value })
               }
-              className="w-full px-3 py-2 border border-gray-900 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-900"
+              style={{
+                width: "100%",
+                height: "42px",
+                padding: "0 12px",
+                border: "1px solid #bebebe",
+                borderRadius: "7.5px",
+                fontFamily: "Roboto, sans-serif",
+                fontSize: "12px",
+                color: "#0d1b2a",
+                outline: "none",
+              }}
             />
           </div>
 
-          <div className="grid grid-cols-3 gap-4">
+          {/* City, State, ZIP */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr 0.84fr",
+              gap: "22.5px",
+            }}
+          >
             <div>
-              <label className="block text-sm font-medium text-gray-900 mb-2">
+              <label
+                style={{
+                  display: "block",
+                  fontFamily: "Poppins, sans-serif",
+                  fontSize: "12.75px",
+                  fontWeight: 500,
+                  color: "#0d1b2a",
+                  marginBottom: "10.5px",
+                }}
+              >
                 City
               </label>
               <input
@@ -208,11 +451,30 @@ export default function AccountSettings() {
                 onChange={(e) =>
                   setFormData({ ...formData, city: e.target.value })
                 }
-                className="w-full px-3 py-2 border border-gray-900 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-900"
+                style={{
+                  width: "100%",
+                  height: "42px",
+                  padding: "0 12px",
+                  border: "1px solid #bebebe",
+                  borderRadius: "7.5px",
+                  fontFamily: "Roboto, sans-serif",
+                  fontSize: "12px",
+                  color: "#0d1b2a",
+                  outline: "none",
+                }}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-900 mb-2">
+              <label
+                style={{
+                  display: "block",
+                  fontFamily: "Poppins, sans-serif",
+                  fontSize: "12.75px",
+                  fontWeight: 500,
+                  color: "#0d1b2a",
+                  marginBottom: "10.5px",
+                }}
+              >
                 State
               </label>
               <input
@@ -221,11 +483,30 @@ export default function AccountSettings() {
                 onChange={(e) =>
                   setFormData({ ...formData, state: e.target.value })
                 }
-                className="w-full px-3 py-2 border border-gray-900 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-900"
+                style={{
+                  width: "100%",
+                  height: "42px",
+                  padding: "0 12px",
+                  border: "1px solid #bebebe",
+                  borderRadius: "7.5px",
+                  fontFamily: "Roboto, sans-serif",
+                  fontSize: "12px",
+                  color: "#0d1b2a",
+                  outline: "none",
+                }}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-900 mb-2">
+              <label
+                style={{
+                  display: "block",
+                  fontFamily: "Poppins, sans-serif",
+                  fontSize: "12.75px",
+                  fontWeight: 500,
+                  color: "#0d1b2a",
+                  marginBottom: "10.5px",
+                }}
+              >
                 ZIP Code
               </label>
               <input
@@ -234,13 +515,33 @@ export default function AccountSettings() {
                 onChange={(e) =>
                   setFormData({ ...formData, zip: e.target.value })
                 }
-                className="w-full px-3 py-2 border border-gray-900 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-900"
+                style={{
+                  width: "100%",
+                  height: "42px",
+                  padding: "0 12px",
+                  border: "1px solid #bebebe",
+                  borderRadius: "7.5px",
+                  fontFamily: "Roboto, sans-serif",
+                  fontSize: "12px",
+                  color: "#0d1b2a",
+                  outline: "none",
+                }}
               />
             </div>
           </div>
 
+          {/* Bio / Company Description */}
           <div>
-            <label className="block text-sm font-medium text-gray-900 mb-2">
+            <label
+              style={{
+                display: "block",
+                fontFamily: "Poppins, sans-serif",
+                fontSize: "12.75px",
+                fontWeight: 500,
+                color: "#0d1b2a",
+                marginBottom: "10.5px",
+              }}
+            >
               Bio / Company Description
             </label>
             <textarea
@@ -248,21 +549,45 @@ export default function AccountSettings() {
               onChange={(e) =>
                 setFormData({ ...formData, bio: e.target.value })
               }
-              rows={4}
-              className="w-full px-3 py-2 border border-gray-900 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-900 resize-none"
+              style={{
+                width: "100%",
+                height: "150.75px",
+                padding: "12px",
+                border: "1px solid #bebebe",
+                borderRadius: "7.5px",
+                fontFamily: "Roboto, sans-serif",
+                fontSize: "12px",
+                color: "#0d1b2a",
+                outline: "none",
+                resize: "none",
+              }}
             />
           </div>
         </div>
       </div>
 
       {/* Save Button */}
-      <div className="flex justify-end">
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
         <button
           onClick={handleSave}
           disabled={saving}
-          className="px-6 py-2.5 bg-white border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "7.5px",
+            padding: "11.25px 82.5px",
+            backgroundColor: "#1e3a8a",
+            color: "white",
+            border: "none",
+            borderRadius: "9px",
+            fontFamily: "Poppins, sans-serif",
+            fontSize: "15px",
+            fontWeight: 600,
+            cursor: saving ? "not-allowed" : "pointer",
+            opacity: saving ? 0.6 : 1,
+          }}
         >
-          <Save className="w-4 h-4 text-gray-900" />
+          <Save style={{ width: "21px", height: "21px", color: "white" }} />
           {saving ? "Saving..." : "Save Changes"}
         </button>
       </div>

@@ -1,13 +1,51 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Download } from "lucide-react";
 import Link from "next/link";
 import { buyerService } from "@/services/buyer.service";
 import type { OrderSummary } from "@/types/buyer.types";
 
+// Extended type for orders with supplier and items
+type OrderWithDetails = OrderSummary & {
+  supplierName?: string;
+  items?: string;
+};
+
+// Frame icon SVG
+const FrameIcon = () => (
+  <svg
+    width="25"
+    height="25"
+    viewBox="0 0 25 25"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z"
+      stroke="#292D32"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M15.5 9L9 15.5"
+      stroke="#292D32"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M15.5 14.13V9H10.37"
+      stroke="#292D32"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 export default function MyOrdersPage() {
-  const [orders, setOrders] = useState<OrderSummary[]>([]);
+  const [orders, setOrders] = useState<OrderWithDetails[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -32,9 +70,68 @@ export default function MyOrdersPage() {
       console.log("Orders response:", response);
 
       if (response.success && response.data) {
-        setOrders(response.data.items || []);
+        // Backend returns { orders: [...], pagination: {...} } or { items: [...], pagination: {...} }
+        const ordersData =
+          (response.data as any).orders || response.data.items || [];
+
+        // Debug: Log the first order to see structure
+        if (ordersData.length > 0) {
+          console.log("First order structure:", ordersData[0]);
+          console.log("Order items:", ordersData[0].order_items);
+          console.log("Supplier:", ordersData[0].supplier);
+        }
+
+        // Map backend order format to OrderSummary format
+        const mappedOrders: OrderWithDetails[] = ordersData.map(
+          (order: any) => {
+            // Extract supplier name from the first order item
+            // Each order item has supplier_name, supplier_city fields
+            let supplierName = "Unknown Supplier";
+            if (
+              order.order_items &&
+              Array.isArray(order.order_items) &&
+              order.order_items.length > 0 &&
+              order.order_items[0].supplier_name
+            ) {
+              supplierName = order.order_items[0].supplier_name;
+            }
+
+            // Extract items - use product_title from order_items
+            let itemsText = "No items";
+            if (
+              order.order_items &&
+              Array.isArray(order.order_items) &&
+              order.order_items.length > 0
+            ) {
+              const itemNames = order.order_items
+                .map((item: any) => item.product_title)
+                .filter((name: string) => name);
+
+              if (itemNames.length > 0) {
+                itemsText = itemNames.join(", ");
+              } else {
+                itemsText = `${order.order_items.length} item(s)`;
+              }
+            }
+
+            return {
+              orderId: order.id,
+              orderNumber: order.order_number,
+              status: order.status,
+              paymentStatus: order.payment_status,
+              totalAmount: order.total_amount,
+              itemCount: order.order_items?.length || 0,
+              orderDate: order.created_at,
+              estimatedDelivery: order.estimated_delivery,
+              supplierName,
+              items: itemsText,
+            };
+          }
+        );
+
+        setOrders(mappedOrders);
         setTotalPages(response.data.pagination?.totalPages || 1);
-        console.log("Orders loaded:", response.data.items?.length || 0);
+        console.log("Orders loaded:", mappedOrders.length);
       } else {
         console.error("Failed to fetch orders:", response);
       }
@@ -50,210 +147,450 @@ export default function MyOrdersPage() {
     fetchOrders();
   }, [fetchOrders]);
 
-  const getStatusBadge = (status: string) => {
-    const statusConfig: Record<
-      string,
-      { bg: string; text: string; label: string }
-    > = {
-      pending: {
-        bg: "bg-yellow-100",
-        text: "text-yellow-800",
-        label: "Pending",
-      },
-      confirmed: {
-        bg: "bg-blue-100",
-        text: "text-blue-800",
-        label: "Confirmed",
-      },
-      processing: {
-        bg: "bg-purple-100",
-        text: "text-purple-800",
-        label: "Processing",
-      },
-      shipped: {
-        bg: "bg-indigo-100",
-        text: "text-indigo-800",
-        label: "Shipped",
-      },
-      delivered: {
-        bg: "bg-green-100",
-        text: "text-green-800",
-        label: "Delivered",
-      },
-      cancelled: { bg: "bg-red-100", text: "text-red-800", label: "Cancelled" },
-      refunded: { bg: "bg-gray-100", text: "text-gray-800", label: "Refunded" },
-    };
+  useEffect(() => {
+    fetchOrders();
+  }, [fetchOrders]);
 
-    const config = statusConfig[status] || statusConfig.pending;
-    return (
-      <span
-        className={`px-3 py-1 rounded-full text-xs font-medium ${config.bg} ${config.text}`}
-      >
-        {config.label}
-      </span>
-    );
+  const getStatusColor = (status: string) => {
+    // Map to design's green color for shipped/delivered
+    if (status === "shipped" || status === "delivered") {
+      return "#2aae7a";
+    }
+    // Keep other statuses as black
+    return "#000000";
   };
 
   return (
-    <div className="min-h-screen bg-white p-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">My Orders</h1>
-          <button className="px-6 py-2.5 bg-white border-2 border-gray-900 text-gray-900 rounded font-medium hover:bg-gray-50 transition-colors flex items-center gap-2">
-            <Download className="w-4 h-4" />
+    <div
+      style={{
+        backgroundColor: "#eefbf6",
+        minHeight: "100vh",
+        position: "relative",
+        paddingTop: "100.5px",
+        paddingBottom: "45px",
+      }}
+    >
+      <div style={{ maxWidth: "1440px", margin: "0 auto", padding: "0 60px" }}>
+        {/* Page Title and Export Button */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginBottom: "80.25px",
+          }}
+        >
+          <h1
+            style={{
+              fontFamily: "Poppins, sans-serif",
+              fontWeight: 600,
+              fontSize: "27px",
+              color: "#0d1b2a",
+              margin: 0,
+            }}
+          >
+            My Orders
+          </h1>
+          <button
+            style={{
+              backgroundColor: "#1e3a8a",
+              color: "white",
+              padding: "0 82.5px",
+              height: "45px",
+              borderRadius: "11.25px",
+              border: "none",
+              display: "flex",
+              alignItems: "center",
+              gap: "7.5px",
+              fontFamily: "Poppins, sans-serif",
+              fontWeight: 600,
+              fontSize: "13.5px",
+              cursor: "pointer",
+            }}
+          >
+            <FrameIcon />
             Export Orders
           </button>
         </div>
 
-        {/* Filters */}
-        <div className="mb-6 flex gap-2">
-          <button
-            onClick={() => setStatusFilter("all")}
-            className={`px-4 py-2 rounded ${
-              statusFilter === "all"
-                ? "bg-gray-900 text-white"
-                : "bg-gray-100 text-gray-900 hover:bg-gray-200"
-            }`}
-          >
-            All Orders
-          </button>
-          <button
-            onClick={() => setStatusFilter("pending")}
-            className={`px-4 py-2 rounded ${
-              statusFilter === "pending"
-                ? "bg-gray-900 text-white"
-                : "bg-gray-100 text-gray-900 hover:bg-gray-200"
-            }`}
-          >
-            Pending
-          </button>
-          <button
-            onClick={() => setStatusFilter("shipped")}
-            className={`px-4 py-2 rounded ${
-              statusFilter === "shipped"
-                ? "bg-gray-900 text-white"
-                : "bg-gray-100 text-gray-900 hover:bg-gray-200"
-            }`}
-          >
-            Shipped
-          </button>
-          <button
-            onClick={() => setStatusFilter("delivered")}
-            className={`px-4 py-2 rounded ${
-              statusFilter === "delivered"
-                ? "bg-gray-900 text-white"
-                : "bg-gray-100 text-gray-900 hover:bg-gray-200"
-            }`}
-          >
-            Delivered
-          </button>
-        </div>
-
         {error && (
-          <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-600">
+          <div
+            style={{
+              marginBottom: "15px",
+              padding: "12px",
+              backgroundColor: "#fee",
+              border: "1px solid #fcc",
+              borderRadius: "6px",
+              color: "#c00",
+            }}
+          >
             {error}
           </div>
         )}
 
-        <div className="bg-white border-2 border-gray-900 rounded overflow-hidden">
-          <table className="w-full">
-            <thead className="bg-white border-b-2 border-gray-900">
-              <tr>
-                <th className="px-6 py-4 text-left text-sm font-bold text-gray-900">
-                  Order Number
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-bold text-gray-900">
-                  Items
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-bold text-gray-900">
-                  Amount
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-bold text-gray-900">
-                  Status
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-bold text-gray-900">
-                  Order Date
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-bold text-gray-900">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200">
-              {isLoading ? (
-                <tr>
-                  <td
-                    colSpan={6}
-                    className="px-6 py-8 text-center text-gray-500"
+        {/* Orders Table */}
+        <div
+          style={{
+            backgroundColor: "white",
+            borderRadius: "15px",
+            boxShadow: "0px 0px 6px 0px rgba(0,0,0,0.25)",
+            overflow: "hidden",
+            minHeight: "371.25px",
+            width: "100%",
+          }}
+        >
+          {/* Table Headers */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns:
+                "140px 200px 1fr 140px 120px 140px 140px 120px",
+              height: "69px",
+              alignItems: "center",
+              borderBottom: "1px solid #e5e5e5",
+              width: "100%",
+            }}
+          >
+            <div
+              style={{
+                paddingLeft: "22.5px",
+                fontFamily: "Poppins, sans-serif",
+                fontWeight: 500,
+                fontSize: "15px",
+                color: "#0d1b2a",
+                letterSpacing: "0.5px",
+              }}
+            >
+              ORDER ID
+            </div>
+            <div
+              style={{
+                fontFamily: "Poppins, sans-serif",
+                fontWeight: 500,
+                fontSize: "15px",
+                color: "#0d1b2a",
+                letterSpacing: "0.5px",
+              }}
+            >
+              SUPPLIER
+            </div>
+            <div
+              style={{
+                fontFamily: "Poppins, sans-serif",
+                fontWeight: 500,
+                fontSize: "15px",
+                color: "#0d1b2a",
+                letterSpacing: "0.5px",
+              }}
+            >
+              ITEMS
+            </div>
+            <div
+              style={{
+                fontFamily: "Poppins, sans-serif",
+                fontWeight: 500,
+                fontSize: "15px",
+                color: "#0d1b2a",
+                letterSpacing: "0.5px",
+              }}
+            >
+              AMOUNT
+            </div>
+            <div
+              style={{
+                fontFamily: "Poppins, sans-serif",
+                fontWeight: 500,
+                fontSize: "15px",
+                color: "#0d1b2a",
+                letterSpacing: "0.5px",
+              }}
+            >
+              STATUS
+            </div>
+            <div
+              style={{
+                fontFamily: "Poppins, sans-serif",
+                fontWeight: 500,
+                fontSize: "15px",
+                color: "#0d1b2a",
+                letterSpacing: "0.5px",
+                lineHeight: "18px",
+              }}
+            >
+              ORDER
+              <br />
+              DATE
+            </div>
+            <div
+              style={{
+                fontFamily: "Poppins, sans-serif",
+                fontWeight: 500,
+                fontSize: "15px",
+                color: "#0d1b2a",
+                letterSpacing: "0.5px",
+                lineHeight: "18px",
+              }}
+            >
+              EXPECTED
+              <br />
+              DATE
+            </div>
+            <div
+              style={{
+                fontFamily: "Poppins, sans-serif",
+                fontWeight: 500,
+                fontSize: "15px",
+                color: "#0d1b2a",
+                letterSpacing: "0.5px",
+              }}
+            >
+              ACTIONS
+            </div>
+          </div>
+
+          {/* Table Rows */}
+          {isLoading ? (
+            <div
+              style={{
+                padding: "45px 0",
+                textAlign: "center",
+                fontFamily: "Inter, sans-serif",
+                fontSize: "15px",
+                color: "#9c9c9c",
+              }}
+            >
+              <div className="animate-pulse">Loading orders...</div>
+            </div>
+          ) : orders.length === 0 ? (
+            <div
+              style={{
+                padding: "45px 0",
+                textAlign: "center",
+                fontFamily: "Inter, sans-serif",
+                fontSize: "15px",
+                color: "#9c9c9c",
+              }}
+            >
+              No orders found
+            </div>
+          ) : (
+            orders.map((order, index) => (
+              <div
+                key={order.orderId || order.orderNumber}
+                style={{
+                  display: "grid",
+                  gridTemplateColumns:
+                    "140px 200px 1fr 140px 120px 140px 140px 120px",
+                  height: "75px",
+                  alignItems: "center",
+                  boxShadow: "0px 2px 4px 0px rgba(0,0,0,0.25)",
+                  backgroundColor: "white",
+                  width: "100%",
+                }}
+              >
+                {/* Order ID */}
+                <div
+                  style={{
+                    paddingLeft: "22.5px",
+                    fontFamily: "Inter, sans-serif",
+                    fontWeight: 500,
+                    fontSize: "15px",
+                    color: "#9c9c9c",
+                    letterSpacing: "0.5px",
+                    lineHeight: "21px",
+                  }}
+                >
+                  {order.orderNumber}
+                </div>
+
+                {/* Supplier - with green underline on hover */}
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <div
+                    style={{
+                      fontFamily: "Inter, sans-serif",
+                      fontWeight: 400,
+                      fontSize: "15px",
+                      color: "#000000",
+                      letterSpacing: "0.5px",
+                      lineHeight: "21px",
+                      padding: "7.5px",
+                      display: "inline-block",
+                      cursor: "pointer",
+                      transition: "border-bottom 0.2s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderBottom = "2px solid #18b522";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderBottom =
+                        "2px solid transparent";
+                    }}
                   >
-                    <div className="animate-pulse">Loading orders...</div>
-                  </td>
-                </tr>
-              ) : orders.length === 0 ? (
-                <tr>
-                  <td
-                    colSpan={6}
-                    className="px-6 py-8 text-center text-gray-500"
-                  >
-                    No orders found
-                  </td>
-                </tr>
-              ) : (
-                orders.map((order) => (
-                  <tr
-                    key={order.orderId || order.orderNumber}
-                    className="hover:bg-gray-50"
-                  >
-                    <td className="px-6 py-4 text-sm text-gray-900 font-medium">
-                      {order.orderNumber}
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-900">
-                      {order.itemCount || 0} item(s)
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-900 font-medium">
-                      ₹
-                      {parseFloat(
-                        String(order.totalAmount || 0)
-                      ).toLocaleString("en-IN", { maximumFractionDigits: 2 })}
-                    </td>
-                    <td className="px-6 py-4 text-sm">
-                      {getStatusBadge(order.status)}
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-900">
-                      {new Date(order.orderDate).toLocaleDateString("en-IN")}
-                    </td>
-                    <td className="px-6 py-4 text-sm">
-                      <Link
-                        href={`/buyer/orders/${order.orderId}`}
-                        className="text-blue-600 hover:text-blue-800 font-medium"
-                      >
-                        View Details
-                      </Link>
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
+                    {order.supplierName}
+                  </div>
+                </div>
+
+                {/* Items */}
+                <div
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontWeight: 400,
+                    fontSize: "15px",
+                    color: "#000000",
+                    letterSpacing: "0.5px",
+                    lineHeight: "21px",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                  }}
+                  title={order.items}
+                >
+                  {order.items}
+                </div>
+
+                {/* Amount */}
+                <div
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontWeight: 400,
+                    fontSize: "15px",
+                    color: "#000000",
+                    letterSpacing: "0.5px",
+                    lineHeight: "21px",
+                  }}
+                >
+                  ₹
+                  {parseFloat(String(order.totalAmount || 0)).toLocaleString(
+                    "en-IN",
+                    { maximumFractionDigits: 2 }
+                  )}
+                </div>
+
+                {/* Status */}
+                <div
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontWeight: 400,
+                    fontSize: "15px",
+                    color: getStatusColor(order.status),
+                    letterSpacing: "0.5px",
+                    lineHeight: "21px",
+                    textTransform: "capitalize",
+                  }}
+                >
+                  {order.status}
+                </div>
+
+                {/* Order Date */}
+                <div
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontWeight: 400,
+                    fontSize: "15px",
+                    color: "#000000",
+                    letterSpacing: "0.5px",
+                    lineHeight: "21px",
+                  }}
+                >
+                  {new Date(order.orderDate).toLocaleDateString("en-IN", {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                  })}
+                </div>
+
+                {/* Expected Date */}
+                <div
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontWeight: 400,
+                    fontSize: "15px",
+                    color: "#000000",
+                    letterSpacing: "0.5px",
+                    lineHeight: "21px",
+                  }}
+                >
+                  {order.estimatedDelivery
+                    ? new Date(order.estimatedDelivery).toLocaleDateString(
+                        "en-IN",
+                        { year: "numeric", month: "2-digit", day: "2-digit" }
+                      )
+                    : "-"}
+                </div>
+
+                {/* Actions */}
+                <div style={{ paddingLeft: "12px" }}>
+                  <Link href={`/buyer/track-order/${order.orderNumber}`}>
+                    <button
+                      style={{
+                        border: "0.5px solid #747474",
+                        borderRadius: "7.5px",
+                        padding: "7.5px",
+                        backgroundColor: "transparent",
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <FrameIcon />
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            ))
+          )}
         </div>
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="mt-6 flex justify-center gap-2">
+          <div
+            style={{
+              marginTop: "30px",
+              display: "flex",
+              justifyContent: "center",
+              gap: "12px",
+              alignItems: "center",
+            }}
+          >
             <button
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="px-4 py-2 border-2 border-gray-900 rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100"
+              style={{
+                padding: "9px 18px",
+                border: "2px solid #0d1b2a",
+                borderRadius: "6px",
+                backgroundColor: "white",
+                fontFamily: "Poppins, sans-serif",
+                fontSize: "12px",
+                cursor: currentPage === 1 ? "not-allowed" : "pointer",
+                opacity: currentPage === 1 ? 0.5 : 1,
+              }}
             >
               Previous
             </button>
-            <span className="px-4 py-2 text-gray-900">
+            <span
+              style={{
+                fontFamily: "Poppins, sans-serif",
+                fontSize: "12px",
+                color: "#0d1b2a",
+              }}
+            >
               Page {currentPage} of {totalPages}
             </span>
             <button
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
-              className="px-4 py-2 border-2 border-gray-900 rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100"
+              style={{
+                padding: "9px 18px",
+                border: "2px solid #0d1b2a",
+                borderRadius: "6px",
+                backgroundColor: "white",
+                fontFamily: "Poppins, sans-serif",
+                fontSize: "12px",
+                cursor: currentPage === totalPages ? "not-allowed" : "pointer",
+                opacity: currentPage === totalPages ? 0.5 : 1,
+              }}
             >
               Next
             </button>

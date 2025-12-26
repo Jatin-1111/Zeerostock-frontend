@@ -46,90 +46,136 @@ export default function AllProductsSection() {
   };
 
   return (
-    <div className="bg-white p-6">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-bold text-gray-900">All Products</h2>
-        <div className="flex items-center gap-4">
-          <select
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            className="px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 text-gray-600"
-          >
-            <option value="all">All Located IN STATE</option>
-            <option value="Maharashtra">Maharashtra</option>
-            <option value="Delhi">Delhi</option>
-            <option value="Karnataka">Karnataka</option>
-            <option value="Gujarat">Gujarat</option>
-            <option value="Tamil Nadu">Tamil Nadu</option>
-          </select>
-          <select
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
-            className="px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 text-gray-600"
-          >
-            <option value="relevance">Show All</option>
-            <option value="price_asc">Low to High</option>
-            <option value="price_desc">High to Low</option>
-            <option value="newest">Newest First</option>
-          </select>
-          <button className="px-4 py-2 border border-gray-300 rounded hover:bg-white text-gray-600">
+    <div className="max-w-[1200px] mx-auto py-12 px-4">
+      {/* Header with title and filters */}
+      <div className="flex items-center justify-between mb-8">
+        <h2 className="font-poppins font-semibold text-[32px] text-[#1a1a1a] m-0">
+          All products
+        </h2>
+
+        {/* Filters */}
+        <div className="flex items-center gap-3">
+          {/* Category dropdown */}
+          <div className="relative">
+            <select
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              className="w-[200px] h-10 px-3 pr-10 border border-gray-300 rounded-lg font-inter text-sm text-gray-700 bg-white cursor-pointer appearance-none"
+            >
+              <option value="all">All Categories (15,420)</option>
+              <option value="Maharashtra">Maharashtra</option>
+              <option value="Delhi">Delhi</option>
+              <option value="Karnataka">Karnataka</option>
+              <option value="Gujarat">Gujarat</option>
+              <option value="Tamil Nadu">Tamil Nadu</option>
+            </select>
             <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
+              width="16"
+              height="16"
               viewBox="0 0 24 24"
+              fill="none"
+              className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"
             >
               <path
+                d="M6 9L12 15L18 9"
+                stroke="#666"
+                strokeWidth="2"
                 strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
               />
             </svg>
+          </div>
+
+          {/* Sort dropdown */}
+          <div className="relative">
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="w-[140px] h-10 px-3 pr-10 border border-gray-300 rounded-lg font-inter text-sm text-gray-700 bg-white cursor-pointer appearance-none"
+            >
+              <option value="relevance">Relevance</option>
+              <option value="price_asc">Low to High</option>
+              <option value="price_desc">High to Low</option>
+              <option value="newest">Newest First</option>
+            </select>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"
+            >
+              <path
+                d="M6 9L12 15L18 9"
+                stroke="#666"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            </svg>
+          </div>
+
+          {/* More Filters button */}
+          <button className="flex items-center gap-2 px-4 h-10 border border-gray-300 rounded-lg bg-white hover:bg-gray-50 transition-colors cursor-pointer">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M22 3H2L10 12.46V19L14 21V12.46L22 3Z"
+                stroke="#666"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            <span className="font-inter text-sm text-gray-700">
+              More Filters
+            </span>
           </button>
         </div>
       </div>
 
       {isLoading ? (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-          {[1, 2, 3, 4, 5].map((i) => (
-            <div key={i} className="border border-gray-200 overflow-hidden">
+        <div className="grid grid-cols-4 gap-5">
+          {[1, 2, 3, 4].map((i) => (
+            <div
+              key={i}
+              className="bg-white rounded-xl overflow-hidden shadow-md"
+            >
               <div className="w-full h-40 bg-gray-200 animate-pulse"></div>
-              <div className="p-3 space-y-2">
-                <div className="h-4 bg-gray-200 rounded animate-pulse"></div>
-                <div className="h-4 bg-gray-200 rounded w-2/3 animate-pulse"></div>
+              <div className="p-4">
+                <div className="h-5 bg-gray-200 mb-2 rounded animate-pulse"></div>
+                <div className="h-5 bg-gray-200 w-3/5 rounded animate-pulse"></div>
               </div>
             </div>
           ))}
         </div>
       ) : products.length === 0 ? (
-        <div className="text-center py-16 px-4">
-          <div className="text-gray-400 text-5xl mb-4">🏪</div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">
+        <div className="text-center py-16">
+          <div className="text-5xl mb-5">🏪</div>
+          <h3 className="font-poppins text-2xl text-[#0d1b2a] mb-3">
             No products available
           </h3>
-          <p className="text-gray-600 mb-4 max-w-md mx-auto">
+          <p className="font-inter text-base text-gray-600 mb-5 max-w-lg mx-auto">
             {location !== "all"
               ? `No products found in ${location}. Try selecting a different location.`
               : "Products are being added to our marketplace. Check back soon!"}
           </p>
           <button
             onClick={() => fetchProducts()}
-            className="px-6 py-2 bg-[#1a5f52] text-white rounded-lg hover:bg-[#155144] transition-colors"
+            className="px-6 py-2.5 bg-[#1e3a8a] text-white border-none rounded-lg cursor-pointer font-poppins text-base hover:bg-[#2d4a9a] transition-colors"
           >
             Refresh
           </button>
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          <div className="grid grid-cols-4 gap-5">
             {products.map((product, index) => (
               <Link
                 key={product?.productId || index}
                 href={`/product/${product?.slug || "unknown"}`}
+                className="no-underline"
               >
-                <div className="border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow cursor-pointer">
-                  <div className="w-full h-40 bg-gray-100 flex items-center justify-center overflow-hidden">
+                <div className="bg-white rounded-xl shadow-md overflow-hidden hover:-translate-y-1 transition-transform duration-200 cursor-pointer">
+                  {/* Product image */}
+                  <div className="w-full h-40 bg-gray-100">
                     {product?.image ? (
                       <img
                         src={product.image}
@@ -137,74 +183,71 @@ export default function AllProductsSection() {
                         className="w-full h-full object-cover"
                         onError={(e) => {
                           e.currentTarget.style.display = "none";
-                          e.currentTarget.parentElement!.innerHTML =
-                            '<span class="text-xs text-gray-400">Product Image</span>';
                         }}
                       />
-                    ) : (
-                      <span className="text-xs text-gray-400">
-                        Product Image
-                      </span>
-                    )}
+                    ) : null}
                   </div>
-                  <div className="p-3">
-                    <h3 className="text-sm font-semibold text-gray-900 mb-1 line-clamp-2">
+
+                  {/* Product details */}
+                  <div className="p-4">
+                    <h3 className="font-poppins font-medium text-base text-[#1a1a1a] m-0 mb-2 truncate">
                       {product?.title || "Product"}
                     </h3>
-                    <p className="text-xs text-gray-600 mb-2">
-                      by {product?.seller?.name || "Zeerostock"}
-                    </p>
-                    <div className="flex items-center gap-1 mb-2">
-                      <span className="text-base font-bold text-gray-900">
+
+                    {/* Stars and rating count */}
+                    <div className="flex items-center gap-1.5 mb-1">
+                      {[...Array(5)].map((_, i) => (
+                        <svg
+                          key={i}
+                          width="14"
+                          height="14"
+                          viewBox="0 0 19 18"
+                          fill="none"
+                        >
+                          <path
+                            d="M9.5 0L11.6 6.9L19 6.9L13 11.1L15.1 18L9.5 13.8L3.9 18L6 11.1L0 6.9L7.4 6.9L9.5 0Z"
+                            fill="#FFD700"
+                          />
+                        </svg>
+                      ))}
+                      <span className="font-inter text-xs text-gray-500 ml-1">
+                        (2338)
+                      </span>
+                    </div>
+
+                    {/* Location */}
+                    <div className="flex items-center gap-1.5 mb-3">
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                      >
+                        <path
+                          d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z"
+                          fill="#666"
+                        />
+                      </svg>
+                      <span className="font-inter text-xs text-gray-600">
+                        {product?.city || "Mumbai"},IN
+                      </span>
+                    </div>
+
+                    {/* Price */}
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="font-poppins font-bold text-2xl text-[#2D4A9A]">
                         ₹{(product?.price || 0).toLocaleString("en-IN")}
                       </span>
                       {product?.originalPrice &&
                         product.originalPrice > (product.price || 0) && (
-                          <span className="text-xs text-gray-500 line-through">
+                          <span className="font-inter text-sm text-gray-400 line-through">
                             ₹{product.originalPrice.toLocaleString("en-IN")}
                           </span>
                         )}
                     </div>
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="flex items-center gap-1 text-xs text-gray-600">
-                        <svg
-                          className="w-3 h-3 text-gray-900"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                          />
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                          />
-                        </svg>
-                        {product?.city || "Unknown"}
-                      </span>
-                      <button className="text-gray-400 hover:text-red-500">
-                        <svg
-                          className="w-4 h-4"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                    <button className="w-full py-2 border border-gray-900 text-gray-900 rounded text-sm font-medium hover:bg-gray-900 hover:text-white transition-colors">
+
+                    {/* View Deal button */}
+                    <button className="w-full h-10 bg-[#2D4A9A] rounded-lg border-none cursor-pointer font-poppins font-semibold text-sm text-white hover:bg-[#3d5aaa] transition-colors">
                       View Deal
                     </button>
                   </div>
@@ -213,10 +256,11 @@ export default function AllProductsSection() {
             ))}
           </div>
 
-          <div className="mt-6 text-center">
-            <Link href="/marketplace?filter=all">
-              <button className="px-6 py-2 text-gray-700 hover:text-gray-900 font-medium">
-                Load more results
+          {/* Load More button */}
+          <div className="text-center mt-10">
+            <Link href="/marketplace?filter=all" className="no-underline">
+              <button className="px-8 py-2.5 font-poppins text-lg text-[#0d1b2a] bg-transparent border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                Load More Products
               </button>
             </Link>
           </div>

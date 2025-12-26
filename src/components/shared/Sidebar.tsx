@@ -2,6 +2,20 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import {
+  Box,
+  TrendingUp,
+  MessageCircle,
+  ShoppingCart,
+  Settings,
+  Building2,
+  HelpCircle,
+  DollarSign,
+  ArrowLeft,
+  Star,
+  AlertCircle,
+  Mail,
+} from "lucide-react";
 
 interface SidebarProps {
   isOpen?: boolean;
@@ -50,259 +64,196 @@ export default function Sidebar({
 
       {/* Sidebar */}
       <div
-        className={`fixed lg:sticky top-0 left-0 h-screen lg:h-[calc(100vh-73px)] bg-white border-r border-gray-200 transform ${
+        className={`fixed lg:sticky top-0 left-0 h-screen lg:h-[calc(100vh-73px)] w-[300px] bg-white shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } lg:translate-x-0 transition-transform duration-300 ease-in-out z-40 overflow-y-auto lg:top-[73px]`}
       >
-        <div className="p-6 pb-8">
-          {/* Title */}
-          <h2 className="text-lg font-semibold text-gray-900 mb-6 pb-4 border-b border-gray-200">
+        {/* Header */}
+        <div className="h-[60px] flex items-center justify-center border-b border-[#8b8b8b] relative">
+          <h2 className="font-['Poppins',sans-serif] font-medium text-[20px] text-[#1e3a8a] leading-normal">
             Explore Zeerostock
           </h2>
+          <button
+            className="absolute right-[21px] w-[21px] h-[21px]"
+            onClick={handleToggle}
+          >
+            <ArrowLeft className="w-[21px] h-[21px] text-[#1e3a8a]" />
+          </button>
+        </div>
 
+        <div className="px-[4px] pb-[28px]">
           {/* EXPLORE PRODUCTS Section */}
-          <div className="mb-8">
-            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">
-              EXPLORE PRODUCTS
+          <div className="mt-[37px] mb-[32px]">
+            <h3 className="font-['Poppins',sans-serif] font-medium text-[19px] text-black leading-normal px-[20px] mb-[29px]">
+              Explore Products
             </h3>
-            <nav className="space-y-1">
+            <nav className="space-y-[5px]">
+              {/* Browse Categories - Active */}
+              <div className="relative h-[53px]">
+                <div className="absolute left-0 top-0 w-[4px] h-[53px] bg-[#2aae7a] rounded-tr-[4px] rounded-br-[4px]" />
+                <Link
+                  href="#"
+                  className="flex items-center gap-[15px] bg-[#eeffef] rounded-[9px] py-[15px] pl-[23px] pr-[53px] h-[50px] ml-[4px] relative"
+                >
+                  <div className="w-[19px] h-[19px] flex-shrink-0">
+                    <Box className="w-[19px] h-[19px] text-[#2aae7a]" />
+                  </div>
+                  <span className="font-['Inter',sans-serif] font-medium text-[17px] text-[#2aae7a] leading-normal">
+                    Browse Categories
+                  </span>
+                  <div className="absolute right-[9px] top-[15px] bg-[#2aae7a] rounded-[60px] px-[4px] py-0">
+                    <span className="font-['Poppins',sans-serif] font-medium text-[8px] text-[#eeffef] leading-normal">
+                      45 Active
+                    </span>
+                  </div>
+                </Link>
+              </div>
+
+              {/* Trending Items */}
               <Link
                 href="#"
-                className="flex items-center gap-3 px-3 py-2 text-gray-900 hover:bg-gray-100 rounded text-sm"
+                className="flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-[20px] hover:bg-gray-100"
               >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
-                  />
-                </svg>
-                Browse Categories
+                <div className="w-[19px] h-[19px] flex-shrink-0">
+                  <TrendingUp className="w-[19px] h-[19px] text-[#8b8b8b]" />
+                </div>
+                <span className="font-['Inter',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+                  Trending Items
+                </span>
               </Link>
+
+              {/* Featured Deals */}
               <Link
                 href="#"
-                className="flex items-center gap-3 px-3 py-2 text-gray-900 hover:bg-gray-100 rounded text-sm"
+                className="flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-[20px] hover:bg-gray-100"
               >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
-                  />
-                </svg>
-                Trending Items
-              </Link>
-              <Link
-                href="#"
-                className="flex items-center gap-3 px-3 py-2 text-gray-900 hover:bg-gray-100 rounded text-sm"
-              >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
-                  />
-                </svg>
-                Featured Deals
+                <div className="w-[19px] h-[19px] flex-shrink-0">
+                  <Star className="w-[19px] h-[19px] text-[#8b8b8b]" />
+                </div>
+                <span className="font-['Inter',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+                  Featured Deals
+                </span>
               </Link>
             </nav>
           </div>
 
           {/* GET STARTED Section */}
-          <div className="mb-8">
-            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">
-              GET STARTED
+          <div className="mb-[32px]">
+            <h3 className="font-['Poppins',sans-serif] font-medium text-[19px] text-black leading-normal px-[20px] mb-[29px]">
+              Get Started
             </h3>
-            <nav className="space-y-1">
+            <nav className="space-y-[5px]">
+              {/* For Buyers */}
               <Link
-                href="#"
-                className="flex items-center gap-3 px-3 py-2 text-gray-900 hover:bg-gray-100 rounded text-sm"
+                href="/for-buyer"
+                className="flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-[20px] hover:bg-gray-100"
               >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                  />
-                </svg>
-                For Buyers
+                <div className="w-[19px] h-[19px] flex-shrink-0">
+                  <ShoppingCart className="w-[19px] h-[19px] text-[#8b8b8b]" />
+                </div>
+                <span className="font-['Inter',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+                  For Buyers
+                </span>
               </Link>
+
+              {/* For Suppliers */}
               <Link
-                href="#"
-                className="flex items-center gap-3 px-3 py-2 text-gray-900 hover:bg-gray-100 rounded text-sm"
+                href="/for-supplier"
+                className="flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-[20px] hover:bg-gray-100"
               >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                  />
-                </svg>
-                For Suppliers
+                <div className="w-[18px] h-[19px] flex-shrink-0">
+                  <Building2 className="w-[18px] h-[19px] text-[#8b8b8b]" />
+                </div>
+                <span className="font-['Inter',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+                  For Suppliers
+                </span>
               </Link>
+
+              {/* How It Works */}
               <Link
                 href="#"
-                className="flex items-center gap-3 px-3 py-2 text-gray-900 hover:bg-gray-100 rounded text-sm"
+                className="flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[22px] pr-[20px] hover:bg-gray-100"
               >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                How It Works
+                <div className="w-[19px] h-[19px] flex-shrink-0 overflow-clip">
+                  <HelpCircle className="w-[19px] h-[19px] text-[#8b8b8b]" />
+                </div>
+                <span className="font-['Inter',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+                  How It Works
+                </span>
               </Link>
             </nav>
           </div>
 
           {/* RESOURCES Section */}
-          <div className="mb-8">
-            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">
-              RESOURCES
+          <div className="mb-[32px]">
+            <h3 className="font-['Poppins',sans-serif] font-medium text-[19px] text-black leading-normal px-[20px] mb-[29px]">
+              Resources
             </h3>
-            <nav className="space-y-1">
+            <nav className="space-y-[5px]">
+              {/* Pricing */}
               <Link
                 href="#"
-                className="flex items-center gap-3 px-3 py-2 text-gray-900 hover:bg-gray-100 rounded text-sm"
+                className="flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-[20px] hover:bg-gray-100"
               >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
-                  />
-                </svg>
-                Pricing
+                <div className="w-[19px] h-[19px] flex-shrink-0 overflow-clip">
+                  <DollarSign className="w-[19px] h-[19px] text-[#8b8b8b]" />
+                </div>
+                <span className="font-['Inter',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+                  Pricing
+                </span>
               </Link>
+
+              {/* Contact Us */}
               <Link
                 href="#"
-                className="flex items-center gap-3 px-3 py-2 text-gray-900 hover:bg-gray-100 rounded text-sm"
+                className="flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-[20px] hover:bg-gray-100"
               >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                  />
-                </svg>
-                Contact Us
+                <div className="w-[19px] h-[19px] flex-shrink-0">
+                  <MessageCircle className="w-[19px] h-[19px] text-[#8b8b8b]" />
+                </div>
+                <span className="font-['Inter',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+                  Contact Us
+                </span>
               </Link>
+
+              {/* Settings */}
               <Link
                 href="#"
-                className="flex items-center gap-3 px-3 py-2 text-gray-900 hover:bg-gray-100 rounded text-sm"
+                className="flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-[20px] hover:bg-gray-100"
               >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                </svg>
-                Settings
+                <div className="w-[19px] h-[19px] flex-shrink-0">
+                  <Settings className="w-[19px] h-[19px] text-[#8b8b8b]" />
+                </div>
+                <span className="font-['Inter',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+                  Settings
+                </span>
               </Link>
             </nav>
           </div>
 
-          {/* Help & Support */}
-          <div className="space-y-2 pt-4 border-t border-gray-200">
+          {/* Help & Support Card */}
+          <div className="mx-auto w-[255px] bg-[#f0f0f0] rounded-[15px] overflow-clip h-[104px] relative">
             <Link
-              href="#"
-              className="flex items-center gap-3 px-3 py-2 text-sm text-gray-900 hover:bg-gray-100 rounded"
+              href="/helpdesk"
+              className="flex items-end gap-[11px] absolute left-[23px] top-[23px] hover:opacity-80"
             >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"
-                />
-              </svg>
-              Help & Support
+              <div className="w-[19px] h-[19px] flex-shrink-0">
+                <AlertCircle className="w-[19px] h-[19px] text-black" />
+              </div>
+              <span className="font-['Inter',sans-serif] font-medium text-[17px] text-black leading-normal">
+                Help & Support
+              </span>
             </Link>
             <Link
               href="#"
-              className="flex items-center gap-3 px-3 py-2 text-sm text-gray-900 hover:bg-gray-100 rounded"
+              className="flex items-center gap-[11px] absolute left-[23px] top-[62px] hover:opacity-80"
             >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
-                />
-              </svg>
-              Send Feedback
+              <div className="w-[18px] h-[18px] flex-shrink-0">
+                <Mail className="w-[18px] h-[18px] text-black" />
+              </div>
+              <span className="font-['Inter',sans-serif] font-medium text-[17px] text-black leading-normal">
+                Sent Feedback
+              </span>
             </Link>
           </div>
         </div>

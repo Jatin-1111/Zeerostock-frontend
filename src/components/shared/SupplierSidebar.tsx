@@ -49,7 +49,7 @@ export default function SupplierSidebar() {
 
       {/* Sidebar */}
       <aside
-        className={`fixed lg:sticky top-0 left-0 h-screen lg:h-[calc(100vh-73px)] w-[263px] bg-white shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] z-30 transform transition-transform duration-300 ease-in-out ${
+        className={`fixed lg:sticky top-0 left-0 h-screen lg:h-[calc(100vh-73px)] w-[263px] bg-white shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] z-30 transform transition-transform duration-300 ease-in-out overflow-x-hidden ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } lg:translate-x-0 lg:top-[73px] overflow-y-auto`}
       >
@@ -242,7 +242,7 @@ export default function SupplierSidebar() {
         </nav>
 
         {/* Footer Section */}
-        <div className="absolute bottom-[30px] left-1/2 -translate-x-1/2 w-[255px] bg-[#F0F0F0] rounded-[15px] overflow-hidden">
+        <div className="absolute bottom-[1px] left-1/2 -translate-x-1/2 w-[255px] bg-[#F0F0F0] rounded-[15px] overflow-hidden">
           <Link
             href="/supplier/contact"
             className="flex items-center gap-[11px] px-[23px] py-[15px] hover:bg-gray-200 transition-colors"

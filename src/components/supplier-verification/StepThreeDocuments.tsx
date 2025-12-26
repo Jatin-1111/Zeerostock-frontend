@@ -111,18 +111,34 @@ export default function StepThreeDocuments({
 
     setUploading(docKey);
     try {
+      console.log(`Uploading ${docKey}:`, {
+        name: file.name,
+        type: file.type,
+        size: file.size,
+      });
+
       const response = await supplierVerificationService.uploadDocument(
         file,
         docKey
       );
+
+      console.log("Upload response:", response);
+
       if (response.success && response.data?.url) {
         updateData("documents", { [docKey]: response.data.url });
+        console.log(`Successfully uploaded ${docKey}:`, response.data.url);
       } else {
-        alert(response.message || "Failed to upload document");
+        const errorMsg = response.message || "Failed to upload document";
+        console.error("Upload failed:", errorMsg);
+        alert(errorMsg);
       }
     } catch (error: any) {
       console.error("Upload error:", error);
-      alert(error.message || "Failed to upload document");
+      const errorMsg =
+        error.message ||
+        error.errorMessage ||
+        "Failed to upload document. Please try again.";
+      alert(errorMsg);
     } finally {
       setUploading(null);
     }

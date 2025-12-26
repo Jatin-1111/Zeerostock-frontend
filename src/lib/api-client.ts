@@ -54,6 +54,12 @@ apiClient.interceptors.request.use(
         config.headers.Authorization = `Bearer ${token}`;
       }
     }
+
+    // If data is FormData, remove Content-Type header to let axios set it with boundary
+    if (config.data instanceof FormData && config.headers) {
+      delete config.headers["Content-Type"];
+    }
+
     return config;
   },
   (error) => {
@@ -82,7 +88,26 @@ apiClient.interceptors.response.use(
     }
 
     // Handle 401 Unauthorized - Try to refresh token
-    if (error.response.status === 401 && !originalRequest._retry) {
+    // Skip token refresh for auth endpoints (login, signup, etc.)
+    const authEndpoints = [
+      "/auth/login",
+      "/auth/signup",
+      "/auth/verify-otp",
+      "/auth/otp-login",
+      "/auth/verify-login-otp",
+      "/auth/refresh-token",
+      "/auth/forgot-password",
+      "/auth/reset-password",
+    ];
+    const isAuthEndpoint = authEndpoints.some((endpoint) =>
+      originalRequest.url?.includes(endpoint)
+    );
+
+    if (
+      error.response.status === 401 &&
+      !originalRequest._retry &&
+      !isAuthEndpoint
+    ) {
       if (isRefreshing) {
         // Queue this request until refresh completes
         return new Promise((resolve, reject) => {

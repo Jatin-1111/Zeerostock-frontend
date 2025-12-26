@@ -17,6 +17,7 @@ export default function SupplierVerificationPage() {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [verificationStatus, setVerificationStatus] = useState<any>(null);
+  const [isEditing, setIsEditing] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     // Step 1: Identity & Bank
@@ -84,16 +85,68 @@ export default function SupplierVerificationPage() {
     }
   };
 
+  // Function to map verification data back to form for editing
+  const loadVerificationDataForEdit = () => {
+    if (!verificationStatus?.verification) return;
+
+    const v = verificationStatus.verification;
+
+    setFormData({
+      identityVerification: {
+        ownerName: v.owner_full_name || "",
+        idCard: v.government_id_type || "",
+        proofOfAddress: v.proof_of_address_document_url || "",
+        aadharCard: v.government_id_number || "",
+      },
+      bankAccount: {
+        bankName: v.bank_name || "",
+        accountHolderName: v.account_holder_name || "",
+        accountNumber: v.account_number || "",
+        ifscCode: v.routing_number || "",
+      },
+      businessDetails: {
+        legalBusinessName: v.legal_business_name || "",
+        businessRegistrationNumber: v.business_registration_number || "",
+        businessType: v.business_type || "",
+        taxId: v.business_tax_id || "",
+        ein: "",
+        yearEstablished: v.establishment_year?.toString() || "",
+      },
+      operationalInfo: {
+        primaryAddress: v.primary_business_address || "",
+        warehouseLocation: v.warehouse_locations?.[0] || "",
+        businessPhone: v.business_phone || "",
+        businessEmail: v.business_email || "",
+      },
+      documents: {
+        governmentId: v.government_id_document_url || null,
+        proofOfAddress: v.proof_of_address_document_url || null,
+        businessLicense: v.business_license_url || null,
+        certificateOfIncorporation: v.certificate_of_incorporation_url || null,
+        taxRegistration: v.tax_registration_certificate_url || null,
+        iso9001: v.iso_certificate_url || null,
+        industryLicenses: v.quality_assurance_license_url || null,
+        auditReports: v.audit_reports_url || null,
+      },
+    });
+
+    setIsEditing(true);
+    setCurrentStep(1);
+  };
+
   // Auto-save draft on form data change
   useEffect(() => {
-    if (!loading && verificationStatus?.status === "not_started") {
+    if (
+      !loading &&
+      (verificationStatus?.status === "not_started" || isEditing)
+    ) {
       const timer = setTimeout(() => {
         saveDraft();
       }, 2000); // Auto-save after 2 seconds of inactivity
 
       return () => clearTimeout(timer);
     }
-  }, [formData, currentStep]);
+  }, [formData, currentStep, loading, verificationStatus, isEditing]);
 
   const saveDraft = async () => {
     try {
@@ -158,6 +211,7 @@ export default function SupplierVerificationPage() {
 
       if (response.success) {
         // Refresh status to show submitted state
+        setIsEditing(false);
         await checkVerificationStatus();
       } else {
         alert(response.message || "Failed to submit verification");
@@ -187,8 +241,17 @@ export default function SupplierVerificationPage() {
   }
 
   // If verification is submitted (any status except not_started), show status page
-  if (verificationStatus && verificationStatus.status !== "not_started") {
-    return <VerificationStatusView status={verificationStatus} />;
+  if (
+    verificationStatus &&
+    verificationStatus.status !== "not_started" &&
+    !isEditing
+  ) {
+    return (
+      <VerificationStatusView
+        status={verificationStatus}
+        onEditReapply={loadVerificationDataForEdit}
+      />
+    );
   }
 
   // Show verification form
@@ -200,12 +263,15 @@ export default function SupplierVerificationPage() {
           <div className="flex items-center gap-3 mb-2">
             <Shield className="w-8 h-8 text-gray-900" />
             <h1 className="text-3xl font-bold text-gray-900">
-              Supplier Verification
+              {isEditing
+                ? "Edit & Reapply for Verification"
+                : "Supplier Verification"}
             </h1>
           </div>
           <p className="text-sm text-gray-600">
-            Complete verification to unlock premium features and build buyer
-            trust
+            {isEditing
+              ? "Update your information and resubmit for verification"
+              : "Complete verification to unlock premium features and build buyer trust"}
           </p>
         </div>
 
@@ -318,17 +384,31 @@ export default function SupplierVerificationPage() {
 
             {/* Navigation Buttons */}
             <div className="flex justify-between mt-8">
-              <button
-                onClick={handlePrevious}
-                disabled={currentStep === 1 || submitting}
-                className={`px-6 py-2 border-2 border-gray-900 font-medium ${
-                  currentStep === 1 || submitting
-                    ? "text-gray-400 border-gray-300 cursor-not-allowed"
-                    : "text-gray-900 hover:bg-gray-100"
-                }`}
-              >
-                ← Previous Step
-              </button>
+              <div className="flex gap-3">
+                {isEditing && (
+                  <button
+                    onClick={() => {
+                      setIsEditing(false);
+                      setCurrentStep(1);
+                    }}
+                    disabled={submitting}
+                    className="px-6 py-2 border-2 border-red-600 text-red-600 font-medium hover:bg-red-50 disabled:border-gray-300 disabled:text-gray-400 disabled:cursor-not-allowed"
+                  >
+                    Cancel
+                  </button>
+                )}
+                <button
+                  onClick={handlePrevious}
+                  disabled={currentStep === 1 || submitting}
+                  className={`px-6 py-2 border-2 border-gray-900 font-medium ${
+                    currentStep === 1 || submitting
+                      ? "text-gray-400 border-gray-300 cursor-not-allowed"
+                      : "text-gray-900 hover:bg-gray-100"
+                  }`}
+                >
+                  ← Previous Step
+                </button>
+              </div>
               {currentStep < 3 ? (
                 <button
                   onClick={handleNext}
@@ -356,10 +436,14 @@ export default function SupplierVerificationPage() {
                     {submitting ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin" />
-                        Submitting...
+                        {isEditing ? "Resubmitting..." : "Submitting..."}
                       </>
                     ) : (
-                      "Submit for Verification →"
+                      <>
+                        {isEditing
+                          ? "Resubmit for Verification →"
+                          : "Submit for Verification →"}
+                      </>
                     )}
                   </button>
                 </div>

@@ -7,7 +7,6 @@ import {
   Eye,
   Download,
   CheckCircle,
-  Circle,
   AlertCircle,
   XCircle,
 } from "lucide-react";
@@ -19,23 +18,32 @@ interface VerificationData {
   userId: string;
   supplierId: string;
   companyName: string;
-  gstNumber: string;
-  panNumber: string;
-  registeredAddress: string;
   contactPerson: string;
   contactEmail: string;
   contactPhone: string;
   category: string;
-  verificationStatus: string;
+  verificationStatus:
+    | "pending"
+    | "approved"
+    | "rejected"
+    | "under_review"
+    | "verified";
   submittedAt: string;
   verifiedAt: string | null;
+  gstNumber: string;
+  panNumber: string;
+  registeredAddress: string;
   documents: {
-    gstCertificate?: string;
-    panCard?: string;
-    addressProof?: string;
-    bankStatement?: string;
-    incorporationCertificate?: string;
-    [key: string]: string | undefined;
+    gstCertificate?: string | null;
+    panCard?: string | null;
+    addressProof?: string | null;
+    bankStatement?: string | null;
+    incorporationCertificate?: string | null;
+    businessLicense?: string | null;
+    businessCertificate?: string | null;
+    isoCertificate?: string | null;
+    qualityAssuranceLicense?: string | null;
+    auditReports?: string | null;
   };
 }
 
@@ -61,12 +69,6 @@ export default function SupplierDetailPage() {
   const params = useParams();
   const verificationId = params.id as string;
 
-  useEffect(() => {
-    if (verificationId) {
-      fetchVerificationDetails();
-    }
-  }, [verificationId]);
-
   const fetchVerificationDetails = async () => {
     try {
       setLoading(true);
@@ -84,20 +86,40 @@ export default function SupplierDetailPage() {
       if (!response.ok) throw new Error("Failed to fetch verification details");
 
       const result = await response.json();
+      console.log("Verification data:", result.data.verification);
+      console.log("Documents:", result.data.verification?.documents);
       setVerification(result.data.verification);
       setHistory(result.data.history || []);
-    } catch (err: any) {
-      setError(err.message || "Failed to fetch verification details");
+    } catch (err) {
+      const error = err as Error;
+      setError(error.message || "Failed to fetch verification details");
     } finally {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (verificationId) {
+      fetchVerificationDetails();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [verificationId]);
 
   const handleAction = async (
     action: "approve" | "reject" | "review",
     notes?: string
   ) => {
     try {
+      // If rejecting, prompt for reason
+      if (action === "reject" && !notes) {
+        const reason = prompt("Please provide a rejection reason:");
+        if (!reason || reason.trim() === "") {
+          alert("Rejection reason is required");
+          return;
+        }
+        notes = reason;
+      }
+
       setActionLoading(true);
       const token = localStorage.getItem("admin_token");
 
@@ -111,6 +133,7 @@ export default function SupplierDetailPage() {
           },
           body: JSON.stringify({
             notes: notes || `Verification ${action}d by admin`,
+            reason: action === "reject" ? notes : undefined,
           }),
         }
       );
@@ -122,11 +145,62 @@ export default function SupplierDetailPage() {
       fetchVerificationDetails();
 
       setTimeout(() => setSuccess(""), 3000);
-    } catch (err: any) {
-      setError(err.message || `Failed to ${action} verification`);
+    } catch (err) {
+      const error = err as Error;
+      setError(error.message || `Failed to ${action} verification`);
       setTimeout(() => setError(""), 3000);
     } finally {
       setActionLoading(false);
+    }
+  };
+
+  const handleViewDocument = async (
+    documentUrl: string,
+    documentName: string
+  ) => {
+    try {
+      console.log("Attempting to view document:", {
+        documentName,
+        documentUrl,
+      });
+
+      // Fetch document with auth token first, then open as blob
+      const token = localStorage.getItem("admin_token");
+      const proxyUrl = `${
+        process.env.NEXT_PUBLIC_API_BASE_URL
+      }/admin/verification-document?url=${encodeURIComponent(documentUrl)}`;
+
+      console.log("Fetching document via proxy:", proxyUrl);
+
+      const response = await fetch(proxyUrl, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      // Get the blob and create object URL
+      const blob = await response.blob();
+      const blobUrl = window.URL.createObjectURL(blob);
+
+      // Open in new tab
+      window.open(blobUrl, "_blank", "noopener,noreferrer");
+
+      // Clean up after a delay to allow the document to load
+      setTimeout(() => {
+        window.URL.revokeObjectURL(blobUrl);
+      }, 1000);
+
+      console.log("Document opened successfully");
+    } catch (error) {
+      console.error("Error opening document:", error);
+      setError(
+        `Failed to open ${documentName}. Please try downloading instead.`
+      );
+      setTimeout(() => setError(""), 3000);
     }
   };
 
@@ -135,18 +209,40 @@ export default function SupplierDetailPage() {
     documentName: string
   ) => {
     try {
-      const response = await fetch(documentUrl);
+      console.log("Attempting to download:", { documentName, documentUrl });
+
+      // Use backend proxy to download the document
+      const token = localStorage.getItem("admin_token");
+      const proxyUrl = `${
+        process.env.NEXT_PUBLIC_API_BASE_URL
+      }/admin/verification-document?url=${encodeURIComponent(documentUrl)}`;
+
+      const response = await fetch(proxyUrl, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
+      const blobUrl = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
-      a.href = url;
+      a.href = blobUrl;
       a.download = documentName;
       document.body.appendChild(a);
       a.click();
-      window.URL.revokeObjectURL(url);
+      window.URL.revokeObjectURL(blobUrl);
       document.body.removeChild(a);
-    } catch (err) {
-      setError("Failed to download document");
+
+      console.log("Download successful");
+    } catch (error) {
+      console.error("Error downloading document:", error);
+      setError(
+        `Failed to download ${documentName}. The file may not be accessible.`
+      );
       setTimeout(() => setError(""), 3000);
     }
   };
@@ -159,7 +255,7 @@ export default function SupplierDetailPage() {
         {/* Business Details */}
         <div>
           <h3 className="text-[14px] font-bold text-black mb-4">
-            Business Details
+            Business Information
           </h3>
           <div className="space-y-3">
             <div>
@@ -172,7 +268,15 @@ export default function SupplierDetailPage() {
             </div>
             <div>
               <label className="text-[11px] text-gray-500 block mb-1">
-                GSTIN
+                Category
+              </label>
+              <p className="text-[13px] text-black">
+                {verification.category || "N/A"}
+              </p>
+            </div>
+            <div>
+              <label className="text-[11px] text-gray-500 block mb-1">
+                GST Number
               </label>
               <p className="text-[13px] text-black">
                 {verification.gstNumber || "N/A"}
@@ -186,14 +290,10 @@ export default function SupplierDetailPage() {
                 {verification.panNumber || "N/A"}
               </p>
             </div>
-            <div>
-              <label className="text-[11px] text-gray-500 block mb-1">
-                Registered Address
-              </label>
-              <p className="text-[13px] text-black">
-                {verification.registeredAddress || "N/A"}
-              </p>
-            </div>
+
+            <h3 className="text-[14px] font-bold text-black mb-4 mt-6">
+              Contact Information
+            </h3>
             <div>
               <label className="text-[11px] text-gray-500 block mb-1">
                 Contact Person
@@ -204,15 +304,15 @@ export default function SupplierDetailPage() {
             </div>
             <div>
               <label className="text-[11px] text-gray-500 block mb-1">
-                Contact Email
+                Registered Address
               </label>
               <p className="text-[13px] text-black">
-                {verification.contactEmail || "N/A"}
+                {verification.registeredAddress || "N/A"}
               </p>
             </div>
             <div>
               <label className="text-[11px] text-gray-500 block mb-1">
-                Contact Phone
+                Business Phone
               </label>
               <p className="text-[13px] text-black">
                 {verification.contactPhone || "N/A"}
@@ -220,34 +320,35 @@ export default function SupplierDetailPage() {
             </div>
             <div>
               <label className="text-[11px] text-gray-500 block mb-1">
-                Category
+                Business Email
               </label>
               <p className="text-[13px] text-black">
-                {verification.category || "N/A"}
+                {verification.contactEmail || "N/A"}
               </p>
             </div>
           </div>
         </div>
 
-        {/* Status Information */}
+        {/* Status & Identity Information */}
         <div>
           <h3 className="text-[14px] font-bold text-black mb-4">
             Verification Status
           </h3>
           <div className="space-y-4">
-            <div className="border border-gray-200 p-4">
+            <div className="border border-gray-200 p-4 rounded">
               <label className="text-[11px] text-gray-500 block mb-1">
                 Current Status
               </label>
               <p
                 className={`text-[16px] font-semibold ${
+                  verification.verificationStatus === "approved" ||
                   verification.verificationStatus === "verified"
                     ? "text-green-600"
                     : verification.verificationStatus === "rejected"
                     ? "text-red-600"
                     : verification.verificationStatus === "under_review"
                     ? "text-blue-600"
-                    : "text-gray-600"
+                    : "text-yellow-600"
                 }`}
               >
                 {verification.verificationStatus
@@ -256,7 +357,7 @@ export default function SupplierDetailPage() {
               </p>
             </div>
 
-            <div className="border border-gray-200 p-4">
+            <div className="border border-gray-200 p-4 rounded">
               <label className="text-[11px] text-gray-500 block mb-1">
                 Submitted Date
               </label>
@@ -277,9 +378,9 @@ export default function SupplierDetailPage() {
             </div>
 
             {verification.verifiedAt && (
-              <div className="border border-gray-200 p-4">
+              <div className="border border-gray-200 p-4 rounded">
                 <label className="text-[11px] text-gray-500 block mb-1">
-                  Verified Date
+                  Reviewed Date
                 </label>
                 <p className="text-[13px] text-black">
                   {new Date(verification.verifiedAt).toLocaleDateString(
@@ -296,36 +397,16 @@ export default function SupplierDetailPage() {
               </div>
             )}
 
-            {/* Action Buttons */}
-            {verification.verificationStatus === "pending" ||
-            verification.verificationStatus === "under_review" ? (
-              <div className="space-y-2 mt-6">
-                <button
-                  onClick={() => handleAction("approve")}
-                  disabled={actionLoading}
-                  className="w-full bg-green-600 text-white px-4 py-2 text-[13px] font-medium hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                >
-                  <CheckCircle className="w-4 h-4" />
-                  Approve Verification
-                </button>
-                <button
-                  onClick={() => handleAction("review")}
-                  disabled={actionLoading}
-                  className="w-full bg-blue-600 text-white px-4 py-2 text-[13px] font-medium hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                >
-                  <Eye className="w-4 h-4" />
-                  Mark Under Review
-                </button>
-                <button
-                  onClick={() => handleAction("reject")}
-                  disabled={actionLoading}
-                  className="w-full bg-red-600 text-white px-4 py-2 text-[13px] font-medium hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                >
-                  <XCircle className="w-4 h-4" />
-                  Reject Verification
-                </button>
+            {verification.verificationStatus === "rejected" && (
+              <div className="border border-red-200 bg-red-50 p-4 rounded">
+                <label className="text-[11px] text-red-600 block mb-1">
+                  Rejection Reason
+                </label>
+                <p className="text-[13px] text-red-800">
+                  Contact admin for details
+                </p>
               </div>
-            ) : null}
+            )}
           </div>
         </div>
       </div>
@@ -333,56 +414,69 @@ export default function SupplierDetailPage() {
   };
 
   const renderDocuments = () => {
-    if (!verification?.documents) {
+    if (!verification || !verification.documents) {
       return <p className="text-[13px] text-gray-500">No documents uploaded</p>;
     }
 
-    const documentEntries = Object.entries(verification.documents).filter(
-      ([_, url]) => url
-    );
+    // Document labels mapping for better display names
+    const documentLabels: { [key: string]: string } = {
+      panCard: "PAN Card",
+      gstCertificate: "GST Certificate",
+      addressProof: "Address Proof",
+      businessLicense: "Business License",
+      incorporationCertificate: "Certificate of Incorporation",
+      businessCertificate: "Business Certificate",
+      isoCertificate: "ISO Certificate",
+      qualityAssuranceLicense: "Quality Assurance License",
+      auditReports: "Audit Reports",
+      bankStatement: "Bank Statement",
+    };
 
-    if (documentEntries.length === 0) {
+    // Get all document URLs from verification.documents object
+    const documents = Object.entries(documentLabels)
+      .map(([key, label]) => ({
+        key,
+        label,
+        url: verification.documents[key as keyof typeof verification.documents],
+      }))
+      .filter((doc) => doc.url); // Only show uploaded documents
+
+    if (documents.length === 0) {
       return <p className="text-[13px] text-gray-500">No documents uploaded</p>;
     }
 
     return (
       <div>
         <h3 className="text-[14px] font-bold text-black mb-4">
-          Attached Documents
+          Attached Documents ({documents.length})
         </h3>
         <div className="grid grid-cols-2 gap-4">
-          {documentEntries.map(([key, url]) => {
-            const fileName = key.replace(/([A-Z])/g, " $1").trim();
-            const displayName =
-              fileName.charAt(0).toUpperCase() + fileName.slice(1);
-
+          {documents.map((doc) => {
             return (
               <div
-                key={key}
-                className="border border-gray-200 p-4 flex items-center gap-3"
+                key={doc.key}
+                className="border border-gray-200 p-4 flex items-center gap-3 hover:border-gray-300 transition-colors rounded"
               >
-                <div className="w-10 h-10 bg-gray-100 flex items-center justify-center flex-shrink-0">
-                  <FileText className="w-5 h-5 text-gray-600" />
+                <div className="w-10 h-10 bg-blue-50 flex items-center justify-center shrink-0 rounded">
+                  <FileText className="w-5 h-5 text-blue-600" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-[12px] text-black truncate">
-                    {displayName}
+                  <p className="text-[12px] text-black font-medium truncate">
+                    {doc.label}
                   </p>
-                  <p className="text-[10px] text-gray-500">Document</p>
+                  <p className="text-[10px] text-gray-500">Uploaded Document</p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <a
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    onClick={() => handleViewDocument(doc.url!, doc.label)}
                     className="p-1.5 hover:bg-gray-100 rounded transition-colors"
                     title="View Document"
                   >
                     <Eye className="w-4 h-4 text-gray-600" />
-                  </a>
+                  </button>
                   <button
                     onClick={() =>
-                      handleDownloadDocument(url!, `${displayName}.pdf`)
+                      handleDownloadDocument(doc.url!, `${doc.label}.pdf`)
                     }
                     className="p-1.5 hover:bg-gray-100 rounded transition-colors"
                     title="Download Document"
@@ -413,10 +507,10 @@ export default function SupplierDetailPage() {
           <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gray-200" />
 
           <div className="space-y-6">
-            {history.map((event, index) => (
+            {history.map((event) => (
               <div key={event.id} className="relative flex gap-4">
                 {/* Timeline Node */}
-                <div className="relative z-10 flex-shrink-0">
+                <div className="relative z-10 shrink-0">
                   <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
                     <CheckCircle className="w-6 h-6 text-gray-600" />
                   </div>
@@ -549,6 +643,43 @@ export default function SupplierDetailPage() {
           {activeTab === "Documents" && renderDocuments()}
           {activeTab === "History" && renderHistory()}
         </div>
+
+        {/* Action Buttons for pending verifications */}
+        {verification &&
+        (verification.verificationStatus === "pending" ||
+          verification.verificationStatus === "under_review") ? (
+          <div className="bg-white border border-gray-200 p-6">
+            <h3 className="text-[14px] font-bold text-black mb-4">
+              Verification Actions
+            </h3>
+            <div className="flex gap-3">
+              <button
+                onClick={() => handleAction("approve")}
+                disabled={actionLoading}
+                className="flex-1 bg-green-600 text-white px-6 py-3 text-[14px] font-medium hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 rounded"
+              >
+                <CheckCircle className="w-5 h-5" />
+                Approve Verification
+              </button>
+              <button
+                onClick={() => handleAction("review")}
+                disabled={actionLoading}
+                className="flex-1 bg-blue-600 text-white px-6 py-3 text-[14px] font-medium hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 rounded"
+              >
+                <Eye className="w-5 h-5" />
+                Mark Under Review
+              </button>
+              <button
+                onClick={() => handleAction("reject")}
+                disabled={actionLoading}
+                className="flex-1 bg-red-600 text-white px-6 py-3 text-[14px] font-medium hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 rounded"
+              >
+                <XCircle className="w-5 h-5" />
+                Reject Verification
+              </button>
+            </div>
+          </div>
+        ) : null}
       </div>
     </AdminLayout>
   );

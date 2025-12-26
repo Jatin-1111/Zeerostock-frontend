@@ -9,8 +9,44 @@ import {
   Upload,
 } from "lucide-react";
 
+interface VerificationData {
+  legal_business_name?: string;
+  business_type?: string;
+  business_registration_number?: string;
+  business_tax_id?: string;
+  establishment_year?: string;
+  owner_full_name?: string;
+  government_id_type?: string;
+  government_id_number?: string;
+  government_id_document_url?: string;
+  primary_business_address?: string;
+  business_phone?: string;
+  business_email?: string;
+  bank_name?: string;
+  account_holder_name?: string;
+  account_number?: string;
+  business_license_url?: string;
+  certificate_of_incorporation_url?: string;
+  tax_registration_certificate_url?: string;
+  iso_certificate_url?: string;
+  business_certificate_url?: string;
+  quality_assurance_license_url?: string;
+  audit_reports_url?: string;
+  proof_of_address_document_url?: string;
+  warehouse_locations?: string[];
+  submitted_at?: string;
+  created_at?: string;
+}
+
 interface VerificationStatusViewProps {
-  status: any;
+  status: {
+    status: string;
+    verification: VerificationData | null;
+    role: Record<string, unknown> | null;
+    hasDraft: boolean;
+    draft?: Record<string, unknown>;
+  };
+  onEditReapply?: () => void;
 }
 
 // Helper function to mask account number
@@ -30,115 +66,73 @@ const formatDate = (dateString: string) => {
   });
 };
 
-// DocumentRow component - matches wireframe design
-const DocumentRow = ({
-  label,
-  uploadedDate,
-  status,
-  url,
-  optional = false,
-}: {
-  label: string;
-  uploadedDate: string;
-  status: string;
-  url: string;
-  optional?: boolean;
-}) => (
-  <div className="bg-gray-50 p-4 flex items-center justify-between">
-    <div className="flex-1">
-      <div className="flex items-center gap-2 mb-1">
-        <p className="text-sm font-medium text-gray-900">{label}</p>
-      </div>
-      <p className="text-xs text-blue-600">
-        Uploaded: {formatDate(uploadedDate)}
-      </p>
-    </div>
-    <div className="flex items-center gap-2">
-      <span
-        className={`px-3 py-1 text-xs font-medium rounded ${
-          status === "approved"
-            ? "bg-green-500 text-white"
-            : "bg-yellow-500 text-white"
-        }`}
-      >
-        {status === "approved" ? "Verified" : "Pending"}
-      </span>
-    </div>
-  </div>
-);
-
-// BankInfoRow component
-const BankInfoRow = ({
-  label,
-  value,
-  verified = false,
-}: {
-  label: string;
-  value: string;
-  verified?: boolean;
-}) => (
-  <div className="bg-gray-50 p-4 flex items-center justify-between">
-    <div className="flex-1">
-      <div className="text-xs text-gray-500 mb-1">{label}</div>
-      <div className="text-sm font-medium text-gray-900">{value}</div>
-    </div>
-    {verified && (
-      <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center">
-        <svg
-          className="w-3 h-3 text-white"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={3}
-            d="M5 13l4 4L19 7"
-          />
-        </svg>
-      </div>
-    )}
-  </div>
-);
+// Removed unused helper components - using DocumentRowNew instead
 
 export default function VerificationStatusView({
   status,
+  onEditReapply,
 }: VerificationStatusViewProps) {
   const { verification, role } = status;
 
-  // Calculate progress dynamically
+  // Calculate progress dynamically based on actual data completeness
   const calculateProgress = () => {
     if (!verification) return { progress: 0, completedSteps: 0 };
 
-    // Only count progress if status is approved
-    if (status.status !== "approved") {
-      return { progress: 0, completedSteps: 0 };
+    // If verification is approved or verified, show 100% progress
+    if (status.status === "approved" || status.status === "verified") {
+      return { progress: 100, completedSteps: 5 };
     }
 
     let completedSteps = 0;
     const totalSteps = 5; // Business Info, Identity, Operational, Documents, Bank
 
-    // Step 1: Business Information (always completed if verification exists)
-    if (verification.legal_business_name) completedSteps++;
-
-    // Step 2: Identity Verification
-    if (verification.owner_full_name && verification.government_id_document_url)
-      completedSteps++;
-
-    // Step 3: Operational Information
-    if (verification.primary_business_address && verification.business_phone)
-      completedSteps++;
-
-    // Step 4: Business Documents
+    // Step 1: Business Information (check all required fields)
     if (
-      verification.business_license_url ||
-      verification.certificate_of_incorporation_url
-    )
+      verification.legal_business_name &&
+      verification.business_type &&
+      verification.business_registration_number &&
+      verification.establishment_year
+    ) {
       completedSteps++;
+    }
 
-    // Step 5: Bank Account
-    if (verification.bank_name && verification.account_number) completedSteps++;
+    // Step 2: Identity Verification (check all required identity fields)
+    if (
+      verification.owner_full_name &&
+      verification.government_id_type &&
+      verification.government_id_number &&
+      verification.government_id_document_url
+    ) {
+      completedSteps++;
+    }
+
+    // Step 3: Operational Information (check contact and address)
+    if (
+      verification.primary_business_address &&
+      verification.business_phone &&
+      verification.business_email
+    ) {
+      completedSteps++;
+    }
+
+    // Step 4: Business Documents (at least 2 required documents)
+    const documentCount = [
+      verification.business_license_url,
+      verification.certificate_of_incorporation_url,
+      verification.tax_registration_certificate_url,
+    ].filter(Boolean).length;
+    if (documentCount >= 2) {
+      completedSteps++;
+    }
+
+    // Step 5: Bank Account (check all bank fields)
+    if (
+      verification.bank_name &&
+      verification.account_holder_name &&
+      verification.account_number
+    ) {
+      completedSteps++;
+    }
 
     const progress = Math.round((completedSteps / totalSteps) * 100);
     return { progress, completedSteps };
@@ -201,18 +195,19 @@ export default function VerificationStatusView({
 
   const statusConfig = getStatusConfig();
 
-  // Get documents list dynamically
+  // Get documents list dynamically with all possible document types
   const getDocuments = () => {
     const docs = [];
+
+    // Required documents
     if (verification?.business_license_url) {
       docs.push({
         label: "Business License",
         url: verification.business_license_url,
         required: true,
         status: status.status,
-        uploadedDate: verification.business_license_url
-          ? new Date().toISOString()
-          : null,
+        uploadedDate: (verification.submitted_at ||
+          verification.created_at) as string,
       });
     }
     if (verification?.certificate_of_incorporation_url) {
@@ -221,9 +216,8 @@ export default function VerificationStatusView({
         url: verification.certificate_of_incorporation_url,
         required: true,
         status: status.status,
-        uploadedDate: verification.certificate_of_incorporation_url
-          ? new Date().toISOString()
-          : null,
+        uploadedDate: (verification.submitted_at ||
+          verification.created_at) as string,
       });
     }
     if (verification?.tax_registration_certificate_url) {
@@ -232,22 +226,73 @@ export default function VerificationStatusView({
         url: verification.tax_registration_certificate_url,
         required: true,
         status: status.status,
-        uploadedDate: verification.tax_registration_certificate_url
-          ? new Date().toISOString()
-          : null,
+        uploadedDate: (verification.submitted_at ||
+          verification.created_at) as string,
       });
     }
+    if (verification?.government_id_document_url) {
+      docs.push({
+        label: "Government ID Document",
+        url: verification.government_id_document_url,
+        required: true,
+        status: status.status,
+        uploadedDate: (verification.submitted_at ||
+          verification.created_at) as string,
+      });
+    }
+
+    // Optional documents
     if (verification?.iso_certificate_url) {
       docs.push({
-        label: "Industry Certifications (ISO/CE)",
+        label: "ISO Certificate",
         url: verification.iso_certificate_url,
         required: false,
         status: status.status,
-        uploadedDate: verification.iso_certificate_url
-          ? new Date().toISOString()
-          : null,
+        uploadedDate: (verification.submitted_at ||
+          verification.created_at) as string,
       });
     }
+    if (verification?.business_certificate_url) {
+      docs.push({
+        label: "Business Certificate",
+        url: verification.business_certificate_url,
+        required: false,
+        status: status.status,
+        uploadedDate: (verification.submitted_at ||
+          verification.created_at) as string,
+      });
+    }
+    if (verification?.quality_assurance_license_url) {
+      docs.push({
+        label: "Quality Assurance License",
+        url: verification.quality_assurance_license_url,
+        required: false,
+        status: status.status,
+        uploadedDate: (verification.submitted_at ||
+          verification.created_at) as string,
+      });
+    }
+    if (verification?.audit_reports_url) {
+      docs.push({
+        label: "Audit Reports",
+        url: verification.audit_reports_url,
+        required: false,
+        status: status.status,
+        uploadedDate: (verification.submitted_at ||
+          verification.created_at) as string,
+      });
+    }
+    if (verification?.proof_of_address_document_url) {
+      docs.push({
+        label: "Proof of Address",
+        url: verification.proof_of_address_document_url,
+        required: false,
+        status: status.status,
+        uploadedDate: (verification.submitted_at ||
+          verification.created_at) as string,
+      });
+    }
+
     return docs;
   };
 
@@ -412,6 +457,31 @@ export default function VerificationStatusView({
           </p>
         </div>
       </div>
+
+      {/* Edit & Reapply Button for Rejected Status */}
+      {status.status === "rejected" && onEditReapply && (
+        <div className="mb-[23px]">
+          <button
+            onClick={onEditReapply}
+            className="w-full bg-gray-900 text-white font-semibold text-[16px] px-8 py-4 rounded-[10px] hover:bg-gray-800 transition-colors flex items-center justify-center gap-3 shadow-md"
+          >
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+              />
+            </svg>
+            Edit & Reapply for Verification
+          </button>
+        </div>
+      )}
 
       <div className="flex gap-5">
         {/* Left Column - Verification Cards */}
@@ -685,7 +755,7 @@ export default function VerificationStatusView({
                     />
                     <InfoCard
                       label="Account Holder"
-                      value={verification.account_holder_name}
+                      value={verification.account_holder_name || "N/A"}
                       verified
                     />
                   </div>
@@ -743,7 +813,8 @@ export default function VerificationStatusView({
                     <InfoCard
                       label="Warehouse Location"
                       value={
-                        verification.warehouse_locations?.length > 0
+                        verification.warehouse_locations &&
+                        verification.warehouse_locations.length > 0
                           ? `${verification.warehouse_locations.length} verified Locations`
                           : "Not specified"
                       }
@@ -751,12 +822,12 @@ export default function VerificationStatusView({
                     />
                     <InfoCard
                       label="Business Phone"
-                      value={verification.business_phone}
+                      value={verification.business_phone || "N/A"}
                       verified
                     />
                     <InfoCard
                       label="Business Email"
-                      value={verification.business_email}
+                      value={verification.business_email || "N/A"}
                       verified
                     />
                   </div>

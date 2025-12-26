@@ -371,9 +371,9 @@ export interface SignupFormData {
   businessEmail: string;
   mobile: string;
   password: string;
-  companyName: string;
+  companyName?: string;
   gstNumber?: string;
-  businessType: string;
+  businessType?: string;
   acceptedTerms: boolean;
 }
 
@@ -395,6 +395,7 @@ export interface ForgotPasswordData {
 export interface ResetPasswordData {
   token: string;
   newPassword: string;
+  confirmPassword: string;
 }
 
 export interface UpdateProfileData {

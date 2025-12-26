@@ -18,9 +18,6 @@ export default function SignUpPage() {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    companyName: "",
-    businessType: "",
-    gstNumber: "",
     email: "",
     countryCode: "+91",
     mobile: "",
@@ -61,9 +58,6 @@ export default function SignUpPage() {
         businessEmail: formData.email,
         mobile: formData.mobile,
         password: formData.password,
-        companyName: formData.companyName,
-        businessType: formData.businessType,
-        gstNumber: formData.gstNumber || undefined,
         acceptedTerms: agreedToTerms,
       });
 
@@ -140,67 +134,14 @@ export default function SignUpPage() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Company Name
-            </label>
-            <input
-              type="text"
-              name="companyName"
-              value={formData.companyName}
-              onChange={handleChange}
-              placeholder="Acela Ltd."
-              required
-              disabled={loading}
-              className="w-full px-3 py-2 border text-gray-800 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed text-black placeholder:text-gray-400"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Business Type
-            </label>
-            <select
-              name="businessType"
-              value={formData.businessType}
-              onChange={handleChange}
-              disabled={loading}
-              className="w-full px-3 py-2 border text-gray-800 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed text-black"
-            >
-              <option value="">Select business type</option>
-              <option value="manufacturer">Manufacturer</option>
-              <option value="distributor">Distributor</option>
-              <option value="retailer">Retailer</option>
-              <option value="broker">Broker</option>
-            </select>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              GST number
-            </label>
-            <div className="flex items-center gap-2">
-              <input
-                type="text"
-                name="gstNumber"
-                value={formData.gstNumber}
-                onChange={handleChange}
-                placeholder="33AAACR0000M1Z5"
-                disabled={loading}
-                className="flex-1 px-3 py-2 border text-gray-800 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed text-black placeholder:text-gray-400"
-              />
-              <span className="text-xs text-gray-500">include gst details</span>
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Business Email
+              Email
             </label>
             <input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="email@gmail.in"
+              placeholder="email@gmail.com"
               required
               disabled={loading}
               className="w-full px-3 py-2 border text-gray-800 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:bg-gray-100 disabled:cursor-not-allowed text-black placeholder:text-gray-400"

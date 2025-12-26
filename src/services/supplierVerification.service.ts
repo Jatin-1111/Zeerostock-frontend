@@ -54,11 +54,8 @@ export const supplierVerificationService = {
     formData.append("document", file);
     formData.append("documentType", documentType);
 
-    return apiRequest("post", "/supplier/verification/upload", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    // Don't set Content-Type header - let axios set it automatically with boundary
+    return apiRequest("post", "/supplier/verification/upload", formData);
   },
 
   /**

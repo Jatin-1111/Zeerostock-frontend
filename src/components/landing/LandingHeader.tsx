@@ -32,9 +32,9 @@ export default function Header() {
         {/* Logo */}
         <Link href="/" className="shrink-0">
           <img
-            src={imgUpscaleRe2}
+            src={'/Zeerostock Logo-1.svg'}
             alt="Zeerostock"
-            className="w-[150px] h-[47px]"
+            className="w-auto h-[125px]"
           />
         </Link>
         {/* Navigation */}

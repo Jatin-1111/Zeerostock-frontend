@@ -1,47 +1,57 @@
+"use client";
+
 import CartItems from "@/components/cart/CartItems";
 import OrderSummary from "@/components/cart/OrderSummary";
 import RelatedProducts from "@/components/cart/RelatedProducts";
-import CartDebugPanel from "@/components/cart/CartDebugPanel";
+import { ShoppingCart } from "lucide-react";
+import { useCartStore } from "@/stores/cartStore";
 
 export default function CartPage() {
+  const { items } = useCartStore();
+  const itemCount = items?.length || 0;
+
   return (
-    <div className="min-h-screen bg-white">
-      <div className="flex">
-        <div className="flex-1 p-4 md:p-8">
-          <div className="max-w-8xl mx-auto">
-            {/* Page Header */}
-            <div className="mb-6 flex items-center justify-between">
-              <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-3">
-                <svg
-                  className="w-8 h-8"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                  />
-                </svg>
+    <div className="min-h-screen bg-[#EEFBF6]">
+      <div className="w-full px-6 md:px-20 py-10">
+        {/* Page Header */}
+        <div className="mb-8 bg-white rounded-2xl shadow-sm px-8 py-6 flex items-center justify-between">
+          <div className="flex items-center gap-6">
+            {/* Cart Icon */}
+            <div className="w-14 h-14 bg-[#EEFBF6] rounded-lg flex items-center justify-center">
+              <ShoppingCart
+                className="w-8 h-8 text-[#2aae7a]"
+                strokeWidth={2}
+              />
+            </div>
+
+            {/* Title Section */}
+            <div>
+              <h1 className="text-3xl font-semibold text-[#0d1b2a] mb-1">
                 Shopping Cart
               </h1>
-              <button className="px-6 py-2 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors">
-                Browse More Items
-              </button>
+              <p className="text-base text-[#9c9c9c]">
+                {itemCount} {itemCount === 1 ? "item" : "items"} in your cart
+              </p>
             </div>
+          </div>
 
-            <div className="grid lg:grid-cols-3 gap-6">
-              <div className="lg:col-span-2 space-y-6">
-                <CartItems />
-              </div>
+          {/* Browse Button */}
+          <button className="px-8 py-3 bg-white border-2 border-[#1e3a8a] text-[#1e3a8a] rounded-xl text-base font-semibold hover:bg-[#1e3a8a] hover:text-white transition-colors">
+            Browse More Items
+          </button>
+        </div>
 
-              <div className="flex flex-col gap-6">
-                <OrderSummary />
-                <RelatedProducts />
-              </div>
-            </div>
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Left Column - Cart Items */}
+          <div className="lg:col-span-2">
+            <CartItems />
+          </div>
+
+          {/* Right Column - Order Summary & Related Products */}
+          <div className="flex flex-col gap-6">
+            <OrderSummary />
+            <RelatedProducts />
           </div>
         </div>
       </div>

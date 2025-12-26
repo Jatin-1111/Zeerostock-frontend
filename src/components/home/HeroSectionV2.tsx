@@ -8,8 +8,6 @@ import { useAuth } from "@/contexts/AuthContext";
 
 const imgHeroBackground =
   "https://www.figma.com/api/mcp/asset/5bd287c3-4c2c-4c09-8256-b56732d470e4";
-const imgFloatingImage =
-  "https://www.figma.com/api/mcp/asset/f630ba7a-2110-4476-be94-b4cc3e985e05";
 
 export default function HeroSectionV2() {
   const router = useRouter();
@@ -176,18 +174,9 @@ export default function HeroSectionV2() {
       {/* Background Image */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <img
-          alt=""
+          alt="Hero Background"
           className="absolute h-[128.6%] left-0 max-w-none top-[-1.05%] w-full object-cover"
-          src={imgHeroBackground}
-        />
-      </div>
-
-      {/* Floating Image - Right Side */}
-      <div className="absolute right-[77px] top-[419px] bg-[#eeffef] rounded-[60px] shadow-[0px_0px_10px_0px_rgba(24,181,34,0.25)] p-2.5">
-        <img
-          alt=""
-          className="w-[54px] h-[54px] object-cover rounded-full"
-          src={imgFloatingImage}
+          src={'/Herosection.jpeg'}
         />
       </div>
 

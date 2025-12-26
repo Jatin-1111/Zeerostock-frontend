@@ -1,36 +1,65 @@
+import Image from "next/image";
+
 export default function RelatedProducts() {
   const products = [
-    { title: "Related Product 1", price: "₹45.00" },
-    { title: "Related Product 2", price: "₹45.00" },
-    { title: "Related Product 3", price: "₹45.00" },
+    {
+      title: "Microcontroller",
+      price: "₹45,000",
+      image: "/placeholder-product.jpg", // Replace with actual product images
+    },
+    {
+      title: "Fashion clothes",
+      price: "₹30,500",
+      image: "/placeholder-product.jpg",
+    },
+    {
+      title: "Spare Parts",
+      price: "₹110,000",
+      image: "/placeholder-product.jpg",
+    },
   ];
 
   return (
-    <div className="bg-white border-2 border-gray-200 rounded-lg p-6">
-      <h3 className="text-xl font-bold text-gray-900 mb-4">
+    <div className="w-full bg-white rounded-2xl shadow-md p-6">
+      <h3 className="text-lg font-medium text-[#0d1b2a] mb-6">
         You might also like
       </h3>
 
-      <div className="grid grid-cols-3 gap-4">
+      <div className="space-y-0">
         {products.map((product, index) => (
-          <div
-            key={index}
-            className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
-          >
-            <div className="w-full h-32 bg-gray-100 flex items-center justify-center">
-              <span className="text-xs text-gray-400">Product Image</span>
+          <div key={index}>
+            <div className="flex items-center gap-6 py-4">
+              {/* Product Image */}
+              <div className="w-[90px] h-[90px] bg-gray-100 rounded-lg shrink-0 relative overflow-hidden">
+                {product.image ? (
+                  <Image
+                    src={product.image}
+                    alt={product.title}
+                    fill
+                    className="object-cover"
+                  />
+                ) : (
+                  <span className="absolute inset-0 flex items-center justify-center text-xs text-gray-400">
+                    No Image
+                  </span>
+                )}
+              </div>
+
+              {/* Product Info */}
+              <div className="flex-1">
+                <h4 className="text-base font-medium text-[#0d1b2a] mb-2">
+                  {product.title}
+                </h4>
+                <p className="text-xl font-semibold text-[#2aae7a] tracking-wide">
+                  {product.price}
+                </p>
+              </div>
             </div>
-            <div className="p-3">
-              <h4 className="text-sm font-semibold text-gray-900 mb-2">
-                {product.title}
-              </h4>
-              <p className="text-base font-bold text-gray-900 mb-3">
-                {product.price}
-              </p>
-              <button className="w-full py-2 border border-gray-900 text-gray-900 rounded text-sm font-medium hover:bg-gray-900 hover:text-white transition-colors">
-                Add to Cart
-              </button>
-            </div>
+
+            {/* Divider (except after last item) */}
+            {index < products.length - 1 && (
+              <div className="border-t border-gray-300"></div>
+            )}
           </div>
         ))}
       </div>

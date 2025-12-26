@@ -5,14 +5,11 @@ import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import toast from "react-hot-toast";
+import { Globe, User } from "lucide-react";
 import EnhancedSearchInput from "@/components/search/EnhancedSearchInput";
 
 const imgUpscaleRe2 =
   "https://www.figma.com/api/mcp/asset/81fa2263-b943-4cba-b6b4-86e7e69d9a8e";
-const imgLanguage =
-  "https://www.figma.com/api/mcp/asset/2d3fcf4e-dbc3-41f8-b342-5a5c46cd2b41";
-const imgLogosWhatsappIcon =
-  "https://www.figma.com/api/mcp/asset/a5fa290d-c3c0-47cb-91f9-f53412b2b3ab";
 
 export default function Header() {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
@@ -42,9 +39,9 @@ export default function Header() {
         {/* Logo - Left Side */}
         <Link href="/" className="shrink-0">
           <img
-            src={imgUpscaleRe2}
+            src={"/Zeerostock Logo-1.svg"}
             alt="Zeerostock"
-            className="w-[150px] h-[47px]"
+            className="h-[125px] w-auto"
           />
         </Link>
 
@@ -123,7 +120,7 @@ export default function Header() {
           <div className="flex items-center gap-[18px] shrink-0">
             {/* Language Selector */}
             <button className="flex items-center hover:opacity-80 transition-opacity">
-              <img src={imgLanguage} alt="" className="w-5 h-5" />
+              <Globe className="w-5 h-5 text-white" />
               <span className="font-normal text-[18px] text-white leading-5 tracking-[0.1px] ml-1.5">
                 EN
               </span>
@@ -135,11 +132,21 @@ export default function Header() {
               target="_blank"
               className="hover:opacity-80 transition-opacity"
             >
-              <img
-                src={imgLogosWhatsappIcon}
-                alt="WhatsApp"
+              <svg
                 className="w-[30px] h-[30px]"
-              />
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 0C7.164 0 0 7.164 0 16c0 2.824.736 5.488 2.032 7.808L0 32l8.384-2.008A15.904 15.904 0 0016 32c8.836 0 16-7.164 16-16S24.836 0 16 0z"
+                  fill="#25D366"
+                />
+                <path
+                  d="M25.344 22.592c-.352 1.008-1.76 1.856-2.88 2.112-.768.176-1.776.32-5.152-.664-4.336-1.264-7.136-5.664-7.344-5.92-.208-.256-1.696-2.256-1.696-4.304s1.072-3.056 1.456-3.472c.384-.416.832-.52 1.104-.52.272 0 .544.016.784.016.256 0 .592-.096.928.704.336.8 1.136 2.768 1.232 2.976.096.208.16.448.032.704-.128.256-.192.416-.384.64-.192.224-.4.496-.576.672-.192.192-.384.4-.16.784.224.384.992 1.632 2.128 2.64 1.456 1.296 2.688 1.696 3.072 1.888.384.192.608.16.832-.096.224-.256.96-1.12 1.216-1.504.256-.384.512-.32.864-.192.352.128 2.24 1.056 2.624 1.248.384.192.64.288.736.448.096.16.096.928-.256 1.936z"
+                  fill="#fff"
+                />
+              </svg>
             </Link>
 
             {/* User Menu */}
@@ -148,19 +155,7 @@ export default function Header() {
                 onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                 className="bg-[#0a2540] rounded-full flex items-center justify-center p-2.5 hover:bg-[#0d2f52] transition-colors"
               >
-                <svg
-                  className="w-5 h-5 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                  />
-                </svg>
+                <User className="w-5 h-5 text-white" />
               </button>
 
               {isUserMenuOpen && (

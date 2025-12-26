@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useCartStore } from "@/stores/cartStore";
 import { cartService } from "@/services/cart.service";
 import toast from "react-hot-toast";
+import { Shield, Truck } from "lucide-react";
 
 export default function OrderSummary() {
   const router = useRouter();
@@ -102,22 +103,24 @@ export default function OrderSummary() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="w-full space-y-4">
       {/* Promo Code */}
-      <div className="bg-white border-2 border-gray-200 rounded-lg p-6">
-        <h3 className="font-semibold text-gray-900 mb-4">Promo Code</h3>
-        <div className="flex gap-2">
+      <div className="w-full bg-white rounded-2xl shadow-md p-6">
+        <h3 className="text-lg font-medium text-[#0d1b2a] mb-4">
+          Have a promo code?
+        </h3>
+        <div className="flex gap-3">
           <input
             type="text"
             value={promoCode}
             onChange={(e) => setPromoCode(e.target.value)}
-            placeholder="Enter Promo Code"
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
+            placeholder="Enter Code"
+            className="flex-1 h-[42px] px-4 text-sm font-medium text-[#bebebe] border border-[#bebebe] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-transparent"
           />
           <button
             onClick={handleApplyCoupon}
             disabled={isApplyingCoupon}
-            className="px-6 py-2 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="h-[42px] px-8 bg-[#1e3a8a] text-white text-sm font-semibold rounded-xl hover:bg-[#152d6b] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isApplyingCoupon ? "Applying..." : "Apply"}
           </button>
@@ -125,70 +128,61 @@ export default function OrderSummary() {
       </div>
 
       {/* Order Summary */}
-      <div className="bg-white border-2 border-gray-200 rounded-lg p-6">
-        <h3 className="font-semibold text-gray-900 mb-4">Order Summary</h3>
+      <div className="w-full bg-white rounded-2xl shadow-md p-6">
+        <h3 className="text-lg font-medium text-[#0d1b2a] mb-5">
+          Order Summary
+        </h3>
 
-        <div className="space-y-3 mb-4">
-          <div className="flex justify-between text-gray-700">
-            <span>Subtotal ({summary.itemCount} items)</span>
-            <span className="font-semibold">
-              ₹{" "}
-              {summary.subtotal.toLocaleString("en-IN", {
-                minimumFractionDigits: 2,
-              })}
+        <div className="space-y-4 mb-5">
+          <div className="flex justify-between items-center text-base">
+            <span className="font-medium text-[#9c9c9c]">
+              Subtotal ({summary.itemCount} items)
+            </span>
+            <span className="font-semibold text-[#bebebe] tracking-wide">
+              ₹{summary.subtotal.toLocaleString("en-IN")}
             </span>
           </div>
           {summary.savings > 0 && (
-            <div className="flex justify-between text-gray-700">
-              <span>Total Savings</span>
-              <span className="font-semibold text-green-600">
-                -₹{" "}
-                {summary.savings.toLocaleString("en-IN", {
-                  minimumFractionDigits: 2,
-                })}
+            <div className="flex justify-between items-center text-base">
+              <span className="font-medium text-[#2aae7a]">Total Saving</span>
+              <span className="font-semibold text-[#2aae7a] tracking-wide">
+                -₹{summary.savings.toLocaleString("en-IN")}
               </span>
             </div>
           )}
           {summary.couponDiscount > 0 && (
-            <div className="flex justify-between text-gray-700">
-              <span>Coupon Discount</span>
-              <span className="font-semibold text-green-600">
-                -₹{" "}
-                {summary.couponDiscount.toLocaleString("en-IN", {
-                  minimumFractionDigits: 2,
-                })}
+            <div className="flex justify-between items-center text-base">
+              <span className="font-medium text-[#2aae7a]">
+                Coupon Discount
+              </span>
+              <span className="font-semibold text-[#2aae7a] tracking-wide">
+                -₹{summary.couponDiscount.toLocaleString("en-IN")}
               </span>
             </div>
           )}
-          <div className="flex justify-between text-gray-700">
-            <span>Estimated Tax (GST)</span>
-            <span className="font-semibold">
-              ₹{" "}
-              {summary.tax.toLocaleString("en-IN", {
-                minimumFractionDigits: 2,
-              })}
+          <div className="flex justify-between items-center text-base">
+            <span className="font-medium text-[#9c9c9c]">Estimated Tax</span>
+            <span className="font-semibold text-[#bebebe] tracking-wide">
+              ₹{summary.tax.toLocaleString("en-IN")}
             </span>
           </div>
-          <div className="flex justify-between text-gray-700">
-            <span>Shipping</span>
-            <span className="font-semibold text-green-600">
+          <div className="flex justify-between items-center text-base">
+            <span className="font-medium text-[#9c9c9c]">Shipping</span>
+            <span className="font-semibold text-[#2aae7a] tracking-wide">
               {summary.shipping === 0
                 ? "Free"
-                : `₹ ${summary.shipping.toLocaleString("en-IN", {
-                    minimumFractionDigits: 2,
-                  })}`}
+                : `₹${summary.shipping.toLocaleString("en-IN")}`}
             </span>
           </div>
         </div>
 
-        <div className="pt-4 border-t border-gray-200 mb-6">
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-xl font-bold text-gray-900">Total</span>
-            <span className="text-2xl font-bold text-gray-900">
-              ₹{" "}
-              {summary.total.toLocaleString("en-IN", {
-                minimumFractionDigits: 2,
-              })}
+        <div className="border-t border-gray-300 pt-4 mb-6">
+          <div className="flex justify-between items-center">
+            <span className="text-2xl font-semibold text-[#0d1b2a]">
+              Total :
+            </span>
+            <span className="text-2xl font-semibold text-[#1e3a8a] tracking-wide">
+              ₹{summary.total.toLocaleString("en-IN")}
             </span>
           </div>
         </div>
@@ -196,36 +190,24 @@ export default function OrderSummary() {
         <button
           onClick={handleCheckout}
           disabled={!items || items.length === 0}
-          className="w-full py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors mb-3 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full h-[45px] bg-[#1e3a8a] text-white text-base font-semibold rounded-xl hover:bg-[#152d6b] transition-colors mb-6 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Proceed to Checkout
         </button>
 
-        <div className="flex items-center justify-center gap-2 text-sm text-gray-600">
-          <svg
-            className="w-5 h-5 text-green-600"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-            />
-          </svg>
-          <span>Secure checkout with 256-bit SSL encryption</span>
-        </div>
-
-        <div className="mt-4 text-center">
-          <p className="text-sm text-blue-600">
-            {summary.subtotal > 25000
-              ? "🎉 You qualify for free shipping!"
-              : `Add ₹${(25000 - summary.subtotal).toLocaleString(
-                  "en-IN"
-                )} more for free shipping`}
-          </p>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Shield className="w-5 h-5 text-[#bebebe]" />
+            <span className="text-sm font-medium text-[#bebebe] tracking-wide">
+              SSL Secure Checkout
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Truck className="w-5 h-5 text-[#bebebe]" />
+            <span className="text-sm font-medium text-[#bebebe] tracking-wide">
+              Fast Shipping Options
+            </span>
+          </div>
         </div>
       </div>
     </div>

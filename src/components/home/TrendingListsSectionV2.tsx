@@ -1,21 +1,22 @@
 "use client";
 
+import Image from "next/image";
 import { ArrowUp, ArrowDown } from "lucide-react";
 
 const imgProduct1 =
-  "https://www.figma.com/api/mcp/asset/bbf8158b-2af6-4ce3-8a97-001c1166d9b1";
+  "https://www.figma.com/api/mcp/asset/2d45e833-8ce6-4e4a-915a-9d4acc9fe20a";
 const imgProduct2 =
-  "https://www.figma.com/api/mcp/asset/3c3c0f3a-95cd-4555-8071-5d3d981bf43b";
+  "https://www.figma.com/api/mcp/asset/9a62cc83-6787-4773-af15-f17846a54887";
 const imgProduct3 =
-  "https://www.figma.com/api/mcp/asset/de50ea87-9c86-4d5e-8736-4b9c19254182";
+  "https://www.figma.com/api/mcp/asset/1004f5d2-edf7-4f22-9226-14fd2eb4ced8";
 const imgMarketChart =
-  "https://www.figma.com/api/mcp/asset/7c032063-570a-4802-b408-201f452f7166";
+  "https://www.figma.com/api/mcp/asset/13b91b8d-703d-4d55-be7f-e213f83f1b91";
 
 export default function TrendingListsSectionV2() {
   const products = [
     {
       title: "HR Steel Coils",
-      category: "Raw Materials",
+      category: "Raw Materils",
       currentPrice: "₹20,00,000",
       originalPrice: "₹25,00,000",
       discount: "Save 15%",
@@ -47,9 +48,9 @@ export default function TrendingListsSectionV2() {
   ];
 
   return (
-    <section className="bg-[#eefbf6] w-full py-[44px] px-[80px]">
-      {/* Title */}
-      <h2 className="text-center text-[50px] font-bold mb-[10px]">
+    <section className="bg-[#eefbf6] w-full py-[33px] px-[60px]">
+      {/* Title - 75% scaled (50px → 38px) */}
+      <h2 className="text-center text-[38px] font-bold mb-2 leading-normal">
         <span className="text-[#0d1b2a]">Trending </span>
         <span className="text-[#2ec096]">Lists</span>
         <span className="text-[#0d1b2a]"> & </span>
@@ -57,51 +58,53 @@ export default function TrendingListsSectionV2() {
         <span className="text-[#0d1b2a]"> Analysis</span>
       </h2>
 
-      {/* Subtitle */}
-      <p className="text-center text-[25px] font-semibold text-gray-500 mb-[114px]">
+      {/* Subtitle - 75% scaled (25px → 19px) */}
+      <p className="text-center text-[19px] font-semibold text-[#6b7280] mb-[86px] leading-normal max-w-[806px] mx-auto">
         Discover high-demand inventory and stay informed with real-time market
         insights
       </p>
 
-      {/* Content Grid */}
-      <div className="flex gap-[39px]">
-        {/* Left Column - Product Cards */}
-        <div className="flex flex-col gap-[20px] w-[600px]">
+      {/* Content Grid - 75% scaled gap (39px → 29px) */}
+      <div className="flex gap-[29px] max-w-[950px] mx-auto items-start">
+        {/* Left Column - Product Cards, 75% scaled (600px → 450px) */}
+        <div className="flex flex-col gap-[15px] w-[450px]">
           {products.map((product, index) => (
             <div
               key={index}
-              className="bg-[#063576] rounded-[20px] shadow-[0px_0px_10px_2px_rgba(0,0,0,0.25)] h-[229px] p-[28px] flex gap-[28px] relative"
+              className="bg-[#063576] rounded-[15px] shadow-[0px_0px_10px_2px_rgba(0,0,0,0.25)] min-h-[172px] p-[21px] flex gap-[21px] relative overflow-hidden"
             >
               {/* Product Info */}
-              <div className="flex flex-col flex-1">
-                <h3 className="text-[30px] font-bold text-[#2bc295] mb-[10px]">
+              <div className="flex flex-col flex-1 min-w-0">
+                <h3 className="text-[23px] font-bold text-[#2bc295] mb-1.5 leading-tight">
                   {product.title}
                 </h3>
-                <p className="text-[23px] font-semibold text-[#787878] mb-[10px]">
+                <p className="text-[17px] font-semibold text-[#787878] mb-1.5 leading-tight">
                   {product.category}
                 </p>
-                <div className="flex flex-col">
-                  <span className="text-[30px] font-bold text-[#0bd600]">
+                <div className="flex flex-col mt-auto">
+                  <span className="text-[23px] font-bold text-[#0bd600] leading-tight">
                     {product.currentPrice}
                   </span>
-                  <span className="text-[24px] font-bold text-[#9dce98] line-through">
+                  <span className="text-[18px] font-bold text-[#9dce98] line-through leading-tight">
                     {product.originalPrice}
                   </span>
                 </div>
               </div>
 
-              {/* Product Image */}
-              <div className="relative w-[281px] h-[176px] rounded-[20px] overflow-hidden">
-                <img
+              {/* Product Image - 75% scaled (281px → 211px, 176px → 132px) */}
+              <div className="relative w-[211px] h-[132px] rounded-[15px] overflow-hidden shrink-0">
+                <Image
                   alt={product.title}
-                  className="w-full h-full object-cover"
+                  className="object-cover"
                   src={product.image}
+                  fill
+                  unoptimized
                 />
               </div>
 
-              {/* Discount Badge */}
-              <div className="absolute top-[18px] right-[18px] bg-[#d0ffdb] px-[10px] py-[4px] rounded-[9px]">
-                <span className="text-[14px] font-bold text-[#18a328]">
+              {/* Discount Badge - 75% scaled */}
+              <div className="absolute top-3.5 right-3.5 bg-[#d0ffdb] px-2 py-[3px] rounded-[7px]">
+                <span className="text-[11px] font-bold text-[#18a328] leading-none">
                   {product.discount}
                 </span>
               </div>
@@ -109,39 +112,47 @@ export default function TrendingListsSectionV2() {
           ))}
         </div>
 
-        {/* Right Column - Market Analysis */}
-        <div className="bg-[#063576] rounded-[20px] shadow-[0px_0px_10px_0px_rgba(0,0,0,0.25)] w-[638px] h-[727px] p-[28px]">
-          <h3 className="text-[35px] font-extrabold text-[#2bc295] mb-[26px]">
+        {/* Right Column - Market Analysis, 75% scaled (638px → 479px, 727px → 545px) */}
+        <div className="bg-[#063576] rounded-[15px] shadow-[0px_0px_10px_0px_rgba(0,0,0,0.25)] w-[479px] flex-1 p-[21px] flex flex-col">
+          <h3 className="text-[26px] font-extrabold text-[#2bc295] mb-5 leading-normal">
             Live Market Analysis
           </h3>
 
-          {/* Chart Placeholder */}
-          <div className="relative w-full h-[281px] rounded-[20px] border-4 border-[#545f71] overflow-hidden mb-[19px]">
-            <img
+          {/* Chart Placeholder - 75% scaled (573px → 430px, 284px → 213px) */}
+          <div className="relative w-full h-[213px] rounded-[15px] border-[3px] border-[#545f71] overflow-hidden mb-3.5">
+            <Image
               alt="Market Chart"
-              className="w-full h-full object-cover"
+              className="object-cover"
               src={imgMarketChart}
+              fill
+              unoptimized
             />
           </div>
 
-          {/* Market Data Grid */}
-          <div className="grid grid-cols-2 gap-[20px]">
+          {/* Market Data Grid - 75% scaled gap (20px → 15px) */}
+          <div className="grid grid-cols-2 gap-[15px]">
             {marketData.map((data, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center text-center p-[20px]"
+                className="flex flex-col items-center text-center p-[15px]"
               >
-                <h4 className="text-[25px] font-bold text-[#2bc295] mb-[16px]">
+                <h4 className="text-[19px] font-bold text-[#2bc295] mb-3 leading-normal">
                   {data.title}
                 </h4>
-                <div className="flex items-center gap-[10px]">
+                <div className="flex items-center gap-2">
                   {data.isUp ? (
-                    <ArrowUp className="w-[34px] h-[34px] text-[#0bd600]" />
+                    <ArrowUp
+                      className="w-[26px] h-[26px] text-[#0bd600]"
+                      strokeWidth={2.5}
+                    />
                   ) : (
-                    <ArrowDown className="w-[34px] h-[34px] text-[#ff0404]" />
+                    <ArrowDown
+                      className="w-[26px] h-[26px] text-[#ff0404]"
+                      strokeWidth={2.5}
+                    />
                   )}
                   <span
-                    className={`text-[40px] font-bold ${
+                    className={`text-[30px] font-bold leading-normal ${
                       data.isUp ? "text-[#0bd600]" : "text-[#ff0404]"
                     }`}
                   >

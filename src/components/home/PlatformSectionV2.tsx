@@ -1,58 +1,69 @@
-const imgSupplierIcon =
-  "https://www.figma.com/api/mcp/asset/b4a1a93d-c02a-42f2-99a2-c0c2a7a7512f";
-const imgBuyerIcon =
-  "https://www.figma.com/api/mcp/asset/f2a1e778-ab7a-478e-b7b7-f45091be88ae";
+import { Package, ShoppingCart } from "lucide-react";
 
 export default function PlatformSectionV2() {
   return (
-    <section className="bg-[#eefbf6] w-full py-[39px] px-[150px]">
-      {/* Title */}
-      <h2 className="text-center text-[52px] font-bold mb-[10px]">
+    <section className="bg-[#eefbf6] w-full py-[29px] px-[113px]">
+      {/* Title - 75% scaled (52px → 39px) */}
+      <h2 className="text-center text-[39px] font-bold mb-2 leading-normal">
         <span className="text-[#0d1b2a]">One Platform, Two </span>
         <span className="text-[#2ec096]">Success Stories</span>
       </h2>
 
-      {/* Subtitle */}
-      <p className="text-center text-[24px] font-semibold text-gray-500 mb-[73px]">
+      {/* Subtitle - 75% scaled (24px → 18px) */}
+      <p className="text-center text-[18px] font-semibold text-[#6b7280] mb-[55px] leading-normal">
         Discover how Zeerostock creates value for every participant in the
         surplus inventory ecosystem
       </p>
 
-      {/* Cards Container */}
-      <div className="flex gap-[110px] justify-center">
-        {/* Suppliers Card */}
-        <div className="bg-[#2aae7a] rounded-[60px] shadow-[0px_0px_7px_0px_rgba(0,0,0,0.25)] w-[525px] h-[400px] flex flex-col items-center py-[20px]">
-          <img
-            alt="Suppliers"
-            className="w-[100px] h-[100px] object-cover"
-            src={imgSupplierIcon}
-          />
-          <h3 className="text-[40px] font-semibold text-[#022778] text-center mt-[19px] drop-shadow-[0px_3px_3px_rgba(0,0,0,0.25)]">
+      {/* Cards Container - 75% scaled gap (110px → 83px) */}
+      <div className="flex gap-[83px] justify-center">
+        {/* Suppliers Card - 75% scaled (525px → 394px, 400px → 300px) */}
+        <div className="bg-[#2aae7a] rounded-[45px] shadow-[0px_0px_7px_0px_rgba(0,0,0,0.25)] w-[394px] h-[300px] flex flex-col items-center py-[15px] gap-3.5">
+          {/* Icon - 75% scaled (100px → 75px) */}
+          <div className="w-[75px] h-[75px] flex items-center justify-center">
+            <Package
+              className="w-[75px] h-[75px] text-white"
+              strokeWidth={1.5}
+            />
+          </div>
+
+          {/* Title - 75% scaled (40px → 30px) */}
+          <h3 className="text-[30px] font-semibold text-[#022778] text-center drop-shadow-[0px_3px_3px_rgba(0,0,0,0.25)] leading-normal">
             SUPPLIERS
           </h3>
-          <div className="text-center text-white text-[24px] font-semibold mt-[19px] px-[75px] leading-normal">
+
+          {/* Description - 75% scaled (24px → 18px) */}
+          <div className="text-center text-white text-[18px] font-semibold px-14 leading-normal">
             <p className="mb-0">
               Transform surplus inventory into revenue streams
             </p>
-            <p>Reduce holding costs & maximize returns</p>
+            <p className="mb-0">Reduce holding costs & maximize returns</p>
           </div>
         </div>
 
-        {/* Buyers Card */}
-        <div className="bg-[#2aae7a] rounded-[60px] shadow-[0px_0px_7px_0px_rgba(0,0,0,0.25)] w-[505px] h-[400px] flex flex-col items-center py-[20px]">
-          <img
-            alt="Buyers"
-            className="w-[100px] h-[101px] object-cover"
-            src={imgBuyerIcon}
-          />
-          <h3 className="text-[40px] font-semibold text-[#022778] text-center mt-[19px] drop-shadow-[0px_3px_3px_rgba(0,0,0,0.25)]">
+        {/* Buyers Card - 75% scaled (505px → 379px, 400px → 300px) */}
+        <div className="bg-[#2aae7a] rounded-[45px] shadow-[0px_0px_7px_0px_rgba(0,0,0,0.25)] w-[379px] h-[300px] flex flex-col items-center py-[15px] gap-3.5">
+          {/* Icon - 75% scaled (100px → 75px) */}
+          <div className="w-[75px] h-[76px] flex items-center justify-center">
+            <ShoppingCart
+              className="w-[75px] h-[75px] text-white"
+              strokeWidth={1.5}
+            />
+          </div>
+
+          {/* Title - 75% scaled (40px → 30px) */}
+          <h3 className="text-[30px] font-semibold text-[#022778] text-center drop-shadow-[0px_3px_3px_rgba(0,0,0,0.25)] leading-normal">
             BUYERS
           </h3>
-          <div className="text-center text-white text-[24px] font-semibold mt-[19px] px-[61px] leading-normal">
+
+          {/* Description - 75% scaled (24px → 18px) */}
+          <div className="text-center text-white text-[18px] font-semibold px-[46px] leading-normal">
             <p className="mb-0">
               Access quality inventory at competitive prices &
             </p>
-            <p>Building reliable supply chains with verified partners</p>
+            <p className="mb-0">
+              Building reliable supply chains with verified partners
+            </p>
           </div>
         </div>
       </div>

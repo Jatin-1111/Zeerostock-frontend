@@ -11,11 +11,10 @@ export default function HeroSection() {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1442&h=800&fit=crop&q=80"
+          src="/landing-hero.png"
           alt="Industrial warehouse background"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-orange-600/40 via-red-600/30 to-orange-700/40" />
       </div>
 
       {/* Content */}

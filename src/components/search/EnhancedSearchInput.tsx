@@ -162,7 +162,7 @@ export default function EnhancedSearchInput({
       {/* Search Input */}
       <div className="relative flex items-center">
         <div className="absolute left-3 pointer-events-none">
-          <Search className="w-5 h-5 text-gray-400" />
+          <Search className="w-5 h-5 text-gray-600" />
         </div>
         <input
           ref={inputRef}
@@ -173,14 +173,14 @@ export default function EnhancedSearchInput({
           onFocus={() => setShowDropdown(true)}
           placeholder={placeholder}
           autoFocus={autoFocus}
-          className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1a5f52] focus:border-transparent"
+          className="w-full pl-10 pr-10 py-3 border text-gray-600 border-gray-300 rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5f52] focus:border-transparent"
         />
         {query && (
           <button
             onClick={clearQuery}
             className="absolute right-3 p-1 hover:bg-gray-100 rounded-full transition-colors"
           >
-            <X className="w-4 h-4 text-gray-400" />
+            <X className="w-4 h-4 text-gray-600" />
           </button>
         )}
       </div>
@@ -287,4 +287,3 @@ export default function EnhancedSearchInput({
     </div>
   );
 }
-

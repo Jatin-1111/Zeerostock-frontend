@@ -111,7 +111,7 @@ export default function Header() {
           <div className="w-[250px]">
             <EnhancedSearchInput
               placeholder="Search Industrial Equipment, etc"
-              className="rounded-[60px] text-[11px] font-semibold py-2"
+              className="rounded-full text-[11px] font-semibold py-2"
               showPopularSearches={false}
             />
           </div>

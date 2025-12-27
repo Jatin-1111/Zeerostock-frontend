@@ -73,7 +73,7 @@ export default function SavedPaymentMethods({
             <h4 className="text-[18px] font-semibold font-['Poppins'] text-[#0d1b2a] mb-3">
               No Payment Methods Yet
             </h4>
-            <p className="text-[12px] font-['Inter'] text-[#9c9c9c] mb-6">
+            <p className="text-[12px] font-['Poppins'] text-[#9c9c9c] mb-6">
               Add a bank account or card to receive payments from your sales
             </p>
             <button
@@ -102,10 +102,10 @@ export default function SavedPaymentMethods({
 
                   {/* Payment Info */}
                   <div className="ml-[26.25px] flex-1">
-                    <p className="text-[15px] font-medium font-['Inter'] text-[#0d1b2a] leading-[21px] mb-[6px]">
+                    <p className="text-[15px] font-medium font-['Poppins'] text-[#0d1b2a] leading-[21px] mb-[6px]">
                       {method.name} •••• {method.last_four}
                     </p>
-                    <p className="text-[15px] font-normal font-['Inter'] text-[#9c9c9c] leading-[21px]">
+                    <p className="text-[15px] font-normal font-['Poppins'] text-[#9c9c9c] leading-[21px]">
                       {method.details}
                     </p>
                   </div>

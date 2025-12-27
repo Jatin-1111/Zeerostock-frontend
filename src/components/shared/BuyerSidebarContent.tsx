@@ -61,7 +61,7 @@ export default function BuyerSidebarContent() {
               <div className="w-[18px] h-[18px] shrink-0">
                 <FileDown className="w-[18px] h-[18px] text-[#2aae7a]" />
               </div>
-              <span className="font-['Inter',sans-serif] font-medium text-[17px] text-[#2aae7a] leading-normal flex-1 text-left">
+              <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#2aae7a] leading-normal flex-1 text-left">
                 Dashboard
               </span>
               <div className="w-[18px] h-[18px] shrink-0">
@@ -80,7 +80,7 @@ export default function BuyerSidebarContent() {
                   href="/buyer/rfq"
                   className="flex items-center py-[15px] pl-[53px] hover:opacity-80"
                 >
-                  <span className="font-['Inter',sans-serif] font-medium text-[14px] text-[#8b8b8b] leading-normal">
+                  <span className="font-['Poppins',sans-serif] font-medium text-[14px] text-[#8b8b8b] leading-normal">
                     My RFQs
                   </span>
                 </Link>
@@ -88,7 +88,7 @@ export default function BuyerSidebarContent() {
                   href="/buyer/rfq"
                   className="flex items-center py-[15px] pl-[53px] hover:opacity-80"
                 >
-                  <span className="font-['Inter',sans-serif] font-medium text-[14px] text-[#2aae7a] leading-normal">
+                  <span className="font-['Poppins',sans-serif] font-medium text-[14px] text-[#2aae7a] leading-normal">
                     Post RFQ
                   </span>
                 </Link>
@@ -96,7 +96,7 @@ export default function BuyerSidebarContent() {
                   href="/buyer/quotes"
                   className="flex items-center py-[15px] pl-[53px] hover:opacity-80"
                 >
-                  <span className="font-['Inter',sans-serif] font-medium text-[14px] text-[#8b8b8b] leading-normal">
+                  <span className="font-['Poppins',sans-serif] font-medium text-[14px] text-[#8b8b8b] leading-normal">
                     My Quotes
                   </span>
                 </Link>
@@ -112,7 +112,7 @@ export default function BuyerSidebarContent() {
             <div className="w-[19px] h-[19px] shrink-0">
               <Box className="w-[19px] h-[19px] text-[#8b8b8b]" />
             </div>
-            <span className="font-['Inter',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+            <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
               Browse Categories
             </span>
           </Link>
@@ -125,7 +125,7 @@ export default function BuyerSidebarContent() {
             <div className="w-[19px] h-[19px] shrink-0">
               <Eye className="w-[19px] h-[19px] text-[#8b8b8b]" />
             </div>
-            <span className="font-['Inter',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+            <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
               Market Analytics
             </span>
           </Link>
@@ -138,7 +138,7 @@ export default function BuyerSidebarContent() {
             <div className="w-[19px] h-[19px] shrink-0">
               <Heart className="w-[19px] h-[19px] text-[#8b8b8b]" />
             </div>
-            <span className="font-['Inter',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+            <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
               Saved Items
             </span>
           </Link>
@@ -159,7 +159,7 @@ export default function BuyerSidebarContent() {
             <div className="w-[19px] h-[19px] shrink-0">
               <Clock className="w-[19px] h-[19px] text-[#8b8b8b]" />
             </div>
-            <span className="font-['Inter',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+            <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
               Order History
             </span>
           </Link>
@@ -172,7 +172,7 @@ export default function BuyerSidebarContent() {
             <div className="w-[19px] h-[19px] shrink-0">
               <Truck className="w-[19px] h-[19px] text-[#8b8b8b]" />
             </div>
-            <span className="font-['Inter',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+            <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
               Track Shipments
             </span>
           </Link>
@@ -193,7 +193,7 @@ export default function BuyerSidebarContent() {
             <div className="w-[19px] h-[19px] shrink-0">
               <User className="w-[19px] h-[19px] text-[#8b8b8b]" />
             </div>
-            <span className="font-['Inter',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+            <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
               Profile
             </span>
           </Link>
@@ -206,7 +206,7 @@ export default function BuyerSidebarContent() {
             <div className="w-[19px] h-[19px] shrink-0">
               <CreditCard className="w-[19px] h-[19px] text-[#8b8b8b]" />
             </div>
-            <span className="font-['Inter',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+            <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
               Payment Methods
             </span>
           </Link>
@@ -219,7 +219,7 @@ export default function BuyerSidebarContent() {
             <div className="w-[19px] h-[19px] shrink-0">
               <Store className="w-[19px] h-[19px] text-[#8b8b8b]" />
             </div>
-            <span className="font-['Inter',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+            <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
               Become Supplier
             </span>
           </Link>
@@ -232,7 +232,7 @@ export default function BuyerSidebarContent() {
             <div className="w-[19px] h-[19px] shrink-0">
               <Settings className="w-[19px] h-[19px] text-[#8b8b8b]" />
             </div>
-            <span className="font-['Inter',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+            <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
               Settings
             </span>
           </Link>
@@ -245,7 +245,7 @@ export default function BuyerSidebarContent() {
             <div className="w-[19px] h-[19px] shrink-0">
               <LogOut className="w-[19px] h-[19px] text-[#ff0001]" />
             </div>
-            <span className="font-['Inter',sans-serif] font-medium text-[17px] text-[#ff0001] leading-normal">
+            <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#ff0001] leading-normal">
               Sign Out
             </span>
           </button>
@@ -261,7 +261,7 @@ export default function BuyerSidebarContent() {
           <div className="w-[19px] h-[19px] shrink-0">
             <AlertCircle className="w-[19px] h-[19px] text-black" />
           </div>
-          <span className="font-['Inter',sans-serif] font-medium text-[17px] text-black leading-normal">
+          <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-black leading-normal">
             Help & Support
           </span>
         </Link>
@@ -272,7 +272,7 @@ export default function BuyerSidebarContent() {
           <div className="w-[18px] h-[18px] shrink-0">
             <Mail className="w-[18px] h-[18px] text-black" />
           </div>
-          <span className="font-['Inter',sans-serif] font-medium text-[17px] text-black leading-normal">
+          <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-black leading-normal">
             Sent Feedback
           </span>
         </Link>

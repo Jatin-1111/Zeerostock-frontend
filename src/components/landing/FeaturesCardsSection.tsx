@@ -25,28 +25,28 @@ export default function FeaturesCardsSection() {
   ];
 
   return (
-    <section className="w-full bg-white py-16">
-      <div className="max-w-[1440px] mx-auto px-20">
-        <div className="grid grid-cols-4 gap-8">
+    <section className="w-full bg-white py-12">
+      <div className="max-w-[1440px] mx-auto px-[60px]">
+        <div className="grid grid-cols-4 gap-6">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
               <div
                 key={index}
-                className="bg-[#2aae7a] rounded-[40px] p-8 flex flex-col items-center text-center h-[286px] justify-center"
+                className="bg-[#2aae7a] rounded-[30px] p-6 flex flex-col items-center text-center h-[215px] justify-center"
               >
                 {/* Icon */}
-                <div className="w-[70px] h-[70px] bg-white rounded-full flex items-center justify-center mb-10">
-                  <Icon className="w-9 h-9 text-[#2aae7a]" strokeWidth={2.5} />
+                <div className="w-[52px] h-[52px] bg-white rounded-full flex items-center justify-center mb-8">
+                  <Icon className="w-7 h-7 text-[#2aae7a]" strokeWidth={2.5} />
                 </div>
 
                 {/* Title */}
-                <h3 className="text-[#022778] text-[22px] font-semibold mb-5">
+                <h3 className="text-[#022778] text-base font-semibold mb-4 leading-normal font-['Poppins']">
                   {feature.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-white text-[20px] font-bold">
+                <p className="text-white text-[15px] font-bold leading-normal font-['Poppins']">
                   {feature.description}
                 </p>
               </div>

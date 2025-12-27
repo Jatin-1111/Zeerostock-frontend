@@ -59,7 +59,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             <h2 className="text-[22.5px] font-medium font-['Poppins'] text-[#0d1b2a] mb-4.5">
               Return Policy
             </h2>
-            <p className="text-[18.75px] font-normal font-['Inter'] text-[#9c9c9c] leading-[24.75px]">
+            <p className="text-[18.75px] font-normal font-['Poppins'] text-[#9c9c9c] leading-[24.75px]">
               {(product.returnPolicy as string) ||
                 "30-day return policy for unused items in original packaging. Buyer responsible for return shipping costs."}
             </p>

@@ -98,7 +98,7 @@ export default function Sidebar({
                   <div className="w-[19px] h-[19px] flex-shrink-0">
                     <Box className="w-[19px] h-[19px] text-[#2aae7a]" />
                   </div>
-                  <span className="font-['Inter',sans-serif] font-medium text-[17px] text-[#2aae7a] leading-normal">
+                  <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#2aae7a] leading-normal">
                     Browse Categories
                   </span>
                   <div className="absolute right-[9px] top-[15px] bg-[#2aae7a] rounded-[60px] px-[4px] py-0">
@@ -117,7 +117,7 @@ export default function Sidebar({
                 <div className="w-[19px] h-[19px] flex-shrink-0">
                   <TrendingUp className="w-[19px] h-[19px] text-[#8b8b8b]" />
                 </div>
-                <span className="font-['Inter',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+                <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
                   Trending Items
                 </span>
               </Link>
@@ -130,7 +130,7 @@ export default function Sidebar({
                 <div className="w-[19px] h-[19px] flex-shrink-0">
                   <Star className="w-[19px] h-[19px] text-[#8b8b8b]" />
                 </div>
-                <span className="font-['Inter',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+                <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
                   Featured Deals
                 </span>
               </Link>
@@ -151,7 +151,7 @@ export default function Sidebar({
                 <div className="w-[19px] h-[19px] flex-shrink-0">
                   <ShoppingCart className="w-[19px] h-[19px] text-[#8b8b8b]" />
                 </div>
-                <span className="font-['Inter',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+                <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
                   For Buyers
                 </span>
               </Link>
@@ -164,7 +164,7 @@ export default function Sidebar({
                 <div className="w-[18px] h-[19px] flex-shrink-0">
                   <Building2 className="w-[18px] h-[19px] text-[#8b8b8b]" />
                 </div>
-                <span className="font-['Inter',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+                <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
                   For Suppliers
                 </span>
               </Link>
@@ -177,7 +177,7 @@ export default function Sidebar({
                 <div className="w-[19px] h-[19px] flex-shrink-0 overflow-clip">
                   <HelpCircle className="w-[19px] h-[19px] text-[#8b8b8b]" />
                 </div>
-                <span className="font-['Inter',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+                <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
                   How It Works
                 </span>
               </Link>
@@ -198,7 +198,7 @@ export default function Sidebar({
                 <div className="w-[19px] h-[19px] flex-shrink-0 overflow-clip">
                   <DollarSign className="w-[19px] h-[19px] text-[#8b8b8b]" />
                 </div>
-                <span className="font-['Inter',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+                <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
                   Pricing
                 </span>
               </Link>
@@ -211,7 +211,7 @@ export default function Sidebar({
                 <div className="w-[19px] h-[19px] flex-shrink-0">
                   <MessageCircle className="w-[19px] h-[19px] text-[#8b8b8b]" />
                 </div>
-                <span className="font-['Inter',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+                <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
                   Contact Us
                 </span>
               </Link>
@@ -224,7 +224,7 @@ export default function Sidebar({
                 <div className="w-[19px] h-[19px] flex-shrink-0">
                   <Settings className="w-[19px] h-[19px] text-[#8b8b8b]" />
                 </div>
-                <span className="font-['Inter',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+                <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
                   Settings
                 </span>
               </Link>
@@ -240,7 +240,7 @@ export default function Sidebar({
               <div className="w-[19px] h-[19px] flex-shrink-0">
                 <AlertCircle className="w-[19px] h-[19px] text-black" />
               </div>
-              <span className="font-['Inter',sans-serif] font-medium text-[17px] text-black leading-normal">
+              <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-black leading-normal">
                 Help & Support
               </span>
             </Link>
@@ -251,7 +251,7 @@ export default function Sidebar({
               <div className="w-[18px] h-[18px] flex-shrink-0">
                 <Mail className="w-[18px] h-[18px] text-black" />
               </div>
-              <span className="font-['Inter',sans-serif] font-medium text-[17px] text-black leading-normal">
+              <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-black leading-normal">
                 Sent Feedback
               </span>
             </Link>

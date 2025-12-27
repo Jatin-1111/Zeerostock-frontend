@@ -23,7 +23,7 @@ export default function EscrowProtection({
       </div>
 
       {/* Main Description */}
-      <p className="font-['Inter'] font-medium text-[#9c9c9c] text-[15px] leading-normal mb-8">
+      <p className="font-['Poppins'] font-medium text-[#9c9c9c] text-[15px] leading-normal mb-8">
         Your payment of ${amount} is securely held in escrow until {releaseDate}
         . Funds will be released to suppliers automatically after the escrow
         period, or when you confirm receipt and satisfaction.
@@ -35,7 +35,7 @@ export default function EscrowProtection({
       </button>
 
       {/* Footer Note */}
-      <p className="font-['Inter'] font-medium text-[#9c9c9c] text-[12px] leading-normal text-center mt-5">
+      <p className="font-['Poppins'] font-medium text-[#9c9c9c] text-[12px] leading-normal text-center mt-5">
         You can release funds early or extend the escrow period if needed
       </p>
     </div>

@@ -46,7 +46,7 @@ export default function SettingsSidebar({
         <h2 className="text-[22.5px] font-semibold text-[#0d1b2a] font-[family-name:'Poppins'] mb-[5.25px]">
           Settings
         </h2>
-        <p className="text-[13.5px] font-medium text-[#9c9c9c] font-[family-name:'Inter'] leading-normal">
+        <p className="text-[13.5px] font-medium text-[#9c9c9c] font-[family-name:'Poppins'] leading-normal">
           Manage your account and preferences
         </p>
       </div>
@@ -77,7 +77,7 @@ export default function SettingsSidebar({
 
             {/* Label */}
             <span
-              className={`text-[16.5px] font-[family-name:'Inter'] ${
+              className={`text-[16.5px] font-[family-name:'Poppins'] ${
                 activeTab === item.id
                   ? "text-[#2aae7a] font-semibold"
                   : "text-[#8b8b8b] font-medium"

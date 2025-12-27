@@ -365,7 +365,7 @@ export default function TrackOrderDetailPage() {
               <h2 className="font-['Poppins'] font-semibold text-[22px] text-[#0d1b2a] m-0">
                 {formatStatus(order.status)}
               </h2>
-              <p className="font-['Inter'] font-medium text-[22px] text-[#9c9c9c] mt-2 mb-0">
+              <p className="font-['Poppins'] font-medium text-[22px] text-[#9c9c9c] mt-2 mb-0">
                 <span className="font-normal">Current location:</span>{" "}
                 <span className="text-[#0d1b2a]">
                   {currentLocation || "Updating..."}
@@ -377,13 +377,13 @@ export default function TrackOrderDetailPage() {
             <div className="flex gap-[160px] mt-[30px]">
               <div className="flex items-center gap-[9px]">
                 <RefreshCw size={22} color="#9c9c9c" />
-                <span className="font-['Inter'] font-medium text-[22px] text-[#9c9c9c]">
+                <span className="font-['Poppins'] font-medium text-[22px] text-[#9c9c9c]">
                   Last updated: {lastUpdated}
                 </span>
               </div>
               <div className="flex items-center gap-2">
                 <Calendar size={22} color="#9c9c9c" />
-                <span className="font-['Inter'] font-medium text-[22px] text-[#9c9c9c]">
+                <span className="font-['Poppins'] font-medium text-[22px] text-[#9c9c9c]">
                   Est. delivery:{" "}
                   {order.deliveryEta
                     ? new Date(order.deliveryEta).toLocaleDateString("en-GB")

@@ -316,7 +316,7 @@ export default function VerificationStatusView({
             Supplier Verification
           </h1>
           <p
-            style={{ fontFamily: "'Inter', sans-serif" }}
+            style={{ fontFamily: "'Poppins', sans-serif" }}
             className="font-medium text-[18px] text-[#9c9c9c] leading-normal"
           >
             Complete verification to unlock premium features and build buyer
@@ -334,7 +334,7 @@ export default function VerificationStatusView({
           Verification Progress
         </h2>
         <p
-          style={{ fontFamily: "'Inter', sans-serif" }}
+          style={{ fontFamily: "'Poppins', sans-serif" }}
           className="font-medium text-[18px] text-[#9c9c9c] mb-[35px] leading-normal"
         >
           {progress}% Complete - {completedSteps} of 5 sections verified
@@ -370,7 +370,7 @@ export default function VerificationStatusView({
         >
           <Clock className="w-[17px] h-[17px] text-black" />
           <span
-            style={{ fontFamily: "'Inter', sans-serif" }}
+            style={{ fontFamily: "'Poppins', sans-serif" }}
             className="font-medium text-[15px] text-black"
           >
             {status.status === "approved"
@@ -442,7 +442,7 @@ export default function VerificationStatusView({
             />
           </svg>
           <p
-            style={{ fontFamily: "'Inter', sans-serif" }}
+            style={{ fontFamily: "'Poppins', sans-serif" }}
             className={`font-medium text-[17px] leading-normal ${
               status.status === "approved"
                 ? "text-[#2aae7a]"
@@ -518,7 +518,7 @@ export default function VerificationStatusView({
                     <div className="bg-[#eeffef] px-[15px] py-[5px] rounded-[15px] shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)] flex items-center gap-[8px]">
                       <CheckCircle2 className="w-[17px] h-[17px] text-[#2aae7a]" />
                       <span
-                        style={{ fontFamily: "'Inter', sans-serif" }}
+                        style={{ fontFamily: "'Poppins', sans-serif" }}
                         className="font-medium text-[18px] text-[#2aae7a]"
                       >
                         Verified
@@ -588,7 +588,7 @@ export default function VerificationStatusView({
                     <div className="bg-[#eeffef] px-[15px] py-[5px] rounded-[15px] shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)] flex items-center gap-[8px]">
                       <CheckCircle2 className="w-[17px] h-[17px] text-[#2aae7a]" />
                       <span
-                        style={{ fontFamily: "'Inter', sans-serif" }}
+                        style={{ fontFamily: "'Poppins', sans-serif" }}
                         className="font-medium text-[18px] text-[#2aae7a]"
                       >
                         Verified
@@ -670,7 +670,7 @@ export default function VerificationStatusView({
                         <Clock className="w-[17px] h-[17px] text-[#fc3]" />
                       )}
                       <span
-                        style={{ fontFamily: "'Inter', sans-serif" }}
+                        style={{ fontFamily: "'Poppins', sans-serif" }}
                         className={`font-medium text-[18px] ${
                           status.status === "approved"
                             ? "text-[#2aae7a]"
@@ -732,7 +732,7 @@ export default function VerificationStatusView({
                     <div className="bg-[#eeffef] px-[15px] py-[5px] rounded-[15px] shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)] flex items-center gap-[8px]">
                       <CheckCircle2 className="w-[17px] h-[17px] text-[#2aae7a]" />
                       <span
-                        style={{ fontFamily: "'Inter', sans-serif" }}
+                        style={{ fontFamily: "'Poppins', sans-serif" }}
                         className="font-medium text-[18px] text-[#2aae7a]"
                       >
                         Verified
@@ -792,7 +792,7 @@ export default function VerificationStatusView({
                     <div className="bg-[#eeffef] px-[15px] py-[5px] rounded-[15px] shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)] flex items-center gap-[8px]">
                       <CheckCircle2 className="w-[17px] h-[17px] text-[#2aae7a]" />
                       <span
-                        style={{ fontFamily: "'Inter', sans-serif" }}
+                        style={{ fontFamily: "'Poppins', sans-serif" }}
                         className="font-medium text-[18px] text-[#2aae7a]"
                       >
                         Verified
@@ -1088,7 +1088,7 @@ function DocumentRowNew({
         <div className="bg-[#eeffef] px-[10px] py-[5px] rounded-[15px] shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)] flex items-center gap-[5px]">
           <CheckCircle2 className="w-[18px] h-[18px] text-[#2aae7a]" />
           <span
-            style={{ fontFamily: "'Inter', sans-serif" }}
+            style={{ fontFamily: "'Poppins', sans-serif" }}
             className="font-medium text-[14px] text-[#2aae7a]"
           >
             Verified
@@ -1098,7 +1098,7 @@ function DocumentRowNew({
         <div className="bg-[#fff3cf] px-[10px] py-[5px] rounded-[15px] shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)] flex items-center gap-[5px]">
           <Clock className="w-[18px] h-[18px] text-[#fc3]" />
           <span
-            style={{ fontFamily: "'Inter', sans-serif" }}
+            style={{ fontFamily: "'Poppins', sans-serif" }}
             className="font-medium text-[14px] text-[#fc3]"
           >
             Pending
@@ -1131,7 +1131,7 @@ function BenefitItem({
       <div className="shrink-0 mt-1">{icon}</div>
       <div>
         <h4
-          style={{ fontFamily: "'Inter', sans-serif" }}
+          style={{ fontFamily: "'Poppins', sans-serif" }}
           className="font-semibold text-[17px] text-[#0d1b2a] mb-[5px]"
         >
           {title}
@@ -1169,7 +1169,7 @@ function ImpactCard({
         {value}
       </p>
       <p
-        style={{ fontFamily: "'Inter', sans-serif" }}
+        style={{ fontFamily: "'Poppins', sans-serif" }}
         className={`font-semibold text-[13px] ${textColor}`}
       >
         {label}

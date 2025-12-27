@@ -49,7 +49,7 @@ export default function OrderStatusTracker({
         </h2>
         <div className="bg-[#FFCC33] flex items-center gap-[8px] px-[19px] py-[5px] rounded-[100px]">
           <Timer className="w-[17px] h-[17px] text-black" />
-          <span className="font-['Inter'] font-normal text-[15px] leading-[21px] text-black tracking-[0.5px]">
+          <span className="font-['Poppins'] font-normal text-[15px] leading-[21px] text-black tracking-[0.5px]">
             {currentStatus}
           </span>
         </div>
@@ -96,7 +96,7 @@ export default function OrderStatusTracker({
                         {step.title}
                       </h3>
                       <p
-                        className={`font-['Inter'] font-medium text-[14px] leading-normal ${getDescriptionColor(
+                        className={`font-['Poppins'] font-medium text-[14px] leading-normal ${getDescriptionColor(
                           step.status
                         )}`}
                       >
@@ -106,7 +106,7 @@ export default function OrderStatusTracker({
 
                     {/* Timestamp */}
                     <span
-                      className={`font-['Inter'] font-medium text-[14px] leading-normal whitespace-nowrap ml-4 ${getDescriptionColor(
+                      className={`font-['Poppins'] font-medium text-[14px] leading-normal whitespace-nowrap ml-4 ${getDescriptionColor(
                         step.status
                       )}`}
                     >

@@ -185,7 +185,7 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
             return null;
           })()}
         </div>
-        <p className="text-[18px] font-medium font-['Inter'] text-[#bebebe] tracking-[0.375px]">
+        <p className="text-[18px] font-medium font-['Poppins'] text-[#bebebe] tracking-[0.375px]">
           per {(product.unit as string) || "unit"} /{" "}
           {(product.stock_quantity as number) ||
             (product.quantity as number) ||
@@ -196,7 +196,7 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
 
       {/* Minimum Bid for Auction */}
       {isAuction && (
-        <p className="text-[15px] font-medium font-['Inter'] text-[#bebebe] tracking-[0.375px] mb-4.5">
+        <p className="text-[15px] font-medium font-['Poppins'] text-[#bebebe] tracking-[0.375px] mb-4.5">
           minimum bid{" "}
           {formatPrice(
             (auction?.current_bid as number) || (product.price as number)
@@ -207,7 +207,7 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
       {/* Watching Section */}
       {/* <div className="flex items-center gap-2.25 mb-4.5">
         <Eye className="w-4.5 h-4.5 text-[#bebebe]" />
-        <span className="text-[18px] font-medium font-['Inter'] text-[#0d1b2a]">
+        <span className="text-[18px] font-medium font-['Poppins'] text-[#0d1b2a]">
           Watching:{" "}
           <span className="font-semibold">
             {(product.views as number) || 47}

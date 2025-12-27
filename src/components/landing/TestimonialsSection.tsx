@@ -44,24 +44,24 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section className="relative w-full bg-[#f0fdf7] py-20">
-      <div className="max-w-[1440px] mx-auto px-20">
+    <section className="relative w-full bg-[#eefbf6] py-15">
+      <div className="max-w-[1440px] mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-[48px] leading-tight font-bold text-[#0A2540] mb-4 font-['Poppins']">
+        <div className="text-center mb-12">
+          <h2 className="text-[38px] leading-tight font-medium text-[#0d1b2a] mb-2 font-['Poppins']">
             Real Results from{" "}
             <span className="text-[#2aae7a]">Real Businesses</span>
           </h2>
-          <p className="text-[18px] text-[#6B7280] font-['Poppins']">
+          <p className="text-lg font-semibold text-[#868181] font-['Poppins']">
             See how companies like yours are maximizing value from surplus
             inventory
           </p>
         </div>
 
         {/* Carousel Container */}
-        <div className="relative flex items-center justify-center gap-6">
+        <div className="relative flex items-center justify-center gap-4">
           {/* Left Preview Card */}
-          <div className="w-[140px] h-[400px] rounded-[32px] overflow-hidden brightness-[0.4]">
+          <div className="w-[114px] h-[330px] rounded-[30px] overflow-hidden brightness-[0.4]">
             <img
               src={
                 testimonials[
@@ -73,59 +73,65 @@ export default function TestimonialsSection() {
             />
           </div>
 
-          {/* Left Arrow */}
-          <button
-            onClick={prevTestimonial}
-            className="absolute left-[50px] top-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg z-20 hover:bg-gray-50 transition-colors"
-            aria-label="Previous testimonial"
-          >
-            <ChevronLeft className="w-6 h-6 text-[#0A2540]" strokeWidth={3} />
-          </button>
-
           {/* Main Card */}
-          <div className="relative w-[700px] h-[450px] rounded-[32px] overflow-hidden shadow-2xl">
+          <div className="relative w-[674px] h-[386px] rounded-[30px] overflow-hidden shadow-2xl">
             <img
               src={testimonials[currentIndex].image}
               alt={testimonials[currentIndex].company}
               className="absolute inset-0 w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
 
-            <div className="relative h-full flex flex-col items-center justify-center p-10 text-center">
+            {/* Left Arrow */}
+            <button
+              onClick={prevTestimonial}
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-[68px] h-[68px] bg-transparent rounded-full flex items-center justify-center z-30 hover:bg-white/10 transition-colors rotate-180"
+              aria-label="Previous testimonial"
+            >
+              <ChevronRight
+                className="w-[68px] h-[68px] text-white"
+                strokeWidth={2}
+              />
+            </button>
+
+            {/* Right Arrow */}
+            <button
+              onClick={nextTestimonial}
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-[68px] h-[68px] bg-transparent rounded-full flex items-center justify-center z-30 hover:bg-white/10 transition-colors"
+              aria-label="Next testimonial"
+            >
+              <ChevronRight
+                className="w-[68px] h-[68px] text-white"
+                strokeWidth={2}
+              />
+            </button>
+
+            <div className="relative h-full flex flex-col items-center justify-center text-center">
               {/* Content */}
-              <div className="mb-8">
-                <p className="text-[36px] leading-tight font-bold text-[#2aae7a] mb-3 font-['Poppins']">
+              <div className="mb-6">
+                <p className="text-[30px] leading-tight font-extrabold text-[#58ea50] mb-4 font-['Poppins']">
                   {testimonials[currentIndex].savings}
                 </p>
-                <h3 className="text-[36px] leading-tight font-bold text-white mb-2 font-['Poppins']">
+                <h3 className="text-[30px] leading-tight font-extrabold text-white mb-4 font-['Poppins']">
                   {testimonials[currentIndex].company}
                 </h3>
-                <p className="text-[24px] leading-normal font-semibold text-white mb-3 font-['Poppins']">
+                <p className="text-[26px] leading-normal font-bold text-white mb-4 font-['Poppins']">
                   {testimonials[currentIndex].industry}
                 </p>
-                <p className="text-[20px] font-normal text-white/90 font-['Poppins']">
+                <p className="text-[21px] font-semibold text-white font-['Poppins']">
                   {testimonials[currentIndex].impact}
                 </p>
               </div>
 
               {/* CTA Button */}
-              <button className="w-full max-w-[400px] py-4 bg-[#2aae7a] rounded-xl text-[20px] font-semibold text-white hover:bg-[#2aae7a]/90 transition-colors font-['Poppins']">
+              <button className="w-[396px] h-[53px] bg-[#2aae7a] rounded-[15px] text-[21px] font-bold text-white hover:bg-[#2aae7a]/90 transition-colors font-['Poppins']">
                 Read Case Study
               </button>
             </div>
           </div>
 
-          {/* Right Arrow */}
-          <button
-            onClick={nextTestimonial}
-            className="absolute right-[50px] top-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg z-20 hover:bg-gray-50 transition-colors"
-            aria-label="Next testimonial"
-          >
-            <ChevronRight className="w-6 h-6 text-[#0A2540]" strokeWidth={3} />
-          </button>
-
           {/* Right Preview Card */}
-          <div className="w-[140px] h-[400px] rounded-[32px] overflow-hidden brightness-[0.4]">
+          <div className="w-[114px] h-[330px] rounded-[30px] overflow-hidden brightness-[0.4]">
             <img
               src={testimonials[(currentIndex + 1) % testimonials.length].image}
               alt="Preview"

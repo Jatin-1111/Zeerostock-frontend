@@ -12,10 +12,10 @@ export default function Footer() {
               <Link href="/home" className="shrink-0">
                 <img
                   src={
-                    "https://www.figma.com/api/mcp/asset/81fa2263-b943-4cba-b6b4-86e7e69d9a8e"
+                    "/Zeerostock Logo-1.svg"
                   }
                   alt="Zeerostock"
-                  className="w-[150px] h-[47px]"
+                  className="h-[125px]"
                 />
               </Link>
               <p className="text-[14px] leading-normal text-[#d0d0d0] text-center lg:text-left font-['Poppins']">

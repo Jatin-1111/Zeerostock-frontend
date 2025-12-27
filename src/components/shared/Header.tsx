@@ -8,9 +8,6 @@ import toast from "react-hot-toast";
 import { Globe, User } from "lucide-react";
 import EnhancedSearchInput from "@/components/search/EnhancedSearchInput";
 
-const imgUpscaleRe2 =
-  "https://www.figma.com/api/mcp/asset/81fa2263-b943-4cba-b6b4-86e7e69d9a8e";
-
 export default function Header() {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -34,14 +31,14 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 w-full z-50 shadow-[0px_5px_8px_0px_rgba(0,0,0,0.25)] bg-gradient-to-r from-[#1a5f52] via-[#2d7a6b] to-[#1a5f52]">
-      <div className="container mx-auto h-[70px] flex items-center justify-between px-20 gap-8">
+    <header className="sticky top-0 w-full z-50 shadow-[0px_5px_8px_0px_rgba(0,0,0,0.25)] bg-gradient-to-b from-[#43C786] to-[#0A2540]">
+      <div className="container mx-auto h-20 flex items-center justify-between px-20 gap-8">
         {/* Logo - Left Side */}
         <Link href="/" className="shrink-0">
           <img
             src={"/Zeerostock Logo-1.svg"}
             alt="Zeerostock"
-            className="h-[125px] w-auto"
+            className="h-[125px]"
           />
         </Link>
 
@@ -120,24 +117,23 @@ export default function Header() {
           <div className="flex items-center gap-4 shrink-0">
             {/* Language Selector */}
             <button
-            className="flex items-center gap-2 px-4 py-2 rounded-full hover:bg-white/10 transition-colors"
-            aria-label="Change language"
-          >
-            <svg
-              className="w-5 h-5 text-white"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
+              className="flex items-center gap-2 px-4 py-2 rounded-full hover:bg-white/10 transition-colors"
+              aria-label="Change language"
             >
-              <circle cx="12" cy="12" r="10" strokeWidth="2" />
-              <path
-                d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
-                strokeWidth="2"
-              />
-            </svg>
-            <span className="text-white text-[14px] font-medium">EN</span>
-          </button>
-
+              <svg
+                className="w-5 h-5 text-white"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+              >
+                <circle cx="12" cy="12" r="10" strokeWidth="2" />
+                <path
+                  d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                  strokeWidth="2"
+                />
+              </svg>
+              <span className="text-white text-[14px] font-medium">EN</span>
+            </button>
 
             {/* WhatsApp */}
             <Link

@@ -89,7 +89,7 @@ export default function SupplierProfile() {
               Company Name
             </label>
             <div className="border border-[#bebebe] rounded-[8px] px-3 py-[12px]">
-              <p className="text-[#0d1b2a] text-[12px] font-['Inter']">
+              <p className="text-[#0d1b2a] text-[12px] font-['Poppins']">
                 {company_info.company_name}
               </p>
             </div>
@@ -101,7 +101,7 @@ export default function SupplierProfile() {
               Website
             </label>
             <div className="border border-[#bebebe] rounded-[8px] px-3 py-[12px]">
-              <p className="text-[#0d1b2a] text-[12px] font-['Inter']">
+              <p className="text-[#0d1b2a] text-[12px] font-['Poppins']">
                 {company_info.website}
               </p>
             </div>
@@ -113,7 +113,7 @@ export default function SupplierProfile() {
               Business Type
             </label>
             <div className="border border-[#bebebe] rounded-[8px] px-3 py-[12px] flex items-center justify-between">
-              <p className="text-[#0d1b2a] text-[12px] font-['Roboto']">
+              <p className="text-[#0d1b2a] text-[12px] font-['Poppins']">
                 {company_info.business_type}
               </p>
               <svg
@@ -140,7 +140,7 @@ export default function SupplierProfile() {
               Company Description
             </label>
             <div className="border border-[#bebebe] rounded-[8px] px-3 py-[11px] h-[140px]">
-              <p className="text-[#0d1b2a] text-[12px] font-['Inter'] leading-[18px]">
+              <p className="text-[#0d1b2a] text-[12px] font-['Poppins'] leading-[18px]">
                 {company_info.description}
               </p>
             </div>
@@ -152,7 +152,7 @@ export default function SupplierProfile() {
               Phone
             </label>
             <div className="border border-[#bebebe] rounded-[8px] px-3 py-[12px]">
-              <p className="text-[#0d1b2a] text-[12px] font-['Inter']">
+              <p className="text-[#0d1b2a] text-[12px] font-['Poppins']">
                 {company_info.phone}
               </p>
             </div>

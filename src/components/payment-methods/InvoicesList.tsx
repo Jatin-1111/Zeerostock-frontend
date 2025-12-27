@@ -134,7 +134,7 @@ export default function InvoicesList({
       <div className="w-full bg-white rounded-[15px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] overflow-hidden">
         <div className="p-12 text-center">
           <div className="w-16 h-16 border-4 border-gray-300 border-t-gray-900 rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600 text-[15px] font-['Inter']">
+          <p className="text-gray-600 text-[15px] font-['Poppins']">
             Loading invoices...
           </p>
         </div>
@@ -152,7 +152,7 @@ export default function InvoicesList({
           <h3 className="text-[19.5px] font-['Poppins'] font-semibold text-[#0D1B2A] mb-2">
             Error
           </h3>
-          <p className="text-gray-600 text-[15px] font-['Inter']">{error}</p>
+          <p className="text-gray-600 text-[15px] font-['Poppins']">{error}</p>
         </div>
       </div>
     );
@@ -168,7 +168,7 @@ export default function InvoicesList({
           <h3 className="text-[19.5px] font-['Poppins'] font-semibold text-[#0D1B2A] mb-2">
             No Invoices Yet
           </h3>
-          <p className="text-gray-600 text-[15px] font-['Inter']">
+          <p className="text-gray-600 text-[15px] font-['Poppins']">
             Invoices will appear here
           </p>
         </div>
@@ -222,13 +222,13 @@ export default function InvoicesList({
 
                   {/* Order and Invoice Details */}
                   <div className="flex-1 ml-[30px]">
-                    <p className="text-[20px] font-['Inter'] font-medium text-[#0D1B2A] tracking-[0.5px] leading-[28px] mb-[8px]">
+                    <p className="text-[20px] font-['Poppins'] font-medium text-[#0D1B2A] tracking-[0.5px] leading-[28px] mb-[8px]">
                       {invoice.order_number} -{" "}
                       {invoice.buyer_name ||
                         invoice.buyer_company ||
                         "Customer"}
                     </p>
-                    <p className="text-[20px] font-['Inter'] text-[#9C9C9C] tracking-[0.5px] leading-[28px]">
+                    <p className="text-[20px] font-['Poppins'] text-[#9C9C9C] tracking-[0.5px] leading-[28px]">
                       {invoice.invoice_number} •{" "}
                       {formatDate(invoice.issue_date)}
                     </p>
@@ -313,7 +313,7 @@ export default function InvoicesList({
                         </svg>
                       )}
                       <span
-                        className="text-[20px] font-['Inter'] tracking-[0.5px] leading-[28px]"
+                        className="text-[20px] font-['Poppins'] tracking-[0.5px] leading-[28px]"
                         style={{ color: statusStyles.text }}
                       >
                         {statusStyles.label}
@@ -339,7 +339,7 @@ export default function InvoicesList({
                 {/* Processing Warning (if status is processing) */}
                 {invoice.status.toLowerCase() === "processing" && (
                   <div className="mx-[50px] mb-[30px] px-[20px] py-[15px] bg-[#FFF3CF] rounded-[20px]">
-                    <p className="text-[13px] font-['Inter'] text-[#FFCC33] leading-[22px]">
+                    <p className="text-[13px] font-['Poppins'] text-[#FFCC33] leading-[22px]">
                       We are currently processing your Invoice. Please try again
                       later...
                     </p>

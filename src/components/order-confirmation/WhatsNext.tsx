@@ -40,7 +40,7 @@ export default function WhatsNext({ steps }: WhatsNextProps) {
               <h4 className="font-['Poppins'] font-medium text-[#0d1b2a] text-[15px] leading-[21px] tracking-[0.4px] mb-[4px]">
                 {step.title}
               </h4>
-              <p className="font-['Inter'] font-medium text-[#9c9c9c] text-[14px] leading-normal max-w-[232px]">
+              <p className="font-['Poppins'] font-medium text-[#9c9c9c] text-[14px] leading-normal max-w-[232px]">
                 {step.description}
               </p>
             </div>

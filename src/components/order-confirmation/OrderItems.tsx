@@ -25,7 +25,7 @@ export default function OrderItems({ items }: OrderItemsProps) {
         <h2 className="font-['Poppins'] font-medium text-[#0d1b2a] text-[18px] leading-normal mb-3">
           Order Items:
         </h2>
-        <p className="font-['Inter'] font-medium text-[#9c9c9c] text-[15px]">
+        <p className="font-['Poppins'] font-medium text-[#9c9c9c] text-[15px]">
           Loading order items...
         </p>
       </div>
@@ -88,19 +88,19 @@ export default function OrderItems({ items }: OrderItemsProps) {
               {/* Product Details */}
               <div className="flex-1 flex flex-col">
                 {/* Product Name */}
-                <h3 className="font-['Inter'] font-medium text-[18px] leading-normal text-black mb-[11px]">
+                <h3 className="font-['Poppins'] font-medium text-[18px] leading-normal text-black mb-[11px]">
                   {item.name || "Product"}
                 </h3>
 
                 {/* Seller */}
-                <p className="font-['Inter'] font-medium text-[15px] leading-normal text-[#9c9c9c] mb-[19px]">
+                <p className="font-['Poppins'] font-medium text-[15px] leading-normal text-[#9c9c9c] mb-[19px]">
                   by {item.seller || "Seller"}
                 </p>
 
                 {/* Quantity and Price */}
-                <p className="font-['Inter'] font-medium text-[15px] leading-normal text-[#9c9c9c]">
+                <p className="font-['Poppins'] font-medium text-[15px] leading-normal text-[#9c9c9c]">
                   Qty: {item.quantity || 1} / Price:{" "}
-                  <span className="font-['Inter'] font-bold">₹</span>
+                  <span className="font-['Poppins'] font-bold">₹</span>
                   {(item.price || 0).toFixed(2)}
                 </p>
               </div>
@@ -108,13 +108,13 @@ export default function OrderItems({ items }: OrderItemsProps) {
               {/* Right Side - Price and Date */}
               <div className="flex flex-col items-end justify-start pt-[11px]">
                 {/* Total Price */}
-                <p className="font-['Inter'] font-semibold text-[23px] leading-normal text-black mb-[13px]">
+                <p className="font-['Poppins'] font-semibold text-[23px] leading-normal text-black mb-[13px]">
                   ₹{((item.quantity || 1) * (item.price || 0)).toLocaleString()}
                 </p>
 
                 {/* Estimated Date */}
                 {(item.estimatedDate || item.status) && (
-                  <p className="font-['Inter'] font-medium text-[15px] leading-normal text-[#9c9c9c]">
+                  <p className="font-['Poppins'] font-medium text-[15px] leading-normal text-[#9c9c9c]">
                     Est. Date: {item.estimatedDate || item.status}
                   </p>
                 )}
@@ -124,10 +124,10 @@ export default function OrderItems({ items }: OrderItemsProps) {
             {/* Tracking ID Section */}
             {item.trackingId && (
               <div className="absolute bottom-0 left-0 right-0 h-[51px] flex items-center px-[15px] border-t border-gray-300">
-                <span className="font-['Inter'] font-medium text-[14px] leading-normal text-black">
+                <span className="font-['Poppins'] font-medium text-[14px] leading-normal text-black">
                   Tracking ID:
                 </span>
-                <span className="font-['Inter'] font-medium text-[14px] leading-normal text-[#9c9c9c] ml-auto">
+                <span className="font-['Poppins'] font-medium text-[14px] leading-normal text-[#9c9c9c] ml-auto">
                   {item.trackingId}
                 </span>
               </div>

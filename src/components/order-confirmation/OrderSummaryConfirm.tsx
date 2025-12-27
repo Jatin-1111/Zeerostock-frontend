@@ -31,41 +31,41 @@ export default function OrderSummaryConfirm({
       <div className="space-y-4 mb-[35px]">
         {/* Subtotal */}
         <div className="flex items-center justify-between">
-          <span className="font-['Inter'] font-medium text-[#9c9c9c] text-[15px] leading-normal">
+          <span className="font-['Poppins'] font-medium text-[#9c9c9c] text-[15px] leading-normal">
             Subtotal ({itemCount} items)
           </span>
-          <span className="font-['Inter'] font-semibold text-[#bebebe] text-[15px] leading-[18px] tracking-[0.5px]">
+          <span className="font-['Poppins'] font-semibold text-[#bebebe] text-[15px] leading-[18px] tracking-[0.5px]">
             ₹{subtotal.toLocaleString()}
           </span>
         </div>
 
         {/* Total Savings */}
         <div className="flex items-center justify-between">
-          <span className="font-['Inter'] font-medium text-[#2aae7a] text-[15px] leading-normal">
+          <span className="font-['Poppins'] font-medium text-[#2aae7a] text-[15px] leading-normal">
             Total Saving
           </span>
-          <span className="font-['Inter'] font-semibold text-[#2aae7a] text-[15px] leading-[18px] tracking-[0.5px]">
+          <span className="font-['Poppins'] font-semibold text-[#2aae7a] text-[15px] leading-[18px] tracking-[0.5px]">
             -₹{savings.toLocaleString()}
           </span>
         </div>
 
         {/* Estimated Tax */}
         <div className="flex items-center justify-between">
-          <span className="font-['Inter'] font-medium text-[#9c9c9c] text-[15px] leading-normal">
+          <span className="font-['Poppins'] font-medium text-[#9c9c9c] text-[15px] leading-normal">
             Estimated Tax
           </span>
-          <span className="font-['Inter'] font-semibold text-[#bebebe] text-[15px] leading-[18px] tracking-[0.5px]">
+          <span className="font-['Poppins'] font-semibold text-[#bebebe] text-[15px] leading-[18px] tracking-[0.5px]">
             ₹{tax.toLocaleString()}
           </span>
         </div>
 
         {/* Shipping */}
         <div className="flex items-center justify-between">
-          <span className="font-['Inter'] font-medium text-[#9c9c9c] text-[15px] leading-normal">
+          <span className="font-['Poppins'] font-medium text-[#9c9c9c] text-[15px] leading-normal">
             Shipping
           </span>
           <span
-            className={`font-['Inter'] font-semibold text-[15px] leading-[18px] tracking-[0.5px] ${
+            className={`font-['Poppins'] font-semibold text-[15px] leading-[18px] tracking-[0.5px] ${
               isFreeShipping ? "text-[#2aae7a]" : "text-[#bebebe]"
             }`}
           >
@@ -82,7 +82,7 @@ export default function OrderSummaryConfirm({
         <span className="font-['Poppins'] font-semibold text-[#0d1b2a] text-[23px] leading-normal">
           Total :
         </span>
-        <span className="font-['Inter'] font-semibold text-[#2aae7a] text-[23px] leading-[18px] tracking-[0.5px]">
+        <span className="font-['Poppins'] font-semibold text-[#2aae7a] text-[23px] leading-[18px] tracking-[0.5px]">
           ₹
           {total.toLocaleString(undefined, {
             minimumFractionDigits: 2,
@@ -95,13 +95,13 @@ export default function OrderSummaryConfirm({
       <div className="space-y-[11px]">
         <div className="flex items-center gap-2">
           <Phone className="w-[18px] h-[18px] text-[#bebebe]" />
-          <span className="font-['Inter'] font-medium text-[#bebebe] text-[14px] leading-[18px] tracking-[0.5px]">
+          <span className="font-['Poppins'] font-medium text-[#bebebe] text-[14px] leading-[18px] tracking-[0.5px]">
             SSL Secure Checkout
           </span>
         </div>
         <div className="flex items-center gap-2">
           <Truck className="w-[18px] h-[18px] text-[#bebebe]" />
-          <span className="font-['Inter'] font-medium text-[#bebebe] text-[14px] leading-[18px] tracking-[0.5px]">
+          <span className="font-['Poppins'] font-medium text-[#bebebe] text-[14px] leading-[18px] tracking-[0.5px]">
             Fast Shipping Options
           </span>
         </div>

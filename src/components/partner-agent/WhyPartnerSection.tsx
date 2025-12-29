@@ -86,10 +86,10 @@ export default function WhyPartnerSection() {
     <section className="bg-white py-16 border-t border-gray-200">
       <div className="max-w-[1200px] mx-auto px-8">
         <div className="text-center mb-12">
-          <h2 className="text-[36px] font-bold text-gray-900 mb-3 font-['Poppins']">
+          <h2 className="text-[36px] font-bold text-gray-900 mb-3">
             Why Partner with Zeerostock?
           </h2>
-          <p className="text-[15px] text-gray-600 max-w-[800px] mx-auto font-['Poppins']">
+          <p className="text-[15px] text-gray-600 max-w-[800px] mx-auto">
             Build a sustainable income stream by connecting suppliers with the
             fastest-growing B2B surplus marketplace
           </p>
@@ -100,10 +100,10 @@ export default function WhyPartnerSection() {
           {benefits.map((benefit, index) => (
             <div key={index} className="text-center">
               <div className="mb-4">{benefit.icon}</div>
-              <h3 className="text-[16px] font-semibold text-gray-900 mb-2 font-['Poppins']">
+              <h3 className="text-[16px] font-semibold text-gray-900 mb-2">
                 {benefit.title}
               </h3>
-              <p className="text-[13px] text-gray-600 font-['Poppins']">
+              <p className="text-[13px] text-gray-600">
                 {benefit.description}
               </p>
             </div>

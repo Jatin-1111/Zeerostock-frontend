@@ -33,7 +33,7 @@ export default function SavedPaymentMethods({
     return (
       <div className="bg-white rounded-[15px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] relative">
         <div className="flex items-center justify-between p-[26.25px] pb-[15px]">
-          <h3 className="text-[19.5px] font-semibold font-['Poppins'] text-[#0d1b2a] leading-[18px]">
+          <h3 className="text-[19.5px] font-semibold text-[#0d1b2a] leading-[18px]">
             Saved Payment Methods
           </h3>
         </div>
@@ -49,7 +49,7 @@ export default function SavedPaymentMethods({
     <div className="bg-white rounded-[15px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] relative">
       {/* Header */}
       <div className="flex items-center justify-between px-[26.25px] pt-[26.25px] pb-[15px]">
-        <h3 className="text-[19.5px] font-semibold font-['Poppins'] text-[#0d1b2a] leading-[18px]">
+        <h3 className="text-[19.5px] font-semibold text-[#0d1b2a] leading-[18px]">
           Saved Payment Methods
         </h3>
         <button
@@ -57,7 +57,7 @@ export default function SavedPaymentMethods({
           className="bg-[#1e3a8a] text-white rounded-[11.25px] px-[50px] py-[11.25px] flex items-center gap-[7.5px] h-[45px] hover:bg-[#1e3a8a]/90 transition-colors"
         >
           <Plus className="w-[18px] h-[18px]" />
-          <span className="text-[15px] font-semibold font-['Poppins'] leading-[16.5px]">
+          <span className="text-[15px] font-semibold leading-[16.5px]">
             Add Payment Method
           </span>
         </button>
@@ -70,10 +70,10 @@ export default function SavedPaymentMethods({
             <div className="w-[60px] h-[60px] bg-[#fbfbfb] border border-[#9c9c9c] rounded-[15px] mx-auto flex items-center justify-center mb-6">
               <CreditCard className="w-[30px] h-[30px] text-[#9c9c9c]" />
             </div>
-            <h4 className="text-[18px] font-semibold font-['Poppins'] text-[#0d1b2a] mb-3">
+            <h4 className="text-[18px] font-semibold text-[#0d1b2a] mb-3">
               No Payment Methods Yet
             </h4>
-            <p className="text-[12px] font-['Poppins'] text-[#9c9c9c] mb-6">
+            <p className="text-[12px] text-[#9c9c9c] mb-6">
               Add a bank account or card to receive payments from your sales
             </p>
             <button
@@ -81,7 +81,7 @@ export default function SavedPaymentMethods({
               className="bg-[#1e3a8a] text-white rounded-[11.25px] px-[60px] py-[11.25px] inline-flex items-center gap-[7.5px] hover:bg-[#1e3a8a]/90 transition-colors"
             >
               <Plus className="w-[15px] h-[15px]" />
-              <span className="text-[13.5px] font-semibold font-['Poppins']">
+              <span className="text-[13.5px] font-semibold">
                 Add Your First Payment Method
               </span>
             </button>
@@ -102,10 +102,10 @@ export default function SavedPaymentMethods({
 
                   {/* Payment Info */}
                   <div className="ml-[26.25px] flex-1">
-                    <p className="text-[15px] font-medium font-['Poppins'] text-[#0d1b2a] leading-[21px] mb-[6px]">
+                    <p className="text-[15px] font-medium text-[#0d1b2a] leading-[21px] mb-[6px]">
                       {method.name} •••• {method.last_four}
                     </p>
-                    <p className="text-[15px] font-normal font-['Poppins'] text-[#9c9c9c] leading-[21px]">
+                    <p className="text-[15px] font-normal text-[#9c9c9c] leading-[21px]">
                       {method.details}
                     </p>
                   </div>

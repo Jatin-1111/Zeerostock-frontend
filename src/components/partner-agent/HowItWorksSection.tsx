@@ -30,10 +30,10 @@ export default function HowItWorksSection() {
     <section className="bg-white py-16 border-t border-gray-200">
       <div className="max-w-[1200px] mx-auto px-8">
         <div className="text-center mb-12">
-          <h2 className="text-[36px] font-bold text-gray-900 mb-3 font-['Poppins']">
+          <h2 className="text-[36px] font-bold text-gray-900 mb-3">
             How the Agent Program Works
           </h2>
-          <p className="text-[15px] text-gray-600 font-['Poppins']">
+          <p className="text-[15px] text-gray-600">
             Ready. A step-by-step look at what partnering means
           </p>
         </div>
@@ -43,15 +43,15 @@ export default function HowItWorksSection() {
           {steps.map((step) => (
             <div key={step.number} className="flex gap-4 items-start">
               <div className="w-10 h-10 shrink-0 rounded-full border-2 border-gray-900 flex items-center justify-center">
-                <span className="text-[16px] font-bold text-gray-900 font-['Poppins']">
+                <span className="text-[16px] font-bold text-gray-900">
                   {step.number}
                 </span>
               </div>
               <div>
-                <h3 className="text-[18px] font-semibold text-gray-900 mb-1 font-['Poppins']">
+                <h3 className="text-[18px] font-semibold text-gray-900 mb-1">
                   {step.title}
                 </h3>
-                <p className="text-[14px] text-gray-600 font-['Poppins']">
+                <p className="text-[14px] text-gray-600">
                   {step.description}
                 </p>
               </div>

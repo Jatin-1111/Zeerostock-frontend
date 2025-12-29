@@ -48,11 +48,11 @@ export default function TestimonialsSection() {
       <div className="max-w-[1440px] mx-auto">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <h2 className="text-[38px] leading-tight font-medium text-[#0d1b2a] mb-2 font-['Poppins']">
+          <h2 className="text-[38px] leading-tight font-medium text-[#0d1b2a] mb-2">
             Real Results from{" "}
             <span className="text-[#2aae7a]">Real Businesses</span>
           </h2>
-          <p className="text-lg font-semibold text-[#868181] font-['Poppins']">
+          <p className="text-lg font-semibold text-[#868181]">
             See how companies like yours are maximizing value from surplus
             inventory
           </p>
@@ -109,22 +109,22 @@ export default function TestimonialsSection() {
             <div className="relative h-full flex flex-col items-center justify-center text-center">
               {/* Content */}
               <div className="mb-6">
-                <p className="text-[30px] leading-tight font-extrabold text-[#58ea50] mb-4 font-['Poppins']">
+                <p className="text-[30px] leading-tight font-extrabold text-[#58ea50] mb-4">
                   {testimonials[currentIndex].savings}
                 </p>
-                <h3 className="text-[30px] leading-tight font-extrabold text-white mb-4 font-['Poppins']">
+                <h3 className="text-[30px] leading-tight font-extrabold text-white mb-4">
                   {testimonials[currentIndex].company}
                 </h3>
-                <p className="text-[26px] leading-normal font-bold text-white mb-4 font-['Poppins']">
+                <p className="text-[26px] leading-normal font-bold text-white mb-4">
                   {testimonials[currentIndex].industry}
                 </p>
-                <p className="text-[21px] font-semibold text-white font-['Poppins']">
+                <p className="text-[21px] font-semibold text-white">
                   {testimonials[currentIndex].impact}
                 </p>
               </div>
 
               {/* CTA Button */}
-              <button className="w-[396px] h-[53px] bg-[#2aae7a] rounded-[15px] text-[21px] font-bold text-white hover:bg-[#2aae7a]/90 transition-colors font-['Poppins']">
+              <button className="w-[396px] h-[53px] bg-[#2aae7a] rounded-[15px] text-[21px] font-bold text-white hover:bg-[#2aae7a]/90 transition-colors">
                 Read Case Study
               </button>
             </div>

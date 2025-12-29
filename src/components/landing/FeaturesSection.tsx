@@ -50,10 +50,10 @@ export default function FeaturesSection() {
               className="bg-[#2aae7a] rounded-[40px] overflow-hidden h-[286px] flex flex-col items-center justify-center px-8 text-center"
             >
               <div className="mb-6">{feature.icon}</div>
-              <h3 className="text-[22px] font-bold text-[#022778] mb-1 font-['Poppins']">
+              <h3 className="text-[22px] font-bold text-[#022778] mb-1">
                 {feature.title}
               </h3>
-              <p className="text-[20px] font-semibold text-[#ffffff]  font-['Poppins']">
+              <p className="text-[20px] font-semibold text-[#ffffff] ">
                 {feature.description}
               </p>
             </div>

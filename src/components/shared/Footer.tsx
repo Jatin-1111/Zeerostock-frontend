@@ -11,24 +11,22 @@ export default function Footer() {
             <div className="flex flex-col gap-4 items-center lg:items-start">
               <Link href="/home" className="shrink-0">
                 <img
-                  src={
-                    "/Zeerostock Logo-1.svg"
-                  }
+                  src={"/Zeerostock Logo B White.png"}
                   alt="Zeerostock"
                   className="h-[125px]"
                 />
               </Link>
-              <p className="text-[14px] leading-normal text-[#d0d0d0] text-center lg:text-left font-['Poppins']">
+              <p className="text-[14px] leading-normal text-[#d0d0d0] text-center lg:text-left">
                 Turning idle inventory into opportunity.
               </p>
             </div>
 
             {/* Company Links */}
             <div className="flex flex-col gap-[18px]">
-              <h3 className="text-[20px] leading-normal font-medium text-white font-['Poppins']">
+              <h3 className="text-[20px] leading-normal font-medium text-white">
                 Company
               </h3>
-              <div className="flex flex-col gap-2 text-[14px] leading-6 text-[#d0d0d0] font-['Poppins']">
+              <div className="flex flex-col gap-2 text-[14px] leading-6 text-[#d0d0d0]">
                 <Link
                   href="/about"
                   className="hover:text-white transition-colors"
@@ -46,10 +44,10 @@ export default function Footer() {
 
             {/* Policy Links */}
             <div className="flex flex-col gap-[18px]">
-              <h3 className="text-[20px] leading-normal font-medium text-white font-['Poppins']">
+              <h3 className="text-[20px] leading-normal font-medium text-white">
                 Policy
               </h3>
-              <div className="flex flex-col gap-2 text-[14px] leading-6 text-[#d0d0d0] font-['Poppins']">
+              <div className="flex flex-col gap-2 text-[14px] leading-6 text-[#d0d0d0]">
                 <Link
                   href="/terms-conditions"
                   className="hover:text-white transition-colors"
@@ -67,10 +65,10 @@ export default function Footer() {
 
             {/* Quick Links & Support Combined */}
             <div className="flex flex-col gap-[18px]">
-              <h3 className="text-[20px] leading-normal font-medium text-white font-['Poppins']">
+              <h3 className="text-[20px] leading-normal font-medium text-white">
                 Quick Links
               </h3>
-              <div className="flex flex-col gap-2 text-[14px] leading-6 text-[#d0d0d0] font-['Poppins']">
+              <div className="flex flex-col gap-2 text-[14px] leading-6 text-[#d0d0d0]">
                 <Link
                   href="/buyer"
                   className="hover:text-white transition-colors"
@@ -100,16 +98,16 @@ export default function Footer() {
 
             {/* Newsletter Signup */}
             <div className="flex flex-col gap-6">
-              <h3 className="text-[20px] leading-normal font-medium text-white font-['Poppins']">
+              <h3 className="text-[20px] leading-normal font-medium text-white">
                 Join Our Network
               </h3>
               <div className="flex flex-col gap-4">
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="w-full h-[50px] bg-gray-800 border border-[#8f8f8f] rounded-xl px-4 text-[15px] leading-[22px] text-[#d0d0d0] placeholder:text-dimgray focus:outline-none focus:border-[#2aae7a] font-['Poppins'] text-black placeholder:text-black"
+                  className="w-full h-[50px] bg-gray-800 border border-[#8f8f8f] rounded-xl px-4 text-[15px] leading-[22px] text-[#d0d0d0] placeholder:text-dimgray focus:outline-none focus:border-[#2aae7a] text-black placeholder:text-black"
                 />
-                <button className="w-full h-[50px] bg-[#2aae7a] text-[#0d1e23] text-[18px] leading-[22px] font-medium rounded-xl hover:bg-[#2aae7a]/90 transition-colors font-['Poppins']">
+                <button className="w-full h-[50px] bg-[#2aae7a] text-[#0d1e23] text-[18px] leading-[22px] font-medium rounded-xl hover:bg-[#2aae7a]/90 transition-colors">
                   Subscribe
                 </button>
               </div>
@@ -176,7 +174,7 @@ export default function Footer() {
           <div className="w-full h-px bg-gray-600 my-6" />
 
           {/* Copyright */}
-          <p className="text-[15px] leading-6 text-[#d0d0d0] text-center font-['Poppins']">
+          <p className="text-[15px] leading-6 text-[#d0d0d0] text-center">
             © 2025 Zeerostock Ventures. All Rights Reserved.
           </p>
         </div>
@@ -184,7 +182,7 @@ export default function Footer() {
 
       {/* Bottom Disclaimer - Now with proper light background visibility */}
       <div className="max-w-[900px] mx-auto px-4 py-6">
-        <p className="text-[15px] leading-6 text-[#0d1e23] text-center font-['Poppins']">
+        <p className="text-[15px] leading-6 text-[#0d1e23] text-center">
           Zeerostock is a registered trademark. Our platform facilitates B2B
           transactions with industry-leading security and compliance standards.
           For enterprise solutions and partnership, contact our business

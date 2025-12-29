@@ -318,7 +318,7 @@ export default function Contact() {
                 style={{ fontFamily: "Poppins, sans-serif" }}
                 className="absolute left-[30px] top-[158.5px] -translate-y-1/2 font-medium text-[22px] text-[#0D1B2A] leading-normal"
               >
-                +91 1243636732
+                +91 89568 35375
               </p>
               <button
                 style={{ fontFamily: "Poppins, sans-serif" }}
@@ -349,7 +349,7 @@ export default function Contact() {
                 style={{ fontFamily: "Poppins, sans-serif" }}
                 className="absolute left-[30px] top-[158.5px] -translate-y-1/2 font-medium text-[22px] text-[#0D1B2A] leading-normal"
               >
-                support@zeerostock.com
+                contact@zeerostock.com
               </p>
               <button
                 style={{ fontFamily: "Poppins, sans-serif" }}
@@ -380,7 +380,7 @@ export default function Contact() {
                 style={{ fontFamily: "Poppins, sans-serif" }}
                 className="absolute left-[30px] top-[158.5px] -translate-y-1/2 font-medium text-[22px] text-[#0D1B2A] leading-normal"
               >
-                +91 2134515195
+                +91 89568 35375
               </p>
               <button
                 style={{ fontFamily: "Poppins, sans-serif" }}

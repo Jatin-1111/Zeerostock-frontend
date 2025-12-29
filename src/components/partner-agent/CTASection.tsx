@@ -25,19 +25,19 @@ export default function CTASection() {
             </svg>
           </div>
 
-          <h2 className="text-[32px] font-bold text-gray-900 mb-3 font-['Poppins']">
+          <h2 className="text-[32px] font-bold text-gray-900 mb-3">
             Ready to Start Earning?
           </h2>
-          <p className="text-[15px] text-gray-600 mb-8 max-w-[600px] mx-auto font-['Poppins']">
+          <p className="text-[15px] text-gray-600 mb-8 max-w-[600px] mx-auto">
             Join Zeerostock as an independent agent partner and build a
             sustainable income stream where everyone wins. Our platform.
           </p>
 
-          <button className="px-8 py-3 bg-gray-900 text-white text-[15px] font-semibold rounded-lg hover:bg-gray-800 transition-colors font-['Poppins']">
+          <button className="px-8 py-3 bg-gray-900 text-white text-[15px] font-semibold rounded-lg hover:bg-gray-800 transition-colors">
             Submit Application
           </button>
 
-          <p className="text-[13px] text-gray-500 mt-6 font-['Poppins']">
+          <p className="text-[13px] text-gray-500 mt-6">
             You will receive confirmation of receiving your application by
             sending process
           </p>

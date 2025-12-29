@@ -289,9 +289,7 @@ export default function TrackOrderDetailPage() {
       <div className="min-h-screen bg-[#eefbf6] px-4 py-8 flex items-center justify-center">
         <div className="text-center">
           <div className="w-9 h-9 border-3 border-[#2aae7a] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-          <p className="font-['Poppins'] text-sm text-[#0d1b2a]">
-            Loading order details...
-          </p>
+          <p className="text-sm text-[#0d1b2a]">Loading order details...</p>
         </div>
       </div>
     );
@@ -300,12 +298,12 @@ export default function TrackOrderDetailPage() {
   if (error || !order) {
     return (
       <div className="min-h-screen bg-[#eefbf6] px-4 py-8 flex flex-col items-center justify-center">
-        <p className="font-['Poppins'] text-sm text-red-500 mb-4">
+        <p className="text-sm text-red-500 mb-4">
           {error || "Order not found"}
         </p>
         <button
           onClick={() => router.push("/buyer/track-order")}
-          className="px-5 py-2 bg-[#1e3a8a] text-white border-none rounded-[11px] font-['Poppins'] text-sm cursor-pointer hover:bg-[#152e6b]"
+          className="px-5 py-2 bg-[#1e3a8a] text-white border-none rounded-[11px] text-sm cursor-pointer hover:bg-[#152e6b]"
         >
           Track Another Order
         </button>
@@ -322,7 +320,7 @@ export default function TrackOrderDetailPage() {
       {/* Back Navigation */}
       <Link
         href="/buyer/track-order"
-        className="inline-flex items-center gap-2 font-['Poppins'] text-sm text-[#0d1b2a] no-underline mb-4"
+        className="inline-flex items-center gap-2 text-sm text-[#0d1b2a] no-underline mb-4"
       >
         <ArrowLeft size={21} color="#0d1b2a" />
         <span>Track another order</span>
@@ -331,10 +329,10 @@ export default function TrackOrderDetailPage() {
       {/* Header Section */}
       <div className="flex justify-between items-start mb-6">
         <div>
-          <h1 className="font-['Poppins'] font-semibold text-[30px] text-[#0d1b2a] m-0 leading-normal">
+          <h1 className="font-semibold text-[30px] text-[#0d1b2a] m-0 leading-normal">
             Order #{order.orderNumber}
           </h1>
-          <p className="font-['Poppins'] font-normal text-base text-[#9c9c9c] mt-3 mb-0">
+          <p className="font-normal text-base text-[#9c9c9c] mt-3 mb-0">
             Placed on {new Date(order.createdAt).toLocaleDateString("en-GB")}
           </p>
         </div>
@@ -343,7 +341,7 @@ export default function TrackOrderDetailPage() {
             order.status
           )} rounded-[8px] px-3 py-2`}
         >
-          <span className="font-['Poppins'] font-medium text-sm text-white">
+          <span className="font-medium text-sm text-white">
             {formatStatus(order.status)}
           </span>
         </div>
@@ -362,10 +360,10 @@ export default function TrackOrderDetailPage() {
 
             {/* Status Text */}
             <div className="ml-[90px]">
-              <h2 className="font-['Poppins'] font-semibold text-[22px] text-[#0d1b2a] m-0">
+              <h2 className="font-semibold text-[22px] text-[#0d1b2a] m-0">
                 {formatStatus(order.status)}
               </h2>
-              <p className="font-['Poppins'] font-medium text-[22px] text-[#9c9c9c] mt-2 mb-0">
+              <p className="font-medium text-[22px] text-[#9c9c9c] mt-2 mb-0">
                 <span className="font-normal">Current location:</span>{" "}
                 <span className="text-[#0d1b2a]">
                   {currentLocation || "Updating..."}
@@ -377,13 +375,13 @@ export default function TrackOrderDetailPage() {
             <div className="flex gap-[160px] mt-[30px]">
               <div className="flex items-center gap-[9px]">
                 <RefreshCw size={22} color="#9c9c9c" />
-                <span className="font-['Poppins'] font-medium text-[22px] text-[#9c9c9c]">
+                <span className="font-medium text-[22px] text-[#9c9c9c]">
                   Last updated: {lastUpdated}
                 </span>
               </div>
               <div className="flex items-center gap-2">
                 <Calendar size={22} color="#9c9c9c" />
-                <span className="font-['Poppins'] font-medium text-[22px] text-[#9c9c9c]">
+                <span className="font-medium text-[22px] text-[#9c9c9c]">
                   Est. delivery:{" "}
                   {order.deliveryEta
                     ? new Date(order.deliveryEta).toLocaleDateString("en-GB")
@@ -395,7 +393,7 @@ export default function TrackOrderDetailPage() {
 
           {/* Tracking Progress Card */}
           <div className="bg-white rounded-[15px] shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] p-6">
-            <h2 className="font-['Poppins'] font-medium text-lg text-[#0d1b2a] mt-0 mb-6">
+            <h2 className="font-medium text-lg text-[#0d1b2a] mt-0 mb-6">
               Tracking Progress
             </h2>
 
@@ -427,7 +425,7 @@ export default function TrackOrderDetailPage() {
                   {/* Step Content */}
                   <div className="flex-1">
                     <h3
-                      className={`font-['Poppins'] font-semibold text-base ${
+                      className={`font-semibold text-base ${
                         step.status === "completed" || step.status === "current"
                           ? "text-[#2aae7a]"
                           : "text-[#7b7b7b]"
@@ -435,13 +433,13 @@ export default function TrackOrderDetailPage() {
                     >
                       {step.title}
                     </h3>
-                    <p className="font-['Poppins'] font-medium text-sm text-[#9c9c9c] mt-1 mb-0">
+                    <p className="font-medium text-sm text-[#9c9c9c] mt-1 mb-0">
                       {step.description}
                     </p>
                     {step.location && (
                       <div className="flex items-center gap-1 mt-2">
                         <MapPin size={14} color="#9c9c9c" />
-                        <span className="font-['Poppins'] font-medium text-sm text-[#9c9c9c]">
+                        <span className="font-medium text-sm text-[#9c9c9c]">
                           {step.location}
                         </span>
                       </div>
@@ -450,7 +448,7 @@ export default function TrackOrderDetailPage() {
 
                   {/* Timestamp */}
                   {step.timestamp && (
-                    <div className="font-['Poppins'] font-medium text-sm text-[#9c9c9c] whitespace-nowrap">
+                    <div className="font-medium text-sm text-[#9c9c9c] whitespace-nowrap">
                       {formatTimestamp(step.timestamp)}
                     </div>
                   )}
@@ -461,7 +459,7 @@ export default function TrackOrderDetailPage() {
 
           {/* Detailed Shipping Events Card */}
           <div className="bg-white rounded-[15px] shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] pt-6 pb-0 px-0 overflow-hidden">
-            <h2 className="font-['Poppins'] font-medium text-lg text-[#0d1b2a] mt-0 mb-3 ml-6">
+            <h2 className="font-medium text-lg text-[#0d1b2a] mt-0 mb-3 ml-6">
               Detailed Shipping Events
             </h2>
 
@@ -480,12 +478,12 @@ export default function TrackOrderDetailPage() {
                     <div className="flex items-center">
                       {/* Date & Time */}
                       <div className="w-[112px]">
-                        <p className="font-['Poppins'] font-medium text-base text-black m-0">
+                        <p className="font-medium text-base text-black m-0">
                           {new Date(track.timestamp).toLocaleDateString(
                             "en-CA"
                           )}
                         </p>
-                        <p className="font-['Poppins'] font-medium text-base text-[#9c9c9c] mt-1 mb-0">
+                        <p className="font-medium text-base text-[#9c9c9c] mt-1 mb-0">
                           {new Date(track.timestamp).toLocaleTimeString(
                             "en-US",
                             {
@@ -499,7 +497,7 @@ export default function TrackOrderDetailPage() {
 
                       {/* Event Description */}
                       <div className="flex-1">
-                        <p className="font-['Poppins'] font-normal text-base text-black m-0">
+                        <p className="font-normal text-base text-black m-0">
                           {track.title || track.description}
                         </p>
                       </div>
@@ -508,7 +506,7 @@ export default function TrackOrderDetailPage() {
                       {track.location && (
                         <div className="flex items-center gap-1">
                           <MapPin size={14} color="#9c9c9c" />
-                          <span className="font-['Poppins'] font-medium text-sm text-[#9c9c9c]">
+                          <span className="font-medium text-sm text-[#9c9c9c]">
                             {track.location}
                           </span>
                         </div>
@@ -518,7 +516,7 @@ export default function TrackOrderDetailPage() {
                 ))
             ) : (
               <div className="py-8 px-6 text-center">
-                <p className="font-['Poppins'] text-sm text-[#9c9c9c]">
+                <p className="text-sm text-[#9c9c9c]">
                   No detailed shipping events available yet
                 </p>
               </div>
@@ -527,7 +525,7 @@ export default function TrackOrderDetailPage() {
 
           {/* Order Items Card */}
           <div className="bg-white rounded-[15px] shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] p-6">
-            <h2 className="font-['Poppins'] font-medium text-lg text-[#0d1b2a] mt-0 mb-6">
+            <h2 className="font-medium text-lg text-[#0d1b2a] mt-0 mb-6">
               Order Items:
             </h2>
 
@@ -558,13 +556,13 @@ export default function TrackOrderDetailPage() {
 
                   {/* Product Details */}
                   <div className="flex-1">
-                    <h3 className="font-['Poppins'] font-medium text-lg text-black mt-2 mb-0">
+                    <h3 className="font-medium text-lg text-black mt-2 mb-0">
                       {item.productTitle}
                     </h3>
-                    <p className="font-['Poppins'] font-medium text-base text-[#9c9c9c] mt-2 mb-0">
+                    <p className="font-medium text-base text-[#9c9c9c] mt-2 mb-0">
                       by {item.supplier?.name || "Seller"}
                     </p>
-                    <p className="font-['Poppins'] font-medium text-base text-[#9c9c9c] mt-2 mb-0">
+                    <p className="font-medium text-base text-[#9c9c9c] mt-2 mb-0">
                       Qty: {item.quantity} / Price: ₹
                       {item.unitPrice.toLocaleString()}
                     </p>
@@ -572,10 +570,10 @@ export default function TrackOrderDetailPage() {
 
                   {/* Price & Delivery */}
                   <div className="text-right">
-                    <p className="font-['Poppins'] font-semibold text-[22px] text-black mt-5 mb-0">
+                    <p className="font-semibold text-[22px] text-black mt-5 mb-0">
                       ₹{item.subtotal.toLocaleString()}
                     </p>
-                    <p className="font-['Poppins'] font-medium text-base text-[#9c9c9c] mt-2 mb-0">
+                    <p className="font-medium text-base text-[#9c9c9c] mt-2 mb-0">
                       Est. Date:{" "}
                       {order.deliveryEta
                         ? new Date(order.deliveryEta).toLocaleDateString(
@@ -591,10 +589,10 @@ export default function TrackOrderDetailPage() {
 
                 {/* Tracking ID Row */}
                 <div className="flex justify-between items-center px-1">
-                  <span className="font-['Poppins'] font-medium text-sm text-black">
+                  <span className="font-medium text-sm text-black">
                     Tracking ID:
                   </span>
-                  <span className="font-['Poppins'] font-medium text-sm text-[#9c9c9c]">
+                  <span className="font-medium text-sm text-[#9c9c9c]">
                     {order.trackingNumber || "Not available"}
                   </span>
                 </div>
@@ -604,10 +602,10 @@ export default function TrackOrderDetailPage() {
 
           {/* Shipping Address Card */}
           <div className="bg-white rounded-[15px] shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] p-6">
-            <h2 className="font-['Poppins'] font-medium text-lg text-[#0d1b2a] mt-0 mb-4">
+            <h2 className="font-medium text-lg text-[#0d1b2a] mt-0 mb-4">
               Shipping Address
             </h2>
-            <div className="font-['Poppins'] font-normal text-base text-[#9c9c9c] leading-[22px]">
+            <div className="font-normal text-base text-[#9c9c9c] leading-[22px]">
               <p className="m-0">{order.shippingAddress?.name}</p>
               <p className="m-0">
                 {order.shippingAddress?.addressLine1}
@@ -627,36 +625,34 @@ export default function TrackOrderDetailPage() {
         <div className="flex flex-col gap-6">
           {/* Carrier Information Card */}
           <div className="bg-white rounded-[15px] shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] p-6">
-            <h2 className="font-['Poppins'] font-medium text-lg text-[#0d1b2a] mt-0 mb-5">
+            <h2 className="font-medium text-lg text-[#0d1b2a] mt-0 mb-5">
               Carrier Information
             </h2>
 
             {/* Carrier */}
             <div className="mb-5">
-              <p className="font-['Poppins'] font-medium text-sm text-[#9c9c9c] m-0">
-                Carrier
-              </p>
-              <p className="font-['Poppins'] font-medium text-base text-[#0d1b2a] mt-1 mb-0">
+              <p className="font-medium text-sm text-[#9c9c9c] m-0">Carrier</p>
+              <p className="font-medium text-base text-[#0d1b2a] mt-1 mb-0">
                 {order.shippingPartner || "Not assigned yet"}
               </p>
             </div>
 
             {/* Tracking Number */}
             <div className="mb-5">
-              <p className="font-['Poppins'] font-medium text-sm text-[#9c9c9c] m-0">
+              <p className="font-medium text-sm text-[#9c9c9c] m-0">
                 Tracking Number
               </p>
-              <p className="font-['Poppins'] font-medium text-base text-[#0d1b2a] mt-1 mb-0">
+              <p className="font-medium text-base text-[#0d1b2a] mt-1 mb-0">
                 {order.trackingNumber || "Not available"}
               </p>
             </div>
 
             {/* Estimated Delivery */}
             <div className="mb-6">
-              <p className="font-['Poppins'] font-medium text-sm text-[#9c9c9c] m-0">
+              <p className="font-medium text-sm text-[#9c9c9c] m-0">
                 Estimated Delivery
               </p>
-              <p className="font-['Poppins'] font-medium text-base text-[#2aae7a] mt-1 mb-0">
+              <p className="font-medium text-base text-[#2aae7a] mt-1 mb-0">
                 {order.deliveryEta
                   ? formatDate(order.deliveryEta)
                   : "To be confirmed"}
@@ -683,7 +679,7 @@ export default function TrackOrderDetailPage() {
                 className="w-full p-3 border border-[#9c9c9c] rounded-[11px] bg-transparent flex items-center justify-center gap-2 cursor-pointer hover:bg-gray-50"
               >
                 <ExternalLink size={16} color="#0d1b2a" />
-                <span className="font-['Poppins'] font-medium text-base text-[#0d1b2a]">
+                <span className="font-medium text-base text-[#0d1b2a]">
                   Track On Carrier Site
                 </span>
               </button>
@@ -692,7 +688,7 @@ export default function TrackOrderDetailPage() {
 
           {/* Order Actions Card */}
           <div className="bg-white rounded-[15px] shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] p-6">
-            <h2 className="font-['Poppins'] font-medium text-lg text-[#0d1b2a] mt-0 mb-5">
+            <h2 className="font-medium text-lg text-[#0d1b2a] mt-0 mb-5">
               Order Actions
             </h2>
 
@@ -704,7 +700,7 @@ export default function TrackOrderDetailPage() {
               <div className="p-2">
                 <FileText size={16} color="#1e3a8a" />
               </div>
-              <span className="font-['Poppins'] font-medium text-base text-[#1e3a8a]">
+              <span className="font-medium text-base text-[#1e3a8a]">
                 Download Invoice
               </span>
             </button>
@@ -720,7 +716,7 @@ export default function TrackOrderDetailPage() {
               <div className="p-2">
                 <Share2 size={16} color="#9c9c9c" />
               </div>
-              <span className="font-['Poppins'] font-medium text-base text-[#9c9c9c]">
+              <span className="font-medium text-base text-[#9c9c9c]">
                 Share Tracking
               </span>
             </button>
@@ -733,7 +729,7 @@ export default function TrackOrderDetailPage() {
               <div className="p-2">
                 <Send size={16} color="#9c9c9c" />
               </div>
-              <span className="font-['Poppins'] font-medium text-base text-[#9c9c9c]">
+              <span className="font-medium text-base text-[#9c9c9c]">
                 View Order Details
               </span>
             </button>
@@ -741,7 +737,7 @@ export default function TrackOrderDetailPage() {
 
           {/* Need Help Card */}
           <div className="bg-white rounded-[15px] shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] p-6">
-            <h2 className="font-['Poppins'] font-medium text-lg text-[#0d1b2a] mt-0 mb-5">
+            <h2 className="font-medium text-lg text-[#0d1b2a] mt-0 mb-5">
               Need Help?
             </h2>
 
@@ -753,36 +749,36 @@ export default function TrackOrderDetailPage() {
               <div className="p-2">
                 <MessageCircle size={16} color="#9c9c9c" />
               </div>
-              <span className="font-['Poppins'] font-medium text-base text-[#9c9c9c]">
+              <span className="font-medium text-base text-[#9c9c9c]">
                 Live Chat Support
               </span>
             </button>
 
             {/* Call Support */}
             <a
-              href="tel:000-800-0000"
+              href="tel:+918956835375"
               className="block w-full py-2 px-3 border border-[#9c9c9c] rounded-[11px] bg-transparent no-underline mb-2 box-border hover:bg-gray-50"
             >
               <div className="flex items-center gap-2">
                 <div className="p-2">
                   <Phone size={16} color="#9c9c9c" />
                 </div>
-                <span className="font-['Poppins'] font-medium text-base text-[#9c9c9c]">
-                  Call: 000-800-0000
+                <span className="font-medium text-base text-[#9c9c9c]">
+                  Call: +91 89568 35375
                 </span>
               </div>
             </a>
 
             {/* Email Support */}
             <a
-              href="mailto:support@zeerostock.com"
+              href="mailto:contact@zeerostock.com"
               className="block w-full py-2 px-3 border border-[#9c9c9c] rounded-[11px] bg-transparent no-underline box-border hover:bg-gray-50"
             >
               <div className="flex items-center gap-2">
                 <div className="p-2">
                   <Mail size={16} color="#9c9c9c" />
                 </div>
-                <span className="font-['Poppins'] font-medium text-base text-[#9c9c9c]">
+                <span className="font-medium text-base text-[#9c9c9c]">
                   Email Support
                 </span>
               </div>
@@ -791,7 +787,7 @@ export default function TrackOrderDetailPage() {
 
           {/* Delivery Instructions Card */}
           <div className="bg-white rounded-[15px] shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] p-6">
-            <h2 className="font-['Poppins'] font-medium text-lg text-[#0d1b2a] mt-0 mb-5">
+            <h2 className="font-medium text-lg text-[#0d1b2a] mt-0 mb-5">
               Delivery Instructions
             </h2>
 
@@ -819,7 +815,7 @@ export default function TrackOrderDetailPage() {
                   />
                 </svg>
               </div>
-              <p className="font-['Poppins'] font-normal text-sm text-[#9c9c9c] leading-[18px] m-0">
+              <p className="font-normal text-sm text-[#9c9c9c] leading-[18px] m-0">
                 Please ensure someone is available to receive and inspect the
                 shipment upon delivery.
               </p>
@@ -830,7 +826,7 @@ export default function TrackOrderDetailPage() {
               onClick={() => router.push("/buyer/dashboard")}
               className="w-full p-3 bg-[#1e3a8a] border-none rounded-[11px] flex items-center justify-center gap-4 cursor-pointer hover:bg-[#152e6b]"
             >
-              <span className="font-['Poppins'] font-semibold text-base text-white">
+              <span className="font-semibold text-base text-white">
                 Go to Dashboard
               </span>
               <ChevronRight size={18} color="white" />

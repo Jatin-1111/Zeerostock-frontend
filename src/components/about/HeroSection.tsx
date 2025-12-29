@@ -5,7 +5,7 @@ export default function HeroSection() {
     "https://www.figma.com/api/mcp/asset/813ae249-45b4-4e8c-85b3-bbf097f5c237";
 
   return (
-    <section className="relative w-full h-[600px] shadow-md overflow-hidden py-10">
+    <section className="relative w-full h-[450px] shadow-md overflow-hidden py-10">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
@@ -17,11 +17,11 @@ export default function HeroSection() {
 
       {/* Content */}
       <div className="relative z-10 flex flex-col justify-center items-start h-full px-10 gap-5">
-        <h1 className="font-poppins font-semibold text-5xl md:text-6xl leading-tight text-center text-gray-900 max-w-2xl">
+        <h1 className="font-poppins font-semibold text-5xl md:text-5xl leading-tight text-center text-gray-900 max-w-2xl">
           Transforming <span className="text-emerald-500">Global Surplus</span>{" "}
           Trade
         </h1>
-        <p className="font-inter font-semibold text-lg md:text-xl leading-normal text-center text-gray-500 max-w-2xl">
+        <p className="font-inter font-semibold leading-normal text-center text-gray-500 max-w-2xl">
           Connect suppliers, buyers and agents with trust, transparency and
           speed
         </p>

@@ -39,7 +39,7 @@ export default function ProductDescription({
         <div className="flex px-7.5">
           <button
             onClick={() => setActiveTab("description")}
-            className={`relative px-0 py-3 text-[21px] font-medium font-['Poppins'] transition-colors ${
+            className={`relative px-0 py-3 text-[21px] font-medium transition-colors ${
               activeTab === "description" ? "text-[#2aae7a]" : "text-[#0d1b2a]"
             }`}
           >
@@ -50,7 +50,7 @@ export default function ProductDescription({
           </button>
           <button
             onClick={() => setActiveTab("specifications")}
-            className={`relative ml-[52.5px] px-0 py-3 text-[21px] font-medium font-['Poppins'] transition-colors ${
+            className={`relative ml-[52.5px] px-0 py-3 text-[21px] font-medium transition-colors ${
               activeTab === "specifications"
                 ? "text-[#2aae7a]"
                 : "text-[#0d1b2a]"
@@ -63,7 +63,7 @@ export default function ProductDescription({
           </button>
           <button
             onClick={() => setActiveTab("shipping")}
-            className={`relative ml-[52.5px] px-0 py-3 text-[21px] font-medium font-['Poppins'] transition-colors ${
+            className={`relative ml-[52.5px] px-0 py-3 text-[21px] font-medium transition-colors ${
               activeTab === "shipping" ? "text-[#2aae7a]" : "text-[#0d1b2a]"
             }`}
           >
@@ -79,10 +79,10 @@ export default function ProductDescription({
       <div className="px-7.5 py-6">
         {activeTab === "description" && (
           <div>
-            <h2 className="text-[22.5px] font-medium font-['Poppins'] text-[#0d1b2a] mb-4.5">
+            <h2 className="text-[22.5px] font-medium text-[#0d1b2a] mb-4.5">
               Product description
             </h2>
-            <p className="text-[18.75px] font-normal font-['Poppins'] text-[#9c9c9c] leading-[24.75px] mb-9">
+            <p className="text-[18.75px] font-normal text-[#9c9c9c] leading-[24.75px] mb-9">
               {(productData.description as string) ||
                 "High-quality structural steel coils manufactured to ASTM A36 specifications. These coils are perfect for construction projects, infrastructure development, and industrial applications. All materials come with full certification and quality guarantees."}
             </p>
@@ -97,7 +97,7 @@ export default function ProductDescription({
                   />
                 </div>
                 <div>
-                  <h4 className="text-[19.5px] font-medium font-['Poppins'] text-[#0d1b2a] mb-0">
+                  <h4 className="text-[19.5px] font-medium text-[#0d1b2a] mb-0">
                     Fast Shipping
                   </h4>
                 </div>
@@ -110,7 +110,7 @@ export default function ProductDescription({
                   />
                 </div>
                 <div>
-                  <h4 className="text-[19.5px] font-medium font-['Poppins'] text-[#0d1b2a] mb-0">
+                  <h4 className="text-[19.5px] font-medium text-[#0d1b2a] mb-0">
                     Certified Materials
                   </h4>
                 </div>
@@ -123,7 +123,7 @@ export default function ProductDescription({
                   />
                 </div>
                 <div>
-                  <h4 className="text-[19.5px] font-medium font-['Poppins'] text-[#0d1b2a] mb-0">
+                  <h4 className="text-[19.5px] font-medium text-[#0d1b2a] mb-0">
                     Verified Supplier
                   </h4>
                 </div>
@@ -136,7 +136,7 @@ export default function ProductDescription({
                   />
                 </div>
                 <div>
-                  <h4 className="text-[19.5px] font-medium font-['Poppins'] text-[#0d1b2a] mb-0">
+                  <h4 className="text-[19.5px] font-medium text-[#0d1b2a] mb-0">
                     Secure Transactions
                   </h4>
                 </div>
@@ -147,7 +147,7 @@ export default function ProductDescription({
 
         {activeTab === "specifications" && (
           <div>
-            <h2 className="text-[22.5px] font-medium font-['Poppins'] text-[#0d1b2a] mb-6">
+            <h2 className="text-[22.5px] font-medium text-[#0d1b2a] mb-6">
               Technical Specifications
             </h2>
 
@@ -157,10 +157,10 @@ export default function ProductDescription({
                   specs.map((spec, index: number) => (
                     <div key={`${category}-${index}`}>
                       <div className="py-3 border-b border-gray-200">
-                        <div className="text-[16.5px] font-normal font-['Poppins'] text-[#9c9c9c] mb-1.5">
+                        <div className="text-[16.5px] font-normal text-[#9c9c9c] mb-1.5">
                           {spec.key.replace(/_/g, " ")}
                         </div>
-                        <div className="text-[18px] font-medium font-['Poppins'] text-[#0d1b2a]">
+                        <div className="text-[18px] font-medium text-[#0d1b2a]">
                           {spec.value} {spec.unit || ""}
                         </div>
                       </div>
@@ -172,52 +172,52 @@ export default function ProductDescription({
               <div className="grid grid-cols-2 gap-x-15">
                 <div>
                   <div className="py-3 border-b border-gray-200">
-                    <div className="text-[16.5px] font-normal font-['Poppins'] text-[#9c9c9c] mb-1.5">
+                    <div className="text-[16.5px] font-normal text-[#9c9c9c] mb-1.5">
                       Material Grade
                     </div>
-                    <div className="text-[18px] font-medium font-['Poppins'] text-[#0d1b2a]">
+                    <div className="text-[18px] font-medium text-[#0d1b2a]">
                       ASTM A36
                     </div>
                   </div>
                   <div className="py-3 border-b border-gray-200">
-                    <div className="text-[16.5px] font-normal font-['Poppins'] text-[#9c9c9c] mb-1.5">
+                    <div className="text-[16.5px] font-normal text-[#9c9c9c] mb-1.5">
                       Wall Thickness
                     </div>
-                    <div className="text-[18px] font-medium font-['Poppins'] text-[#0d1b2a]">
+                    <div className="text-[18px] font-medium text-[#0d1b2a]">
                       0.25&quot;-0.5&quot;
                     </div>
                   </div>
                   <div className="py-3 border-b border-gray-200">
-                    <div className="text-[16.5px] font-normal font-['Poppins'] text-[#9c9c9c] mb-1.5">
+                    <div className="text-[16.5px] font-normal text-[#9c9c9c] mb-1.5">
                       Coating
                     </div>
-                    <div className="text-[18px] font-medium font-['Poppins'] text-[#0d1b2a]">
+                    <div className="text-[18px] font-medium text-[#0d1b2a]">
                       Mill Finish
                     </div>
                   </div>
                 </div>
                 <div>
                   <div className="py-3 border-b border-gray-200">
-                    <div className="text-[16.5px] font-normal font-['Poppins'] text-[#9c9c9c] mb-1.5">
+                    <div className="text-[16.5px] font-normal text-[#9c9c9c] mb-1.5">
                       Diameter Range
                     </div>
-                    <div className="text-[18px] font-medium font-['Poppins'] text-[#0d1b2a]">
+                    <div className="text-[18px] font-medium text-[#0d1b2a]">
                       2&quot;-12&quot;
                     </div>
                   </div>
                   <div className="py-3 border-b border-gray-200">
-                    <div className="text-[16.5px] font-normal font-['Poppins'] text-[#9c9c9c] mb-1.5">
+                    <div className="text-[16.5px] font-normal text-[#9c9c9c] mb-1.5">
                       Length
                     </div>
-                    <div className="text-[18px] font-medium font-['Poppins'] text-[#0d1b2a]">
+                    <div className="text-[18px] font-medium text-[#0d1b2a]">
                       20ft standard
                     </div>
                   </div>
                   <div className="py-3 border-b border-gray-200">
-                    <div className="text-[16.5px] font-normal font-['Poppins'] text-[#9c9c9c] mb-1.5">
+                    <div className="text-[16.5px] font-normal text-[#9c9c9c] mb-1.5">
                       Certification
                     </div>
-                    <div className="text-[18px] font-medium font-['Poppins'] text-[#0d1b2a]">
+                    <div className="text-[18px] font-medium text-[#0d1b2a]">
                       API 5L, ASTM A36
                     </div>
                   </div>
@@ -229,43 +229,43 @@ export default function ProductDescription({
 
         {activeTab === "shipping" && (
           <div>
-            <h2 className="text-[22.5px] font-medium font-['Poppins'] text-[#0d1b2a] mb-6">
+            <h2 className="text-[22.5px] font-medium text-[#0d1b2a] mb-6">
               Shipping Information
             </h2>
 
             <div className="grid grid-cols-2 gap-x-15 mb-9">
               <div>
                 <div className="py-3 border-b border-gray-200">
-                  <div className="text-[16.5px] font-normal font-['Poppins'] text-[#9c9c9c] mb-1.5">
+                  <div className="text-[16.5px] font-normal text-[#9c9c9c] mb-1.5">
                     Weight
                   </div>
-                  <div className="text-[18px] font-medium font-['Poppins'] text-[#0d1b2a]">
+                  <div className="text-[18px] font-medium text-[#0d1b2a]">
                     25 tons per unit
                   </div>
                 </div>
                 <div className="py-3 border-b border-gray-200">
-                  <div className="text-[16.5px] font-normal font-['Poppins'] text-[#9c9c9c] mb-1.5">
+                  <div className="text-[16.5px] font-normal text-[#9c9c9c] mb-1.5">
                     Shipping Cost
                   </div>
-                  <div className="text-[18px] font-medium font-['Poppins'] text-[#0d1b2a]">
+                  <div className="text-[18px] font-medium text-[#0d1b2a]">
                     Calculated at checkout
                   </div>
                 </div>
               </div>
               <div>
                 <div className="py-3 border-b border-gray-200">
-                  <div className="text-[16.5px] font-normal font-['Poppins'] text-[#9c9c9c] mb-1.5">
+                  <div className="text-[16.5px] font-normal text-[#9c9c9c] mb-1.5">
                     Dimensions
                   </div>
-                  <div className="text-[18px] font-medium font-['Poppins'] text-[#0d1b2a]">
+                  <div className="text-[18px] font-medium text-[#0d1b2a]">
                     2&quot;-12&quot;
                   </div>
                 </div>
                 <div className="py-3 border-b border-gray-200">
-                  <div className="text-[16.5px] font-normal font-['Poppins'] text-[#9c9c9c] mb-1.5">
+                  <div className="text-[16.5px] font-normal text-[#9c9c9c] mb-1.5">
                     Estimated Delivery
                   </div>
-                  <div className="text-[18px] font-medium font-['Poppins'] text-[#0d1b2a]">
+                  <div className="text-[18px] font-medium text-[#0d1b2a]">
                     7-10 business days
                   </div>
                 </div>

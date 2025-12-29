@@ -24,13 +24,13 @@ export default function BenefitsSection() {
       <div className="relative h-full max-w-[1440px] mx-auto flex flex-col items-center justify-center">
         {/* Headline */}
         <div className="text-center mb-12 max-w-[725px]">
-          <h2 className="text-[52px] leading-[52px] font-medium text-[#0a2540] font-['Poppins']">
+          <h2 className="text-[52px] leading-[52px] font-medium text-[#0a2540]">
             Everything You Need To
           </h2>
-          <h2 className="text-[52px] leading-[52px] font-medium text-[#2aae7a] mb-5 font-['Poppins']">
+          <h2 className="text-[52px] leading-[52px] font-medium text-[#2aae7a] mb-5">
             Succeed
           </h2>
-          <p className="text-lg font-semibold text-[#868181] font-['Poppins']">
+          <p className="text-lg font-semibold text-[#868181]">
             Powerful tools and features designed specifically for B2B surplus
             inventory trading
           </p>
@@ -43,7 +43,7 @@ export default function BenefitsSection() {
               <div className="w-[38px] h-[36px] flex items-center justify-center bg-[#2aae7a] rounded-lg shrink-0">
                 <Check className="w-5 h-5 text-white" strokeWidth={3} />
               </div>
-              <span className="text-[21px] leading-[25px] text-[#0a2540] font-medium font-['Poppins']">
+              <span className="text-[21px] leading-[25px] text-[#0a2540] font-medium">
                 {feature.title}
               </span>
             </div>
@@ -51,7 +51,7 @@ export default function BenefitsSection() {
         </div>
 
         {/* CTA Button */}
-        <button className="w-[345px] h-[53px] bg-[#1e3a8a] text-white text-[21px] font-medium rounded-[15px] hover:bg-[#1e3a8a]/90 transition-colors font-['Poppins']">
+        <button className="w-[345px] h-[53px] bg-[#1e3a8a] text-white text-[21px] font-medium rounded-[15px] hover:bg-[#1e3a8a]/90 transition-colors">
           Explore Features
         </button>
       </div>

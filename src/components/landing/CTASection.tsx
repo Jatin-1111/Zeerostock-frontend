@@ -11,14 +11,14 @@ export default function CTASection() {
       <div className="max-w-[1440px] mx-auto flex justify-center">
         <div className="w-[957px] h-[299px] bg-[#39ac7a] rounded-[23px] overflow-hidden flex flex-col items-center justify-center text-center">
           {/* Headline */}
-          <h2 className="text-[34px] leading-normal font-semibold text-white mb-4 font-['Poppins']">
+          <h2 className="text-[34px] leading-normal font-semibold text-white mb-4">
             {isAuthenticated && user
               ? `Welcome back, ${user.firstName}!`
               : "Ready to Transform Your Business"}
           </h2>
 
           {/* Subtitle */}
-          <p className="text-[17px] font-semibold text-[#374151] mb-9 font-['Poppins']">
+          <p className="text-[17px] font-semibold text-[#374151] mb-9">
             {isAuthenticated && user
               ? "Continue exploring deals and growing your business"
               : "Join thousands of businesses already maximizing their surplus inventory value"}
@@ -31,13 +31,13 @@ export default function CTASection() {
               <>
                 <Link
                   href="/marketplace"
-                  className="w-[210px] h-[44px] bg-[#1e3a8a] text-white text-[17px] font-semibold rounded-[9px] hover:bg-[#1e3a8a]/90 transition-colors font-['Poppins'] flex items-center justify-center"
+                  className="w-[210px] h-[44px] bg-[#1e3a8a] text-white text-[17px] font-semibold rounded-[9px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center justify-center"
                 >
                   Explore Marketplace
                 </Link>
                 <Link
                   href="/buyer/rfq"
-                  className="w-[210px] h-[45px] bg-white text-[#2aae7a] text-[17px] font-semibold rounded-[9px] hover:bg-white/90 transition-colors font-['Poppins'] flex items-center justify-center"
+                  className="w-[210px] h-[45px] bg-white text-[#2aae7a] text-[17px] font-semibold rounded-[9px] hover:bg-white/90 transition-colors flex items-center justify-center"
                 >
                   Create RFQ
                 </Link>
@@ -47,13 +47,13 @@ export default function CTASection() {
               <>
                 <Link
                   href="/signup"
-                  className="w-[210px] h-[44px] bg-[#1e3a8a] text-white text-[17px] font-semibold rounded-[9px] hover:bg-[#1e3a8a]/90 transition-colors font-['Poppins'] flex items-center justify-center"
+                  className="w-[210px] h-[44px] bg-[#1e3a8a] text-white text-[17px] font-semibold rounded-[9px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center justify-center"
                 >
                   Sign Up Free
                 </Link>
                 <Link
                   href="/help-support"
-                  className="w-[210px] h-[45px] bg-white text-[#2aae7a] text-[17px] font-semibold rounded-[9px] hover:bg-white/90 transition-colors font-['Poppins'] flex items-center justify-center"
+                  className="w-[210px] h-[45px] bg-white text-[#2aae7a] text-[17px] font-semibold rounded-[9px] hover:bg-white/90 transition-colors flex items-center justify-center"
                 >
                   Schedule Demo
                 </Link>

@@ -36,7 +36,7 @@ export default function Header() {
         {/* Logo - Left Side */}
         <Link href="/" className="shrink-0">
           <img
-            src={"/Zeerostock Logo-1.svg"}
+            src={"/Zeerostock Logo B White.png"}
             alt="Zeerostock"
             className="h-[125px]"
           />
@@ -82,7 +82,7 @@ export default function Header() {
             {/* Show Supplier link only if not logged in as buyer */}
             {(!isAuthenticated || user?.activeRole !== "buyer") && (
               <Link
-                href="/supplier"
+                href="/supplier/dashboard"
                 className={`font-semibold text-[20px] leading-normal whitespace-nowrap transition-colors ${
                   isActive("/supplier")
                     ? "text-[#58ea50]"
@@ -137,7 +137,7 @@ export default function Header() {
 
             {/* WhatsApp */}
             <Link
-              href="https://wa.me/"
+              href="https://wa.me/918956835375"
               target="_blank"
               rel="noopener noreferrer"
               className="w-[44px] h-[44px] bg-[#25D366] rounded-full flex items-center justify-center hover:bg-[#25D366]/90 transition-colors"

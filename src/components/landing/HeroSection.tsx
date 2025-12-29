@@ -21,14 +21,14 @@ export default function HeroSection() {
       <div className="relative h-[675px] w-full max-w-[1440px] mx-auto px-6 flex flex-col items-center justify-center">
         {/* Main Headline - 80px reduced by 25% = 60px, top: 70px reduced by 25% = 52.5px */}
         <h1 className="text-center mb-4 max-w-[667px] mt-[52px]">
-          <span className="text-[60px] leading-[60px] font-extrabold font-['Poppins']">
+          <span className="text-[60px] leading-[60px] font-extrabold">
             <span className="text-white">Transform Surplus into </span>
             <span className="text-[#2aae7a]">Revenue Today</span>
           </span>
         </h1>
 
         {/* Subtitle - 20px reduced by 25% = 15px */}
-        <p className="text-center text-white text-[15px] leading-[19px] font-semibold max-w-[622px] mb-9 font-['Poppins']">
+        <p className="text-center text-white text-[15px] leading-[19px] font-semibold max-w-[622px] mb-9">
           The only B2B marketplace you need to buy, sell or broker surplus
           inventory with complete trust and transparency
         </p>
@@ -40,13 +40,13 @@ export default function HeroSection() {
             <>
               <Link
                 href="/buyer/dashboard"
-                className="w-[210px] h-[52px] bg-[#022778] text-white text-[17px] font-semibold rounded-lg hover:bg-[#022778]/90 transition-colors font-['Poppins'] flex items-center justify-center"
+                className="w-[210px] h-[52px] bg-[#022778] text-white text-[17px] font-semibold rounded-lg hover:bg-[#022778]/90 transition-colors flex items-center justify-center"
               >
                 Go to Dashboard
               </Link>
               <Link
                 href="/marketplace"
-                className="w-[210px] h-[52px] bg-white text-[#2aae7a] text-[17px] font-semibold rounded-lg hover:bg-white/90 transition-colors font-['Poppins'] flex items-center justify-center"
+                className="w-[210px] h-[52px] bg-white text-[#2aae7a] text-[17px] font-semibold rounded-lg hover:bg-white/90 transition-colors flex items-center justify-center"
               >
                 Browse Marketplace
               </Link>
@@ -56,13 +56,13 @@ export default function HeroSection() {
             <>
               <Link
                 href="/become-supplier"
-                className="w-[210px] h-[52px] bg-[#022778] text-white text-[17px] font-semibold rounded-lg hover:bg-[#022778]/90 transition-colors font-['Poppins'] flex items-center justify-center"
+                className="w-[210px] h-[52px] bg-[#022778] text-white text-[17px] font-semibold rounded-lg hover:bg-[#022778]/90 transition-colors flex items-center justify-center"
               >
                 Start Selling
               </Link>
               <Link
                 href="/signup"
-                className="w-[210px] h-[52px] bg-white text-[#2aae7a] text-[17px] font-semibold rounded-lg hover:bg-white/90 transition-colors font-['Poppins'] flex items-center justify-center"
+                className="w-[210px] h-[52px] bg-white text-[#2aae7a] text-[17px] font-semibold rounded-lg hover:bg-white/90 transition-colors flex items-center justify-center"
               >
                 Start Buying
               </Link>
@@ -72,7 +72,7 @@ export default function HeroSection() {
 
         {/* Stats Bar - 24px reduced by 25% = 18px, gap 16*0.75=12 */}
         <div className="absolute bottom-0 left-0 right-0 h-[57px] flex items-center justify-center">
-          <div className="flex items-center justify-center gap-12 text-white text-[18px] font-bold font-['Poppins']">
+          <div className="flex items-center justify-center gap-12 text-white text-[18px] font-bold">
             <span>10,000 Businesses Connected</span>
             <span>$50M+ Inventory Traded</span>
             <span>97% Success Rate</span>

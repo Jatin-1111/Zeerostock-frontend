@@ -27,6 +27,7 @@ export default function Sidebar({
   onToggle,
 }: SidebarProps = {}) {
   const [internalIsOpen, setInternalIsOpen] = useState(false);
+  const [activeItem, setActiveItem] = useState("browse-categories");
 
   // Use external state if provided, otherwise use internal state
   const isOpen = externalIsOpen !== undefined ? externalIsOpen : internalIsOpen;
@@ -83,26 +84,57 @@ export default function Sidebar({
 
         <div className="px-[4px] pb-[28px]">
           {/* EXPLORE PRODUCTS Section */}
-          <div className="mt-[37px] mb-[32px]">
-            <h3 className="font-['Poppins',sans-serif] font-medium text-[19px] text-black leading-normal px-[20px] mb-[29px]">
+          <div className="mt-[37px] mb-8">
+            <h3 className="font-['Poppins',sans-serif] font-medium text-[19px] text-black leading-normal px-4 mb-[29px]">
               Explore Products
             </h3>
             <nav className="space-y-[5px]">
-              {/* Browse Categories - Active */}
+              {/* Browse Categories */}
               <div className="relative h-[53px]">
-                <div className="absolute left-0 top-0 w-[4px] h-[53px] bg-[#2aae7a] rounded-tr-[4px] rounded-br-[4px]" />
+                {activeItem === "browse-categories" && (
+                  <div className="absolute left-0 top-0 w-1 h-[53px] bg-[#2aae7a] rounded-tr-1 rounded-br-sm" />
+                )}
                 <Link
-                  href="#"
-                  className="flex items-center gap-[15px] bg-[#eeffef] rounded-[9px] py-[15px] pl-[23px] pr-[53px] h-[50px] ml-[4px] relative"
+                  href="/marketplace"
+                  onClick={() => setActiveItem("browse-categories")}
+                  className={`flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-[53px] h-[50px] ml-[4px] relative ${
+                    activeItem === "browse-categories"
+                      ? "bg-[#eeffef]"
+                      : "hover:bg-gray-100"
+                  }`}
                 >
                   <div className="w-[19px] h-[19px] flex-shrink-0">
-                    <Box className="w-[19px] h-[19px] text-[#2aae7a]" />
+                    <Box
+                      className={`w-[19px] h-[19px] ${
+                        activeItem === "browse-categories"
+                          ? "text-[#2aae7a]"
+                          : "text-[#8b8b8b]"
+                      }`}
+                    />
                   </div>
-                  <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#2aae7a] leading-normal">
+                  <span
+                    className={`font-['Poppins',sans-serif] font-medium text-[17px] leading-normal ${
+                      activeItem === "browse-categories"
+                        ? "text-[#2aae7a]"
+                        : "text-[#8b8b8b]"
+                    }`}
+                  >
                     Browse Categories
                   </span>
-                  <div className="absolute right-[9px] top-[15px] bg-[#2aae7a] rounded-[60px] px-[4px] py-0">
-                    <span className="font-['Poppins',sans-serif] font-medium text-[8px] text-[#eeffef] leading-normal">
+                  <div
+                    className={`absolute right-[9px] top-[15px] rounded-[60px] px-[4px] py-0 ${
+                      activeItem === "browse-categories"
+                        ? "bg-[#2aae7a]"
+                        : "bg-[#8b8b8b]"
+                    }`}
+                  >
+                    <span
+                      className={`font-['Poppins',sans-serif] font-medium text-[8px] leading-normal ${
+                        activeItem === "browse-categories"
+                          ? "text-[#eeffef]"
+                          : "text-white"
+                      }`}
+                    >
                       45 Active
                     </span>
                   </div>
@@ -110,30 +142,74 @@ export default function Sidebar({
               </div>
 
               {/* Trending Items */}
-              <Link
-                href="#"
-                className="flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-[20px] hover:bg-gray-100"
-              >
-                <div className="w-[19px] h-[19px] flex-shrink-0">
-                  <TrendingUp className="w-[19px] h-[19px] text-[#8b8b8b]" />
-                </div>
-                <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
-                  Trending Items
-                </span>
-              </Link>
+              <div className="relative h-[53px]">
+                {activeItem === "trending-items" && (
+                  <div className="absolute left-0 top-0 w-[4px] h-[53px] bg-[#2aae7a] rounded-tr-[4px] rounded-br-[4px]" />
+                )}
+                <Link
+                  href="/marketplace?filter=trending"
+                  onClick={() => setActiveItem("trending-items")}
+                  className={`flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-[20px] ml-[4px] ${
+                    activeItem === "trending-items"
+                      ? "bg-[#eeffef]"
+                      : "hover:bg-gray-100"
+                  }`}
+                >
+                  <div className="w-[19px] h-[19px] flex-shrink-0">
+                    <TrendingUp
+                      className={`w-[19px] h-[19px] ${
+                        activeItem === "trending-items"
+                          ? "text-[#2aae7a]"
+                          : "text-[#8b8b8b]"
+                      }`}
+                    />
+                  </div>
+                  <span
+                    className={`font-['Poppins',sans-serif] font-medium text-[17px] leading-normal ${
+                      activeItem === "trending-items"
+                        ? "text-[#2aae7a]"
+                        : "text-[#8b8b8b]"
+                    }`}
+                  >
+                    Trending Items
+                  </span>
+                </Link>
+              </div>
 
               {/* Featured Deals */}
-              <Link
-                href="#"
-                className="flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-[20px] hover:bg-gray-100"
-              >
-                <div className="w-[19px] h-[19px] flex-shrink-0">
-                  <Star className="w-[19px] h-[19px] text-[#8b8b8b]" />
-                </div>
-                <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
-                  Featured Deals
-                </span>
-              </Link>
+              <div className="relative h-[53px]">
+                {activeItem === "featured-deals" && (
+                  <div className="absolute left-0 top-0 w-[4px] h-[53px] bg-[#2aae7a] rounded-tr-[4px] rounded-br-[4px]" />
+                )}
+                <Link
+                  href="/marketplace?filter=featured"
+                  onClick={() => setActiveItem("featured-deals")}
+                  className={`flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-[20px] ml-[4px] ${
+                    activeItem === "featured-deals"
+                      ? "bg-[#eeffef]"
+                      : "hover:bg-gray-100"
+                  }`}
+                >
+                  <div className="w-[19px] h-[19px] flex-shrink-0">
+                    <Star
+                      className={`w-[19px] h-[19px] ${
+                        activeItem === "featured-deals"
+                          ? "text-[#2aae7a]"
+                          : "text-[#8b8b8b]"
+                      }`}
+                    />
+                  </div>
+                  <span
+                    className={`font-['Poppins',sans-serif] font-medium text-[17px] leading-normal ${
+                      activeItem === "featured-deals"
+                        ? "text-[#2aae7a]"
+                        : "text-[#8b8b8b]"
+                    }`}
+                  >
+                    Featured Deals
+                  </span>
+                </Link>
+              </div>
             </nav>
           </div>
 
@@ -144,43 +220,109 @@ export default function Sidebar({
             </h3>
             <nav className="space-y-[5px]">
               {/* For Buyers */}
-              <Link
-                href="/for-buyer"
-                className="flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-[20px] hover:bg-gray-100"
-              >
-                <div className="w-[19px] h-[19px] flex-shrink-0">
-                  <ShoppingCart className="w-[19px] h-[19px] text-[#8b8b8b]" />
-                </div>
-                <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
-                  For Buyers
-                </span>
-              </Link>
+              <div className="relative h-[53px]">
+                {activeItem === "for-buyers" && (
+                  <div className="absolute left-0 top-0 w-[4px] h-[53px] bg-[#2aae7a] rounded-tr-[4px] rounded-br-[4px]" />
+                )}
+                <Link
+                  href="/for-buyer"
+                  onClick={() => setActiveItem("for-buyers")}
+                  className={`flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-[20px] ml-[4px] ${
+                    activeItem === "for-buyers"
+                      ? "bg-[#eeffef]"
+                      : "hover:bg-gray-100"
+                  }`}
+                >
+                  <div className="w-[19px] h-[19px] flex-shrink-0">
+                    <ShoppingCart
+                      className={`w-[19px] h-[19px] ${
+                        activeItem === "for-buyers"
+                          ? "text-[#2aae7a]"
+                          : "text-[#8b8b8b]"
+                      }`}
+                    />
+                  </div>
+                  <span
+                    className={`font-['Poppins',sans-serif] font-medium text-[17px] leading-normal ${
+                      activeItem === "for-buyers"
+                        ? "text-[#2aae7a]"
+                        : "text-[#8b8b8b]"
+                    }`}
+                  >
+                    For Buyers
+                  </span>
+                </Link>
+              </div>
 
               {/* For Suppliers */}
-              <Link
-                href="/for-supplier"
-                className="flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-[20px] hover:bg-gray-100"
-              >
-                <div className="w-[18px] h-[19px] flex-shrink-0">
-                  <Building2 className="w-[18px] h-[19px] text-[#8b8b8b]" />
-                </div>
-                <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
-                  For Suppliers
-                </span>
-              </Link>
+              <div className="relative h-[53px]">
+                {activeItem === "for-suppliers" && (
+                  <div className="absolute left-0 top-0 w-[4px] h-[53px] bg-[#2aae7a] rounded-tr-[4px] rounded-br-[4px]" />
+                )}
+                <Link
+                  href="/for-supplier"
+                  onClick={() => setActiveItem("for-suppliers")}
+                  className={`flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-[20px] ml-[4px] ${
+                    activeItem === "for-suppliers"
+                      ? "bg-[#eeffef]"
+                      : "hover:bg-gray-100"
+                  }`}
+                >
+                  <div className="w-[18px] h-[19px] flex-shrink-0">
+                    <Building2
+                      className={`w-[18px] h-[19px] ${
+                        activeItem === "for-suppliers"
+                          ? "text-[#2aae7a]"
+                          : "text-[#8b8b8b]"
+                      }`}
+                    />
+                  </div>
+                  <span
+                    className={`font-['Poppins',sans-serif] font-medium text-[17px] leading-normal ${
+                      activeItem === "for-suppliers"
+                        ? "text-[#2aae7a]"
+                        : "text-[#8b8b8b]"
+                    }`}
+                  >
+                    For Suppliers
+                  </span>
+                </Link>
+              </div>
 
               {/* How It Works */}
-              <Link
-                href="#"
-                className="flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[22px] pr-[20px] hover:bg-gray-100"
-              >
-                <div className="w-[19px] h-[19px] flex-shrink-0 overflow-clip">
-                  <HelpCircle className="w-[19px] h-[19px] text-[#8b8b8b]" />
-                </div>
-                <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
-                  How It Works
-                </span>
-              </Link>
+              <div className="relative h-[53px]">
+                {activeItem === "how-it-works" && (
+                  <div className="absolute left-0 top-0 w-[4px] h-[53px] bg-[#2aae7a] rounded-tr-[4px] rounded-br-[4px]" />
+                )}
+                <Link
+                  href="/how-it-works"
+                  onClick={() => setActiveItem("how-it-works")}
+                  className={`flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[22px] pr-[20px] ml-[4px] ${
+                    activeItem === "how-it-works"
+                      ? "bg-[#eeffef]"
+                      : "hover:bg-gray-100"
+                  }`}
+                >
+                  <div className="w-[19px] h-[19px] flex-shrink-0 overflow-clip">
+                    <HelpCircle
+                      className={`w-[19px] h-[19px] ${
+                        activeItem === "how-it-works"
+                          ? "text-[#2aae7a]"
+                          : "text-[#8b8b8b]"
+                      }`}
+                    />
+                  </div>
+                  <span
+                    className={`font-['Poppins',sans-serif] font-medium text-[17px] leading-normal ${
+                      activeItem === "how-it-works"
+                        ? "text-[#2aae7a]"
+                        : "text-[#8b8b8b]"
+                    }`}
+                  >
+                    How It Works
+                  </span>
+                </Link>
+              </div>
             </nav>
           </div>
 
@@ -191,43 +333,109 @@ export default function Sidebar({
             </h3>
             <nav className="space-y-[5px]">
               {/* Pricing */}
-              <Link
-                href="#"
-                className="flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-[20px] hover:bg-gray-100"
-              >
-                <div className="w-[19px] h-[19px] flex-shrink-0 overflow-clip">
-                  <DollarSign className="w-[19px] h-[19px] text-[#8b8b8b]" />
-                </div>
-                <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
-                  Pricing
-                </span>
-              </Link>
+              <div className="relative h-[53px]">
+                {activeItem === "pricing" && (
+                  <div className="absolute left-0 top-0 w-[4px] h-[53px] bg-[#2aae7a] rounded-tr-[4px] rounded-br-[4px]" />
+                )}
+                <Link
+                  href="/pricing"
+                  onClick={() => setActiveItem("pricing")}
+                  className={`flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-[20px] ml-[4px] ${
+                    activeItem === "pricing"
+                      ? "bg-[#eeffef]"
+                      : "hover:bg-gray-100"
+                  }`}
+                >
+                  <div className="w-[19px] h-[19px] flex-shrink-0 overflow-clip">
+                    <DollarSign
+                      className={`w-[19px] h-[19px] ${
+                        activeItem === "pricing"
+                          ? "text-[#2aae7a]"
+                          : "text-[#8b8b8b]"
+                      }`}
+                    />
+                  </div>
+                  <span
+                    className={`font-['Poppins',sans-serif] font-medium text-[17px] leading-normal ${
+                      activeItem === "pricing"
+                        ? "text-[#2aae7a]"
+                        : "text-[#8b8b8b]"
+                    }`}
+                  >
+                    Pricing
+                  </span>
+                </Link>
+              </div>
 
               {/* Contact Us */}
-              <Link
-                href="#"
-                className="flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-[20px] hover:bg-gray-100"
-              >
-                <div className="w-[19px] h-[19px] flex-shrink-0">
-                  <MessageCircle className="w-[19px] h-[19px] text-[#8b8b8b]" />
-                </div>
-                <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
-                  Contact Us
-                </span>
-              </Link>
+              <div className="relative h-[53px]">
+                {activeItem === "contact-us" && (
+                  <div className="absolute left-0 top-0 w-[4px] h-[53px] bg-[#2aae7a] rounded-tr-[4px] rounded-br-[4px]" />
+                )}
+                <Link
+                  href="/help-support"
+                  onClick={() => setActiveItem("contact-us")}
+                  className={`flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-[20px] ml-[4px] ${
+                    activeItem === "contact-us"
+                      ? "bg-[#eeffef]"
+                      : "hover:bg-gray-100"
+                  }`}
+                >
+                  <div className="w-[19px] h-[19px] flex-shrink-0">
+                    <MessageCircle
+                      className={`w-[19px] h-[19px] ${
+                        activeItem === "contact-us"
+                          ? "text-[#2aae7a]"
+                          : "text-[#8b8b8b]"
+                      }`}
+                    />
+                  </div>
+                  <span
+                    className={`font-['Poppins',sans-serif] font-medium text-[17px] leading-normal ${
+                      activeItem === "contact-us"
+                        ? "text-[#2aae7a]"
+                        : "text-[#8b8b8b]"
+                    }`}
+                  >
+                    Contact Us
+                  </span>
+                </Link>
+              </div>
 
               {/* Settings */}
-              <Link
-                href="#"
-                className="flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-[20px] hover:bg-gray-100"
-              >
-                <div className="w-[19px] h-[19px] flex-shrink-0">
-                  <Settings className="w-[19px] h-[19px] text-[#8b8b8b]" />
-                </div>
-                <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
-                  Settings
-                </span>
-              </Link>
+              <div className="relative h-[53px]">
+                {activeItem === "settings" && (
+                  <div className="absolute left-0 top-0 w-[4px] h-[53px] bg-[#2aae7a] rounded-tr-[4px] rounded-br-[4px]" />
+                )}
+                <Link
+                  href="/buyer/settings"
+                  onClick={() => setActiveItem("settings")}
+                  className={`flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-[20px] ml-[4px] ${
+                    activeItem === "settings"
+                      ? "bg-[#eeffef]"
+                      : "hover:bg-gray-100"
+                  }`}
+                >
+                  <div className="w-[19px] h-[19px] flex-shrink-0">
+                    <Settings
+                      className={`w-[19px] h-[19px] ${
+                        activeItem === "settings"
+                          ? "text-[#2aae7a]"
+                          : "text-[#8b8b8b]"
+                      }`}
+                    />
+                  </div>
+                  <span
+                    className={`font-['Poppins',sans-serif] font-medium text-[17px] leading-normal ${
+                      activeItem === "settings"
+                        ? "text-[#2aae7a]"
+                        : "text-[#8b8b8b]"
+                    }`}
+                  >
+                    Settings
+                  </span>
+                </Link>
+              </div>
             </nav>
           </div>
 

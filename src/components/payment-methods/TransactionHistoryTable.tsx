@@ -178,7 +178,7 @@ export default function TransactionHistoryTable({
       <div className="w-full bg-white rounded-[20px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] overflow-hidden">
         <div className="p-12 text-center">
           <div className="w-16 h-16 border-4 border-gray-300 border-t-gray-900 rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600 text-[15px] font-['Poppins']">
+          <p className="text-gray-600 text-[15px]">
             Loading transactions...
           </p>
         </div>
@@ -193,10 +193,10 @@ export default function TransactionHistoryTable({
           <div className="w-16 h-16 bg-red-100 border-2 border-red-600 mx-auto flex items-center justify-center mb-4 rounded">
             <span className="text-3xl">❌</span>
           </div>
-          <h3 className="text-[19.5px] font-['Poppins'] font-semibold text-[#0D1B2A] mb-2">
+          <h3 className="text-[19.5px] font-semibold text-[#0D1B2A] mb-2">
             Error
           </h3>
-          <p className="text-gray-600 text-[15px] font-['Poppins']">{error}</p>
+          <p className="text-gray-600 text-[15px]">{error}</p>
         </div>
       </div>
     );
@@ -209,10 +209,10 @@ export default function TransactionHistoryTable({
           <div className="w-16 h-16 bg-gray-100 border-2 border-gray-900 mx-auto flex items-center justify-center mb-4 rounded">
             <span className="text-3xl">💳</span>
           </div>
-          <h3 className="text-[19.5px] font-['Poppins'] font-semibold text-[#0D1B2A] mb-2">
+          <h3 className="text-[19.5px] font-semibold text-[#0D1B2A] mb-2">
             No Transactions Yet
           </h3>
-          <p className="text-gray-600 text-[15px] font-['Poppins']">
+          <p className="text-gray-600 text-[15px]">
             Payment transactions will appear here
           </p>
         </div>
@@ -232,22 +232,22 @@ export default function TransactionHistoryTable({
       <div className="bg-white rounded-[20px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] overflow-hidden">
         {/* Table Header */}
         <div className="grid grid-cols-[186px_162px_312px_312px_257px_257px] gap-0 px-[30px] py-[41px] border-b border-gray-200">
-          <div className="text-[20px] font-['Poppins'] font-medium text-[#0D1B2A] tracking-[0.5px]">
+          <div className="text-[20px] font-medium text-[#0D1B2A] tracking-[0.5px]">
             DATE
           </div>
-          <div className="text-[20px] font-['Poppins'] font-medium text-[#0D1B2A] tracking-[0.5px]">
+          <div className="text-[20px] font-medium text-[#0D1B2A] tracking-[0.5px]">
             TYPE
           </div>
-          <div className="text-[20px] font-['Poppins'] font-medium text-[#0D1B2A] tracking-[0.5px]">
+          <div className="text-[20px] font-medium text-[#0D1B2A] tracking-[0.5px]">
             DESCRIPTION
           </div>
-          <div className="text-[20px] font-['Poppins'] font-medium text-[#0D1B2A] tracking-[0.5px]">
+          <div className="text-[20px] font-medium text-[#0D1B2A] tracking-[0.5px]">
             AMOUNT
           </div>
-          <div className="text-[20px] font-['Poppins'] font-medium text-[#0D1B2A] tracking-[0.5px]">
+          <div className="text-[20px] font-medium text-[#0D1B2A] tracking-[0.5px]">
             STATUS
           </div>
-          <div className="text-[20px] font-['Poppins'] font-medium text-[#0D1B2A] tracking-[0.5px]">
+          <div className="text-[20px] font-medium text-[#0D1B2A] tracking-[0.5px]">
             ACTIONS
           </div>
         </div>
@@ -264,22 +264,22 @@ export default function TransactionHistoryTable({
                 className="bg-white shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)] grid grid-cols-[186px_162px_312px_312px_257px_257px] gap-0 px-[30px] py-[36px] items-center"
               >
                 {/* Date */}
-                <div className="text-[20px] font-['Poppins'] font-medium text-[#9C9C9C] tracking-[0.5px] leading-[28px]">
+                <div className="text-[20px] font-medium text-[#9C9C9C] tracking-[0.5px] leading-[28px]">
                   {formatDate(transaction.created_at)}
                 </div>
 
                 {/* Type */}
-                <div className="text-[20px] font-['Poppins'] text-black tracking-[0.5px] leading-[28px]">
+                <div className="text-[20px] text-black tracking-[0.5px] leading-[28px]">
                   {transactionType}
                 </div>
 
                 {/* Description */}
-                <div className="text-[20px] font-['Poppins'] text-black tracking-[0.5px] leading-[28px]">
+                <div className="text-[20px] text-black tracking-[0.5px] leading-[28px]">
                   {transaction.order_number || transaction.buyer_name}
                 </div>
 
                 {/* Amount */}
-                <div className="text-[20px] font-['Poppins'] text-black tracking-[0.5px] leading-[28px]">
+                <div className="text-[20px] text-black tracking-[0.5px] leading-[28px]">
                   $
                   {transaction.amount.toLocaleString("en-US", {
                     minimumFractionDigits: 2,
@@ -298,7 +298,7 @@ export default function TransactionHistoryTable({
                     {statusStyles.icon === "check" && <CheckIcon />}
                     {statusStyles.icon === "timer" && <TimerIcon />}
                     <span
-                      className="text-[20px] font-['Poppins'] tracking-[0.5px] leading-[28px]"
+                      className="text-[20px] tracking-[0.5px] leading-[28px]"
                       style={{ color: statusStyles.text }}
                     >
                       {statusStyles.label}

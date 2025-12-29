@@ -144,21 +144,21 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
   return (
     <div className="bg-white rounded-[15px] shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)] p-6 h-fit">
       {/* Title */}
-      <h1 className="text-[25.5px] font-semibold font-['Poppins'] text-[#1e3a8a] leading-normal mb-3">
+      <h1 className="text-[25.5px] font-semibold text-[#1e3a8a] leading-normal mb-3">
         {product.title as string}
       </h1>
 
       {/* Badges */}
       <div className="flex items-center gap-2.25 mb-4.5">
-        <span className="px-2.25 py-0.75 bg-[#eeffef] text-[#2aae7a] text-[11.25px] font-medium font-['Poppins'] rounded-[60px]">
+        <span className="px-2.25 py-0.75 bg-[#eeffef] text-[#2aae7a] text-[11.25px] font-medium rounded-[60px]">
           {(product.category as { name?: string })?.name || "Materials"}
         </span>
         {isAuction && (
-          <span className="px-2.25 py-0.75 bg-[#eeffef] text-[#2aae7a] text-[11.25px] font-medium font-['Poppins'] rounded-[60px]">
+          <span className="px-2.25 py-0.75 bg-[#eeffef] text-[#2aae7a] text-[11.25px] font-medium rounded-[60px]">
             Auction
           </span>
         )}
-        <span className="px-2.25 py-0.75 bg-[#eeffef] text-[#2aae7a] text-[11.25px] font-medium font-['Poppins'] rounded-[60px] capitalize">
+        <span className="px-2.25 py-0.75 bg-[#eeffef] text-[#2aae7a] text-[11.25px] font-medium rounded-[60px] capitalize">
           {product.condition as string}
         </span>
       </div>
@@ -166,7 +166,7 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
       {/* Price */}
       <div className="mb-4.5">
         <div className="flex items-baseline gap-3 mb-1.5">
-          <span className="text-[30px] font-semibold font-['Poppins'] text-[#0d1b2a]">
+          <span className="text-[30px] font-semibold text-[#0d1b2a]">
             {formatPrice(product.price as number)}
           </span>
           {(() => {
@@ -177,7 +177,7 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
               product.original_price > product.price
             ) {
               return (
-                <span className="text-[18px] font-medium font-['Poppins'] text-[#bebebe] line-through">
+                <span className="text-[18px] font-medium text-[#bebebe] line-through">
                   {formatPrice(product.original_price)}
                 </span>
               );
@@ -185,7 +185,7 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
             return null;
           })()}
         </div>
-        <p className="text-[18px] font-medium font-['Poppins'] text-[#bebebe] tracking-[0.375px]">
+        <p className="text-[18px] font-medium text-[#bebebe] tracking-[0.375px]">
           per {(product.unit as string) || "unit"} /{" "}
           {(product.stock_quantity as number) ||
             (product.quantity as number) ||
@@ -196,7 +196,7 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
 
       {/* Minimum Bid for Auction */}
       {isAuction && (
-        <p className="text-[15px] font-medium font-['Poppins'] text-[#bebebe] tracking-[0.375px] mb-4.5">
+        <p className="text-[15px] font-medium text-[#bebebe] tracking-[0.375px] mb-4.5">
           minimum bid{" "}
           {formatPrice(
             (auction?.current_bid as number) || (product.price as number)
@@ -207,7 +207,7 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
       {/* Watching Section */}
       {/* <div className="flex items-center gap-2.25 mb-4.5">
         <Eye className="w-4.5 h-4.5 text-[#bebebe]" />
-        <span className="text-[18px] font-medium font-['Poppins'] text-[#0d1b2a]">
+        <span className="text-[18px] font-medium text-[#0d1b2a]">
           Watching:{" "}
           <span className="font-semibold">
             {(product.views as number) || 47}
@@ -221,14 +221,14 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
           <button
             onClick={handleBuyNow}
             disabled={isAddingToCart}
-            className="w-full bg-[#1e3a8a] text-white text-[15px] font-semibold font-['Poppins'] py-3 rounded-[7.5px] hover:bg-[#1e3a8a]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-[#1e3a8a] text-white text-[15px] font-semibold py-3 rounded-[7.5px] hover:bg-[#1e3a8a]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isAddingToCart ? "Adding..." : "Buy Now"}
           </button>
           <button
             onClick={handleAddToCart}
             disabled={isAddingToCart}
-            className="w-full bg-white border-2 border-[#1e3a8a] text-[#1e3a8a] text-[15px] font-semibold font-['Poppins'] py-3 rounded-[7.5px] hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-white border-2 border-[#1e3a8a] text-[#1e3a8a] text-[15px] font-semibold py-3 rounded-[7.5px] hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isAddingToCart ? "Adding..." : "Add to Cart"}
           </button>

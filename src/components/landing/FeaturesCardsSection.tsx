@@ -41,12 +41,12 @@ export default function FeaturesCardsSection() {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-[#022778] text-base font-semibold mb-4 leading-normal font-['Poppins']">
+                <h3 className="text-[#022778] text-base font-semibold mb-4 leading-normal">
                   {feature.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-white text-[15px] font-bold leading-normal font-['Poppins']">
+                <p className="text-white text-[15px] font-bold leading-normal">
                   {feature.description}
                 </p>
               </div>

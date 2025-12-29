@@ -101,7 +101,7 @@ export default function SecurityProtection() {
         {/* Title with Icon */}
         <div className="absolute left-[74px] top-[52px] -translate-y-1/2 flex items-center gap-[15px]">
           <SecuritySafeIcon />
-          <h3 className="font-['Poppins'] font-semibold text-[26px] text-[#0D1B2A] tracking-[0.5px] leading-[24px] m-0">
+          <h3 className="font-semibold text-[26px] text-[#0D1B2A] tracking-[0.5px] leading-[24px] m-0">
             Security & Protection
           </h3>
         </div>
@@ -111,7 +111,7 @@ export default function SecurityProtection() {
           <div className="shrink-0">
             <LockIcon />
           </div>
-          <p className="font-['Poppins'] font-medium text-[20px] text-[#9C9C9C] leading-normal m-0 flex-1">
+          <p className="font-medium text-[20px] text-[#9C9C9C] leading-normal m-0 flex-1">
             All payment information is encrypted and stored securely. Zeerostock
             uses industry-standard PCI DSS compliance to protect your financial
             data.
@@ -126,10 +126,10 @@ export default function SecurityProtection() {
                 <ShieldCheckIcon />
               </div>
               <div className="flex flex-col gap-[15px]">
-                <p className="font-['Poppins'] font-medium text-[30px] text-[#0D1B2A] tracking-[0.5px] leading-[24px] m-0">
+                <p className="font-medium text-[30px] text-[#0D1B2A] tracking-[0.5px] leading-[24px] m-0">
                   {feature.title}
                 </p>
-                <p className="font-['Poppins'] font-medium text-[20px] text-[#9C9C9C] leading-[28px] m-0">
+                <p className="font-medium text-[20px] text-[#9C9C9C] leading-[28px] m-0">
                   {feature.description}
                 </p>
               </div>

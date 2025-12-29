@@ -5,15 +5,15 @@ export default function HeroSection() {
         <div className="flex gap-12 items-center">
           {/* Left Content */}
           <div className="flex-1">
-            <p className="text-[14px] text-gray-600 mb-3 font-['Poppins']">
+            <p className="text-[14px] text-gray-600 mb-3">
               Join The Marketplace
             </p>
-            <h1 className="text-[42px] font-bold text-gray-900 mb-4 leading-tight font-['Poppins']">
+            <h1 className="text-[42px] font-bold text-gray-900 mb-4 leading-tight">
               Partner with Zeerostock
               <br />
               Earn as an Agent
             </h1>
-            <p className="text-[15px] text-gray-700 mb-8 leading-relaxed font-['Poppins']">
+            <p className="text-[15px] text-gray-700 mb-8 leading-relaxed">
               Join our global network of trusted agents and earn competitive
               commissions by connecting suppliers with the market-leading B2B
               trading platform.
@@ -37,7 +37,7 @@ export default function HeroSection() {
                     d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                <span className="text-[14px] text-gray-700 font-['Poppins']">
+                <span className="text-[14px] text-gray-700">
                   Up to 5% recurring commissions
                 </span>
               </div>
@@ -55,7 +55,7 @@ export default function HeroSection() {
                     d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                <span className="text-[14px] text-gray-700 font-['Poppins']">
+                <span className="text-[14px] text-gray-700">
                   Transparent pay
                 </span>
               </div>
@@ -73,13 +73,13 @@ export default function HeroSection() {
                     d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                <span className="text-[14px] text-gray-700 font-['Poppins']">
+                <span className="text-[14px] text-gray-700">
                   Trusted brand
                 </span>
               </div>
             </div>
 
-            <button className="px-6 py-3 bg-gray-900 text-white text-[15px] font-semibold rounded-lg hover:bg-gray-800 transition-colors font-['Poppins']">
+            <button className="px-6 py-3 bg-gray-900 text-white text-[15px] font-semibold rounded-lg hover:bg-gray-800 transition-colors">
               Apply Now
             </button>
           </div>

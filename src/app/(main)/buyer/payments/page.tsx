@@ -1,19 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { supplierService } from "@/services/supplier.service";
+import { useEffect, useState, useCallback } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-import PaymentMethodsStats from "@/components/payment-methods/PaymentMethodsStats";
-import SavedPaymentMethods from "@/components/payment-methods/SavedPaymentMethods";
-import SecurityProtection from "@/components/payment-methods/SecurityProtection";
-import TransactionHistoryTable from "@/components/payment-methods/TransactionHistoryTable";
-import InvoicesList from "@/components/payment-methods/InvoicesList";
+import { buyerService } from "@/services/buyer.service";
+import BuyerPaymentMethodsStats from "@/components/buyer-payment-methods/BuyerPaymentMethodsStats";
+import BuyerSavedPaymentMethods from "@/components/buyer-payment-methods/BuyerSavedPaymentMethods";
+import BuyerSecurityProtection from "@/components/buyer-payment-methods/BuyerSecurityProtection";
+import BuyerTransactionHistoryTable from "@/components/buyer-payment-methods/BuyerTransactionHistoryTable";
+import BuyerInvoicesList from "@/components/buyer-payment-methods/BuyerInvoicesList";
 
 interface PaymentSummary {
   total_transactions: number;
-  total_received: number;
+  total_spent: number;
   pending_amount: number;
-  received_this_month: number;
+  spent_this_month: number;
 }
 
 interface Transaction {
@@ -27,8 +27,8 @@ interface Transaction {
   status: string;
   created_at: string;
   updated_at: string;
-  buyer_name: string;
-  buyer_company: string;
+  supplier_name: string;
+  supplier_company: string;
 }
 
 interface Invoice {
@@ -44,12 +44,12 @@ interface Invoice {
   due_date: string;
   paid_date: string | null;
   created_at: string;
-  buyer_name: string;
-  buyer_company: string;
-  buyer_email: string;
+  supplier_name: string;
+  supplier_company: string;
+  supplier_email: string;
 }
 
-export default function PaymentMethodsPage() {
+export default function BuyerPaymentMethodsPage() {
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState<
     "payment-methods" | "transaction-history" | "invoices"
@@ -66,19 +66,12 @@ export default function PaymentMethodsPage() {
   const [transactionTotalPages, setTransactionTotalPages] = useState(1);
   const [invoiceTotalPages, setInvoiceTotalPages] = useState(1);
 
-  useEffect(() => {
-    fetchPaymentData();
-  }, [transactionPage]);
-
-  useEffect(() => {
-    fetchInvoiceData();
-  }, [invoicePage]);
-
-  const fetchPaymentData = async () => {
+  const fetchPaymentData = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
-      const response = await supplierService.getPayments({
+
+      const response = await buyerService.getPayments({
         page: transactionPage,
         limit: 10,
       });
@@ -88,20 +81,21 @@ export default function PaymentMethodsPage() {
         setTransactions(response.data.transactions);
         setTransactionTotalPages(response.data.pagination.totalPages);
       } else {
-        setError(response.message || "Failed to fetch payment data");
+        setError("Failed to fetch payment data");
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Error fetching payments:", err);
-      setError(err.message || "An error occurred");
+      setError(err instanceof Error ? err.message : "An error occurred");
     } finally {
       setLoading(false);
     }
-  };
+  }, [transactionPage]);
 
-  const fetchInvoiceData = async () => {
+  const fetchInvoiceData = useCallback(async () => {
     try {
       setError(null);
-      const response = await supplierService.getInvoices({
+
+      const response = await buyerService.getInvoices({
         page: invoicePage,
         limit: 10,
       });
@@ -110,18 +104,26 @@ export default function PaymentMethodsPage() {
         setInvoices(response.data.invoices);
         setInvoiceTotalPages(response.data.pagination.totalPages);
       } else {
-        setError(response.message || "Failed to fetch invoices");
+        setError("Failed to fetch invoices");
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Error fetching invoices:", err);
-      setError(err.message || "An error occurred");
+      setError(err instanceof Error ? err.message : "An error occurred");
     }
-  };
+  }, [invoicePage]);
+
+  useEffect(() => {
+    fetchPaymentData();
+  }, [fetchPaymentData]);
+
+  useEffect(() => {
+    fetchInvoiceData();
+  }, [fetchInvoiceData]);
 
   // Role check
-  if (user && user.activeRole !== "supplier") {
+  if (user && user.activeRole !== "buyer") {
     return (
-      <div className="min-h-screen bg-[#EEFBF6] flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center max-w-md mx-auto p-8">
           <div className="mb-6">
             <div className="w-16 h-16 bg-red-100 border-2 border-red-600 mx-auto flex items-center justify-center mb-4">
@@ -131,16 +133,16 @@ export default function PaymentMethodsPage() {
               Access Restricted
             </h2>
             <p className="text-gray-600 mb-6">
-              You need to be in supplier mode to view payments. Your current
-              role is: <strong>{user.activeRole}</strong>
+              You need to be in buyer mode to view payments. Your current role
+              is: <strong>{user.activeRole}</strong>
             </p>
           </div>
           <div className="space-y-3">
             <button
-              onClick={() => (window.location.href = "/supplier")}
+              onClick={() => (window.location.href = "/buyer")}
               className="w-full px-6 py-3 bg-gray-900 text-white font-semibold border-2 border-gray-900 hover:bg-gray-800 transition-colors"
             >
-              Switch to Supplier Mode
+              Switch to Buyer Mode
             </button>
             <button
               onClick={() => (window.location.href = "/")}
@@ -266,7 +268,7 @@ export default function PaymentMethodsPage() {
                 </h1>
                 <p
                   style={{
-                    fontFamily: "Inter, sans-serif",
+                    fontFamily: "Poppins, sans-serif",
                     fontWeight: 500,
                     fontSize: "24px",
                     color: "#9C9C9C",
@@ -282,7 +284,7 @@ export default function PaymentMethodsPage() {
         </div>
 
         {/* Stats Cards */}
-        <PaymentMethodsStats summary={paymentSummary} />
+        <BuyerPaymentMethodsStats summary={paymentSummary} />
 
         {/* Tabs Navigation with scaling */}
         <div
@@ -366,19 +368,25 @@ export default function PaymentMethodsPage() {
         {/* Tab Content */}
         {activeTab === "payment-methods" && (
           <div className="flex flex-col gap-6">
-            <SavedPaymentMethods
+            <BuyerSavedPaymentMethods
               methods={[]}
               loading={false}
-              onAdd={() => alert("Add payout method functionality coming soon")}
-              onEdit={(id) => alert(`Edit payout method ${id} coming soon`)}
-              onDelete={(id) => alert(`Delete payout method ${id} coming soon`)}
+              onAdd={() =>
+                alert("Add payment method functionality coming soon")
+              }
+              onEdit={(id: string) =>
+                alert(`Edit payment method ${id} coming soon`)
+              }
+              onDelete={(id: string) =>
+                alert(`Delete payment method ${id} coming soon`)
+              }
             />
-            <SecurityProtection />
+            <BuyerSecurityProtection />
           </div>
         )}
 
         {activeTab === "transaction-history" && (
-          <TransactionHistoryTable
+          <BuyerTransactionHistoryTable
             transactions={transactions}
             loading={loading}
             error={error}
@@ -389,7 +397,7 @@ export default function PaymentMethodsPage() {
         )}
 
         {activeTab === "invoices" && (
-          <InvoicesList
+          <BuyerInvoicesList
             invoices={invoices}
             loading={loading}
             error={error}

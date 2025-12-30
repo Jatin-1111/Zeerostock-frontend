@@ -4,13 +4,13 @@ export default function MissionSection() {
       <div className="w-full max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative w-full flex flex-col items-center">
           {/* Title */}
-          <h2 className="font-poppins font-semibold text-4xl sm:text-5xl lg:text-[52px] leading-tight lg:leading-[70px] text-center text-[#0d1b2a] max-w-4xl mb-6 px-4">
+          <h2 className="font-poppins font-semibold text-5xl leading-tight lg:leading-[70px] text-center text-[#0d1b2a] max-w-4xl mb-6 px-4">
             Building a Sustainable Future Through{" "}
             <span className="text-[#2ec096]">Smart Commerce</span>
           </h2>
 
           {/* Description */}
-          <p className="font-inter font-semibold text-base sm:text-lg lg:text-[21px] leading-relaxed lg:leading-[25px] text-center text-[#868181] max-w-5xl mb-16 px-4">
+          <p className="font-inter font-semibold text-base leading-relaxed lg:leading-[25px] text-center text-[#868181] max-w-5xl mb-16 px-4">
             Every year, billions of dollars in surplus inventory goes to waste.
             We believe there&apos;s a better way, By connecting suppliers with
             buyers through intelligent matching

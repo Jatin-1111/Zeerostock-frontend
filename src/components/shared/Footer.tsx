@@ -70,13 +70,13 @@ export default function Footer() {
               </h3>
               <div className="flex flex-col gap-2 text-[14px] leading-6 text-[#d0d0d0]">
                 <Link
-                  href="/buyer"
+                  href="/for-buyer"
                   className="hover:text-white transition-colors"
                 >
                   Buyer
                 </Link>
                 <Link
-                  href="/supplier"
+                  href="/for-supplier"
                   className="hover:text-white transition-colors"
                 >
                   Seller

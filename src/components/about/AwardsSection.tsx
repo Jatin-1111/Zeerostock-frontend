@@ -109,7 +109,7 @@ export default function AwardsSection() {
               <div className="lg:col-span-5">
                 <div className="relative h-[420px]">
                   {/* Top Right Card - Our Impact (Waste & CO2) */}
-                  <div className="absolute top-[-50px] right-0 w-[320px] bg-[#eeffef] rounded-[30px] shadow-[0px_-1px_30px_0px_rgba(24,181,34,0.25)] p-6 z-20">
+                  <div className="absolute top-[-50px] right-[-10px] w-[320px] bg-[#eeffef] rounded-[30px] shadow-[0px_-1px_30px_0px_rgba(24,181,34,0.25)] p-6 z-20">
                     {/* Title */}
                     <h3 className="font-poppins font-bold text-[32px] text-black text-center mb-6">
                       Our Impact
@@ -158,7 +158,7 @@ export default function AwardsSection() {
                   </div>
 
                   {/* Bottom Left Card - Small Businesses & Jobs */}
-                  <div className="absolute bottom-[-90px] left-0 w-[320px] bg-[#eeffef] rounded-[30px] shadow-[0px_-1px_30px_0px_rgba(24,181,34,0.25)] p-6 z-10">
+                  <div className="absolute bottom-[-100px] left-[-10px] w-[320px] bg-[#eeffef] rounded-[30px] shadow-[0px_-1px_30px_0px_rgba(24,181,34,0.25)] p-6 z-10">
                     {/* Small Businesses */}
                     <div className="mb-6">
                       <div className="w-10 h-10 mb-3">

@@ -2,7 +2,11 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Heart } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
+import { buyerService } from "@/services/buyer.service";
+import { useAuth } from "@/contexts/AuthContext";
+import toast from "react-hot-toast";
 
 interface ProductInfoProps {
   product: {
@@ -22,6 +26,7 @@ interface ProductInfoProps {
 export default function ProductInfo({ product: data }: ProductInfoProps) {
   const router = useRouter();
   const { addToCart } = useCartStore();
+  const { isAuthenticated, user } = useAuth();
   const product = data.product;
   const auction = data.auction;
 
@@ -33,6 +38,8 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
   );
   const [message, setMessage] = useState("");
   const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const [isWatchlisted, setIsWatchlisted] = useState(data.isWatching || false);
+  const [isTogglingWishlist, setIsTogglingWishlist] = useState(false);
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat("en-IN", {
@@ -47,7 +54,55 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
   const minimumIncrement = (auction?.min_increment as number) || 20000;
   const productStock = (product.quantity as number) || 0;
   const minOrderQty = (product.minimum_order_quantity as number) || 1;
+  const handleToggleWishlist = async () => {
+    // Check authentication
+    if (!isAuthenticated) {
+      toast.error("Please login to add items to your wishlist");
+      router.push("/login");
+      return;
+    }
 
+    // Validate product ID
+    if (!product.id) {
+      toast.error("Invalid product");
+      return;
+    }
+
+    setIsTogglingWishlist(true);
+
+    try {
+      if (isWatchlisted) {
+        // Remove from wishlist
+        const response = await buyerService.removeFromWatchlist(
+          product.id as string
+        );
+
+        if (response.success) {
+          setIsWatchlisted(false);
+          toast.success("Removed from wishlist");
+        } else {
+          toast.error(response.message || "Failed to remove from wishlist");
+        }
+      } else {
+        // Add to wishlist
+        const response = await buyerService.addToWatchlist({
+          productId: product.id as string,
+        });
+
+        if (response.success) {
+          setIsWatchlisted(true);
+          toast.success("Added to wishlist");
+        } else {
+          toast.error(response.message || "Failed to add to wishlist");
+        }
+      }
+    } catch (error) {
+      console.error("Error toggling wishlist:", error);
+      toast.error("An error occurred");
+    } finally {
+      setIsTogglingWishlist(false);
+    }
+  };
   const handleAddToCart = async () => {
     console.log("=== Add to Cart clicked ===");
     console.log("Product ID:", product.id);
@@ -143,10 +198,28 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
 
   return (
     <div className="bg-white rounded-[15px] shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)] p-6 h-fit">
-      {/* Title */}
-      <h1 className="text-[25.5px] font-semibold text-[#1e3a8a] leading-normal mb-3">
-        {product.title as string}
-      </h1>
+      {/* Title with Wishlist Button */}
+      <div className="flex items-start justify-between gap-3 mb-3">
+        <h1 className="text-[25.5px] font-semibold text-[#1e3a8a] leading-normal flex-1">
+          {product.title as string}
+        </h1>
+        <button
+          onClick={handleToggleWishlist}
+          disabled={isTogglingWishlist}
+          className="flex-shrink-0 p-2 rounded-full hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed group"
+          aria-label={
+            isWatchlisted ? "Remove from wishlist" : "Add to wishlist"
+          }
+        >
+          <Heart
+            className={`w-6 h-6 transition-all ${
+              isWatchlisted
+                ? "fill-red-500 text-red-500"
+                : "text-gray-400 group-hover:text-red-500"
+            }`}
+          />
+        </button>
+      </div>
 
       {/* Badges */}
       <div className="flex items-center gap-2.25 mb-4.5">

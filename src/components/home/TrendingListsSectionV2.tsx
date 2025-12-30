@@ -16,7 +16,7 @@ export default function TrendingListsSectionV2() {
   const products = [
     {
       title: "HR Steel Coils",
-      category: "Raw Materils",
+      category: "Raw Materials",
       currentPrice: "₹20,00,000",
       originalPrice: "₹25,00,000",
       discount: "Save 15%",

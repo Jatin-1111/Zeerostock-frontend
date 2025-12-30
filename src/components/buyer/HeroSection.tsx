@@ -38,15 +38,15 @@ export default function HeroSection() {
         <div className="flex flex-col sm:flex-row items-start justify-start gap-4 mb-6 w-full">
           <Link
             href="/signup"
-            className="bg-[#1e3a8a] rounded-[9px] px-[48px] py-[11.25px] h-[52.5px] flex items-center justify-center w-full sm:w-auto"
+            className="bg-[#1e3a8a] rounded-[9px] px-12 py-[11.25px] h-[52.5px] flex items-center justify-center w-full sm:w-auto"
           >
             <span className="font-montserrat font-medium text-[16.5px] leading-normal text-white text-left">
               Start Buying Now
             </span>
           </Link>
           <Link
-            href="/contact"
-            className="bg-white rounded-[9px] px-[48px] py-[11.25px] h-[52.5px] flex items-center justify-center w-full sm:w-auto border-2 border-[#1e3a8a]"
+            href="/helpdesk"
+            className="bg-white rounded-[9px] px-12 py-[11.25px] h-[52.5px] flex items-center justify-center w-full sm:w-auto border-2 border-[#1e3a8a]"
           >
             <span className="font-montserrat font-medium text-[16.5px] leading-[16.5px] text-[#2aae7a] text-left">
               Request Demo

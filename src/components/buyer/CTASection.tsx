@@ -20,7 +20,7 @@ export default function CTASection() {
               Create Buyer Account
             </Link>
             <Link
-              href="/contact"
+              href="/helpdesk"
               className="w-full sm:w-auto px-8 md:px-12 py-3 md:py-4 bg-white text-[#00B67A] rounded-xl text-base md:text-xl font-medium hover:bg-gray-50 transition-colors"
             >
               Schedule Demo

@@ -22,8 +22,13 @@ export default function WishlistPage() {
       setError(null);
 
       const response = await buyerService.getWatchlist({ page: 1, limit: 50 });
+
       if (response.success && response.data) {
-        setItems(response.data.items || []);
+        const items = response.data.items || [];
+        setItems(items);
+      } else {
+        console.error("API response not successful:", response);
+        setError(response.message || "Failed to load wishlist");
       }
     } catch (err) {
       console.error("Error fetching watchlist:", err);
@@ -41,7 +46,7 @@ export default function WishlistPage() {
       const response = await buyerService.removeFromWatchlist(productId);
       if (response.success) {
         setItems((prev) =>
-          prev.filter((item) => item.product.id !== productId)
+          prev.filter((item) => item.product?.id !== productId)
         );
       }
     } catch (err) {
@@ -54,7 +59,7 @@ export default function WishlistPage() {
 
   const clearUnavailableItems = async () => {
     const unavailable = items.filter(
-      (item) => item.product.status !== "active"
+      (item) => item.product?.status !== "active"
     );
     if (unavailable.length === 0) {
       alert("No unavailable items to clear");
@@ -63,14 +68,16 @@ export default function WishlistPage() {
     if (!confirm("Clear all unavailable items?")) return;
 
     for (const item of unavailable) {
-      await handleRemove(item.product.id);
+      if (item.product?.id) {
+        await handleRemove(item.product.id);
+      }
     }
   };
 
   const getPriceChange = (item: WatchlistItem) => {
-    if (!item.priceAtAdd || !item.product.priceAfter) return null;
+    if (!item.priceAtAdd || !item.product?.priceAfter) return null;
 
-    const priceDiff = item.product.priceAfter - item.priceAtAdd;
+    const priceDiff = item.product?.priceAfter - item.priceAtAdd;
     const percentChange = (priceDiff / item.priceAtAdd) * 100;
 
     return {
@@ -81,46 +88,16 @@ export default function WishlistPage() {
   };
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        backgroundColor: "#eefbf6",
-        padding: "45px 60px",
-      }}
-    >
-      <div style={{ maxWidth: "1440px", margin: "0 auto" }}>
+    <div className="min-h-screen bg-[#eefbf6] px-[60px] py-[45px]">
+      <div className="max-w-[1440px] mx-auto">
         {/* Header */}
-        <div
-          style={{
-            marginBottom: "30px",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <h1
-            style={{
-              fontSize: "27px",
-              fontWeight: 600,
-              fontFamily: "Poppins, sans-serif",
-              color: "#0d1b2a",
-              margin: 0,
-            }}
-          >
+        <div className="mb-[30px] flex justify-between items-center">
+          <h1 className="text-[27px] font-semibold font-['Poppins'] text-[#0d1b2a] m-0">
             My Wishlist
           </h1>
           <button
             onClick={clearUnavailableItems}
-            style={{
-              fontSize: "12px",
-              fontFamily: "Poppins, sans-serif",
-              fontWeight: 600,
-              color: "#1e3a8a",
-              backgroundColor: "transparent",
-              border: "none",
-              cursor: "pointer",
-              padding: "6px 12px",
-            }}
+            className="text-[12px] font-['Poppins'] font-semibold text-[#1e3a8a] bg-transparent border-none cursor-pointer px-3 py-1.5"
           >
             Clear Unavailable Items
           </button>
@@ -128,231 +105,83 @@ export default function WishlistPage() {
 
         {/* Error Message */}
         {error && (
-          <div
-            style={{
-              marginBottom: "23px",
-              padding: "15px",
-              backgroundColor: "#fee",
-              border: "1px solid #fcc",
-              color: "#c33",
-              borderRadius: "8px",
-              fontFamily: "Inter, sans-serif",
-              fontSize: "12px",
-            }}
-          >
+          <div className="mb-[23px] p-[15px] bg-[#fee] border border-[#fcc] text-[#c33] rounded-lg font-['Inter'] text-xs">
             {error}
           </div>
         )}
 
         {/* Loading State */}
         {isLoading ? (
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(263px, 1fr))",
-              gap: "23px",
-            }}
-          >
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(263px,1fr))] gap-[23px]">
             {[...Array(6)].map((_, i) => (
               <div
                 key={i}
-                style={{
-                  backgroundColor: "#fbfbfb",
-                  borderRadius: "11px",
-                  padding: "19px",
-                  boxShadow: "0px 0px 3px 0px rgba(0,0,0,0.15)",
-                }}
+                className="bg-[#fbfbfb] rounded-[11px] p-[19px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.15)]"
               >
-                <div
-                  style={{
-                    width: "100%",
-                    aspectRatio: "4/3",
-                    backgroundColor: "#e5e5e5",
-                    borderRadius: "8px",
-                    marginBottom: "15px",
-                    animation: "pulse 2s infinite",
-                  }}
-                />
-                <div
-                  style={{
-                    height: "15px",
-                    backgroundColor: "#e5e5e5",
-                    borderRadius: "4px",
-                    marginBottom: "9px",
-                    animation: "pulse 2s infinite",
-                  }}
-                />
-                <div
-                  style={{
-                    height: "15px",
-                    backgroundColor: "#e5e5e5",
-                    borderRadius: "4px",
-                    width: "75%",
-                    animation: "pulse 2s infinite",
-                  }}
-                />
+                <div className="w-full aspect-[4/3] bg-[#e5e5e5] rounded-lg mb-[15px] animate-pulse" />
+                <div className="h-[15px] bg-[#e5e5e5] rounded mb-[9px] animate-pulse" />
+                <div className="h-[15px] bg-[#e5e5e5] rounded w-3/4 animate-pulse" />
               </div>
             ))}
           </div>
         ) : items.length === 0 ? (
           /* Empty State */
-          <div style={{ textAlign: "center", padding: "75px 0" }}>
-            <div
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: "60px",
-                height: "60px",
-                marginBottom: "23px",
-              }}
-            >
-              <Heart
-                style={{ width: "60px", height: "60px", color: "#9c9c9c" }}
-              />
+          <div className="text-center py-[75px]">
+            <div className="inline-flex items-center justify-center w-[60px] h-[60px] mb-[23px]">
+              <Heart className="w-[60px] h-[60px] text-[#9c9c9c]" />
             </div>
-            <h2
-              style={{
-                fontSize: "24px",
-                fontWeight: 600,
-                fontFamily: "Poppins, sans-serif",
-                color: "#0d1b2a",
-                marginBottom: "11px",
-              }}
-            >
+            <h2 className="text-2xl font-semibold font-['Poppins'] text-[#0d1b2a] mb-[11px]">
               Your wishlist is empty
             </h2>
-            <p
-              style={{
-                fontSize: "13.5px",
-                fontFamily: "Inter, sans-serif",
-                color: "#9c9c9c",
-                marginBottom: "30px",
-              }}
-            >
+            <p className="text-[13.5px] font-['Inter'] text-[#9c9c9c] mb-[30px]">
               Start adding products to your wishlist to keep track of items you
               love
             </p>
             <Link
               href="/marketplace"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                backgroundColor: "#1e3a8a",
-                color: "white",
-                padding: "11px 30px",
-                borderRadius: "8px",
-                fontSize: "13.5px",
-                fontWeight: 600,
-                fontFamily: "Poppins, sans-serif",
-                textDecoration: "none",
-                transition: "background-color 0.2s",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "#152d6b";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "#1e3a8a";
-              }}
+              className="inline-flex items-center justify-center bg-[#1e3a8a] text-white px-[30px] py-[11px] rounded-lg text-[13.5px] font-semibold font-['Poppins'] no-underline transition-colors hover:bg-[#152d6b]"
             >
               Browse Products
             </Link>
           </div>
         ) : (
           /* Product Grid */
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(263px, 1fr))",
-              gap: "23px",
-            }}
-          >
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(263px,1fr))] gap-[23px]">
             {items.map((item) => {
+              // Skip items without product data
+              if (!item.product) {
+                console.warn("Item without product data:", item);
+                return null;
+              }
+
               const priceChange = getPriceChange(item);
-              const isAvailable = item.product.status === "active";
+              const isAvailable = item.product?.status === "active";
 
               return (
                 <div
                   key={item.id}
-                  style={{
-                    backgroundColor: "#fbfbfb",
-                    borderRadius: "11px",
-                    padding: "19px",
-                    boxShadow: "0px 0px 3px 0px rgba(0,0,0,0.15)",
-                    position: "relative",
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
+                  className="bg-[#fbfbfb] rounded-[11px] p-[19px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.15)] relative flex flex-col"
                 >
                   {/* Product Image */}
                   <Link
-                    href={`/product/${item.product.slug}`}
-                    style={{ textDecoration: "none" }}
+                    href={`/product/${item.product?.slug || ""}`}
+                    className="no-underline"
                   >
-                    <div
-                      style={{
-                        position: "relative",
-                        width: "100%",
-                        aspectRatio: "4/3",
-                        backgroundColor: "#f0f0f0",
-                        borderRadius: "8px",
-                        overflow: "hidden",
-                        marginBottom: "15px",
-                      }}
-                    >
-                      {item.product.imageUrl ? (
+                    <div className="relative w-full aspect-[4/3] bg-[#f0f0f0] rounded-lg overflow-hidden mb-[15px]">
+                      {item.product?.imageUrl ? (
                         <img
-                          src={item.product.imageUrl}
-                          alt={item.product.title}
-                          style={{
-                            width: "100%",
-                            height: "100%",
-                            objectFit: "cover",
-                            transition: "transform 0.3s",
-                          }}
-                          onMouseEnter={(e) => {
-                            e.currentTarget.style.transform = "scale(1.05)";
-                          }}
-                          onMouseLeave={(e) => {
-                            e.currentTarget.style.transform = "scale(1)";
-                          }}
+                          src={item.product?.imageUrl}
+                          alt={item.product?.title || "Product"}
+                          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                         />
                       ) : (
-                        <div
-                          style={{
-                            width: "100%",
-                            height: "100%",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            color: "#9c9c9c",
-                            fontFamily: "Inter, sans-serif",
-                            fontSize: "16px",
-                          }}
-                        >
+                        <div className="w-full h-full flex items-center justify-center text-[#9c9c9c] font-['Inter'] text-base">
                           No Image
                         </div>
                       )}
                       {!isAvailable && (
-                        <div
-                          style={{
-                            position: "absolute",
-                            inset: 0,
-                            backgroundColor: "rgba(0, 0, 0, 0.6)",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                          }}
-                        >
-                          <span
-                            style={{
-                              color: "white",
-                              fontSize: "20px",
-                              fontWeight: 600,
-                              fontFamily: "Poppins, sans-serif",
-                            }}
-                          >
+                        <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
+                          <span className="text-white text-xl font-semibold font-['Poppins']">
                             Not Available
                           </span>
                         </div>
@@ -362,146 +191,60 @@ export default function WishlistPage() {
 
                   {/* Remove & Heart Buttons */}
                   <button
-                    onClick={() => handleRemove(item.product.id)}
-                    disabled={removingId === item.product.id || !isAvailable}
-                    style={{
-                      position: "absolute",
-                      top: "26px",
-                      left: "26px",
-                      backgroundColor: "white",
-                      border: "2px solid #0d1b2a",
-                      borderRadius: "6px",
-                      padding: "6px",
-                      cursor:
-                        removingId === item.product.id ? "wait" : "pointer",
-                      opacity: !isAvailable ? 0.5 : 1,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
+                    onClick={() =>
+                      item.product?.id && handleRemove(item.product?.id)
+                    }
+                    disabled={removingId === item.product?.id || !isAvailable}
+                    className={`absolute top-[26px] left-[26px] bg-white text-black border-2 border-[#0d1b2a] rounded-md p-1.5 flex items-center justify-center ${
+                      removingId === item.product?.id
+                        ? "cursor-wait"
+                        : "cursor-pointer"
+                    } ${!isAvailable ? "opacity-50" : "opacity-100"}`}
                     title="Remove from wishlist"
                   >
-                    <Trash2 style={{ width: "14px", height: "14px" }} />
+                    <Trash2 className="w-3.5 h-3.5" />
                   </button>
 
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: "26px",
-                      right: "26px",
-                      backgroundColor: "white",
-                      borderRadius: "6px",
-                      padding: "6px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Heart
-                      style={{
-                        width: "14px",
-                        height: "14px",
-                        fill: "#0d1b2a",
-                        color: "#0d1b2a",
-                      }}
-                    />
+                  <div className="absolute top-[26px] right-[26px] bg-white rounded-md p-1.5 flex items-center justify-center border-2 border-[#0d1b2a]">
+                    <Heart className="w-3.5 h-3.5 fill-[#0d1b2a] text-[#0d1b2a]" />
                   </div>
 
                   {/* Product Details */}
-                  <div
-                    style={{
-                      flex: 1,
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                  >
+                  <div className="flex-1 flex flex-col">
                     <Link
-                      href={`/product/${item.product.slug}`}
-                      style={{ textDecoration: "none", marginBottom: "9px" }}
+                      href={`/product/${item.product?.slug || ""}`}
+                      className="no-underline mb-[9px]"
                     >
-                      <h3
-                        style={{
-                          fontSize: "15px",
-                          fontWeight: 600,
-                          fontFamily: "Poppins, sans-serif",
-                          color: "#0d1b2a",
-                          margin: 0,
-                          lineHeight: "1.4",
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.color = "#1e3a8a";
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.color = "#0d1b2a";
-                        }}
-                      >
-                        {item.product.title}
+                      <h3 className="text-[15px] font-semibold font-['Poppins'] text-[#0d1b2a] m-0 leading-[1.4] hover:text-[#1e3a8a]">
+                        {item.product?.title || "Unknown Product"}
                       </h3>
                     </Link>
 
                     {/* Location */}
-                    {(item.product.city || item.product.state) && (
-                      <p
-                        style={{
-                          fontSize: "11px",
-                          fontFamily: "Inter, sans-serif",
-                          color: "#9c9c9c",
-                          margin: "0 0 11px 0",
-                        }}
-                      >
-                        {item.product.city}
-                        {item.product.city && item.product.state && ", "}
-                        {item.product.state}
+                    {(item.product?.city || item.product?.state) && (
+                      <p className="text-[11px] font-['Inter'] text-[#9c9c9c] m-0 mb-[11px]">
+                        {item.product?.city}
+                        {item.product?.city && item.product?.state && ", "}
+                        {item.product?.state}
                       </p>
                     )}
 
                     {/* Price */}
-                    <div style={{ marginBottom: "11px" }}>
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "8px",
-                          flexWrap: "wrap",
-                        }}
-                      >
-                        <span
-                          style={{
-                            fontSize: "21px",
-                            fontWeight: 600,
-                            fontFamily: "Poppins, sans-serif",
-                            color: "#0d1b2a",
-                          }}
-                        >
+                    <div className="mb-[11px]">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="text-[21px] font-semibold font-['Poppins'] text-[#0d1b2a]">
                           ₹{item.product.priceAfter?.toLocaleString()}
                         </span>
-                        {item.product.priceBefore &&
-                          item.product.priceBefore >
-                            item.product.priceAfter && (
+                        {item.product?.priceBefore &&
+                          item.product?.priceBefore >
+                            (item.product?.priceAfter || 0) && (
                             <>
-                              <span
-                                style={{
-                                  fontSize: "12px",
-                                  fontFamily: "Inter, sans-serif",
-                                  color: "#9c9c9c",
-                                  textDecoration: "line-through",
-                                }}
-                              >
-                                ₹{item.product.priceBefore.toLocaleString()}
+                              <span className="text-xs font-['Inter'] text-[#9c9c9c] line-through">
+                                ₹{item.product?.priceBefore?.toLocaleString()}
                               </span>
-                              {item.product.discountPercent && (
-                                <span
-                                  style={{
-                                    backgroundColor: "#d4edda",
-                                    color: "#155724",
-                                    fontSize: "11px",
-                                    fontWeight: 600,
-                                    fontFamily: "Inter, sans-serif",
-                                    padding: "3px 8px",
-                                    borderRadius: "5px",
-                                  }}
-                                >
-                                  {item.product.discountPercent}% OFF
+                              {item.product?.discountPercent && (
+                                <span className="bg-[#d4edda] text-[#155724] text-[11px] font-semibold font-['Inter'] px-2 py-0.5 rounded-[5px]">
+                                  {item.product?.discountPercent}% OFF
                                 </span>
                               )}
                             </>
@@ -511,15 +254,11 @@ export default function WishlistPage() {
                       {/* Price Change Since Added */}
                       {priceChange && (
                         <p
-                          style={{
-                            fontSize: "11px",
-                            fontFamily: "Inter, sans-serif",
-                            marginTop: "6px",
-                            margin: 0,
-                            color: priceChange.isIncrease
-                              ? "#dc3545"
-                              : "#28a745",
-                          }}
+                          className={`text-[11px] font-['Inter'] mt-1.5 m-0 ${
+                            priceChange.isIncrease
+                              ? "text-[#dc3545]"
+                              : "text-[#28a745]"
+                          }`}
                         >
                           {priceChange.isIncrease ? "↑" : "↓"}{" "}
                           {priceChange.percent.toFixed(1)}% since added
@@ -530,52 +269,16 @@ export default function WishlistPage() {
                     {/* Action Button */}
                     {isAvailable ? (
                       <Link
-                        href={`/product/${item.product.slug}`}
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          gap: "10px",
-                          width: "100%",
-                          backgroundColor: "#1e3a8a",
-                          color: "white",
-                          padding: "12px",
-                          borderRadius: "11px",
-                          fontSize: "16px",
-                          fontWeight: 600,
-                          fontFamily: "Poppins, sans-serif",
-                          textDecoration: "none",
-                          marginTop: "auto",
-                          transition: "background-color 0.2s",
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor = "#152d6b";
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = "#1e3a8a";
-                        }}
+                        href={`/product/${item.product?.slug || ""}`}
+                        className="flex items-center justify-center gap-2.5 w-full bg-[#1e3a8a] text-white p-3 rounded-[11px] text-base font-semibold font-['Poppins'] no-underline mt-auto transition-colors hover:bg-[#152d6b]"
                       >
-                        <ShoppingCart
-                          style={{ width: "18px", height: "18px" }}
-                        />
+                        <ShoppingCart className="w-[18px] h-[18px]" />
                         View Product
                       </Link>
                     ) : (
                       <button
                         disabled
-                        style={{
-                          width: "100%",
-                          backgroundColor: "#e5e5e5",
-                          color: "#9c9c9c",
-                          padding: "12px",
-                          borderRadius: "11px",
-                          border: "none",
-                          fontSize: "16px",
-                          fontWeight: 600,
-                          fontFamily: "Poppins, sans-serif",
-                          cursor: "not-allowed",
-                          marginTop: "auto",
-                        }}
+                        className="w-full bg-[#e5e5e5] text-[#9c9c9c] p-3 rounded-[11px] border-none text-base font-semibold font-['Poppins'] cursor-not-allowed mt-auto"
                       >
                         Not Available
                       </button>
@@ -587,14 +290,6 @@ export default function WishlistPage() {
           </div>
         )}
       </div>
-
-      {/* Keyframes for pulse animation */}
-      <style>{`
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.5; }
-        }
-      `}</style>
     </div>
   );
 }

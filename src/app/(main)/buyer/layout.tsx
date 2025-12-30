@@ -10,7 +10,7 @@ export default function BuyerLayout({
 }>) {
   return (
     <RoleGuard allowedRole="buyer">
-      <div className="flex min-h-screen">
+      <div className="flex min-h-screen bg-[#EEFBF6]">
         <BuyerSidebar />
         <main className="flex-1">{children}</main>
       </div>

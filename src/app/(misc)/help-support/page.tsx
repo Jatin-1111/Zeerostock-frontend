@@ -1,13 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
 
 export default function HelpSupportPage() {
   const [activeTab, setActiveTab] = useState<"faqs" | "guide" | "videos">(
     "faqs"
   );
+
+  const handleEmailSupport = () => {
+    window.location.href =
+      "mailto:contact@zeerostock.com?subject=Support Request&body=Hi Zeerostock Team,%0D%0A%0D%0AI need help with:%0D%0A";
+  };
+
+  const handleScheduleCall = () => {
+    window.location.href = "tel:+918956835375";
+  };
 
   const supportCards = [
     {
@@ -15,24 +22,28 @@ export default function HelpSupportPage() {
       title: "Live Chat Support",
       subtitle: "Chat with our team",
       description: "Get instant answers to your questions",
+      action: () => alert("Live chat coming soon! 🚀"),
     },
     {
       icon: "📞",
       title: "Schedule Call",
       subtitle: "Book a call",
       description: "Talk to our support team",
+      action: handleScheduleCall,
     },
     {
       icon: "✉️",
       title: "Email Support",
       subtitle: "Send us an email",
       description: "We'll respond within 24 hours",
+      action: handleEmailSupport,
     },
     {
       icon: "📹",
       title: "Video Tutorials",
       subtitle: "Watch and learn",
       description: "Step-by-step video guides",
+      action: () => setActiveTab("videos"),
     },
   ];
 
@@ -91,7 +102,7 @@ export default function HelpSupportPage() {
             Help & Support
           </h1>
           <p className="text-[18px] text-gray-600">
-            We&apos;re here to help with anything you need
+            We're here to help with anything you need
           </p>
         </div>
       </div>
@@ -103,20 +114,27 @@ export default function HelpSupportPage() {
             {supportCards.map((card, index) => (
               <div
                 key={index}
-                className="bg-white border-2 border-gray-900 rounded-xl p-6 flex flex-col items-center text-center"
+                className="bg-white border-2 border-gray-900 rounded-xl p-6 flex flex-col items-center text-center h-[275px]"
               >
                 <div className="text-[48px] mb-4">{card.icon}</div>
-                <h3 className="text-[20px] font-semibold text-gray-900 mb-1">
+                <h3 className="text-[20px] font-semibold text-gray-900 mb-1 h-[28px] flex items-center">
                   {card.title}
                 </h3>
-                <p className="text-[14px] text-gray-600 mb-2">
+                <p className="text-[14px] text-gray-600 mb-2 h-[20px]">
                   {card.subtitle}
                 </p>
-                <p className="text-[14px] text-gray-500 mb-4">
+                <p className="text-[13px] text-gray-500 mb-4 h-[20px]">
                   {card.description}
                 </p>
-                <button className="w-full h-[40px] bg-gray-900 text-white text-[14px] font-medium rounded-lg hover:bg-gray-800 transition-colors">
-                  Start Chat
+                <button
+                  onClick={card.action}
+                  className="w-full h-[40px] bg-gray-900 text-white text-[14px] font-medium rounded-lg hover:bg-gray-800 transition-colors mt-auto"
+                >
+                  {card.title === "Schedule Call"
+                    ? "Call Now"
+                    : card.title === "Email Support"
+                    ? "Send Email"
+                    : "Start Chat"}
                 </button>
               </div>
             ))}
@@ -230,10 +248,10 @@ export default function HelpSupportPage() {
                     </h3>
                     <p className="text-[14px] text-gray-700 leading-relaxed">
                       Zeerostock is a marketplace designed to help B2B buyers
-                      and suppliers of surplus inventory. Whether you&apos;re
-                      looking to acquire items quickly, monetize slow-moving
-                      stock, or diversify into brokerage transactions, we
-                      optimize the supply chain.
+                      and suppliers of surplus inventory. Whether you're looking
+                      to acquire items quickly, monetize slow-moving stock, or
+                      diversify into brokerage transactions, we optimize the
+                      supply chain.
                     </p>
                   </div>
 
@@ -297,9 +315,8 @@ export default function HelpSupportPage() {
                       4. Posting RFQs (for Buyers)
                     </h3>
                     <p className="text-[14px] text-gray-700 leading-relaxed">
-                      Can&apos;t find what you&apos;re looking for? Post a
-                      "Request for Quote (RFQ)" and our suppliers will respond
-                      with offers.
+                      Can't find what you're looking for? Post a "Request for
+                      Quote (RFQ)" and our suppliers will respond with offers.
                     </p>
                   </div>
 

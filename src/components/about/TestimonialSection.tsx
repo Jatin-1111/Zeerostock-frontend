@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
 
 export default function TestimonialSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -48,71 +49,80 @@ export default function TestimonialSection() {
       <div className="w-full max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative w-full flex flex-col items-center">
           {/* Title */}
-          <h2 className="font-poppins font-bold text-3xl sm:text-4xl lg:text-[50px] leading-tight lg:leading-[75px] text-center text-[#0d1b2a] mb-3">
+          <h2 className="font-poppins font-bold text-5xl leading-tight lg:leading-[75px] text-center text-[#0d1b2a] mb-3">
             <span className="text-[#2ec096]">Trusted</span> By Industry Leaders
           </h2>
 
           {/* Subtitle */}
-          <p className="font-inter font-semibold text-base sm:text-lg lg:text-[24px] leading-relaxed lg:leading-[36px] text-center text-[#686868] max-w-3xl mb-16">
+          <p className="font-inter font-semibold text-base leading-relaxed lg:leading-[36px] text-center text-[#686868] max-w-3xl mb-16">
             See how businesses like yours are maximizing value from surplus
             inventory
           </p>
 
           {/* Testimonial Card Container */}
           <div className="relative w-full max-w-2xl mx-auto px-12 sm:px-16">
-            <div className="relative bg-[#eeffef] rounded-[30px] p-8 sm:p-10 lg:p-12 min-h-[360px] flex flex-col justify-center shadow-sm">
-              {/* Left Arrow */}
-              <button
-                onClick={prevTestimonial}
-                className="absolute left-[-40px] sm:left-[-50px] top-1/2 -translate-y-1/2 z-10 hover:opacity-80 transition-opacity bg-white rounded-full p-2 shadow-md"
-                aria-label="Previous testimonial"
+            {/* Left Arrow */}
+            <button
+              onClick={prevTestimonial}
+              className="absolute left-[-40px] sm:left-[-50px] top-1/2 -translate-y-1/2 z-10 hover:opacity-80 transition-opacity bg-white rounded-full p-2 shadow-md"
+              aria-label="Previous testimonial"
+            >
+              <ChevronLeft className="w-6 h-6 text-[#2ec096]" />
+            </button>
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentIndex}
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -100 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+                className="relative bg-[#eeffef] rounded-[30px] p-8 sm:p-10 lg:p-12 min-h-[360px] flex flex-col justify-center shadow-sm"
               >
-                <ChevronLeft className="w-6 h-6 text-[#2ec096]" />
-              </button>
+                {/* Content */}
+                <div className="text-center flex flex-col items-center gap-6">
+                  {/* Quote */}
+                  <p className="font-inter font-medium text-lg sm:text-xl lg:text-[22px] leading-relaxed lg:leading-[33px] text-[#686868]">
+                    &quot;{testimonials[currentIndex].text}&quot;
+                  </p>
 
-              {/* Content */}
-              <div className="text-center flex flex-col items-center gap-6">
-                {/* Quote */}
-                <p className="font-inter font-medium text-lg sm:text-xl lg:text-[22px] leading-relaxed lg:leading-[33px] text-[#686868]">
-                  &quot;{testimonials[currentIndex].text}&quot;
-                </p>
+                  {/* Stars */}
+                  <div className="flex justify-center gap-6 sm:gap-7 lg:gap-[31px]">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className="w-[24px] h-[24px] fill-[#2ec096] text-[#2ec096]"
+                      />
+                    ))}
+                  </div>
 
-                {/* Stars */}
-                <div className="flex justify-center gap-6 sm:gap-7 lg:gap-[31px]">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className="w-[24px] h-[24px] fill-[#2ec096] text-[#2ec096]"
-                    />
-                  ))}
+                  {/* Divider Line */}
+                  <div className="w-full h-[1px] bg-gray-300 my-2" />
+
+                  {/* Author Info */}
+                  <div className="flex flex-col items-center gap-2">
+                    <p className="font-poppins font-bold text-xl sm:text-2xl lg:text-[28px] leading-tight lg:leading-[42px] text-black">
+                      {testimonials[currentIndex].author}
+                    </p>
+                    <p className="font-inter font-semibold text-lg sm:text-xl lg:text-[21px] leading-tight lg:leading-[25px] text-black">
+                      {testimonials[currentIndex].company}
+                    </p>
+                    <p className="font-inter font-medium text-sm sm:text-base lg:text-[15px] leading-relaxed lg:leading-[22px] text-[#3f3737]">
+                      {testimonials[currentIndex].badge}
+                    </p>
+                  </div>
                 </div>
+              </motion.div>
+            </AnimatePresence>
 
-                {/* Divider Line */}
-                <div className="w-full h-[1px] bg-gray-300 my-2" />
-
-                {/* Author Info */}
-                <div className="flex flex-col items-center gap-2">
-                  <p className="font-poppins font-bold text-xl sm:text-2xl lg:text-[28px] leading-tight lg:leading-[42px] text-black">
-                    {testimonials[currentIndex].author}
-                  </p>
-                  <p className="font-inter font-semibold text-lg sm:text-xl lg:text-[21px] leading-tight lg:leading-[25px] text-black">
-                    {testimonials[currentIndex].company}
-                  </p>
-                  <p className="font-inter font-medium text-sm sm:text-base lg:text-[15px] leading-relaxed lg:leading-[22px] text-[#3f3737]">
-                    {testimonials[currentIndex].badge}
-                  </p>
-                </div>
-              </div>
-
-              {/* Right Arrow */}
-              <button
-                onClick={nextTestimonial}
-                className="absolute right-[-40px] sm:right-[-50px] top-1/2 -translate-y-1/2 z-10 hover:opacity-80 transition-opacity bg-white rounded-full p-2 shadow-md"
-                aria-label="Next testimonial"
-              >
-                <ChevronRight className="w-6 h-6 text-[#2ec096]" />
-              </button>
-            </div>
+            {/* Right Arrow */}
+            <button
+              onClick={nextTestimonial}
+              className="absolute right-[-40px] sm:right-[-50px] top-1/2 -translate-y-1/2 z-10 hover:opacity-80 transition-opacity bg-white rounded-full p-2 shadow-md"
+              aria-label="Next testimonial"
+            >
+              <ChevronRight className="w-6 h-6 text-[#2ec096]" />
+            </button>
 
             {/* Dots Navigation */}
             <div className="flex justify-center gap-4 mt-8">

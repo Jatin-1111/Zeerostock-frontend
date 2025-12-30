@@ -46,9 +46,9 @@ export default function TestimonialsSection() {
         {/* Testimonials Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-[80px]">
           {testimonials.map((testimonial, index) => (
-            <div key={index} className="relative h-[171px]">
-              {/* Quote */}
-              <p className="text-[11px] leading-normal font-medium text-[#727272] text-center mb-[48px]">
+            <div key={index} className="flex flex-col">
+              {/* Quote - Fixed Height */}
+              <p className="text-[11px] leading-normal font-medium text-[#727272] text-center mb-[48px] h-[44px]">
                 {testimonial.quote}
               </p>
 
@@ -63,15 +63,15 @@ export default function TestimonialsSection() {
               </div>
 
               {/* Metric */}
-              <p className="text-[15px] leading-normal font-semibold text-[#2aae7a] text-center mb-[50px]">
+              <p className="text-[15px] leading-normal font-semibold text-[#2aae7a] text-center mb-[22px]">
                 {testimonial.metric}
               </p>
 
               {/* Divider Line */}
-              <div className="absolute bottom-[30px] left-0 right-0 h-[1px] bg-[#d1d1d1]" />
+              <div className="h-[1px] bg-[#d1d1d1] mb-[10px]" />
 
               {/* Author */}
-              <p className="absolute bottom-0 left-0 right-0 text-[14px] leading-normal font-medium text-[#0d1b2a] text-center">
+              <p className="text-[14px] leading-normal font-medium text-[#0d1b2a] text-center">
                 {testimonial.name}
               </p>
             </div>

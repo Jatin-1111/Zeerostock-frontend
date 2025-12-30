@@ -595,6 +595,91 @@ export const buyerService = {
       },
     };
   },
+
+  // =====================================================
+  // PAYMENT & INVOICE OPERATIONS (2 methods)
+  // =====================================================
+
+  /**
+   * Get buyer's payment transactions
+   * @param params - Pagination and filter parameters
+   */
+  async getPayments(params?: {
+    page?: number;
+    limit?: number;
+    status?: string;
+    startDate?: string;
+    endDate?: string;
+  }): Promise<
+    ApiResponse<{
+      summary: {
+        total_transactions: number;
+        total_spent: number;
+        pending_amount: number;
+        spent_this_month: number;
+      };
+      transactions: Array<{
+        id: string;
+        transaction_id: string;
+        order_id: string;
+        order_number: string;
+        amount: number;
+        payment_method: string;
+        payment_gateway: string;
+        status: string;
+        created_at: string;
+        updated_at: string;
+        supplier_name: string;
+        supplier_company: string;
+      }>;
+      pagination: {
+        page: number;
+        limit: number;
+        total: number;
+        totalPages: number;
+      };
+    }>
+  > {
+    return apiRequest("get", "/buyer/payments", undefined, { params });
+  },
+
+  /**
+   * Get buyer's invoices
+   * @param params - Pagination and filter parameters
+   */
+  async getInvoices(params?: {
+    page?: number;
+    limit?: number;
+    status?: string;
+  }): Promise<
+    ApiResponse<{
+      invoices: Array<{
+        id: string;
+        invoice_number: string;
+        order_id: string;
+        order_number: string;
+        amount: number;
+        tax_amount: number;
+        total_amount: number;
+        status: string;
+        issue_date: string;
+        due_date: string;
+        paid_date: string | null;
+        created_at: string;
+        supplier_name: string;
+        supplier_company: string;
+        supplier_email: string;
+      }>;
+      pagination: {
+        page: number;
+        limit: number;
+        total: number;
+        totalPages: number;
+      };
+    }>
+  > {
+    return apiRequest("get", "/buyer/invoices", undefined, { params });
+  },
 };
 
 // Export default
@@ -656,4 +741,7 @@ export const {
   // Dashboard
   getDashboardData,
   getOrderSummary,
+  // Payments & Invoices
+  getPayments,
+  getInvoices,
 } = buyerService;

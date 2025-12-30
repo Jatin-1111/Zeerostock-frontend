@@ -314,38 +314,23 @@ export default function PostRFQPage() {
                 className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]"
                 style={{ fontFamily: "Poppins, sans-serif" }}
               >
-                Budge Range
+                Budget
               </label>
               <input
-                type="text"
-                placeholder="eg., 20,000 - 50,000"
-                value={
-                  formData.budgetMin && formData.budgetMax
-                    ? `${formData.budgetMin} - ${formData.budgetMax}`
-                    : ""
-                }
+                type="number"
+                placeholder="eg., 50,000"
+                value={formData.budgetMax || ""}
                 onChange={(e) => {
                   const value = e.target.value;
-                  const parts = value.split("-").map((p) => p.trim());
-                  if (parts.length === 2) {
-                    setFormData({
-                      ...formData,
-                      budgetMin:
-                        Number(parts[0].replace(/,/g, "")) || undefined,
-                      budgetMax:
-                        Number(parts[1].replace(/,/g, "")) || undefined,
-                    });
-                  } else if (value === "") {
-                    setFormData({
-                      ...formData,
-                      budgetMin: undefined,
-                      budgetMax: undefined,
-                    });
-                  }
+                  setFormData({
+                    ...formData,
+                    budgetMax: value ? Number(value) : undefined,
+                  });
                 }}
                 className="w-full h-[42px] px-3 border border-[#bebebe] rounded-[8px] text-[12px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
                 style={{ fontFamily: "Roboto, sans-serif" }}
                 disabled={loading}
+                min="0"
               />
             </div>
 

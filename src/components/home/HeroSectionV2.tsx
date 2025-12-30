@@ -185,7 +185,7 @@ export default function HeroSectionV2() {
         {/* Headline */}
         <h1 className="text-center max-w-[761px] mb-[15px]">
           <span className="text-[60px] leading-[70px] text-[#0d1b2a] font-medium block text-shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
-            Unlock Hidden Vale in{" "}
+            Unlock Hidden Value in{" "}
             <span className="text-[#2ec096]">Surplus Inventory</span>
           </span>
         </h1>

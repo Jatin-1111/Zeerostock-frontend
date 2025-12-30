@@ -17,17 +17,17 @@ export default function HeroSection() {
 
       {/* Content */}
       <div className="relative z-10 flex flex-col justify-center items-start h-full px-10 gap-5">
-        <h1 className="font-poppins font-semibold text-5xl md:text-5xl leading-tight text-center text-gray-900 max-w-2xl">
+        <h1 className="font-poppins font-semibold text-5xl leading-tight text-center text-gray-900 max-w-xl">
           Transforming <span className="text-emerald-500">Global Surplus</span>{" "}
           Trade
         </h1>
-        <p className="font-inter font-semibold leading-normal text-center text-gray-500 max-w-2xl">
+        <p className="font-inter font-semibold leading-normal text-center text-gray-500 max-w-xl">
           Connect suppliers, buyers and agents with trust, transparency and
           speed
         </p>
 
         {/* CTA Buttons */}
-        <div className="flex gap-4 mt-2 ml-32">
+        <div className="flex gap-4 mt-2 ml-20">
           <Link
             href="/join"
             className="bg-blue-900 text-white font-medium px-8 py-3 rounded-lg hover:bg-blue-800 transition-colors"

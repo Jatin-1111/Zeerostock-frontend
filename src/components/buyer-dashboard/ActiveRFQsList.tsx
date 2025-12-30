@@ -218,7 +218,7 @@ export default function ActiveRFQsList() {
                 <div className="absolute bottom-[22px] left-[22px] flex items-center gap-3">
                   <Link
                     href={`/buyer/quotes?rfqId=${rfq.id}`}
-                    className="h-[45px] px-[45px] bg-[#1e3a8a] text-white rounded-[11px] font-semibold text-[15px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center gap-[8px]"
+                    className="h-[45px] px-[35px] bg-[#1e3a8a] text-white rounded-[11px] font-semibold text-[15px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center gap-[8px]"
                     style={{ fontFamily: "Poppins, sans-serif" }}
                   >
                     <Eye className="w-[19px] h-[19px]" strokeWidth={1.5} />

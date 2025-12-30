@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation"; // 👈 Add usePathname
 import {
   FileDown,
   Box,
@@ -22,6 +22,7 @@ import {
 
 export default function BuyerSidebarContent() {
   const router = useRouter();
+  const pathname = usePathname(); // 👈 Get current path
   const [dashboardOpen, setDashboardOpen] = useState(false);
 
   const handleSignOut = async () => {
@@ -77,18 +78,30 @@ export default function BuyerSidebarContent() {
             {dashboardOpen && (
               <div className="bg-[#eeffef] border-t border-[#8b8b8b] border-opacity-50 rounded-bl-[15px] rounded-br-[15px] ml-1 overflow-clip">
                 <Link
-                  href="/buyer/rfq"
+                  href="/buyer/rfq/my-rfqs"
                   className="flex items-center py-[15px] pl-[53px] hover:opacity-80"
                 >
-                  <span className="font-['Poppins',sans-serif] font-medium text-[14px] text-[#8b8b8b] leading-normal">
+                  <span
+                    className={`font-['Poppins',sans-serif] font-medium text-[14px] leading-normal ${
+                      pathname === "/buyer/rfq/my-rfqs"
+                        ? "text-[#2aae7a]"
+                        : "text-[#8b8b8b]"
+                    }`}
+                  >
                     My RFQs
                   </span>
                 </Link>
                 <Link
-                  href="/buyer/rfq"
+                  href="/buyer/rfq/post"
                   className="flex items-center py-[15px] pl-[53px] hover:opacity-80"
                 >
-                  <span className="font-['Poppins',sans-serif] font-medium text-[14px] text-[#2aae7a] leading-normal">
+                  <span
+                    className={`font-['Poppins',sans-serif] font-medium text-[14px] leading-normal ${
+                      pathname === "/buyer/rfq/post"
+                        ? "text-[#2aae7a]"
+                        : "text-[#8b8b8b]"
+                    }`}
+                  >
                     Post RFQ
                   </span>
                 </Link>
@@ -96,7 +109,13 @@ export default function BuyerSidebarContent() {
                   href="/buyer/quotes"
                   className="flex items-center py-[15px] pl-[53px] hover:opacity-80"
                 >
-                  <span className="font-['Poppins',sans-serif] font-medium text-[14px] text-[#8b8b8b] leading-normal">
+                  <span
+                    className={`font-['Poppins',sans-serif] font-medium text-[14px] leading-normal ${
+                      pathname === "/buyer/quotes"
+                        ? "text-[#2aae7a]"
+                        : "text-[#8b8b8b]"
+                    }`}
+                  >
                     My Quotes
                   </span>
                 </Link>
@@ -200,7 +219,7 @@ export default function BuyerSidebarContent() {
 
           {/* Payment Methods */}
           <Link
-            href="/buyer/checkout"
+            href="/buyer/payments"
             className="flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-5 hover:bg-gray-100"
           >
             <div className="w-[19px] h-[19px] shrink-0">

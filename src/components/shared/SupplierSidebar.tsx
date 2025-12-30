@@ -242,7 +242,7 @@ export default function SupplierSidebar() {
         </nav>
 
         {/* Footer Section */}
-        <div className="absolute bottom-[1px] left-1/2 -translate-x-1/2 w-[255px] bg-[#F0F0F0] rounded-[15px] overflow-hidden">
+        <div className="absolute bottom-px left-1/2 -translate-x-1/2 w-[255px] bg-[#F0F0F0] rounded-[15px] overflow-hidden">
           <Link
             href="/supplier/contact"
             className="flex items-center gap-[11px] px-[23px] py-[15px] hover:bg-gray-200 transition-colors"

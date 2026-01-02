@@ -295,7 +295,7 @@ export default function Sidebar({
                   <div className="absolute left-0 top-0 w-[4px] h-[53px] bg-[#2aae7a] rounded-tr-[4px] rounded-br-[4px]" />
                 )}
                 <Link
-                  href="/how-it-works"
+                  href="/about"
                   onClick={() => setActiveItem("how-it-works")}
                   className={`flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[22px] pr-[20px] ml-[4px] ${
                     activeItem === "how-it-works"

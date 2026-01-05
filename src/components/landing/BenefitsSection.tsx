@@ -11,13 +11,13 @@ export default function BenefitsSection() {
   ];
 
   return (
-    <section className="relative w-full h-[674px] bg-[#fefefe] overflow-hidden">
+    <section className="relative h-[899px] bg-[#fefefe]">
       {/* Background Graphic */}
-      <div className="absolute inset-0 pointer-events-none opacity-10">
+      <div className="absolute inset-0 pointer-events-none">
         <img
-          src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&h=900&fit=crop&q=80"
+          src="Landing Page (Explore features).png"
           alt="Background"
-          className="w-full h-full object-cover"
+          className="h-full w-full object-cover"
         />
       </div>
 
@@ -51,7 +51,7 @@ export default function BenefitsSection() {
         </div>
 
         {/* CTA Button */}
-        <button className="w-[345px] h-[53px] bg-[#1e3a8a] text-white text-[21px] font-medium rounded-[15px] hover:bg-[#1e3a8a]/90 transition-colors">
+        <button className="w-[300px] h-[53px] bg-[#1e3a8a] text-white text-[21px] font-medium rounded-[15px] hover:bg-[#1e3a8a]/90 transition-colors">
           Explore Features
         </button>
       </div>

@@ -4,11 +4,11 @@ import Image from "next/image";
 import { ArrowUp, ArrowDown } from "lucide-react";
 
 const imgProduct1 =
-  "https://www.figma.com/api/mcp/asset/2d45e833-8ce6-4e4a-915a-9d4acc9fe20a";
+  "/22.jpg";
 const imgProduct2 =
-  "https://www.figma.com/api/mcp/asset/9a62cc83-6787-4773-af15-f17846a54887";
+  "/196006c025d5e21c3d5e8aae0f4d45da.jpg";
 const imgProduct3 =
-  "https://www.figma.com/api/mcp/asset/1004f5d2-edf7-4f22-9226-14fd2eb4ced8";
+  "/Industrial-Manufacturing-Services-Header-1200x900-Machine.jpg";
 const imgMarketChart =
   "https://www.figma.com/api/mcp/asset/13b91b8d-703d-4d55-be7f-e213f83f1b91";
 

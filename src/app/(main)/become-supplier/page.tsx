@@ -5,7 +5,7 @@ import { Shield, Loader2 } from "lucide-react";
 import StepOneIdentityBank from "@/components/supplier-verification/StepOneIdentityBank";
 import StepTwoBusinessOperations from "@/components/supplier-verification/StepTwoBusinessOperations";
 import StepThreeDocuments from "@/components/supplier-verification/StepThreeDocuments";
-import VerificationBenefitsSidebar from "@/components/supplier-verification/VerificationBenefitsSidebar";
+import { VerificationBenefitsSidebar } from "@/components/supplier-verification/VerificationBenefitsSidebar";
 import { supplierVerificationService } from "@/services/supplierVerification.service";
 import { useRouter } from "next/navigation";
 

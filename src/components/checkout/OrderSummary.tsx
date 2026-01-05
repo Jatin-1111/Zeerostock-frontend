@@ -15,25 +15,19 @@ export default function OrderSummary({
 
   return (
     <div className="bg-white rounded-[15px] shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)] p-[23px] sticky top-6">
-      <h3
-        className="text-[18px] font-medium text-[#0d1b2a] mb-[27px]"
-        style={{ fontFamily: "Poppins, sans-serif" }}
-      >
+      <h3 className="text-[18px] font-medium text-[#0d1b2a] mb-[27px]">
         Order Summary
       </h3>
 
       <div className="space-y-[15px] mb-[35px]">
         <div className="flex justify-between items-center">
-          <span
-            className="text-[15px] font-medium text-[#9c9c9c]"
-            style={{ fontFamily: "Inter, sans-serif" }}
-          >
+          <span className="text-[15px] font-medium text-[#9c9c9c]">
             Subtotal (2 items)
           </span>
           <span
             className="text-[15px] font-semibold text-[#bebebe]"
             style={{
-              fontFamily: "Inter, sans-serif",
+              fontFamily: "Poppins, sans-serif",
               letterSpacing: "0.5px",
               lineHeight: "18px",
             }}
@@ -43,16 +37,13 @@ export default function OrderSummary({
         </div>
 
         <div className="flex justify-between items-center">
-          <span
-            className="text-[15px] font-medium text-[#2aae7a]"
-            style={{ fontFamily: "Inter, sans-serif" }}
-          >
+          <span className="text-[15px] font-medium text-[#2aae7a]">
             Total Saving
           </span>
           <span
             className="text-[15px] font-semibold text-[#2aae7a]"
             style={{
-              fontFamily: "Inter, sans-serif",
+              fontFamily: "Poppins, sans-serif",
               letterSpacing: "0.5px",
               lineHeight: "18px",
             }}
@@ -62,39 +53,19 @@ export default function OrderSummary({
         </div>
 
         <div className="flex justify-between items-center">
-          <span
-            className="text-[15px] font-medium text-[#9c9c9c]"
-            style={{ fontFamily: "Inter, sans-serif" }}
-          >
+          <span className="text-[15px] font-medium text-[#9c9c9c]">
             Estimated Tax
           </span>
-          <span
-            className="text-[15px] font-semibold text-[#bebebe]"
-            style={{
-              fontFamily: "Inter, sans-serif",
-              letterSpacing: "0.5px",
-              lineHeight: "18px",
-            }}
-          >
+          <span className="text-[15px] font-semibold text-[#bebebe]">
             ₹{tax.toLocaleString()}
           </span>
         </div>
 
         <div className="flex justify-between items-center">
-          <span
-            className="text-[15px] font-medium text-[#9c9c9c]"
-            style={{ fontFamily: "Inter, sans-serif" }}
-          >
+          <span className="text-[15px] font-medium text-[#9c9c9c]">
             Shipping
           </span>
-          <span
-            className="text-[15px] font-semibold text-[#2aae7a]"
-            style={{
-              fontFamily: "Inter, sans-serif",
-              letterSpacing: "0.5px",
-              lineHeight: "18px",
-            }}
-          >
+          <span className="text-[15px] font-semibold text-[#2aae7a]">
             {shipping === 0 ? "Free" : `₹${shipping.toLocaleString()}`}
           </span>
         </div>
@@ -106,21 +77,11 @@ export default function OrderSummary({
       />
 
       <div className="flex justify-between items-center mb-[48px]">
-        <span
-          className="text-[26px] font-semibold text-[#0d1b2a]"
-          style={{ fontFamily: "Poppins, sans-serif", lineHeight: "normal" }}
-        >
+        <span className="text-[26px] font-semibold text-[#0d1b2a]">
           Total :
         </span>
         <div className="px-[8px] py-[8px]">
-          <span
-            className="text-[26px] font-semibold text-[#1e3a8a]"
-            style={{
-              fontFamily: "Inter, sans-serif",
-              letterSpacing: "0.5px",
-              lineHeight: "18px",
-            }}
-          >
+          <span className="text-[26px] font-semibold text-[#1e3a8a]">
             ₹{total.toLocaleString()}
           </span>
         </div>
@@ -140,14 +101,7 @@ export default function OrderSummary({
             d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
           />
         </svg>
-        <p
-          className="text-[14px] font-medium text-[#bebebe]"
-          style={{
-            fontFamily: "Inter, sans-serif",
-            letterSpacing: "0.5px",
-            lineHeight: "18px",
-          }}
-        >
+        <p className="text-[14px] font-medium text-[#bebebe]">
           SSL Secure Checkout
         </p>
       </div>
@@ -171,14 +125,7 @@ export default function OrderSummary({
             d="M5 13l4 4L19 7"
           />
         </svg>
-        <p
-          className="text-[14px] font-medium text-[#bebebe]"
-          style={{
-            fontFamily: "Inter, sans-serif",
-            letterSpacing: "0.5px",
-            lineHeight: "18px",
-          }}
-        >
+        <p className="text-[14px] font-medium text-[#bebebe]">
           Fast Shipping Options
         </p>
       </div>

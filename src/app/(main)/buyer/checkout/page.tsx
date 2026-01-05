@@ -236,16 +236,11 @@ function CheckoutContent() {
           <div className="text-center">
             <h1
               className="text-[27px] font-semibold text-[#0d1b2a]"
-              style={{
-                fontFamily: "Poppins",
-                lineHeight: "normal",
-              }}
             >
               Checkout
             </h1>
             <p
               className="text-[18px] font-medium text-[#9c9c9c]"
-              style={{ fontFamily: "Inter, sans-serif", lineHeight: "normal" }}
             >
               Secure payment and shipping information
             </p>

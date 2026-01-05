@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { Check, CreditCard, Truck, Loader2 } from "lucide-react";
 import type { Address } from "@/types/buyer.types";
 import type { CartItem } from "@/types/api.types";
 
@@ -90,136 +91,49 @@ export default function ReviewOrder({
   const shippingDisplay = getShippingMethodDisplay();
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "19px" }}>
+    <div className="flex flex-col gap-[19px]">
       {/* Order Summary Section */}
-      <div
-        style={{
-          backgroundColor: "white",
-          borderRadius: "15px",
-          boxShadow: "0px 0px 4.5px 0px rgba(0,0,0,0.25)",
-          padding: "23px",
-          width: "100%",
-        }}
-      >
-        <h2
-          style={{
-            fontFamily: "Poppins, sans-serif",
-            fontWeight: 600,
-            fontSize: "18px",
-            color: "#0d1b2a",
-            marginBottom: "15px",
-          }}
-        >
+      <div className="bg-white rounded-[15px] shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)] p-[23px] w-full">
+        <h2 className="font-semibold text-[18px] text-[#0d1b2a] mb-[15px]">
           Order Summary
         </h2>
-        <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+        <div className="flex flex-col gap-[15px]">
           {cartItems && cartItems.length > 0 ? (
             cartItems.map((item) => (
               <div
                 key={item.itemId}
-                style={{
-                  backgroundColor: "#fbfbfb",
-                  borderRadius: "15px",
-                  boxShadow: "0px 0px 3px 0px rgba(0,0,0,0.25)",
-                  padding: "18px 19px",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "19px",
-                  height: "90px",
-                  width: "100%",
-                }}
+                className="bg-[#fbfbfb] rounded-[15px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] px-[19px] py-[18px] flex items-center gap-[19px] h-[90px] w-full"
               >
                 {item.image && (
-                  <div
-                    style={{
-                      width: "79px",
-                      height: "54px",
-                      borderRadius: "8px",
-                      overflow: "hidden",
-                      flexShrink: 0,
-                    }}
-                  >
+                  <div className="w-[79px] h-[54px] rounded-[8px] overflow-hidden shrink-0">
                     <Image
                       src={item.image}
                       alt={item.title}
                       width={79}
                       height={54}
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                      }}
+                      className="w-full h-full object-cover"
                     />
                   </div>
                 )}
-                <div
-                  style={{
-                    flex: 1,
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "2px",
-                  }}
-                >
-                  <div
-                    style={{
-                      fontFamily: "Poppins, sans-serif",
-                      fontWeight: 500,
-                      fontSize: "14px",
-                      color: "#0d1b2a",
-                    }}
-                  >
+                <div className="flex-1 flex flex-col gap-[2px]">
+                  <div className=" font-medium text-[14px] text-[#0d1b2a]">
                     {item.title}
                   </div>
-                  <div
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "12px",
-                      color: "#9c9c9c",
-                      lineHeight: "18px",
-                    }}
-                  >
+                  <div className="text-[12px] text-[#9c9c9c] leading-[18px]">
                     by {item.seller?.name || item.category || "Supplier"}
                   </div>
-                  <div
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "12px",
-                      color: "#9c9c9c",
-                      lineHeight: "18px",
-                    }}
-                  >
+                  <div className="text-[12px] text-[#9c9c9c] leading-[18px]">
                     Qty: {item.quantity} x {item.price.toFixed(2)}
                   </div>
                 </div>
-                <div
-                  style={{
-                    fontFamily: "Poppins, sans-serif",
-                    fontWeight: 500,
-                    fontSize: "18px",
-                    color: "#0d1b2a",
-                    opacity: 0.8,
-                  }}
-                >
-                  <span
-                    style={{
-                      fontFamily: "Poppins, sans-serif",
-                      fontWeight: 700,
-                    }}
-                  >
-                    ₹
-                  </span>
+                <div className=" font-medium text-[18px] text-[#0d1b2a] opacity-80">
+                  <span className=" font-bold">₹</span>
                   {(item.quantity * item.price).toFixed(0)}
                 </div>
               </div>
             ))
           ) : (
-            <div
-              style={{
-                textAlign: "center",
-                color: "#9c9c9c",
-                padding: "30px",
-              }}
-            >
+            <div className="text-center text-[#9c9c9c] p-[30px]">
               No items in cart
             </div>
           )}
@@ -227,61 +141,25 @@ export default function ReviewOrder({
       </div>
 
       {/* Payment and Shipping Method */}
-      <div style={{ display: "flex", gap: "19px" }}>
+      <div className="flex gap-[19px]">
         {/* Payment Method */}
-        <div
-          style={{
-            backgroundColor: "white",
-            borderRadius: "15px",
-            boxShadow: "0px 0px 4.5px 0px rgba(0,0,0,0.25)",
-            padding: "23px",
-            flex: 1,
-            height: "116px",
-          }}
-        >
-          <h3
-            style={{
-              fontFamily: "Poppins, sans-serif",
-              fontWeight: 600,
-              fontSize: "18px",
-              color: "#0d1b2a",
-              marginBottom: "19px",
-            }}
-          >
+        <div className="bg-white rounded-[15px] shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)] p-[23px] flex-1 h-[116px]">
+          <h3 className=" font-semibold text-[18px] text-[#0d1b2a] mb-[19px]">
             Payment Method
           </h3>
-          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            <svg
-              width="30"
-              height="30"
-              viewBox="0 0 24 24"
-              fill="#0d1b2a"
-              style={{ flexShrink: 0 }}
-            >
-              <rect x="2" y="5" width="20" height="14" rx="2" />
-              <path d="M2 10h20" fill="white" />
-            </svg>
-            <div
-              style={{ display: "flex", flexDirection: "column", gap: "2px" }}
-            >
-              <div
-                style={{
-                  fontFamily: "Poppins, sans-serif",
-                  fontWeight: 500,
-                  fontSize: "14px",
-                  color: "#0d1b2a",
-                }}
-              >
+          <div className="flex items-center gap-[8px]">
+            {/* Payment Icon */}
+            <div className="shrink-0">
+              <CreditCard
+                className="w-[30px] h-[30px] text-[#0d1b2a]"
+                strokeWidth={1.5}
+              />
+            </div>
+            <div className="flex flex-col gap-[2px]">
+              <div className=" font-medium text-[14px] text-[#0d1b2a]">
                 {paymentDisplay.title}
               </div>
-              <div
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontWeight: 500,
-                  fontSize: "12px",
-                  color: "#9c9c9c",
-                }}
-              >
+              <div className="font-medium text-[12px] text-[#9c9c9c]">
                 {paymentDisplay.subtitle}
               </div>
             </div>
@@ -289,61 +167,23 @@ export default function ReviewOrder({
         </div>
 
         {/* Shipping Method */}
-        <div
-          style={{
-            backgroundColor: "white",
-            borderRadius: "15px",
-            boxShadow: "0px 0px 4.5px 0px rgba(0,0,0,0.25)",
-            padding: "23px",
-            flex: 1,
-            height: "116px",
-          }}
-        >
-          <h3
-            style={{
-              fontFamily: "Poppins, sans-serif",
-              fontWeight: 600,
-              fontSize: "18px",
-              color: "#0d1b2a",
-              marginBottom: "19px",
-            }}
-          >
+        <div className="bg-white rounded-[15px] shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)] p-[23px] flex-1 h-[116px]">
+          <h3 className=" font-semibold text-[18px] text-[#0d1b2a] mb-[19px]">
             Shipping Method
           </h3>
-          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            <svg
-              width="30"
-              height="30"
-              viewBox="0 0 24 24"
-              fill="#0d1b2a"
-              style={{ flexShrink: 0 }}
-            >
-              <path d="M1 3h15v13H1z" />
-              <path d="M16 8h2.343l2.122 2.121a1 1 0 01.293.707V16h-4.758" />
-              <circle cx="5.5" cy="18.5" r="2.5" />
-              <circle cx="18.5" cy="18.5" r="2.5" />
-            </svg>
-            <div
-              style={{ display: "flex", flexDirection: "column", gap: "2px" }}
-            >
-              <div
-                style={{
-                  fontFamily: "Poppins, sans-serif",
-                  fontWeight: 500,
-                  fontSize: "14px",
-                  color: "#0d1b2a",
-                }}
-              >
+          <div className="flex items-center gap-[8px]">
+            {/* Shipping Icon */}
+            <div className="shrink-0">
+              <Truck
+                className="w-[30px] h-[30px] text-[#0d1b2a]"
+                strokeWidth={1.5}
+              />
+            </div>
+            <div className="flex flex-col gap-[2px]">
+              <div className=" font-medium text-[14px] text-[#0d1b2a]">
                 {shippingDisplay.title}
               </div>
-              <div
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontWeight: 500,
-                  fontSize: "12px",
-                  color: "#9c9c9c",
-                }}
-              >
+              <div className="font-medium text-[12px] text-[#9c9c9c]">
                 {shippingDisplay.subtitle}
               </div>
             </div>
@@ -352,72 +192,24 @@ export default function ReviewOrder({
       </div>
 
       {/* Terms and Conditions Checkbox */}
-      <div
-        style={{
-          backgroundColor: "white",
-          borderRadius: "15px",
-          boxShadow: "0px 0px 4.5px 0px rgba(0,0,0,0.25)",
-          padding: "23px 19px",
-          display: "flex",
-          alignItems: "flex-start",
-          gap: "15px",
-          width: "100%",
-        }}
-      >
-        <div
+      <div className="bg-white rounded-[15px] shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)] px-[19px] py-[23px] flex items-start gap-[15px] w-full">
+        <button
           onClick={() => setAgreedToTerms(!agreedToTerms)}
-          style={{
-            width: "23px",
-            height: "23px",
-            backgroundColor: agreedToTerms ? "#2aae7a" : "white",
-            border: `2px solid ${agreedToTerms ? "#2aae7a" : "#bebebe"}`,
-            borderRadius: "4px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: "pointer",
-            flexShrink: 0,
-            padding: "4px",
-          }}
+          className={`w-[23px] h-[23px] rounded-[4px] flex items-center justify-center shrink-0 p-[4px] border-2 transition-colors ${
+            agreedToTerms
+              ? "bg-[#2aae7a] border-[#2aae7a]"
+              : "bg-white border-[#bebebe]"
+          }`}
         >
           {agreedToTerms && (
-            <svg
-              width="15"
-              height="15"
-              viewBox="0 0 20 20"
-              fill="none"
-              stroke="white"
-              strokeWidth="2"
-            >
-              <path
-                d="M4 10l4 4 8-8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <Check className="w-[15px] h-[15px] text-white" strokeWidth={3} />
           )}
-        </div>
-        <div style={{ flex: 1 }}>
-          <div
-            style={{
-              fontFamily: "Poppins, sans-serif",
-              fontWeight: 500,
-              fontSize: "14px",
-              color: "#0d1b2a",
-              marginBottom: "10px",
-            }}
-          >
+        </button>
+        <div className="flex-1">
+          <div className=" font-medium text-[14px] text-[#0d1b2a] mb-[10px]">
             I agree to the Terms of Service and Privacy Policy
           </div>
-          <div
-            style={{
-              fontFamily: "Poppins, sans-serif",
-              fontWeight: 500,
-              fontSize: "11px",
-              color: "#9c9c9c",
-              lineHeight: "17px",
-            }}
-          >
+          <div className=" font-medium text-[11px] text-[#9c9c9c] leading-[17px]">
             By placing this order, you agree to our terms and acknowledge that
             you&apos;ve read our return policy.
           </div>
@@ -425,32 +217,11 @@ export default function ReviewOrder({
       </div>
 
       {/* Navigation Buttons */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          gap: "15px",
-          marginTop: "8px",
-          width: "100%",
-        }}
-      >
+      <div className="flex justify-between gap-[15px] mt-[8px] w-full">
         <button
           onClick={onBack}
           disabled={isPlacingOrder}
-          style={{
-            height: "45px",
-            padding: "11px 83px",
-            backgroundColor: "white",
-            border: "1px solid #9c9c9c",
-            borderRadius: "11px",
-            fontFamily: "Poppins, sans-serif",
-            fontWeight: 600,
-            fontSize: "15px",
-            color: "#9c9c9c",
-            cursor: isPlacingOrder ? "not-allowed" : "pointer",
-            opacity: isPlacingOrder ? 0.5 : 1,
-            lineHeight: "17px",
-          }}
+          className="h-[45px] px-[60px] py-[11px] bg-white border border-[#9c9c9c] rounded-[11px]  font-semibold text-[15px] text-[#9c9c9c] leading-[17px] hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 transition-colors"
         >
           Previous Step
         </button>
@@ -462,63 +233,11 @@ export default function ReviewOrder({
             cartItems.length === 0 ||
             !agreedToTerms
           }
-          style={{
-            height: "45px",
-            padding: "11px 83px",
-            backgroundColor: "#1e3a8a",
-            border: "none",
-            borderRadius: "11px",
-            fontFamily: "Poppins, sans-serif",
-            fontWeight: 600,
-            fontSize: "15px",
-            color: "white",
-            cursor:
-              isPlacingOrder ||
-              !shippingAddress ||
-              cartItems.length === 0 ||
-              !agreedToTerms
-                ? "not-allowed"
-                : "pointer",
-            opacity:
-              isPlacingOrder ||
-              !shippingAddress ||
-              cartItems.length === 0 ||
-              !agreedToTerms
-                ? 0.5
-                : 1,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "8px",
-            lineHeight: "17px",
-          }}
+          className="h-[45px] px-[60px] py-[11px] bg-[#1e3a8a] border-none rounded-[11px]  font-semibold text-[15px] text-white leading-[17px] flex items-center justify-center gap-[8px] hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 transition-all"
         >
           {isPlacingOrder ? (
             <>
-              <svg
-                width="15"
-                height="15"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="white"
-                strokeWidth="2"
-                style={{
-                  animation: "spin 1s linear infinite",
-                }}
-              >
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  strokeOpacity="0.25"
-                  strokeWidth="4"
-                />
-                <path
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  fill="white"
-                  strokeOpacity="0.75"
-                />
-              </svg>
+              <Loader2 className="animate-spin h-[15px] w-[15px] text-white" />
               Placing Order...
             </>
           ) : (
@@ -526,16 +245,6 @@ export default function ReviewOrder({
           )}
         </button>
       </div>
-      <style jsx>{`
-        @keyframes spin {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
-        }
-      `}</style>
     </div>
   );
 }

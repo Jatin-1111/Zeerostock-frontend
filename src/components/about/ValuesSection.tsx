@@ -33,6 +33,9 @@ export default function ValuesSection() {
       <div className="w-full max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div>
           <div className="relative w-full flex flex-col items-center">
+            <p className="font-inter font-medium text-lg text-center text-[#868181]">
+              Our Values
+            </p>
             {/* Title */}
             <h2 className="font-poppins font-bold text-3xl sm:text-4xl lg:text-[52px] leading-tight lg:leading-[78px] text-center text-[#0d1b2a] mb-4">
               What Drives Us <span className="text-[#2ec096]">Forward</span>

@@ -130,7 +130,7 @@ export default function Footer() {
               </svg>
             </a>
             <a
-              href="#"
+              href="https://x.com/zeerostock?s=21"
               className="w-10 h-10 bg-[#2aae7a] rounded-full flex items-center justify-center hover:bg-[#2aae7a]/80 transition-colors"
               aria-label="Twitter/X"
             >
@@ -143,7 +143,7 @@ export default function Footer() {
               </svg>
             </a>
             <a
-              href="#"
+              href="https://www.linkedin.com/company/zeerostock-ventures/"
               className="w-10 h-10 bg-[#2aae7a] rounded-full flex items-center justify-center hover:bg-[#2aae7a]/80 transition-colors"
               aria-label="LinkedIn"
             >
@@ -156,7 +156,7 @@ export default function Footer() {
               </svg>
             </a>
             <a
-              href="#"
+              href="https://www.instagram.com/zeerostock_ventures?igsh=MTZsMGh4ZjJ6cjVpeQ%3D%3D&utm_source=qr"
               className="w-10 h-10 bg-[#2aae7a] rounded-full flex items-center justify-center hover:bg-[#2aae7a]/80 transition-colors"
               aria-label="Instagram"
             >

@@ -62,7 +62,7 @@ export default function TimelineSection() {
             <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-[#2ec096] -translate-x-1/2" />
 
             {/* Milestones */}
-            <div className="relative space-y-24">
+            <div className="relative space-y-10">
               {milestones.map((milestone, index) => (
                 <div key={index} className="relative">
                   {/* Timeline dot */}

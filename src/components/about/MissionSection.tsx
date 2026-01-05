@@ -3,6 +3,9 @@ export default function MissionSection() {
     <section className="w-full bg-[#EEFBF6] py-16">
       <div className="w-full max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative w-full flex flex-col items-center">
+          <p className="font-inter font-medium text-lg text-center text-[#868181]">
+            Our Mission
+          </p>
           {/* Title */}
           <h2 className="font-poppins font-semibold text-5xl leading-tight lg:leading-[70px] text-center text-[#0d1b2a] max-w-4xl mb-6 px-4">
             Building a Sustainable Future Through{" "}

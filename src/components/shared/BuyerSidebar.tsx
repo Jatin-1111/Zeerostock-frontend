@@ -57,7 +57,7 @@ export default function BuyerSidebar({
       >
         {/* Header */}
         <div className="h-[60px] flex items-center justify-center border-b border-[#8b8b8b] relative">
-          <h2 className="font-['Poppins',sans-serif] font-medium text-[20px] text-[#1e3a8a] leading-normal">
+          <h2 className="font-medium text-[20px] text-[#1e3a8a] leading-normal">
             Buyer Menu
           </h2>
           <button

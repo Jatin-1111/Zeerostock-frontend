@@ -4,7 +4,7 @@ export default function HeroSectionV2() {
       {/* Background Image with Gradient Overlay */}
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1600&h=800&fit=crop&q=80"
+          src="/landing-hero.png"
           alt="Industrial background"
           className="w-full h-full object-cover"
         />

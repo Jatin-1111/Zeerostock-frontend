@@ -37,8 +37,8 @@ export default function OrderSummary() {
         return sum;
       }, 0);
 
-      // GST is 18% (typically included in price)
-      const tax = (subtotal * 0.18) / 1.18;
+      // GST is 18% on subtotal
+      const tax = subtotal * 0.18;
 
       // Free shipping for orders > 25000
       const shipping = subtotal > 25000 ? 0 : 500;

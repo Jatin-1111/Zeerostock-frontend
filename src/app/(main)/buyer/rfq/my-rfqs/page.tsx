@@ -74,12 +74,10 @@ export default function MyRFQsPage() {
       <div className="max-w-7xl mx-auto px-8">
         {/* Header */}
         <div className="flex items-center justify-between mb-12">
-          <h1 className="font-['Poppins'] font-semibold text-3xl text-[#0d1b2a]">
-            My RFQs
-          </h1>
+          <h1 className="font-semibold text-3xl text-[#0d1b2a]">My RFQs</h1>
           <Link
             href="/buyer/rfq/post"
-            className="bg-[#1e3a8a] text-white px-8 py-3 rounded-xl font-['Poppins'] font-semibold text-sm hover:bg-[#1e3a8a]/90 transition-colors"
+            className="bg-[#1e3a8a] text-white px-8 py-3 rounded-xl font-semibold text-sm hover:bg-[#1e3a8a]/90 transition-colors"
           >
             + Post New RFQ
           </Link>
@@ -119,28 +117,28 @@ export default function MyRFQsPage() {
               <table className="w-full">
                 <thead className="bg-gray-50 border-b border-gray-200">
                   <tr>
-                    <th className="px-6 py-4 text-left font-['Poppins'] font-medium text-sm text-[#0d1b2a] tracking-wide">
+                    <th className="px-6 py-4 text-left font-medium text-sm text-[#0d1b2a] tracking-wide">
                       RFQ ID
                     </th>
-                    <th className="px-6 py-4 text-left font-['Poppins'] font-medium text-sm text-[#0d1b2a] tracking-wide">
+                    <th className="px-6 py-4 text-left font-medium text-sm text-[#0d1b2a] tracking-wide">
                       TITLE
                     </th>
-                    <th className="px-6 py-4 text-left font-['Poppins'] font-medium text-sm text-[#0d1b2a] tracking-wide">
+                    <th className="px-6 py-4 text-left font-medium text-sm text-[#0d1b2a] tracking-wide">
                       QUANTITY
                     </th>
-                    <th className="px-6 py-4 text-left font-['Poppins'] font-medium text-sm text-[#0d1b2a] tracking-wide">
+                    <th className="px-6 py-4 text-left font-medium text-sm text-[#0d1b2a] tracking-wide">
                       BUDGET
                     </th>
-                    <th className="px-6 py-4 text-left font-['Poppins'] font-medium text-sm text-[#0d1b2a] tracking-wide">
+                    <th className="px-6 py-4 text-left font-medium text-sm text-[#0d1b2a] tracking-wide">
                       STATUS
                     </th>
-                    <th className="px-6 py-4 text-left font-['Poppins'] font-medium text-sm text-[#0d1b2a] tracking-wide">
+                    <th className="px-6 py-4 text-left font-medium text-sm text-[#0d1b2a] tracking-wide">
                       POSTED DATE
                     </th>
-                    <th className="px-6 py-4 text-left font-['Poppins'] font-medium text-sm text-[#0d1b2a] tracking-wide">
+                    <th className="px-6 py-4 text-left font-medium text-sm text-[#0d1b2a] tracking-wide">
                       EXPIRES ON
                     </th>
-                    <th className="px-6 py-4 text-center font-['Poppins'] font-medium text-sm text-[#0d1b2a] tracking-wide">
+                    <th className="px-6 py-4 text-center font-medium text-sm text-[#0d1b2a] tracking-wide">
                       QUOTES
                     </th>
                   </tr>

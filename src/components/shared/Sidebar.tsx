@@ -292,18 +292,18 @@ export default function Sidebar({
               {/* How It Works */}
               <div className="relative h-[53px]">
                 {activeItem === "how-it-works" && (
-                  <div className="absolute left-0 top-0 w-[4px] h-[53px] bg-[#2aae7a] rounded-tr-[4px] rounded-br-[4px]" />
+                  <div className="absolute left-0 top-0 w-1 h-[53px] bg-[#2aae7a] rounded-tr-sm rounded-br-sm" />
                 )}
                 <Link
                   href="/about"
                   onClick={() => setActiveItem("how-it-works")}
-                  className={`flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[22px] pr-[20px] ml-[4px] ${
+                  className={`flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[22px] pr-5 ml-1 ${
                     activeItem === "how-it-works"
                       ? "bg-[#eeffef]"
                       : "hover:bg-gray-100"
                   }`}
                 >
-                  <div className="w-[19px] h-[19px] flex-shrink-0 overflow-clip">
+                  <div className="w-[19px] h-[19px] shrink-0 overflow-clip">
                     <HelpCircle
                       className={`w-[19px] h-[19px] ${
                         activeItem === "how-it-works"

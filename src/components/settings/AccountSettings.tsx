@@ -69,141 +69,54 @@ export default function AccountSettings() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div style={{ color: "#6b7280" }}>Loading settings...</div>
+        <div className="text-gray-500">Loading settings...</div>
       </div>
     );
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "22.5px" }}>
+    <div className="flex flex-col gap-[22.5px]">
       {/* Header Section */}
       <div>
-        <h1
-          style={{
-            fontFamily: "Poppins, sans-serif",
-            fontSize: "26.25px",
-            fontWeight: 600,
-            color: "#0d1b2a",
-            marginBottom: "6px",
-            lineHeight: "1.2",
-          }}
-        >
+        <h1 className="text-[26.25px] font-semibold text-[#0d1b2a] mb-[6px] leading-[1.2]">
           Account Settings
         </h1>
-        <p
-          style={{
-            fontFamily: "Poppins, sans-serif",
-            fontSize: "12.75px",
-            color: "#0d1b2a",
-            fontWeight: 400,
-          }}
-        >
+        <p className="text-[12.75px] text-[#0d1b2a] font-normal">
           Manage your personal information and account details
         </p>
       </div>
 
       {/* Success/Error Messages */}
       {success && (
-        <div
-          style={{
-            backgroundColor: "#f0fdf4",
-            border: "1px solid #86efac",
-            color: "#166534",
-            padding: "9px 12px",
-            borderRadius: "6px",
-          }}
-        >
+        <div className="bg-[#f0fdf4] border border-[#86efac] text-[#166534] px-[12px] py-[9px] rounded-[6px]">
           {success}
         </div>
       )}
       {error && (
-        <div
-          style={{
-            backgroundColor: "#fef2f2",
-            border: "1px solid #fecaca",
-            color: "#991b1b",
-            padding: "9px 12px",
-            borderRadius: "6px",
-          }}
-        >
+        <div className="bg-[#fef2f2] border border-[#fecaca] text-[#991b1b] px-[12px] py-[9px] rounded-[6px]">
           {error}
         </div>
       )}
 
       {/* Personal Information Section */}
-      <div
-        style={{
-          backgroundColor: "white",
-          borderRadius: "15px",
-          boxShadow: "0px 1.5px 4.5px 0px rgba(0,0,0,0.25)",
-          padding: "18px",
-          position: "relative",
-        }}
-      >
+      <div className="bg-white rounded-[15px] shadow-[0px_1.5px_4.5px_0px_rgba(0,0,0,0.25)] p-[18px] relative">
         {/* Section Header */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "15px",
-            marginBottom: "30px",
-          }}
-        >
-          <User
-            style={{ width: "19.5px", height: "19.5px", color: "#0d1b2a" }}
-          />
-          <h2
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: "18px",
-              fontWeight: 600,
-              color: "#0d1b2a",
-            }}
-          >
+        <div className="flex items-center gap-[15px] mb-[30px]">
+          <User className="w-[19.5px] h-[19.5px] text-[#0d1b2a]" />
+          <h2 className="text-[18px] font-semibold text-[#0d1b2a]">
             Personal Information
           </h2>
         </div>
 
         {/* Divider Line */}
-        <div
-          style={{
-            position: "absolute",
-            left: 0,
-            top: "67.5px",
-            width: "100%",
-            height: "1px",
-            backgroundColor: "#e5e7eb",
-          }}
-        />
+        <div className="absolute left-0 top-[67.5px] w-full h-[1px] bg-[#e5e7eb]" />
 
         {/* Form Fields */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "22.5px",
-            marginTop: "22.5px",
-          }}
-        >
+        <div className="flex flex-col gap-[22.5px] mt-[22.5px]">
           {/* First Row: First Name and Last Name */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "22.5px",
-            }}
-          >
+          <div className="grid grid-cols-2 gap-[22.5px]">
             <div>
-              <label
-                style={{
-                  display: "block",
-                  fontFamily: "Poppins, sans-serif",
-                  fontSize: "12.75px",
-                  fontWeight: 500,
-                  color: "#0d1b2a",
-                  marginBottom: "10.5px",
-                }}
-              >
+              <label className="block text-[12.75px] font-medium text-[#0d1b2a] mb-[10.5px]">
                 First Name
               </label>
               <input
@@ -212,30 +125,11 @@ export default function AccountSettings() {
                 onChange={(e) =>
                   setFormData({ ...formData, firstName: e.target.value })
                 }
-                style={{
-                  width: "100%",
-                  height: "42px",
-                  padding: "0 12px",
-                  border: "1px solid #bebebe",
-                  borderRadius: "7.5px",
-                  fontFamily: "Roboto, sans-serif",
-                  fontSize: "12px",
-                  color: "#0d1b2a",
-                  outline: "none",
-                }}
+                className="w-full h-[42px] px-[12px] border border-[#bebebe] rounded-[7.5px] text-[12px] text-[#0d1b2a] outline-none"
               />
             </div>
             <div>
-              <label
-                style={{
-                  display: "block",
-                  fontFamily: "Poppins, sans-serif",
-                  fontSize: "12.75px",
-                  fontWeight: 500,
-                  color: "#0d1b2a",
-                  marginBottom: "10.5px",
-                }}
-              >
+              <label className="block text-[12.75px] font-medium text-[#0d1b2a] mb-[10.5px]">
                 Last Name
               </label>
               <input
@@ -244,40 +138,15 @@ export default function AccountSettings() {
                 onChange={(e) =>
                   setFormData({ ...formData, lastName: e.target.value })
                 }
-                style={{
-                  width: "100%",
-                  height: "42px",
-                  padding: "0 12px",
-                  border: "1px solid #bebebe",
-                  borderRadius: "7.5px",
-                  fontFamily: "Roboto, sans-serif",
-                  fontSize: "12px",
-                  color: "#0d1b2a",
-                  outline: "none",
-                }}
+                className="w-full h-[42px] px-[12px] border border-[#bebebe] rounded-[7.5px] text-[12px] text-[#0d1b2a] outline-none"
               />
             </div>
           </div>
 
           {/* Second Row: Email and Phone */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "22.5px",
-            }}
-          >
+          <div className="grid grid-cols-2 gap-[22.5px]">
             <div>
-              <label
-                style={{
-                  display: "block",
-                  fontFamily: "Poppins, sans-serif",
-                  fontSize: "12.75px",
-                  fontWeight: 500,
-                  color: "#0d1b2a",
-                  marginBottom: "10.5px",
-                }}
-              >
+              <label className="block text-[12.75px] font-medium text-[#0d1b2a] mb-[10.5px]">
                 Email Address
               </label>
               <input
@@ -286,30 +155,11 @@ export default function AccountSettings() {
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
                 }
-                style={{
-                  width: "100%",
-                  height: "42px",
-                  padding: "0 12px",
-                  border: "1px solid #bebebe",
-                  borderRadius: "7.5px",
-                  fontFamily: "Roboto, sans-serif",
-                  fontSize: "12px",
-                  color: "#0d1b2a",
-                  outline: "none",
-                }}
+                className="w-full h-[42px] px-[12px] border border-[#bebebe] rounded-[7.5px] text-[12px] text-[#0d1b2a] outline-none"
               />
             </div>
             <div>
-              <label
-                style={{
-                  display: "block",
-                  fontFamily: "Poppins, sans-serif",
-                  fontSize: "12.75px",
-                  fontWeight: 500,
-                  color: "#0d1b2a",
-                  marginBottom: "10.5px",
-                }}
-              >
+              <label className="block text-[12.75px] font-medium text-[#0d1b2a] mb-[10.5px]">
                 Phone Number
               </label>
               <input
@@ -318,17 +168,7 @@ export default function AccountSettings() {
                 onChange={(e) =>
                   setFormData({ ...formData, phone: e.target.value })
                 }
-                style={{
-                  width: "100%",
-                  height: "42px",
-                  padding: "0 12px",
-                  border: "1px solid #bebebe",
-                  borderRadius: "7.5px",
-                  fontFamily: "Roboto, sans-serif",
-                  fontSize: "12px",
-                  color: "#0d1b2a",
-                  outline: "none",
-                }}
+                className="w-full h-[42px] px-[12px] border border-[#bebebe] rounded-[7.5px] text-[12px] text-[#0d1b2a] outline-none"
               />
             </div>
           </div>
@@ -336,72 +176,23 @@ export default function AccountSettings() {
       </div>
 
       {/* Address Information Section */}
-      <div
-        style={{
-          backgroundColor: "white",
-          borderRadius: "15px",
-          boxShadow: "0px 1.5px 4.5px 0px rgba(0,0,0,0.25)",
-          padding: "18px",
-          position: "relative",
-        }}
-      >
+      <div className="bg-white rounded-[15px] shadow-[0px_1.5px_4.5px_0px_rgba(0,0,0,0.25)] p-[18px] relative">
         {/* Section Header */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "15px",
-            marginBottom: "30px",
-          }}
-        >
-          <MapPin
-            style={{ width: "19.5px", height: "19.5px", color: "#0d1b2a" }}
-          />
-          <h2
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: "18px",
-              fontWeight: 600,
-              color: "#0d1b2a",
-            }}
-          >
+        <div className="flex items-center gap-[15px] mb-[30px]">
+          <MapPin className="w-[19.5px] h-[19.5px] text-[#0d1b2a]" />
+          <h2 className="text-[18px] font-semibold text-[#0d1b2a]">
             Address Information
           </h2>
         </div>
 
         {/* Divider Line */}
-        <div
-          style={{
-            position: "absolute",
-            left: 0,
-            top: "67.5px",
-            width: "100%",
-            height: "1px",
-            backgroundColor: "#e5e7eb",
-          }}
-        />
+        <div className="absolute left-0 top-[67.5px] w-full h-[1px] bg-[#e5e7eb]" />
 
         {/* Form Fields */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "22.5px",
-            marginTop: "22.5px",
-          }}
-        >
+        <div className="flex flex-col gap-[22.5px] mt-[22.5px]">
           {/* Street Address */}
           <div>
-            <label
-              style={{
-                display: "block",
-                fontFamily: "Poppins, sans-serif",
-                fontSize: "12.75px",
-                fontWeight: 500,
-                color: "#0d1b2a",
-                marginBottom: "10.5px",
-              }}
-            >
+            <label className="block text-[12.75px] font-medium text-[#0d1b2a] mb-[10.5px]">
               Street Address
             </label>
             <input
@@ -410,39 +201,14 @@ export default function AccountSettings() {
               onChange={(e) =>
                 setFormData({ ...formData, street: e.target.value })
               }
-              style={{
-                width: "100%",
-                height: "42px",
-                padding: "0 12px",
-                border: "1px solid #bebebe",
-                borderRadius: "7.5px",
-                fontFamily: "Roboto, sans-serif",
-                fontSize: "12px",
-                color: "#0d1b2a",
-                outline: "none",
-              }}
+              className="w-full h-[42px] px-[12px] border border-[#bebebe] rounded-[7.5px] text-[12px] text-[#0d1b2a] outline-none"
             />
           </div>
 
           {/* City, State, ZIP */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr 0.84fr",
-              gap: "22.5px",
-            }}
-          >
+          <div className="grid grid-cols-[1fr_1fr_0.84fr] gap-[22.5px]">
             <div>
-              <label
-                style={{
-                  display: "block",
-                  fontFamily: "Poppins, sans-serif",
-                  fontSize: "12.75px",
-                  fontWeight: 500,
-                  color: "#0d1b2a",
-                  marginBottom: "10.5px",
-                }}
-              >
+              <label className="block text-[12.75px] font-medium text-[#0d1b2a] mb-[10.5px]">
                 City
               </label>
               <input
@@ -451,30 +217,11 @@ export default function AccountSettings() {
                 onChange={(e) =>
                   setFormData({ ...formData, city: e.target.value })
                 }
-                style={{
-                  width: "100%",
-                  height: "42px",
-                  padding: "0 12px",
-                  border: "1px solid #bebebe",
-                  borderRadius: "7.5px",
-                  fontFamily: "Roboto, sans-serif",
-                  fontSize: "12px",
-                  color: "#0d1b2a",
-                  outline: "none",
-                }}
+                className="w-full h-[42px] px-[12px] border border-[#bebebe] rounded-[7.5px] text-[12px] text-[#0d1b2a] outline-none"
               />
             </div>
             <div>
-              <label
-                style={{
-                  display: "block",
-                  fontFamily: "Poppins, sans-serif",
-                  fontSize: "12.75px",
-                  fontWeight: 500,
-                  color: "#0d1b2a",
-                  marginBottom: "10.5px",
-                }}
-              >
+              <label className="block text-[12.75px] font-medium text-[#0d1b2a] mb-[10.5px]">
                 State
               </label>
               <input
@@ -483,30 +230,11 @@ export default function AccountSettings() {
                 onChange={(e) =>
                   setFormData({ ...formData, state: e.target.value })
                 }
-                style={{
-                  width: "100%",
-                  height: "42px",
-                  padding: "0 12px",
-                  border: "1px solid #bebebe",
-                  borderRadius: "7.5px",
-                  fontFamily: "Roboto, sans-serif",
-                  fontSize: "12px",
-                  color: "#0d1b2a",
-                  outline: "none",
-                }}
+                className="w-full h-[42px] px-[12px] border border-[#bebebe] rounded-[7.5px] text-[12px] text-[#0d1b2a] outline-none"
               />
             </div>
             <div>
-              <label
-                style={{
-                  display: "block",
-                  fontFamily: "Poppins, sans-serif",
-                  fontSize: "12.75px",
-                  fontWeight: 500,
-                  color: "#0d1b2a",
-                  marginBottom: "10.5px",
-                }}
-              >
+              <label className="block text-[12.75px] font-medium text-[#0d1b2a] mb-[10.5px]">
                 ZIP Code
               </label>
               <input
@@ -515,33 +243,14 @@ export default function AccountSettings() {
                 onChange={(e) =>
                   setFormData({ ...formData, zip: e.target.value })
                 }
-                style={{
-                  width: "100%",
-                  height: "42px",
-                  padding: "0 12px",
-                  border: "1px solid #bebebe",
-                  borderRadius: "7.5px",
-                  fontFamily: "Roboto, sans-serif",
-                  fontSize: "12px",
-                  color: "#0d1b2a",
-                  outline: "none",
-                }}
+                className="w-full h-[42px] px-[12px] border border-[#bebebe] rounded-[7.5px] text-[12px] text-[#0d1b2a] outline-none"
               />
             </div>
           </div>
 
           {/* Bio / Company Description */}
           <div>
-            <label
-              style={{
-                display: "block",
-                fontFamily: "Poppins, sans-serif",
-                fontSize: "12.75px",
-                fontWeight: 500,
-                color: "#0d1b2a",
-                marginBottom: "10.5px",
-              }}
-            >
+            <label className="block text-[12.75px] font-medium text-[#0d1b2a] mb-[10.5px]">
               Bio / Company Description
             </label>
             <textarea
@@ -549,45 +258,20 @@ export default function AccountSettings() {
               onChange={(e) =>
                 setFormData({ ...formData, bio: e.target.value })
               }
-              style={{
-                width: "100%",
-                height: "150.75px",
-                padding: "12px",
-                border: "1px solid #bebebe",
-                borderRadius: "7.5px",
-                fontFamily: "Roboto, sans-serif",
-                fontSize: "12px",
-                color: "#0d1b2a",
-                outline: "none",
-                resize: "none",
-              }}
+              className="w-full h-[150.75px] p-[12px] border border-[#bebebe] rounded-[7.5px] text-[12px] text-[#0d1b2a] outline-none resize-none"
             />
           </div>
         </div>
       </div>
 
       {/* Save Button */}
-      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+      <div className="flex justify-end">
         <button
           onClick={handleSave}
           disabled={saving}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "7.5px",
-            padding: "11.25px 82.5px",
-            backgroundColor: "#1e3a8a",
-            color: "white",
-            border: "none",
-            borderRadius: "9px",
-            fontFamily: "Poppins, sans-serif",
-            fontSize: "15px",
-            fontWeight: 600,
-            cursor: saving ? "not-allowed" : "pointer",
-            opacity: saving ? 0.6 : 1,
-          }}
+          className="flex items-center gap-[7.5px] py-[11.25px] px-[82.5px] bg-[#1e3a8a] text-white rounded-[9px] text-[15px] font-semibold hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 transition-opacity"
         >
-          <Save style={{ width: "21px", height: "21px", color: "white" }} />
+          <Save className="w-[21px] h-[21px] text-white" />
           {saving ? "Saving..." : "Save Changes"}
         </button>
       </div>

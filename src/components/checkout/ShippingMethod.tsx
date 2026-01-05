@@ -1,5 +1,7 @@
 "use client";
 
+import { Truck } from "lucide-react";
+
 interface ShippingOption {
   id: string;
   name: string;
@@ -19,23 +21,30 @@ const shippingOptions: ShippingOption[] = [
   {
     id: "standard",
     name: "Standard Shipping",
-    description: "Delivery in 5-7 business days",
+    description: "Free for order over $1000",
     price: 0,
-    estimatedDays: "5-7 business days",
+    estimatedDays: "5-6 Business Days",
   },
   {
     id: "express",
-    name: "Express Shipping",
-    description: "Delivery in 2-3 business days",
-    price: 100,
-    estimatedDays: "2-3 business days",
+    name: "Expedited Shipping",
+    description: "Faster delivery with tracking",
+    price: 50,
+    estimatedDays: "2-3 Business Days",
   },
   {
     id: "overnight",
-    name: "Overnight Delivery",
-    description: "Next business day delivery",
-    price: 250,
-    estimatedDays: "1 business day",
+    name: "Overnight Shipping",
+    description: "Next day delivery by 5 PM",
+    price: 500,
+    estimatedDays: "1 Business Days",
+  },
+  {
+    id: "freight",
+    name: "Freight Shipping",
+    description: "For large/heavy items- Quote provided",
+    price: 0,
+    estimatedDays: "7-10 Business Days",
   },
 ];
 
@@ -46,87 +55,71 @@ export default function ShippingMethod({
   onBack,
 }: ShippingMethodProps) {
   return (
-    <div className="border-2 border-gray-900 rounded-lg p-6">
-      <h2 className="text-xl font-bold text-gray-900 mb-5">
-        Select Shipping Method
-      </h2>
+    <div className="bg-white rounded-[15px] shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)] p-[22.5px_22.5px_30px_22.5px]">
+      {/* Header */}
+      <div className="flex items-center gap-[15px] mb-[22.5px]">
+        <Truck
+          className="w-[19.5px] h-[19.5px] text-gray-900"
+          strokeWidth={1.5}
+        />
+        <h2 className="text-[18px] font-semibold text-[#0D1B2A]">
+          Shipping Method
+        </h2>
+      </div>
 
-      <div className="space-y-3 mb-6">
+      {/* Shipping Options */}
+      <div className="space-y-[15px] mb-6">
         {shippingOptions.map((option) => (
           <div
             key={option.id}
             onClick={() => onMethodSelect(option.id)}
-            className={`border-2 rounded-lg p-3 cursor-pointer transition-all ${
+            className={`h-[64px] rounded-[15px] cursor-pointer transition-all ${
               selectedMethod === option.id
-                ? "border-gray-900 bg-gray-50"
-                : "border-gray-300 hover:border-gray-400"
+                ? "bg-[#EEFFEF] border-[1.5px] border-[#2AAE7A]"
+                : "bg-white border border-[#E8E8E8]"
             }`}
           >
-            <div className="flex items-start justify-between">
-              <div className="flex items-start gap-2 flex-1">
-                {/* Radio Button */}
-                <div className="mt-0.5">
-                  <div
-                    className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
-                      selectedMethod === option.id
-                        ? "border-gray-900"
-                        : "border-gray-400"
-                    }`}
-                  >
-                    {selectedMethod === option.id && (
-                      <div className="w-2 h-2 rounded-full bg-gray-900" />
-                    )}
-                  </div>
-                </div>
-
-                {/* Method Details */}
-                <div className="flex-1">
-                  <div className="flex items-center gap-1.5 mb-0.5">
-                    <h3 className="font-semibold text-gray-900 text-sm">
-                      {option.name}
-                    </h3>
-                    {option.price === 0 && (
-                      <span
-                        className="text-2xs bg-green-100 text-green-800 px-1.5 py-0.5 rounded"
-                        style={{ fontSize: "10px" }}
-                      >
-                        FREE
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-xs text-gray-600 mb-1.5">
-                    {option.description}
-                  </p>
-                  <div className="flex items-center gap-1.5 text-xs text-gray-500">
-                    <svg
-                      className="w-3 h-3"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                    <span>Estimated: {option.estimatedDays}</span>
-                  </div>
+            <div className="flex items-center gap-[11.25px] h-full px-[18px]">
+              {/* Radio Button */}
+              <div className="shrink-0">
+                <div
+                  className={`w-[16px] h-[16px] rounded-full border-[1.5px] flex items-center justify-center ${
+                    selectedMethod === option.id
+                      ? "border-[#2AAE7A]"
+                      : "border-[#9C9C9C]"
+                  }`}
+                >
+                  {selectedMethod === option.id && (
+                    <div className="w-[8px] h-[8px] rounded-full bg-[#2AAE7A]" />
+                  )}
                 </div>
               </div>
 
-              {/* Price */}
-              <div className="text-right ml-3">
-                {option.price === 0 ? (
-                  <span className="text-base font-bold text-green-600">
-                    FREE
-                  </span>
-                ) : (
-                  <span className="text-base font-bold text-gray-900">
-                    ₹{option.price}
-                  </span>
-                )}
+              {/* Content */}
+              <div className="flex items-center justify-between flex-1">
+                {/* Left: Name and Description */}
+                <div className="flex flex-col">
+                  <h3 className="text-[13.5px] font-medium text-[#0D1B2A] leading-normal">
+                    {option.name}
+                  </h3>
+                  <p className="text-[12px] text-[#9C9C9C] leading-[18px]">
+                    {option.description}
+                  </p>
+                </div>
+
+                {/* Right: Price and Estimated Days */}
+                <div className="flex flex-col items-end text-right">
+                  <p
+                    className={`text-[13.5px] font-medium leading-normal ${
+                      option.price === 0 ? "text-[#2AAE7A]" : "text-[#0D1B2A]"
+                    }`}
+                  >
+                    {option.price === 0 ? "FREE" : `$${option.price}`}
+                  </p>
+                  <p className="text-[12px] text-[#9C9C9C] leading-[18px]">
+                    {option.estimatedDays}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -137,16 +130,16 @@ export default function ShippingMethod({
       <div className="flex justify-between gap-3">
         <button
           onClick={onBack}
-          className="px-5 py-2 border-2 border-gray-900 text-gray-900 rounded font-medium hover:bg-gray-100 transition-colors text-sm"
+          className="px-[18px] py-[7.5px] border-[1.5px] border-[#9C9C9C] text-[#9C9C9C] rounded-[6px] text-[13px] font-medium hover:bg-gray-50 transition-colors"
         >
           Back to Address
         </button>
         <button
           onClick={onContinue}
           disabled={!selectedMethod}
-          className="px-5 py-2 bg-gray-900 text-white rounded font-medium hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm"
+          className="px-[24px] py-[7.5px] bg-[#1E3A8A] text-white rounded-[6px] text-[13px] font-medium hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
-          Continue to Payment
+          Continue
         </button>
       </div>
     </div>

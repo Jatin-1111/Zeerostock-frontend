@@ -49,13 +49,11 @@ export default function ROIPage() {
           </div>
           <h1
             className="absolute left-[113px] top-[31px] text-[27px] font-semibold text-[#0d1b2a]"
-            style={{ fontFamily: "Poppins, sans-serif" }}
           >
             ROI Calculator
           </h1>
           <p
             className="absolute left-[38px] top-[98px] text-[18px] font-medium text-[#9c9c9c] w-[679px]"
-            style={{ fontFamily: "Inter, sans-serif" }}
           >
             Calculate your return on investment for buying or selling surplus
             inventory on Zeerostocks
@@ -71,13 +69,11 @@ export default function ROIPage() {
         <div className="text-center mb-6">
           <h2
             className="text-[27px] font-semibold text-[#0d1b2a] mb-[11px]"
-            style={{ fontFamily: "Poppins, sans-serif" }}
           >
             Understanding ROI Calculations
           </h2>
           <p
             className="text-[15px] font-medium text-[#9c9c9c]"
-            style={{ fontFamily: "Inter, sans-serif" }}
           >
             Learn how our calculator helps you make informed decisions
           </p>

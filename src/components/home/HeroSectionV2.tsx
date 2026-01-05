@@ -6,9 +6,6 @@ import { ChevronDown, SlidersHorizontal } from "lucide-react";
 import { searchService } from "@/services/search.service";
 import { useAuth } from "@/contexts/AuthContext";
 
-const imgHeroBackground =
-  "https://www.figma.com/api/mcp/asset/40b36222-b8a4-4f0b-ad58-1320ae294288";
-
 export default function HeroSectionV2() {
   const router = useRouter();
   const { isAuthenticated } = useAuth();
@@ -170,13 +167,13 @@ export default function HeroSectionV2() {
   };
 
   return (
-    <section className="relative w-full h-[583px] shadow-[0px_1px_4px_0px_rgba(24,181,34,0.25)]">
+    <section className="relative w-full shadow-[0px_1px_4px_0px_rgba(24,181,34,0.25)] py-5">
       {/* Background Image */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <img
           alt="Hero Background"
-          className="absolute h-[128.6%] left-0 max-w-none top-[-1.05%] w-full object-cover"
-          src={imgHeroBackground}
+          className="absolute h-full w-full object-cover"
+          src={'/Home.jpg'}
         />
       </div>
 

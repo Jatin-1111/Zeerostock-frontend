@@ -11,7 +11,7 @@ export default function HeroSection() {
       {/* Background Image */}
       <div className="absolute inset-0 h-[675px]">
         <img
-          src="https://www.figma.com/api/mcp/asset/83a03590-e178-418c-b034-d2e6bc8b9a69"
+          src="/landing-hero.png"
           alt="Industrial warehouse background"
           className="w-full h-full object-cover"
         />

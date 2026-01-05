@@ -3,17 +3,17 @@ import { Check } from "lucide-react";
 
 export default function HeroSection() {
   return (
-    <section
-      className="w-full bg-white relative min-h-[500px] py-6 px-4 sm:px-6 lg:px-8 flex items-start justify-start"
-      style={{
-        backgroundImage:
-          "url(https://www.figma.com/api/mcp/asset/d225fa1b-42ce-4e6b-a0a8-3ecece8122a7)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
-      <div className="w-full max-w-3xl bg-transparent rounded-2xl p-8 md:p-12 flex flex-col items-start text-left">
+    <section className="relative w-full h-[500px] shadow-[0px_1px_4px_0px_rgba(24,181,34,0.25)] py-10">
+      {/* Background Image */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <img
+          alt="Hero Background"
+          className="absolute h-full w-full object-cover"
+          src={"/buyer.jpg"}
+        />
+      </div>
+
+      <div className="w-full max-w-3xl bg-transparent rounded-2xl p-8 md:p-12 flex flex-col items-start text-left z-10 relative">
         {/* Subtitle */}
         <p className="font-poppins font-medium text-[16.5px] text-black mb-[16.5px]">
           For Smart Buyers

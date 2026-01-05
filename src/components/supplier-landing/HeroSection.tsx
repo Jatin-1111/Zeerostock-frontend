@@ -6,13 +6,13 @@ import { useRouter } from "next/navigation";
 export default function HeroSection() {
   const router = useRouter();
   return (
-    <div className="w-full bg-[#EEFBF6] px-[60px] py-[105px] relative">
+    <div className="w-full px-[60px] py-[105px] relative">
       {/* Background Image - positioned absolutely */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <img
           alt=""
-          className="absolute h-full left-0 max-w-none top-0 w-full object-cover opacity-10"
-          src="https://www.figma.com/api/mcp/asset/8f44aefb-3828-417f-80c3-1535aa09fb73"
+          className="absolute h-full left-0 max-w-none top-0 w-full object-cover"
+          src="/Supplier.jpg"
         />
       </div>
 

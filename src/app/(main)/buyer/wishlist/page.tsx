@@ -92,12 +92,12 @@ export default function WishlistPage() {
       <div className="max-w-[1440px] mx-auto">
         {/* Header */}
         <div className="mb-[30px] flex justify-between items-center">
-          <h1 className="text-[27px] font-semibold font-['Poppins'] text-[#0d1b2a] m-0">
+          <h1 className="text-[27px] font-semibold text-[#0d1b2a] m-0">
             My Wishlist
           </h1>
           <button
             onClick={clearUnavailableItems}
-            className="text-[12px] font-['Poppins'] font-semibold text-[#1e3a8a] bg-transparent border-none cursor-pointer px-3 py-1.5"
+            className="text-[12px] font-semibold text-[#1e3a8a] bg-transparent border-none cursor-pointer px-3 py-1.5"
           >
             Clear Unavailable Items
           </button>
@@ -130,7 +130,7 @@ export default function WishlistPage() {
             <div className="inline-flex items-center justify-center w-[60px] h-[60px] mb-[23px]">
               <Heart className="w-[60px] h-[60px] text-[#9c9c9c]" />
             </div>
-            <h2 className="text-2xl font-semibold font-['Poppins'] text-[#0d1b2a] mb-[11px]">
+            <h2 className="text-2xl font-semibold text-[#0d1b2a] mb-[11px]">
               Your wishlist is empty
             </h2>
             <p className="text-[13.5px] font-['Inter'] text-[#9c9c9c] mb-[30px]">
@@ -139,7 +139,7 @@ export default function WishlistPage() {
             </p>
             <Link
               href="/marketplace"
-              className="inline-flex items-center justify-center bg-[#1e3a8a] text-white px-[30px] py-[11px] rounded-lg text-[13.5px] font-semibold font-['Poppins'] no-underline transition-colors hover:bg-[#152d6b]"
+              className="inline-flex items-center justify-center bg-[#1e3a8a] text-white px-[30px] py-[11px] rounded-lg text-[13.5px] font-semibold no-underline transition-colors hover:bg-[#152d6b]"
             >
               Browse Products
             </Link>
@@ -181,7 +181,7 @@ export default function WishlistPage() {
                       )}
                       {!isAvailable && (
                         <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
-                          <span className="text-white text-xl font-semibold font-['Poppins']">
+                          <span className="text-white text-xl font-semibold ">
                             Not Available
                           </span>
                         </div>
@@ -215,7 +215,7 @@ export default function WishlistPage() {
                       href={`/product/${item.product?.slug || ""}`}
                       className="no-underline mb-[9px]"
                     >
-                      <h3 className="text-[15px] font-semibold font-['Poppins'] text-[#0d1b2a] m-0 leading-[1.4] hover:text-[#1e3a8a]">
+                      <h3 className="text-[15px] font-semibold text-[#0d1b2a] m-0 leading-[1.4] hover:text-[#1e3a8a]">
                         {item.product?.title || "Unknown Product"}
                       </h3>
                     </Link>
@@ -232,7 +232,7 @@ export default function WishlistPage() {
                     {/* Price */}
                     <div className="mb-[11px]">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <span className="text-[21px] font-semibold font-['Poppins'] text-[#0d1b2a]">
+                        <span className="text-[21px] font-semibold text-[#0d1b2a]">
                           ₹{item.product.priceAfter?.toLocaleString()}
                         </span>
                         {item.product?.priceBefore &&
@@ -270,7 +270,7 @@ export default function WishlistPage() {
                     {isAvailable ? (
                       <Link
                         href={`/product/${item.product?.slug || ""}`}
-                        className="flex items-center justify-center gap-2.5 w-full bg-[#1e3a8a] text-white p-3 rounded-[11px] text-base font-semibold font-['Poppins'] no-underline mt-auto transition-colors hover:bg-[#152d6b]"
+                        className="flex items-center justify-center gap-2.5 w-full bg-[#1e3a8a] text-white p-3 rounded-[11px] text-base font-semibold no-underline mt-auto transition-colors hover:bg-[#152d6b]"
                       >
                         <ShoppingCart className="w-[18px] h-[18px]" />
                         View Product
@@ -278,7 +278,7 @@ export default function WishlistPage() {
                     ) : (
                       <button
                         disabled
-                        className="w-full bg-[#e5e5e5] text-[#9c9c9c] p-3 rounded-[11px] border-none text-base font-semibold font-['Poppins'] cursor-not-allowed mt-auto"
+                        className="w-full bg-[#e5e5e5] text-[#9c9c9c] p-3 rounded-[11px] border-none text-base font-semibold cursor-not-allowed mt-auto"
                       >
                         Not Available
                       </button>

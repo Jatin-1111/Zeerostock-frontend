@@ -1,20 +1,42 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { MessageSquareDot, BookText, Save } from "lucide-react";
 import {
   getSettings,
   updateNotificationPreferences,
 } from "@/services/settings.service";
-import type { NotificationPreferences } from "@/types/buyer.types";
+
+// Local type definition for notification settings structure
+interface NotificationSettings {
+  emailNotifications: {
+    orderUpdates: boolean;
+    promotions: boolean;
+    accountActivity: boolean;
+    newMessages: boolean;
+  };
+  pushNotifications: {
+    orderUpdates: boolean;
+    promotions: boolean;
+    accountActivity: boolean;
+    newMessages: boolean;
+  };
+}
 
 export default function NotificationSettings() {
-  const [notifications, setNotifications] = useState<NotificationPreferences>({
-    email: true,
-    sms: false,
-    push: true,
-    marketing: false,
-    digest: false,
-    alerts: true,
+  const [settings, setSettings] = useState<NotificationSettings>({
+    emailNotifications: {
+      orderUpdates: true,
+      promotions: false,
+      accountActivity: true,
+      newMessages: true,
+    },
+    pushNotifications: {
+      orderUpdates: true,
+      promotions: false,
+      accountActivity: false,
+      newMessages: true,
+    },
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -31,7 +53,23 @@ export default function NotificationSettings() {
       const response = await getSettings();
 
       if (response.success && response.data) {
-        setNotifications(response.data.notifications);
+        // Transform backend NotificationPreferences to component NotificationSettings format
+        const backendPrefs = response.data.notifications;
+        const componentSettings: NotificationSettings = {
+          emailNotifications: {
+            orderUpdates: backendPrefs.email,
+            promotions: backendPrefs.marketing,
+            accountActivity: backendPrefs.alerts,
+            newMessages: backendPrefs.email, // Using email as a proxy
+          },
+          pushNotifications: {
+            orderUpdates: backendPrefs.push,
+            promotions: backendPrefs.marketing,
+            accountActivity: backendPrefs.alerts,
+            newMessages: backendPrefs.push, // Using push as a proxy
+          },
+        };
+        setSettings(componentSettings);
       }
     } catch (err: any) {
       console.error("Failed to load settings:", err);
@@ -41,30 +79,54 @@ export default function NotificationSettings() {
     }
   };
 
-  const toggleNotification = async (key: keyof typeof notifications) => {
-    const newValue = !notifications[key];
-    const updatedNotifications = { ...notifications, [key]: newValue };
+  const handleToggle = (
+    type: "emailNotifications" | "pushNotifications",
+    key: string
+  ) => {
+    setSettings((prev) => ({
+      ...prev,
+      [type]: {
+        ...prev[type],
+        [key]: !prev[type][key as keyof typeof prev.emailNotifications],
+      },
+    }));
+  };
 
-    // Optimistic update
-    setNotifications(updatedNotifications);
+  const handleSave = async () => {
     setSaving(true);
     setError(null);
     setSuccess(null);
 
     try {
-      const response = await updateNotificationPreferences({ [key]: newValue });
+      // Transform component NotificationSettings to backend NotificationPreferences format
+      const backendPrefs = {
+        email:
+          settings.emailNotifications.orderUpdates ||
+          settings.emailNotifications.newMessages,
+        sms: false, // Not used in the component
+        push:
+          settings.pushNotifications.orderUpdates ||
+          settings.pushNotifications.newMessages,
+        marketing:
+          settings.emailNotifications.promotions ||
+          settings.pushNotifications.promotions,
+        digest: false, // Not used in the component
+        alerts:
+          settings.emailNotifications.accountActivity ||
+          settings.pushNotifications.accountActivity,
+      };
+
+      const response = await updateNotificationPreferences(backendPrefs);
 
       if (response.success) {
-        setSuccess("Notification preferences updated");
+        setSuccess("Notification preferences updated successfully");
         setTimeout(() => setSuccess(null), 3000);
       } else {
         throw new Error(response.message || "Update failed");
       }
     } catch (err: any) {
       console.error("Failed to update notification settings:", err);
-      setError(err.message || "Failed to update settings");
-      // Revert on error
-      setNotifications({ ...notifications, [key]: !newValue });
+      setError(err.message || "Failed to update notification preferences");
     } finally {
       setSaving(false);
     }
@@ -72,601 +134,219 @@ export default function NotificationSettings() {
 
   if (loading) {
     return (
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "48px 0",
-        }}
-      >
-        <div style={{ color: "#9c9c9c" }}>Loading settings...</div>
+      <div className="flex items-center justify-center py-12">
+        <div className="text-gray-500">Loading settings...</div>
       </div>
     );
   }
 
-  return (
+  // Helper component for the Toggle Switch
+  const ToggleSwitch = ({
+    checked,
+    onChange,
+  }: {
+    checked: boolean;
+    onChange: () => void;
+  }) => (
     <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "31.5px",
-        width: "100%",
-      }}
+      onClick={onChange}
+      className={`w-[36px] h-[19.5px] rounded-full relative cursor-pointer transition-colors duration-200 ease-in-out ${
+        checked ? "bg-[#1e3a8a]" : "bg-[#e5e7eb]"
+      }`}
     >
-      {/* Title Section */}
+      <div
+        className={`w-[15px] h-[15px] bg-white rounded-full absolute top-[2.25px] shadow-sm transition-transform duration-200 ease-in-out ${
+          checked ? "translate-x-[18.75px]" : "translate-x-[2.25px]"
+        }`}
+      />
+    </div>
+  );
+
+  return (
+    <div className="flex flex-col gap-[22.5px]">
+      {/* Header Section */}
       <div>
-        <h1
-          style={{
-            fontFamily: "Poppins, sans-serif",
-            fontWeight: 600,
-            fontSize: "26.25px",
-            color: "#0d1b2a",
-            margin: 0,
-            marginBottom: "6px",
-          }}
-        >
-          Notification
+        <h1 className="text-[26.25px] font-semibold text-[#0d1b2a] mb-[6px] leading-[1.2]">
+          Notification Settings
         </h1>
-        <p
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontSize: "12.75px",
-            color: "#9c9c9c",
-            margin: 0,
-          }}
-        >
-          Manage your notification preferences
+        <p className="text-[12.75px] text-[#0d1b2a] font-normal">
+          Manage how you receive notifications and updates
         </p>
       </div>
 
       {/* Success/Error Messages */}
       {success && (
-        <div
-          style={{
-            backgroundColor: "#f0fdf4",
-            border: "1px solid #86efac",
-            color: "#166534",
-            padding: "12px 16px",
-            borderRadius: "8px",
-          }}
-        >
+        <div className="bg-[#f0fdf4] border border-[#86efac] text-[#166534] px-[12px] py-[9px] rounded-[6px]">
           {success}
         </div>
       )}
       {error && (
-        <div
-          style={{
-            backgroundColor: "#fef2f2",
-            border: "1px solid #fca5a5",
-            color: "#991b1b",
-            padding: "12px 16px",
-            borderRadius: "8px",
-          }}
-        >
+        <div className="bg-[#fef2f2] border border-[#fecaca] text-[#991b1b] px-[12px] py-[9px] rounded-[6px]">
           {error}
         </div>
       )}
 
-      {/* Communication Channels Card */}
-      <div
-        style={{
-          backgroundColor: "white",
-          borderRadius: "15px",
-          boxShadow: "0px 1.5px 4.5px 0px rgba(0,0,0,0.25)",
-          overflow: "hidden",
-          width: "100%",
-        }}
-      >
-        {/* Card Header */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "15px",
-            padding: "15px 18.75px",
-          }}
-        >
-          <img
-            src="https://www.figma.com/api/mcp/asset/ce32da10-d37d-4b34-adf2-72a583dec5d3"
-            alt="notification"
-            style={{ width: "19.5px", height: "19.5px" }}
-          />
-          <h2
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontWeight: 600,
-              fontSize: "18px",
-              color: "#0d1b2a",
-              margin: 0,
-            }}
-          >
-            Communication Channels
+      {/* Email Notifications Card */}
+      <div className="bg-white rounded-[15px] shadow-[0px_1.5px_4.5px_0px_rgba(0,0,0,0.25)] p-[18px] relative">
+        {/* Section Header */}
+        <div className="flex items-center gap-[15px] mb-[30px]">
+          <MessageSquareDot className="w-[19.5px] h-[19.5px] text-[#0d1b2a]" />
+          <h2 className="text-[18px] font-semibold text-[#0d1b2a]">
+            Email Notifications
           </h2>
         </div>
 
         {/* Divider Line */}
-        <div
-          style={{
-            height: "0.75px",
-            backgroundColor: "#e5e7eb",
-            width: "100%",
-          }}
-        ></div>
+        <div className="absolute left-0 top-[67.5px] w-full h-[1px] bg-[#e5e7eb]" />
 
-        {/* Toggle Items */}
-        <div style={{ padding: "26.25px" }}>
-          {/* Email Notification */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              marginBottom: "55.5px",
-            }}
-          >
+        {/* List Items */}
+        <div className="flex flex-col gap-[22.5px] mt-[22.5px]">
+          {/* Order Updates */}
+          <div className="flex items-center justify-between">
             <div>
-              <div
-                style={{
-                  fontFamily: "Poppins, sans-serif",
-                  fontWeight: 500,
-                  fontSize: "12.75px",
-                  color: "#0d1b2a",
-                  marginBottom: "6px",
-                }}
-              >
-                Email Notification
-              </div>
-              <div
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "11.25px",
-                  color: "#747474",
-                }}
-              >
-                Receive important updated via email
-              </div>
+              <p className="text-[12.75px] font-medium text-[#0d1b2a] mb-[3px]">
+                Order Updates
+              </p>
+              <p className="text-[10.5px] text-[#64748b]">
+                Receive emails about your order status and delivery
+              </p>
             </div>
-            <button
-              onClick={() => toggleNotification("email")}
-              style={{
-                position: "relative",
-                width: "38.25px",
-                height: "23.25px",
-                backgroundColor: notifications.email
-                  ? "#2aae7a"
-                  : "rgba(120,120,128,0.16)",
-                border: "none",
-                borderRadius: "100px",
-                cursor: "pointer",
-                transition: "background-color 0.2s",
-                flexShrink: 0,
-              }}
-            >
-              <div
-                style={{
-                  position: "absolute",
-                  width: "20.25px",
-                  height: "20.25px",
-                  backgroundColor: "white",
-                  borderRadius: "100px",
-                  boxShadow:
-                    "0px 0px 0px 0.75px rgba(0,0,0,0.04), 0px 2.25px 6px 0px rgba(0,0,0,0.15), 0px 2.25px 0.75px 0px rgba(0,0,0,0.06)",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  right: notifications.email ? "1.5px" : "auto",
-                  left: notifications.email ? "auto" : "1.5px",
-                  transition: "left 0.2s, right 0.2s",
-                }}
-              ></div>
-            </button>
+            <ToggleSwitch
+              checked={settings.emailNotifications.orderUpdates}
+              onChange={() =>
+                handleToggle("emailNotifications", "orderUpdates")
+              }
+            />
           </div>
 
-          {/* SMS Notification */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              marginBottom: "55.5px",
-            }}
-          >
+          {/* New Messages */}
+          <div className="flex items-center justify-between">
             <div>
-              <div
-                style={{
-                  fontFamily: "Poppins, sans-serif",
-                  fontWeight: 500,
-                  fontSize: "12.75px",
-                  color: "#0d1b2a",
-                  marginBottom: "6px",
-                }}
-              >
-                SMS Notification
-              </div>
-              <div
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "11.25px",
-                  color: "#747474",
-                }}
-              >
-                Get urgent alerts via text message
-              </div>
+              <p className="text-[12.75px] font-medium text-[#0d1b2a] mb-[3px]">
+                New Messages
+              </p>
+              <p className="text-[10.5px] text-[#64748b]">
+                Get notified when you receive a new message
+              </p>
             </div>
-            <button
-              onClick={() => toggleNotification("sms")}
-              style={{
-                position: "relative",
-                width: "38.25px",
-                height: "23.25px",
-                backgroundColor: notifications.sms
-                  ? "#2aae7a"
-                  : "rgba(120,120,128,0.16)",
-                border: "none",
-                borderRadius: "100px",
-                cursor: "pointer",
-                transition: "background-color 0.2s",
-                flexShrink: 0,
-              }}
-            >
-              <div
-                style={{
-                  position: "absolute",
-                  width: "20.25px",
-                  height: "20.25px",
-                  backgroundColor: "white",
-                  borderRadius: "100px",
-                  boxShadow:
-                    "0px 0px 0px 0.75px rgba(0,0,0,0.04), 0px 2.25px 6px 0px rgba(0,0,0,0.15), 0px 2.25px 0.75px 0px rgba(0,0,0,0.06)",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  right: notifications.sms ? "1.5px" : "auto",
-                  left: notifications.sms ? "auto" : "1.5px",
-                  transition: "left 0.2s, right 0.2s",
-                }}
-              ></div>
-            </button>
+            <ToggleSwitch
+              checked={settings.emailNotifications.newMessages}
+              onChange={() => handleToggle("emailNotifications", "newMessages")}
+            />
           </div>
 
-          {/* Push Notification */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
+          {/* Account Activity */}
+          <div className="flex items-center justify-between">
             <div>
-              <div
-                style={{
-                  fontFamily: "Poppins, sans-serif",
-                  fontWeight: 500,
-                  fontSize: "12.75px",
-                  color: "#0d1b2a",
-                  marginBottom: "6px",
-                }}
-              >
-                Push Notification
-              </div>
-              <div
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "11.25px",
-                  color: "#747474",
-                }}
-              >
-                Browser and mobile app alerts
-              </div>
+              <p className="text-[12.75px] font-medium text-[#0d1b2a] mb-[3px]">
+                Account Activity
+              </p>
+              <p className="text-[10.5px] text-[#64748b]">
+                Alerts for security and account changes
+              </p>
             </div>
-            <button
-              onClick={() => toggleNotification("push")}
-              style={{
-                position: "relative",
-                width: "38.25px",
-                height: "23.25px",
-                backgroundColor: notifications.push
-                  ? "#2aae7a"
-                  : "rgba(120,120,128,0.16)",
-                border: "none",
-                borderRadius: "100px",
-                cursor: "pointer",
-                transition: "background-color 0.2s",
-                flexShrink: 0,
-              }}
-            >
-              <div
-                style={{
-                  position: "absolute",
-                  width: "20.25px",
-                  height: "20.25px",
-                  backgroundColor: "white",
-                  borderRadius: "100px",
-                  boxShadow:
-                    "0px 0px 0px 0.75px rgba(0,0,0,0.04), 0px 2.25px 6px 0px rgba(0,0,0,0.15), 0px 2.25px 0.75px 0px rgba(0,0,0,0.06)",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  right: notifications.push ? "1.5px" : "auto",
-                  left: notifications.push ? "auto" : "1.5px",
-                  transition: "left 0.2s, right 0.2s",
-                }}
-              ></div>
-            </button>
+            <ToggleSwitch
+              checked={settings.emailNotifications.accountActivity}
+              onChange={() =>
+                handleToggle("emailNotifications", "accountActivity")
+              }
+            />
+          </div>
+
+          {/* Promotions */}
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-[12.75px] font-medium text-[#0d1b2a] mb-[3px]">
+                Promotions & Offers
+              </p>
+              <p className="text-[10.5px] text-[#64748b]">
+                Receive updates about sales and special offers
+              </p>
+            </div>
+            <ToggleSwitch
+              checked={settings.emailNotifications.promotions}
+              onChange={() => handleToggle("emailNotifications", "promotions")}
+            />
           </div>
         </div>
       </div>
 
-      {/* Content Preferences Card */}
-      <div
-        style={{
-          backgroundColor: "white",
-          borderRadius: "15px",
-          boxShadow: "0px 1.5px 4.5px 0px rgba(0,0,0,0.25)",
-          overflow: "hidden",
-          width: "100%",
-        }}
-      >
-        {/* Card Header */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "15px",
-            padding: "15px 18.75px",
-          }}
-        >
-          <img
-            src="https://www.figma.com/api/mcp/asset/29b789fe-36e7-4422-b505-85b11b8adc69"
-            alt="book"
-            style={{ width: "19.5px", height: "19.5px" }}
-          />
-          <h2
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontWeight: 600,
-              fontSize: "18px",
-              color: "#0d1b2a",
-              margin: 0,
-            }}
-          >
-            Content Preferences
+      {/* Push Notifications Card */}
+      <div className="bg-white rounded-[15px] shadow-[0px_1.5px_4.5px_0px_rgba(0,0,0,0.25)] p-[18px] relative">
+        {/* Section Header */}
+        <div className="flex items-center gap-[15px] mb-[30px]">
+          <BookText className="w-[19.5px] h-[19.5px] text-[#0d1b2a]" />
+          <h2 className="text-[18px] font-semibold text-[#0d1b2a]">
+            Push Notifications
           </h2>
         </div>
 
         {/* Divider Line */}
-        <div
-          style={{
-            height: "0.75px",
-            backgroundColor: "#e5e7eb",
-            width: "100%",
-          }}
-        ></div>
+        <div className="absolute left-0 top-[67.5px] w-full h-[1px] bg-[#e5e7eb]" />
 
-        {/* Toggle Items */}
-        <div style={{ padding: "26.25px" }}>
-          {/* Marketing Emails */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              marginBottom: "55.5px",
-            }}
-          >
+        {/* List Items */}
+        <div className="flex flex-col gap-[22.5px] mt-[22.5px]">
+          {/* Order Updates */}
+          <div className="flex items-center justify-between">
             <div>
-              <div
-                style={{
-                  fontFamily: "Poppins, sans-serif",
-                  fontWeight: 500,
-                  fontSize: "12.75px",
-                  color: "#0d1b2a",
-                  marginBottom: "6px",
-                }}
-              >
-                Marketing Emails
-              </div>
-              <div
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "11.25px",
-                  color: "#747474",
-                }}
-              >
-                New features, tips and special offers
-              </div>
+              <p className="text-[12.75px] font-medium text-[#0d1b2a] mb-[3px]">
+                Order Updates
+              </p>
+              <p className="text-[10.5px] text-[#64748b]">
+                Get instant notifications about your orders
+              </p>
             </div>
-            <button
-              onClick={() => toggleNotification("marketing")}
-              style={{
-                position: "relative",
-                width: "38.25px",
-                height: "23.25px",
-                backgroundColor: notifications.marketing
-                  ? "#2aae7a"
-                  : "rgba(120,120,128,0.16)",
-                border: "none",
-                borderRadius: "100px",
-                cursor: "pointer",
-                transition: "background-color 0.2s",
-                flexShrink: 0,
-              }}
-            >
-              <div
-                style={{
-                  position: "absolute",
-                  width: "20.25px",
-                  height: "20.25px",
-                  backgroundColor: "white",
-                  borderRadius: "100px",
-                  boxShadow:
-                    "0px 0px 0px 0.75px rgba(0,0,0,0.04), 0px 2.25px 6px 0px rgba(0,0,0,0.15), 0px 2.25px 0.75px 0px rgba(0,0,0,0.06)",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  right: notifications.marketing ? "1.5px" : "auto",
-                  left: notifications.marketing ? "auto" : "1.5px",
-                  transition: "left 0.2s, right 0.2s",
-                }}
-              ></div>
-            </button>
+            <ToggleSwitch
+              checked={settings.pushNotifications.orderUpdates}
+              onChange={() => handleToggle("pushNotifications", "orderUpdates")}
+            />
           </div>
 
-          {/* Weekly Digest */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              marginBottom: "55.5px",
-            }}
-          >
+          {/* New Messages */}
+          <div className="flex items-center justify-between">
             <div>
-              <div
-                style={{
-                  fontFamily: "Poppins, sans-serif",
-                  fontWeight: 500,
-                  fontSize: "12.75px",
-                  color: "#0d1b2a",
-                  marginBottom: "6px",
-                }}
-              >
-                Weekly Digest
-              </div>
-              <div
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "11.25px",
-                  color: "#747474",
-                }}
-              >
-                A summary of your account activity
-              </div>
+              <p className="text-[12.75px] font-medium text-[#0d1b2a] mb-[3px]">
+                New Messages
+              </p>
+              <p className="text-[10.5px] text-[#64748b]">
+                Instant alerts for new messages
+              </p>
             </div>
-            <button
-              onClick={() => toggleNotification("digest")}
-              style={{
-                position: "relative",
-                width: "38.25px",
-                height: "23.25px",
-                backgroundColor: notifications.digest
-                  ? "#2aae7a"
-                  : "rgba(120,120,128,0.16)",
-                border: "none",
-                borderRadius: "100px",
-                cursor: "pointer",
-                transition: "background-color 0.2s",
-                flexShrink: 0,
-              }}
-            >
-              <div
-                style={{
-                  position: "absolute",
-                  width: "20.25px",
-                  height: "20.25px",
-                  backgroundColor: "white",
-                  borderRadius: "100px",
-                  boxShadow:
-                    "0px 0px 0px 0.75px rgba(0,0,0,0.04), 0px 2.25px 6px 0px rgba(0,0,0,0.15), 0px 2.25px 0.75px 0px rgba(0,0,0,0.06)",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  right: notifications.digest ? "1.5px" : "auto",
-                  left: notifications.digest ? "auto" : "1.5px",
-                  transition: "left 0.2s, right 0.2s",
-                }}
-              ></div>
-            </button>
+            <ToggleSwitch
+              checked={settings.pushNotifications.newMessages}
+              onChange={() => handleToggle("pushNotifications", "newMessages")}
+            />
           </div>
 
-          {/* Price Alerts */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
+          {/* Account Activity */}
+          <div className="flex items-center justify-between">
             <div>
-              <div
-                style={{
-                  fontFamily: "Poppins, sans-serif",
-                  fontWeight: 500,
-                  fontSize: "12.75px",
-                  color: "#0d1b2a",
-                  marginBottom: "6px",
-                }}
-              >
-                Price Alerts
-              </div>
-              <div
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "11.25px",
-                  color: "#747474",
-                }}
-              >
-                Notification on price changes for tracked items
-              </div>
+              <p className="text-[12.75px] font-medium text-[#0d1b2a] mb-[3px]">
+                Account Activity
+              </p>
+              <p className="text-[10.5px] text-[#64748b]">
+                Security alerts and important account updates
+              </p>
             </div>
-            <button
-              onClick={() => toggleNotification("alerts")}
-              style={{
-                position: "relative",
-                width: "38.25px",
-                height: "23.25px",
-                backgroundColor: notifications.alerts
-                  ? "#2aae7a"
-                  : "rgba(120,120,128,0.16)",
-                border: "none",
-                borderRadius: "100px",
-                cursor: "pointer",
-                transition: "background-color 0.2s",
-                flexShrink: 0,
-              }}
-            >
-              <div
-                style={{
-                  position: "absolute",
-                  width: "20.25px",
-                  height: "20.25px",
-                  backgroundColor: "white",
-                  borderRadius: "100px",
-                  boxShadow:
-                    "0px 0px 0px 0.75px rgba(0,0,0,0.04), 0px 2.25px 6px 0px rgba(0,0,0,0.15), 0px 2.25px 0.75px 0px rgba(0,0,0,0.06)",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  right: notifications.alerts ? "1.5px" : "auto",
-                  left: notifications.alerts ? "auto" : "1.5px",
-                  transition: "left 0.2s, right 0.2s",
-                }}
-              ></div>
-            </button>
+            <ToggleSwitch
+              checked={settings.pushNotifications.accountActivity}
+              onChange={() =>
+                handleToggle("pushNotifications", "accountActivity")
+              }
+            />
           </div>
         </div>
       </div>
 
-      {/* Save Changes Button */}
-      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+      {/* Save Button */}
+      <div className="flex justify-end">
         <button
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "7.5px",
-            backgroundColor: "#1e3a8a",
-            color: "white",
-            border: "none",
-            borderRadius: "9px",
-            padding: "11.25px 82.5px",
-            cursor: "pointer",
-            fontFamily: "Poppins, sans-serif",
-            fontWeight: 600,
-            fontSize: "15px",
-          }}
+          onClick={handleSave}
+          disabled={saving}
+          className="flex items-center gap-[7.5px] py-[11.25px] px-[82.5px] bg-[#1e3a8a] text-white rounded-[9px] text-[15px] font-semibold hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 transition-opacity"
         >
-          <img
-            src="https://www.figma.com/api/mcp/asset/570d3bda-1cc1-4b5a-8cfc-08ef70922430"
-            alt="save"
-            style={{ width: "21px", height: "21px" }}
-          />
-          Save Changes
+          <Save className="w-[21px] h-[21px] text-white" />
+          {saving ? "Saving..." : "Save Changes"}
         </button>
       </div>
     </div>

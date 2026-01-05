@@ -17,20 +17,12 @@ export default function ProgressSteps({ currentStep }: ProgressStepsProps) {
           <div key={step.number} className="flex items-center">
             <div className="flex flex-col items-center">
               <div
-                className={`rounded-[15px] flex items-center justify-center ${
+                className={`w-[60px] h-[60px] rounded-[15px] flex items-center justify-center shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)] ${
                   isActive ? "bg-[#2AAE7A]" : "bg-white"
                 }`}
-                style={{
-                  width: "60px",
-                  height: "60px",
-                  boxShadow: "0px 0px 4.5px 0px rgba(0,0,0,0.25)",
-                }}
               >
                 <svg
-                  style={{
-                    width: "38px",
-                    height: "38px",
-                  }}
+                  className="w-[38px] h-[38px]"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke={isActive ? "white" : "#9c9c9c"}
@@ -62,27 +54,12 @@ export default function ProgressSteps({ currentStep }: ProgressStepsProps) {
                   )}
                 </svg>
               </div>
-              <span
-                className="mt-2 text-[15px] font-medium"
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  color: "#0d1b2a",
-                }}
-              >
+              <span className="mt-2 text-[15px] font-medium text-[#0d1b2a]">
                 {step.label}
               </span>
             </div>
             {index < steps.length - 1 && (
-              <div
-                style={{
-                  width: "211px",
-                  height: "1px",
-                  backgroundColor: "#bebebe",
-                  marginLeft: "15px",
-                  marginRight: "15px",
-                  marginTop: "-30px",
-                }}
-              ></div>
+              <div className="w-[211px] h-[1px] bg-[#bebebe] mx-[15px] -mt-[30px]"></div>
             )}
           </div>
         );

@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu } from "lucide-react";
+import { Bell, Eye, Globe, ShieldCheck, User } from "lucide-react";
 
 interface SettingsSidebarProps {
   activeTab: string;
@@ -15,27 +15,27 @@ export default function SettingsSidebar({
     {
       id: "account",
       label: "Account Setting",
-      icon: "https://www.figma.com/api/mcp/asset/158d8819-bccf-4967-b321-3d15902880bd",
+      icon: User,
     },
     {
       id: "language",
       label: "Language & Region",
-      icon: "https://www.figma.com/api/mcp/asset/c90bb87a-5177-44af-9453-8f53e3c9ff3e",
+      icon: Globe,
     },
     {
       id: "notifications",
       label: "Notification",
-      icon: "https://www.figma.com/api/mcp/asset/21dbaed2-5abd-4f6e-9969-cdf0803d4855",
+      icon: Bell,
     },
     {
       id: "privacy",
       label: "Privacy",
-      icon: "https://www.figma.com/api/mcp/asset/d85815de-fc16-46ba-adb7-314c2fc3fd9d",
+      icon: Eye,
     },
     {
       id: "security",
       label: "Security",
-      icon: "https://www.figma.com/api/mcp/asset/eadf01af-b90c-467a-a4e6-207f11b7a0b0",
+      icon: ShieldCheck,
     },
   ];
 
@@ -43,10 +43,10 @@ export default function SettingsSidebar({
     <div className="w-full lg:w-[277.5px] bg-white min-h-screen relative">
       {/* Header */}
       <div className="px-[18.75px] mb-[40.5px]">
-        <h2 className="text-[22.5px] font-semibold text-[#0d1b2a] font-[family-name:'Poppins'] mb-[5.25px]">
+        <h2 className="text-[22.5px] font-semibold text-[#0d1b2a] mb-[5.25px]">
           Settings
         </h2>
-        <p className="text-[13.5px] font-medium text-[#9c9c9c] font-[family-name:'Poppins'] leading-normal">
+        <p className="text-[13.5px] font-medium text-[#9c9c9c] leading-normal">
           Manage your account and preferences
         </p>
       </div>
@@ -65,19 +65,20 @@ export default function SettingsSidebar({
           >
             {/* Left Border Indicator for Active Tab */}
             {activeTab === item.id && (
-              <div className="absolute left-[-18.75px] top-0 w-[3.75px] h-full bg-[#2aae7a] rounded-r-[3.75px]" />
+              <div className="absolute -left-2.5 top-0 w-[3.75px] h-full bg-[#2aae7a] rounded-r-[3.75px]" />
             )}
 
-            {/* Icon */}
-            <img
-              src={item.icon}
-              alt={item.label}
-              className="w-[18.75px] h-[18.75px] shrink-0"
+            {/* Icon - Now changes color when active */}
+            <item.icon
+              size={18}
+              className={
+                activeTab === item.id ? "text-[#2aae7a]" : "text-[#8b8b8b]"
+              }
             />
 
             {/* Label */}
             <span
-              className={`text-[16.5px] font-[family-name:'Poppins'] ${
+              className={`text-[14px] ${
                 activeTab === item.id
                   ? "text-[#2aae7a] font-semibold"
                   : "text-[#8b8b8b] font-medium"

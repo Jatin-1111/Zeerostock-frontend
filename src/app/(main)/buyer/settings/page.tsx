@@ -15,7 +15,7 @@ export default function SettingsPage() {
 
   return (
     <div className="bg-white min-h-screen">
-      <div className="max-w-8xl mx-auto py-12 px-6">
+      <div className="max-w-8xl mx-auto py-12 pl-2 pr-6">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar */}
           <SettingsSidebar

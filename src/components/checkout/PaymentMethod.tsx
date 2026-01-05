@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Check, CreditCard, MapPin } from "lucide-react";
 
 interface PaymentDetails {
   cardNumber: string;
@@ -94,222 +95,125 @@ export default function PaymentMethod({
   ];
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+    <div className="flex flex-col gap-[15px]">
       {/* Payment Method Selection */}
-      <div
-        style={{
-          backgroundColor: "white",
-          borderRadius: "15px",
-          boxShadow: "0px 0px 5px 0px rgba(0,0,0,0.25)",
-          padding: "23px",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "15px",
-            marginBottom: "26px",
-          }}
-        >
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#0d1b2a"
-            strokeWidth="1.5"
-          >
-            <rect x="2" y="5" width="20" height="14" rx="2" />
-            <path d="M2 10h20" />
-          </svg>
-          <h2
-            style={{
-              fontFamily: "Poppins, sans-serif",
-              fontWeight: 600,
-              fontSize: "18px",
-              color: "#0d1b2a",
-              margin: 0,
-            }}
-          >
+      <div className="bg-white rounded-[15px] shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)] p-[23px]">
+        <div className="flex items-center gap-[15px] mb-[26px]">
+          <CreditCard
+            className="w-[20px] h-[20px] text-[#0d1b2a]"
+            strokeWidth={1.5}
+          />
+          <h2 className="font-semibold text-[18px] text-[#0d1b2a] m-0">
             Payment Method
           </h2>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+        <div className="flex flex-col gap-[15px]">
           {paymentMethods.map((method) => (
             <div
               key={method.id}
               onClick={() => onMethodSelect(method.id)}
-              style={{
-                backgroundColor:
-                  selectedMethod === method.id ? "#eeffef" : "white",
-                border: `2px solid ${
-                  selectedMethod === method.id ? "#2aae7a" : "#e8e8e8"
-                }`,
-                borderRadius: "15px",
-                height: "90px",
-                padding: "15px 16px",
-                cursor: "pointer",
-                position: "relative",
-              }}
+              className={`rounded-[15px] h-[90px] p-[15px_16px] cursor-pointer relative border-2 ${
+                selectedMethod === method.id
+                  ? "bg-[#eeffef] border-[#2aae7a]"
+                  : "bg-white border-[#e8e8e8]"
+              }`}
             >
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "flex-start",
-                  gap: "11px",
-                }}
-              >
+              <div className="flex items-start gap-[11px]">
                 {/* Radio Button */}
                 <div
-                  style={{
-                    width: "16px",
-                    height: "16px",
-                    borderRadius: "50%",
-                    border: `2px solid ${
-                      selectedMethod === method.id ? "#2aae7a" : "#bebebe"
-                    }`,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexShrink: 0,
-                    marginTop: "8px",
-                  }}
+                  className={`w-[16px] h-[16px] rounded-full border-2 flex items-center justify-center shrink-0 mt-[8px] ${
+                    selectedMethod === method.id
+                      ? "border-[#2aae7a]"
+                      : "border-[#bebebe]"
+                  }`}
                 >
                   {selectedMethod === method.id && (
-                    <div
-                      style={{
-                        width: "8px",
-                        height: "8px",
-                        borderRadius: "50%",
-                        backgroundColor: "#2aae7a",
-                      }}
-                    />
+                    <div className="w-[8px] h-[8px] rounded-full bg-[#2aae7a]" />
                   )}
                 </div>
 
                 {/* Content */}
-                <div style={{ flex: 1 }}>
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "9px",
-                      marginBottom: "0px",
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontFamily: "Poppins, sans-serif",
-                        fontWeight: 500,
-                        fontSize: "14px",
-                        color: "#0d1b2a",
-                      }}
-                    >
+                <div className="flex-1">
+                  <div className="flex items-center gap-[9px] mb-0">
+                    <span className="font-medium text-[14px] text-[#0d1b2a]">
                       {method.name}
                     </span>
                     {method.recommended && (
-                      <div
-                        style={{
-                          backgroundColor: "#eeffef",
-                          color: "#2aae7a",
-                          padding: "0px 4px",
-                          borderRadius: "15px",
-                          fontFamily: "Inter, sans-serif",
-                          fontWeight: 500,
-                          fontSize: "10px",
-                          lineHeight: "18px",
-                        }}
-                      >
+                      <div className="bg-[#eeffef] text-[#2aae7a] px-[4px] rounded-[15px] font-medium text-[10px] leading-[18px]">
                         Recommended
                       </div>
                     )}
                   </div>
-                  <p
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "12px",
-                      fontWeight: 400,
-                      color: "#9c9c9c",
-                      margin: "0 0 2px 0",
-                      lineHeight: "18px",
-                      letterSpacing: "0.5px",
-                    }}
-                  >
+                  <p className="text-[12px] font-normal text-[#9c9c9c] mb-[2px] leading-[18px] tracking-[0.5px]">
                     {method.description}
                   </p>
-                  <p
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "12px",
-                      fontWeight: 400,
-                      color: "#9c9c9c",
-                      margin: 0,
-                      lineHeight: "18px",
-                      letterSpacing: "0.5px",
-                    }}
-                  >
+                  <p className="text-[12px] font-normal text-[#9c9c9c] m-0 leading-[18px] tracking-[0.5px]">
                     {method.processingInfo}
                   </p>
                 </div>
 
                 {/* Card Logos (only for card payment) */}
                 {method.id === "card" && (
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "5px",
-                      marginTop: "23px",
-                    }}
-                  >
-                    {/* Visa logo placeholder */}
-                    <div
-                      style={{
-                        width: "38px",
-                        height: "25px",
-                        border: "1px solid #ddd",
-                        borderRadius: "2px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontSize: "8px",
-                        fontWeight: 700,
-                        color: "#1434cb",
-                      }}
-                    >
-                      VISA
+                  <div className="flex items-center gap-[8px] mt-[18px]">
+                    {/* Visa SVG */}
+                    <div className="w-[45px] h-auto">
+                      <svg
+                        viewBox="0 -140 780 780"
+                        version="1.1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="#000000"
+                        className="w-full h-full"
+                      >
+                        <g strokeWidth="0"></g>
+                        <g strokeLinecap="round" strokeLinejoin="round"></g>
+                        <g>
+                          <path
+                            d="m293.2 348.73l33.359-195.76h53.358l-33.384 195.76h-53.333zm246.11-191.54c-10.569-3.966-27.135-8.222-47.821-8.222-52.726 0-89.863 26.551-90.181 64.604-0.297 28.129 26.515 43.822 46.754 53.185 20.771 9.598 27.752 15.716 27.652 24.283-0.133 13.123-16.586 19.115-31.924 19.115-21.355 0-32.701-2.967-50.225-10.273l-6.878-3.111-7.487 43.822c12.463 5.467 35.508 10.199 59.438 10.445 56.09 0 92.502-26.248 92.916-66.885 0.199-22.27-14.016-39.215-44.801-53.188-18.65-9.056-30.072-15.099-29.951-24.269 0-8.137 9.668-16.838 30.56-16.838 17.446-0.271 30.088 3.534 39.936 7.5l4.781 2.259 7.231-42.427m137.31-4.223h-41.23c-12.772 0-22.332 3.486-27.94 16.234l-79.245 179.4h56.031s9.159-24.121 11.231-29.418c6.123 0 60.555 0.084 68.336 0.084 1.596 6.854 6.492 29.334 6.492 29.334h49.512l-43.187-195.64zm-65.417 126.41c4.414-11.279 21.26-54.724 21.26-54.724-0.314 0.521 4.381-11.334 7.074-18.684l3.606 16.878s10.217 46.729 12.353 56.527h-44.293v3e-3zm-363.3-126.41l-52.239 133.5-5.565-27.129c-9.726-31.274-40.025-65.157-73.898-82.12l47.767 171.2 56.455-0.063 84.004-195.39-56.524-1e-3"
+                            fill="#0E4595"
+                          ></path>
+                          <path
+                            d="m146.92 152.96h-86.041l-0.682 4.073c66.939 16.204 111.23 55.363 129.62 102.42l-18.709-89.96c-3.229-12.396-12.597-16.096-24.186-16.528"
+                            fill="#F2AE14"
+                          ></path>
+                        </g>
+                      </svg>
                     </div>
-                    {/* Mastercard logo placeholder */}
-                    <div
-                      style={{
-                        width: "40px",
-                        height: "25px",
-                        border: "0.5px solid #f60",
-                        borderRadius: "8px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        gap: "2px",
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: "12px",
-                          height: "12px",
-                          borderRadius: "50%",
-                          backgroundColor: "#eb001b",
-                        }}
-                      />
-                      <div
-                        style={{
-                          width: "12px",
-                          height: "12px",
-                          borderRadius: "50%",
-                          backgroundColor: "#f79e1b",
-                        }}
-                      />
+
+                    {/* Mastercard SVG */}
+                    <div className="w-[38px] h-auto">
+                      <svg
+                        viewBox="0 -9 58 58"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="w-full h-full"
+                      >
+                        <g strokeWidth="0"></g>
+                        <g strokeLinecap="round" strokeLinejoin="round"></g>
+                        <g>
+                          <rect
+                            x="0.5"
+                            y="0.5"
+                            width="57"
+                            height="39"
+                            rx="3.5"
+                            fill="white"
+                            stroke="#F3F3F3"
+                          ></rect>
+                          <path
+                            d="M34.3102 28.9765H23.9591V10.5122H34.3102V28.9765Z"
+                            fill="#FF5F00"
+                          ></path>
+                          <path
+                            d="M24.6223 19.7429C24.6223 15.9973 26.3891 12.6608 29.1406 10.5107C27.1285 8.93843 24.5892 7.99998 21.8294 7.99998C15.2961 7.99998 10 13.2574 10 19.7429C10 26.2283 15.2961 31.4857 21.8294 31.4857C24.5892 31.4857 27.1285 30.5473 29.1406 28.975C26.3891 26.8249 24.6223 23.4884 24.6223 19.7429"
+                            fill="#EB001B"
+                          ></path>
+                          <path
+                            d="M48.2706 19.7429C48.2706 26.2283 42.9745 31.4857 36.4412 31.4857C33.6814 31.4857 31.1421 30.5473 29.1293 28.975C31.8815 26.8249 33.6483 23.4884 33.6483 19.7429C33.6483 15.9973 31.8815 12.6608 29.1293 10.5107C31.1421 8.93843 33.6814 7.99998 36.4412 7.99998C42.9745 7.99998 48.2706 13.2574 48.2706 19.7429"
+                            fill="#F79E1B"
+                          ></path>
+                        </g>
+                      </svg>
                     </div>
                   </div>
                 )}
@@ -321,42 +225,16 @@ export default function PaymentMethod({
 
       {/* Payment Details (only for card payment) */}
       {selectedMethod === "card" && (
-        <div
-          style={{
-            backgroundColor: "white",
-            borderRadius: "15px",
-            boxShadow: "0px 0px 5px 0px rgba(0,0,0,0.25)",
-            padding: "23px",
-          }}
-        >
-          <h3
-            style={{
-              fontFamily: "Poppins, sans-serif",
-              fontWeight: 600,
-              fontSize: "18px",
-              color: "#0d1b2a",
-              marginBottom: "26px",
-            }}
-          >
+        <div className="bg-white rounded-[15px] shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)] p-[23px]">
+          <h3 className="font-semibold text-[18px] text-[#0d1b2a] mb-[26px]">
             Payment Details
           </h3>
 
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "42px" }}
-          >
+          <div className="flex flex-col gap-[42px]">
             {/* Card Number */}
             <div>
-              <label
-                style={{
-                  display: "block",
-                  fontFamily: "Poppins, sans-serif",
-                  fontWeight: 500,
-                  fontSize: "13px",
-                  color: "#0d1b2a",
-                  marginBottom: "8px",
-                }}
-              >
-                Card Number<span style={{ color: "red" }}>*</span>
+              <label className="block font-medium text-[13px] text-[#0d1b2a] mb-[8px]">
+                Card Number<span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
@@ -366,35 +244,15 @@ export default function PaymentMethod({
                 }
                 placeholder="XXXX XXXX XXXX XXXX"
                 maxLength={19}
-                style={{
-                  width: "100%",
-                  height: "42px",
-                  padding: "0 12px",
-                  border: "1px solid #9c9c9c",
-                  borderRadius: "8px",
-                  fontFamily: "Roboto, sans-serif",
-                  fontSize: "12px",
-                  fontWeight: 400,
-                  color: "#9c9c9c",
-                  letterSpacing: "0.5px",
-                }}
+                className="w-full h-[42px] px-[12px] border border-[#9c9c9c] rounded-[8px] text-[12px] font-normal text-[#9c9c9c] tracking-[0.5px]"
               />
             </div>
 
             {/* Expiry Date & CVV */}
-            <div style={{ display: "flex", gap: "34px" }}>
-              <div style={{ width: "270px" }}>
-                <label
-                  style={{
-                    display: "block",
-                    fontFamily: "Poppins, sans-serif",
-                    fontWeight: 500,
-                    fontSize: "13px",
-                    color: "#0d1b2a",
-                    marginBottom: "8px",
-                  }}
-                >
-                  Expiry Date<span style={{ color: "red" }}>*</span>
+            <div className="flex gap-[34px]">
+              <div className="w-[270px]">
+                <label className="block font-medium text-[13px] text-[#0d1b2a] mb-[8px]">
+                  Expiry Date<span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -404,32 +262,12 @@ export default function PaymentMethod({
                   }
                   placeholder="MM/YY"
                   maxLength={5}
-                  style={{
-                    width: "100%",
-                    height: "42px",
-                    padding: "0 12px",
-                    border: "1px solid #9c9c9c",
-                    borderRadius: "8px",
-                    fontFamily: "Roboto, sans-serif",
-                    fontSize: "12px",
-                    fontWeight: 400,
-                    color: "#9c9c9c",
-                    letterSpacing: "0.5px",
-                  }}
+                  className="w-full h-[42px] px-[12px] border border-[#9c9c9c] rounded-[8px] text-[12px] font-normal text-[#9c9c9c] tracking-[0.5px]"
                 />
               </div>
-              <div style={{ width: "270px" }}>
-                <label
-                  style={{
-                    display: "block",
-                    fontFamily: "Poppins, sans-serif",
-                    fontWeight: 500,
-                    fontSize: "13px",
-                    color: "#0d1b2a",
-                    marginBottom: "8px",
-                  }}
-                >
-                  CVV<span style={{ color: "red" }}>*</span>
+              <div className="w-[270px]">
+                <label className="block font-medium text-[13px] text-[#0d1b2a] mb-[8px]">
+                  CVV<span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -437,35 +275,15 @@ export default function PaymentMethod({
                   onChange={(e) => handleDetailsChange("cvv", e.target.value)}
                   placeholder="XXX"
                   maxLength={4}
-                  style={{
-                    width: "100%",
-                    height: "42px",
-                    padding: "0 12px",
-                    border: "1px solid #9c9c9c",
-                    borderRadius: "8px",
-                    fontFamily: "Roboto, sans-serif",
-                    fontSize: "12px",
-                    fontWeight: 400,
-                    color: "#9c9c9c",
-                    letterSpacing: "0.5px",
-                  }}
+                  className="w-full h-[42px] px-[12px] border border-[#9c9c9c] rounded-[8px] text-[12px] font-normal text-[#9c9c9c] tracking-[0.5px]"
                 />
               </div>
             </div>
 
             {/* Name on Card */}
             <div>
-              <label
-                style={{
-                  display: "block",
-                  fontFamily: "Poppins, sans-serif",
-                  fontWeight: 500,
-                  fontSize: "13px",
-                  color: "#0d1b2a",
-                  marginBottom: "8px",
-                }}
-              >
-                Name on Card<span style={{ color: "red" }}>*</span>
+              <label className="block font-medium text-[13px] text-[#0d1b2a] mb-[8px]">
+                Name on Card<span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
@@ -474,18 +292,7 @@ export default function PaymentMethod({
                   handleDetailsChange("cardName", e.target.value)
                 }
                 placeholder="John Doe"
-                style={{
-                  width: "100%",
-                  height: "42px",
-                  padding: "0 12px",
-                  border: "1px solid #9c9c9c",
-                  borderRadius: "8px",
-                  fontFamily: "Roboto, sans-serif",
-                  fontSize: "12px",
-                  fontWeight: 400,
-                  color: "#9c9c9c",
-                  letterSpacing: "0.5px",
-                }}
+                className="w-full h-[42px] px-[12px] border border-[#9c9c9c] rounded-[8px] text-[12px] font-normal text-[#9c9c9c] tracking-[0.5px]"
               />
             </div>
           </div>
@@ -493,102 +300,43 @@ export default function PaymentMethod({
       )}
 
       {/* Billing Address */}
-      <div
-        style={{
-          backgroundColor: "white",
-          borderRadius: "20px",
-          boxShadow: "0px 0px 6px 0px rgba(0,0,0,0.25)",
-          padding: "30px",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "20px",
-            marginBottom: "25px",
-          }}
-        >
-          <svg
-            width="26"
-            height="26"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#0d1b2a"
-            strokeWidth="1.5"
-          >
-            <rect x="2" y="5" width="20" height="14" rx="2" />
-            <path d="M2 10h20" />
-          </svg>
-          <h3
-            style={{
-              fontFamily: "Poppins, sans-serif",
-              fontWeight: 600,
-              fontSize: "24px",
-              color: "#0d1b2a",
-              margin: 0,
-            }}
-          >
+      <div className="bg-white rounded-[20px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] p-[30px]">
+        <div className="flex items-center gap-[20px] mb-[25px]">
+          <MapPin
+            className="w-[26px] h-[26px] text-[#0d1b2a]"
+            strokeWidth={1.5}
+          />
+          <h3 className="font-semibold text-[24px] text-[#0d1b2a] m-0">
             Billing Address
           </h3>
         </div>
 
         {/* Checkbox */}
-        <label
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "9px",
-            cursor: "pointer",
-            marginBottom: "15px",
-          }}
-        >
-          <input
-            type="checkbox"
-            checked={useSameAddress}
-            onChange={(e) => setUseSameAddress(e.target.checked)}
-            style={{
-              width: "24px",
-              height: "24px",
-              cursor: "pointer",
-              accentColor: "#2aae7a",
-            }}
-          />
-          <span
-            style={{
-              fontFamily: "Poppins, sans-serif",
-              fontWeight: 500,
-              fontSize: "17px",
-              color: "#0d1b2a",
-            }}
-          >
+        <label className="flex items-center gap-[12px] mb-[15px] group select-none">
+          <div className="relative flex items-center justify-center w-[24px] h-[24px]">
+            <input
+              type="checkbox"
+              checked={useSameAddress}
+              onChange={(e) => setUseSameAddress(e.target.checked)}
+              className="peer appearance-none w-full h-full border-2 border-[#e2e2e2] rounded-[6px] bg-white checked:bg-[#2aae7a] checked:border-[#2aae7a] transition-all duration-200 cursor-pointer hover:border-[#2aae7a]"
+            />
+            <Check
+              className="absolute w-[16px] h-[16px] text-white opacity-0 transform scale-50 peer-checked:opacity-100 peer-checked:scale-100 transition-all duration-200 pointer-events-none"
+              strokeWidth={3}
+            />
+          </div>
+          <span className="font-medium text-[17px] text-[#0d1b2a] transition-colors">
             Same as Shipping Address
           </span>
         </label>
 
         {/* Billing Address Form (when checkbox unchecked) */}
         {!useSameAddress && (
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "42px",
-              marginTop: "23px",
-            }}
-          >
+          <div className="flex flex-col gap-[42px] mt-[23px]">
             {/* First Name & Last Name */}
-            <div style={{ display: "flex", gap: "34px" }}>
-              <div style={{ width: "270px" }}>
-                <label
-                  style={{
-                    display: "block",
-                    fontFamily: "Poppins, sans-serif",
-                    fontWeight: 500,
-                    fontSize: "13px",
-                    color: "#0d1b2a",
-                    marginBottom: "8px",
-                  }}
-                >
+            <div className="flex gap-[34px]">
+              <div className="w-[270px]">
+                <label className="block font-medium text-[13px] text-[#0d1b2a] mb-[8px]">
                   First Name
                 </label>
                 <input
@@ -598,31 +346,11 @@ export default function PaymentMethod({
                     handleBillingChange("firstName", e.target.value)
                   }
                   placeholder="John"
-                  style={{
-                    width: "100%",
-                    height: "42px",
-                    padding: "0 12px",
-                    border: "1px solid #bebebe",
-                    borderRadius: "8px",
-                    fontFamily: "Roboto, sans-serif",
-                    fontSize: "12px",
-                    fontWeight: 400,
-                    color: "#0d1b2a",
-                    letterSpacing: "0.5px",
-                  }}
+                  className="w-full h-[42px] px-[12px] border border-[#bebebe] rounded-[8px] text-[12px] font-normal text-[#0d1b2a] tracking-[0.5px]"
                 />
               </div>
-              <div style={{ width: "270px" }}>
-                <label
-                  style={{
-                    display: "block",
-                    fontFamily: "Poppins, sans-serif",
-                    fontWeight: 500,
-                    fontSize: "13px",
-                    color: "#0d1b2a",
-                    marginBottom: "8px",
-                  }}
-                >
+              <div className="w-[270px]">
+                <label className="block font-medium text-[13px] text-[#0d1b2a] mb-[8px]">
                   Last Name
                 </label>
                 <input
@@ -632,34 +360,14 @@ export default function PaymentMethod({
                     handleBillingChange("lastName", e.target.value)
                   }
                   placeholder="Smith"
-                  style={{
-                    width: "100%",
-                    height: "42px",
-                    padding: "0 12px",
-                    border: "1px solid #bebebe",
-                    borderRadius: "8px",
-                    fontFamily: "Roboto, sans-serif",
-                    fontSize: "12px",
-                    fontWeight: 400,
-                    color: "#0d1b2a",
-                    letterSpacing: "0.5px",
-                  }}
+                  className="w-full h-[42px] px-[12px] border border-[#bebebe] rounded-[8px] text-[12px] font-normal text-[#0d1b2a] tracking-[0.5px]"
                 />
               </div>
             </div>
 
             {/* Company Name */}
             <div>
-              <label
-                style={{
-                  display: "block",
-                  fontFamily: "Poppins, sans-serif",
-                  fontWeight: 500,
-                  fontSize: "13px",
-                  color: "#0d1b2a",
-                  marginBottom: "8px",
-                }}
-              >
+              <label className="block font-medium text-[13px] text-[#0d1b2a] mb-[8px]">
                 Company Name
               </label>
               <input
@@ -669,33 +377,13 @@ export default function PaymentMethod({
                   handleBillingChange("companyName", e.target.value)
                 }
                 placeholder="MetelCorp Ltd"
-                style={{
-                  width: "100%",
-                  height: "42px",
-                  padding: "0 12px",
-                  border: "1px solid #bebebe",
-                  borderRadius: "8px",
-                  fontFamily: "Roboto, sans-serif",
-                  fontSize: "12px",
-                  fontWeight: 400,
-                  color: "#0d1b2a",
-                  letterSpacing: "0.5px",
-                }}
+                className="w-full h-[42px] px-[12px] border border-[#bebebe] rounded-[8px] text-[12px] font-normal text-[#0d1b2a] tracking-[0.5px]"
               />
             </div>
 
             {/* Street Address */}
             <div>
-              <label
-                style={{
-                  display: "block",
-                  fontFamily: "Poppins, sans-serif",
-                  fontWeight: 500,
-                  fontSize: "13px",
-                  color: "#0d1b2a",
-                  marginBottom: "8px",
-                }}
-              >
+              <label className="block font-medium text-[13px] text-[#0d1b2a] mb-[8px]">
                 Street Address
               </label>
               <input
@@ -705,34 +393,14 @@ export default function PaymentMethod({
                   handleBillingChange("streetAddress", e.target.value)
                 }
                 placeholder="123 Business Ave"
-                style={{
-                  width: "100%",
-                  height: "42px",
-                  padding: "0 12px",
-                  border: "1px solid #bebebe",
-                  borderRadius: "8px",
-                  fontFamily: "Roboto, sans-serif",
-                  fontSize: "12px",
-                  fontWeight: 400,
-                  color: "#0d1b2a",
-                  letterSpacing: "0.5px",
-                }}
+                className="w-full h-[42px] px-[12px] border border-[#bebebe] rounded-[8px] text-[12px] font-normal text-[#0d1b2a] tracking-[0.5px]"
               />
             </div>
 
             {/* City, State, ZIP */}
-            <div style={{ display: "flex", gap: "19px" }}>
-              <div style={{ width: "191px" }}>
-                <label
-                  style={{
-                    display: "block",
-                    fontFamily: "Poppins, sans-serif",
-                    fontWeight: 500,
-                    fontSize: "13px",
-                    color: "#0d1b2a",
-                    marginBottom: "8px",
-                  }}
-                >
+            <div className="flex gap-[19px]">
+              <div className="w-[191px]">
+                <label className="block font-medium text-[13px] text-[#0d1b2a] mb-[8px]">
                   City
                 </label>
                 <input
@@ -740,31 +408,11 @@ export default function PaymentMethod({
                   value={billingAddress.city}
                   onChange={(e) => handleBillingChange("city", e.target.value)}
                   placeholder="Metropolis"
-                  style={{
-                    width: "100%",
-                    height: "42px",
-                    padding: "0 12px",
-                    border: "1px solid #bebebe",
-                    borderRadius: "8px",
-                    fontFamily: "Roboto, sans-serif",
-                    fontSize: "12px",
-                    fontWeight: 400,
-                    color: "#0d1b2a",
-                    letterSpacing: "0.5px",
-                  }}
+                  className="w-full h-[42px] px-[12px] border border-[#bebebe] rounded-[8px] text-[12px] font-normal text-[#0d1b2a] tracking-[0.5px]"
                 />
               </div>
-              <div style={{ width: "195px" }}>
-                <label
-                  style={{
-                    display: "block",
-                    fontFamily: "Poppins, sans-serif",
-                    fontWeight: 500,
-                    fontSize: "13px",
-                    color: "#0d1b2a",
-                    marginBottom: "8px",
-                  }}
-                >
+              <div className="w-[195px]">
+                <label className="block font-medium text-[13px] text-[#0d1b2a] mb-[8px]">
                   State
                 </label>
                 <input
@@ -772,31 +420,11 @@ export default function PaymentMethod({
                   value={billingAddress.state}
                   onChange={(e) => handleBillingChange("state", e.target.value)}
                   placeholder="Karnataka"
-                  style={{
-                    width: "100%",
-                    height: "42px",
-                    padding: "0 12px",
-                    border: "1px solid #bebebe",
-                    borderRadius: "8px",
-                    fontFamily: "Roboto, sans-serif",
-                    fontSize: "12px",
-                    fontWeight: 400,
-                    color: "#0d1b2a",
-                    letterSpacing: "0.5px",
-                  }}
+                  className="w-full h-[42px] px-[12px] border border-[#bebebe] rounded-[8px] text-[12px] font-normal text-[#0d1b2a] tracking-[0.5px]"
                 />
               </div>
-              <div style={{ width: "150px" }}>
-                <label
-                  style={{
-                    display: "block",
-                    fontFamily: "Poppins, sans-serif",
-                    fontWeight: 500,
-                    fontSize: "13px",
-                    color: "#0d1b2a",
-                    marginBottom: "8px",
-                  }}
-                >
+              <div className="w-[150px]">
+                <label className="block font-medium text-[13px] text-[#0d1b2a] mb-[8px]">
                   ZIP Code
                 </label>
                 <input
@@ -806,18 +434,7 @@ export default function PaymentMethod({
                     handleBillingChange("zipCode", e.target.value)
                   }
                   placeholder="90210"
-                  style={{
-                    width: "100%",
-                    height: "42px",
-                    padding: "0 12px",
-                    border: "1px solid #bebebe",
-                    borderRadius: "8px",
-                    fontFamily: "Roboto, sans-serif",
-                    fontSize: "12px",
-                    fontWeight: 400,
-                    color: "#0d1b2a",
-                    letterSpacing: "0.5px",
-                  }}
+                  className="w-full h-[42px] px-[12px] border border-[#bebebe] rounded-[8px] text-[12px] font-normal text-[#0d1b2a] tracking-[0.5px]"
                 />
               </div>
             </div>
@@ -826,22 +443,10 @@ export default function PaymentMethod({
       </div>
 
       {/* Navigation Buttons */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          gap: "11px",
-          marginTop: "0px",
-        }}
-      >
+      <div className="flex justify-between gap-[11px] mt-0">
         <button
           onClick={onBack}
-          className="h-[45px] px-12 bg-white border border-[#9c9c9c] rounded-[11px] text-[15px] font-semibold text-[#9c9c9c] hover:bg-gray-50 transition-colors"
-          style={{
-            fontFamily: "Poppins, sans-serif",
-            fontWeight: 600,
-            cursor: "pointer",
-          }}
+          className="h-[45px] px-12 bg-white border border-[#9c9c9c] rounded-[11px] text-[15px] font-semibold text-[#9c9c9c] hover:bg-gray-50 transition-colors cursor-pointer"
         >
           Previous Step
         </button>
@@ -855,7 +460,6 @@ export default function PaymentMethod({
               !paymentDetails.cvv)
           }
           className="h-[45px] px-12 bg-[#1e3a8a] rounded-[11px] text-[15px] font-semibold text-white hover:bg-[#2d4a99] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-          style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600 }}
         >
           Continue
         </button>

@@ -5,11 +5,13 @@ export default function TestimonialsSection() {
     <section className="bg-[#EEFFEF] py-10 px-2 md:py-16 md:px-8 w-full mx-auto">
       <div className="w-full max-w-[1600px] mx-auto">
         <div className="text-center mb-8 md:mb-16">
-          <p className="text-xs md:text-sm font-semibold text-[#00B67A] mb-1 tracking-wide uppercase">
+          <p className="text-xs md:text-sm font-semibold text-[#0D1B2A] mb-1 tracking-wide uppercase">
             Success Stories
           </p>
-          <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-2 md:mb-4 leading-tight">
-            Real Results from Real Buyers
+          <h2 className="text-2xl md:text-4xl font-bold text-[#0D1B2A] mb-2 md:mb-4 leading-tight">
+            Real
+            <span className="text-[#2AAE7A]"> Results </span>
+            from Real <span className="text-[#2AAE7A]"> Buyers </span>
           </h2>
           <p className="text-base md:text-xl text-gray-600">
             See how procurement teams are achieving significant cost savings

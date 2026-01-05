@@ -41,18 +41,18 @@ export default function TeamSection() {
         <div>
           <div className="relative w-full flex flex-col items-center">
             {/* Subtitle */}
-            <p className="font-inter font-medium text-lg text-center text-[#868181] mb-4">
+            <p className="font-medium text-lg text-center text-[#868181] mb-4">
               Our Team
             </p>
 
             {/* Title */}
-            <h2 className="font-poppins font-bold text-5xl text-center text-[#0d1b2a] mb-4">
+            <h2 className="font-bold text-5xl text-center text-[#0d1b2a] mb-4">
               Meet the People Behind{" "}
               <span className="text-[#2ec096]">Zeerostock</span>
             </h2>
 
             {/* Description */}
-            <p className="font-inter font-semibold text-lg text-center text-[#868181] max-w-3xl mb-20">
+            <p className="font-semibold text-lg text-center text-[#868181] max-w-3xl mb-20">
               Our experienced leadership team brings together decades of
               expertise in technology, supply chain and B2B marketplaces.
             </p>
@@ -72,17 +72,17 @@ export default function TeamSection() {
                     </div>
 
                     {/* Name */}
-                    <h3 className="font-poppins font-semibold text-2xl text-black text-center mb-2">
+                    <h3 className="font-semibold text-2xl text-black text-center mb-2">
                       {member.name}
                     </h3>
 
                     {/* Role */}
-                    <p className="font-inter font-semibold text-lg text-[#3752ff] text-center mb-3">
+                    <p className="font-semibold text-lg text-[#3752ff] text-center mb-3">
                       {member.role}
                     </p>
 
                     {/* Bio */}
-                    <p className="font-inter font-medium text-sm text-black text-center max-w-[250px] leading-relaxed">
+                    <p className="font-medium text-sm text-black text-center max-w-[250px] leading-relaxed">
                       {member.bio}
                     </p>
                   </div>

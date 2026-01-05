@@ -14,99 +14,31 @@ export default function TrendingIndustriesSection() {
   ];
 
   return (
-    <div
-      style={{
-        maxWidth: "960px",
-        margin: "0 auto",
-        padding: "45px 0",
-      }}
-    >
+    <div className="mx-auto max-w-[960px] py-[45px]">
       {/* Header with icon and title */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "15px",
-          marginBottom: "29px",
-        }}
-      >
-        <img
-          src={iconChart}
-          alt="Chart"
-          style={{
-            width: "29px",
-            height: "29px",
-          }}
-        />
-        <h2
-          style={{
-            fontFamily: "Poppins, sans-serif",
-            fontWeight: 600,
-            fontSize: "26px",
-            color: "#0d1b2a",
-            margin: 0,
-          }}
-        >
+      <div className="mb-[29px] flex items-center gap-[15px]">
+        <img src={iconChart} alt="Chart" className="h-[29px] w-[29px]" />
+        <h2 className="m-0 text-[26px] font-semibold text-[#0d1b2a]">
           Trending Industries
         </h2>
-        <div
-          style={{
-            background: "#FFF1C2",
-            borderRadius: "4px",
-            padding: "2px 11px",
-            marginLeft: "15px",
-          }}
-        >
-          <span
-            style={{
-              fontFamily: "Poppins, sans-serif",
-              fontWeight: 500,
-              fontSize: "15px",
-              color: "#0d1b2a",
-            }}
-          >
+        <div className="ml-[15px] rounded-[4px] bg-[#FFF1C2] px-[11px] py-[2px]">
+          <span className="text-[15px] font-medium text-[#0d1b2a]">
             Hot Markets
           </span>
         </div>
       </div>
 
       {/* Industries grid */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(6, 138px)",
-          gap: "15px",
-          justifyContent: "space-between",
-        }}
-      >
+      <div className="grid grid-cols-[repeat(6,138px)] justify-between gap-[15px]">
         {industries.map((industry, index) => (
           <div
             key={index}
-            style={{
-              width: "138px",
-              height: "138px",
-              background: "white",
-              borderRadius: "50%",
-              overflow: "hidden",
-              cursor: "pointer",
-              boxShadow: "0px 0px 4px 0px rgba(24,181,34,0.25)",
-              transition: "transform 0.2s",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "scale(1.05)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "scale(1)";
-            }}
+            className="h-[138px] w-[138px] cursor-pointer overflow-hidden rounded-full bg-white shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)] transition-transform duration-200 hover:scale-105"
           >
             <img
               src={industry.image}
               alt={industry.name}
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-              }}
+              className="h-full w-full object-cover"
             />
           </div>
         ))}

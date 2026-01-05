@@ -41,17 +41,17 @@ export default function TimelineSection() {
       <div className="w-full max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative w-full flex flex-col items-center">
           {/* Subtitle */}
-          <p className="font-inter font-medium text-lg text-center text-[#868181] mb-4">
+          <p className="font-medium text-lg text-center text-[#868181] mb-4">
             Our Journey
           </p>
 
           {/* Title */}
-          <h2 className="font-poppins font-bold text-5xl text-center text-[#0d1b2a] mb-4">
+          <h2 className="font-bold text-5xl text-center text-[#0d1b2a] mb-4">
             From Idea to <span className="text-[#2ec096]">Global Impact</span>
           </h2>
 
           {/* Description */}
-          <p className="font-inter font-semibold text-lg text-center text-[#868181] max-w-3xl mb-20">
+          <p className="font-semibold text-lg text-center text-[#868181] max-w-3xl mb-20">
             See how we&apos;ve grown from a simple idea to a platform
             transforming global commerce
           </p>
@@ -79,7 +79,7 @@ export default function TimelineSection() {
                     <div className="bg-[#eeffef] rounded-[30px] shadow-[0px_0px_15px_2px_rgba(24,181,34,0.4)] p-8">
                       {/* Year */}
                       <p
-                        className={`font-inter font-semibold text-3xl text-[#0bcd00] mb-3 ${
+                        className={`font-semibold text-3xl text-[#0bcd00] mb-3 ${
                           milestone.position === "left"
                             ? "text-right"
                             : "text-left"
@@ -90,7 +90,7 @@ export default function TimelineSection() {
 
                       {/* Title */}
                       <p
-                        className={`font-inter font-semibold text-2xl text-black mb-3 ${
+                        className={`font-semibold text-2xl text-black mb-3 ${
                           milestone.position === "left"
                             ? "text-right"
                             : "text-left"
@@ -101,7 +101,7 @@ export default function TimelineSection() {
 
                       {/* Description */}
                       <p
-                        className={`font-inter font-medium text-lg text-black leading-relaxed ${
+                        className={`font-medium text-lg text-black leading-relaxed ${
                           milestone.position === "left"
                             ? "text-right"
                             : "text-left"

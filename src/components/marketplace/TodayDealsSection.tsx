@@ -36,50 +36,16 @@ export default function TodayDealsSection() {
 
   if (isLoading) {
     return (
-      <div style={{ maxWidth: "960px", margin: "0 auto", padding: "45px 0" }}>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "15px",
-            marginBottom: "30px",
-          }}
-        >
-          <div
-            style={{
-              width: "60px",
-              height: "60px",
-              background: "#f3f4f6",
-              borderRadius: "10px",
-            }}
-            className="animate-pulse"
-          ></div>
-          <div
-            style={{
-              height: "40px",
-              width: "300px",
-              background: "#f3f4f6",
-              borderRadius: "10px",
-            }}
-            className="animate-pulse"
-          ></div>
+      <div className="mx-auto max-w-[960px] py-[45px]">
+        <div className="mb-[30px] flex items-center gap-[15px]">
+          <div className="h-[60px] w-[60px] animate-pulse rounded-[10px] bg-[#f3f4f6]"></div>
+          <div className="h-[40px] w-[300px] animate-pulse rounded-[10px] bg-[#f3f4f6]"></div>
         </div>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "32px",
-          }}
-        >
+        <div className="grid grid-cols-3 gap-[32px]">
           {[1, 2, 3].map((i) => (
             <div
               key={i}
-              style={{
-                height: "428px",
-                background: "#f3f4f6",
-                borderRadius: "20px",
-              }}
-              className="animate-pulse"
+              className="h-[428px] animate-pulse rounded-[20px] bg-[#f3f4f6]"
             ></div>
           ))}
         </div>
@@ -92,23 +58,16 @@ export default function TodayDealsSection() {
   }
 
   return (
-    <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "60px 0" }}>
+    <div className="mx-auto max-w-[1280px] py-[60px]">
       {/* Section Header */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "20px",
-          marginBottom: "40px",
-        }}
-      >
+      <div className="mb-[40px] flex items-center gap-[20px]">
         {/* Fire Icon */}
-        <div style={{ width: "58px", height: "60px", position: "relative" }}>
+        <div className="relative h-[60px] w-[58px]">
           <svg
             width="38"
             height="50"
             viewBox="0 0 38 50"
-            style={{ position: "absolute", left: "10px", top: "5px" }}
+            className="absolute left-[10px] top-[5px]"
           >
             <path
               d="M19 0C19 20 10 25 10 35C10 42 14 50 19 50C24 50 28 42 28 35C28 25 19 20 19 0Z"
@@ -123,33 +82,11 @@ export default function TodayDealsSection() {
 
         {/* Heading and Tag */}
         <div>
-          <h2
-            style={{
-              fontFamily: "Poppins, sans-serif",
-              fontWeight: 600,
-              fontSize: "35px",
-              color: "#0d1b2a",
-              margin: "0 0 8px 0",
-            }}
-          >
-            Today's Featured Deals
+          <h2 className="mb-[8px] text-[35px] font-semibold text-[#0d1b2a]">
+            Today&apos;s Featured Deals
           </h2>
-          <div
-            style={{
-              display: "inline-block",
-              background: "#FFD700",
-              padding: "3px 21.5px",
-              borderRadius: "5px",
-            }}
-          >
-            <span
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontWeight: 600,
-                fontSize: "18px",
-                color: "#0d1b2a",
-              }}
-            >
+          <div className="inline-block rounded-[5px] bg-[#FFD700] px-[21.5px] py-[3px]">
+            <span className="text-[18px] font-semibold text-[#0d1b2a]">
               Save up to 70%
             </span>
           </div>
@@ -157,132 +94,55 @@ export default function TodayDealsSection() {
       </div>
 
       {/* Deals Grid */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: "32px",
-        }}
-      >
+      <div className="grid grid-cols-3 gap-[32px]">
         {deals.map((deal, index) => (
           <Link
             key={deal?.productId || index}
             href={`/product/${deal?.slug || "unknown"}`}
-            style={{ textDecoration: "none" }}
+            className="no-underline"
           >
-            <div
-              style={{
-                background: "white",
-                borderRadius: "15px",
-                boxShadow: "0px 0px 8px 0px rgba(24,181,34,0.25)",
-                overflow: "hidden",
-                cursor: "pointer",
-                transition: "transform 0.2s",
-                height: "428px",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-4px)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-              }}
-            >
+            <div className="h-[428px] cursor-pointer overflow-hidden rounded-[15px] bg-white shadow-[0px_0px_8px_0px_rgba(24,181,34,0.25)] transition-transform duration-200 hover:-translate-y-[4px]">
               {/* Product Image */}
-              <div
-                style={{
-                  width: "260px",
-                  height: "152px",
-                  margin: "8px",
-                  borderRadius: "15px",
-                  background: "#f3f4f6",
-                  overflow: "hidden",
-                  position: "relative",
-                }}
-              >
+              <div className="relative m-[8px] h-[152px] w-[260px] overflow-hidden rounded-[15px] bg-[#f3f4f6]">
                 {deal?.image ? (
                   <img
                     src={deal.image}
                     alt={deal?.title || "Deal"}
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                    }}
+                    className="h-full w-full object-cover"
                     onError={(e) => {
                       e.currentTarget.style.display = "none";
                     }}
                   />
                 ) : (
-                  <div
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      color: "#9ca3af",
-                      fontSize: "14px",
-                    }}
-                  >
+                  <div className="flex h-full w-full items-center justify-center text-[14px] text-[#9ca3af]">
                     Product Image
                   </div>
                 )}
               </div>
 
               {/* Product Info */}
-              <div style={{ padding: "0 20px" }}>
+              <div className="px-[20px]">
                 {/* Title */}
-                <h3
-                  style={{
-                    fontFamily: "Poppins, sans-serif",
-                    fontWeight: 500,
-                    fontSize: "15px",
-                    color: "#0d1b2a",
-                    margin: "12px 0 7px 0",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                  }}
-                >
+                <h3 className="mb-[7px] mt-[12px] overflow-hidden text-ellipsis whitespace-nowrap text-[15px] font-medium text-[#0d1b2a]">
                   {deal?.title || "Special Deal"}
                 </h3>
 
                 {/* Location and Rating */}
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginBottom: "14px",
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "5px",
-                    }}
-                  >
+                <div className="mb-[14px] flex items-center justify-between">
+                  <div className="flex items-center gap-[5px]">
                     <svg width="17" height="18" viewBox="0 0 17 18" fill="none">
                       <path
                         d="M8.5 0C5.5 0 3 2.5 3 5.5C3 9.5 8.5 16 8.5 16C8.5 16 14 9.5 14 5.5C14 2.5 11.5 0 8.5 0ZM8.5 7.5C7.4 7.5 6.5 6.6 6.5 5.5C6.5 4.4 7.4 3.5 8.5 3.5C9.6 3.5 10.5 4.4 10.5 5.5C10.5 6.6 9.6 7.5 8.5 7.5Z"
                         fill="#0d1b2a"
                       />
                     </svg>
-                    <span
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontWeight: 500,
-                        fontSize: "12px",
-                        color: "#0d1b2a",
-                      }}
-                    >
+                    <span className="text-[12px] font-medium text-[#0d1b2a]">
                       {deal?.city || "Mumbai"}, IN
                     </span>
                   </div>
 
                   {/* Star Rating */}
-                  <div style={{ display: "flex", gap: "3px" }}>
+                  <div className="flex gap-[3px]">
                     {[...Array(5)].map((_, i) => (
                       <svg
                         key={i}
@@ -298,53 +158,21 @@ export default function TodayDealsSection() {
                 </div>
 
                 {/* Price */}
-                <div style={{ marginBottom: "23px" }}>
-                  <span
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontWeight: 700,
-                      fontSize: "29px",
-                      color: "#1e3a8a",
-                      marginRight: "12px",
-                    }}
-                  >
+                <div className="mb-[23px]">
+                  <span className="mr-[12px] text-[29px] font-bold text-[#1e3a8a]">
                     ₹{(deal?.price || 15000).toLocaleString("en-IN")}
                   </span>
                   {deal?.originalPrice &&
                     deal.originalPrice > (deal.price || 0) && (
-                      <span
-                        style={{
-                          fontFamily: "Inter, sans-serif",
-                          fontWeight: 700,
-                          fontSize: "21px",
-                          color: "#787878",
-                          textDecoration: "line-through",
-                          position: "relative",
-                        }}
-                      >
+                      <span className="relative text-[21px] font-bold text-[#787878] line-through">
                         ₹{deal.originalPrice.toLocaleString("en-IN")}
                       </span>
                     )}
                 </div>
 
                 {/* View Deal Button */}
-                <div
-                  style={{
-                    background: "#1e3a8a",
-                    borderRadius: "15px",
-                    padding: "14px",
-                    textAlign: "center",
-                    cursor: "pointer",
-                  }}
-                >
-                  <span
-                    style={{
-                      fontFamily: "Poppins, sans-serif",
-                      fontWeight: 600,
-                      fontSize: "22px",
-                      color: "white",
-                    }}
-                  >
+                <div className="cursor-pointer rounded-[15px] bg-[#1e3a8a] p-[14px] text-center">
+                  <span className="text-[22px] font-semibold text-white">
                     View Deal
                   </span>
                 </div>

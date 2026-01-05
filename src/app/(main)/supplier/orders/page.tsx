@@ -77,16 +77,16 @@ export default function SupplierOrders() {
   // Role check
   if (user && user.activeRole !== "supplier") {
     return (
-      <div className="min-h-screen bg-[#EEFBF6] flex items-center justify-center">
-        <div className="text-center max-w-md mx-auto p-8">
+      <div className="flex min-h-screen items-center justify-center bg-[#EEFBF6]">
+        <div className="mx-auto max-w-md p-8 text-center">
           <div className="mb-6">
-            <div className="w-16 h-16 bg-red-100 border-2 border-red-600 mx-auto flex items-center justify-center mb-4">
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center border-2 border-red-600 bg-red-100">
               <span className="text-3xl">⚠️</span>
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">
+            <h2 className="mb-2 text-2xl font-bold text-gray-900">
               Access Restricted
             </h2>
-            <p className="text-gray-600 mb-6">
+            <p className="mb-6 text-gray-600">
               You need to be in supplier mode to view orders. Your current role
               is: <strong>{user.activeRole}</strong>
             </p>
@@ -94,13 +94,13 @@ export default function SupplierOrders() {
           <div className="space-y-3">
             <button
               onClick={() => (window.location.href = "/supplier")}
-              className="w-full px-6 py-3 bg-gray-900 text-white font-semibold border-2 border-gray-900 hover:bg-gray-800 transition-colors"
+              className="w-full border-2 border-gray-900 bg-gray-900 px-6 py-3 font-semibold text-white transition-colors hover:bg-gray-800"
             >
               Switch to Supplier Mode
             </button>
             <button
               onClick={() => (window.location.href = "/")}
-              className="w-full px-6 py-3 bg-[#EEFBF6] text-gray-900 font-semibold border-2 border-gray-900 hover:bg-gray-50 transition-colors"
+              className="w-full border-2 border-gray-900 bg-[#EEFBF6] px-6 py-3 font-semibold text-gray-900 transition-colors hover:bg-gray-50"
             >
               Go to Homepage
             </button>
@@ -112,9 +112,9 @@ export default function SupplierOrders() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#EEFBF6] flex items-center justify-center">
+      <div className="flex min-h-screen items-center justify-center bg-[#EEFBF6]">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-gray-300 border-t-gray-900 rounded-full animate-spin mx-auto mb-4"></div>
+          <div className="mx-auto mb-4 h-16 w-16 animate-spin rounded-full border-4 border-gray-300 border-t-gray-900"></div>
           <p className="text-gray-600">Loading orders...</p>
         </div>
       </div>
@@ -123,18 +123,18 @@ export default function SupplierOrders() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-[#EEFBF6] flex items-center justify-center">
-        <div className="text-center max-w-md mx-auto p-8">
+      <div className="flex min-h-screen items-center justify-center bg-[#EEFBF6]">
+        <div className="mx-auto max-w-md p-8 text-center">
           <div className="mb-6">
-            <div className="w-16 h-16 bg-red-100 border-2 border-red-600 mx-auto flex items-center justify-center mb-4">
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center border-2 border-red-600 bg-red-100">
               <span className="text-3xl">❌</span>
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Error</h2>
-            <p className="text-gray-600 mb-6">{error}</p>
+            <h2 className="mb-2 text-2xl font-bold text-gray-900">Error</h2>
+            <p className="mb-6 text-gray-600">{error}</p>
           </div>
           <button
             onClick={fetchOrders}
-            className="px-6 py-3 bg-gray-900 text-white font-semibold border-2 border-gray-900 hover:bg-gray-800 transition-colors"
+            className="border-2 border-gray-900 bg-gray-900 px-6 py-3 font-semibold text-white transition-colors hover:bg-gray-800"
           >
             Retry
           </button>
@@ -144,30 +144,12 @@ export default function SupplierOrders() {
   }
 
   return (
-    <div
-      className="min-h-screen bg-[#EEFBF6] px-12 py-6"
-      style={{ maxWidth: "100%", margin: "0 auto" }}
-    >
+    <div className="mx-auto min-h-screen w-full max-w-full bg-[#EEFBF6] px-12 py-6">
       {/* Header */}
-      <div className="flex items-center justify-between mb-9">
-        <h1
-          className="text-[27px] font-semibold text-[#0d1b2a]"
-          style={{ fontFamily: "Poppins, sans-serif" }}
-        >
-          My orders
-        </h1>
-        <button
-          className="bg-[#1e3a8a] text-white rounded-[11px] flex items-center gap-2 hover:bg-[#1e40af] transition-colors"
-          style={{
-            width: "180px",
-            height: "45px",
-            fontFamily: "Poppins, sans-serif",
-            fontSize: "14px",
-            fontWeight: 600,
-            justifyContent: "center",
-          }}
-        >
-          <Download className="w-5 h-5" />
+      <div className="mb-9 flex items-center justify-between">
+        <h1 className="text-[27px] font-semibold text-[#0d1b2a]">My orders</h1>
+        <button className="flex h-[45px] w-[180px] items-center justify-center gap-2 rounded-[11px] bg-[#1e3a8a] text-[14px] font-semibold text-white transition-colors hover:bg-[#1e40af]">
+          <Download className="h-5 w-5" />
           Export Orders
         </button>
       </div>
@@ -175,119 +157,50 @@ export default function SupplierOrders() {
       {/* Table */}
       {orders.length > 0 ? (
         <>
-          <div
-            className="bg-white rounded-[15px] overflow-hidden"
-            style={{
-              boxShadow: "0px 0px 4.5px 0px rgba(0, 0, 0, 0.25)",
-              width: "100%",
-            }}
-          >
+          <div className="w-full overflow-hidden rounded-[15px] bg-white shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)]">
             {/* Table Headers */}
-            <div
-              className="flex items-center h-[69px] border-b"
-              style={{
-                borderColor: "#e5e5e5",
-                paddingLeft: "30px",
-                paddingRight: "30px",
-              }}
-            >
-              <div style={{ flex: "1 1 120px", minWidth: "120px" }}>
-                <p
-                  className="text-[15px] font-medium text-[#0d1b2a]"
-                  style={{
-                    fontFamily: "Poppins, sans-serif",
-                    letterSpacing: "0.38px",
-                    lineHeight: "18px",
-                  }}
-                >
+            <div className="flex h-[69px] items-center border-b border-[#e5e5e5] px-[30px]">
+              <div className="flex-[1_1_120px] min-w-[120px]">
+                <p className="text-[15px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
                   ORDER ID
                 </p>
               </div>
-              <div style={{ flex: "1 1 150px", minWidth: "150px" }}>
-                <p
-                  className="text-[15px] font-medium text-[#0d1b2a]"
-                  style={{
-                    fontFamily: "Poppins, sans-serif",
-                    letterSpacing: "0.38px",
-                    lineHeight: "18px",
-                  }}
-                >
+              <div className="flex-[1_1_150px] min-w-[150px]">
+                <p className="text-[15px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
                   SUPPLIER
                 </p>
               </div>
-              <div style={{ flex: "1.5 1 200px", minWidth: "200px" }}>
-                <p
-                  className="text-[15px] font-medium text-[#0d1b2a]"
-                  style={{
-                    fontFamily: "Poppins, sans-serif",
-                    letterSpacing: "0.38px",
-                    lineHeight: "18px",
-                  }}
-                >
+              <div className="flex-[1.5_1_200px] min-w-[200px]">
+                <p className="text-[15px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
                   ITEMS
                 </p>
               </div>
-              <div style={{ flex: "1 1 120px", minWidth: "120px" }}>
-                <p
-                  className="text-[15px] font-medium text-[#0d1b2a]"
-                  style={{
-                    fontFamily: "Poppins, sans-serif",
-                    letterSpacing: "0.38px",
-                    lineHeight: "18px",
-                  }}
-                >
+              <div className="flex-[1_1_120px] min-w-[120px]">
+                <p className="text-[15px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
                   AMOUNT
                 </p>
               </div>
-              <div style={{ flex: "1 1 120px", minWidth: "120px" }}>
-                <p
-                  className="text-[15px] font-medium text-[#0d1b2a]"
-                  style={{
-                    fontFamily: "Poppins, sans-serif",
-                    letterSpacing: "0.38px",
-                    lineHeight: "18px",
-                  }}
-                >
+              <div className="flex-[1_1_120px] min-w-[120px]">
+                <p className="text-[15px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
                   STATUS
                 </p>
               </div>
-              <div style={{ flex: "1 1 120px", minWidth: "120px" }}>
-                <p
-                  className="text-[15px] font-medium text-[#0d1b2a]"
-                  style={{
-                    fontFamily: "Poppins, sans-serif",
-                    letterSpacing: "0.38px",
-                    lineHeight: "18px",
-                  }}
-                >
+              <div className="flex-[1_1_120px] min-w-[120px]">
+                <p className="text-[15px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
                   ORDER
                   <br />
                   DATE
                 </p>
               </div>
-              <div style={{ flex: "1 1 120px", minWidth: "120px" }}>
-                <p
-                  className="text-[15px] font-medium text-[#0d1b2a]"
-                  style={{
-                    fontFamily: "Poppins, sans-serif",
-                    letterSpacing: "0.38px",
-                    lineHeight: "18px",
-                  }}
-                >
+              <div className="flex-[1_1_120px] min-w-[120px]">
+                <p className="text-[15px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
                   EXPECTED
                   <br />
                   DATE
                 </p>
               </div>
-              <div style={{ flex: "0 0 80px", minWidth: "80px" }}>
-                <p
-                  className="text-[15px] font-medium text-[#0d1b2a]"
-                  style={{
-                    fontFamily: "Poppins, sans-serif",
-                    letterSpacing: "0.38px",
-                    lineHeight: "18px",
-                  }}
-                >
+              <div className="flex-[0_0_80px] min-w-[80px]">
+                <p className="text-[15px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
                   ACTIONS
                 </p>
               </div>
@@ -297,80 +210,41 @@ export default function SupplierOrders() {
             {orders.map((order) => (
               <div
                 key={order.id}
-                className="flex items-center h-[75px] border-b hover:bg-gray-50 transition-colors"
-                style={{
-                  borderColor: "#e5e5e5",
-                  paddingLeft: "30px",
-                  paddingRight: "30px",
-                }}
+                className="flex h-[75px] items-center border-b border-[#e5e5e5] px-[30px] transition-colors hover:bg-gray-50"
               >
                 {/* Order ID */}
-                <div style={{ flex: "1 1 120px", minWidth: "120px" }}>
-                  <p
-                    className="text-[15px] font-medium text-[#9c9c9c]"
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      letterSpacing: "0.38px",
-                      lineHeight: "21px",
-                    }}
-                  >
+                <div className="flex-[1_1_120px] min-w-[120px]">
+                  <p className="text-[15px] font-medium leading-[21px] tracking-[0.38px] text-[#9c9c9c]">
                     {order.order_number}
                   </p>
                 </div>
 
                 {/* Supplier/Buyer */}
-                <div style={{ flex: "1 1 150px", minWidth: "150px" }}>
-                  <p
-                    className="text-[15px] font-normal text-black"
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      letterSpacing: "0.38px",
-                      lineHeight: "21px",
-                      borderBottom: "2px solid #2aae7a",
-                      display: "inline-block",
-                      paddingBottom: "2px",
-                    }}
-                  >
+                <div className="flex-[1_1_150px] min-w-[150px]">
+                  <p className="inline-block border-b-2 border-[#2aae7a] pb-[2px] text-[15px] font-normal leading-[21px] tracking-[0.38px] text-black">
                     {order.buyer_company || order.buyer_name}
                   </p>
                 </div>
 
                 {/* Items */}
-                <div style={{ flex: "1.5 1 200px", minWidth: "200px" }}>
-                  <p
-                    className="text-[15px] font-normal text-black truncate"
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      letterSpacing: "0.38px",
-                      lineHeight: "21px",
-                    }}
-                  >
+                <div className="flex-[1.5_1_200px] min-w-[200px]">
+                  <p className="truncate text-[15px] font-normal leading-[21px] tracking-[0.38px] text-black">
                     {order.items[0]?.product_title || "N/A"}
                   </p>
                 </div>
 
                 {/* Amount */}
-                <div style={{ flex: "1 1 120px", minWidth: "120px" }}>
-                  <p
-                    className="text-[15px] font-normal text-black"
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      letterSpacing: "0.38px",
-                      lineHeight: "21px",
-                    }}
-                  >
+                <div className="flex-[1_1_120px] min-w-[120px]">
+                  <p className="text-[15px] font-normal leading-[21px] tracking-[0.38px] text-black">
                     {formatCurrency(order.total_amount)}
                   </p>
                 </div>
 
                 {/* Status */}
-                <div style={{ flex: "1 1 120px", minWidth: "120px" }}>
+                <div className="flex-[1_1_120px] min-w-[120px]">
                   <p
-                    className="text-[15px] font-normal capitalize"
+                    className="text-[15px] font-normal capitalize leading-[21px] tracking-[0.38px]"
                     style={{
-                      fontFamily: "Inter, sans-serif",
-                      letterSpacing: "0.38px",
-                      lineHeight: "21px",
                       color: getStatusColor(order.status),
                     }}
                   >
@@ -379,40 +253,23 @@ export default function SupplierOrders() {
                 </div>
 
                 {/* Order Date */}
-                <div style={{ flex: "1 1 120px", minWidth: "120px" }}>
-                  <p
-                    className="text-[15px] font-normal text-black"
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      letterSpacing: "0.38px",
-                      lineHeight: "21px",
-                    }}
-                  >
+                <div className="flex-[1_1_120px] min-w-[120px]">
+                  <p className="text-[15px] font-normal leading-[21px] tracking-[0.38px] text-black">
                     {formatDate(order.created_at)}
                   </p>
                 </div>
 
                 {/* Expected Date */}
-                <div style={{ flex: "1 1 120px", minWidth: "120px" }}>
-                  <p
-                    className="text-[15px] font-normal text-black"
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      letterSpacing: "0.38px",
-                      lineHeight: "21px",
-                    }}
-                  >
+                <div className="flex-[1_1_120px] min-w-[120px]">
+                  <p className="text-[15px] font-normal leading-[21px] tracking-[0.38px] text-black">
                     {formatDate(order.updated_at)}
                   </p>
                 </div>
 
                 {/* Actions */}
-                <div style={{ flex: "0 0 80px", minWidth: "80px" }}>
-                  <button
-                    className="border border-[#747474] rounded-[8px] p-1.5 hover:bg-gray-100 transition-colors"
-                    style={{ borderWidth: "0.38px" }}
-                  >
-                    <MoreVertical className="w-5 h-5 text-[#747474]" />
+                <div className="flex-[0_0_80px] min-w-[80px]">
+                  <button className="rounded-[8px] border-[0.38px] border-[#747474] p-1.5 transition-colors hover:bg-gray-100">
+                    <MoreVertical className="h-5 w-5 text-[#747474]" />
                   </button>
                 </div>
               </div>
@@ -421,21 +278,17 @@ export default function SupplierOrders() {
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <div className="flex items-center justify-between mt-5">
-              <div
-                className="text-[11px] text-[#9c9c9c]"
-                style={{ fontFamily: "Poppins, sans-serif" }}
-              >
+            <div className="mt-5 flex items-center justify-between">
+              <div className="text-[11px] text-[#9c9c9c]">
                 Page {currentPage} of {totalPages}
               </div>
               <div className="flex gap-2">
                 <button
                   onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                   disabled={currentPage === 1}
-                  className="px-3 py-1.5 bg-[#EEFBF6] border border-[#9c9c9c] text-[#0d1b2a] rounded-[8px] text-[11px] font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors flex items-center gap-1.5"
-                  style={{ fontFamily: "Poppins, sans-serif" }}
+                  className="flex items-center gap-1.5 rounded-[8px] border border-[#9c9c9c] bg-[#EEFBF6] px-3 py-1.5 text-[11px] font-medium text-[#0d1b2a] transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                  <ChevronLeft className="w-3 h-3" />
+                  <ChevronLeft className="h-3 w-3" />
                   Previous
                 </button>
                 <button
@@ -443,37 +296,24 @@ export default function SupplierOrders() {
                     setCurrentPage((p) => Math.min(totalPages, p + 1))
                   }
                   disabled={currentPage === totalPages}
-                  className="px-3 py-1.5 bg-[#EEFBF6] border border-[#9c9c9c] text-[#0d1b2a] rounded-[8px] text-[11px] font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors flex items-center gap-1.5"
-                  style={{ fontFamily: "Poppins, sans-serif" }}
+                  className="flex items-center gap-1.5 rounded-[8px] border border-[#9c9c9c] bg-[#EEFBF6] px-3 py-1.5 text-[11px] font-medium text-[#0d1b2a] transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   Next
-                  <ChevronRight className="w-3 h-3" />
+                  <ChevronRight className="h-3 w-3" />
                 </button>
               </div>
             </div>
           )}
         </>
       ) : (
-        <div
-          className="bg-[#EEFBF6] rounded-[15px] p-9 text-center"
-          style={{
-            boxShadow: "0px 0px 4.5px 0px rgba(0, 0, 0, 0.25)",
-            width: "100%",
-          }}
-        >
-          <div className="w-12 h-12 bg-[#FAFAFA] mx-auto flex items-center justify-center mb-3 rounded-lg">
+        <div className="w-full rounded-[15px] bg-[#EEFBF6] p-9 text-center shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)]">
+          <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-[#FAFAFA]">
             <span className="text-2xl">📦</span>
           </div>
-          <h3
-            className="text-[15px] font-semibold text-[#0d1b2a] mb-1.5"
-            style={{ fontFamily: "Poppins, sans-serif" }}
-          >
+          <h3 className="mb-1.5 text-[15px] font-semibold text-[#0d1b2a]">
             No Orders Yet
           </h3>
-          <p
-            className="text-[12px] text-[#9c9c9c]"
-            style={{ fontFamily: "Poppins, sans-serif" }}
-          >
+          <p className="text-[12px] text-[#9c9c9c]">
             Orders from buyers will appear here
           </p>
         </div>

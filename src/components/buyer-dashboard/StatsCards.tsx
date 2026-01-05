@@ -60,19 +60,13 @@ export default function StatsCards({ stats, isLoading }: StatsCardsProps) {
 
             {/* Text Content */}
             <div className="ml-[68px]">
-              <p
-                className="text-[15px] font-medium text-[#9c9c9c] leading-normal mb-2"
-                style={{ fontFamily: "Inter, sans-serif" }}
-              >
+              <p className="text-[15px] font-medium text-[#9c9c9c] leading-normal mb-2">
                 {stat.label}
               </p>
               {isLoading ? (
                 <div className="animate-pulse bg-gray-200 h-6 w-15 rounded"></div>
               ) : (
-                <p
-                  className="text-[24px] font-semibold text-[#0d1b2a] leading-normal"
-                  style={{ fontFamily: "Poppins, sans-serif" }}
-                >
+                <p className="text-[24px] font-semibold text-[#0d1b2a] leading-normal">
                   {stat.value}
                 </p>
               )}

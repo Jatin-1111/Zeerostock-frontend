@@ -46,7 +46,7 @@ export default function BuyerSidebarContent() {
     <div className="px-1 pb-7">
       {/* SOURCING Section */}
       <div className="mt-[37px] mb-8">
-        <h3 className="font-['Poppins',sans-serif] font-medium text-[19px] text-black leading-normal px-5 mb-[29px]">
+        <h3 className="font-medium text-[19px] text-black leading-normal px-5 mb-[29px]">
           Sourcing
         </h3>
         <nav className="space-y-[5px]">
@@ -62,7 +62,7 @@ export default function BuyerSidebarContent() {
               <div className="w-[18px] h-[18px] shrink-0">
                 <FileDown className="w-[18px] h-[18px] text-[#2aae7a]" />
               </div>
-              <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#2aae7a] leading-normal flex-1 text-left">
+              <span className="font-medium text-[17px] text-[#2aae7a] leading-normal flex-1 text-left">
                 Dashboard
               </span>
               <div className="w-[18px] h-[18px] shrink-0">
@@ -82,7 +82,7 @@ export default function BuyerSidebarContent() {
                   className="flex items-center py-[15px] pl-[53px] hover:opacity-80"
                 >
                   <span
-                    className={`font-['Poppins',sans-serif] font-medium text-[14px] leading-normal ${
+                    className={`font-medium text-[14px] leading-normal ${
                       pathname === "/buyer/rfq/my-rfqs"
                         ? "text-[#2aae7a]"
                         : "text-[#8b8b8b]"
@@ -96,7 +96,7 @@ export default function BuyerSidebarContent() {
                   className="flex items-center py-[15px] pl-[53px] hover:opacity-80"
                 >
                   <span
-                    className={`font-['Poppins',sans-serif] font-medium text-[14px] leading-normal ${
+                    className={`font-medium text-[14px] leading-normal ${
                       pathname === "/buyer/rfq/post"
                         ? "text-[#2aae7a]"
                         : "text-[#8b8b8b]"
@@ -110,7 +110,7 @@ export default function BuyerSidebarContent() {
                   className="flex items-center py-[15px] pl-[53px] hover:opacity-80"
                 >
                   <span
-                    className={`font-['Poppins',sans-serif] font-medium text-[14px] leading-normal ${
+                    className={`font-medium text-[14px] leading-normal ${
                       pathname === "/buyer/quotes"
                         ? "text-[#2aae7a]"
                         : "text-[#8b8b8b]"
@@ -131,7 +131,7 @@ export default function BuyerSidebarContent() {
             <div className="w-[19px] h-[19px] shrink-0">
               <Box className="w-[19px] h-[19px] text-[#8b8b8b]" />
             </div>
-            <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+            <span className="font-medium text-[17px] text-[#8b8b8b] leading-normal">
               Browse Categories
             </span>
           </Link>
@@ -144,7 +144,7 @@ export default function BuyerSidebarContent() {
             <div className="w-[19px] h-[19px] shrink-0">
               <Eye className="w-[19px] h-[19px] text-[#8b8b8b]" />
             </div>
-            <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+            <span className="font-medium text-[17px] text-[#8b8b8b] leading-normal">
               Market Analytics
             </span>
           </Link>
@@ -157,7 +157,7 @@ export default function BuyerSidebarContent() {
             <div className="w-[19px] h-[19px] shrink-0">
               <Heart className="w-[19px] h-[19px] text-[#8b8b8b]" />
             </div>
-            <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+            <span className="font-medium text-[17px] text-[#8b8b8b] leading-normal">
               Saved Items
             </span>
           </Link>
@@ -166,7 +166,7 @@ export default function BuyerSidebarContent() {
 
       {/* ORDER & ACTIVITY Section */}
       <div className="mb-8">
-        <h3 className="font-['Poppins',sans-serif] font-medium text-[19px] text-black leading-normal px-5 mb-[29px]">
+        <h3 className="font-medium text-[19px] text-black leading-normal px-5 mb-[29px]">
           Order & Activity
         </h3>
         <nav className="space-y-[5px]">
@@ -178,7 +178,7 @@ export default function BuyerSidebarContent() {
             <div className="w-[19px] h-[19px] shrink-0">
               <Clock className="w-[19px] h-[19px] text-[#8b8b8b]" />
             </div>
-            <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+            <span className="font-medium text-[17px] text-[#8b8b8b] leading-normal">
               Order History
             </span>
           </Link>
@@ -191,7 +191,7 @@ export default function BuyerSidebarContent() {
             <div className="w-[19px] h-[19px] shrink-0">
               <Truck className="w-[19px] h-[19px] text-[#8b8b8b]" />
             </div>
-            <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+            <span className="font-medium text-[17px] text-[#8b8b8b] leading-normal">
               Track Shipments
             </span>
           </Link>
@@ -200,7 +200,7 @@ export default function BuyerSidebarContent() {
 
       {/* ACCOUNT Section */}
       <div className="mb-8">
-        <h3 className="font-['Poppins',sans-serif] font-medium text-[19px] text-black leading-normal px-5 mb-[29px]">
+        <h3 className="font-medium text-[19px] text-black leading-normal px-5 mb-[29px]">
           Account
         </h3>
         <nav className="space-y-[5px]">
@@ -212,7 +212,7 @@ export default function BuyerSidebarContent() {
             <div className="w-[19px] h-[19px] shrink-0">
               <User className="w-[19px] h-[19px] text-[#8b8b8b]" />
             </div>
-            <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+            <span className="font-medium text-[17px] text-[#8b8b8b] leading-normal">
               Profile
             </span>
           </Link>
@@ -225,7 +225,7 @@ export default function BuyerSidebarContent() {
             <div className="w-[19px] h-[19px] shrink-0">
               <CreditCard className="w-[19px] h-[19px] text-[#8b8b8b]" />
             </div>
-            <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+            <span className="font-medium text-[17px] text-[#8b8b8b] leading-normal">
               Payment Methods
             </span>
           </Link>
@@ -238,7 +238,7 @@ export default function BuyerSidebarContent() {
             <div className="w-[19px] h-[19px] shrink-0">
               <Store className="w-[19px] h-[19px] text-[#8b8b8b]" />
             </div>
-            <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+            <span className="font-medium text-[17px] text-[#8b8b8b] leading-normal">
               Become Supplier
             </span>
           </Link>
@@ -251,7 +251,7 @@ export default function BuyerSidebarContent() {
             <div className="w-[19px] h-[19px] shrink-0">
               <Settings className="w-[19px] h-[19px] text-[#8b8b8b]" />
             </div>
-            <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#8b8b8b] leading-normal">
+            <span className="font-medium text-[17px] text-[#8b8b8b] leading-normal">
               Settings
             </span>
           </Link>
@@ -264,7 +264,7 @@ export default function BuyerSidebarContent() {
             <div className="w-[19px] h-[19px] shrink-0">
               <LogOut className="w-[19px] h-[19px] text-[#ff0001]" />
             </div>
-            <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-[#ff0001] leading-normal">
+            <span className="font-medium text-[17px] text-[#ff0001] leading-normal">
               Sign Out
             </span>
           </button>
@@ -274,25 +274,25 @@ export default function BuyerSidebarContent() {
       {/* Help & Support Card */}
       <div className="mx-auto w-[255px] bg-[#f0f0f0] rounded-[15px] overflow-clip h-[104px] relative">
         <Link
-          href="/help-support"
+          href="/helpdesk"
           className="flex items-end gap-[11px] absolute left-[23px] top-[23px] hover:opacity-80"
         >
           <div className="w-[19px] h-[19px] shrink-0">
             <AlertCircle className="w-[19px] h-[19px] text-black" />
           </div>
-          <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-black leading-normal">
+          <span className="font-medium text-[17px] text-black leading-normal">
             Help & Support
           </span>
         </Link>
         <Link
-          href="/help-support"
+          href="/helpdesk"
           className="flex items-center gap-[11px] absolute left-[23px] top-[62px] hover:opacity-80"
         >
           <div className="w-[18px] h-[18px] shrink-0">
             <Mail className="w-[18px] h-[18px] text-black" />
           </div>
-          <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-black leading-normal">
-            Sent Feedback
+          <span className="font-medium text-[17px] text-black leading-normal">
+            Send Feedback
           </span>
         </Link>
       </div>

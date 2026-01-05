@@ -66,13 +66,13 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex">
+    <div className="flex min-h-screen">
       {/* Left Side - Login Form */}
-      <div className="flex-1 flex items-center justify-center bg-white px-8 py-12">
+      <div className="flex flex-1 items-center justify-center bg-white px-8 py-12">
         <div className="w-full max-w-[383px]">
           {/* Logo and Tagline */}
           <div className="mb-12">
-            <h1 className="text-[32px] font-bold text-black mb-1">
+            <h1 className="mb-1 text-[32px] font-bold text-black">
               Zeerostock
             </h1>
             <p className="text-[14px] text-[#6B7280]">
@@ -82,7 +82,7 @@ export default function AdminLoginPage() {
 
           {/* Login Form */}
           <div className="mb-8">
-            <h2 className="text-[36px] font-bold text-black mb-2">
+            <h2 className="mb-2 text-[36px] font-bold text-black">
               Admin Log in
             </h2>
             <p className="text-[14px] text-[#6B7280]">
@@ -92,8 +92,8 @@ export default function AdminLoginPage() {
 
           {/* Error Message */}
           {error && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
-              <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+            <div className="mb-6 flex items-start gap-3 rounded-lg border border-red-200 bg-red-50 p-4">
+              <AlertCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-red-500" />
               <div className="flex-1">
                 <p className="text-sm text-red-800">{error}</p>
               </div>
@@ -105,7 +105,7 @@ export default function AdminLoginPage() {
             <div>
               <label
                 htmlFor="adminId"
-                className="block text-[16px] font-medium text-black mb-2"
+                className="mb-2 block text-[16px] font-medium text-black"
               >
                 Admin ID
               </label>
@@ -115,7 +115,7 @@ export default function AdminLoginPage() {
                 value={adminId}
                 onChange={(e) => setAdminId(e.target.value.toUpperCase())}
                 placeholder="Enter your Admin ID (e.g., A3X7K9)"
-                className="w-full px-4 py-3 border border-black text-[14px] text-black placeholder:text-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent uppercase font-mono"
+                className="w-full border border-black px-4 py-3 font-mono text-[14px] text-black uppercase placeholder:text-[#9CA3AF] focus:border-transparent focus:outline-none focus:ring-2 focus:ring-black"
                 maxLength={6}
                 required
               />
@@ -128,7 +128,7 @@ export default function AdminLoginPage() {
             <div>
               <label
                 htmlFor="password"
-                className="block text-[16px] font-medium text-black mb-2"
+                className="mb-2 block text-[16px] font-medium text-black"
               >
                 Password
               </label>
@@ -139,19 +139,19 @@ export default function AdminLoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
-                  className="w-full px-4 py-3 border border-black text-[14px] text-black placeholder:text-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent pr-12"
+                  className="w-full border border-black px-4 py-3 pr-12 text-[14px] text-black placeholder:text-[#9CA3AF] focus:border-transparent focus:outline-none focus:ring-2 focus:ring-black"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-[#6B7280] hover:text-black transition-colors"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-[#6B7280] transition-colors hover:text-black"
                   aria-label={showPassword ? "Hide password" : "Show password"}
                 >
                   {showPassword ? (
-                    <EyeOff className="w-5 h-5" />
+                    <EyeOff className="h-5 w-5" />
                   ) : (
-                    <Eye className="w-5 h-5" />
+                    <Eye className="h-5 w-5" />
                   )}
                 </button>
               </div>
@@ -161,7 +161,7 @@ export default function AdminLoginPage() {
             <div className="text-left">
               <p className="text-[14px] text-[#6B7280]">
                 Don't have credentials?{" "}
-                <span className="text-black font-medium">
+                <span className="font-medium text-black">
                   Contact your system administrator
                 </span>
               </p>
@@ -171,7 +171,7 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-black text-white text-[16px] font-medium py-3.5 hover:bg-gray-900 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+              className="w-full bg-black py-3.5 text-[16px] font-medium text-white transition-colors hover:bg-gray-900 disabled:cursor-not-allowed disabled:bg-gray-400"
             >
               {loading ? "Signing in..." : "Sign in"}
             </button>
@@ -179,70 +179,28 @@ export default function AdminLoginPage() {
 
           {/* Authorization Notice */}
           <div className="mt-12 flex items-center gap-2 text-[#9CA3AF]">
-            <ShieldCheck className="w-5 h-5" />
+            <ShieldCheck className="h-5 w-5" />
             <span className="text-[14px]">For authorized personnel only</span>
           </div>
         </div>
       </div>
 
       {/* Right Side - Decorative Background */}
-      <div className="flex-1 relative bg-gradient-to-br from-[#0D3B2F] via-[#0A2F25] to-[#051F1A] overflow-hidden">
+      <div className="relative flex-1 overflow-hidden bg-gradient-to-br from-[#0D3B2F] via-[#0A2F25] to-[#051F1A]">
         {/* Diagonal Lines Decoration */}
         <div className="absolute inset-0">
           {/* Line 1 */}
-          <div
-            className="absolute w-[600px] h-[2px] bg-gradient-to-r from-transparent via-[#3FCEA8] to-transparent opacity-40"
-            style={{
-              top: "15%",
-              left: "50%",
-              transform: "translateX(-50%) rotate(35deg)",
-            }}
-          />
+          <div className="absolute left-[50%] top-[15%] h-[2px] w-[600px] -translate-x-1/2 rotate-[35deg] bg-gradient-to-r from-transparent via-[#3FCEA8] to-transparent opacity-40" />
           {/* Line 2 */}
-          <div
-            className="absolute w-[700px] h-[2px] bg-gradient-to-r from-transparent via-[#3FCEA8] to-transparent opacity-30"
-            style={{
-              top: "30%",
-              left: "55%",
-              transform: "translateX(-50%) rotate(35deg)",
-            }}
-          />
+          <div className="absolute left-[55%] top-[30%] h-[2px] w-[700px] -translate-x-1/2 rotate-[35deg] bg-gradient-to-r from-transparent via-[#3FCEA8] to-transparent opacity-30" />
           {/* Line 3 */}
-          <div
-            className="absolute w-[500px] h-[2px] bg-gradient-to-r from-transparent via-[#3FCEA8] to-transparent opacity-35"
-            style={{
-              top: "45%",
-              left: "45%",
-              transform: "translateX(-50%) rotate(35deg)",
-            }}
-          />
+          <div className="absolute left-[45%] top-[45%] h-[2px] w-[500px] -translate-x-1/2 rotate-[35deg] bg-gradient-to-r from-transparent via-[#3FCEA8] to-transparent opacity-35" />
           {/* Line 4 */}
-          <div
-            className="absolute w-[800px] h-[2px] bg-gradient-to-r from-transparent via-[#3FCEA8] to-transparent opacity-25"
-            style={{
-              top: "60%",
-              left: "50%",
-              transform: "translateX(-50%) rotate(35deg)",
-            }}
-          />
+          <div className="absolute left-[50%] top-[60%] h-[2px] w-[800px] -translate-x-1/2 rotate-[35deg] bg-gradient-to-r from-transparent via-[#3FCEA8] to-transparent opacity-25" />
           {/* Line 5 */}
-          <div
-            className="absolute w-[600px] h-[2px] bg-gradient-to-r from-transparent via-[#3FCEA8] to-transparent opacity-30"
-            style={{
-              top: "75%",
-              left: "55%",
-              transform: "translateX(-50%) rotate(35deg)",
-            }}
-          />
+          <div className="absolute left-[55%] top-[75%] h-[2px] w-[600px] -translate-x-1/2 rotate-[35deg] bg-gradient-to-r from-transparent via-[#3FCEA8] to-transparent opacity-30" />
           {/* Line 6 */}
-          <div
-            className="absolute w-[550px] h-[2px] bg-gradient-to-r from-transparent via-[#3FCEA8] to-transparent opacity-35"
-            style={{
-              top: "85%",
-              left: "40%",
-              transform: "translateX(-50%) rotate(35deg)",
-            }}
-          />
+          <div className="absolute left-[40%] top-[85%] h-[2px] w-[550px] -translate-x-1/2 rotate-[35deg] bg-gradient-to-r from-transparent via-[#3FCEA8] to-transparent opacity-35" />
         </div>
       </div>
     </div>

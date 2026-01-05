@@ -161,304 +161,96 @@ export default function MyOrdersPage() {
   };
 
   return (
-    <div
-      style={{
-        backgroundColor: "#eefbf6",
-        minHeight: "100vh",
-        position: "relative",
-        paddingTop: "100.5px",
-        paddingBottom: "45px",
-      }}
-    >
-      <div style={{ maxWidth: "1440px", margin: "0 auto", padding: "0 60px" }}>
+    <div className="relative min-h-screen bg-[#eefbf6] pb-[45px] pt-[100.5px]">
+      <div className="mx-auto max-w-[1440px] px-10">
         {/* Page Title and Export Button */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginBottom: "80.25px",
-          }}
-        >
-          <h1
-            style={{
-              fontFamily: "Poppins, sans-serif",
-              fontWeight: 600,
-              fontSize: "27px",
-              color: "#0d1b2a",
-              margin: 0,
-            }}
-          >
+        <div className="mb-[80.25px] flex items-center justify-between">
+          <h1 className="m-0 text-[27px] font-semibold text-[#0d1b2a]">
             My Orders
           </h1>
-          <button
-            style={{
-              backgroundColor: "#1e3a8a",
-              color: "white",
-              padding: "0 82.5px",
-              height: "45px",
-              borderRadius: "11.25px",
-              border: "none",
-              display: "flex",
-              alignItems: "center",
-              gap: "7.5px",
-              fontFamily: "Poppins, sans-serif",
-              fontWeight: 600,
-              fontSize: "13.5px",
-              cursor: "pointer",
-            }}
-          >
+          <button className="flex h-[45px] cursor-pointer items-center gap-[7.5px] rounded-[11.25px] border-none bg-[#1e3a8a] px-[82.5px] text-[13.5px] font-semibold text-white">
             <FrameIcon />
             Export Orders
           </button>
         </div>
 
         {error && (
-          <div
-            style={{
-              marginBottom: "15px",
-              padding: "12px",
-              backgroundColor: "#fee",
-              border: "1px solid #fcc",
-              borderRadius: "6px",
-              color: "#c00",
-            }}
-          >
+          <div className="mb-[15px] rounded-[6px] border border-[#fcc] bg-[#fee] p-[12px] text-[#c00]">
             {error}
           </div>
         )}
 
         {/* Orders Table */}
-        <div
-          style={{
-            backgroundColor: "white",
-            borderRadius: "15px",
-            boxShadow: "0px 0px 6px 0px rgba(0,0,0,0.25)",
-            overflow: "hidden",
-            minHeight: "371.25px",
-            width: "100%",
-          }}
-        >
+        <div className="min-h-[371.25px] w-full overflow-hidden rounded-[15px] bg-white shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)]">
           {/* Table Headers */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns:
-                "140px 200px 1fr 140px 120px 140px 140px 120px",
-              height: "69px",
-              alignItems: "center",
-              borderBottom: "1px solid #e5e5e5",
-              width: "100%",
-            }}
-          >
-            <div
-              style={{
-                paddingLeft: "22.5px",
-                fontFamily: "Poppins, sans-serif",
-                fontWeight: 500,
-                fontSize: "15px",
-                color: "#0d1b2a",
-                letterSpacing: "0.5px",
-              }}
-            >
+          <div className="grid h-[69px] w-full grid-cols-[140px_200px_1fr_140px_120px_140px_140px_120px] items-center border-b border-[#e5e5e5]">
+            <div className="pl-[22.5px] text-[15px] font-medium tracking-[0.5px] text-[#0d1b2a]">
               ORDER ID
             </div>
-            <div
-              style={{
-                fontFamily: "Poppins, sans-serif",
-                fontWeight: 500,
-                fontSize: "15px",
-                color: "#0d1b2a",
-                letterSpacing: "0.5px",
-              }}
-            >
+            <div className="text-[15px] font-medium tracking-[0.5px] text-[#0d1b2a]">
               SUPPLIER
             </div>
-            <div
-              style={{
-                fontFamily: "Poppins, sans-serif",
-                fontWeight: 500,
-                fontSize: "15px",
-                color: "#0d1b2a",
-                letterSpacing: "0.5px",
-              }}
-            >
+            <div className="text-[15px] font-medium tracking-[0.5px] text-[#0d1b2a]">
               ITEMS
             </div>
-            <div
-              style={{
-                fontFamily: "Poppins, sans-serif",
-                fontWeight: 500,
-                fontSize: "15px",
-                color: "#0d1b2a",
-                letterSpacing: "0.5px",
-              }}
-            >
+            <div className="text-[15px] font-medium tracking-[0.5px] text-[#0d1b2a]">
               AMOUNT
             </div>
-            <div
-              style={{
-                fontFamily: "Poppins, sans-serif",
-                fontWeight: 500,
-                fontSize: "15px",
-                color: "#0d1b2a",
-                letterSpacing: "0.5px",
-              }}
-            >
+            <div className="text-[15px] font-medium tracking-[0.5px] text-[#0d1b2a]">
               STATUS
             </div>
-            <div
-              style={{
-                fontFamily: "Poppins, sans-serif",
-                fontWeight: 500,
-                fontSize: "15px",
-                color: "#0d1b2a",
-                letterSpacing: "0.5px",
-                lineHeight: "18px",
-              }}
-            >
+            <div className="text-[15px] font-medium leading-[18px] tracking-[0.5px] text-[#0d1b2a]">
               ORDER
               <br />
               DATE
             </div>
-            <div
-              style={{
-                fontFamily: "Poppins, sans-serif",
-                fontWeight: 500,
-                fontSize: "15px",
-                color: "#0d1b2a",
-                letterSpacing: "0.5px",
-                lineHeight: "18px",
-              }}
-            >
+            <div className="text-[15px] font-medium leading-[18px] tracking-[0.5px] text-[#0d1b2a]">
               EXPECTED
               <br />
               DATE
             </div>
-            <div
-              style={{
-                fontFamily: "Poppins, sans-serif",
-                fontWeight: 500,
-                fontSize: "15px",
-                color: "#0d1b2a",
-                letterSpacing: "0.5px",
-              }}
-            >
+            <div className="text-[15px] font-medium tracking-[0.5px] text-[#0d1b2a]">
               ACTIONS
             </div>
           </div>
 
           {/* Table Rows */}
           {isLoading ? (
-            <div
-              style={{
-                padding: "45px 0",
-                textAlign: "center",
-                fontFamily: "Inter, sans-serif",
-                fontSize: "15px",
-                color: "#9c9c9c",
-              }}
-            >
+            <div className="py-[45px] text-center text-[15px] text-[#9c9c9c]">
               <div className="animate-pulse">Loading orders...</div>
             </div>
           ) : orders.length === 0 ? (
-            <div
-              style={{
-                padding: "45px 0",
-                textAlign: "center",
-                fontFamily: "Inter, sans-serif",
-                fontSize: "15px",
-                color: "#9c9c9c",
-              }}
-            >
+            <div className="py-[45px] text-center text-[15px] text-[#9c9c9c]">
               No orders found
             </div>
           ) : (
             orders.map((order, index) => (
               <div
                 key={order.orderId || order.orderNumber}
-                style={{
-                  display: "grid",
-                  gridTemplateColumns:
-                    "140px 200px 1fr 140px 120px 140px 140px 120px",
-                  height: "75px",
-                  alignItems: "center",
-                  boxShadow: "0px 2px 4px 0px rgba(0,0,0,0.25)",
-                  backgroundColor: "white",
-                  width: "100%",
-                }}
+                className="grid h-[75px] w-full grid-cols-[140px_200px_1fr_140px_120px_140px_140px_120px] items-center bg-white shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]"
               >
                 {/* Order ID */}
-                <div
-                  style={{
-                    paddingLeft: "22.5px",
-                    fontFamily: "Inter, sans-serif",
-                    fontWeight: 500,
-                    fontSize: "15px",
-                    color: "#9c9c9c",
-                    letterSpacing: "0.5px",
-                    lineHeight: "21px",
-                  }}
-                >
+                <div className="pl-[22.5px] text-[15px] font-medium leading-[21px] tracking-[0.5px] text-[#9c9c9c]">
                   {order.orderNumber}
                 </div>
 
                 {/* Supplier - with green underline on hover */}
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  <div
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontWeight: 400,
-                      fontSize: "15px",
-                      color: "#000000",
-                      letterSpacing: "0.5px",
-                      lineHeight: "21px",
-                      padding: "7.5px",
-                      display: "inline-block",
-                      cursor: "pointer",
-                      transition: "border-bottom 0.2s ease",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.borderBottom = "2px solid #18b522";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.borderBottom =
-                        "2px solid transparent";
-                    }}
-                  >
+                <div className="flex flex-col">
+                  <div className="inline-block cursor-pointer border-b-2 border-transparent p-[7.5px] text-[15px] font-normal leading-[21px] tracking-[0.5px] text-black transition-all duration-200 hover:border-[#18b522]">
                     {order.supplierName}
                   </div>
                 </div>
 
                 {/* Items */}
                 <div
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontWeight: 400,
-                    fontSize: "15px",
-                    color: "#000000",
-                    letterSpacing: "0.5px",
-                    lineHeight: "21px",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                  }}
+                  className="overflow-hidden text-ellipsis whitespace-nowrap text-[15px] font-normal leading-[21px] tracking-[0.5px] text-black"
                   title={order.items}
                 >
                   {order.items}
                 </div>
 
                 {/* Amount */}
-                <div
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontWeight: 400,
-                    fontSize: "15px",
-                    color: "#000000",
-                    letterSpacing: "0.5px",
-                    lineHeight: "21px",
-                  }}
-                >
+                <div className="text-[15px] font-normal leading-[21px] tracking-[0.5px] text-black">
                   ₹
                   {parseFloat(String(order.totalAmount || 0)).toLocaleString(
                     "en-IN",
@@ -468,30 +260,14 @@ export default function MyOrdersPage() {
 
                 {/* Status */}
                 <div
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontWeight: 400,
-                    fontSize: "15px",
-                    color: getStatusColor(order.status),
-                    letterSpacing: "0.5px",
-                    lineHeight: "21px",
-                    textTransform: "capitalize",
-                  }}
+                  className="text-[15px] font-normal leading-[21px] tracking-[0.5px] capitalize"
+                  style={{ color: getStatusColor(order.status) }}
                 >
                   {order.status}
                 </div>
 
                 {/* Order Date */}
-                <div
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontWeight: 400,
-                    fontSize: "15px",
-                    color: "#000000",
-                    letterSpacing: "0.5px",
-                    lineHeight: "21px",
-                  }}
-                >
+                <div className="text-[15px] font-normal leading-[21px] tracking-[0.5px] text-black">
                   {new Date(order.orderDate).toLocaleDateString("en-IN", {
                     year: "numeric",
                     month: "2-digit",
@@ -500,16 +276,7 @@ export default function MyOrdersPage() {
                 </div>
 
                 {/* Expected Date */}
-                <div
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontWeight: 400,
-                    fontSize: "15px",
-                    color: "#000000",
-                    letterSpacing: "0.5px",
-                    lineHeight: "21px",
-                  }}
-                >
+                <div className="text-[15px] font-normal leading-[21px] tracking-[0.5px] text-black">
                   {order.estimatedDelivery
                     ? new Date(order.estimatedDelivery).toLocaleDateString(
                         "en-IN",
@@ -519,20 +286,9 @@ export default function MyOrdersPage() {
                 </div>
 
                 {/* Actions */}
-                <div style={{ paddingLeft: "12px" }}>
+                <div className="pl-[12px]">
                   <Link href={`/buyer/track-order/${order.orderNumber}`}>
-                    <button
-                      style={{
-                        border: "0.5px solid #747474",
-                        borderRadius: "7.5px",
-                        padding: "7.5px",
-                        backgroundColor: "transparent",
-                        cursor: "pointer",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
+                    <button className="flex cursor-pointer items-center justify-center rounded-[7.5px] border-[0.5px] border-[#747474] bg-transparent p-[7.5px]">
                       <FrameIcon />
                     </button>
                   </Link>
@@ -544,53 +300,21 @@ export default function MyOrdersPage() {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div
-            style={{
-              marginTop: "30px",
-              display: "flex",
-              justifyContent: "center",
-              gap: "12px",
-              alignItems: "center",
-            }}
-          >
+          <div className="mt-[30px] flex justify-center gap-[12px] items-center">
             <button
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              style={{
-                padding: "9px 18px",
-                border: "2px solid #0d1b2a",
-                borderRadius: "6px",
-                backgroundColor: "white",
-                fontFamily: "Poppins, sans-serif",
-                fontSize: "12px",
-                cursor: currentPage === 1 ? "not-allowed" : "pointer",
-                opacity: currentPage === 1 ? 0.5 : 1,
-              }}
+              className="cursor-pointer rounded-[6px] border-2 border-[#0d1b2a] bg-white px-[18px] py-[9px] text-[12px] disabled:cursor-not-allowed disabled:opacity-50"
             >
               Previous
             </button>
-            <span
-              style={{
-                fontFamily: "Poppins, sans-serif",
-                fontSize: "12px",
-                color: "#0d1b2a",
-              }}
-            >
+            <span className="text-[12px] text-[#0d1b2a]">
               Page {currentPage} of {totalPages}
             </span>
             <button
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
-              style={{
-                padding: "9px 18px",
-                border: "2px solid #0d1b2a",
-                borderRadius: "6px",
-                backgroundColor: "white",
-                fontFamily: "Poppins, sans-serif",
-                fontSize: "12px",
-                cursor: currentPage === totalPages ? "not-allowed" : "pointer",
-                opacity: currentPage === totalPages ? 0.5 : 1,
-              }}
+              className="cursor-pointer rounded-[6px] border-2 border-[#0d1b2a] bg-white px-[18px] py-[9px] text-[12px] disabled:cursor-not-allowed disabled:opacity-50"
             >
               Next
             </button>

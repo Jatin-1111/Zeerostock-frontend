@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 export default function HeroSection() {
-
   return (
     <section className="relative w-full h-[500px] shadow-md overflow-hidden py-10">
       {/* Background Image */}
@@ -9,17 +8,17 @@ export default function HeroSection() {
         <img
           alt=""
           className="absolute h-full w-full object-cover"
-          src={'/About us.jpg'}
+          src={"/About us.jpg"}
         />
       </div>
 
       {/* Content */}
       <div className="relative z-10 flex flex-col justify-center items-start h-full px-10 gap-5">
-        <h1 className="font-poppins font-semibold text-5xl leading-tight text-center text-gray-900 max-w-lg">
+        <h1 className="font-semibold text-5xl leading-tight text-center text-gray-900 max-w-lg">
           Transforming <span className="text-emerald-500">Global Surplus</span>{" "}
           Trade
         </h1>
-        <p className="font-inter font-semibold leading-normal text-center text-gray-500 max-w-lg">
+        <p className="font-semibold leading-normal text-center text-gray-500 max-w-lg">
           Connect suppliers, buyers and agents with trust, transparency and
           speed
         </p>

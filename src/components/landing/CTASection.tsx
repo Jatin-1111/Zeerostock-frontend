@@ -52,7 +52,7 @@ export default function CTASection() {
                   Sign Up Free
                 </Link>
                 <Link
-                  href="/help-support"
+                  href="/helpdesk"
                   className="w-[210px] h-[45px] bg-white text-[#2aae7a] text-[17px] font-semibold rounded-[9px] hover:bg-white/90 transition-colors flex items-center justify-center"
                 >
                   Schedule Demo

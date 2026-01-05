@@ -330,37 +330,24 @@ export default function NewListing() {
 
   return (
     <div className="min-h-screen bg-[#EEFBF6]">
-      <div className="max-w-[1440px] mx-auto px-20 py-8">
+      <div className="mx-auto max-w-[1440px] px-20 py-8">
         {/* Page Title */}
-        <h1
-          className="text-[27px] font-semibold text-[#0d1b2a] mb-5"
-          style={{ fontFamily: "Poppins, sans-serif" }}
-        >
+        <h1 className="mb-5 text-[27px] font-semibold text-[#0d1b2a]">
           My Inventory
         </h1>
 
         {/* Form Container */}
         <form
           onSubmit={handleSubmit}
-          className="bg-white rounded-[15px] p-[23px] relative w-full"
-          style={{
-            boxShadow: "0px 0px 6px 0px rgba(0, 0, 0, 0.25)",
-            minHeight: "791px",
-          }}
+          className="relative min-h-[791px] w-full rounded-[15px] bg-white p-[23px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)]"
         >
           {/* Product Title */}
           <div className="absolute left-[23px] top-[22px]">
-            <label
-              className="text-[17px] font-medium text-[#0d1b2a]"
-              style={{ fontFamily: "Poppins, sans-serif" }}
-            >
+            <label className="text-[17px] font-medium text-[#0d1b2a]">
               Product Title<span className="text-red-600">*</span>
             </label>
           </div>
-          <div
-            className="absolute left-[23px] top-[52px]"
-            style={{ width: "calc(50% - 33px)" }}
-          >
+          <div className="absolute left-[23px] top-[52px] w-[calc(50%-33px)]">
             <input
               type="text"
               name="title"
@@ -368,58 +355,41 @@ export default function NewListing() {
               onChange={handleInputChange}
               placeholder="eg., Industrial Electronic Components"
               required
-              className="w-full h-[42px] px-3 py-2 border border-[#bebebe] rounded-[8px] text-sm text-black placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a] focus:border-[#0d1b2a]"
-              style={{ fontFamily: "Roboto, sans-serif" }}
+              className="h-[42px] w-full rounded-[8px] border border-[#bebebe] px-3 py-2 text-sm text-black placeholder:text-[#9c9c9c] focus:border-[#0d1b2a] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a]"
             />
           </div>
 
           {/* Listing Type */}
-          <div
-            className="absolute top-[22px]"
-            style={{ left: "calc(50% + 10px)" }}
-          >
-            <label
-              className="text-[17px] font-medium text-[#0d1b2a]"
-              style={{ fontFamily: "Poppins, sans-serif" }}
-            >
+          <div className="absolute left-[calc(50%+10px)] top-[22px]">
+            <label className="text-[17px] font-medium text-[#0d1b2a]">
               Listing Type<span className="text-red-600">*</span>
             </label>
           </div>
-          <div
-            className="absolute top-[52px]"
-            style={{ left: "calc(50% + 10px)", width: "calc(50% - 33px)" }}
-          >
+          <div className="absolute left-[calc(50%+10px)] top-[52px] w-[calc(50%-33px)]">
             <div className="relative">
               <select
                 name="listingType"
                 value={formData.listingType}
                 onChange={handleInputChange}
                 required
-                className="w-full h-[42px] px-3 py-2 border border-[#bebebe] rounded-[8px] text-sm appearance-none text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a] focus:border-[#0d1b2a]"
-                style={{ fontFamily: "Roboto, sans-serif" }}
+                className="h-[42px] w-full appearance-none rounded-[8px] border border-[#bebebe] px-3 py-2 text-sm text-[#9c9c9c] focus:border-[#0d1b2a] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a]"
               >
                 <option value="">Select Type</option>
                 <option value="fixed">Fixed Price</option>
                 <option value="negotiable">Negotiable</option>
                 <option value="auction">Auction</option>
               </select>
-              <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#9c9c9c] pointer-events-none" />
+              <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#9c9c9c]" />
             </div>
           </div>
 
           {/* Category */}
           <div className="absolute left-[23px] top-[124px]">
-            <label
-              className="text-[17px] font-medium text-[#0d1b2a]"
-              style={{ fontFamily: "Poppins, sans-serif" }}
-            >
+            <label className="text-[17px] font-medium text-[#0d1b2a]">
               Category<span className="text-red-600">*</span>
             </label>
           </div>
-          <div
-            className="absolute left-[23px] top-[154px]"
-            style={{ width: "calc(50% - 33px)" }}
-          >
+          <div className="absolute left-[23px] top-[154px] w-[calc(50%-33px)]">
             <div className="relative">
               <select
                 name="categoryId"
@@ -427,8 +397,7 @@ export default function NewListing() {
                 onChange={handleInputChange}
                 required
                 disabled={categoriesLoading}
-                className="w-full h-[42px] px-3 py-2 border border-[#bebebe] rounded-[8px] text-sm appearance-none text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a] focus:border-[#0d1b2a] disabled:bg-gray-100"
-                style={{ fontFamily: "Roboto, sans-serif" }}
+                className="h-[42px] w-full appearance-none rounded-[8px] border border-[#bebebe] px-3 py-2 text-sm text-[#9c9c9c] focus:border-[#0d1b2a] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a] disabled:bg-gray-100"
               >
                 <option value="">
                   {categoriesLoading ? "Loading..." : "Select category"}
@@ -439,34 +408,24 @@ export default function NewListing() {
                   </option>
                 ))}
               </select>
-              <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#9c9c9c] pointer-events-none" />
+              <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#9c9c9c]" />
             </div>
           </div>
 
           {/* Condition */}
-          <div
-            className="absolute top-[124px]"
-            style={{ left: "calc(50% + 10px)" }}
-          >
-            <label
-              className="text-[17px] font-medium text-[#0d1b2a]"
-              style={{ fontFamily: "Poppins, sans-serif" }}
-            >
+          <div className="absolute left-[calc(50%+10px)] top-[124px]">
+            <label className="text-[17px] font-medium text-[#0d1b2a]">
               Condition<span className="text-red-600">*</span>
             </label>
           </div>
-          <div
-            className="absolute top-[154px]"
-            style={{ left: "calc(50% + 10px)", width: "calc(50% - 33px)" }}
-          >
+          <div className="absolute left-[calc(50%+10px)] top-[154px] w-[calc(50%-33px)]">
             <div className="relative">
               <select
                 name="condition"
                 value={formData.condition}
                 onChange={handleInputChange}
                 required
-                className="w-full h-[42px] px-3 py-2 border border-[#bebebe] rounded-[8px] text-sm appearance-none text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a] focus:border-[#0d1b2a]"
-                style={{ fontFamily: "Roboto, sans-serif" }}
+                className="h-[42px] w-full appearance-none rounded-[8px] border border-[#bebebe] px-3 py-2 text-sm text-[#9c9c9c] focus:border-[#0d1b2a] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a]"
               >
                 <option value="">Select condition</option>
                 <option value="new">New</option>
@@ -475,23 +434,17 @@ export default function NewListing() {
                 <option value="fair">Fair</option>
                 <option value="refurbished">Refurbished</option>
               </select>
-              <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#9c9c9c] pointer-events-none" />
+              <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#9c9c9c]" />
             </div>
           </div>
 
           {/* Location */}
           <div className="absolute left-[23px] top-[226px]">
-            <label
-              className="text-[17px] font-medium text-[#0d1b2a]"
-              style={{ fontFamily: "Poppins, sans-serif" }}
-            >
+            <label className="text-[17px] font-medium text-[#0d1b2a]">
               Location<span className="text-red-600">*</span>
             </label>
           </div>
-          <div
-            className="absolute left-[23px] top-[256px]"
-            style={{ width: "calc(33.33% - 30px)" }}
-          >
+          <div className="absolute left-[23px] top-[256px] w-[calc(33.33%-30px)]">
             <div className="relative">
               <input
                 type="text"
@@ -500,29 +453,19 @@ export default function NewListing() {
                 onChange={handleInputChange}
                 placeholder="Select Location"
                 required
-                className="w-full h-[42px] px-3 py-2 border border-[#bebebe] rounded-[8px] text-sm text-black placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a] focus:border-[#0d1b2a]"
-                style={{ fontFamily: "Roboto, sans-serif" }}
+                className="h-[42px] w-full rounded-[8px] border border-[#bebebe] px-3 py-2 text-sm text-black placeholder:text-[#9c9c9c] focus:border-[#0d1b2a] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a]"
               />
-              <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#9c9c9c] pointer-events-none" />
+              <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#9c9c9c]" />
             </div>
           </div>
 
           {/* Quantity */}
-          <div
-            className="absolute top-[226px]"
-            style={{ left: "calc(33.33% + 3px)" }}
-          >
-            <label
-              className="text-[17px] font-medium text-[#0d1b2a]"
-              style={{ fontFamily: "Poppins, sans-serif" }}
-            >
+          <div className="absolute left-[calc(33.33%+3px)] top-[226px]">
+            <label className="text-[17px] font-medium text-[#0d1b2a]">
               Quantity<span className="text-red-600">*</span>
             </label>
           </div>
-          <div
-            className="absolute top-[256px]"
-            style={{ left: "calc(33.33% + 3px)", width: "calc(33.33% - 20px)" }}
-          >
+          <div className="absolute left-[calc(33.33%+3px)] top-[256px] w-[calc(33.33%-20px)]">
             <input
               type="number"
               name="quantity"
@@ -531,35 +474,24 @@ export default function NewListing() {
               placeholder="eg., 20,000 - 50,000"
               required
               min="1"
-              className="w-full h-[42px] px-3 py-2 border border-[#bebebe] rounded-[8px] text-sm text-black placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a] focus:border-[#0d1b2a]"
-              style={{ fontFamily: "Roboto, sans-serif" }}
+              className="h-[42px] w-full rounded-[8px] border border-[#bebebe] px-3 py-2 text-sm text-black placeholder:text-[#9c9c9c] focus:border-[#0d1b2a] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a]"
             />
           </div>
 
           {/* Units */}
-          <div
-            className="absolute top-[226px]"
-            style={{ left: "calc(66.66% - 7px)" }}
-          >
-            <label
-              className="text-[17px] font-medium text-[#0d1b2a]"
-              style={{ fontFamily: "Poppins, sans-serif" }}
-            >
+          <div className="absolute left-[calc(66.66%-7px)] top-[226px]">
+            <label className="text-[17px] font-medium text-[#0d1b2a]">
               Units<span className="text-red-600">*</span>
             </label>
           </div>
-          <div
-            className="absolute top-[256px]"
-            style={{ left: "calc(66.66% - 7px)", width: "calc(33.33% - 16px)" }}
-          >
+          <div className="absolute left-[calc(66.66%-7px)] top-[256px] w-[calc(33.33%-16px)]">
             <div className="relative">
               <select
                 name="unit"
                 value={formData.unit}
                 onChange={handleInputChange}
                 required
-                className="w-full h-[42px] px-3 py-2 border border-[#bebebe] rounded-[8px] text-sm appearance-none text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a] focus:border-[#0d1b2a]"
-                style={{ fontFamily: "Roboto, sans-serif" }}
+                className="h-[42px] w-full appearance-none rounded-[8px] border border-[#bebebe] px-3 py-2 text-sm text-[#9c9c9c] focus:border-[#0d1b2a] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a]"
               >
                 <option value="">Select Units</option>
                 <option value="pieces">Pieces</option>
@@ -571,23 +503,17 @@ export default function NewListing() {
                 <option value="boxes">Boxes</option>
                 <option value="pallets">Pallets</option>
               </select>
-              <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#9c9c9c] pointer-events-none" />
+              <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#9c9c9c]" />
             </div>
           </div>
 
           {/* Price */}
           <div className="absolute left-[23px] top-[328px]">
-            <label
-              className="text-[17px] font-medium text-[#0d1b2a]"
-              style={{ fontFamily: "Poppins, sans-serif" }}
-            >
+            <label className="text-[17px] font-medium text-[#0d1b2a]">
               Price<span className="text-red-600">*</span>
             </label>
           </div>
-          <div
-            className="absolute left-[23px] top-[358px]"
-            style={{ width: "calc(50% - 33px)" }}
-          >
+          <div className="absolute left-[23px] top-[358px] w-[calc(50%-33px)]">
             <input
               type="number"
               name="priceAfter"
@@ -596,38 +522,25 @@ export default function NewListing() {
               placeholder="e.g., $20000-$50000"
               required
               step="0.01"
-              className="w-full h-[42px] px-3 py-2 border border-[#bebebe] rounded-[8px] text-sm text-black placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a] focus:border-[#0d1b2a]"
-              style={{ fontFamily: "Roboto, sans-serif" }}
+              className="h-[42px] w-full rounded-[8px] border border-[#bebebe] px-3 py-2 text-sm text-black placeholder:text-[#9c9c9c] focus:border-[#0d1b2a] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a]"
             />
           </div>
 
           {/* Product Images */}
-          <div
-            className="absolute top-[328px]"
-            style={{ left: "calc(50% + 10px)" }}
-          >
-            <label
-              className="text-[17px] font-medium text-[#0d1b2a]"
-              style={{ fontFamily: "Poppins, sans-serif" }}
-            >
+          <div className="absolute left-[calc(50%+10px)] top-[328px]">
+            <label className="text-[17px] font-medium text-[#0d1b2a]">
               Product images<span className="text-red-600">*</span>
             </label>
           </div>
-          <div
-            className="absolute top-[360px] h-[314px]"
-            style={{ left: "calc(50% + 10px)", width: "calc(50% - 33px)" }}
-          >
+          <div className="absolute left-[calc(50%+10px)] top-[360px] h-[314px] w-[calc(50%-33px)]">
             <div
               onClick={() => fileInputRef.current?.click()}
               onDrop={handleDrop}
               onDragOver={handleDragOver}
-              className="w-full h-full border-2 border-dashed border-[#9c9c9c] rounded-[15px] flex flex-col items-center justify-center cursor-pointer hover:border-[#2aae7a] transition-colors relative"
+              className="relative flex h-full w-full cursor-pointer flex-col items-center justify-center rounded-[15px] border-2 border-dashed border-[#9c9c9c] transition-colors hover:border-[#2aae7a]"
             >
-              <Upload className="w-[38px] h-[38px] text-[#9c9c9c] mb-9" />
-              <p
-                className="text-[13px] font-medium text-[#2aae7a] mb-3"
-                style={{ fontFamily: "Inter, sans-serif" }}
-              >
+              <Upload className="mb-9 h-[38px] w-[38px] text-[#9c9c9c]" />
+              <p className="mb-3 text-[13px] font-medium text-[#2aae7a]">
                 Drop & drag images here or click to select
               </p>
               <button
@@ -637,8 +550,7 @@ export default function NewListing() {
                   fileInputRef.current?.click();
                 }}
                 disabled={uploadingImages}
-                className="px-4 py-2 bg-[#f2f2f2] text-[#9c9c9c] text-base font-medium rounded-[11px] hover:bg-gray-300 transition-colors disabled:opacity-50"
-                style={{ fontFamily: "Poppins, sans-serif" }}
+                className="rounded-[11px] bg-[#f2f2f2] px-4 py-2 text-base font-medium text-[#9c9c9c] transition-colors hover:bg-gray-300 disabled:opacity-50"
               >
                 {uploadingImages ? "Uploading..." : "Choose Files"}
               </button>
@@ -653,16 +565,16 @@ export default function NewListing() {
 
               {/* Display uploaded images */}
               {uploadedImages.length > 0 && (
-                <div className="absolute bottom-4 left-4 right-4 flex gap-2 flex-wrap">
+                <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2">
                   {uploadedImages.map((url, index) => (
                     <div
                       key={index}
-                      className="w-16 h-16 rounded-lg overflow-hidden border-2 border-[#2aae7a]"
+                      className="h-16 w-16 overflow-hidden rounded-lg border-2 border-[#2aae7a]"
                     >
                       <img
                         src={url}
                         alt={`Upload ${index + 1}`}
-                        className="w-full h-full object-cover"
+                        className="h-full w-full object-cover"
                       />
                     </div>
                   ))}
@@ -673,17 +585,11 @@ export default function NewListing() {
 
           {/* Product Description */}
           <div className="absolute left-[23px] top-[430px]">
-            <label
-              className="text-[17px] font-medium text-[#0d1b2a]"
-              style={{ fontFamily: "Poppins, sans-serif" }}
-            >
+            <label className="text-[17px] font-medium text-[#0d1b2a]">
               Product description
             </label>
           </div>
-          <div
-            className="absolute left-[23px] top-[460px]"
-            style={{ width: "calc(50% - 33px)" }}
-          >
+          <div className="absolute left-[23px] top-[460px] w-[calc(50%-33px)]">
             <textarea
               name="description"
               value={formData.description}
@@ -691,24 +597,17 @@ export default function NewListing() {
               rows={6}
               placeholder="Describe your specific requirements, quality standards, certifications needed etc."
               required
-              className="w-full h-[113px] px-3 py-2 border border-[#bebebe] rounded-[8px] text-sm text-black placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a] focus:border-[#0d1b2a] resize-none"
-              style={{ fontFamily: "Roboto, sans-serif" }}
+              className="h-[113px] w-full resize-none rounded-[8px] border border-[#bebebe] px-3 py-2 text-sm text-black placeholder:text-[#9c9c9c] focus:border-[#0d1b2a] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a]"
             />
           </div>
 
           {/* Listing Duration */}
           <div className="absolute left-[23px] top-[602px]">
-            <label
-              className="text-[17px] font-medium text-[#0d1b2a]"
-              style={{ fontFamily: "Poppins, sans-serif" }}
-            >
+            <label className="text-[17px] font-medium text-[#0d1b2a]">
               Listing Duration<span className="text-red-600">*</span>
             </label>
           </div>
-          <div
-            className="absolute left-[23px] top-[632px]"
-            style={{ width: "calc(50% - 33px)" }}
-          >
+          <div className="absolute left-[23px] top-[632px] w-[calc(50%-33px)]">
             <div className="relative">
               <input
                 type="date"
@@ -716,10 +615,9 @@ export default function NewListing() {
                 value={formData.expiresAt}
                 onChange={handleInputChange}
                 placeholder="Select duration"
-                className="w-full h-[42px] px-3 py-2 border border-[#bebebe] rounded-[8px] text-sm text-black placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a] focus:border-[#0d1b2a]"
-                style={{ fontFamily: "Roboto, sans-serif" }}
+                className="h-[42px] w-full rounded-[8px] border border-[#bebebe] px-3 py-2 text-sm text-black placeholder:text-[#9c9c9c] focus:border-[#0d1b2a] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a]"
               />
-              <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#9c9c9c] pointer-events-none" />
+              <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#9c9c9c]" />
             </div>
           </div>
 
@@ -728,8 +626,7 @@ export default function NewListing() {
             <button
               type="submit"
               disabled={loading || uploadingImages}
-              className="w-full h-[45px] px-4 py-3 bg-[#1e3a8a] text-white text-base font-semibold rounded-[11px] hover:bg-[#1e40af] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-              style={{ fontFamily: "Poppins, sans-serif" }}
+              className="flex h-[45px] w-full items-center justify-center gap-2 rounded-[11px] bg-[#1e3a8a] px-4 py-3 text-base font-semibold text-white transition-colors hover:bg-[#1e40af] disabled:cursor-not-allowed disabled:opacity-50"
             >
               {loading ? "Creating..." : "List Product"}
             </button>

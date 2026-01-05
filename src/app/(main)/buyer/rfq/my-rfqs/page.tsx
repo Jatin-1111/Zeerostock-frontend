@@ -96,14 +96,12 @@ export default function MyRFQsPage() {
           {isLoading ? (
             <div className="py-20 text-center">
               <div className="animate-spin h-10 w-10 border-4 border-[#2aae7a] border-t-transparent rounded-full mx-auto mb-4"></div>
-              <p className="font-['Inter'] text-gray-500">Loading RFQs...</p>
+              <p className="text-gray-500">Loading RFQs...</p>
             </div>
           ) : rfqs.length === 0 ? (
             /* Empty State */
             <div className="py-20 text-center">
-              <p className="font-['Inter'] text-gray-500 mb-2">
-                No RFQs found.
-              </p>
+              <p className="text-gray-500 mb-2">No RFQs found.</p>
               <Link
                 href="/buyer/rfq/post"
                 className="text-[#1e3a8a] font-medium hover:underline"
@@ -150,7 +148,7 @@ export default function MyRFQsPage() {
                       className="hover:bg-gray-50 transition-colors"
                     >
                       {/* RFQ ID */}
-                      <td className="px-6 py-5 font-['Inter'] font-medium text-sm text-gray-500 whitespace-nowrap">
+                      <td className="px-6 py-5 font-medium text-sm text-gray-500 whitespace-nowrap">
                         {rfq.rfqNumber}
                       </td>
 
@@ -158,20 +156,20 @@ export default function MyRFQsPage() {
                       <td className="px-6 py-5">
                         <Link
                           href={`/buyer/rfq/${rfq.id}`}
-                          className="font-['Inter'] text-sm text-gray-900 hover:text-[#2aae7a] transition-colors line-clamp-2 max-w-md"
+                          className="text-sm text-gray-900 hover:text-[#2aae7a] transition-colors line-clamp-2 max-w-md"
                         >
                           {rfq.title}
                         </Link>
                       </td>
 
                       {/* Quantity */}
-                      <td className="px-6 py-5 font-['Inter'] text-sm text-gray-700 whitespace-nowrap">
+                      <td className="px-6 py-5 text-sm text-gray-700 whitespace-nowrap">
                         <span className="font-medium">{rfq.quantity}</span>{" "}
                         <span className="text-gray-500">{rfq.unit}</span>
                       </td>
 
                       {/* Budget */}
-                      <td className="px-6 py-5 font-['Inter'] text-sm text-gray-900 whitespace-nowrap">
+                      <td className="px-6 py-5 text-sm text-gray-900 whitespace-nowrap">
                         {rfq.budgetMax ? (
                           `₹${parseFloat(String(rfq.budgetMax)).toLocaleString(
                             "en-IN"
@@ -193,18 +191,18 @@ export default function MyRFQsPage() {
                       </td>
 
                       {/* Posted Date */}
-                      <td className="px-6 py-5 font-['Inter'] text-sm text-gray-700 whitespace-nowrap">
+                      <td className="px-6 py-5 text-sm text-gray-700 whitespace-nowrap">
                         {formatDate(rfq.createdAt)}
                       </td>
 
                       {/* Expires On */}
-                      <td className="px-6 py-5 font-['Inter'] text-sm text-gray-700 whitespace-nowrap">
+                      <td className="px-6 py-5 text-sm text-gray-700 whitespace-nowrap">
                         {formatDate(rfq.expiresAt)}
                       </td>
 
                       {/* Quotes Count */}
                       <td className="px-6 py-5 text-center">
-                        <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 font-['Inter'] font-semibold text-sm text-blue-700">
+                        <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 font-semibold text-sm text-blue-700">
                           {rfq.quoteCount || 0}
                         </span>
                       </td>
@@ -222,17 +220,17 @@ export default function MyRFQsPage() {
             <button
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="px-5 py-2 bg-[#1e3a8a] text-white rounded-lg font-['Inter'] text-sm font-medium hover:bg-[#1e3a8a]/90 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
+              className="px-5 py-2 bg-[#1e3a8a] text-white rounded-lg text-sm font-medium hover:bg-[#1e3a8a]/90 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
             >
               Previous
             </button>
-            <span className="font-['Inter'] text-sm text-[#0d1b2a]">
+            <span className="text-sm text-[#0d1b2a]">
               Page {currentPage} of {totalPages}
             </span>
             <button
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
-              className="px-5 py-2 bg-[#1e3a8a] text-white rounded-lg font-['Inter'] text-sm font-medium hover:bg-[#1e3a8a]/90 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
+              className="px-5 py-2 bg-[#1e3a8a] text-white rounded-lg text-sm font-medium hover:bg-[#1e3a8a]/90 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
             >
               Next
             </button>

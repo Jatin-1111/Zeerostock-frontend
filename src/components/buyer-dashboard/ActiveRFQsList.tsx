@@ -105,10 +105,7 @@ export default function ActiveRFQsList() {
 
   return (
     <div className="space-y-5">
-      <h2
-        className="text-[27px] font-semibold text-[#0d1b2a] leading-normal"
-        style={{ fontFamily: "Poppins, sans-serif" }}
-      >
+      <h2 className="text-[27px] font-semibold text-[#0d1b2a] leading-normal">
         Active RFQs
       </h2>
 
@@ -146,51 +143,35 @@ export default function ActiveRFQsList() {
                 {/* Top Row: Category and Budget */}
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
-                    <p
-                      className="text-[15px] font-medium text-[#9c9c9c] leading-normal"
-                      style={{ fontFamily: "Inter, sans-serif" }}
-                    >
+                    <p className="text-[15px] font-medium text-[#9c9c9c] leading-normal">
                       {rfq.category?.name || "Uncategorized"}
                     </p>
                     <span
                       className={`px-[11px] py-0 h-[18px] rounded-[15px] text-[12px] font-medium leading-[18px] inline-flex items-center ${getStatusColor(
                         rfq.status
                       )}`}
-                      style={{ fontFamily: "Inter, sans-serif" }}
                     >
                       {rfq.status.charAt(0).toUpperCase() + rfq.status.slice(1)}
                     </span>
                   </div>
-                  <div
-                    className="text-[24px] font-semibold text-[#0d1b2a] leading-[18px]"
-                    style={{ fontFamily: "Poppins, sans-serif" }}
-                  >
+                  <div className="text-[24px] font-semibold text-[#0d1b2a] leading-[18px]">
                     {budgetRange}
                   </div>
                 </div>
 
                 {/* Title */}
-                <h3
-                  className="text-[20px] font-semibold text-[#0d1b2a] leading-[18px] tracking-[0.4px] mb-2"
-                  style={{ fontFamily: "Poppins, sans-serif" }}
-                >
+                <h3 className="text-[20px] font-semibold text-[#0d1b2a] leading-[18px] tracking-[0.4px] mb-2">
                   {rfq.title}
                 </h3>
 
                 {/* Quantity and Time */}
                 <div className="flex items-center justify-between mb-5">
-                  <p
-                    className="text-[15px] font-medium text-[#9c9c9c] leading-normal"
-                    style={{ fontFamily: "Inter, sans-serif" }}
-                  >
+                  <p className="text-[15px] font-medium text-[#9c9c9c] leading-normal">
                     {rfq.quotesCount || 0}{" "}
                     {(rfq.quotesCount || 0) === 1 ? "Response" : "Responses"}
                   </p>
                   <div className="flex items-center gap-4">
-                    <p
-                      className="text-[15px] font-medium text-[#9c9c9c] leading-normal"
-                      style={{ fontFamily: "Inter, sans-serif" }}
-                    >
+                    <p className="text-[15px] font-medium text-[#9c9c9c] leading-normal">
                       {rfq.quantity} {rfq.unit}
                     </p>
                     <div className="flex items-center gap-[5px]">
@@ -198,10 +179,7 @@ export default function ActiveRFQsList() {
                         className="w-[16px] h-[16px] text-[#9c9c9c]"
                         strokeWidth={1.5}
                       />
-                      <span
-                        className="text-[15px] font-medium text-[#9c9c9c] leading-normal"
-                        style={{ fontFamily: "Inter, sans-serif" }}
-                      >
+                      <span className="text-[15px] font-medium text-[#9c9c9c] leading-normal">
                         {calculateTimeLeft(rfq.expiresAt)}
                       </span>
                     </div>
@@ -219,7 +197,6 @@ export default function ActiveRFQsList() {
                   <Link
                     href={`/buyer/quotes?rfqId=${rfq.id}`}
                     className="h-[45px] px-[35px] bg-[#1e3a8a] text-white rounded-[11px] font-semibold text-[15px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center gap-[8px]"
-                    style={{ fontFamily: "Poppins, sans-serif" }}
                   >
                     <Eye className="w-[19px] h-[19px]" strokeWidth={1.5} />
                     View Quotes
@@ -227,7 +204,6 @@ export default function ActiveRFQsList() {
                   <Link
                     href={`/buyer/rfq?edit=${rfq.id}`}
                     className="h-[45px] px-[45px] bg-white border border-[#9c9c9c] text-[#9c9c9c] rounded-[11px] font-semibold text-[15px] hover:bg-gray-50 transition-colors flex items-center gap-[8px]"
-                    style={{ fontFamily: "Poppins, sans-serif" }}
                   >
                     <Edit2 className="w-[18px] h-[18px]" strokeWidth={1.5} />
                     Edit

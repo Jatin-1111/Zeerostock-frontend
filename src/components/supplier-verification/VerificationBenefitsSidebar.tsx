@@ -23,18 +23,8 @@ export function InfoCard({
 }) {
   return (
     <div className="bg-[#f6f6f6] rounded-[8px] px-[11px] py-[9px] relative">
-      <p
-        style={{ fontFamily: "'Poppins', sans-serif" }}
-        className="font-medium text-[9px] text-[#9c9c9c] mb-[8px]"
-      >
-        {label}
-      </p>
-      <p
-        style={{ fontFamily: "'Poppins', sans-serif" }}
-        className="font-medium text-[11px] text-[#0d1b2a]"
-      >
-        {value}
-      </p>
+      <p className="font-medium text-[9px] text-[#9c9c9c] mb-[8px]">{label}</p>
+      <p className="font-medium text-[11px] text-[#0d1b2a]">{value}</p>
       {verified && (
         <div className="absolute right-[11px] top-1/2 -translate-y-1/2">
           <CheckCircle2 className="w-[20px] h-[20px] text-[#2aae7a]" />
@@ -61,25 +51,14 @@ export function DocumentRowNew({
     <div className="bg-[#f6f6f6] rounded-[8px] px-5 py-[13px] flex items-center justify-between">
       <div>
         <div className="flex items-center gap-2">
-          <p
-            style={{ fontFamily: "'Poppins', sans-serif" }}
-            className="font-medium text-[14px] text-[#0d1b2a]"
-          >
-            {label}
-          </p>
+          <p className="font-medium text-[14px] text-[#0d1b2a]">{label}</p>
           {optional && (
-            <span
-              style={{ fontFamily: "'Poppins', sans-serif" }}
-              className="font-medium text-[14px] text-[#9c9c9c]"
-            >
+            <span className="font-medium text-[14px] text-[#9c9c9c]">
               (Optional)
             </span>
           )}
         </div>
-        <p
-          style={{ fontFamily: "'Poppins', sans-serif" }}
-          className="font-medium text-[12px] text-[#9c9c9c] mt-[9px]"
-        >
+        <p className="font-medium text-[12px] text-[#9c9c9c] mt-[9px]">
           {date}
         </p>
       </div>
@@ -87,22 +66,14 @@ export function DocumentRowNew({
       {status === "verified" || status === "approved" ? (
         <div className="bg-[#eeffef] px-[10px] py-[5px] rounded-[15px] shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)] flex items-center gap-[5px]">
           <CheckCircle2 className="w-[18px] h-[18px] text-[#2aae7a]" />
-          <span
-            style={{ fontFamily: "'Poppins', sans-serif" }}
-            className="font-medium text-[14px] text-[#2aae7a]"
-          >
+          <span className="font-medium text-[14px] text-[#2aae7a]">
             Verified
           </span>
         </div>
       ) : status === "pending" || status === "under_review" ? (
         <div className="bg-[#fff3cf] px-[10px] py-[5px] rounded-[15px] shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)] flex items-center gap-[5px]">
           <Clock className="w-[18px] h-[18px] text-[#fc3]" />
-          <span
-            style={{ fontFamily: "'Poppins', sans-serif" }}
-            className="font-medium text-[14px] text-[#fc3]"
-          >
-            Pending
-          </span>
+          <span className="font-medium text-[14px] text-[#fc3]">Pending</span>
         </div>
       ) : (
         <button
@@ -130,16 +101,10 @@ function BenefitItem({
     <div className="flex items-start gap-4">
       <div className="shrink-0 mt-1">{icon}</div>
       <div>
-        <h4
-          style={{ fontFamily: "'Poppins', sans-serif" }}
-          className="font-semibold text-[17px] text-[#0d1b2a] mb-[5px]"
-        >
+        <h4 className="font-semibold text-[17px] text-[#0d1b2a] mb-[5px]">
           {title}
         </h4>
-        <p
-          style={{ fontFamily: "'Poppins', sans-serif" }}
-          className="font-medium text-[11px] text-[#9c9c9c] leading-normal"
-        >
+        <p className="font-medium text-[11px] text-[#9c9c9c] leading-normal">
           {description}
         </p>
       </div>
@@ -162,18 +127,10 @@ function ImpactCard({
     <div
       className={`${bgColor} rounded-[15px] h-[80px] flex flex-col items-center justify-center`}
     >
-      <p
-        style={{ fontFamily: "'Poppins', sans-serif" }}
-        className={`font-semibold text-[26px] ${textColor} mb-[5px]`}
-      >
+      <p className={`font-semibold text-[26px] ${textColor} mb-[5px]`}>
         {value}
       </p>
-      <p
-        style={{ fontFamily: "'Poppins', sans-serif" }}
-        className={`font-semibold text-[13px] ${textColor}`}
-      >
-        {label}
-      </p>
+      <p className={`font-semibold text-[13px] ${textColor}`}>{label}</p>
     </div>
   );
 }
@@ -185,10 +142,7 @@ export function VerificationBenefitsSidebar() {
     <div className="w-[345px] space-y-[23px]">
       {/* Verification Benefits Card */}
       <div className="bg-white shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] rounded-[15px] p-[23px]">
-        <h3
-          style={{ fontFamily: "'Poppins', sans-serif" }}
-          className="font-semibold text-[18px] text-[#0d1b2a] mb-8"
-        >
+        <h3 className="font-semibold text-[18px] text-[#0d1b2a] mb-8">
           Verification Benefits
         </h3>
 
@@ -255,10 +209,7 @@ export function VerificationBenefitsSidebar() {
 
       {/* Verification Impact Card */}
       <div className="bg-white shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] rounded-[15px] p-[30px]">
-        <h3
-          style={{ fontFamily: "'Poppins', sans-serif" }}
-          className="font-semibold text-[18px] text-[#0d1b2a] mb-[55px]"
-        >
+        <h3 className="font-semibold text-[18px] text-[#0d1b2a] mb-[55px]">
           Verification Impact
         </h3>
 
@@ -286,20 +237,14 @@ export function VerificationBenefitsSidebar() {
 
       {/* Need Help Card */}
       <div className="bg-white shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] rounded-[15px] p-[30px]">
-        <h3
-          style={{ fontFamily: "'Poppins', sans-serif" }}
-          className="font-semibold text-[18px] text-[#0d1b2a] mb-5"
-        >
+        <h3 className="font-semibold text-[18px] text-[#0d1b2a] mb-5">
           Need Help?
         </h3>
-        <p
-          style={{ fontFamily: "'Poppins', sans-serif" }}
-          className="font-medium text-[18px] text-[#9c9c9c] leading-normal mb-[60px]"
-        >
+        <p className="font-medium text-[18px] text-[#9c9c9c] leading-normal mb-[60px]">
           Our verification team is here to assist you through the process
         </p>
 
-        <Link href={"/help-support"}>
+        <Link href={"/helpdesk"}>
           <button className="w-full bg-[#1e3a8a] hover:bg-[#152e6b] text-white font-semibold text-[16px] py-[17px] rounded-[8px] flex items-center justify-center gap-[8px] mb-[10px]">
             <Phone className="w-5 h-5" />
             Contact Support

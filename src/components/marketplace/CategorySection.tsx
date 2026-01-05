@@ -391,12 +391,12 @@ export default function CategorySection() {
   return (
     <div className="max-w-[1200px] mx-auto py-12 px-4">
       <div className="flex justify-between items-center mb-8">
-        <h2 className="font-poppins font-semibold text-[28px] text-[#1a1a1a] m-0">
+        <h2 className="font-semibold text-[28px] text-[#1a1a1a] m-0">
           Shop by Category
         </h2>
         <button
           onClick={() => setShowAll(!showAll)}
-          className="font-inter font-medium text-base text-gray-600 bg-transparent border-none cursor-pointer hover:text-[#2D4A9A] transition-colors"
+          className="font-medium text-base text-gray-600 bg-transparent border-none cursor-pointer hover:text-[#2D4A9A] transition-colors"
         >
           {showAll ? "Show less" : "View all categories"}
         </button>
@@ -409,7 +409,7 @@ export default function CategorySection() {
             className="bg-white rounded-xl shadow-md p-6 flex flex-col items-center gap-4 border-none cursor-pointer hover:-translate-y-1 transition-transform duration-200"
           >
             <div className="text-gray-700">{category.icon}</div>
-            <span className="font-poppins font-medium text-sm text-[#1a1a1a] text-center leading-tight">
+            <span className="font-medium text-sm text-[#1a1a1a] text-center leading-tight">
               {category.name}
             </span>
           </button>

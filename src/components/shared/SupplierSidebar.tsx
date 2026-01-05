@@ -56,7 +56,7 @@ export default function SupplierSidebar() {
         {/* Header */}
         <div className="h-[60px] border-b border-[#8B8B8B] flex items-center justify-center relative">
           <h1
-            style={{ fontFamily: "Poppins, sans-serif" }}
+            
             className="font-medium text-[20px] text-[#1E3A8A] leading-normal"
           >
             Supplier Menu
@@ -70,7 +70,7 @@ export default function SupplierSidebar() {
           {/* INVENTORY MANAGEMENT Section */}
           <div className="mb-[23px]">
             <h3
-              style={{ fontFamily: "Poppins, sans-serif" }}
+              
               className="font-medium text-[19px] text-black leading-normal mb-[8px] px-[20px]"
             >
               Inventory Management
@@ -95,7 +95,6 @@ export default function SupplierSidebar() {
                   }`}
                 />
                 <span
-                  style={{ fontFamily: "Inter, sans-serif" }}
                   className={`font-medium text-[17px] leading-normal ${
                     isActive("/supplier/listings")
                       ? "text-[#2AAE7A]"
@@ -110,10 +109,7 @@ export default function SupplierSidebar() {
                 className="flex items-center gap-[15px] px-[19px] py-[15px] rounded-[9px] ml-[4px] hover:bg-gray-50"
               >
                 <Zap className="w-[19px] h-[19px] text-[#8B8B8B]" />
-                <span
-                  style={{ fontFamily: "Inter, sans-serif" }}
-                  className="font-medium text-[17px] text-[#8B8B8B] leading-normal"
-                >
+                <span className="font-medium text-[17px] text-[#8B8B8B] leading-normal">
                   Quick List
                 </span>
               </Link>
@@ -122,10 +118,7 @@ export default function SupplierSidebar() {
                 className="flex items-center gap-[15px] px-[19px] py-[15px] rounded-[9px] ml-[4px] hover:bg-gray-50"
               >
                 <BarChart3 className="w-[19px] h-[19px] text-[#8B8B8B]" />
-                <span
-                  style={{ fontFamily: "Inter, sans-serif" }}
-                  className="font-medium text-[17px] text-[#8B8B8B] leading-normal"
-                >
+                <span className="font-medium text-[17px] text-[#8B8B8B] leading-normal">
                   Performance
                 </span>
               </Link>
@@ -135,7 +128,7 @@ export default function SupplierSidebar() {
           {/* SALES & ORDERS Section */}
           <div className="mb-[23px]">
             <h3
-              style={{ fontFamily: "Poppins, sans-serif" }}
+              
               className="font-medium text-[19px] text-black leading-normal mb-[8px] px-[20px]"
             >
               Sales &amp; Orders
@@ -146,10 +139,7 @@ export default function SupplierSidebar() {
                 className="flex items-center gap-[15px] px-[19px] py-[15px] rounded-[9px] ml-[4px] hover:bg-gray-50"
               >
                 <ShoppingCart className="w-[19px] h-[19px] text-[#8B8B8B]" />
-                <span
-                  style={{ fontFamily: "Inter, sans-serif" }}
-                  className="font-medium text-[17px] text-[#8B8B8B] leading-normal"
-                >
+                <span className="font-medium text-[17px] text-[#8B8B8B] leading-normal">
                   Order Management
                 </span>
               </Link>
@@ -158,10 +148,7 @@ export default function SupplierSidebar() {
                 className="flex items-center gap-[15px] px-[19px] py-[15px] rounded-[9px] ml-[4px] hover:bg-gray-50"
               >
                 <LayoutDashboard className="w-[19px] h-[19px] text-[#8B8B8B]" />
-                <span
-                  style={{ fontFamily: "Inter, sans-serif" }}
-                  className="font-medium text-[17px] text-[#8B8B8B] leading-normal"
-                >
+                <span className="font-medium text-[17px] text-[#8B8B8B] leading-normal">
                   Dashboard
                 </span>
               </Link>
@@ -170,10 +157,7 @@ export default function SupplierSidebar() {
                 className="flex items-center gap-[15px] px-[19px] py-[15px] rounded-[9px] ml-[4px] hover:bg-gray-50"
               >
                 <CreditCard className="w-[19px] h-[19px] text-[#8B8B8B]" />
-                <span
-                  style={{ fontFamily: "Inter, sans-serif" }}
-                  className="font-medium text-[17px] text-[#8B8B8B] leading-normal"
-                >
+                <span className="font-medium text-[17px] text-[#8B8B8B] leading-normal">
                   Payments
                 </span>
               </Link>
@@ -182,10 +166,7 @@ export default function SupplierSidebar() {
                 className="flex items-center gap-[15px] px-[19px] py-[15px] rounded-[9px] ml-[4px] hover:bg-gray-50"
               >
                 <Eye className="w-[19px] h-[19px] text-[#8B8B8B]" />
-                <span
-                  style={{ fontFamily: "Inter, sans-serif" }}
-                  className="font-medium text-[17px] text-[#8B8B8B] leading-normal"
-                >
+                <span className="font-medium text-[17px] text-[#8B8B8B] leading-normal">
                   Market Analytics
                 </span>
               </Link>
@@ -195,7 +176,7 @@ export default function SupplierSidebar() {
           {/* ACCOUNT Section */}
           <div className="mb-[23px]">
             <h3
-              style={{ fontFamily: "Poppins, sans-serif" }}
+              
               className="font-medium text-[19px] text-black leading-normal mb-[8px] px-[20px]"
             >
               Account
@@ -206,10 +187,7 @@ export default function SupplierSidebar() {
                 className="flex items-center gap-[15px] px-[19px] py-[15px] rounded-[9px] ml-[4px] hover:bg-gray-50"
               >
                 <User className="w-[19px] h-[19px] text-[#8B8B8B]" />
-                <span
-                  style={{ fontFamily: "Inter, sans-serif" }}
-                  className="font-medium text-[17px] text-[#8B8B8B] leading-normal"
-                >
+                <span className="font-medium text-[17px] text-[#8B8B8B] leading-normal">
                   Profile
                 </span>
               </Link>
@@ -218,10 +196,7 @@ export default function SupplierSidebar() {
                 className="flex items-center gap-[15px] px-[19px] py-[15px] rounded-[9px] ml-[4px] hover:bg-gray-50"
               >
                 <Settings className="w-[19px] h-[19px] text-[#8B8B8B]" />
-                <span
-                  style={{ fontFamily: "Inter, sans-serif" }}
-                  className="font-medium text-[17px] text-[#8B8B8B] leading-normal"
-                >
+                <span className="font-medium text-[17px] text-[#8B8B8B] leading-normal">
                   Settings
                 </span>
               </Link>
@@ -230,10 +205,7 @@ export default function SupplierSidebar() {
                 className="flex items-center gap-[15px] px-[19px] py-[15px] rounded-[9px] ml-[4px] hover:bg-red-50"
               >
                 <LogOut className="w-[19px] h-[19px] text-[#FF0001]" />
-                <span
-                  style={{ fontFamily: "Inter, sans-serif" }}
-                  className="font-medium text-[17px] text-[#FF0001] leading-normal"
-                >
+                <span className="font-medium text-[17px] text-[#FF0001] leading-normal">
                   Sign Out
                 </span>
               </Link>
@@ -248,10 +220,7 @@ export default function SupplierSidebar() {
             className="flex items-center gap-[11px] px-[23px] py-[15px] hover:bg-gray-200 transition-colors"
           >
             <AlertCircle className="w-[19px] h-[19px] text-black" />
-            <span
-              style={{ fontFamily: "Inter, sans-serif" }}
-              className="font-medium text-[17px] text-black leading-normal"
-            >
+            <span className="font-medium text-[17px] text-black leading-normal">
               Help &amp; Support
             </span>
           </Link>
@@ -260,11 +229,8 @@ export default function SupplierSidebar() {
             className="flex items-center gap-[11px] px-[23px] py-[13px] hover:bg-gray-200 transition-colors"
           >
             <Mail className="w-[18px] h-[18px] text-black" />
-            <span
-              style={{ fontFamily: "Inter, sans-serif" }}
-              className="font-medium text-[17px] text-black leading-normal"
-            >
-              Sent Feedback
+            <span className="font-medium text-[17px] text-black leading-normal">
+              Send Feedback
             </span>
           </Link>
         </div>

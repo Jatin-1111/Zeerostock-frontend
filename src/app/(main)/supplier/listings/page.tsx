@@ -113,10 +113,7 @@ export default function SupplierListings() {
     <div className="min-h-screen bg-[#EEFBF6]">
       <div className="max-w-[1440px] mx-auto px-20 py-8">
         {/* Page Title */}
-        <h1
-          className="text-[36px] font-semibold text-[#0d1b2a] mb-8"
-          style={{ fontFamily: "Poppins, sans-serif" }}
-        >
+        <h1 className="text-[36px] font-semibold text-[#0d1b2a] mb-8">
           Active Listing
         </h1>
 
@@ -173,17 +170,6 @@ export default function SupplierListings() {
                   >
                     <p
                       className="text-[15px] font-medium leading-normal"
-                      style={{
-                        fontFamily: "Poppins, sans-serif",
-                        color:
-                          listing.status === "active"
-                            ? "#2aae7a"
-                            : listing.status === "draft"
-                            ? "#9c9c9c"
-                            : listing.status === "sold"
-                            ? "#1e3a8a"
-                            : "#dc2626",
-                      }}
                     >
                       {listing.status.charAt(0).toUpperCase() +
                         listing.status.slice(1)}
@@ -211,35 +197,23 @@ export default function SupplierListings() {
                   {/* Product Details */}
                   <div className="px-[20px] pb-[20px]">
                     {/* Title */}
-                    <h3
-                      className="text-[20px] font-medium text-[#0d1b2a] mb-2 line-clamp-2"
-                      style={{ fontFamily: "Poppins, sans-serif" }}
-                    >
+                    <h3 className="text-[20px] font-medium text-[#0d1b2a] mb-2 line-clamp-2">
                       {listing.title}
                     </h3>
 
                     {/* Subtitle */}
-                    <p
-                      className="text-[14px] font-medium text-[#9c9c9c] mb-4"
-                      style={{ fontFamily: "Poppins, sans-serif" }}
-                    >
+                    <p className="text-[14px] font-medium text-[#9c9c9c] mb-4">
                       {listing.city || "Location not specified"}
                     </p>
 
                     {/* Pricing */}
                     <div className="mb-4 flex items-center gap-3">
-                      <span
-                        className="text-[26px] font-bold text-[#1e3a8a]"
-                        style={{ fontFamily: "Inter, sans-serif" }}
-                      >
+                      <span className="text-[26px] font-bold text-[#1e3a8a]">
                         {formatCurrency(listing.price_after)}
                       </span>
                       {listing.price_before && (
                         <div className="relative">
-                          <span
-                            className="text-[18px] font-bold text-[#9c9c9c]"
-                            style={{ fontFamily: "Inter, sans-serif" }}
-                          >
+                          <span className="text-[18px] font-bold text-[#9c9c9c]">
                             {formatCurrency(listing.price_before)}
                           </span>
                           <div
@@ -252,29 +226,17 @@ export default function SupplierListings() {
 
                     {/* Availability Info */}
                     <div className="flex items-center gap-2 mb-4">
-                      <p
-                        className="text-[14px] font-medium text-[#9c9c9c]"
-                        style={{ fontFamily: "Poppins, sans-serif" }}
-                      >
-                        Price alerts{" "}
-                        <span style={{ fontFamily: "Inter, sans-serif" }}>
-                          ₹
-                        </span>
+                      <p className="text-[14px] font-medium text-[#9c9c9c]">
+                        Price alerts <span>₹</span>
                         {(
                           parseFloat(listing.price_after.toString()) *
                           parseFloat(listing.quantity.toString())
                         ).toLocaleString("en-IN")}
                       </p>
-                      <span
-                        className="text-[14px] font-medium text-[#9c9c9c]"
-                        style={{ fontFamily: "Poppins, sans-serif" }}
-                      >
+                      <span className="text-[14px] font-medium text-[#9c9c9c]">
                         |
                       </span>
-                      <p
-                        className="text-[14px] font-medium text-[#9c9c9c]"
-                        style={{ fontFamily: "Poppins, sans-serif" }}
-                      >
+                      <p className="text-[14px] font-medium text-[#9c9c9c]">
                         {listing.quantity} {listing.unit} available
                       </p>
                     </div>
@@ -283,19 +245,13 @@ export default function SupplierListings() {
                     <div className="flex items-center gap-4 pb-4 border-b border-[#e5e5e5] mb-4">
                       <div className="flex items-center gap-2">
                         <Eye className="w-[22px] h-[22px] text-[#9c9c9c]" />
-                        <span
-                          className="text-[12px] font-medium text-[#9c9c9c]"
-                          style={{ fontFamily: "Poppins, sans-serif" }}
-                        >
+                        <span className="text-[12px] font-medium text-[#9c9c9c]">
                           {listing.views_count}
                         </span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Star className="w-[22px] h-[22px] text-[#9c9c9c]" />
-                        <span
-                          className="text-[12px] font-medium text-[#9c9c9c]"
-                          style={{ fontFamily: "Poppins, sans-serif" }}
-                        >
+                        <span className="text-[12px] font-medium text-[#9c9c9c]">
                           {listing.rating
                             ? Number(listing.rating).toFixed(1)
                             : "0"}
@@ -303,19 +259,13 @@ export default function SupplierListings() {
                       </div>
                       <div className="flex items-center gap-2">
                         <MessageCircle className="w-[22px] h-[22px] text-[#9c9c9c]" />
-                        <span
-                          className="text-[12px] font-medium text-[#9c9c9c]"
-                          style={{ fontFamily: "Poppins, sans-serif" }}
-                        >
+                        <span className="text-[12px] font-medium text-[#9c9c9c]">
                           {listing.inquiries_count}
                         </span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Clock className="w-[22px] h-[22px] text-[#9c9c9c]" />
-                        <span
-                          className="text-[12px] font-medium text-[#9c9c9c]"
-                          style={{ fontFamily: "Poppins, sans-serif" }}
-                        >
+                        <span className="text-[12px] font-medium text-[#9c9c9c]">
                           3d 20h
                         </span>
                       </div>
@@ -328,10 +278,7 @@ export default function SupplierListings() {
                         className="flex-1 h-[50px] flex items-center justify-center gap-2 px-5 py-4 border border-[#9c9c9c] rounded-[15px] hover:bg-gray-50 transition-colors"
                       >
                         <Edit className="w-5 h-5 text-[#9c9c9c]" />
-                        <span
-                          className="text-[16px] font-medium text-[#9c9c9c]"
-                          style={{ fontFamily: "Poppins, sans-serif" }}
-                        >
+                        <span className="text-[16px] font-medium text-[#9c9c9c]">
                           Edit
                         </span>
                       </Link>
@@ -340,10 +287,7 @@ export default function SupplierListings() {
                         className="flex-1 h-[50px] flex items-center justify-center gap-2 px-5 py-4 bg-[#1e3a8a] rounded-[15px] hover:bg-[#1e40af] transition-colors"
                       >
                         <BarChart3 className="w-5 h-5 text-white" />
-                        <span
-                          className="text-[16px] font-medium text-white"
-                          style={{ fontFamily: "Poppins, sans-serif" }}
-                        >
+                        <span className="text-[16px] font-medium text-white">
                           Analytics
                         </span>
                       </Link>

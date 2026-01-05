@@ -24,14 +24,7 @@ export default function OrderSummary({
           <span className="text-[15px] font-medium text-[#9c9c9c]">
             Subtotal (2 items)
           </span>
-          <span
-            className="text-[15px] font-semibold text-[#bebebe]"
-            style={{
-              fontFamily: "Poppins, sans-serif",
-              letterSpacing: "0.5px",
-              lineHeight: "18px",
-            }}
-          >
+          <span className="text-[15px] font-semibold text-[#bebebe]">
             ₹{subtotal.toLocaleString()}
           </span>
         </div>
@@ -42,11 +35,6 @@ export default function OrderSummary({
           </span>
           <span
             className="text-[15px] font-semibold text-[#2aae7a]"
-            style={{
-              fontFamily: "Poppins, sans-serif",
-              letterSpacing: "0.5px",
-              lineHeight: "18px",
-            }}
           >
             -₹{savings.toLocaleString()}
           </span>

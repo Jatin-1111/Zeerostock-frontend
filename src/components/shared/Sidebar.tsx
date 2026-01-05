@@ -71,7 +71,7 @@ export default function Sidebar({
       >
         {/* Header */}
         <div className="h-[60px] flex items-center justify-center border-b border-[#8b8b8b] relative">
-          <h2 className="font-['Poppins',sans-serif] font-medium text-[20px] text-[#1e3a8a] leading-normal">
+          <h2 className="font-medium text-[20px] text-[#1e3a8a] leading-normal">
             Explore Zeerostock
           </h2>
           <button
@@ -85,7 +85,7 @@ export default function Sidebar({
         <div className="px-[4px] pb-[28px]">
           {/* EXPLORE PRODUCTS Section */}
           <div className="mt-[37px] mb-8">
-            <h3 className="font-['Poppins',sans-serif] font-medium text-[19px] text-black leading-normal px-4 mb-[29px]">
+            <h3 className="font-medium text-[19px] text-black leading-normal px-4 mb-[29px]">
               Explore Products
             </h3>
             <nav className="space-y-[5px]">
@@ -113,7 +113,7 @@ export default function Sidebar({
                     />
                   </div>
                   <span
-                    className={`font-['Poppins',sans-serif] font-medium text-[17px] leading-normal ${
+                    className={`font-medium text-[17px] leading-normal ${
                       activeItem === "browse-categories"
                         ? "text-[#2aae7a]"
                         : "text-[#8b8b8b]"
@@ -129,7 +129,7 @@ export default function Sidebar({
                     }`}
                   >
                     <span
-                      className={`font-['Poppins',sans-serif] font-medium text-[8px] leading-normal ${
+                      className={`font-medium text-[8px] leading-normal ${
                         activeItem === "browse-categories"
                           ? "text-[#eeffef]"
                           : "text-white"
@@ -165,7 +165,7 @@ export default function Sidebar({
                     />
                   </div>
                   <span
-                    className={`font-['Poppins',sans-serif] font-medium text-[17px] leading-normal ${
+                    className={`font-medium text-[17px] leading-normal ${
                       activeItem === "trending-items"
                         ? "text-[#2aae7a]"
                         : "text-[#8b8b8b]"
@@ -200,7 +200,7 @@ export default function Sidebar({
                     />
                   </div>
                   <span
-                    className={`font-['Poppins',sans-serif] font-medium text-[17px] leading-normal ${
+                    className={`font-medium text-[17px] leading-normal ${
                       activeItem === "featured-deals"
                         ? "text-[#2aae7a]"
                         : "text-[#8b8b8b]"
@@ -215,7 +215,7 @@ export default function Sidebar({
 
           {/* GET STARTED Section */}
           <div className="mb-[32px]">
-            <h3 className="font-['Poppins',sans-serif] font-medium text-[19px] text-black leading-normal px-[20px] mb-[29px]">
+            <h3 className="font-medium text-[19px] text-black leading-normal px-[20px] mb-[29px]">
               Get Started
             </h3>
             <nav className="space-y-[5px]">
@@ -243,7 +243,7 @@ export default function Sidebar({
                     />
                   </div>
                   <span
-                    className={`font-['Poppins',sans-serif] font-medium text-[17px] leading-normal ${
+                    className={`font-medium text-[17px] leading-normal ${
                       activeItem === "for-buyers"
                         ? "text-[#2aae7a]"
                         : "text-[#8b8b8b]"
@@ -278,7 +278,7 @@ export default function Sidebar({
                     />
                   </div>
                   <span
-                    className={`font-['Poppins',sans-serif] font-medium text-[17px] leading-normal ${
+                    className={`font-medium text-[17px] leading-normal ${
                       activeItem === "for-suppliers"
                         ? "text-[#2aae7a]"
                         : "text-[#8b8b8b]"
@@ -313,7 +313,7 @@ export default function Sidebar({
                     />
                   </div>
                   <span
-                    className={`font-['Poppins',sans-serif] font-medium text-[17px] leading-normal ${
+                    className={`font-medium text-[17px] leading-normal ${
                       activeItem === "how-it-works"
                         ? "text-[#2aae7a]"
                         : "text-[#8b8b8b]"
@@ -328,7 +328,7 @@ export default function Sidebar({
 
           {/* RESOURCES Section */}
           <div className="mb-[32px]">
-            <h3 className="font-['Poppins',sans-serif] font-medium text-[19px] text-black leading-normal px-[20px] mb-[29px]">
+            <h3 className="font-medium text-[19px] text-black leading-normal px-[20px] mb-[29px]">
               Resources
             </h3>
             <nav className="space-y-[5px]">
@@ -356,7 +356,7 @@ export default function Sidebar({
                     />
                   </div>
                   <span
-                    className={`font-['Poppins',sans-serif] font-medium text-[17px] leading-normal ${
+                    className={`font-medium text-[17px] leading-normal ${
                       activeItem === "pricing"
                         ? "text-[#2aae7a]"
                         : "text-[#8b8b8b]"
@@ -373,7 +373,7 @@ export default function Sidebar({
                   <div className="absolute left-0 top-0 w-[4px] h-[53px] bg-[#2aae7a] rounded-tr-[4px] rounded-br-[4px]" />
                 )}
                 <Link
-                  href="/help-support"
+                  href="/helpdesk"
                   onClick={() => setActiveItem("contact-us")}
                   className={`flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-[20px] ml-[4px] ${
                     activeItem === "contact-us"
@@ -391,7 +391,7 @@ export default function Sidebar({
                     />
                   </div>
                   <span
-                    className={`font-['Poppins',sans-serif] font-medium text-[17px] leading-normal ${
+                    className={`font-medium text-[17px] leading-normal ${
                       activeItem === "contact-us"
                         ? "text-[#2aae7a]"
                         : "text-[#8b8b8b]"
@@ -426,7 +426,7 @@ export default function Sidebar({
                     />
                   </div>
                   <span
-                    className={`font-['Poppins',sans-serif] font-medium text-[17px] leading-normal ${
+                    className={`font-medium text-[17px] leading-normal ${
                       activeItem === "settings"
                         ? "text-[#2aae7a]"
                         : "text-[#8b8b8b]"
@@ -448,7 +448,7 @@ export default function Sidebar({
               <div className="w-[19px] h-[19px] flex-shrink-0">
                 <AlertCircle className="w-[19px] h-[19px] text-black" />
               </div>
-              <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-black leading-normal">
+              <span className="font-medium text-[17px] text-black leading-normal">
                 Help & Support
               </span>
             </Link>
@@ -459,8 +459,8 @@ export default function Sidebar({
               <div className="w-[18px] h-[18px] flex-shrink-0">
                 <Mail className="w-[18px] h-[18px] text-black" />
               </div>
-              <span className="font-['Poppins',sans-serif] font-medium text-[17px] text-black leading-normal">
-                Sent Feedback
+              <span className="font-medium text-[17px] text-black leading-normal">
+                Send Feedback
               </span>
             </Link>
           </div>

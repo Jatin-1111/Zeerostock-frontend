@@ -54,12 +54,12 @@ export default function MarketplaceHero() {
       }}
     >
       {/* Main heading */}
-      <h1 className="absolute left-1/2 top-[77.5px] -translate-x-1/2 -translate-y-1/2 font-poppins font-normal text-7xl text-[#0d1b2a] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] whitespace-nowrap m-0">
+      <h1 className="absolute left-1/2 top-[77.5px] -translate-x-1/2 -translate-y-1/2 font-normal text-7xl text-[#0d1b2a] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] whitespace-nowrap m-0">
         B2B Surplus Marketplace
       </h1>
 
       {/* Subheading */}
-      <p className="absolute left-1/2 top-[155.5px] -translate-x-1/2 -translate-y-1/2 font-inter font-medium text-2xl text-[#787878] whitespace-nowrap m-0">
+      <p className="absolute left-1/2 top-[155.5px] -translate-x-1/2 -translate-y-1/2 font-medium text-2xl text-[#787878] whitespace-nowrap m-0">
         Millions of products. Thousands of suppliers. One marketplace
       </p>
 
@@ -74,7 +74,7 @@ export default function MarketplaceHero() {
             className="flex items-center gap-1 px-4 cursor-pointer"
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           >
-            <span className="font-inter font-medium text-sm text-gray-700 whitespace-nowrap">
+            <span className="font-medium text-sm text-gray-700 whitespace-nowrap">
               {selectedCategory}
             </span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
@@ -94,7 +94,7 @@ export default function MarketplaceHero() {
               {categories.map((category) => (
                 <div
                   key={category}
-                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer font-inter text-sm text-gray-700"
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm text-gray-700"
                   onClick={() => {
                     setSelectedCategory(category);
                     setIsDropdownOpen(false);
@@ -116,7 +116,7 @@ export default function MarketplaceHero() {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Search for products, categories, etc"
-          className="flex-1 border-none bg-transparent outline-none font-inter font-normal text-sm text-gray-700 px-4"
+          className="flex-1 border-none bg-transparent outline-none font-normal text-sm text-gray-700 px-4"
         />
 
         {/* Divider */}
@@ -141,7 +141,7 @@ export default function MarketplaceHero() {
         {/* Search button */}
         <button
           type="submit"
-          className="font-inter font-medium text-sm text-gray-700 bg-transparent border-none cursor-pointer px-5 h-full"
+          className="font-medium text-sm text-gray-700 bg-transparent border-none cursor-pointer px-5 h-full"
         >
           Search
         </button>

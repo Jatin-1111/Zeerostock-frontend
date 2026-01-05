@@ -52,7 +52,7 @@ export default function Header() {
             About Us
           </Link>
           <Link
-            href="/help-support"
+            href="/helpdesk"
             className="text-white text-[20px] font-medium hover:text-white/90 transition-colors"
           >
             Contact Us

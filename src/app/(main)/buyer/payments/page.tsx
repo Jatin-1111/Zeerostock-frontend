@@ -123,16 +123,16 @@ export default function BuyerPaymentMethodsPage() {
   // Role check
   if (user && user.activeRole !== "buyer") {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center max-w-md mx-auto p-8">
+      <div className="flex min-h-screen items-center justify-center bg-white">
+        <div className="mx-auto max-w-md p-8 text-center">
           <div className="mb-6">
-            <div className="w-16 h-16 bg-red-100 border-2 border-red-600 mx-auto flex items-center justify-center mb-4">
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center border-2 border-red-600 bg-red-100">
               <span className="text-3xl">⚠️</span>
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">
+            <h2 className="mb-2 text-2xl font-bold text-gray-900">
               Access Restricted
             </h2>
-            <p className="text-gray-600 mb-6">
+            <p className="mb-6 text-gray-600">
               You need to be in buyer mode to view payments. Your current role
               is: <strong>{user.activeRole}</strong>
             </p>
@@ -140,13 +140,13 @@ export default function BuyerPaymentMethodsPage() {
           <div className="space-y-3">
             <button
               onClick={() => (window.location.href = "/buyer")}
-              className="w-full px-6 py-3 bg-gray-900 text-white font-semibold border-2 border-gray-900 hover:bg-gray-800 transition-colors"
+              className="w-full border-2 border-gray-900 bg-gray-900 px-6 py-3 font-semibold text-white transition-colors hover:bg-gray-800"
             >
               Switch to Buyer Mode
             </button>
             <button
               onClick={() => (window.location.href = "/")}
-              className="w-full px-6 py-3 bg-white text-gray-900 font-semibold border-2 border-gray-900 hover:bg-gray-50 transition-colors"
+              className="w-full border-2 border-gray-900 bg-white px-6 py-3 font-semibold text-gray-900 transition-colors hover:bg-gray-50"
             >
               Go to Homepage
             </button>
@@ -158,9 +158,9 @@ export default function BuyerPaymentMethodsPage() {
 
   if (loading && !paymentSummary) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="flex min-h-screen items-center justify-center bg-white">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-gray-300 border-t-gray-900 rounded-full animate-spin mx-auto mb-4"></div>
+          <div className="mx-auto mb-4 h-16 w-16 animate-spin rounded-full border-4 border-gray-300 border-t-gray-900"></div>
           <p className="text-gray-600">Loading payment data...</p>
         </div>
       </div>
@@ -207,75 +207,23 @@ export default function BuyerPaymentMethodsPage() {
   );
 
   return (
-    <div style={{ minHeight: "100vh" }}>
-      <div
-        style={{
-          width: "100%",
-          maxWidth: "1440px",
-          margin: "0 auto",
-          padding: "40px 80px",
-        }}
-      >
+    <div className="min-h-screen">
+      <div className="mx-auto w-full max-w-[1440px] px-[80px] py-[40px]">
         {/* Page Header with scaling */}
-        <div
-          style={{
-            transform: "scale(0.75)",
-            transformOrigin: "top left",
-            width: "133.33%",
-            marginBottom: "30px",
-          }}
-        >
-          <div
-            style={{
-              background: "white",
-              borderRadius: "20px",
-              boxShadow: "0px 0px 10px 0px rgba(24,181,34,0.25)",
-              padding: "20px 81px 20px 81px",
-              display: "flex",
-              alignItems: "center",
-              marginBottom: "71px",
-            }}
-          >
-            <div style={{ display: "flex", gap: "34px", alignItems: "center" }}>
+        <div className="mb-[15px] w-[133.33%] origin-top-left scale-[0.75]">
+          <div className="flex items-center rounded-[20px] bg-white px-[81px] py-[20px] shadow-[0px_0px_10px_0px_rgba(24,181,34,0.25)]">
+            <div className="flex items-center gap-[34px]">
               {/* Icon Box */}
-              <div
-                style={{
-                  background: "#EEFFEF",
-                  borderRadius: "10px",
-                  boxShadow: "0px 0px 10px 0px rgba(24,181,34,0.25)",
-                  padding: "15px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
+              <div className="flex items-center justify-center rounded-[10px] bg-[#EEFFEF] p-[15px] shadow-[0px_0px_10px_0px_rgba(24,181,34,0.25)]">
                 <CardIcon />
               </div>
 
               {/* Text Content */}
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                <h1
-                  style={{
-                    fontFamily: "Poppins, sans-serif",
-                    fontWeight: 600,
-                    fontSize: "36px",
-                    color: "#0D1B2A",
-                    lineHeight: "normal",
-                    margin: 0,
-                  }}
-                >
+              <div className="flex flex-col">
+                <h1 className="m-0 text-[36px] font-semibold leading-normal text-[#0D1B2A]">
                   Payment Method
                 </h1>
-                <p
-                  style={{
-                    fontFamily: "Poppins, sans-serif",
-                    fontWeight: 500,
-                    fontSize: "24px",
-                    color: "#9C9C9C",
-                    lineHeight: "normal",
-                    margin: 0,
-                  }}
-                >
+                <p className="m-0 text-[24px] font-medium leading-normal text-[#9C9C9C]">
                   Manage payment method and transaction history
                 </p>
               </div>
@@ -287,37 +235,13 @@ export default function BuyerPaymentMethodsPage() {
         <BuyerPaymentMethodsStats summary={paymentSummary} />
 
         {/* Tabs Navigation with scaling */}
-        <div
-          style={{
-            transform: "scale(0.75)",
-            transformOrigin: "top left",
-            width: "133.33%",
-            marginBottom: "50px",
-            marginTop: "50px",
-          }}
-        >
-          <div style={{ position: "relative" }}>
+        <div className="mb-[25px] mt-[25px] w-[133.33%] origin-top-left scale-[0.75]">
+          <div className="relative">
             {/* Horizontal line under all tabs */}
-            <div
-              style={{
-                position: "absolute",
-                bottom: "0",
-                left: "0",
-                right: "0",
-                height: "1px",
-                background: "#E5E7EB",
-              }}
-            />
+            <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-[#E5E7EB]" />
 
             {/* Tabs */}
-            <div
-              style={{
-                display: "flex",
-                gap: "65px",
-                position: "relative",
-                paddingLeft: "40px",
-              }}
-            >
+            <div className="relative flex gap-[65px] pl-[40px]">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
@@ -329,35 +253,14 @@ export default function BuyerPaymentMethodsPage() {
                         | "invoices"
                     )
                   }
-                  style={{
-                    background: "transparent",
-                    border: "none",
-                    fontFamily: "Poppins, sans-serif",
-                    fontWeight: 500,
-                    fontSize: "20px",
-                    color: activeTab === tab.id ? "#2AAE7A" : "#0D1B2A",
-                    letterSpacing: "0.5px",
-                    lineHeight: "24px",
-                    padding: "8px 0",
-                    cursor: "pointer",
-                    position: "relative",
-                    transition: "color 0.2s ease",
-                  }}
+                  className={`relative cursor-pointer border-none bg-transparent py-[8px] text-[20px] font-medium leading-[24px] tracking-[0.5px] transition-colors duration-200 ${
+                    activeTab === tab.id ? "text-[#2AAE7A]" : "text-[#0D1B2A]"
+                  }`}
                 >
                   {tab.label}
                   {/* Active underline */}
                   {activeTab === tab.id && (
-                    <div
-                      style={{
-                        position: "absolute",
-                        bottom: "-1px",
-                        left: "0",
-                        right: "0",
-                        height: "3px",
-                        background: "#2AAE7A",
-                        borderRadius: "2px 2px 0 0",
-                      }}
-                    />
+                    <div className="absolute bottom-[-1px] left-0 right-0 h-[3px] rounded-t-[2px] bg-[#2AAE7A]" />
                   )}
                 </button>
               ))}

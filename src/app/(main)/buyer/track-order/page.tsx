@@ -19,29 +19,9 @@ export default function TrackOrderPage() {
   };
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        backgroundColor: "#eefbf6",
-        padding: "45px 60px",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
+    <div className="flex min-h-screen flex-col items-center bg-[#eefbf6] px-[60px] py-[45px]">
       {/* Header Icon */}
-      <div
-        style={{
-          backgroundColor: "#eeffef",
-          borderRadius: "200px",
-          padding: "18.75px",
-          boxShadow: "0px 0px 2px 0px rgba(0,0,0,0.25)",
-          marginBottom: "22.5px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+      <div className="mb-[22.5px] flex items-center justify-center rounded-[200px] bg-[#eeffef] p-[18.75px] shadow-[0px_0px_2px_0px_rgba(0,0,0,0.25)]">
         <svg
           width="45"
           height="45"
@@ -76,100 +56,34 @@ export default function TrackOrderPage() {
       </div>
 
       {/* Title and Description */}
-      <div
-        style={{
-          textAlign: "center",
-          marginBottom: "33.75px",
-          maxWidth: "480.75px",
-        }}
-      >
-        <h1
-          style={{
-            fontFamily: "Poppins, sans-serif",
-            fontWeight: 600,
-            fontSize: "30px",
-            color: "#0d1b2a",
-            marginBottom: "11.25px",
-            lineHeight: "normal",
-          }}
-        >
+      <div className="mb-[33.75px] max-w-[480.75px] text-center">
+        <h1 className="mb-[11.25px] text-[30px] font-semibold leading-normal text-[#0d1b2a]">
           Track Your Order
         </h1>
-        <p
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontWeight: 500,
-            fontSize: "18px",
-            color: "#9c9c9c",
-            lineHeight: "normal",
-          }}
-        >
+        <p className="text-[18px] font-medium leading-normal text-[#9c9c9c]">
           Enter your order ID to see real-time tracking information
         </p>
       </div>
 
       {/* Main Card */}
-      <div
-        style={{
-          backgroundColor: "white",
-          borderRadius: "15px",
-          boxShadow: "0px 0px 6px 0px rgba(0,0,0,0.25)",
-          width: "825px",
-          maxWidth: "90vw",
-          padding: "36px 22.5px",
-        }}
-      >
+      <div className="w-[825px] max-w-[90vw] rounded-[15px] bg-white px-[22.5px] py-[36px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)]">
         {/* Order ID Section */}
         <form onSubmit={handleSubmit}>
-          <div style={{ marginBottom: "30px" }}>
-            <label
-              style={{
-                fontFamily: "Poppins, sans-serif",
-                fontWeight: 500,
-                fontSize: "18px",
-                color: "#0d1b2a",
-                marginBottom: "11.25px",
-                display: "block",
-              }}
-            >
+          <div className="mb-[30px]">
+            <label className="mb-[11.25px] block text-[18px] font-medium text-[#0d1b2a]">
               Order ID
             </label>
-            <div style={{ display: "flex", gap: "11.25px" }}>
+            <div className="flex gap-[11.25px]">
               <input
                 type="text"
                 placeholder="e.g., ORD-2025-000005"
                 value={orderId}
                 onChange={(e) => setOrderId(e.target.value)}
-                style={{
-                  flex: 1,
-                  height: "42px",
-                  border: "1px solid #bebebe",
-                  borderRadius: "7.5px",
-                  paddingLeft: "12px",
-                  fontFamily: "Roboto, sans-serif",
-                  fontSize: "12px",
-                  color: "#9c9c9c",
-                  outline: "none",
-                }}
+                className="h-[42px] flex-1 rounded-[7.5px] border border-[#bebebe] pl-[12px] text-[12px] text-[#9c9c9c] outline-none"
               />
               <button
                 type="submit"
-                style={{
-                  backgroundColor: "#1e3a8a",
-                  color: "white",
-                  width: "172.5px",
-                  height: "42px",
-                  borderRadius: "11.25px",
-                  border: "none",
-                  fontFamily: "Poppins, sans-serif",
-                  fontWeight: 600,
-                  fontSize: "15px",
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: "7.5px",
-                }}
+                className="flex h-[42px] w-[172.5px] cursor-pointer items-center justify-center gap-[7.5px] rounded-[11.25px] border-none bg-[#1e3a8a] text-[15px] font-semibold text-white"
               >
                 <svg
                   width="12.6"
@@ -198,22 +112,8 @@ export default function TrackOrderPage() {
           </div>
 
           {/* Info Box */}
-          <div
-            style={{
-              backgroundColor: "#c0daff",
-              borderRadius: "15px",
-              padding: "18.75px 22.5px",
-              marginBottom: "30px",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "7.5px",
-                marginBottom: "11.25px",
-              }}
-            >
+          <div className="mb-[30px] rounded-[15px] bg-[#c0daff] px-[22.5px] py-[18.75px]">
+            <div className="mb-[11.25px] flex items-center gap-[7.5px]">
               <svg
                 width="16.5"
                 height="16.5"
@@ -235,28 +135,11 @@ export default function TrackOrderPage() {
                   strokeLinecap="round"
                 />
               </svg>
-              <h3
-                style={{
-                  fontFamily: "Poppins, sans-serif",
-                  fontWeight: 600,
-                  fontSize: "15px",
-                  color: "#085396",
-                  margin: 0,
-                }}
-              >
+              <h3 className="m-0 text-[15px] font-semibold text-[#085396]">
                 Where to find your Tracking ID?
               </h3>
             </div>
-            <ul
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: "15px",
-                color: "#085396",
-                lineHeight: "22.5px",
-                paddingLeft: "22.5px",
-                margin: 0,
-              }}
-            >
+            <ul className="m-0 pl-[22.5px] text-[15px] leading-[22.5px] text-[#085396]">
               <li>Check your order confirmation email</li>
               <li>
                 Find it in your account dashboard under &quot;My Orders&quot;
@@ -270,43 +153,14 @@ export default function TrackOrderPage() {
 
           {/* Quick Actions Section */}
           <div>
-            <h3
-              style={{
-                fontFamily: "Poppins, sans-serif",
-                fontWeight: 500,
-                fontSize: "16.5px",
-                color: "#0d1b2a",
-                marginBottom: "15px",
-              }}
-            >
+            <h3 className="mb-[15px] text-[16.5px] font-medium text-[#0d1b2a]">
               Quick Actions
             </h3>
-            <div
-              style={{
-                display: "flex",
-                gap: "73.5px",
-                justifyContent: "space-between",
-              }}
-            >
+            <div className="flex justify-between gap-[73.5px]">
               <button
                 type="button"
                 onClick={() => router.push("/buyer/orders")}
-                style={{
-                  flex: 1,
-                  border: "1px solid #9c9c9c",
-                  borderRadius: "11.25px",
-                  backgroundColor: "white",
-                  padding: "7.5px 3.75px",
-                  fontFamily: "Poppins, sans-serif",
-                  fontWeight: 500,
-                  fontSize: "15px",
-                  color: "#9c9c9c",
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: "7.5px",
-                }}
+                className="flex flex-1 cursor-pointer items-center justify-center gap-[7.5px] rounded-[11.25px] border border-[#9c9c9c] bg-white px-[3.75px] py-[7.5px] text-[15px] font-medium text-[#9c9c9c]"
               >
                 <svg
                   width="16.5"
@@ -327,22 +181,7 @@ export default function TrackOrderPage() {
               <button
                 type="button"
                 onClick={() => router.push("/buyer/support")}
-                style={{
-                  flex: 1,
-                  border: "1px solid #9c9c9c",
-                  borderRadius: "11.25px",
-                  backgroundColor: "white",
-                  padding: "7.5px 3.75px",
-                  fontFamily: "Poppins, sans-serif",
-                  fontWeight: 500,
-                  fontSize: "15px",
-                  color: "#9c9c9c",
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: "7.5px",
-                }}
+                className="flex flex-1 cursor-pointer items-center justify-center gap-[7.5px] rounded-[11.25px] border border-[#9c9c9c] bg-white px-[3.75px] py-[7.5px] text-[15px] font-medium text-[#9c9c9c]"
               >
                 <svg
                   width="16.5"

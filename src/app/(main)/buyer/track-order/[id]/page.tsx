@@ -354,16 +354,16 @@ export default function TrackOrderDetailPage() {
           {/* Current Status Card */}
           <div className="bg-white rounded-[15px] shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] p-6 relative">
             {/* Truck Icon */}
-            <div className="absolute left-6 top-6 bg-[#eeffef] rounded-[200px] p-3 shadow-[0px_0px_2px_0px_rgba(0,0,0,0.25)]">
-              <Truck size={26} color="#2aae7a" />
+            <div className="absolute left-6 top-6 bg-[#eeffef] rounded-[200px] p-2.5 shadow-[0px_0px_2px_0px_rgba(0,0,0,0.25)]">
+              <Truck size={20} color="#2aae7a" />
             </div>
 
             {/* Status Text */}
-            <div className="ml-[90px]">
-              <h2 className="font-semibold text-[22px] text-[#0d1b2a] m-0">
+            <div className="ml-[70px]">
+              <h2 className="font-semibold text-lg text-[#0d1b2a] m-0">
                 {formatStatus(order.status)}
               </h2>
-              <p className="font-medium text-[22px] text-[#9c9c9c] mt-2 mb-0">
+              <p className="font-medium text-base text-[#9c9c9c] mt-2 mb-0">
                 <span className="font-normal">Current location:</span>{" "}
                 <span className="text-[#0d1b2a]">
                   {currentLocation || "Updating..."}
@@ -372,16 +372,16 @@ export default function TrackOrderDetailPage() {
             </div>
 
             {/* Footer Info */}
-            <div className="flex gap-[160px] mt-[30px]">
-              <div className="flex items-center gap-[9px]">
-                <RefreshCw size={22} color="#9c9c9c" />
-                <span className="font-medium text-[22px] text-[#9c9c9c]">
+            <div className="flex flex-wrap gap-8 mt-6">
+              <div className="flex items-center gap-2">
+                <RefreshCw size={16} color="#9c9c9c" />
+                <span className="font-medium text-sm text-[#9c9c9c]">
                   Last updated: {lastUpdated}
                 </span>
               </div>
               <div className="flex items-center gap-2">
-                <Calendar size={22} color="#9c9c9c" />
-                <span className="font-medium text-[22px] text-[#9c9c9c]">
+                <Calendar size={16} color="#9c9c9c" />
+                <span className="font-medium text-sm text-[#9c9c9c]">
                   Est. delivery:{" "}
                   {order.deliveryEta
                     ? new Date(order.deliveryEta).toLocaleDateString("en-GB")

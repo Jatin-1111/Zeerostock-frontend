@@ -10,7 +10,7 @@ export default function CTASection() {
             <h2 className="font-worksans font-medium text-[33.75px] leading-normal text-white w-full">
               Ready to Join Our Story?
             </h2>
-            <p className="font-inter font-semibold text-[17.25px] leading-normal text-[#374151] w-full">
+            <p className="font-semibold text-[17.25px] leading-normal text-[#374151] w-full">
               Whether you&apos;re a business looking to optimize your surplus
               inventory or a professional wanting to make an impact, we&apos;d
               love to have you as part of our journey.

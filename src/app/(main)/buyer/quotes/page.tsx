@@ -185,10 +185,7 @@ export default function MyQuotesPage() {
   return (
     <div className="min-h-screen bg-[#eefbf6] px-[60px] py-[100px]">
       {/* Page Title */}
-      <h1
-        className="text-[27px] font-semibold text-[#0d1b2a] mb-[43px]"
-        style={{ fontFamily: "Poppins, sans-serif" }}
-      >
+      <h1 className="text-[27px] font-semibold text-[#0d1b2a] mb-[43px]">
         My Quotes
       </h1>
 
@@ -200,27 +197,16 @@ export default function MyQuotesPage() {
         <div className="flex items-center justify-center py-12">
           <div className="text-center">
             <div className="animate-spin h-8 w-8 border-4 border-[#1e3a8a] border-t-transparent rounded-full mx-auto mb-4"></div>
-            <p
-              className="text-[#0d1b2a]"
-              style={{ fontFamily: "Inter, sans-serif" }}
-            >
-              Loading quotes...
-            </p>
+            <p className="text-[#0d1b2a]">Loading quotes...</p>
           </div>
         </div>
       ) : quotes.length === 0 ? (
         <div className="text-center py-12">
           <MessageSquare className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-          <h3
-            className="text-[18px] font-medium text-[#0d1b2a] mb-2"
-            style={{ fontFamily: "Inter, sans-serif" }}
-          >
+          <h3 className="text-[18px] font-medium text-[#0d1b2a] mb-2">
             No quotes found
           </h3>
-          <p
-            className="text-[#9c9c9c]"
-            style={{ fontFamily: "Inter, sans-serif" }}
-          >
+          <p className="text-[#9c9c9c]">
             You haven&apos;t received any quotes yet. Create an RFQ to get
             started.
           </p>
@@ -237,16 +223,10 @@ export default function MyQuotesPage() {
                 {/* Quote Header */}
                 <div className="px-[21px] py-[15px] flex items-center justify-between">
                   <div>
-                    <h2
-                      className="text-[18px] font-medium text-black mb-[8px]"
-                      style={{ fontFamily: "Inter, sans-serif" }}
-                    >
+                    <h2 className="text-[18px] font-medium text-black mb-[8px]">
                       {quote.rfq?.title || "RFQ Title"}
                     </h2>
-                    <p
-                      className="text-[15px] font-medium text-[#9c9c9c]"
-                      style={{ fontFamily: "Inter, sans-serif" }}
-                    >
+                    <p className="text-[15px] font-medium text-[#9c9c9c]">
                       Supplier: {quote.supplier?.companyName || "Unknown"}
                     </p>
                   </div>
@@ -256,10 +236,7 @@ export default function MyQuotesPage() {
                     className={`${statusBadge.bg} ${statusBadge.text} px-[15px] py-[5px] rounded-[100px] flex items-center gap-[8px]`}
                   >
                     {statusBadge.icon}
-                    <span
-                      className="text-[15px] font-normal tracking-[0.5px]"
-                      style={{ fontFamily: "Inter, sans-serif" }}
-                    >
+                    <span className="text-[15px] font-normal tracking-[0.5px]">
                       {statusBadge.label}
                     </span>
                   </div>
@@ -268,24 +245,15 @@ export default function MyQuotesPage() {
                 {/* Quote Details Grid */}
                 <div className="px-[28px] pt-[18px] pb-[22px] grid grid-cols-4 gap-[22px]">
                   <div>
-                    <p
-                      className="text-[20px] font-medium text-[#9c9c9c] mb-[16px]"
-                      style={{ fontFamily: "Inter, sans-serif" }}
-                    >
+                    <p className="text-[20px] font-medium text-[#9c9c9c] mb-[16px]">
                       Quote Price
                     </p>
-                    <p
-                      className="text-[26px] font-medium text-black"
-                      style={{ fontFamily: "Inter, sans-serif" }}
-                    >
+                    <p className="text-[26px] font-medium text-black">
                       <span className="font-bold">₹</span>
                       {(quote.quotePrice || 0).toLocaleString("en-IN")}
                     </p>
                     {quote.rfq?.budgetMin && quote.rfq?.budgetMax && (
-                      <p
-                        className="text-[15px] font-medium text-black mt-[3px]"
-                        style={{ fontFamily: "Inter, sans-serif" }}
-                      >
+                      <p className="text-[15px] font-medium text-black mt-[3px]">
                         <span className="font-bold">₹</span>
                         {(quote.rfq.budgetMax || 0).toLocaleString("en-IN")}
                       </p>
@@ -293,46 +261,28 @@ export default function MyQuotesPage() {
                   </div>
 
                   <div>
-                    <p
-                      className="text-[15px] font-medium text-[#9c9c9c] mb-[12px]"
-                      style={{ fontFamily: "Inter, sans-serif" }}
-                    >
+                    <p className="text-[15px] font-medium text-[#9c9c9c] mb-[12px]">
                       Delivery
                     </p>
-                    <p
-                      className="text-[20px] font-medium text-black"
-                      style={{ fontFamily: "Inter, sans-serif" }}
-                    >
+                    <p className="text-[20px] font-medium text-black">
                       {quote.deliveryDays} Days
                     </p>
                   </div>
 
                   <div>
-                    <p
-                      className="text-[15px] font-medium text-[#9c9c9c] mb-[12px]"
-                      style={{ fontFamily: "Inter, sans-serif" }}
-                    >
+                    <p className="text-[15px] font-medium text-[#9c9c9c] mb-[12px]">
                       Validity
                     </p>
-                    <p
-                      className="text-[20px] font-medium text-black"
-                      style={{ fontFamily: "Inter, sans-serif" }}
-                    >
+                    <p className="text-[20px] font-medium text-black">
                       {formatDate(quote.validUntil)}
                     </p>
                   </div>
 
                   <div>
-                    <p
-                      className="text-[15px] font-medium text-[#9c9c9c] mb-[12px]"
-                      style={{ fontFamily: "Inter, sans-serif" }}
-                    >
+                    <p className="text-[15px] font-medium text-[#9c9c9c] mb-[12px]">
                       RFQ ID
                     </p>
-                    <p
-                      className="text-[20px] font-medium text-black"
-                      style={{ fontFamily: "Inter, sans-serif" }}
-                    >
+                    <p className="text-[20px] font-medium text-black">
                       {quote.quoteNumber}
                     </p>
                   </div>
@@ -348,7 +298,6 @@ export default function MyQuotesPage() {
                       onClick={() => handleAcceptQuote(quote.id)}
                       disabled={acceptingQuoteId === quote.id}
                       className="bg-[#1e3a8a] text-white w-[191px] h-[45px] rounded-[11px] text-[15px] font-semibold hover:bg-[#152d6b] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                      style={{ fontFamily: "Poppins, sans-serif" }}
                     >
                       {acceptingQuoteId === quote.id
                         ? "Accepting..."
@@ -356,10 +305,7 @@ export default function MyQuotesPage() {
                     </button>
                   )}
 
-                  <button
-                    className="border border-[#9c9c9c] w-[191px] h-[45px] rounded-[11px] flex items-center justify-center gap-[11px] text-[#898989] text-[15px] font-medium hover:bg-gray-50 transition-colors"
-                    style={{ fontFamily: "Poppins, sans-serif" }}
-                  >
+                  <button className="border border-[#9c9c9c] w-[191px] h-[45px] rounded-[11px] flex items-center justify-center gap-[11px] text-[#898989] text-[15px] font-medium hover:bg-gray-50 transition-colors">
                     <MessageSquare className="w-[18px] h-[18px]" />
                     <span>Help Desk</span>
                   </button>
@@ -379,14 +325,10 @@ export default function MyQuotesPage() {
             }
             disabled={pagination.page === 1}
             className="px-[30px] py-[15px] bg-[#1e3a8a] text-white rounded-[10px] text-[18px] font-medium hover:bg-[#152d6b] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            style={{ fontFamily: "Inter, sans-serif" }}
           >
             Previous
           </button>
-          <span
-            className="text-[14px] font-medium text-[#0d1b2a]"
-            style={{ fontFamily: "Inter, sans-serif" }}
-          >
+          <span className="text-[14px] font-medium text-[#0d1b2a]">
             Page {pagination.page} of {pagination.totalPages}
           </span>
           <button
@@ -395,7 +337,6 @@ export default function MyQuotesPage() {
             }
             disabled={pagination.page === pagination.totalPages}
             className="px-[30px] py-[15px] bg-[#1e3a8a] text-white rounded-[10px] text-[18px] font-medium hover:bg-[#152d6b] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            style={{ fontFamily: "Inter, sans-serif" }}
           >
             Next
           </button>
@@ -406,16 +347,10 @@ export default function MyQuotesPage() {
       {showRejectModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-[15px] p-[30px] max-w-md w-full mx-4 shadow-[0px_0px_8px_0px_rgba(0,0,0,0.3)]">
-            <h3
-              className="text-[18px] font-bold text-[#0d1b2a] mb-[15px]"
-              style={{ fontFamily: "Inter, sans-serif" }}
-            >
+            <h3 className="text-[18px] font-bold text-[#0d1b2a] mb-[15px]">
               Reject Quote
             </h3>
-            <p
-              className="text-[12px] text-[#9c9c9c] mb-[15px]"
-              style={{ fontFamily: "Inter, sans-serif" }}
-            >
+            <p className="text-[12px] text-[#9c9c9c] mb-[15px]">
               Please provide a reason for rejecting this quote:
             </p>
             <textarea
@@ -424,7 +359,6 @@ export default function MyQuotesPage() {
               placeholder="Enter reason..."
               rows={4}
               className="w-full px-[11px] py-[9px] border border-gray-300 rounded-[8px] text-[12px] focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] resize-none mb-[15px]"
-              style={{ fontFamily: "Inter, sans-serif" }}
               disabled={!!rejectingQuoteId}
             />
             <div className="flex items-center gap-[11px]">
@@ -432,7 +366,6 @@ export default function MyQuotesPage() {
                 onClick={handleRejectQuote}
                 disabled={!!rejectingQuoteId || !rejectReason.trim()}
                 className="flex-1 px-[15px] py-[9px] bg-red-600 text-white rounded-[8px] text-[12px] font-medium hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                style={{ fontFamily: "Inter, sans-serif" }}
               >
                 {rejectingQuoteId ? "Rejecting..." : "Confirm Reject"}
               </button>
@@ -444,7 +377,6 @@ export default function MyQuotesPage() {
                 }}
                 disabled={!!rejectingQuoteId}
                 className="flex-1 px-[15px] py-[9px] bg-white border-2 border-gray-300 text-[#0d1b2a] rounded-[8px] text-[12px] font-medium hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                style={{ fontFamily: "Inter, sans-serif" }}
               >
                 Cancel
               </button>

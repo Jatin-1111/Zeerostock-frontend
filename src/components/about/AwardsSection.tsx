@@ -61,12 +61,12 @@ export default function AwardsSection() {
         <div>
           <div className="relative w-full max-w-7xl mx-auto">
             {/* Subtitle */}
-            <p className="font-inter font-medium text-lg text-center text-[#868181] mb-4">
+            <p className="font-medium text-lg text-center text-[#868181] mb-4">
               Recognitions
             </p>
 
             {/* Main Title */}
-            <h2 className="font-poppins font-bold text-5xl text-center text-[#0d1b2a] mb-20">
+            <h2 className="font-bold text-5xl text-center text-[#0d1b2a] mb-20">
               Industry <span className="text-[#2ec096]">Recognitions</span> &{" "}
               <span className="text-[#2ec096]">Awards</span>
             </h2>
@@ -90,14 +90,14 @@ export default function AwardsSection() {
                     {/* Award Content */}
                     <div className="flex-grow">
                       <div className="flex justify-between items-start mb-2">
-                        <h3 className="font-poppins font-bold text-xl text-[#0d1b2a] flex-grow pr-4">
+                        <h3 className="font-bold text-xl text-[#0d1b2a] flex-grow pr-4">
                           {award.title}
                         </h3>
-                        <span className="font-poppins font-bold text-xl text-[#0d1b2a] flex-shrink-0">
+                        <span className="font-bold text-xl text-[#0d1b2a] flex-shrink-0">
                           {award.year}
                         </span>
                       </div>
-                      <p className="font-inter font-medium text-base text-[#868181] leading-relaxed">
+                      <p className="font-medium text-base text-[#868181] leading-relaxed">
                         {award.description}
                       </p>
                     </div>
@@ -111,7 +111,7 @@ export default function AwardsSection() {
                   {/* Top Right Card - Our Impact (Waste & CO2) */}
                   <div className="absolute top-[-50px] right-[-10px] w-[320px] bg-[#eeffef] rounded-[30px] shadow-[0px_-1px_30px_0px_rgba(24,181,34,0.25)] p-6 z-20">
                     {/* Title */}
-                    <h3 className="font-poppins font-bold text-[32px] text-black text-center mb-6">
+                    <h3 className="font-bold text-[32px] text-black text-center mb-6">
                       Our Impact
                     </h3>
 
@@ -131,7 +131,7 @@ export default function AwardsSection() {
                         <p className="font-worksans font-semibold text-[36px] leading-[45px] text-black text-center mb-2">
                           tons
                         </p>
-                        <p className="font-poppins font-medium text-[16px] leading-[30px] text-[#8f8f8f] text-center">
+                        <p className="font-medium text-[16px] leading-[30px] text-[#8f8f8f] text-center">
                           Waste Reduced
                         </p>
                       </div>
@@ -150,7 +150,7 @@ export default function AwardsSection() {
                         <p className="font-worksans font-semibold text-[36px] leading-[45px] text-black text-center mb-2">
                           tons
                         </p>
-                        <p className="font-poppins font-medium text-[15px] leading-[25px] text-[#8f8f8f] text-center">
+                        <p className="font-medium text-[15px] leading-[25px] text-[#8f8f8f] text-center">
                           CO2 Emissions Avoided
                         </p>
                       </div>
@@ -170,7 +170,7 @@ export default function AwardsSection() {
                       <p className="font-worksans font-semibold text-[36px] leading-normal text-black mb-2">
                         8,500+
                       </p>
-                      <p className="font-poppins font-medium text-[18px] leading-[20px] text-[#8f8f8f] w-[200px]">
+                      <p className="font-medium text-[18px] leading-[20px] text-[#8f8f8f] w-[200px]">
                         Small Businesses Supported
                       </p>
                     </div>
@@ -186,7 +186,7 @@ export default function AwardsSection() {
                       <p className="font-worksans font-semibold text-[36px] leading-normal text-black text-right mb-2 pt-10">
                         15,000+
                       </p>
-                      <p className="font-poppins font-medium text-[18px] leading-[30px] text-[#8f8f8f] text-right">
+                      <p className="font-medium text-[18px] leading-[30px] text-[#8f8f8f] text-right">
                         Jobs Created
                       </p>
                     </div>

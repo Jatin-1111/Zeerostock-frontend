@@ -105,7 +105,7 @@ export default function WishlistPage() {
 
         {/* Error Message */}
         {error && (
-          <div className="mb-[23px] p-[15px] bg-[#fee] border border-[#fcc] text-[#c33] rounded-lg font-['Inter'] text-xs">
+          <div className="mb-[23px] p-[15px] bg-[#fee] border border-[#fcc] text-[#c33] rounded-lg text-xs">
             {error}
           </div>
         )}
@@ -133,7 +133,7 @@ export default function WishlistPage() {
             <h2 className="text-2xl font-semibold text-[#0d1b2a] mb-[11px]">
               Your wishlist is empty
             </h2>
-            <p className="text-[13.5px] font-['Inter'] text-[#9c9c9c] mb-[30px]">
+            <p className="text-[13.5px] text-[#9c9c9c] mb-[30px]">
               Start adding products to your wishlist to keep track of items you
               love
             </p>
@@ -175,7 +175,7 @@ export default function WishlistPage() {
                           className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                         />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center text-[#9c9c9c] font-['Inter'] text-base">
+                        <div className="w-full h-full flex items-center justify-center text-[#9c9c9c] text-base">
                           No Image
                         </div>
                       )}
@@ -222,7 +222,7 @@ export default function WishlistPage() {
 
                     {/* Location */}
                     {(item.product?.city || item.product?.state) && (
-                      <p className="text-[11px] font-['Inter'] text-[#9c9c9c] m-0 mb-[11px]">
+                      <p className="text-[11px] text-[#9c9c9c] m-0 mb-[11px]">
                         {item.product?.city}
                         {item.product?.city && item.product?.state && ", "}
                         {item.product?.state}
@@ -239,11 +239,11 @@ export default function WishlistPage() {
                           item.product?.priceBefore >
                             (item.product?.priceAfter || 0) && (
                             <>
-                              <span className="text-xs font-['Inter'] text-[#9c9c9c] line-through">
+                              <span className="text-xs text-[#9c9c9c] line-through">
                                 ₹{item.product?.priceBefore?.toLocaleString()}
                               </span>
                               {item.product?.discountPercent && (
-                                <span className="bg-[#d4edda] text-[#155724] text-[11px] font-semibold font-['Inter'] px-2 py-0.5 rounded-[5px]">
+                                <span className="bg-[#d4edda] text-[#155724] text-[11px] font-semibold px-2 py-0.5 rounded-[5px]">
                                   {item.product?.discountPercent}% OFF
                                 </span>
                               )}
@@ -254,7 +254,7 @@ export default function WishlistPage() {
                       {/* Price Change Since Added */}
                       {priceChange && (
                         <p
-                          className={`text-[11px] font-['Inter'] mt-1.5 m-0 ${
+                          className={`text-[11px] mt-1.5 m-0 ${
                             priceChange.isIncrease
                               ? "text-[#dc3545]"
                               : "text-[#28a745]"

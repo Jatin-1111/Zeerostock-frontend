@@ -15,16 +15,16 @@ export default function HeroSection() {
 
       <div className="w-full max-w-3xl bg-transparent rounded-2xl p-8 md:p-12 flex flex-col items-start text-left z-10 relative">
         {/* Subtitle */}
-        <p className="font-poppins font-medium text-[16.5px] text-black mb-[16.5px]">
+        <p className="font-medium text-[16.5px] text-black mb-[16.5px]">
           For Smart Buyers
         </p>
         {/* Title */}
-        <h1 className="font-poppins font-semibold text-[39px] leading-[57.75px] text-[#0d1b2a] mb-[15px]">
+        <h1 className="font-semibold text-[39px] leading-[57.75px] text-[#0d1b2a] mb-[15px]">
           Source Surplus Inventory at{" "}
           <span className="text-[#2ec096]">30-60%</span> Below Market Price
         </h1>
         {/* Description */}
-        <p className="font-inter text-[13.5px] leading-[18.75px] text-[#868181] mb-6">
+        <p className="text-[13.5px] leading-[18.75px] text-[#868181] mb-6">
           <span className="font-medium">
             Connect with verified suppliers worldwide and access high-quality
             surplus inventory through our
@@ -60,7 +60,7 @@ export default function HeroSection() {
               className="w-[22.5px] h-[22.5px] text-[#2ec096]"
               strokeWidth={2.5}
             />
-            <span className="font-poppins leading-normal text-[18.75px] text-black">
+            <span className="leading-normal text-[18.75px] text-black">
               Free to join
             </span>
           </div>
@@ -69,7 +69,7 @@ export default function HeroSection() {
               className="w-[22.5px] h-[22.5px] text-[#2ec096]"
               strokeWidth={2.5}
             />
-            <span className="font-poppins leading-normal text-[18.75px] text-black">
+            <span className="leading-normal text-[18.75px] text-black">
               No hidden fees
             </span>
           </div>
@@ -78,7 +78,7 @@ export default function HeroSection() {
               className="w-[22.5px] h-[22.5px] text-[#2ec096]"
               strokeWidth={2.5}
             />
-            <span className="font-poppins leading-normal text-[18.75px] text-black">
+            <span className="leading-normal text-[18.75px] text-black">
               Instant access
             </span>
           </div>

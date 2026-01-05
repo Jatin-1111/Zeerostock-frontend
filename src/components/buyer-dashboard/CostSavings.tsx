@@ -67,10 +67,7 @@ export default function CostSavings() {
 
   return (
     <div className="bg-white rounded-[15px] shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)] p-[22px] h-[297px] relative overflow-hidden">
-      <h2
-        className="text-[20px] font-semibold text-[#0d1b2a] leading-[18px] tracking-[0.4px] mb-5"
-        style={{ fontFamily: "Poppins, sans-serif" }}
-      >
+      <h2 className="text-[20px] font-semibold text-[#0d1b2a] leading-[18px] tracking-[0.4px] mb-5">
         Cost Saving
       </h2>
 
@@ -83,10 +80,7 @@ export default function CostSavings() {
           {/* Average Cost Reduction Box */}
           <div className="bg-[#eeffef] rounded-[15px] h-[105px] w-[278px] mx-auto mb-6 flex flex-col items-center justify-center relative overflow-hidden">
             <div className="flex items-center gap-[11px] mb-2">
-              <p
-                className="text-[27px] font-semibold text-[#2aae7a] leading-[18px] tracking-[0.4px]"
-                style={{ fontFamily: "Poppins, sans-serif" }}
-              >
+              <p className="text-[27px] font-semibold text-[#2aae7a] leading-[18px] tracking-[0.4px]">
                 {avgSavings}
               </p>
               <ArrowDown
@@ -94,10 +88,7 @@ export default function CostSavings() {
                 strokeWidth={1.5}
               />
             </div>
-            <p
-              className="text-[15px] font-medium text-[#9c9c9c] leading-normal"
-              style={{ fontFamily: "Inter, sans-serif" }}
-            >
+            <p className="text-[15px] font-medium text-[#9c9c9c] leading-normal">
               Avg. Cost Reduction
             </p>
           </div>
@@ -106,16 +97,10 @@ export default function CostSavings() {
           <div className="space-y-3">
             {categorySavings.map((item, index) => (
               <div key={index} className="flex items-center justify-between">
-                <span
-                  className="text-[15px] font-medium text-[#9c9c9c] leading-normal"
-                  style={{ fontFamily: "Inter, sans-serif" }}
-                >
+                <span className="text-[15px] font-medium text-[#9c9c9c] leading-normal">
                   {item.category}
                 </span>
-                <span
-                  className="text-[15px] font-medium text-[#2aae7a] leading-normal"
-                  style={{ fontFamily: "Inter, sans-serif" }}
-                >
+                <span className="text-[15px] font-medium text-[#2aae7a] leading-normal">
                   {item.percentage}
                 </span>
               </div>

@@ -49,12 +49,12 @@ export default function TestimonialSection() {
       <div className="w-full max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative w-full flex flex-col items-center">
           {/* Title */}
-          <h2 className="font-poppins font-bold text-5xl leading-tight lg:leading-[75px] text-center text-[#0d1b2a] mb-3">
+          <h2 className="font-bold text-5xl leading-tight lg:leading-[75px] text-center text-[#0d1b2a] mb-3">
             <span className="text-[#2ec096]">Trusted</span> By Industry Leaders
           </h2>
 
           {/* Subtitle */}
-          <p className="font-inter font-semibold text-base leading-relaxed lg:leading-[36px] text-center text-[#686868] max-w-3xl mb-16">
+          <p className="font-semibold text-base leading-relaxed lg:leading-[36px] text-center text-[#686868] max-w-3xl mb-16">
             See how businesses like yours are maximizing value from surplus
             inventory
           </p>
@@ -82,7 +82,7 @@ export default function TestimonialSection() {
                 {/* Content */}
                 <div className="text-center flex flex-col items-center gap-6">
                   {/* Quote */}
-                  <p className="font-inter font-medium text-lg sm:text-xl lg:text-[22px] leading-relaxed lg:leading-[33px] text-[#686868]">
+                  <p className="font-medium text-lg sm:text-xl lg:text-[22px] leading-relaxed lg:leading-[33px] text-[#686868]">
                     &quot;{testimonials[currentIndex].text}&quot;
                   </p>
 
@@ -101,13 +101,13 @@ export default function TestimonialSection() {
 
                   {/* Author Info */}
                   <div className="flex flex-col items-center gap-2">
-                    <p className="font-poppins font-bold text-xl sm:text-2xl lg:text-[28px] leading-tight lg:leading-[42px] text-black">
+                    <p className="font-bold text-xl sm:text-2xl lg:text-[28px] leading-tight lg:leading-[42px] text-black">
                       {testimonials[currentIndex].author}
                     </p>
-                    <p className="font-inter font-semibold text-lg sm:text-xl lg:text-[21px] leading-tight lg:leading-[25px] text-black">
+                    <p className="font-semibold text-lg sm:text-xl lg:text-[21px] leading-tight lg:leading-[25px] text-black">
                       {testimonials[currentIndex].company}
                     </p>
-                    <p className="font-inter font-medium text-sm sm:text-base lg:text-[15px] leading-relaxed lg:leading-[22px] text-[#3f3737]">
+                    <p className="font-medium text-sm sm:text-base lg:text-[15px] leading-relaxed lg:leading-[22px] text-[#3f3737]">
                       {testimonials[currentIndex].badge}
                     </p>
                   </div>

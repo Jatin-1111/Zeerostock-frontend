@@ -129,16 +129,10 @@ export default function Contact() {
       <div className="max-w-[1440px] mx-auto px-[80px] py-12">
         {/* Header */}
         <div className="text-center mb-[89px] mt-[55px]">
-          <h1
-            style={{ fontFamily: "Poppins, sans-serif" }}
-            className="font-semibold text-[40px] text-[#0D1B2A] leading-[60px] mb-[14px]"
-          >
+          <h1 className="font-semibold text-[40px] text-[#0D1B2A] leading-[60px] mb-[14px]">
             Get in Touch
           </h1>
-          <p
-            style={{ fontFamily: "Inter, sans-serif" }}
-            className="font-medium text-[24px] text-[#9C9C9C] leading-[29px]"
-          >
+          <p className="font-medium text-[24px] text-[#9C9C9C] leading-[29px]">
             Have questions? We&apos;re here to help. Choose your preferred way
             to reach us.
           </p>
@@ -148,16 +142,10 @@ export default function Contact() {
         <div className="grid grid-cols-[826px_1fr] gap-[35px] mb-[25px]">
           {/* Left Column - Contact Form */}
           <div className="bg-white rounded-[20px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] p-[30px] min-h-[920px]">
-            <h2
-              style={{ fontFamily: "Poppins, sans-serif" }}
-              className="font-semibold text-[24px] text-[#0D1B2A] leading-normal mb-[11px]"
-            >
+            <h2 className="font-semibold text-[24px] text-[#0D1B2A] leading-normal mb-[11px]">
               Send us a message
             </h2>
-            <p
-              style={{ fontFamily: "Inter, sans-serif" }}
-              className="font-medium text-[18px] text-[#9C9C9C] leading-normal mb-[60px]"
-            >
+            <p className="font-medium text-[18px] text-[#9C9C9C] leading-normal mb-[60px]">
               Fill out the form below and we&apos;ll get back to you within 24
               hours.
             </p>
@@ -166,10 +154,7 @@ export default function Contact() {
               {/* Name Row */}
               <div className="grid grid-cols-2 gap-[45px] mb-[32px]">
                 <div>
-                  <label
-                    style={{ fontFamily: "Poppins, sans-serif" }}
-                    className="block font-medium text-[17px] text-[#0D1B2A] leading-normal mb-[16px]"
-                  >
+                  <label className="block font-medium text-[17px] text-[#0D1B2A] leading-normal mb-[16px]">
                     First Name<span className="text-red-600">*</span>
                   </label>
                   <input
@@ -179,15 +164,11 @@ export default function Contact() {
                     onChange={(e) =>
                       setFormData({ ...formData, firstName: e.target.value })
                     }
-                    style={{ fontFamily: "Roboto, sans-serif" }}
                     className="w-full h-[56px] px-4 border border-[#BEBEBE] rounded-[10px] text-[16px] text-[#9C9C9C] placeholder:text-[#9C9C9C] focus:outline-none focus:ring-1 focus:ring-[#0D1B2A] focus:border-[#0D1B2A]"
                   />
                 </div>
                 <div>
-                  <label
-                    style={{ fontFamily: "Poppins, sans-serif" }}
-                    className="block font-medium text-[17px] text-[#0D1B2A] leading-normal mb-[16px]"
-                  >
+                  <label className="block font-medium text-[17px] text-[#0D1B2A] leading-normal mb-[16px]">
                     Last Name<span className="text-red-600">*</span>
                   </label>
                   <input
@@ -197,7 +178,6 @@ export default function Contact() {
                     onChange={(e) =>
                       setFormData({ ...formData, lastName: e.target.value })
                     }
-                    style={{ fontFamily: "Roboto, sans-serif" }}
                     className="w-full h-[56px] px-4 border border-[#BEBEBE] rounded-[10px] text-[16px] text-[#9C9C9C] placeholder:text-[#9C9C9C] focus:outline-none focus:ring-1 focus:ring-[#0D1B2A] focus:border-[#0D1B2A]"
                   />
                 </div>
@@ -206,10 +186,7 @@ export default function Contact() {
               {/* Email and Phone Row */}
               <div className="grid grid-cols-2 gap-[45px] mb-[32px]">
                 <div>
-                  <label
-                    style={{ fontFamily: "Poppins, sans-serif" }}
-                    className="block font-medium text-[17px] text-[#0D1B2A] leading-normal mb-[16px]"
-                  >
+                  <label className="block font-medium text-[17px] text-[#0D1B2A] leading-normal mb-[16px]">
                     Email Address<span className="text-red-600">*</span>
                   </label>
                   <input
@@ -219,15 +196,11 @@ export default function Contact() {
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
                     }
-                    style={{ fontFamily: "Roboto, sans-serif" }}
                     className="w-full h-[56px] px-4 border border-[#BEBEBE] rounded-[10px] text-[16px] text-[#9C9C9C] placeholder:text-[#9C9C9C] focus:outline-none focus:ring-1 focus:ring-[#0D1B2A] focus:border-[#0D1B2A]"
                   />
                 </div>
                 <div>
-                  <label
-                    style={{ fontFamily: "Poppins, sans-serif" }}
-                    className="block font-medium text-[17px] text-[#0D1B2A] leading-normal mb-[16px]"
-                  >
+                  <label className="block font-medium text-[17px] text-[#0D1B2A] leading-normal mb-[16px]">
                     Phone Number<span className="text-red-600">*</span>
                   </label>
                   <input
@@ -237,7 +210,6 @@ export default function Contact() {
                     onChange={(e) =>
                       setFormData({ ...formData, phone: e.target.value })
                     }
-                    style={{ fontFamily: "Roboto, sans-serif" }}
                     className="w-full h-[56px] px-4 border border-[#BEBEBE] rounded-[10px] text-[16px] text-[#9C9C9C] placeholder:text-[#9C9C9C] focus:outline-none focus:ring-1 focus:ring-[#0D1B2A] focus:border-[#0D1B2A]"
                   />
                 </div>
@@ -245,10 +217,7 @@ export default function Contact() {
 
               {/* Company Name */}
               <div className="mb-[32px]">
-                <label
-                  style={{ fontFamily: "Poppins, sans-serif" }}
-                  className="block font-medium text-[17px] text-[#0D1B2A] leading-normal mb-[16px]"
-                >
+                <label className="block font-medium text-[17px] text-[#0D1B2A] leading-normal mb-[16px]">
                   Company Name<span className="text-red-600">*</span>
                 </label>
                 <input
@@ -258,17 +227,13 @@ export default function Contact() {
                   onChange={(e) =>
                     setFormData({ ...formData, company: e.target.value })
                   }
-                  style={{ fontFamily: "Roboto, sans-serif" }}
                   className="w-full h-[56px] px-4 border border-[#BEBEBE] rounded-[10px] text-[16px] text-[#9C9C9C] placeholder:text-[#9C9C9C] focus:outline-none focus:ring-1 focus:ring-[#0D1B2A] focus:border-[#0D1B2A]"
                 />
               </div>
 
               {/* Message */}
               <div className="mb-[60px]">
-                <label
-                  style={{ fontFamily: "Poppins, sans-serif" }}
-                  className="block font-medium text-[17px] text-[#0D1B2A] leading-normal mb-[16px]"
-                >
+                <label className="block font-medium text-[17px] text-[#0D1B2A] leading-normal mb-[16px]">
                   Message<span className="text-red-600">*</span>
                 </label>
                 <textarea
@@ -278,7 +243,6 @@ export default function Contact() {
                   onChange={(e) =>
                     setFormData({ ...formData, message: e.target.value })
                   }
-                  style={{ fontFamily: "Roboto, sans-serif" }}
                   className="w-full h-[180px] px-4 py-3 border border-[#BEBEBE] rounded-[10px] text-[16px] text-[#9C9C9C] placeholder:text-[#9C9C9C] focus:outline-none focus:ring-1 focus:ring-[#0D1B2A] focus:border-[#0D1B2A] resize-none"
                 />
               </div>
@@ -286,7 +250,6 @@ export default function Contact() {
               {/* Submit Button */}
               <button
                 type="submit"
-                style={{ fontFamily: "Poppins, sans-serif" }}
                 className="w-[240px] h-[65px] bg-[#1E3A8A] text-white font-semibold text-[20px] leading-[22px] rounded-[12px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center justify-center gap-[10px]"
               >
                 Send Message
@@ -302,28 +265,16 @@ export default function Contact() {
               <div className="absolute left-[30px] top-[30px] bg-[#F4F2ED] p-[10px] rounded-[12px]">
                 <WhatsAppIcon />
               </div>
-              <h3
-                style={{ fontFamily: "Poppins, sans-serif" }}
-                className="absolute left-[93px] top-[53.5px] -translate-y-1/2 font-semibold text-[22px] text-[#0D1B2A] leading-normal"
-              >
+              <h3 className="absolute left-[93px] top-[53.5px] -translate-y-1/2 font-semibold text-[22px] text-[#0D1B2A] leading-normal">
                 WhatsApp Business
               </h3>
-              <p
-                style={{ fontFamily: "Inter, sans-serif" }}
-                className="absolute left-[30px] top-[116px] -translate-y-1/2 font-medium text-[18px] text-[#9C9C9C] leading-normal w-[344px]"
-              >
+              <p className="absolute left-[30px] top-[116px] -translate-y-1/2 font-medium text-[18px] text-[#9C9C9C] leading-normal w-[344px]">
                 Get instant responses via WhatsApp
               </p>
-              <p
-                style={{ fontFamily: "Poppins, sans-serif" }}
-                className="absolute left-[30px] top-[158.5px] -translate-y-1/2 font-medium text-[22px] text-[#0D1B2A] leading-normal"
-              >
+              <p className="absolute left-[30px] top-[158.5px] -translate-y-1/2 font-medium text-[22px] text-[#0D1B2A] leading-normal">
                 +91 89568 35375
               </p>
-              <button
-                style={{ fontFamily: "Poppins, sans-serif" }}
-                className="absolute left-[30px] top-[210px] w-[357px] h-[55px] bg-[#128C7E] text-white font-semibold text-[20px] leading-[22px] rounded-[12px] hover:bg-[#128C7E]/90 transition-colors"
-              >
+              <button className="absolute left-[30px] top-[210px] w-[357px] h-[55px] bg-[#128C7E] text-white font-semibold text-[20px] leading-[22px] rounded-[12px] hover:bg-[#128C7E]/90 transition-colors">
                 Chat on WhatsApp
               </button>
             </div>
@@ -333,28 +284,16 @@ export default function Contact() {
               <div className="absolute left-[30px] top-[30px]">
                 <GmailIcon />
               </div>
-              <h3
-                style={{ fontFamily: "Poppins, sans-serif" }}
-                className="absolute left-[93px] top-[53.5px] -translate-y-1/2 font-semibold text-[22px] text-[#0D1B2A] leading-normal"
-              >
+              <h3 className="absolute left-[93px] top-[53.5px] -translate-y-1/2 font-semibold text-[22px] text-[#0D1B2A] leading-normal">
                 Email Support
               </h3>
-              <p
-                style={{ fontFamily: "Inter, sans-serif" }}
-                className="absolute left-[30px] top-[116px] -translate-y-1/2 font-medium text-[18px] text-[#9C9C9C] leading-normal w-[344px]"
-              >
+              <p className="absolute left-[30px] top-[116px] -translate-y-1/2 font-medium text-[18px] text-[#9C9C9C] leading-normal w-[344px]">
                 Send us a detailed mesage
               </p>
-              <p
-                style={{ fontFamily: "Poppins, sans-serif" }}
-                className="absolute left-[30px] top-[158.5px] -translate-y-1/2 font-medium text-[22px] text-[#0D1B2A] leading-normal"
-              >
+              <p className="absolute left-[30px] top-[158.5px] -translate-y-1/2 font-medium text-[22px] text-[#0D1B2A] leading-normal">
                 contact@zeerostock.com
               </p>
-              <button
-                style={{ fontFamily: "Poppins, sans-serif" }}
-                className="absolute left-[30px] top-[210px] w-[357px] h-[55px] bg-white border border-[#9C9C9C] text-[#9C9C9C] font-semibold text-[20px] leading-[22px] rounded-[12px] hover:bg-gray-50 transition-colors"
-              >
+              <button className="absolute left-[30px] top-[210px] w-[357px] h-[55px] bg-white border border-[#9C9C9C] text-[#9C9C9C] font-semibold text-[20px] leading-[22px] rounded-[12px] hover:bg-gray-50 transition-colors">
                 Send Email
               </button>
             </div>
@@ -364,28 +303,16 @@ export default function Contact() {
               <div className="absolute left-[30px] top-[30px] bg-[#F4F2ED] p-[10px] rounded-[12px]">
                 <PhoneIcon />
               </div>
-              <h3
-                style={{ fontFamily: "Poppins, sans-serif" }}
-                className="absolute left-[93px] top-[53.5px] -translate-y-1/2 font-semibold text-[22px] text-[#0D1B2A] leading-normal"
-              >
+              <h3 className="absolute left-[93px] top-[53.5px] -translate-y-1/2 font-semibold text-[22px] text-[#0D1B2A] leading-normal">
                 Phone Support
               </h3>
-              <p
-                style={{ fontFamily: "Inter, sans-serif" }}
-                className="absolute left-[30px] top-[116px] -translate-y-1/2 font-medium text-[18px] text-[#9C9C9C] leading-normal w-[344px]"
-              >
+              <p className="absolute left-[30px] top-[116px] -translate-y-1/2 font-medium text-[18px] text-[#9C9C9C] leading-normal w-[344px]">
                 Speak with our team directly
               </p>
-              <p
-                style={{ fontFamily: "Poppins, sans-serif" }}
-                className="absolute left-[30px] top-[158.5px] -translate-y-1/2 font-medium text-[22px] text-[#0D1B2A] leading-normal"
-              >
+              <p className="absolute left-[30px] top-[158.5px] -translate-y-1/2 font-medium text-[22px] text-[#0D1B2A] leading-normal">
                 +91 89568 35375
               </p>
-              <button
-                style={{ fontFamily: "Poppins, sans-serif" }}
-                className="absolute left-[30px] top-[210px] w-[357px] h-[55px] bg-white border border-[#9C9C9C] text-[#9C9C9C] font-semibold text-[20px] leading-[22px] rounded-[12px] hover:bg-gray-50 transition-colors"
-              >
+              <button className="absolute left-[30px] top-[210px] w-[357px] h-[55px] bg-white border border-[#9C9C9C] text-[#9C9C9C] font-semibold text-[20px] leading-[22px] rounded-[12px] hover:bg-gray-50 transition-colors">
                 Call Now
               </button>
             </div>
@@ -394,22 +321,13 @@ export default function Contact() {
 
         {/* Become an Agent Banner */}
         <div className="bg-white rounded-[20px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] h-[128px] mb-[93px] relative">
-          <h3
-            style={{ fontFamily: "Poppins, sans-serif" }}
-            className="absolute left-[25px] top-[38px] -translate-y-1/2 font-medium text-[24px] text-[#0D1B2A] leading-normal"
-          >
+          <h3 className="absolute left-[25px] top-[38px] -translate-y-1/2 font-medium text-[24px] text-[#0D1B2A] leading-normal">
             Become an Agent
           </h3>
-          <p
-            style={{ fontFamily: "Inter, sans-serif" }}
-            className="absolute left-[25px] top-[88px] -translate-y-1/2 font-medium text-[18px] text-[#9C9C9C] leading-normal w-[487px]"
-          >
+          <p className="absolute left-[25px] top-[88px] -translate-y-1/2 font-medium text-[18px] text-[#9C9C9C] leading-normal w-[487px]">
             Be a verified Zeerstock agent and unlock exclusive commissions.
           </p>
-          <button
-            style={{ fontFamily: "Poppins, sans-serif" }}
-            className="absolute right-[35px] top-1/2 -translate-y-1/2 w-[240px] h-[65px] bg-[#1E3A8A] text-white font-semibold text-[20px] leading-[22px] rounded-[12px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center justify-center gap-[10px]"
-          >
+          <button className="absolute right-[35px] top-1/2 -translate-y-1/2 w-[240px] h-[65px] bg-[#1E3A8A] text-white font-semibold text-[20px] leading-[22px] rounded-[12px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center justify-center gap-[10px]">
             Join as a Agent
             <ArrowRightIcon />
           </button>
@@ -418,16 +336,10 @@ export default function Contact() {
         {/* FAQ Section */}
         <div className="mt-[129px] mb-[69px]">
           <div className="text-center mb-[75px]">
-            <h2
-              style={{ fontFamily: "Poppins, sans-serif" }}
-              className="font-semibold text-[52px] text-[#0D1B2A] leading-[78px] mb-[15px] tracking-[0.5px]"
-            >
+            <h2 className="font-semibold text-[52px] text-[#0D1B2A] leading-[78px] mb-[15px] tracking-[0.5px]">
               Frequently Asked Questions
             </h2>
-            <p
-              style={{ fontFamily: "Inter, sans-serif" }}
-              className="font-medium text-[20px] text-[#9C9C9C] leading-[25px]"
-            >
+            <p className="font-medium text-[20px] text-[#9C9C9C] leading-[25px]">
               Quick answers to common questions
             </p>
           </div>
@@ -438,16 +350,10 @@ export default function Contact() {
                 key={index}
                 className="bg-white rounded-[20px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] p-[30px] min-h-[196px]"
               >
-                <h3
-                  style={{ fontFamily: "Poppins, sans-serif" }}
-                  className="font-medium text-[26px] text-[#0D1B2A] leading-[28px] tracking-[0.5px] mb-[22px]"
-                >
+                <h3 className="font-medium text-[26px] text-[#0D1B2A] leading-[28px] tracking-[0.5px] mb-[22px]">
                   {faq.question}
                 </h3>
-                <p
-                  style={{ fontFamily: "Inter, sans-serif" }}
-                  className="font-medium text-[20px] text-[#9C9C9C] leading-[28px]"
-                >
+                <p className="font-medium text-[20px] text-[#9C9C9C] leading-[28px]">
                   {faq.answer}
                 </p>
               </div>
@@ -458,30 +364,18 @@ export default function Contact() {
         {/* CTA Section */}
         <div className="bg-[#2AAE7A] rounded-[30px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] h-[340px] relative px-[159px] py-[50px]">
           <div className="text-center">
-            <h2
-              style={{ fontFamily: "Poppins, sans-serif" }}
-              className="font-semibold text-[45px] text-white leading-normal mb-[20px]"
-            >
+            <h2 className="font-semibold text-[45px] text-white leading-normal mb-[20px]">
               Need Immediate Assistance?
             </h2>
-            <p
-              style={{ fontFamily: "Inter, sans-serif" }}
-              className="font-semibold text-[22px] text-[#374151] leading-normal mb-[55px]"
-            >
+            <p className="font-semibold text-[22px] text-[#374151] leading-normal mb-[55px]">
               Our support team is standing by to help you succeed with
               Zeerostock.
             </p>
             <div className="flex items-center justify-center gap-[90px]">
-              <button
-                style={{ fontFamily: "Poppins, sans-serif" }}
-                className="w-[290px] h-[70px] bg-[#1E3A8A] text-white font-medium text-[22px] leading-normal rounded-[12px] hover:bg-[#1e3a8a]/90 transition-colors"
-              >
+              <button className="w-[290px] h-[70px] bg-[#1E3A8A] text-white font-medium text-[22px] leading-normal rounded-[12px] hover:bg-[#1e3a8a]/90 transition-colors">
                 Chat with support
               </button>
-              <button
-                style={{ fontFamily: "Poppins, sans-serif" }}
-                className="w-[290px] h-[70px] bg-white text-[#2AAE7A] font-medium text-[22px] leading-[22px] rounded-[12px] hover:bg-gray-50 transition-colors"
-              >
+              <button className="w-[290px] h-[70px] bg-white text-[#2AAE7A] font-medium text-[22px] leading-[22px] rounded-[12px] hover:bg-gray-50 transition-colors">
                 Schedule call
               </button>
             </div>

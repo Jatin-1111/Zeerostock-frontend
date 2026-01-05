@@ -108,12 +108,7 @@ export default function ShippingAddress({
       <div className="bg-white rounded-[20px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] p-8">
         <div className="text-center py-8">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#0d1b2a] mx-auto"></div>
-          <p
-            className="mt-4 text-[#9c9c9c]"
-            style={{ fontFamily: "Inter, sans-serif" }}
-          >
-            Loading...
-          </p>
+          <p className="mt-4 text-[#9c9c9c]">Loading...</p>
         </div>
       </div>
     );

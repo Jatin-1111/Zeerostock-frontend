@@ -33,16 +33,16 @@ export default function ValuesSection() {
       <div className="w-full max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div>
           <div className="relative w-full flex flex-col items-center">
-            <p className="font-inter font-medium text-lg text-center text-[#868181]">
+            <p className="font-medium text-lg text-center text-[#868181]">
               Our Values
             </p>
             {/* Title */}
-            <h2 className="font-poppins font-bold text-3xl sm:text-4xl lg:text-[52px] leading-tight lg:leading-[78px] text-center text-[#0d1b2a] mb-4">
+            <h2 className="font-bold text-3xl sm:text-4xl lg:text-[52px] leading-tight lg:leading-[78px] text-center text-[#0d1b2a] mb-4">
               What Drives Us <span className="text-[#2ec096]">Forward</span>
             </h2>
 
             {/* Subtitle */}
-            <p className="font-inter font-semibold text-base sm:text-lg lg:text-[20px] leading-relaxed lg:leading-[30px] text-center text-[#868181] max-w-3xl mb-16">
+            <p className="font-semibold text-base sm:text-lg lg:text-[20px] leading-relaxed lg:leading-[30px] text-center text-[#868181] max-w-3xl mb-16">
               Our core values guide every decision we make and every
               relationship we build
             </p>
@@ -63,12 +63,12 @@ export default function ValuesSection() {
                       </div>
 
                       {/* Title */}
-                      <h3 className="font-inter font-semibold text-[22px] leading-[33px] text-[#022778] mb-3">
+                      <h3 className="font-semibold text-[22px] leading-[33px] text-[#022778] mb-3">
                         {value.title}
                       </h3>
 
                       {/* Description */}
-                      <p className="font-inter font-medium text-[16px] leading-[24px] text-white">
+                      <p className="font-medium text-[16px] leading-[24px] text-white">
                         {value.description}
                       </p>
                     </div>

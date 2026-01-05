@@ -171,60 +171,17 @@ export default function BuyerPaymentMethodsStats({
 }: BuyerPaymentMethodsStatsProps) {
   if (!summary) {
     return (
-      <div
-        style={{
-          transform: "scale(0.75)",
-          transformOrigin: "top left",
-          width: "133.33%",
-          marginBottom: "24px",
-        }}
-      >
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: "30px",
-          }}
-        >
+      <div className="mb-6 w-[133.33%] origin-top-left scale-[0.75]">
+        <div className="grid grid-cols-4 gap-[30px]">
           {[1, 2, 3, 4].map((i) => (
             <div
               key={i}
-              style={{
-                background: "white",
-                borderRadius: "20px",
-                boxShadow: "0px 0px 4px 0px rgba(24,181,34,0.25)",
-                height: "135px",
-                position: "relative",
-                animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-              }}
+              className="relative h-[135px] animate-pulse rounded-[20px] bg-white shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)]"
             >
-              <div style={{ padding: "17px" }}>
-                <div
-                  style={{
-                    height: "20px",
-                    background: "#E5E7EB",
-                    borderRadius: "4px",
-                    width: "40%",
-                    marginBottom: "20px",
-                  }}
-                ></div>
-                <div
-                  style={{
-                    height: "32px",
-                    background: "#E5E7EB",
-                    borderRadius: "4px",
-                    width: "60%",
-                    marginBottom: "10px",
-                  }}
-                ></div>
-                <div
-                  style={{
-                    height: "14px",
-                    background: "#E5E7EB",
-                    borderRadius: "4px",
-                    width: "50%",
-                  }}
-                ></div>
+              <div className="p-[17px]">
+                <div className="mb-[20px] h-[20px] w-[40%] rounded-[4px] bg-[#E5E7EB]"></div>
+                <div className="mb-[10px] h-[32px] w-[60%] rounded-[4px] bg-[#E5E7EB]"></div>
+                <div className="h-[14px] w-[50%] rounded-[4px] bg-[#E5E7EB]"></div>
               </div>
             </div>
           ))}
@@ -269,99 +226,35 @@ export default function BuyerPaymentMethodsStats({
   ];
 
   return (
-    <div
-      style={{
-        transform: "scale(0.75)",
-        transformOrigin: "top left",
-        width: "133.33%",
-        marginBottom: "24px",
-      }}
-    >
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
-          gap: "30px",
-        }}
-      >
+    <div className="mb-6 w-[133.33%] origin-top-left scale-[0.75]">
+      <div className="grid grid-cols-4 gap-[30px]">
         {stats.map((stat, index) => (
           <div
             key={index}
-            style={{
-              background: "white",
-              borderRadius: "20px",
-              boxShadow: "0px 0px 4px 0px rgba(24,181,34,0.25)",
-              height: "135px",
-              position: "relative",
-              overflow: "hidden",
-            }}
+            className="relative h-[135px] overflow-hidden rounded-[20px] bg-white shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)]"
           >
             {/* Label */}
-            <div
-              style={{
-                position: "absolute",
-                left: "17px",
-                top: "27px",
-                transform: "translateY(-50%)",
-                fontFamily: "Poppins, sans-serif",
-                fontWeight: 500,
-                fontSize: "20px",
-                color: "#9C9C9C",
-                lineHeight: "normal",
-              }}
-            >
+            <div className="absolute left-[17px] top-[27px] -translate-y-1/2 text-[20px] font-medium leading-normal text-[#9C9C9C]">
               {stat.label}
             </div>
 
             {/* Value */}
-            <div
-              style={{
-                position: "absolute",
-                left: "17px",
-                top: "69px",
-                transform: "translateY(-50%)",
-                fontFamily: "Poppins, sans-serif",
-                fontWeight: 600,
-                fontSize: "32px",
-                color: "#0D1B2A",
-                lineHeight: "normal",
-              }}
-            >
+            <div className="absolute left-[17px] top-[69px] -translate-y-1/2 text-[32px] font-semibold leading-normal text-[#0D1B2A]">
               {stat.value}
             </div>
 
             {/* Subtitle */}
             <div
-              style={{
-                position: "absolute",
-                left: "17px",
-                top: "102.5px",
-                transform: "translateY(-50%)",
-                fontFamily: "Poppins, sans-serif",
-                fontWeight: 500,
-                fontSize: "14px",
-                color: stat.subtitleColor,
-                lineHeight: "normal",
-              }}
+              className="absolute left-[17px] top-[102.5px] -translate-y-1/2 text-[14px] font-medium leading-normal"
+              style={{ color: stat.subtitleColor }}
             >
               {stat.subtitle}
             </div>
 
             {/* Icon */}
             <div
-              style={{
-                position: "absolute",
-                right: "20px",
-                top: "20px",
-                background: stat.iconBgColor,
-                borderRadius: "100px",
-                padding: "10px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: "44px",
-                height: "44px",
-              }}
+              className="absolute right-[20px] top-[20px] flex h-[44px] w-[44px] items-center justify-center rounded-[100px] p-[10px]"
+              style={{ background: stat.iconBgColor }}
             >
               <stat.icon />
             </div>

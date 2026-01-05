@@ -135,7 +135,6 @@ export default function GettingStartedGuide({
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search for guide...."
                   className="flex-1 bg-transparent text-[10.6875px] font-medium text-[#374151] outline-none placeholder:text-[#374151] placeholder:opacity-80"
-                  style={{ fontFamily: "Inter, sans-serif" }}
                 />
                 <div className="flex items-center gap-[5.625px]">
                   <div className="h-[25.3125px] w-[1.125px] bg-gray-300"></div>
@@ -149,10 +148,7 @@ export default function GettingStartedGuide({
               {/* Sections */}
               {filteredSections.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-[60px]">
-                  <p
-                    className="text-[13.5px] font-medium text-[#9c9c9c]"
-                    style={{ fontFamily: "Inter, sans-serif" }}
-                  >
+                  <p className="text-[13.5px] font-medium text-[#9c9c9c]">
                     No results found matching your search.
                   </p>
                 </div>

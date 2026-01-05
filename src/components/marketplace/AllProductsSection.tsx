@@ -49,7 +49,7 @@ export default function AllProductsSection() {
     <div className="max-w-[1200px] mx-auto py-12 px-4">
       {/* Header with title and filters */}
       <div className="flex items-center justify-between mb-8">
-        <h2 className="font-poppins font-semibold text-[32px] text-[#1a1a1a] m-0">
+        <h2 className="font-semibold text-[32px] text-[#1a1a1a] m-0">
           All products
         </h2>
 
@@ -60,7 +60,7 @@ export default function AllProductsSection() {
             <select
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="w-[200px] h-10 px-3 pr-10 border border-gray-300 rounded-lg font-inter text-sm text-gray-700 bg-white cursor-pointer appearance-none"
+              className="w-[200px] h-10 px-3 pr-10 border border-gray-300 rounded-lg text-sm text-gray-700 bg-white cursor-pointer appearance-none"
             >
               <option value="all">All Categories (15,420)</option>
               <option value="Maharashtra">Maharashtra</option>
@@ -90,7 +90,7 @@ export default function AllProductsSection() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="w-[140px] h-10 px-3 pr-10 border border-gray-300 rounded-lg font-inter text-sm text-gray-700 bg-white cursor-pointer appearance-none"
+              className="w-[140px] h-10 px-3 pr-10 border border-gray-300 rounded-lg text-sm text-gray-700 bg-white cursor-pointer appearance-none"
             >
               <option value="relevance">Relevance</option>
               <option value="price_asc">Low to High</option>
@@ -124,9 +124,7 @@ export default function AllProductsSection() {
                 strokeLinejoin="round"
               />
             </svg>
-            <span className="font-inter text-sm text-gray-700">
-              More Filters
-            </span>
+            <span className="text-sm text-gray-700">More Filters</span>
           </button>
         </div>
       </div>
@@ -149,17 +147,17 @@ export default function AllProductsSection() {
       ) : products.length === 0 ? (
         <div className="text-center py-16">
           <div className="text-5xl mb-5">🏪</div>
-          <h3 className="font-poppins text-2xl text-[#0d1b2a] mb-3">
+          <h3 className="text-2xl text-[#0d1b2a] mb-3">
             No products available
           </h3>
-          <p className="font-inter text-base text-gray-600 mb-5 max-w-lg mx-auto">
+          <p className="text-base text-gray-600 mb-5 max-w-lg mx-auto">
             {location !== "all"
               ? `No products found in ${location}. Try selecting a different location.`
               : "Products are being added to our marketplace. Check back soon!"}
           </p>
           <button
             onClick={() => fetchProducts()}
-            className="px-6 py-2.5 bg-[#1e3a8a] text-white border-none rounded-lg cursor-pointer font-poppins text-base hover:bg-[#2d4a9a] transition-colors"
+            className="px-6 py-2.5 bg-[#1e3a8a] text-white border-none rounded-lg cursor-pointer text-base hover:bg-[#2d4a9a] transition-colors"
           >
             Refresh
           </button>
@@ -190,7 +188,7 @@ export default function AllProductsSection() {
 
                   {/* Product details */}
                   <div className="p-4">
-                    <h3 className="font-poppins font-medium text-base text-[#1a1a1a] m-0 mb-2 truncate">
+                    <h3 className="font-medium text-base text-[#1a1a1a] m-0 mb-2 truncate">
                       {product?.title || "Product"}
                     </h3>
 
@@ -210,9 +208,7 @@ export default function AllProductsSection() {
                           />
                         </svg>
                       ))}
-                      <span className="font-inter text-xs text-gray-500 ml-1">
-                        (2338)
-                      </span>
+                      <span className="text-xs text-gray-500 ml-1">(2338)</span>
                     </div>
 
                     {/* Location */}
@@ -228,26 +224,26 @@ export default function AllProductsSection() {
                           fill="#666"
                         />
                       </svg>
-                      <span className="font-inter text-xs text-gray-600">
+                      <span className="text-xs text-gray-600">
                         {product?.city || "Mumbai"},IN
                       </span>
                     </div>
 
                     {/* Price */}
                     <div className="flex items-center gap-2 mb-3">
-                      <span className="font-poppins font-bold text-2xl text-[#2D4A9A]">
+                      <span className="font-bold text-2xl text-[#2D4A9A]">
                         ₹{(product?.price || 0).toLocaleString("en-IN")}
                       </span>
                       {product?.originalPrice &&
                         product.originalPrice > (product.price || 0) && (
-                          <span className="font-inter text-sm text-gray-400 line-through">
+                          <span className="text-sm text-gray-400 line-through">
                             ₹{product.originalPrice.toLocaleString("en-IN")}
                           </span>
                         )}
                     </div>
 
                     {/* View Deal button */}
-                    <button className="w-full h-10 bg-[#2D4A9A] rounded-lg border-none cursor-pointer font-poppins font-semibold text-sm text-white hover:bg-[#3d5aaa] transition-colors">
+                    <button className="w-full h-10 bg-[#2D4A9A] rounded-lg border-none cursor-pointer font-semibold text-sm text-white hover:bg-[#3d5aaa] transition-colors">
                       View Deal
                     </button>
                   </div>
@@ -259,7 +255,7 @@ export default function AllProductsSection() {
           {/* Load More button */}
           <div className="text-center mt-10">
             <Link href="/marketplace?filter=all" className="no-underline">
-              <button className="px-8 py-2.5 font-poppins text-lg text-[#0d1b2a] bg-transparent border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+              <button className="px-8 py-2.5 text-lg text-[#0d1b2a] bg-transparent border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
                 Load More Products
               </button>
             </Link>

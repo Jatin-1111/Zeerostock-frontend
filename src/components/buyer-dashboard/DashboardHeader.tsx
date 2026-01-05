@@ -36,16 +36,10 @@ export default function DashboardHeader({ userName }: DashboardHeaderProps) {
   return (
     <div className="flex items-center justify-between mb-5">
       <div className="flex flex-col">
-        <h1
-          className="text-[27px] font-semibold text-[#0d1b2a] leading-normal"
-          style={{ fontFamily: "Poppins, sans-serif" }}
-        >
+        <h1 className="text-[27px] font-semibold text-[#0d1b2a] leading-normal">
           Welcome Back, {displayName}
         </h1>
-        <p
-          className="text-[18px] font-medium text-[#9c9c9c] leading-normal mt-1"
-          style={{ fontFamily: "Inter, sans-serif" }}
-        >
+        <p className="text-[18px] font-medium text-[#9c9c9c] leading-normal mt-1">
           Here's your procurement overview
         </p>
       </div>
@@ -53,7 +47,6 @@ export default function DashboardHeader({ userName }: DashboardHeaderProps) {
         <Link
           href="/buyer/rfq"
           className="h-[45px] px-[45px] bg-[#1e3a8a] text-white rounded-[11px] font-semibold text-[15px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center gap-[8px]"
-          style={{ fontFamily: "Poppins, sans-serif" }}
         >
           <Plus className="w-5 h-5" />
           Post New RFQ
@@ -61,7 +54,6 @@ export default function DashboardHeader({ userName }: DashboardHeaderProps) {
         <Link
           href="/buyer/quotes"
           className="h-[45px] px-[45px] bg-white border border-[#9c9c9c] text-[#9c9c9c] rounded-[11px] font-semibold text-[15px] hover:bg-gray-50 transition-colors flex items-center gap-[8px] relative"
-          style={{ fontFamily: "Poppins, sans-serif" }}
         >
           <MessageSquare className="w-5 h-5" />
           My Quotes

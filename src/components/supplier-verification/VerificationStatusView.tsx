@@ -295,26 +295,17 @@ export default function VerificationStatusView({
   const documents = getDocuments();
 
   return (
-    <div
-      style={{ fontFamily: "'Poppins', sans-serif" }}
-      className="min-h-screen bg-[#eefbf6] px-20 py-6"
-    >
+    <div className="min-h-screen bg-[#eefbf6] px-20 py-6">
       {/* Header Section */}
       <div className="mb-[34px] bg-white shadow-[0px_0px_5px_0px_rgba(24,181,34,0.25)] rounded-[15px] px-[61px] py-5 flex items-center gap-[26px]">
         <div className="bg-[#eeffef] p-[11px] rounded-[8px] shadow-[0px_0px_10px_0px_rgba(24,181,34,0.25)]">
           <Shield className="w-[34px] h-[34px] text-[#2aae7a]" />
         </div>
         <div>
-          <h1
-            style={{ fontFamily: "'Poppins', sans-serif" }}
-            className="font-semibold text-[27px] text-[#0d1b2a] mb-0 leading-normal"
-          >
+          <h1 className="font-semibold text-[27px] text-[#0d1b2a] mb-0 leading-normal">
             Supplier Verification
           </h1>
-          <p
-            style={{ fontFamily: "'Poppins', sans-serif" }}
-            className="font-medium text-[18px] text-[#9c9c9c] leading-normal"
-          >
+          <p className="font-medium text-[18px] text-[#9c9c9c] leading-normal">
             Complete verification to unlock premium features and build buyer
             trust
           </p>
@@ -323,16 +314,10 @@ export default function VerificationStatusView({
 
       {/* Progress Section */}
       <div className="mb-[23px] bg-white shadow-[0px_3px_5px_0px_rgba(24,181,34,0.25)] rounded-[15px] px-8 py-[23px] relative">
-        <h2
-          style={{ fontFamily: "'Poppins', sans-serif" }}
-          className="font-semibold text-[21px] text-[#0d1b2a] mb-4 leading-normal"
-        >
+        <h2 className="font-semibold text-[21px] text-[#0d1b2a] mb-4 leading-normal">
           Verification Progress
         </h2>
-        <p
-          style={{ fontFamily: "'Poppins', sans-serif" }}
-          className="font-medium text-[18px] text-[#9c9c9c] mb-[35px] leading-normal"
-        >
+        <p className="font-medium text-[18px] text-[#9c9c9c] mb-[35px] leading-normal">
           {progress}% Complete - {completedSteps} of 5 sections verified
         </p>
 
@@ -346,10 +331,7 @@ export default function VerificationStatusView({
 
         {/* Percentage Badge */}
         <div className="absolute right-[27px] top-[54px]">
-          <span
-            style={{ fontFamily: "'Poppins', sans-serif" }}
-            className="font-semibold text-[30px] text-[#0d1b2a]"
-          >
+          <span className="font-semibold text-[30px] text-[#0d1b2a]">
             {progress}%
           </span>
         </div>
@@ -365,10 +347,7 @@ export default function VerificationStatusView({
           }`}
         >
           <Clock className="w-[17px] h-[17px] text-black" />
-          <span
-            style={{ fontFamily: "'Poppins', sans-serif" }}
-            className="font-medium text-[15px] text-black"
-          >
+          <span className="font-medium text-[15px] text-black">
             {status.status === "approved"
               ? "Verified"
               : status.status === "under_review"
@@ -438,7 +417,6 @@ export default function VerificationStatusView({
             />
           </svg>
           <p
-            style={{ fontFamily: "'Poppins', sans-serif" }}
             className={`font-medium text-[17px] leading-normal ${
               status.status === "approved"
                 ? "text-[#2aae7a]"
@@ -504,19 +482,13 @@ export default function VerificationStatusView({
                           strokeLinecap="round"
                         />
                       </svg>
-                      <h3
-                        style={{ fontFamily: "'Poppins', sans-serif" }}
-                        className="font-semibold text-[18px] text-[#0d1b2a]"
-                      >
+                      <h3 className="font-semibold text-[18px] text-[#0d1b2a]">
                         Business Information
                       </h3>
                     </div>
                     <div className="bg-[#eeffef] px-[15px] py-[5px] rounded-[15px] shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)] flex items-center gap-[8px]">
                       <CheckCircle2 className="w-[17px] h-[17px] text-[#2aae7a]" />
-                      <span
-                        style={{ fontFamily: "'Poppins', sans-serif" }}
-                        className="font-medium text-[18px] text-[#2aae7a]"
-                      >
+                      <span className="font-medium text-[18px] text-[#2aae7a]">
                         Verified
                       </span>
                     </div>
@@ -574,19 +546,13 @@ export default function VerificationStatusView({
                           strokeLinecap="round"
                         />
                       </svg>
-                      <h3
-                        style={{ fontFamily: "'Poppins', sans-serif" }}
-                        className="font-semibold text-[18px] text-[#0d1b2a]"
-                      >
+                      <h3 className="font-semibold text-[18px] text-[#0d1b2a]">
                         Identity Verification
                       </h3>
                     </div>
                     <div className="bg-[#eeffef] px-[15px] py-[5px] rounded-[15px] shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)] flex items-center gap-[8px]">
                       <CheckCircle2 className="w-[17px] h-[17px] text-[#2aae7a]" />
-                      <span
-                        style={{ fontFamily: "'Poppins', sans-serif" }}
-                        className="font-medium text-[18px] text-[#2aae7a]"
-                      >
+                      <span className="font-medium text-[18px] text-[#2aae7a]">
                         Verified
                       </span>
                     </div>
@@ -646,10 +612,7 @@ export default function VerificationStatusView({
                           strokeLinecap="round"
                         />
                       </svg>
-                      <h3
-                        style={{ fontFamily: "'Poppins', sans-serif" }}
-                        className="font-semibold text-[18px] text-[#0d1b2a]"
-                      >
+                      <h3 className="font-semibold text-[18px] text-[#0d1b2a]">
                         Business Documents
                       </h3>
                     </div>
@@ -666,7 +629,6 @@ export default function VerificationStatusView({
                         <Clock className="w-[17px] h-[17px] text-[#fc3]" />
                       )}
                       <span
-                        style={{ fontFamily: "'Poppins', sans-serif" }}
                         className={`font-medium text-[18px] ${
                           status.status === "approved"
                             ? "text-[#2aae7a]"
@@ -718,19 +680,13 @@ export default function VerificationStatusView({
                           strokeLinecap="round"
                         />
                       </svg>
-                      <h3
-                        style={{ fontFamily: "'Poppins', sans-serif" }}
-                        className="font-semibold text-[18px] text-[#0d1b2a]"
-                      >
+                      <h3 className="font-semibold text-[18px] text-[#0d1b2a]">
                         Bank Account Verification
                       </h3>
                     </div>
                     <div className="bg-[#eeffef] px-[15px] py-[5px] rounded-[15px] shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)] flex items-center gap-[8px]">
                       <CheckCircle2 className="w-[17px] h-[17px] text-[#2aae7a]" />
-                      <span
-                        style={{ fontFamily: "'Poppins', sans-serif" }}
-                        className="font-medium text-[18px] text-[#2aae7a]"
-                      >
+                      <span className="font-medium text-[18px] text-[#2aae7a]">
                         Verified
                       </span>
                     </div>
@@ -778,19 +734,13 @@ export default function VerificationStatusView({
                           strokeLinecap="round"
                         />
                       </svg>
-                      <h3
-                        style={{ fontFamily: "'Poppins', sans-serif" }}
-                        className="font-semibold text-[18px] text-[#0d1b2a]"
-                      >
+                      <h3 className="font-semibold text-[18px] text-[#0d1b2a]">
                         Operational Information
                       </h3>
                     </div>
                     <div className="bg-[#eeffef] px-[15px] py-[5px] rounded-[15px] shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)] flex items-center gap-[8px]">
                       <CheckCircle2 className="w-[17px] h-[17px] text-[#2aae7a]" />
-                      <span
-                        style={{ fontFamily: "'Poppins', sans-serif" }}
-                        className="font-medium text-[18px] text-[#2aae7a]"
-                      >
+                      <span className="font-medium text-[18px] text-[#2aae7a]">
                         Verified
                       </span>
                     </div>
@@ -834,10 +784,7 @@ export default function VerificationStatusView({
               {status.status !== "approved" && status.status !== "verified" && (
                 <div className="bg-white shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] rounded-[15px] p-[30px]">
                   <div className="flex items-center mb-[23px]">
-                    <h3
-                      style={{ fontFamily: "'Poppins', sans-serif" }}
-                      className="font-semibold text-[18px] text-[#0d1b2a]"
-                    >
+                    <h3 className="font-semibold text-[18px] text-[#0d1b2a]">
                       Additional Verification (Optional)
                     </h3>
                   </div>

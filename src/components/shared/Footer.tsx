@@ -13,7 +13,7 @@ export default function Footer() {
                 <img
                   src={"/Zeerostock Logo B White.png"}
                   alt="Zeerostock"
-                  className="h-[125px]"
+                  className="h-[140px]"
                 />
               </Link>
               <p className="text-[14px] leading-normal text-[#d0d0d0] text-center lg:text-left">
@@ -82,7 +82,7 @@ export default function Footer() {
                   Seller
                 </Link>
                 <Link
-                  href="/help-support"
+                  href="/helpdesk"
                   className="hover:text-white transition-colors"
                 >
                   Help Desk

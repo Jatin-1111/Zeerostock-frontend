@@ -139,10 +139,7 @@ export default function PostRFQPage() {
   return (
     <div className="min-h-screen bg-white px-15 py-6">
       <div className="max-w-[885px] mx-auto">
-        <h1
-          className="text-[27px] font-semibold text-[#0d1b2a] mb-6"
-          style={{ fontFamily: "Poppins, sans-serif" }}
-        >
+        <h1 className="text-[27px] font-semibold text-[#0d1b2a] mb-6">
           Post New RFQ
         </h1>
 
@@ -171,10 +168,7 @@ export default function PostRFQPage() {
         >
           {/* Product Title */}
           <div className="mb-6">
-            <label
-              className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]"
-              style={{ fontFamily: "Poppins, sans-serif" }}
-            >
+            <label className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]">
               Product Title<span className="text-red-600">*</span>
             </label>
             <input
@@ -185,7 +179,6 @@ export default function PostRFQPage() {
                 setFormData({ ...formData, title: e.target.value })
               }
               className="w-full h-[56px] px-4 border border-[#bebebe] rounded-[10px] text-[16px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
-              style={{ fontFamily: "Roboto, sans-serif" }}
               required
               disabled={loading}
             />
@@ -194,10 +187,7 @@ export default function PostRFQPage() {
           {/* Category and Industry */}
           <div className="grid grid-cols-2 gap-[30px] mb-6">
             <div>
-              <label
-                className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]"
-                style={{ fontFamily: "Poppins, sans-serif" }}
-              >
+              <label className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]">
                 Category<span className="text-red-600">*</span>
               </label>
               <select
@@ -206,7 +196,6 @@ export default function PostRFQPage() {
                   setFormData({ ...formData, categoryId: e.target.value })
                 }
                 className="w-full h-[42px] px-3 border border-[#bebebe] rounded-[8px] text-[12px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe] appearance-none bg-white"
-                style={{ fontFamily: "Roboto, sans-serif" }}
                 required
                 disabled={loading}
               >
@@ -222,10 +211,7 @@ export default function PostRFQPage() {
             </div>
 
             <div>
-              <label
-                className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]"
-                style={{ fontFamily: "Poppins, sans-serif" }}
-              >
+              <label className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]">
                 Industry<span className="text-red-600">*</span>
               </label>
               <select
@@ -234,7 +220,6 @@ export default function PostRFQPage() {
                   setFormData({ ...formData, industryId: e.target.value })
                 }
                 className="w-full h-[42px] px-3 border border-[#bebebe] rounded-[8px] text-[12px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe] appearance-none bg-white"
-                style={{ fontFamily: "Roboto, sans-serif" }}
                 required
                 disabled={loading}
               >
@@ -253,10 +238,7 @@ export default function PostRFQPage() {
           {/* Quantity and Unit */}
           <div className="grid grid-cols-2 gap-[30px] mb-6">
             <div>
-              <label
-                className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]"
-                style={{ fontFamily: "Poppins, sans-serif" }}
-              >
+              <label className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]">
                 Quantity<span className="text-red-600">*</span>
               </label>
               <input
@@ -267,7 +249,6 @@ export default function PostRFQPage() {
                   setFormData({ ...formData, quantity: Number(e.target.value) })
                 }
                 className="w-full h-[42px] px-3 border border-[#bebebe] rounded-[8px] text-[12px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
-                style={{ fontFamily: "Roboto, sans-serif" }}
                 required
                 min="1"
                 disabled={loading}
@@ -275,10 +256,7 @@ export default function PostRFQPage() {
             </div>
 
             <div>
-              <label
-                className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]"
-                style={{ fontFamily: "Poppins, sans-serif" }}
-              >
+              <label className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]">
                 Unit
               </label>
               <select
@@ -287,7 +265,6 @@ export default function PostRFQPage() {
                   setFormData({ ...formData, unit: e.target.value as RFQUnit })
                 }
                 className="w-full h-[42px] px-3 border border-[#bebebe] rounded-[8px] text-[12px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe] appearance-none bg-white"
-                style={{ fontFamily: "Roboto, sans-serif" }}
                 required
                 disabled={loading}
               >
@@ -310,10 +287,7 @@ export default function PostRFQPage() {
           {/* Budget Range and Required by Date */}
           <div className="grid grid-cols-2 gap-[30px] mb-6">
             <div>
-              <label
-                className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]"
-                style={{ fontFamily: "Poppins, sans-serif" }}
-              >
+              <label className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]">
                 Budget
               </label>
               <input
@@ -328,17 +302,13 @@ export default function PostRFQPage() {
                   });
                 }}
                 className="w-full h-[42px] px-3 border border-[#bebebe] rounded-[8px] text-[12px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
-                style={{ fontFamily: "Roboto, sans-serif" }}
                 disabled={loading}
                 min="0"
               />
             </div>
 
             <div>
-              <label
-                className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]"
-                style={{ fontFamily: "Poppins, sans-serif" }}
-              >
+              <label className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]">
                 Required by Date
               </label>
               <input
@@ -349,7 +319,6 @@ export default function PostRFQPage() {
                   setFormData({ ...formData, requiredByDate: e.target.value })
                 }
                 className="w-full h-[42px] px-3 border border-[#bebebe] rounded-[8px] text-[12px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
-                style={{ fontFamily: "Roboto, sans-serif" }}
                 disabled={loading}
               />
             </div>
@@ -357,10 +326,7 @@ export default function PostRFQPage() {
 
           {/* Detailed Requirements */}
           <div className="mb-6">
-            <label
-              className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]"
-              style={{ fontFamily: "Poppins, sans-serif" }}
-            >
+            <label className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]">
               Detailed Requirements
             </label>
             <textarea
@@ -374,7 +340,6 @@ export default function PostRFQPage() {
               }
               rows={4}
               className="w-full px-3 py-2 border border-[#bebebe] rounded-[8px] text-[12px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe] resize-none"
-              style={{ fontFamily: "Roboto, sans-serif" }}
               disabled={loading}
             />
           </div>
@@ -382,10 +347,7 @@ export default function PostRFQPage() {
           {/* Preferred Location and RFQ Duration */}
           <div className="grid grid-cols-2 gap-[30px] mb-9">
             <div>
-              <label
-                className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]"
-                style={{ fontFamily: "Poppins, sans-serif" }}
-              >
+              <label className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]">
                 Preferred Location
               </label>
               <input
@@ -399,16 +361,12 @@ export default function PostRFQPage() {
                   })
                 }
                 className="w-full h-[42px] px-3 border border-[#bebebe] rounded-[8px] text-[12px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
-                style={{ fontFamily: "Roboto, sans-serif" }}
                 disabled={loading}
               />
             </div>
 
             <div>
-              <label
-                className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]"
-                style={{ fontFamily: "Poppins, sans-serif" }}
-              >
+              <label className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]">
                 RFQ Duration<span className="text-red-600">*</span>
               </label>
               <select
@@ -420,7 +378,6 @@ export default function PostRFQPage() {
                   })
                 }
                 className="w-full h-[42px] px-3 border border-[#bebebe] rounded-[8px] text-[12px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe] appearance-none bg-white"
-                style={{ fontFamily: "Roboto, sans-serif" }}
                 required
                 disabled={loading}
               >
@@ -439,7 +396,6 @@ export default function PostRFQPage() {
               type="submit"
               disabled={loading}
               className="w-[191px] h-[45px] bg-[#1e3a8a] text-white text-[15px] font-semibold rounded-[11px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center justify-center gap-[11px] disabled:opacity-50 disabled:cursor-not-allowed"
-              style={{ fontFamily: "Poppins, sans-serif" }}
             >
               {loading ? (
                 <>

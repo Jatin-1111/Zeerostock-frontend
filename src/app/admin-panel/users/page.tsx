@@ -247,241 +247,243 @@ export default function UserManagementPage() {
 
   return (
     <AdminLayout>
-      {/* Header */}
-      <PageHeader
-        title="User Management"
-        description="Manage all user and access activity"
-        actions={
-          <button className="bg-black text-white px-4 py-2 text-[13px] font-medium hover:bg-gray-900 transition-colors">
-            Export
-          </button>
-        }
-      />
-
-      {/* Alert Messages */}
-      {error && (
-        <div className="mb-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 flex items-center gap-2">
-          <AlertCircle className="h-5 w-5" />
-          <span className="text-[13px]">{error}</span>
-        </div>
-      )}
-
-      {success && (
-        <div className="mb-4 bg-green-50 border border-green-200 text-green-700 px-4 py-3 flex items-center gap-2">
-          <CheckCircle className="h-5 w-5" />
-          <span className="text-[13px]">{success}</span>
-        </div>
-      )}
-
-      {/* Stats Cards */}
-      <div className="grid grid-cols-4 gap-4 mb-6">
-        {statsCards.map((card, index) => (
-          <StatsCard key={index} {...card} />
-        ))}
-      </div>
-
-      {/* Filters and Search */}
-      <div className="bg-white border border-gray-200 mb-4">
-        {/* Filter Buttons */}
-        <div className="flex items-center gap-2 p-4 border-b border-gray-200">
-          {filterButtons.map((filter) => (
-            <button
-              key={filter.value}
-              onClick={() => handleFilterChange(filter.value)}
-              className={`px-4 py-1.5 text-[12px] font-medium transition-colors ${
-                activeFilter === filter.value
-                  ? "bg-black text-white"
-                  : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
-              }`}
-            >
-              {filter.label}
+      <div className="p-8">
+        {/* Header */}
+        <PageHeader
+          title="User Management"
+          description="Manage all user and access activity"
+          actions={
+            <button className="bg-black text-white px-4 py-2 text-[13px] font-medium hover:bg-gray-900 transition-colors">
+              Export
             </button>
+          }
+        />
+
+        {/* Alert Messages */}
+        {error && (
+          <div className="mb-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 flex items-center gap-2">
+            <AlertCircle className="h-5 w-5" />
+            <span className="text-[13px]">{error}</span>
+          </div>
+        )}
+
+        {success && (
+          <div className="mb-4 bg-green-50 border border-green-200 text-green-700 px-4 py-3 flex items-center gap-2">
+            <CheckCircle className="h-5 w-5" />
+            <span className="text-[13px]">{success}</span>
+          </div>
+        )}
+
+        {/* Stats Cards */}
+        <div className="grid grid-cols-4 gap-4 mb-6">
+          {statsCards.map((card, index) => (
+            <StatsCard key={index} {...card} />
           ))}
         </div>
 
-        {/* Search Bar */}
-        <div className="p-4">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-            <input
-              type="text"
-              placeholder="Search by name, email, or ID..."
-              value={searchTerm}
-              onChange={handleSearch}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 text-[13px] text-black placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Table */}
-      {loading ? (
-        <div className="flex justify-center items-center h-64 bg-white border border-gray-200">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
-        </div>
-      ) : users.length === 0 ? (
-        <div className="text-center py-12 bg-white border border-gray-200">
-          <Users className="h-12 w-12 mx-auto mb-4 opacity-50 text-gray-400" />
-          <p className="text-gray-500 text-[13px]">No users found</p>
-        </div>
-      ) : (
+        {/* Filters and Search */}
         <div className="bg-white border border-gray-200 mb-4">
-          <table className="w-full">
-            <thead className="bg-gray-50 border-b border-gray-200">
-              <tr>
-                <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
-                  USER ID
-                </th>
-                <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
-                  NAME
-                </th>
-                <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
-                  EMAIL
-                </th>
-                <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
-                  ROLE
-                </th>
-                <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
-                  STATUS
-                </th>
-                <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
-                  Last Login
-                </th>
-                <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
-                  ACTIONS
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200">
-              {users.map((user) => (
-                <tr key={user.id} className="hover:bg-gray-50">
-                  <td className="px-4 py-3 text-[12px] text-black">
-                    {user.id}
-                  </td>
-                  <td className="px-4 py-3 text-[12px] text-black">
-                    {user.name}
-                  </td>
-                  <td className="px-4 py-3 text-[12px] text-black">
-                    {user.email}
-                  </td>
-                  <td className="px-4 py-3">
-                    <span
-                      className={`px-3 py-1 rounded-full text-[11px] font-medium ${getRoleBadgeColor(
-                        user.activeRole
-                      )}`}
-                    >
-                      {user.activeRole.charAt(0).toUpperCase() +
-                        user.activeRole.slice(1)}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3">
-                    <span
-                      className={`px-3 py-1 rounded-full text-[11px] font-medium ${getStatusBadgeColor(
-                        user.isActive,
-                        user.isVerified
-                      )}`}
-                    >
-                      {getStatusText(user.isActive, user.isVerified)}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3 text-[12px] text-black">
-                    {formatLastLogin(user.lastLogin)}
-                  </td>
-                  <td className="px-4 py-3">
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={() =>
-                          router.push(`/admin-panel/users/${user.id}`)
-                        }
-                        className="hover:bg-gray-100 p-1.5 rounded transition-colors"
-                        title="View Details"
-                      >
-                        <Eye className="w-4 h-4 text-gray-600" />
-                      </button>
-                      {user.isActive ? (
-                        <button
-                          onClick={() => handleAction("deactivate", user.id)}
-                          className="hover:bg-gray-100 p-1.5 rounded transition-colors"
-                          title="Deactivate User"
-                        >
-                          <Lock className="w-4 h-4 text-red-600" />
-                        </button>
-                      ) : (
-                        <button
-                          onClick={() => handleAction("activate", user.id)}
-                          className="hover:bg-gray-100 p-1.5 rounded transition-colors"
-                          title="Activate User"
-                        >
-                          <Unlock className="w-4 h-4 text-green-600" />
-                        </button>
-                      )}
-                      <button
-                        onClick={() => {
-                          if (
-                            confirm(
-                              `Are you sure you want to delete ${user.name}?`
-                            )
-                          ) {
-                            handleAction("delete", user.id);
-                          }
-                        }}
-                        className="hover:bg-gray-100 p-1.5 rounded transition-colors"
-                        title="Delete User"
-                      >
-                        <Trash2 className="w-4 h-4 text-red-600" />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+          {/* Filter Buttons */}
+          <div className="flex items-center gap-2 p-4 border-b border-gray-200">
+            {filterButtons.map((filter) => (
+              <button
+                key={filter.value}
+                onClick={() => handleFilterChange(filter.value)}
+                className={`px-4 py-1.5 text-[12px] font-medium transition-colors ${
+                  activeFilter === filter.value
+                    ? "bg-black text-white"
+                    : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
+                }`}
+              >
+                {filter.label}
+              </button>
+            ))}
+          </div>
 
-      {/* Pagination */}
-      {!loading && users.length > 0 && (
-        <div className="flex justify-between items-center">
-          <p className="text-[12px] text-gray-600">
-            Page {currentPage} of {totalPages}
-          </p>
-          <div className="flex items-center gap-1">
-            <button
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-              className="w-8 h-8 border border-gray-300 flex items-center justify-center hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              <ChevronLeft className="w-4 h-4 text-gray-600" />
-            </button>
-            {Array.from({ length: Math.min(totalPages, 5) }, (_, i) => {
-              const pageNum = currentPage <= 3 ? i + 1 : currentPage - 2 + i;
-              if (pageNum > totalPages) return null;
-              return (
-                <button
-                  key={pageNum}
-                  onClick={() => setCurrentPage(pageNum)}
-                  className={`w-8 h-8 border flex items-center justify-center text-[12px] font-medium transition-colors ${
-                    currentPage === pageNum
-                      ? "bg-black text-white border-black"
-                      : "border-gray-300 text-gray-700 hover:bg-gray-50"
-                  }`}
-                >
-                  {pageNum}
-                </button>
-              );
-            })}
-            <button
-              onClick={() =>
-                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-              }
-              disabled={currentPage === totalPages}
-              className="w-8 h-8 border border-gray-300 flex items-center justify-center hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              <ChevronRight className="w-4 h-4 text-gray-600" />
-            </button>
+          {/* Search Bar */}
+          <div className="p-4">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search by name, email, or ID..."
+                value={searchTerm}
+                onChange={handleSearch}
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 text-[13px] text-black placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
+              />
+            </div>
           </div>
         </div>
-      )}
+
+        {/* Table */}
+        {loading ? (
+          <div className="flex justify-center items-center h-64 bg-white border border-gray-200">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
+          </div>
+        ) : users.length === 0 ? (
+          <div className="text-center py-12 bg-white border border-gray-200">
+            <Users className="h-12 w-12 mx-auto mb-4 opacity-50 text-gray-400" />
+            <p className="text-gray-500 text-[13px]">No users found</p>
+          </div>
+        ) : (
+          <div className="bg-white border border-gray-200 mb-4">
+            <table className="w-full">
+              <thead className="bg-gray-50 border-b border-gray-200">
+                <tr>
+                  <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
+                    USER ID
+                  </th>
+                  <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
+                    NAME
+                  </th>
+                  <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
+                    EMAIL
+                  </th>
+                  <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
+                    ROLE
+                  </th>
+                  <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
+                    STATUS
+                  </th>
+                  <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
+                    Last Login
+                  </th>
+                  <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
+                    ACTIONS
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                {users.map((user) => (
+                  <tr key={user.id} className="hover:bg-gray-50">
+                    <td className="px-4 py-3 text-[12px] text-black">
+                      {user.id}
+                    </td>
+                    <td className="px-4 py-3 text-[12px] text-black">
+                      {user.name}
+                    </td>
+                    <td className="px-4 py-3 text-[12px] text-black">
+                      {user.email}
+                    </td>
+                    <td className="px-4 py-3">
+                      <span
+                        className={`px-3 py-1 rounded-full text-[11px] font-medium ${getRoleBadgeColor(
+                          user.activeRole
+                        )}`}
+                      >
+                        {user.activeRole.charAt(0).toUpperCase() +
+                          user.activeRole.slice(1)}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3">
+                      <span
+                        className={`px-3 py-1 rounded-full text-[11px] font-medium ${getStatusBadgeColor(
+                          user.isActive,
+                          user.isVerified
+                        )}`}
+                      >
+                        {getStatusText(user.isActive, user.isVerified)}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 text-[12px] text-black">
+                      {formatLastLogin(user.lastLogin)}
+                    </td>
+                    <td className="px-4 py-3">
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() =>
+                            router.push(`/admin-panel/users/${user.id}`)
+                          }
+                          className="hover:bg-gray-100 p-1.5 rounded transition-colors"
+                          title="View Details"
+                        >
+                          <Eye className="w-4 h-4 text-gray-600" />
+                        </button>
+                        {user.isActive ? (
+                          <button
+                            onClick={() => handleAction("deactivate", user.id)}
+                            className="hover:bg-gray-100 p-1.5 rounded transition-colors"
+                            title="Deactivate User"
+                          >
+                            <Lock className="w-4 h-4 text-red-600" />
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => handleAction("activate", user.id)}
+                            className="hover:bg-gray-100 p-1.5 rounded transition-colors"
+                            title="Activate User"
+                          >
+                            <Unlock className="w-4 h-4 text-green-600" />
+                          </button>
+                        )}
+                        <button
+                          onClick={() => {
+                            if (
+                              confirm(
+                                `Are you sure you want to delete ${user.name}?`
+                              )
+                            ) {
+                              handleAction("delete", user.id);
+                            }
+                          }}
+                          className="hover:bg-gray-100 p-1.5 rounded transition-colors"
+                          title="Delete User"
+                        >
+                          <Trash2 className="w-4 h-4 text-red-600" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {/* Pagination */}
+        {!loading && users.length > 0 && (
+          <div className="flex justify-between items-center">
+            <p className="text-[12px] text-gray-600">
+              Page {currentPage} of {totalPages}
+            </p>
+            <div className="flex items-center gap-1">
+              <button
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                className="w-8 h-8 border border-gray-300 flex items-center justify-center hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                <ChevronLeft className="w-4 h-4 text-gray-600" />
+              </button>
+              {Array.from({ length: Math.min(totalPages, 5) }, (_, i) => {
+                const pageNum = currentPage <= 3 ? i + 1 : currentPage - 2 + i;
+                if (pageNum > totalPages) return null;
+                return (
+                  <button
+                    key={pageNum}
+                    onClick={() => setCurrentPage(pageNum)}
+                    className={`w-8 h-8 border flex items-center justify-center text-[12px] font-medium transition-colors ${
+                      currentPage === pageNum
+                        ? "bg-black text-white border-black"
+                        : "border-gray-300 text-gray-700 hover:bg-gray-50"
+                    }`}
+                  >
+                    {pageNum}
+                  </button>
+                );
+              })}
+              <button
+                onClick={() =>
+                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                }
+                disabled={currentPage === totalPages}
+                className="w-8 h-8 border border-gray-300 flex items-center justify-center hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                <ChevronRight className="w-4 h-4 text-gray-600" />
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
     </AdminLayout>
   );
 }

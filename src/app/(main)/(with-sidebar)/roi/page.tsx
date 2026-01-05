@@ -7,7 +7,7 @@ export default function ROIPage() {
   const activeTab = "buyer";
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="min-h-screen">
       <div className="max-w-full mx-auto px-15 py-6">
         {/* Header */}
         <div className="relative bg-white rounded-[15px] shadow-[0px_1px_5px_0px_rgba(24,181,34,0.25)] mb-6 py-[23px] px-[38px] h-[164px]">

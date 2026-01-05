@@ -11,10 +11,12 @@ import {
   LogOut,
   UserCog,
   KeyRound,
+  MessageSquare,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useAdminAuth } from "@/contexts/AdminAuthContext";
 
 const menuItems = [
   {
@@ -35,44 +37,38 @@ const menuItems = [
     label: "Reports & Analytics",
     href: "/admin-panel/reports",
   },
+  {
+    icon: MessageSquare,
+    label: "Feedback & Bugs",
+    href: "/admin-panel/feedback-bugs",
+  },
 ];
 
 export default function AdminSidebar() {
   const pathname = usePathname();
+  const { admin, logout } = useAdminAuth();
   const [isSuperAdmin, setIsSuperAdmin] = useState(false);
 
   useEffect(() => {
     // Check if user is super admin
-    const userStr = localStorage.getItem("admin_user");
-    if (userStr) {
-      try {
-        const user = JSON.parse(userStr);
-        console.log("Admin user data:", user); // Debug log
+    if (admin) {
+      const isSuperAdminCheck =
+        admin.role === "super_admin" ||
+        admin.role === "super-admin" ||
+        (admin as any).isSuperAdmin === true ||
+        (admin as any).roles?.includes("super_admin") ||
+        false;
 
-        // Check multiple possible ways this could be stored
-        const isSuperAdminCheck =
-          user.isSuperAdmin === true ||
-          user.is_super_admin === true ||
-          user.roles?.includes("super_admin") ||
-          false;
-
-        console.log("Is super admin:", isSuperAdminCheck); // Debug log
-        setIsSuperAdmin(isSuperAdminCheck);
-      } catch (e) {
-        console.error("Failed to parse user data", e);
-      }
+      setIsSuperAdmin(isSuperAdminCheck);
     }
-  }, []);
+  }, [admin]);
 
   const isActive = (href: string) => {
     return pathname?.startsWith(href);
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("admin_token");
-    localStorage.removeItem("admin_refresh_token");
-    localStorage.removeItem("admin_user");
-    window.location.href = "/admin-panel/login";
+    logout();
   };
 
   return (

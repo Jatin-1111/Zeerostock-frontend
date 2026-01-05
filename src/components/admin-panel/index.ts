@@ -2,6 +2,7 @@
 export { default as AdminSidebar } from "./layout/AdminSidebar";
 export { default as AdminTopBar } from "./layout/AdminTopBar";
 export { default as AdminLayout } from "./layout/AdminLayout";
+export { default as AdminProtectedRoute } from "./AdminProtectedRoute";
 
 // UI Components
 export { default as StatsCard } from "./ui/StatsCard";

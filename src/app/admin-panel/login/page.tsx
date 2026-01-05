@@ -1,16 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Eye, EyeOff, ShieldCheck, AlertCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useAdminAuth } from "@/contexts/AdminAuthContext";
 
 export default function AdminLoginPage() {
   const router = useRouter();
+  const { login, isAuthenticated } = useAdminAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [adminId, setAdminId] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push("/admin-panel/dashboard");
+    }
+  }, [isAuthenticated, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,10 +53,8 @@ export default function AdminLoginPage() {
         return;
       }
 
-      // Store auth data
-      localStorage.setItem("admin_token", data.data.accessToken);
-      localStorage.setItem("admin_refresh_token", data.data.refreshToken);
-      localStorage.setItem("admin_user", JSON.stringify(data.data.user));
+      // Use auth context to login
+      login(data.data.accessToken, data.data.refreshToken, data.data.user);
 
       // Redirect to dashboard
       router.push("/admin-panel/dashboard");

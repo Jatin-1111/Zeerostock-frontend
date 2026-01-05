@@ -3,33 +3,14 @@
 import { Bell, User } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { useAdminAuth } from "@/contexts/AdminAuthContext";
 import Link from "next/link";
 
 export default function AdminTopBar() {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-  const [adminInfo, setAdminInfo] = useState<{
-    firstName?: string;
-    lastName?: string;
-    email?: string;
-  } | null>(null);
+  const { admin, logout } = useAdminAuth();
   const userMenuRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
-
-  // Fetch admin info from localStorage or API
-  useEffect(() => {
-    const token = localStorage.getItem("admin_token");
-    if (token) {
-      // Try to get admin info from localStorage
-      const storedAdmin = localStorage.getItem("admin_user");
-      if (storedAdmin) {
-        try {
-          setAdminInfo(JSON.parse(storedAdmin));
-        } catch (e) {
-          console.error("Failed to parse admin info", e);
-        }
-      }
-    }
-  }, []);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -52,16 +33,15 @@ export default function AdminTopBar() {
   }, [isUserMenuOpen]);
 
   const handleLogout = () => {
-    localStorage.removeItem("admin_token");
-    localStorage.removeItem("admin_user");
     setIsUserMenuOpen(false);
-    router.push("/admin-panel/login");
+    logout();
   };
 
   const getInitials = () => {
-    if (!adminInfo) return "AD";
-    const first = adminInfo.firstName?.[0]?.toUpperCase() || "A";
-    const last = adminInfo.lastName?.[0]?.toUpperCase() || "D";
+    if (!admin || !admin.name) return "AD";
+    const nameParts = admin.name.split(" ");
+    const first = nameParts[0]?.[0]?.toUpperCase() || "A";
+    const last = nameParts[1]?.[0]?.toUpperCase() || "D";
     return `${first}${last}`;
   };
 
@@ -75,14 +55,14 @@ export default function AdminTopBar() {
         <button
           onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
           className={`rounded-full flex items-center justify-center transition-all ${
-            adminInfo
+            admin
               ? "bg-white hover:bg-gray-100 w-10 h-10 border-2 border-gray-300"
               : "bg-black hover:bg-gray-800 w-8 h-8"
           }`}
           aria-label="User menu"
           aria-expanded={isUserMenuOpen}
         >
-          {adminInfo ? (
+          {admin ? (
             <span className="text-black font-bold text-sm">
               {getInitials()}
             </span>
@@ -93,17 +73,17 @@ export default function AdminTopBar() {
 
         {isUserMenuOpen && (
           <div className="absolute right-0 mt-2 w-56 bg-white border-2 border-gray-900 rounded-lg shadow-lg z-20">
-            {adminInfo ? (
+            {admin ? (
               <div className="py-2">
                 <div className="px-4 py-3 border-b border-gray-200">
                   <p className="text-sm font-semibold text-gray-900">
-                    {adminInfo.firstName} {adminInfo.lastName}
+                    {admin.name || "Admin User"}
                   </p>
                   <p className="text-xs text-gray-600 truncate">
-                    {adminInfo.email}
+                    {admin.email}
                   </p>
                   <span className="inline-block mt-1 px-2 py-0.5 text-[10px] bg-black text-white rounded">
-                    Admin
+                    {admin.role || "Admin"}
                   </span>
                 </div>
 

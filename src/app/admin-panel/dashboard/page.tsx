@@ -87,7 +87,7 @@ export default function AdminDashboard() {
             headers: { Authorization: `Bearer ${token}` },
           }),
           fetch(
-            `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/supllier-verifications/stats`,
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/supplier-verifications/stats`,
             {
               headers: { Authorization: `Bearer ${token}` },
             }
@@ -96,7 +96,7 @@ export default function AdminDashboard() {
             headers: { Authorization: `Bearer ${token}` },
           }),
           fetch(
-            `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/supllier-verifications?page=1&limit=5`,
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/supplier-verifications?page=1&limit=5`,
             {
               headers: { Authorization: `Bearer ${token}` },
             }
@@ -268,333 +268,345 @@ export default function AdminDashboard() {
 
   return (
     <AdminLayout>
-      {/* Header */}
-      <PageHeader
-        title="Admin Dashboard"
-        description="Welcome back, Admin. Here's what's happening today."
-      />
+      <div className="p-8">
+        {/* Header */}
+        <PageHeader
+          title="Admin Dashboard"
+          description="Welcome back, Admin. Here's what's happening today."
+        />
 
-      {/* Stats Cards */}
-      <div className="grid grid-cols-4 gap-4 mb-6">
-        {statsCards.map((card, index) => (
-          <StatsCard key={index} {...card} />
-        ))}
-      </div>
-
-      {/* Middle Row */}
-      <div className="grid grid-cols-3 gap-6 mb-6">
-        {/* User Heat Map */}
-        <div className="col-span-2 bg-white border border-gray-200 p-6">
-          <div className="flex justify-between items-center mb-4">
-            <div>
-              <h3 className="text-[16px] font-bold text-black">
-                User Heat Map
-              </h3>
-              <p className="text-[12px] text-gray-500">
-                Active user across India&apos;s elasticity
-              </p>
-            </div>
-            <div className="flex gap-2">
-              <button
-                onClick={() => setHeatMapTab("India")}
-                className={`px-4 py-1.5 text-[12px] font-medium transition-colors ${
-                  heatMapTab === "India"
-                    ? "bg-black text-white"
-                    : "bg-white text-gray-600 border border-gray-300"
-                }`}
-              >
-                India
-              </button>
-              <button
-                onClick={() => setHeatMapTab("Global")}
-                className={`px-4 py-1.5 text-[12px] font-medium transition-colors ${
-                  heatMapTab === "Global"
-                    ? "bg-black text-white"
-                    : "bg-white text-gray-600 border border-gray-300"
-                }`}
-              >
-                Global
-              </button>
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            {locationStats.length > 0 ? (
-              locationStats.map((item, index) => {
-                // Calculate bar width based on max users for better visualization
-                const maxUsers = Math.max(...locationStats.map((s) => s.users));
-                const barWidth = (item.users / maxUsers) * 100;
-
-                return (
-                  <div key={index} className="flex items-center gap-4">
-                    <span className="text-[12px] text-gray-600 w-24">
-                      {item.state}
-                    </span>
-                    <div className="flex-1 relative">
-                      <div className="h-6 bg-gray-100 relative">
-                        <div
-                          className="h-full bg-black"
-                          style={{ width: `${barWidth}%` }}
-                        />
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-[14px] font-medium text-black">
-                        {item.users.toLocaleString()} users
-                      </span>
-                      {/* Growth percentage - commented out until historical data available */}
-                      {/* <div className="w-8 h-8 border border-gray-300 rounded flex items-center justify-center text-[10px] text-gray-600">
-                        +{item.percentage}%
-                      </div> */}
-                    </div>
-                  </div>
-                );
-              })
-            ) : (
-              <div className="text-center py-8 text-gray-500">
-                No location data available
-              </div>
-            )}
-          </div>
+        {/* Stats Cards */}
+        <div className="grid grid-cols-4 gap-4 mb-6">
+          {statsCards.map((card, index) => (
+            <StatsCard key={index} {...card} />
+          ))}
         </div>
 
-        {/* Risk Alerts Panel */}
-        <div className="bg-white border border-gray-200 p-6">
-          <h3 className="text-[16px] font-bold text-black mb-4">
-            Risk Alerts Panel
-          </h3>
-          <div className="space-y-4">
-            {riskAlerts.map((alert, index) => (
-              <div key={index} className="border border-gray-200 p-3">
-                <p className="text-[12px] text-black mb-1">{alert.text}</p>
-                <p className="text-[10px] text-gray-500 mb-2">{alert.time}</p>
+        {/* Middle Row */}
+        <div className="grid grid-cols-3 gap-6 mb-6">
+          {/* User Heat Map */}
+          <div className="col-span-2 bg-white border border-gray-200 p-6">
+            <div className="flex justify-between items-center mb-4">
+              <div>
+                <h3 className="text-[16px] font-bold text-black">
+                  User Heat Map
+                </h3>
+                <p className="text-[12px] text-gray-500">
+                  Active user across India&apos;s elasticity
+                </p>
+              </div>
+              <div className="flex gap-2">
                 <button
-                  className={`text-[11px] font-medium ${alert.actionColor} hover:underline`}
+                  onClick={() => setHeatMapTab("India")}
+                  className={`px-4 py-1.5 text-[12px] font-medium transition-colors ${
+                    heatMapTab === "India"
+                      ? "bg-black text-white"
+                      : "bg-white text-gray-600 border border-gray-300"
+                  }`}
                 >
-                  {alert.action}
+                  India
+                </button>
+                <button
+                  onClick={() => setHeatMapTab("Global")}
+                  className={`px-4 py-1.5 text-[12px] font-medium transition-colors ${
+                    heatMapTab === "Global"
+                      ? "bg-black text-white"
+                      : "bg-white text-gray-600 border border-gray-300"
+                  }`}
+                >
+                  Global
                 </button>
               </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom Row */}
-      <div className="grid grid-cols-3 gap-6 mb-6">
-        {/* Listing Status */}
-        <div className="col-span-2 bg-white border border-gray-200 p-6">
-          <div className="flex justify-between items-center mb-6">
-            <div>
-              <h3 className="text-[16px] font-bold text-black">
-                Listing Status
-              </h3>
-              <p className="text-[12px] text-gray-500">Inventory breakdown</p>
             </div>
-            <div className="flex gap-2">
-              {["Last 6 months", "Last 12 months", "Month-by-data"].map(
-                (tab) => (
-                  <button
-                    key={tab}
-                    onClick={() => setListingTab(tab)}
-                    className={`px-3 py-1.5 text-[11px] font-medium transition-colors ${
-                      listingTab === tab
-                        ? "bg-black text-white"
-                        : "bg-white text-gray-600 border border-gray-300"
-                    }`}
-                  >
-                    {tab}
-                  </button>
-                )
+
+            <div className="space-y-4">
+              {locationStats.length > 0 ? (
+                locationStats.map((item, index) => {
+                  // Calculate bar width based on max users for better visualization
+                  const maxUsers = Math.max(
+                    ...locationStats.map((s) => s.users)
+                  );
+                  const barWidth = (item.users / maxUsers) * 100;
+
+                  return (
+                    <div key={index} className="flex items-center gap-4">
+                      <span className="text-[12px] text-gray-600 w-24">
+                        {item.state}
+                      </span>
+                      <div className="flex-1 relative">
+                        <div className="h-6 bg-gray-100 relative">
+                          <div
+                            className="h-full bg-black"
+                            style={{ width: `${barWidth}%` }}
+                          />
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[14px] font-medium text-black">
+                          {item.users.toLocaleString()} users
+                        </span>
+                        {/* Growth percentage - commented out until historical data available */}
+                        {/* <div className="w-8 h-8 border border-gray-300 rounded flex items-center justify-center text-[10px] text-gray-600">
+                        +{item.percentage}%
+                      </div> */}
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                <div className="text-center py-8 text-gray-500">
+                  No location data available
+                </div>
               )}
             </div>
           </div>
 
-          {/* Bar Chart */}
-          <div className="relative h-64">
-            <div className="absolute left-0 top-0 bottom-0 flex flex-col justify-between text-[10px] text-gray-500">
-              <span>2000</span>
-              <span>1600</span>
-              <span>1000</span>
-              <span>500</span>
-              <span>100</span>
-              <span>0</span>
+          {/* Risk Alerts Panel */}
+          <div className="bg-white border border-gray-200 p-6">
+            <h3 className="text-[16px] font-bold text-black mb-4">
+              Risk Alerts Panel
+            </h3>
+            <div className="space-y-4">
+              {riskAlerts.map((alert, index) => (
+                <div key={index} className="border border-gray-200 p-3">
+                  <p className="text-[12px] text-black mb-1">{alert.text}</p>
+                  <p className="text-[10px] text-gray-500 mb-2">{alert.time}</p>
+                  <button
+                    className={`text-[11px] font-medium ${alert.actionColor} hover:underline`}
+                  >
+                    {alert.action}
+                  </button>
+                </div>
+              ))}
             </div>
-            <div className="ml-12 h-full flex items-end justify-around gap-8">
-              {/* Delivered */}
-              <div className="flex flex-col items-center flex-1">
-                <div className="relative w-full h-full flex items-end justify-center">
+          </div>
+        </div>
+
+        {/* Bottom Row */}
+        <div className="grid grid-cols-3 gap-6 mb-6">
+          {/* Listing Status */}
+          <div className="col-span-2 bg-white border border-gray-200 p-6">
+            <div className="flex justify-between items-center mb-6">
+              <div>
+                <h3 className="text-[16px] font-bold text-black">
+                  Listing Status
+                </h3>
+                <p className="text-[12px] text-gray-500">Inventory breakdown</p>
+              </div>
+              <div className="flex gap-2">
+                {["Last 6 months", "Last 12 months", "Month-by-data"].map(
+                  (tab) => (
+                    <button
+                      key={tab}
+                      onClick={() => setListingTab(tab)}
+                      className={`px-3 py-1.5 text-[11px] font-medium transition-colors ${
+                        listingTab === tab
+                          ? "bg-black text-white"
+                          : "bg-white text-gray-600 border border-gray-300"
+                      }`}
+                    >
+                      {tab}
+                    </button>
+                  )
+                )}
+              </div>
+            </div>
+
+            {/* Bar Chart */}
+            <div className="relative h-64">
+              <div className="absolute left-0 top-0 bottom-0 flex flex-col justify-between text-[10px] text-gray-500">
+                <span>2000</span>
+                <span>1600</span>
+                <span>1000</span>
+                <span>500</span>
+                <span>100</span>
+                <span>0</span>
+              </div>
+              <div className="ml-12 h-full flex items-end justify-around gap-8">
+                {/* Delivered */}
+                <div className="flex flex-col items-center flex-1">
+                  <div className="relative w-full h-full flex items-end justify-center">
+                    <div
+                      className="w-20 bg-green-500 relative"
+                      style={{
+                        height: orderStats
+                          ? `${Math.min(
+                              (orderStats.delivered / 2000) * 100,
+                              100
+                            )}%`
+                          : "0%",
+                      }}
+                    >
+                      {orderStats && orderStats.delivered > 0 && (
+                        <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-100 border border-gray-300 px-2 py-1 text-[10px] whitespace-nowrap">
+                          Delivered
+                          <br />
+                          {orderStats.delivered}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  <span className="text-[12px] text-gray-600 mt-2">
+                    Delivered
+                  </span>
+                </div>
+
+                {/* In Transit */}
+                <div className="flex flex-col items-center flex-1">
                   <div
-                    className="w-20 bg-green-500 relative"
+                    className="w-20 bg-blue-500"
                     style={{
                       height: orderStats
                         ? `${Math.min(
-                            (orderStats.delivered / 2000) * 100,
+                            (orderStats.in_transit / 2000) * 100,
                             100
                           )}%`
                         : "0%",
                     }}
-                  >
-                    {orderStats && orderStats.delivered > 0 && (
-                      <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-100 border border-gray-300 px-2 py-1 text-[10px] whitespace-nowrap">
-                        Delivered
-                        <br />
-                        {orderStats.delivered}
-                      </div>
-                    )}
-                  </div>
+                  />
+                  <span className="text-[12px] text-gray-600 mt-2">
+                    In Transit
+                  </span>
                 </div>
-                <span className="text-[12px] text-gray-600 mt-2">
-                  Delivered
-                </span>
-              </div>
 
-              {/* In Transit */}
-              <div className="flex flex-col items-center flex-1">
-                <div
-                  className="w-20 bg-blue-500"
-                  style={{
-                    height: orderStats
-                      ? `${Math.min(
-                          (orderStats.in_transit / 2000) * 100,
-                          100
-                        )}%`
-                      : "0%",
-                  }}
-                />
-                <span className="text-[12px] text-gray-600 mt-2">
-                  In Transit
-                </span>
-              </div>
+                {/* Processing */}
+                <div className="flex flex-col items-center flex-1">
+                  <div
+                    className="w-20 bg-yellow-500"
+                    style={{
+                      height: orderStats
+                        ? `${Math.min(
+                            (orderStats.processing / 2000) * 100,
+                            100
+                          )}%`
+                        : "0%",
+                    }}
+                  />
+                  <span className="text-[12px] text-gray-600 mt-2">
+                    Processing
+                  </span>
+                </div>
 
-              {/* Processing */}
-              <div className="flex flex-col items-center flex-1">
-                <div
-                  className="w-20 bg-yellow-500"
-                  style={{
-                    height: orderStats
-                      ? `${Math.min(
-                          (orderStats.processing / 2000) * 100,
-                          100
-                        )}%`
-                      : "0%",
-                  }}
-                />
-                <span className="text-[12px] text-gray-600 mt-2">
-                  Processing
-                </span>
-              </div>
+                {/* Pending */}
+                <div className="flex flex-col items-center flex-1">
+                  <div
+                    className="w-20 bg-gray-400"
+                    style={{
+                      height: orderStats
+                        ? `${Math.min((orderStats.pending / 2000) * 100, 100)}%`
+                        : "0%",
+                    }}
+                  />
+                  <span className="text-[12px] text-gray-600 mt-2">
+                    Pending
+                  </span>
+                </div>
 
-              {/* Pending */}
-              <div className="flex flex-col items-center flex-1">
-                <div
-                  className="w-20 bg-gray-400"
-                  style={{
-                    height: orderStats
-                      ? `${Math.min((orderStats.pending / 2000) * 100, 100)}%`
-                      : "0%",
-                  }}
-                />
-                <span className="text-[12px] text-gray-600 mt-2">Pending</span>
+                {/* Cancelled */}
+                <div className="flex flex-col items-center flex-1">
+                  <div
+                    className="w-20 bg-red-500"
+                    style={{
+                      height: orderStats
+                        ? `${Math.min(
+                            (orderStats.cancelled / 2000) * 100,
+                            100
+                          )}%`
+                        : "0%",
+                    }}
+                  />
+                  <span className="text-[12px] text-gray-600 mt-2">
+                    Cancelled
+                  </span>
+                </div>
               </div>
+            </div>
+          </div>
 
-              {/* Cancelled */}
-              <div className="flex flex-col items-center flex-1">
-                <div
-                  className="w-20 bg-red-500"
-                  style={{
-                    height: orderStats
-                      ? `${Math.min((orderStats.cancelled / 2000) * 100, 100)}%`
-                      : "0%",
-                  }}
-                />
-                <span className="text-[12px] text-gray-600 mt-2">
-                  Cancelled
-                </span>
-              </div>
+          {/* Recent Activity Feed */}
+          <div className="bg-white border border-gray-200 p-6">
+            <h3 className="text-[16px] font-bold text-black mb-4">
+              Recent Activity Feed
+            </h3>
+            <div className="space-y-3">
+              {recentActivities.map((activity, index) => (
+                <div key={index} className="border border-gray-200 p-3">
+                  <p className="text-[12px] text-black mb-1">{activity.text}</p>
+                  <p className="text-[10px] text-gray-500">{activity.time}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Recent Activity Feed */}
-        <div className="bg-white border border-gray-200 p-6">
-          <h3 className="text-[16px] font-bold text-black mb-4">
-            Recent Activity Feed
-          </h3>
-          <div className="space-y-3">
-            {recentActivities.map((activity, index) => (
-              <div key={index} className="border border-gray-200 p-3">
-                <p className="text-[12px] text-black mb-1">{activity.text}</p>
-                <p className="text-[10px] text-gray-500">{activity.time}</p>
-              </div>
-            ))}
+        {/* Pending Supplier KYC Table */}
+        <div className="bg-white border border-gray-200">
+          <div className="p-6 border-b border-gray-200">
+            <h3 className="text-[16px] font-bold text-black">
+              Pending Supplier KYC
+            </h3>
           </div>
-        </div>
-      </div>
-
-      {/* Pending Supplier KYC Table */}
-      <div className="bg-white border border-gray-200">
-        <div className="p-6 border-b border-gray-200">
-          <h3 className="text-[16px] font-bold text-black">
-            Pending Supplier KYC
-          </h3>
-        </div>
-        <table className="w-full">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-[12px] font-bold text-black uppercase">
-                COMPANY
-              </th>
-              <th className="px-6 py-3 text-left text-[12px] font-bold text-black uppercase">
-                SUBMITTED DOC
-              </th>
-              <th className="px-6 py-3 text-left text-[12px] font-bold text-black uppercase">
-                TRUST SCORE
-              </th>
-              <th className="px-6 py-3 text-left text-[12px] font-bold text-black uppercase">
-                ACTIONS
-              </th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-200">
-            {pendingVerifications.length > 0 ? (
-              pendingVerifications.map((item) => (
-                <tr key={item.id}>
-                  <td className="px-6 py-4 text-[14px] text-black">
-                    {item.companyName || "N/A"}
-                  </td>
-                  <td className="px-6 py-4 text-[14px] text-black">
-                    {getSubmittedDocs(item)}
-                  </td>
-                  <td className="px-6 py-4 text-[14px] text-black">
-                    {getTrustScore(item)}
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="flex items-center gap-3">
-                      <a
-                        href={`/admin-panel/verification/${item.id}`}
-                        className="cursor-pointer"
-                      >
-                        <Eye className="w-4 h-4 text-gray-600 hover:text-black" />
-                      </a>
-                      <button className="text-[12px] text-black hover:underline">
-                        Approve
-                      </button>
-                      <button className="text-[12px] text-black hover:underline">
-                        Reject
-                      </button>
-                    </div>
+          <table className="w-full">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-6 py-3 text-left text-[12px] font-bold text-black uppercase">
+                  COMPANY
+                </th>
+                <th className="px-6 py-3 text-left text-[12px] font-bold text-black uppercase">
+                  SUBMITTED DOC
+                </th>
+                <th className="px-6 py-3 text-left text-[12px] font-bold text-black uppercase">
+                  TRUST SCORE
+                </th>
+                <th className="px-6 py-3 text-left text-[12px] font-bold text-black uppercase">
+                  ACTIONS
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-200">
+              {pendingVerifications.length > 0 ? (
+                pendingVerifications.map((item) => (
+                  <tr key={item.id}>
+                    <td className="px-6 py-4 text-[14px] text-black">
+                      {item.companyName || "N/A"}
+                    </td>
+                    <td className="px-6 py-4 text-[14px] text-black">
+                      {getSubmittedDocs(item)}
+                    </td>
+                    <td className="px-6 py-4 text-[14px] text-black">
+                      {getTrustScore(item)}
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
+                        <a
+                          href={`/admin-panel/verification/${item.id}`}
+                          className="cursor-pointer"
+                        >
+                          <Eye className="w-4 h-4 text-gray-600 hover:text-black" />
+                        </a>
+                        <button className="text-[12px] text-black hover:underline">
+                          Approve
+                        </button>
+                        <button className="text-[12px] text-black hover:underline">
+                          Reject
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td
+                    colSpan={4}
+                    className="px-6 py-8 text-center text-gray-500"
+                  >
+                    No pending verifications
                   </td>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={4} className="px-6 py-8 text-center text-gray-500">
-                  No pending verifications
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
     </AdminLayout>
   );

@@ -446,7 +446,7 @@ export default function SupplierDetailPage() {
     }
 
     return (
-      <div>
+      <div className="p-8">
         <h3 className="text-[14px] font-bold text-black mb-4">
           Attached Documents ({documents.length})
         </h3>

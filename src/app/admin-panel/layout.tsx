@@ -1,14 +1,24 @@
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Admin Panel - Zeerostock",
-  description: "Zeerostock Admin Panel - For authorized personnel only",
-};
+import { AdminAuthProvider } from "@/contexts/AdminAuthContext";
+import AdminProtectedRoute from "@/components/admin-panel/AdminProtectedRoute";
+import { usePathname } from "next/navigation";
 
 export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  const pathname = usePathname();
+  const isLoginPage = pathname === "/admin-panel/login";
+
+  return (
+    <AdminAuthProvider>
+      {isLoginPage ? (
+        children
+      ) : (
+        <AdminProtectedRoute>{children}</AdminProtectedRoute>
+      )}
+    </AdminAuthProvider>
+  );
 }

@@ -13,7 +13,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       <AdminSidebar />
       <main className="flex-1 overflow-auto">
         <AdminTopBar />
-        <div className="p-8">{children}</div>
+        <div>{children}</div>
       </main>
     </div>
   );

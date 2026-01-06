@@ -1,6 +1,10 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Footer() {
+  const [email, setEmail] = useState("");
   return (
     <footer className="w-full bg-[#eefbf6]">
       {/* Main Footer Content */}
@@ -105,9 +109,21 @@ export default function Footer() {
                 <input
                   type="email"
                   placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full h-[50px] bg-gray-800 border border-[#8f8f8f] rounded-xl px-4 text-[15px] leading-[22px] text-[#d0d0d0] placeholder:text-dimgray focus:outline-none focus:border-[#2aae7a] placeholder:text-[#696969]"
                 />
-                <button className="w-full h-[50px] bg-[#2aae7a] text-[#0d1e23] text-[18px] leading-[22px] font-medium rounded-xl hover:bg-[#2aae7a]/90 transition-colors">
+                <button
+                  onClick={() => {
+                    if (email) {
+                      alert(
+                        "Thank you for subscribing! We will keep you updated."
+                      );
+                      setEmail("");
+                    }
+                  }}
+                  className="w-full h-[50px] bg-[#2aae7a] text-[#0d1e23] text-[18px] leading-[22px] font-medium rounded-xl hover:bg-[#2aae7a]/90 transition-colors"
+                >
                   Subscribe
                 </button>
               </div>

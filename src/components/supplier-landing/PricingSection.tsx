@@ -1,6 +1,7 @@
 "use client";
 
 import { Check } from "lucide-react";
+import Link from "next/link";
 
 export default function PricingSection() {
   const plans = [
@@ -94,9 +95,18 @@ export default function PricingSection() {
             </ul>
 
             {/* CTA Button */}
-            <button className="w-full py-2 bg-white border-2 border-gray-900 text-gray-900 font-medium hover:bg-gray-50 transition-colors">
+            <Link
+              href={
+                plan.name === "Basic"
+                  ? "/signup"
+                  : plan.name === "Enterprise"
+                  ? "/helpdesk"
+                  : "/become-supplier"
+              }
+              className="w-full py-2 bg-white border-2 border-gray-900 text-gray-900 font-medium hover:bg-gray-50 transition-colors inline-block text-center"
+            >
               {plan.cta}
-            </button>
+            </Link>
           </div>
         ))}
       </div>

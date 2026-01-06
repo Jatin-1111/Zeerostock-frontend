@@ -49,7 +49,10 @@ export default function HeroSection() {
               >
                 Start Selling Today
               </button>
-              <button className="bg-white border border-[#1e3a8a] text-[#1e3a8a] rounded-[9px] px-[20px] py-[12px] text-[17px] font-medium hover:bg-gray-50 transition-colors">
+              <button
+                onClick={() => router.push("/for-supplier")}
+                className="bg-white border border-[#1e3a8a] text-[#1e3a8a] rounded-[9px] px-[20px] py-[12px] text-[17px] font-medium hover:bg-gray-50 transition-colors"
+              >
                 View Success Stories
               </button>
             </div>

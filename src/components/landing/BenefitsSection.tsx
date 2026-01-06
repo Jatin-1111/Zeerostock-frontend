@@ -1,4 +1,5 @@
 import { Check } from "lucide-react";
+import Link from "next/link";
 
 export default function BenefitsSection() {
   const features = [
@@ -51,9 +52,12 @@ export default function BenefitsSection() {
         </div>
 
         {/* CTA Button */}
-        <button className="w-[300px] h-[53px] bg-[#1e3a8a] text-white text-[21px] font-medium rounded-[15px] hover:bg-[#1e3a8a]/90 transition-colors">
+        <Link
+          href="/marketplace"
+          className="w-[300px] h-[53px] bg-[#1e3a8a] text-white text-[21px] font-medium rounded-[15px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center justify-center"
+        >
           Explore Features
-        </button>
+        </Link>
       </div>
     </section>
   );

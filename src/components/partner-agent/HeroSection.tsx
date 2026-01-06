@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function HeroSection() {
   return (
     <section className="bg-white py-16">
@@ -73,15 +75,16 @@ export default function HeroSection() {
                     d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                <span className="text-[14px] text-gray-700">
-                  Trusted brand
-                </span>
+                <span className="text-[14px] text-gray-700">Trusted brand</span>
               </div>
             </div>
 
-            <button className="px-6 py-3 bg-gray-900 text-white text-[15px] font-semibold rounded-lg hover:bg-gray-800 transition-colors">
+            <Link
+              href="/helpdesk"
+              className="px-6 py-3 bg-gray-900 text-white text-[15px] font-semibold rounded-lg hover:bg-gray-800 transition-colors inline-block"
+            >
               Apply Now
-            </button>
+            </Link>
           </div>
 
           {/* Right Image Placeholder */}

@@ -154,7 +154,7 @@ export default function StepTwoBusinessOperations({
               }
               className="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:border-gray-900 text-black placeholder:text-gray-400"
             />
-            <button className="text-sm text-gray-600 mt-1">+ Add</button>
+            {/* <button className="text-sm text-gray-600 mt-1">+ Add</button> */}
           </div>
 
           {/* Business Phone */}
@@ -197,4 +197,3 @@ export default function StepTwoBusinessOperations({
     </div>
   );
 }
-

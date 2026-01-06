@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function HeroSectionV2() {
   return (
     <section className="relative w-full h-[751px] overflow-hidden shadow-[0px_1px_4px_0px_rgba(24,181,34,0.25)]">
@@ -27,12 +29,18 @@ export default function HeroSectionV2() {
 
         {/* CTA Buttons */}
         <div className="flex items-center gap-6 mb-20">
-          <button className="px-[110px] py-[15px] h-[70px] bg-[#022778] text-white text-[22px] font-semibold rounded-xl hover:bg-[#022778]/90 transition-colors">
+          <Link
+            href="/become-supplier"
+            className="px-[110px] py-[15px] h-[70px] bg-[#022778] text-white text-[22px] font-semibold rounded-xl hover:bg-[#022778]/90 transition-colors flex items-center justify-center"
+          >
             Start Selling
-          </button>
-          <button className="px-[110px] py-[15px] h-[70px] bg-white text-[#2aae7a] text-[22px] font-semibold rounded-xl hover:bg-white/90 transition-colors">
+          </Link>
+          <Link
+            href="/signup"
+            className="px-[110px] py-[15px] h-[70px] bg-white text-[#2aae7a] text-[22px] font-semibold rounded-xl hover:bg-white/90 transition-colors flex items-center justify-center"
+          >
             Start Buying
-          </button>
+          </Link>
         </div>
 
         {/* Stats Bar */}

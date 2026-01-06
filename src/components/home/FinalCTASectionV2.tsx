@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function FinalCTASectionV2() {
   return (
     <section className="w-full py-[25px]">
@@ -16,12 +18,18 @@ export default function FinalCTASectionV2() {
 
           {/* CTA Buttons */}
           <div className="flex gap-[67.5px] justify-center mb-[45px]">
-            <button className="bg-[#063576] text-white text-[16.5px] font-semibold rounded-[9px] h-[44.25px] w-[210px] flex items-center justify-center hover:opacity-90 transition-opacity">
+            <Link
+              href="/signup"
+              className="bg-[#063576] text-white text-[16.5px] font-semibold rounded-[9px] h-[44.25px] w-[210px] flex items-center justify-center hover:opacity-90 transition-opacity"
+            >
               Sign Up Free
-            </button>
-            <button className="bg-white text-[#2aae7a] text-[16.5px] font-semibold rounded-[9px] h-[45px] w-[210px] flex items-center justify-center hover:opacity-90 transition-opacity">
+            </Link>
+            <Link
+              href="/helpdesk"
+              className="bg-white text-[#2aae7a] text-[16.5px] font-semibold rounded-[9px] h-[45px] w-[210px] flex items-center justify-center hover:opacity-90 transition-opacity"
+            >
               Talk to Us
-            </button>
+            </Link>
           </div>
 
           {/* Stats */}

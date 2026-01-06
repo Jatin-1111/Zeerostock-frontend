@@ -137,8 +137,8 @@ export default function PostRFQPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white px-15 py-6">
-      <div className="max-w-[885px] mx-auto">
+    <div className="min-h-screen px-15 py-6">
+      <div className="max-w-[1000px] mx-auto">
         <h1 className="text-[27px] font-semibold text-[#0d1b2a] mb-6">
           Post New RFQ
         </h1>

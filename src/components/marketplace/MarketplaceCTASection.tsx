@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function MarketplaceCTASection() {
   return (
     <div className="max-w-[1200px] mx-auto py-12 px-4">
@@ -10,9 +12,12 @@ export default function MarketplaceCTASection() {
           <p className="text-sm text-gray-600 text-center mb-6 max-w-sm">
             List your surplus inventory and reach thousands of buyers worldwide
           </p>
-          <button className="bg-[#2D4A9A] hover:bg-[#3d5aaa] rounded-xl px-12 py-3 border-none cursor-pointer font-semibold text-base text-white transition-colors">
+          <Link
+            href="/become-supplier"
+            className="bg-[#2D4A9A] hover:bg-[#3d5aaa] rounded-xl px-12 py-3 border-none cursor-pointer font-semibold text-base text-white transition-colors inline-block"
+          >
             Start Selling
-          </button>
+          </Link>
         </div>
 
         {/* Can't find what you need */}
@@ -23,9 +28,12 @@ export default function MarketplaceCTASection() {
           <p className="text-sm text-gray-600 text-center mb-6 max-w-sm">
             Post a buying request and let our suppliers find it for you
           </p>
-          <button className="bg-[#2D4A9A] hover:bg-[#3d5aaa] rounded-xl px-12 py-3 border-none cursor-pointer font-semibold text-base text-white transition-colors">
+          <Link
+            href="/buyer/rfq/post"
+            className="bg-[#2D4A9A] hover:bg-[#3d5aaa] rounded-xl px-12 py-3 border-none cursor-pointer font-semibold text-base text-white transition-colors inline-block"
+          >
             Post Request
-          </button>
+          </Link>
         </div>
       </div>
     </div>

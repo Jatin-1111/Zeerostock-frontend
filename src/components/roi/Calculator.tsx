@@ -477,10 +477,16 @@ export default function Calculator({ type }: CalculatorProps) {
                   Ready to get started?
                 </h3>
                 <div className="flex gap-[14px]">
-                  <button className="flex-1 h-[45px] bg-[#2aae7a] rounded-[11px] text-white text-[15px] font-semibold hover:bg-[#259b6c] transition-colors">
+                  <button
+                    onClick={() => (window.location.href = "/marketplace")}
+                    className="flex-1 h-[45px] bg-[#2aae7a] rounded-[11px] text-white text-[15px] font-semibold hover:bg-[#259b6c] transition-colors"
+                  >
                     Browse Inventory
                   </button>
-                  <button className="flex-1 h-[45px] border border-[#1e3a8a] rounded-[8px] text-[#1e3a8a] text-[15px] font-semibold hover:bg-blue-50 transition-colors">
+                  <button
+                    onClick={() => (window.location.href = "/become-supplier")}
+                    className="flex-1 h-[45px] border border-[#1e3a8a] rounded-[8px] text-[#1e3a8a] text-[15px] font-semibold hover:bg-blue-50 transition-colors"
+                  >
                     List Your Inventory
                   </button>
                 </div>

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function CTASection() {
   return (
     <section className="bg-white py-16 border-t border-gray-200">
@@ -33,9 +35,12 @@ export default function CTASection() {
             sustainable income stream where everyone wins. Our platform.
           </p>
 
-          <button className="px-8 py-3 bg-gray-900 text-white text-[15px] font-semibold rounded-lg hover:bg-gray-800 transition-colors">
+          <Link
+            href="/helpdesk"
+            className="px-8 py-3 bg-gray-900 text-white text-[15px] font-semibold rounded-lg hover:bg-gray-800 transition-colors inline-block"
+          >
             Submit Application
-          </button>
+          </Link>
 
           <p className="text-[13px] text-gray-500 mt-6">
             You will receive confirmation of receiving your application by

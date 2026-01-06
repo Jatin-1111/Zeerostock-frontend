@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 export default function TestimonialsSection() {
   const testimonials = [
@@ -231,9 +232,12 @@ export default function TestimonialsSection() {
                       </div>
 
                       {/* CTA Button */}
-                      <button className="w-[300px] h-[53px] bg-[#2aae7a] rounded-[15px] text-[21px] font-bold text-white hover:bg-[#2aae7a]/90 transition-colors">
+                      <Link
+                        href="/for-supplier"
+                        className="w-[300px] h-[53px] bg-[#2aae7a] rounded-[15px] text-[21px] font-bold text-white hover:bg-[#2aae7a]/90 transition-colors flex items-center justify-center"
+                      >
                         Read Case Study
-                      </button>
+                      </Link>
                     </motion.div>
                   )}
                 </AnimatePresence>

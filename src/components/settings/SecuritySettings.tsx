@@ -2,8 +2,11 @@
 
 import { useState } from "react";
 import { ShieldCheck, Info, Lock, Save, ChevronDown } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function SecuritySettings() {
+  const router = useRouter();
   const [security, setSecurityData] = useState({
     twoFactor: true,
     loginAlerts: true,
@@ -17,6 +20,14 @@ export default function SecuritySettings() {
         [key]: !security[key],
       });
     }
+  };
+
+  const handleChangePassword = () => {
+    router.push("/admin-panel/change-password");
+  };
+
+  const handleSaveChanges = () => {
+    toast.success("Security settings have been updated successfully");
   };
 
   // Helper component for Toggle Switch
@@ -140,7 +151,10 @@ export default function SecuritySettings() {
             <h3 className="text-[15px] font-medium text-[#0d1b2a] mb-[26.25px] leading-normal">
               Password
             </h3>
-            <button className="flex items-center justify-center gap-[7.5px] bg-[#2aae7a] text-white border-none rounded-[9px] py-[11.25px] px-[60px] cursor-pointer text-[15px] font-semibold hover:bg-[#239668] transition-colors">
+            <button
+              onClick={handleChangePassword}
+              className="flex items-center justify-center gap-[7.5px] bg-[#2aae7a] text-white border-none rounded-[9px] py-[11.25px] px-[60px] cursor-pointer text-[15px] font-semibold hover:bg-[#239668] transition-colors"
+            >
               <Lock className="w-[20.25px] h-[20.25px]" />
               Change Password
             </button>
@@ -159,7 +173,10 @@ export default function SecuritySettings() {
 
       {/* Save Changes Button */}
       <div className="flex justify-end">
-        <button className="flex items-center justify-center gap-[7.5px] bg-[#1e3a8a] text-white border-none rounded-[9px] py-[11.25px] px-[82.5px] cursor-pointer text-[15px] font-semibold hover:opacity-90 transition-opacity">
+        <button
+          onClick={handleSaveChanges}
+          className="flex items-center justify-center gap-[7.5px] bg-[#1e3a8a] text-white border-none rounded-[9px] py-[11.25px] px-[82.5px] cursor-pointer text-[15px] font-semibold hover:opacity-90 transition-opacity"
+        >
           <Save className="w-[21px] h-[21px]" />
           Save Changes
         </button>

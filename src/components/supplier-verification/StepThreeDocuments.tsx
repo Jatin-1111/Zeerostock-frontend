@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { Circle, CheckCircle, Upload, X, Loader2 } from "lucide-react";
+import Link from "next/link";
 import { VerificationFormData } from "@/types/verification";
 import { supplierVerificationService } from "@/services/supplierVerification.service";
 
@@ -315,12 +316,18 @@ export default function StepThreeDocuments({
           <p className="text-xs text-gray-600 mb-4">
             Our team is here to assist you with the verification process.
           </p>
-          <button className="w-full bg-black text-white py-2 text-sm mb-2 hover:bg-gray-800">
+          <Link
+            href="/helpdesk"
+            className="w-full bg-black text-white py-2 text-sm mb-2 hover:bg-gray-800 inline-block text-center"
+          >
             Contact Support
-          </button>
-          <button className="w-full text-sm text-gray-600 underline hover:text-gray-900">
+          </Link>
+          <Link
+            href="/help-support"
+            className="w-full text-sm text-gray-600 underline hover:text-gray-900 inline-block text-center"
+          >
             View Guidelines
-          </button>
+          </Link>
         </div>
       </div>
     </div>

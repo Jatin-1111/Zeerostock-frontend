@@ -250,10 +250,12 @@ export function VerificationBenefitsSidebar() {
             Contact Support
           </button>
         </Link>
-        <button className="w-full bg-white border border-[#9c9c9c] text-[#9c9c9c] font-semibold text-[12px] py-[13px] rounded-[8px] flex items-center justify-center gap-[8px]">
-          <FileText className="w-4 h-4" />
-          View Guidelines
-        </button>
+        <Link href="/help-support">
+          <button className="w-full bg-white border border-[#9c9c9c] text-[#9c9c9c] font-semibold text-[12px] py-[13px] rounded-[8px] flex items-center justify-center gap-[8px]">
+            <FileText className="w-4 h-4" />
+            View Guidelines
+          </button>
+        </Link>
       </div>
     </div>
   );

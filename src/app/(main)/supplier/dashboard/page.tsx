@@ -139,7 +139,7 @@ export default function SupplierDashboard() {
 
   return (
     <div className="min-h-screen bg-[#EEFBF6]">
-      <div className="max-w-[1300px] mx-auto py-12">
+      <div className="max-w-300 mx-auto py-12 px-5">
         <div className="flex justify-between">
           {/* Welcome Header */}
           <div className="mb-[18px]">

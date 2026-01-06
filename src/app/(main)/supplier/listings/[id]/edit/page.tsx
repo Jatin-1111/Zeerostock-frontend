@@ -2,12 +2,30 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter, useParams } from "next/navigation";
-import { Upload, ChevronDown, X, Eye } from "lucide-react";
+import { X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { supplierService } from "@/services/supplier.service";
 import { marketplaceService } from "@/services/marketplace.service";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
+import {
+  FormSection,
+  FormInput,
+  CustomDropdown,
+  CertificationCheckbox,
+  ImageUpload,
+  UnitInput,
+} from "@/components/supplier/listings";
+import {
+  LISTING_TYPE_OPTIONS,
+  CONDITION_OPTIONS,
+  UNIT_OPTIONS,
+  MATERIAL_TYPE_OPTIONS,
+  MANUFACTURING_PROCESS_OPTIONS,
+  LENGTH_UNIT_OPTIONS,
+  WEIGHT_UNIT_OPTIONS,
+  CERTIFICATION_OPTIONS,
+} from "@/components/supplier/listings/constants";
 
 interface FormData {
   title: string;
@@ -22,11 +40,23 @@ interface FormData {
   quantity: string;
   unit: string;
   city: string;
-  state: string;
   listingType: string;
   expiresAt: string;
   availableQuantity: string;
   minOrderQuantity: string;
+  // Technical Specification
+  materialType: string;
+  materialGrade: string;
+  diameterRange: string;
+  wallThicknessRange: string;
+  lengthMin: string;
+  lengthUnit: string;
+  weightPerUnit: string;
+  weightUnit: string;
+  manufacturingProcess: string;
+  // Compliance & Certification
+  certifications: string[];
+  otherCertification: string;
 }
 
 interface Category {
@@ -49,7 +79,8 @@ export default function EditListing() {
   >([]);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [imageUploadError, setImageUploadError] = useState("");
   const [validationErrors, setValidationErrors] = useState<
     Record<string, string>
   >({});
@@ -66,11 +97,23 @@ export default function EditListing() {
     quantity: "1",
     unit: "pieces",
     city: "",
-    state: "",
     listingType: "fixed",
     expiresAt: "",
     availableQuantity: "",
     minOrderQuantity: "1",
+    // Technical Specification
+    materialType: "",
+    materialGrade: "",
+    diameterRange: "",
+    wallThicknessRange: "",
+    lengthMin: "",
+    lengthUnit: "meters",
+    weightPerUnit: "",
+    weightUnit: "Kg",
+    manufacturingProcess: "",
+    // Compliance & Certification
+    certifications: [],
+    otherCertification: "",
   });
 
   useEffect(() => {
@@ -119,11 +162,27 @@ export default function EditListing() {
           quantity: listing.quantity?.toString() || "1",
           unit: listing.unit || "pieces",
           city: listing.city || "",
-          state: listing.state || "",
           listingType: listing.listing_type || "fixed",
           expiresAt: expiresAtFormatted,
           availableQuantity: listing.available_quantity?.toString() || "",
           minOrderQuantity: listing.min_order_quantity?.toString() || "1",
+          // Technical Specification
+          materialType: listing.material_type || "",
+          materialGrade: listing.material_grade || "",
+          diameterRange: listing.diameter_range || "",
+          wallThicknessRange: listing.wall_thickness_range || "",
+          lengthMin: listing.length_min || "",
+          lengthUnit: listing.length_unit || "meters",
+          weightPerUnit: listing.weight_per_unit || "",
+          weightUnit: listing.weight_unit || "Kg",
+          manufacturingProcess: listing.manufacturing_process || "",
+          // Compliance & Certification
+          certifications: listing.certifications
+            ? typeof listing.certifications === "string"
+              ? JSON.parse(listing.certifications)
+              : listing.certifications
+            : [],
+          otherCertification: listing.other_certification || "",
         });
 
         // Set uploaded images
@@ -246,6 +305,23 @@ export default function EditListing() {
     setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
   };
 
+  const handleCertificationToggle = (certValue: string) => {
+    setFormData((prev) => {
+      const currentCerts = prev.certifications || [];
+      if (currentCerts.includes(certValue)) {
+        return {
+          ...prev,
+          certifications: currentCerts.filter((cert) => cert !== certValue),
+        };
+      } else {
+        return {
+          ...prev,
+          certifications: [...currentCerts, certValue],
+        };
+      }
+    });
+  };
+
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -282,15 +358,16 @@ export default function EditListing() {
     });
 
     if (invalidFiles.length > 0) {
-      toast.error(
-        `The following file(s) exceed the 10MB size limit:\n${invalidFiles.join(
-          ", "
-        )}`
-      );
+      const errorMsg = `The following file(s) exceed the 10MB size limit:\n${invalidFiles.join(
+        ", "
+      )}`;
+      setImageUploadError(errorMsg);
+      toast.error(errorMsg);
       return;
     }
 
     setUploadingImages(true);
+    setImageUploadError("");
 
     try {
       const formDataToSend = new FormData();
@@ -365,33 +442,21 @@ export default function EditListing() {
       }
     } catch (error) {
       console.error("Error uploading images:", error);
-      toast.error(
-        `Upload failed: ${
-          error instanceof Error ? error.message : "Unknown error"
-        }`
-      );
+      const errorMessage =
+        error instanceof Error ? error.message : "Unknown error";
+      setImageUploadError(`Upload failed: ${errorMessage}`);
+      toast.error(`Upload failed: ${errorMessage}`);
     } finally {
       setUploadingImages(false);
     }
   };
 
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files && files.length > 0) {
-      uploadToS3(files);
-    }
+  const handleImageUpload = (files: FileList) => {
+    uploadToS3(files);
   };
 
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    const files = e.dataTransfer.files;
-    if (files && files.length > 0) {
-      uploadToS3(files);
-    }
-  };
-
-  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
+  const handleImagePreview = (url: string) => {
+    setPreviewImage(url);
   };
 
   const handleRemoveImage = async (indexToRemove: number) => {
@@ -535,13 +600,25 @@ export default function EditListing() {
         quantity: parseInt(formData.quantity) || 1,
         unit: formData.unit,
         city: formData.city,
-        state: "",
         listingType: formData.listingType as
           | "auction"
           | "fixed"
           | "negotiable"
           | undefined,
         expiresAt: expiresAt || undefined,
+        // Technical Specification fields
+        materialType: formData.materialType || undefined,
+        materialGrade: formData.materialGrade || undefined,
+        diameterRange: formData.diameterRange || undefined,
+        wallThicknessRange: formData.wallThicknessRange || undefined,
+        lengthMin: formData.lengthMin || undefined,
+        lengthUnit: formData.lengthUnit || undefined,
+        weightPerUnit: formData.weightPerUnit || undefined,
+        weightUnit: formData.weightUnit || undefined,
+        manufacturingProcess: formData.manufacturingProcess || undefined,
+        // Compliance & Certification fields
+        certifications: formData.certifications || [],
+        otherCertification: formData.otherCertification || undefined,
       };
 
       const response = await supplierService.updateListing(
@@ -641,576 +718,310 @@ export default function EditListing() {
         )}
       </AnimatePresence>
 
-      <div className="mx-auto max-w-[1440px] px-20 py-8">
-        <h1 className="mb-5 text-[27px] font-semibold text-[#0d1b2a]">
+      <div className="mx-auto max-w-[1080px] px-[60px] py-[22px]">
+        <h1 className="mb-[11px] text-[20px] font-semibold leading-[40px] text-[#0d1b2a]">
           Edit Product Listing
         </h1>
 
-        <form
-          onSubmit={handleSubmit}
-          className="relative min-h-[791px] w-full rounded-[15px] bg-white p-[23px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)]"
-        >
-          {/* Product Title */}
-          <div className="absolute left-[23px] top-[22px]">
-            <label className="text-[17px] font-medium text-[#0d1b2a]">
-              Product Title<span className="text-red-600">*</span>
-              <span className="ml-2 text-xs text-[#6b7280]">
-                (Min: 10 chars)
-              </span>
-            </label>
-          </div>
-          <div className="absolute left-[23px] top-[52px] w-[calc(50%-33px)]">
-            <input
-              type="text"
-              name="title"
-              value={formData.title}
-              onChange={handleInputChange}
-              placeholder="eg., Industrial Electronic Components"
-              required
-              minLength={10}
-              maxLength={500}
-              className={`h-[42px] w-full rounded-[8px] border ${
-                validationErrors.title ? "border-red-500" : "border-[#bebebe]"
-              } px-3 py-2 text-sm text-black placeholder:text-[#9c9c9c] focus:border-[#0d1b2a] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a]`}
-            />
-            {validationErrors.title && (
-              <p className="mt-1 text-xs text-red-600">
-                {validationErrors.title}
-              </p>
-            )}
-          </div>
+        <form onSubmit={handleSubmit} className="space-y-[30px]">
+          {/* Basic Information Section */}
+          <FormSection title="Basic Information">
+            <div className="space-y-[20px]">
+              {/* Row 1: Product Title & Listing Type */}
+              <div className="grid grid-cols-2 gap-[11px]">
+                <FormInput
+                  label="Product Title"
+                  name="title"
+                  value={formData.title}
+                  onChange={handleInputChange}
+                  placeholder="eg., Industrial Electronic Components"
+                  required={true}
+                  error={validationErrors.title}
+                />
 
-          {/* Listing Type */}
-          <div className="absolute left-[calc(50%+10px)] top-[22px]">
-            <label className="text-[17px] font-medium text-[#0d1b2a]">
-              Listing Type<span className="text-red-600">*</span>
-            </label>
-          </div>
-          <div className="absolute left-[calc(50%+10px)] top-[52px] w-[calc(50%-33px)]">
-            <div className="relative custom-dropdown">
-              <button
-                type="button"
-                onClick={() => toggleDropdown("listingType")}
-                className="h-[42px] w-full appearance-none rounded-[8px] border border-[#bebebe] px-3 py-2 text-left text-sm transition-all duration-300 hover:border-[#2aae7a] hover:shadow-md focus:border-[#0d1b2a] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a] focus:scale-[1.01] flex items-center justify-between"
-              >
-                <span
-                  className={
-                    formData.listingType ? "text-black" : "text-[#9c9c9c]"
+                <CustomDropdown
+                  label="Listing Type"
+                  name="listingType"
+                  value={formData.listingType}
+                  options={LISTING_TYPE_OPTIONS}
+                  onSelect={handleDropdownSelect}
+                  placeholder="Select Type"
+                  required={true}
+                  isOpen={openDropdown === "listingType"}
+                  onToggle={() => toggleDropdown("listingType")}
+                />
+              </div>
+
+              {/* Row 2: Category & Condition */}
+              <div className="grid grid-cols-2 gap-[11px]">
+                <CustomDropdown
+                  label="Category"
+                  name="categoryId"
+                  value={formData.categoryId}
+                  options={categories.map((cat) => ({
+                    value: cat.id,
+                    label: cat.name,
+                  }))}
+                  onSelect={handleDropdownSelect}
+                  placeholder={
+                    categoriesLoading ? "Loading..." : "Select category"
                   }
-                >
-                  {formData.listingType === "fixed" && "Fixed Price"}
-                  {formData.listingType === "negotiable" && "Negotiable"}
-                  {formData.listingType === "auction" && "Auction"}
-                  {!formData.listingType && "Select Type"}
-                </span>
-                <motion.div
-                  animate={{ rotate: openDropdown === "listingType" ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <ChevronDown className="h-5 w-5 text-[#9c9c9c] transition-colors duration-300" />
-                </motion.div>
-              </button>
-              <AnimatePresence>
-                {openDropdown === "listingType" && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="absolute z-50 w-full overflow-hidden rounded-[8px] border border-[#bebebe] bg-white shadow-lg mt-1"
-                  >
-                    <div className="max-h-[200px] overflow-y-auto">
-                      {[
-                        { value: "fixed", label: "Fixed Price" },
-                        { value: "negotiable", label: "Negotiable" },
-                        { value: "auction", label: "Auction" },
-                      ].map((option) => (
-                        <button
-                          key={option.value}
-                          type="button"
-                          onClick={() =>
-                            handleDropdownSelect("listingType", option.value)
-                          }
-                          className="w-full px-3 py-2 text-left text-sm hover:bg-[#f0fdf4] transition-colors duration-200 text-black"
-                        >
-                          {option.label}
-                        </button>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          </div>
-
-          {/* Category */}
-          <div className="absolute left-[23px] top-[124px]">
-            <label className="text-[17px] font-medium text-[#0d1b2a]">
-              Category<span className="text-red-600">*</span>
-            </label>
-            {validationErrors.categoryId && (
-              <p className="mt-1 text-xs text-red-600">
-                {validationErrors.categoryId}
-              </p>
-            )}
-          </div>
-          <div className="absolute left-[23px] top-[154px] w-[calc(50%-33px)]">
-            <div className="relative custom-dropdown">
-              <button
-                type="button"
-                onClick={() => !categoriesLoading && toggleDropdown("category")}
-                disabled={categoriesLoading}
-                className={`h-[42px] w-full appearance-none rounded-[8px] border ${
-                  validationErrors.categoryId
-                    ? "border-red-500"
-                    : "border-[#bebebe]"
-                } px-3 py-2 text-left text-sm transition-all duration-300 hover:border-[#2aae7a] hover:shadow-md focus:border-[#0d1b2a] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a] focus:scale-[1.01] disabled:bg-gray-100 disabled:hover:border-[#bebebe] disabled:hover:shadow-none flex items-center justify-between`}
-              >
-                <span
-                  className={
-                    formData.categoryId ? "text-black" : "text-[#9c9c9c]"
+                  required={true}
+                  error={validationErrors.categoryId}
+                  isOpen={openDropdown === "category"}
+                  onToggle={() =>
+                    !categoriesLoading && toggleDropdown("category")
                   }
-                >
-                  {categoriesLoading
-                    ? "Loading..."
-                    : formData.categoryId
-                    ? categories.find((c) => c.id === formData.categoryId)?.name
-                    : "Select category"}
-                </span>
-                <motion.div
-                  animate={{ rotate: openDropdown === "category" ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <ChevronDown className="h-5 w-5 text-[#9c9c9c] transition-colors duration-300" />
-                </motion.div>
-              </button>
-              <AnimatePresence>
-                {openDropdown === "category" && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="absolute z-50 w-full overflow-hidden rounded-[8px] border border-[#bebebe] bg-white shadow-lg mt-1"
-                  >
-                    <div className="max-h-[200px] overflow-y-auto">
-                      {categories.map((cat) => (
-                        <button
-                          key={cat.id}
-                          type="button"
-                          onClick={() =>
-                            handleDropdownSelect("categoryId", cat.id)
-                          }
-                          className="w-full px-3 py-2 text-left text-sm hover:bg-[#f0fdf4] transition-colors duration-200 text-black"
-                        >
-                          {cat.name}
-                        </button>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          </div>
+                  disabled={categoriesLoading}
+                />
 
-          {/* Condition */}
-          <div className="absolute left-[calc(50%+10px)] top-[124px]">
-            <label className="text-[17px] font-medium text-[#0d1b2a]">
-              Condition<span className="text-red-600">*</span>
-            </label>
-          </div>
-          <div className="absolute left-[calc(50%+10px)] top-[154px] w-[calc(50%-33px)]">
-            <div className="relative custom-dropdown">
-              <button
-                type="button"
-                onClick={() => toggleDropdown("condition")}
-                className="h-[42px] w-full appearance-none rounded-[8px] border border-[#bebebe] px-3 py-2 text-left text-sm transition-all duration-300 hover:border-[#2aae7a] hover:shadow-md focus:border-[#0d1b2a] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a] focus:scale-[1.01] flex items-center justify-between"
-              >
-                <span
-                  className={
-                    formData.condition ? "text-black" : "text-[#9c9c9c]"
-                  }
-                >
-                  {formData.condition === "new" && "New"}
-                  {formData.condition === "like-new" && "Like New"}
-                  {formData.condition === "good" && "Good"}
-                  {formData.condition === "fair" && "Fair"}
-                  {formData.condition === "refurbished" && "Refurbished"}
-                  {!formData.condition && "Select condition"}
-                </span>
-                <motion.div
-                  animate={{ rotate: openDropdown === "condition" ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <ChevronDown className="h-5 w-5 text-[#9c9c9c] transition-colors duration-300" />
-                </motion.div>
-              </button>
-              <AnimatePresence>
-                {openDropdown === "condition" && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="absolute z-50 w-full overflow-hidden rounded-[8px] border border-[#bebebe] bg-white shadow-lg mt-1"
-                  >
-                    <div className="max-h-[200px] overflow-y-auto">
-                      {[
-                        { value: "new", label: "New" },
-                        { value: "like-new", label: "Like New" },
-                        { value: "good", label: "Good" },
-                        { value: "fair", label: "Fair" },
-                        { value: "refurbished", label: "Refurbished" },
-                      ].map((option) => (
-                        <button
-                          key={option.value}
-                          type="button"
-                          onClick={() =>
-                            handleDropdownSelect("condition", option.value)
-                          }
-                          className="w-full px-3 py-2 text-left text-sm hover:bg-[#f0fdf4] transition-colors duration-200 text-black"
-                        >
-                          {option.label}
-                        </button>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          </div>
+                <CustomDropdown
+                  label="Condition"
+                  name="condition"
+                  value={formData.condition}
+                  options={CONDITION_OPTIONS}
+                  onSelect={handleDropdownSelect}
+                  placeholder="Select Condition"
+                  required={true}
+                  isOpen={openDropdown === "condition"}
+                  onToggle={() => toggleDropdown("condition")}
+                />
+              </div>
 
-          {/* Location */}
-          <div className="absolute left-[23px] top-[226px]">
-            <label className="text-[17px] font-medium text-[#0d1b2a]">
-              Location<span className="text-red-600">*</span>
-            </label>
-          </div>
-          <div className="absolute left-[23px] top-[256px] w-[calc(33.33%-30px)]">
-            <div className="relative">
-              <input
-                type="text"
-                name="city"
-                value={formData.city}
+              {/* Row 3: Quantity, Unit, Price */}
+              <div className="grid grid-cols-3 gap-[11px]">
+                <FormInput
+                  label="Quantity"
+                  name="quantity"
+                  value={formData.quantity}
+                  onChange={handleInputChange}
+                  placeholder="Enter quantity"
+                  type="number"
+                  required={true}
+                  error={validationErrors.quantity}
+                />
+
+                <CustomDropdown
+                  label="Unit"
+                  name="unit"
+                  value={formData.unit}
+                  options={UNIT_OPTIONS}
+                  onSelect={handleDropdownSelect}
+                  placeholder="Select Unit"
+                  required={true}
+                  isOpen={openDropdown === "unit"}
+                  onToggle={() => toggleDropdown("unit")}
+                />
+
+                <FormInput
+                  label="Price"
+                  name="priceAfter"
+                  value={formData.priceAfter}
+                  onChange={handleInputChange}
+                  placeholder="₹ 0.00"
+                  type="number"
+                  required={true}
+                  error={validationErrors.priceAfter}
+                />
+              </div>
+
+              {/* Row 4: Location & Listing Duration */}
+              <div className="grid grid-cols-2 gap-[11px]">
+                <FormInput
+                  label="Location"
+                  name="city"
+                  value={formData.city}
+                  onChange={handleInputChange}
+                  placeholder="eg., Mumbai"
+                  required={true}
+                  error={validationErrors.city}
+                />
+
+                <FormInput
+                  label="Listing Duration"
+                  name="expiresAt"
+                  value={formData.expiresAt}
+                  onChange={handleInputChange}
+                  placeholder="Select duration"
+                  type="date"
+                />
+              </div>
+
+              {/* Row 5: Product Description */}
+              <FormInput
+                label="Product Description"
+                name="description"
+                value={formData.description}
                 onChange={handleInputChange}
-                placeholder="Select Location"
-                required
-                className={`h-[42px] w-full rounded-[8px] border ${
-                  validationErrors.city ? "border-red-500" : "border-[#bebebe]"
-                } px-3 py-2 text-sm text-black placeholder:text-[#9c9c9c] focus:border-[#0d1b2a] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a]`}
+                placeholder="Describe your specific requirements, quality standards, certifications needed etc."
+                required={true}
+                error={validationErrors.description}
+                multiline={true}
+                rows={4}
               />
             </div>
-            {validationErrors.city && (
-              <p className="mt-1 text-xs text-red-600">
-                {validationErrors.city}
-              </p>
-            )}
-          </div>
+          </FormSection>
 
-          {/* Quantity */}
-          <div className="absolute left-[calc(33.33%+3px)] top-[226px]">
-            <label className="text-[17px] font-medium text-[#0d1b2a]">
-              Quantity<span className="text-red-600">*</span>
-            </label>
-          </div>
-          <div className="absolute left-[calc(33.33%+3px)] top-[256px] w-[calc(33.33%-20px)]">
-            <input
-              type="number"
-              name="quantity"
-              value={formData.quantity}
-              onChange={handleInputChange}
-              placeholder="eg., 20,000 - 50,000"
-              required
-              min="1"
-              className={`h-[42px] w-full rounded-[8px] border ${
-                validationErrors.quantity
-                  ? "border-red-500"
-                  : "border-[#bebebe]"
-              } px-3 py-2 text-sm text-black placeholder:text-[#9c9c9c] focus:border-[#0d1b2a] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a]`}
-            />
-            {validationErrors.quantity && (
-              <p className="mt-1 text-xs text-red-600">
-                {validationErrors.quantity}
-              </p>
-            )}
-          </div>
+          {/* Technical Specification Section */}
+          <FormSection title="Technical Specification">
+            <div className="space-y-[20px]">
+              {/* Row 1: Material Type & Material Grade/Standard */}
+              <div className="grid grid-cols-2 gap-[11px]">
+                <CustomDropdown
+                  label="Material Type"
+                  name="materialType"
+                  value={formData.materialType}
+                  options={MATERIAL_TYPE_OPTIONS}
+                  onSelect={handleDropdownSelect}
+                  placeholder="Select material"
+                  required={true}
+                  isOpen={openDropdown === "materialType"}
+                  onToggle={() => toggleDropdown("materialType")}
+                />
 
-          {/* Units */}
-          <div className="absolute left-[calc(66.66%-7px)] top-[226px]">
-            <label className="text-[17px] font-medium text-[#0d1b2a]">
-              Units<span className="text-red-600">*</span>
-            </label>
-          </div>
-          <div className="absolute left-[calc(66.66%-7px)] top-[256px] w-[calc(33.33%-16px)]">
-            <div className="relative custom-dropdown">
-              <button
-                type="button"
-                onClick={() => toggleDropdown("unit")}
-                className="h-[42px] w-full appearance-none rounded-[8px] border border-[#bebebe] px-3 py-2 text-left text-sm transition-all duration-300 hover:border-[#2aae7a] hover:shadow-md focus:border-[#0d1b2a] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a] focus:scale-[1.01] flex items-center justify-between"
-              >
-                <span
-                  className={formData.unit ? "text-black" : "text-[#9c9c9c]"}
-                >
-                  {formData.unit === "pieces" && "Pieces"}
-                  {formData.unit === "kg" && "Kilograms"}
-                  {formData.unit === "tons" && "Tons"}
-                  {formData.unit === "liters" && "Liters"}
-                  {formData.unit === "meters" && "Meters"}
-                  {formData.unit === "units" && "Units"}
-                  {formData.unit === "boxes" && "Boxes"}
-                  {formData.unit === "pallets" && "Pallets"}
-                  {!formData.unit && "Select Units"}
-                </span>
-                <motion.div
-                  animate={{ rotate: openDropdown === "unit" ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <ChevronDown className="h-5 w-5 text-[#9c9c9c] transition-colors duration-300" />
-                </motion.div>
-              </button>
-              <AnimatePresence>
-                {openDropdown === "unit" && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="absolute z-50 w-full overflow-hidden rounded-[8px] border border-[#bebebe] bg-white shadow-lg mt-1"
-                  >
-                    <div className="max-h-[200px] overflow-y-auto">
-                      {[
-                        { value: "pieces", label: "Pieces" },
-                        { value: "kg", label: "Kilograms" },
-                        { value: "tons", label: "Tons" },
-                        { value: "liters", label: "Liters" },
-                        { value: "meters", label: "Meters" },
-                        { value: "units", label: "Units" },
-                        { value: "boxes", label: "Boxes" },
-                        { value: "pallets", label: "Pallets" },
-                      ].map((option) => (
-                        <button
-                          key={option.value}
-                          type="button"
-                          onClick={() =>
-                            handleDropdownSelect("unit", option.value)
-                          }
-                          className="w-full px-3 py-2 text-left text-sm hover:bg-[#f0fdf4] transition-colors duration-200 text-black"
-                        >
-                          {option.label}
-                        </button>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                <FormInput
+                  label="Material Grade / Standard"
+                  name="materialGrade"
+                  value={formData.materialGrade}
+                  onChange={handleInputChange}
+                  placeholder="eg., SS304 A36,ASTM A06"
+                />
+              </div>
+
+              {/* Row 2: Diameter Range & Wall Thickness */}
+              <div className="grid grid-cols-2 gap-[11px]">
+                <FormInput
+                  label="Diameter Range (Min-Max) (in mm)"
+                  name="diameterRange"
+                  value={formData.diameterRange}
+                  onChange={handleInputChange}
+                  placeholder="eg., 200-400"
+                />
+
+                <FormInput
+                  label="Wall Thickness (Min-Max) (in mm)"
+                  name="wallThicknessRange"
+                  value={formData.wallThicknessRange}
+                  onChange={handleInputChange}
+                  placeholder="eg., 5-10"
+                />
+              </div>
+
+              {/* Row 3: Length/Size Range, Weight per unit, Manufacturing Process */}
+              <div className="grid grid-cols-3 gap-[11px]">
+                <UnitInput
+                  label="Length / Size Range"
+                  name="lengthMin"
+                  value={formData.lengthMin}
+                  onChange={handleInputChange}
+                  placeholder="Value"
+                  unitName="lengthUnit"
+                  unitValue={formData.lengthUnit || "mm"}
+                  unitOptions={LENGTH_UNIT_OPTIONS}
+                  onUnitSelect={handleDropdownSelect}
+                  required={true}
+                  isOpen={openDropdown === "lengthUnit"}
+                  onToggle={() => toggleDropdown("lengthUnit")}
+                  unitWidth="90px"
+                />
+
+                <UnitInput
+                  label="Weight per unit"
+                  name="weightPerUnit"
+                  value={formData.weightPerUnit}
+                  onChange={handleInputChange}
+                  placeholder="Value"
+                  unitName="weightUnit"
+                  unitValue={formData.weightUnit || "Kg"}
+                  unitOptions={WEIGHT_UNIT_OPTIONS}
+                  onUnitSelect={handleDropdownSelect}
+                  required={true}
+                  isOpen={openDropdown === "weightUnit"}
+                  onToggle={() => toggleDropdown("weightUnit")}
+                  unitWidth="70px"
+                />
+
+                <CustomDropdown
+                  label="Manufacturing Process"
+                  name="manufacturingProcess"
+                  value={formData.manufacturingProcess}
+                  options={MANUFACTURING_PROCESS_OPTIONS}
+                  onSelect={handleDropdownSelect}
+                  placeholder="Select Process"
+                  isOpen={openDropdown === "manufacturingProcess"}
+                  onToggle={() => toggleDropdown("manufacturingProcess")}
+                />
+              </div>
             </div>
-          </div>
+          </FormSection>
 
-          {/* Price */}
-          <div className="absolute left-[23px] top-[328px]">
-            <label className="text-[17px] font-medium text-[#0d1b2a]">
-              Price<span className="text-red-600">*</span>
-            </label>
-          </div>
-          <div className="absolute left-[23px] top-[358px] w-[calc(50%-33px)]">
-            <input
-              type="number"
-              name="priceAfter"
-              value={formData.priceAfter}
-              onChange={handleInputChange}
-              placeholder="e.g., $20000-$50000"
-              required
-              step="0.01"
-              className={`h-[42px] w-full rounded-[8px] border ${
-                validationErrors.priceAfter
-                  ? "border-red-500"
-                  : "border-[#bebebe]"
-              } px-3 py-2 text-sm text-black placeholder:text-[#9c9c9c] focus:border-[#0d1b2a] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a]`}
-            />
-            {validationErrors.priceAfter && (
-              <p className="mt-1 text-xs text-red-600">
-                {validationErrors.priceAfter}
-              </p>
-            )}
-          </div>
-
-          {/* Product Images */}
-          <div className="absolute left-[calc(50%+10px)] top-[328px]">
-            <label className="text-[17px] font-medium text-[#0d1b2a]">
-              Product images<span className="text-red-600">*</span>
-              <span className="ml-2 text-xs text-[#6b7280]">
-                (Min: 1, Max: 10 images, 10MB each)
-              </span>
-            </label>
-            {validationErrors.imageUrl && (
-              <p className="mt-1 text-xs text-red-600">
-                {validationErrors.imageUrl}
-              </p>
-            )}
-          </div>
-          <div className="absolute left-[calc(50%+10px)] top-[360px] h-[314px] w-[calc(50%-33px)]">
-            <div
-              onClick={() => fileInputRef.current?.click()}
-              onDrop={handleDrop}
-              onDragOver={handleDragOver}
-              className="relative flex h-full w-full cursor-pointer flex-col items-center justify-center rounded-[15px] border-2 border-dashed border-[#9c9c9c] transition-all duration-300 hover:border-[#2aae7a] hover:bg-[#f0fdf4] hover:shadow-md"
-            >
-              <Upload className="mb-9 h-[38px] w-[38px] text-[#9c9c9c] transition-all duration-300 hover:scale-110 hover:text-[#2aae7a]" />
-              <p className="mb-3 text-[13px] font-medium text-[#2aae7a] transition-all duration-200">
-                Drop & drag images here or click to select
-              </p>
-              <p className="mb-3 text-[11px] text-[#9c9c9c]">
-                Max 10 images, 10MB per image
-              </p>
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  fileInputRef.current?.click();
-                }}
-                disabled={uploadingImages}
-                className="rounded-[11px] bg-[#f2f2f2] px-4 py-2 text-base font-medium text-[#9c9c9c] transition-all duration-300 hover:scale-105 hover:bg-gray-300 hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {uploadingImages ? (
-                  <span className="flex items-center gap-2">
-                    <svg
-                      className="h-4 w-4 animate-spin"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                      ></circle>
-                      <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                      ></path>
-                    </svg>
-                    Uploading...
-                  </span>
-                ) : (
-                  "Choose Files"
-                )}
-              </button>
-              <input
-                ref={fileInputRef}
-                type="file"
-                multiple
-                accept="image/*"
-                onChange={handleFileSelect}
-                className="hidden"
-              />
-
-              {uploadedImages.length > 0 && (
-                <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2">
-                  {uploadedImages.map((image, index) => (
-                    <div
-                      key={index}
-                      className="group relative h-24 w-24 overflow-hidden rounded-lg border-2 border-[#2aae7a] cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-lg hover:border-[#1e8a5a] animate-in fade-in zoom-in-95"
-                      style={{
-                        animationDelay: `${index * 50}ms`,
-                        animationDuration: "300ms",
-                      }}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setPreviewImage(image.url);
-                      }}
-                    >
-                      <img
-                        src={image.url}
-                        alt={`Upload ${index + 1}`}
-                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+          {/* Compliance & Certification Section */}
+          <FormSection title="Compliance & Certification">
+            <div className="space-y-[20px]">
+              <div>
+                <label className="mb-[9px] block text-[12px] font-medium text-[#0d1b2a]">
+                  Available Certification
+                </label>
+                <div className="space-y-[12px]">
+                  {/* Row 1 */}
+                  <div className="grid grid-cols-4 gap-[20px]">
+                    {CERTIFICATION_OPTIONS.slice(0, 4).map((cert) => (
+                      <CertificationCheckbox
+                        key={cert}
+                        label={cert}
+                        value={cert}
+                        checked={formData.certifications.includes(cert)}
+                        onChange={handleCertificationToggle}
                       />
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-all duration-300 group-hover:bg-black/50">
-                        <Eye className="h-6 w-6 text-white opacity-0 scale-50 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100" />
-                      </div>
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleRemoveImage(index);
-                        }}
-                        className="absolute right-0 top-0 z-10 flex h-6 w-6 items-center justify-center rounded-bl-md bg-red-500 text-white transition-all duration-200 hover:h-7 hover:w-7 hover:bg-red-600 hover:shadow-md"
-                        title="Remove image"
-                      >
-                        <X className="h-3 w-3" />
-                      </button>
-                      {index === 0 && (
-                        <div className="absolute bottom-0 left-0 right-0 bg-[#2aae7a] bg-opacity-90 px-1 py-0.5 text-center text-[10px] font-medium text-white animate-in slide-in-from-bottom duration-300">
-                          Main
-                        </div>
-                      )}
+                    ))}
+                  </div>
+
+                  {/* Row 2 */}
+                  <div className="grid grid-cols-4 gap-[20px]">
+                    {CERTIFICATION_OPTIONS.slice(4).map((cert) => (
+                      <CertificationCheckbox
+                        key={cert}
+                        label={cert}
+                        value={cert}
+                        checked={formData.certifications.includes(cert)}
+                        onChange={handleCertificationToggle}
+                      />
+                    ))}
+
+                    <div className="col-span-2">
+                      <FormInput
+                        label=""
+                        name="otherCertification"
+                        value={formData.otherCertification}
+                        onChange={handleInputChange}
+                        placeholder="Other (Please Specify)"
+                      />
                     </div>
-                  ))}
+                  </div>
                 </div>
-              )}
+              </div>
             </div>
-          </div>
+          </FormSection>
 
-          {/* Product Description */}
-          <div className="absolute left-[23px] top-[430px]">
-            <label className="text-[17px] font-medium text-[#0d1b2a]">
-              Product description<span className="text-red-600">*</span>
-              <span className="ml-2 text-xs text-[#6b7280]">
-                (Min: 50 chars)
-              </span>
-            </label>
-          </div>
-          <div className="absolute left-[23px] top-[460px] w-[calc(50%-33px)]">
-            <textarea
-              name="description"
-              value={formData.description}
-              onChange={handleInputChange}
-              rows={6}
-              placeholder="Describe your specific requirements, quality standards, certifications needed etc."
-              required
-              minLength={50}
-              className={`h-[113px] w-full resize-none rounded-[8px] border ${
-                validationErrors.description
-                  ? "border-red-500"
-                  : "border-[#bebebe]"
-              } px-3 py-2 text-sm text-black placeholder:text-[#9c9c9c] focus:border-[#0d1b2a] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a]`}
+          {/* Product Images Section */}
+          <FormSection title="Product Images">
+            <ImageUpload
+              uploadedImages={uploadedImages}
+              uploading={uploadingImages}
+              error={imageUploadError}
+              onUpload={handleImageUpload}
+              onRemove={handleRemoveImage}
+              onPreview={handleImagePreview}
+              fileInputRef={fileInputRef}
             />
-            {validationErrors.description && (
-              <p className="mt-1 text-xs text-red-600">
-                {validationErrors.description}
-              </p>
-            )}
-          </div>
-
-          {/* Listing Duration */}
-          <div className="absolute left-[23px] top-[602px]">
-            <label className="text-[17px] font-medium text-[#0d1b2a]">
-              Listing Duration<span className="text-red-600">*</span>
-            </label>
-          </div>
-          <div className="absolute left-[23px] top-[632px] w-[calc(50%-33px)]">
-            <div className="relative">
-              <input
-                type="date"
-                name="expiresAt"
-                value={formData.expiresAt}
-                onChange={handleInputChange}
-                placeholder="Select duration"
-                className="h-[42px] w-full rounded-[8px] border border-[#bebebe] px-3 py-2 text-sm text-black placeholder:text-[#9c9c9c] focus:border-[#0d1b2a] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a]"
-              />
-              <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#9c9c9c]" />
-            </div>
-          </div>
+          </FormSection>
 
           {/* Submit Button */}
-          <div className="absolute left-[23px] top-[724px] w-[191px]">
+          <div className="flex justify-start">
             <button
               type="submit"
               disabled={loading || uploadingImages}
-              className="flex h-[45px] w-full items-center justify-center gap-2 rounded-[11px] bg-[#1e3a8a] px-4 py-3 text-base font-semibold text-white transition-colors hover:bg-[#1e40af] disabled:cursor-not-allowed disabled:opacity-50"
+              className="h-[45px] w-[191px] rounded-[8px] bg-[#1e3a8a] text-[12px] font-semibold text-white hover:bg-[#1e40af] disabled:cursor-not-allowed disabled:opacity-50"
             >
               {loading ? "Updating..." : "Update Product"}
             </button>

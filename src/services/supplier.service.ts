@@ -33,6 +33,19 @@ export interface SupplierListing {
   gallery_images?: string | string[];
   available_quantity?: number;
   min_order_quantity?: number;
+  // Technical Specification fields
+  material_type?: string;
+  material_grade?: string;
+  diameter_range?: string;
+  wall_thickness_range?: string;
+  length_min?: string;
+  length_unit?: string;
+  weight_per_unit?: string;
+  weight_unit?: string;
+  manufacturing_process?: string;
+  // Compliance & Certification fields
+  certifications?: string | string[];
+  other_certification?: string;
 }
 
 export interface SupplierDashboardStats {
@@ -125,6 +138,19 @@ export interface CreateListingData {
   expiresAt?: string;
   availableQuantity?: number;
   minOrderQuantity?: number;
+  // Technical Specification fields
+  materialType?: string;
+  materialGrade?: string;
+  diameterRange?: string;
+  wallThicknessRange?: string;
+  lengthMin?: string;
+  lengthUnit?: string;
+  weightPerUnit?: string;
+  weightUnit?: string;
+  manufacturingProcess?: string;
+  // Compliance & Certification fields
+  certifications?: string[];
+  otherCertification?: string;
 }
 
 export interface UpdateListingData extends Partial<CreateListingData> {

@@ -490,38 +490,35 @@ export default function NewListing() {
         toast.success("Your listing has been created successfully");
         router.push("/supplier/listings");
       } else {
-        // Handle validation errors from backend
-        if (response.errors && Array.isArray(response.errors)) {
-          const backendErrors: Record<string, string> = {};
-          response.errors.forEach((err: { field: string; message: string }) => {
-            backendErrors[err.field] = err.message;
-          });
-          setValidationErrors(backendErrors);
-          toast.error(response.message || "Validation failed");
-        } else {
-          toast.error(response.message || "Failed to create listing");
-        }
+        toast.error(response.message || "Failed to create listing");
       }
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error creating listing:", error);
-      // Check if error response has validation errors
-      if (error?.response?.data?.errors) {
+      const err = error as {
+        response?: {
+          data?: {
+            errors?: Array<{ field: string; message: string }>;
+            message?: string;
+          };
+        };
+        message?: string;
+      };
+
+      if (err?.response?.data?.errors) {
         const backendErrors: Record<string, string> = {};
-        error.response.data.errors.forEach(
-          (err: { field: string; message: string }) => {
-            backendErrors[err.field] = err.message;
-          }
-        );
+        err.response.data.errors.forEach((validationError) => {
+          backendErrors[validationError.field] = validationError.message;
+        });
         setValidationErrors(backendErrors);
         toast.error(
-          error.response.data.message ||
+          err.response.data.message ||
             "Validation failed. Please check your inputs."
         );
-      } else if (error?.response?.data?.message) {
-        toast.error(error.response.data.message);
+      } else if (err?.response?.data?.message) {
+        toast.error(err.response.data.message);
       } else {
         toast.error(
-          error.message || "Failed to create listing. Please try again."
+          err?.message || "Failed to create listing. Please try again."
         );
       }
     } finally {

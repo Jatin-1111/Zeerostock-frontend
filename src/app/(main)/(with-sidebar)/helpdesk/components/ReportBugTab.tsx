@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Bug, CheckCircle, Send } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { Bug, CheckCircle, Send, ChevronDown } from "lucide-react";
 import { authService } from "@/services/auth.service";
 
 interface BugFormData {
@@ -33,6 +33,11 @@ export default function ReportBugTab() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [severityOpen, setSeverityOpen] = useState(false);
+  const [categoryOpen, setCategoryOpen] = useState(false);
+
+  const severityRef = useRef<HTMLDivElement>(null);
+  const categoryRef = useRef<HTMLDivElement>(null);
 
   const [bugForm, setBugForm] = useState<BugFormData>({
     title: "",
@@ -41,6 +46,27 @@ export default function ReportBugTab() {
     description: "",
     steps_to_reproduce: "",
   });
+
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        severityRef.current &&
+        !severityRef.current.contains(event.target as Node)
+      ) {
+        setSeverityOpen(false);
+      }
+      if (
+        categoryRef.current &&
+        !categoryRef.current.contains(event.target as Node)
+      ) {
+        setCategoryOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleBugSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -146,48 +172,101 @@ export default function ReportBugTab() {
             </div>
 
             {/* Severity */}
-            <div>
+            <div ref={severityRef} className="relative">
               <label className="block text-[17px] font-medium text-[#0d1b2a] mb-2 ">
                 Severity
               </label>
-              <select
-                value={bugForm.severity}
-                onChange={(e) =>
-                  setBugForm({ ...bugForm, severity: e.target.value })
-                }
-                required
-                className="w-full px-4 py-3 border border-[#bebebe] rounded-[10px] text-base text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] "
+              <button
+                type="button"
+                onClick={() => setSeverityOpen(!severityOpen)}
+                className="w-full px-4 py-3 border border-[#bebebe] rounded-[10px] text-base text-left focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] bg-white flex items-center justify-between"
               >
-                <option value="">Select severity</option>
-                {severityLevels.map((level) => (
-                  <option key={level.value} value={level.value}>
-                    {level.label}
-                  </option>
-                ))}
-              </select>
+                <span
+                  className={
+                    bugForm.severity ? "text-[#0d1b2a]" : "text-[#9c9c9c]"
+                  }
+                >
+                  {bugForm.severity
+                    ? severityLevels.find((l) => l.value === bugForm.severity)
+                        ?.label
+                    : "Select severity"}
+                </span>
+                <ChevronDown
+                  className={`w-5 h-5 text-[#9c9c9c] transition-transform duration-300 ${
+                    severityOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+              <div
+                className={`absolute z-10 w-full mt-1 bg-white border border-[#bebebe] rounded-[10px] shadow-lg overflow-hidden transition-all duration-300 ${
+                  severityOpen
+                    ? "max-h-[300px] opacity-100"
+                    : "max-h-0 opacity-0"
+                }`}
+              >
+                <div className="py-1">
+                  {severityLevels.map((level) => (
+                    <button
+                      key={level.value}
+                      type="button"
+                      onClick={() => {
+                        setBugForm({ ...bugForm, severity: level.value });
+                        setSeverityOpen(false);
+                      }}
+                      className="w-full px-4 py-2.5 text-left text-base text-[#0d1b2a] hover:bg-[#eeffef] transition-colors"
+                    >
+                      {level.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Category */}
-          <div className="mb-4">
+          <div ref={categoryRef} className="mb-4 relative">
             <label className="block text-[17px] font-medium text-[#0d1b2a] mb-2 ">
               Category
             </label>
-            <select
-              value={bugForm.category}
-              onChange={(e) =>
-                setBugForm({ ...bugForm, category: e.target.value })
-              }
-              required
-              className="w-full px-4 py-3 border border-[#bebebe] rounded-[10px] text-base text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] "
+            <button
+              type="button"
+              onClick={() => setCategoryOpen(!categoryOpen)}
+              className="w-full px-4 py-3 border border-[#bebebe] rounded-[10px] text-base text-left focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] bg-white flex items-center justify-between"
             >
-              <option value="">Select Category</option>
-              {categories.map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat}
-                </option>
-              ))}
-            </select>
+              <span
+                className={
+                  bugForm.category ? "text-[#0d1b2a]" : "text-[#9c9c9c]"
+                }
+              >
+                {bugForm.category || "Select Category"}
+              </span>
+              <ChevronDown
+                className={`w-5 h-5 text-[#9c9c9c] transition-transform duration-300 ${
+                  categoryOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+            <div
+              className={`absolute z-10 w-full mt-1 bg-white border border-[#bebebe] rounded-[10px] shadow-lg overflow-hidden transition-all duration-300 ${
+                categoryOpen ? "max-h-[300px] opacity-100" : "max-h-0 opacity-0"
+              }`}
+            >
+              <div className="py-1 max-h-[250px] overflow-y-auto">
+                {categories.map((cat) => (
+                  <button
+                    key={cat}
+                    type="button"
+                    onClick={() => {
+                      setBugForm({ ...bugForm, category: cat });
+                      setCategoryOpen(false);
+                    }}
+                    className="w-full px-4 py-2.5 text-left text-base text-[#0d1b2a] hover:bg-[#eeffef] transition-colors"
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Detailed Requirements */}

@@ -46,7 +46,7 @@ export default function Sidebar({
       {/* Mobile menu button */}
       <button
         onClick={handleToggle}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-white border border-gray-300 rounded"
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 border border-white rounded-lg"
       >
         <svg
           className="w-6 h-6"

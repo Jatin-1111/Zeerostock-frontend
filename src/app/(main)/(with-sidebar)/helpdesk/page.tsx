@@ -62,7 +62,7 @@ export default function HelpDesk() {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
       {/* Header */}
       <div className="px-15 py-6">
         <div className="flex flex-col gap-3">

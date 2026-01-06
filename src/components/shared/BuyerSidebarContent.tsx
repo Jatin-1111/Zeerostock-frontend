@@ -285,7 +285,7 @@ export default function BuyerSidebarContent() {
           </span>
         </Link>
         <Link
-          href="/helpdesk"
+          href="/helpdesk?tab=feedback"
           className="flex items-center gap-[11px] absolute left-[23px] top-[62px] hover:opacity-80"
         >
           <div className="w-[18px] h-[18px] shrink-0">

@@ -453,7 +453,7 @@ export default function Sidebar({
               </span>
             </Link>
             <Link
-              href="#"
+              href="/helpdesk?tab=feedback"
               className="flex items-center gap-[11px] absolute left-[23px] top-[62px] hover:opacity-80"
             >
               <div className="w-[18px] h-[18px] flex-shrink-0">

@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { MessageCircle, Phone, Mail, Video } from "lucide-react";
 import FAQTab from "./components/FAQTab";
 import GuidesTab from "./components/GuidesTab";
@@ -8,7 +9,15 @@ import ReportBugTab from "./components/ReportBugTab";
 import FeedbackTab from "./components/FeedbackTab";
 
 export default function HelpDesk() {
+  const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState("faq");
+
+  useEffect(() => {
+    const tab = searchParams.get("tab");
+    if (tab && ["faq", "guides", "report", "feedback"].includes(tab)) {
+      setActiveTab(tab);
+    }
+  }, [searchParams]);
 
   const tabs = [
     { id: "faq", label: "FAQ" },

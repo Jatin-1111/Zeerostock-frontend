@@ -390,7 +390,7 @@ export default function SupplierSidebar() {
               </span>
             </Link>
             <Link
-              href="/feedback"
+              href="/helpdesk?tab=feedback"
               className="flex items-center gap-[11px] absolute left-[23px] top-[62px] hover:opacity-80"
             >
               <div className="w-[18px] h-[18px] shrink-0">

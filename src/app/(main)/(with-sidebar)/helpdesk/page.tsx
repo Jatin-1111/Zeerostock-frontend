@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { MessageCircle, Phone, Mail, Video } from "lucide-react";
 import FAQTab from "./components/FAQTab";
@@ -8,7 +8,7 @@ import GuidesTab from "./components/GuidesTab";
 import ReportBugTab from "./components/ReportBugTab";
 import FeedbackTab from "./components/FeedbackTab";
 
-export default function HelpDesk() {
+function HelpDeskContent() {
   const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState("faq");
 
@@ -146,5 +146,13 @@ export default function HelpDesk() {
         {activeTab === "feedback" && <FeedbackTab />}
       </div>
     </div>
+  );
+}
+
+export default function HelpDesk() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-white" />}>
+      <HelpDeskContent />
+    </Suspense>
   );
 }

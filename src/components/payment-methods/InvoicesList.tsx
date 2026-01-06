@@ -134,9 +134,7 @@ export default function InvoicesList({
       <div className="w-full bg-white rounded-[15px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] overflow-hidden">
         <div className="p-12 text-center">
           <div className="w-16 h-16 border-4 border-gray-300 border-t-gray-900 rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600 text-[15px]">
-            Loading invoices...
-          </p>
+          <p className="text-gray-600 text-[15px]">Loading invoices...</p>
         </div>
       </div>
     );
@@ -168,9 +166,7 @@ export default function InvoicesList({
           <h3 className="text-[19.5px] font-semibold text-[#0D1B2A] mb-2">
             No Invoices Yet
           </h3>
-          <p className="text-gray-600 text-[15px]">
-            Invoices will appear here
-          </p>
+          <p className="text-gray-600 text-[15px]">Invoices will appear here</p>
         </div>
       </div>
     );
@@ -198,9 +194,7 @@ export default function InvoicesList({
             <div className="w-[25px] h-[25px]">
               <DownloadIconSVG />
             </div>
-            <span className="text-[20px] font-semibold">
-              Download All
-            </span>
+            <span className="text-[20px] font-semibold">Download All</span>
           </button>
         </div>
 

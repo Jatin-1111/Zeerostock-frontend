@@ -89,7 +89,7 @@ export default function TestimonialsSection() {
       scale: 1,
       opacity: 1,
       // When moving to center, always animate smoothly
-      transition: { duration: 0.5, type: "spring" },
+      transition: { duration: 0.5, type: "spring" as const },
     },
     left: {
       x: "-410px",
@@ -101,7 +101,7 @@ export default function TestimonialsSection() {
       opacity: 1,
       // If we clicked NEXT (direction 1), a card moves Center -> Left (Smooth).
       // If we clicked PREV (direction -1), a card moves Right -> Left (Wrap around! Needs to be instant or fast).
-      transition: { duration: 0.5, type: "spring" },
+      transition: { duration: 0.5, type: "spring" as const },
     },
     right: {
       x: "410px",
@@ -113,7 +113,7 @@ export default function TestimonialsSection() {
       opacity: 1,
       // If we clicked NEXT (direction 1), a card moves Left -> Right (Wrap around! Needs to be instant).
       // If we clicked PREV (direction -1), a card moves Center -> Right (Smooth).
-      transition: { duration: 0.5, type: "spring" },
+      transition: { duration: 0.5, type: "spring" as const },
     },
   };
 
@@ -139,8 +139,8 @@ export default function TestimonialsSection() {
             const isCenter = position === "center";
 
             // Calculate specific transitions for the wrap-around cases
-            let transitionSettings = {
-              type: "spring",
+            let transitionSettings: any = {
+              type: "spring" as const,
               stiffness: 300,
               damping: 30,
             };
@@ -148,11 +148,11 @@ export default function TestimonialsSection() {
             // FIX: If we are moving from Left to Right (wrapping behind during Next), make it instant
             // We deduce this: If the card IS 'right' and we clicked 'next' (direction 1), it came from 'left'.
             if (position === "right" && direction === 1) {
-              transitionSettings = { duration: 0 } as any;
+              transitionSettings = { duration: 0 };
             }
             // FIX: If we are moving from Right to Left (wrapping behind during Prev), make it instant
             if (position === "left" && direction === -1) {
-              transitionSettings = { duration: 0 } as any;
+              transitionSettings = { duration: 0 };
             }
 
             return (

@@ -6,7 +6,7 @@ import { Heart } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import { buyerService } from "@/services/buyer.service";
 import { useAuth } from "@/contexts/AuthContext";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 interface ProductInfoProps {
   product: {
@@ -79,7 +79,7 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
 
         if (response.success) {
           setIsWatchlisted(false);
-          toast.success("Removed from wishlist");
+          toast.success("Item removed from your wishlist");
         } else {
           toast.error(response.message || "Failed to remove from wishlist");
         }
@@ -91,7 +91,7 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
 
         if (response.success) {
           setIsWatchlisted(true);
-          toast.success("Added to wishlist");
+          toast.success("Item added to your wishlist");
         } else {
           toast.error(response.message || "Failed to add to wishlist");
         }

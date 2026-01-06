@@ -20,7 +20,7 @@ import {
   Mail,
   ChevronRight,
 } from "lucide-react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -254,7 +254,7 @@ export default function TrackOrderDetailPage() {
       a.click();
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
-      toast.success("Invoice downloaded successfully");
+      toast.success("Invoice has been downloaded successfully");
     } catch (err) {
       console.error("Error downloading invoice:", err);
       toast.error("Failed to download invoice");
@@ -709,7 +709,7 @@ export default function TrackOrderDetailPage() {
             <button
               onClick={() => {
                 navigator.clipboard.writeText(window.location.href);
-                toast.success("Tracking link copied to clipboard!");
+                toast.success("Tracking link copied to clipboard");
               }}
               className="w-full py-2 px-3 border border-[#9c9c9c] rounded-[11px] bg-transparent flex items-center gap-2 cursor-pointer mb-2 hover:bg-gray-50"
             >

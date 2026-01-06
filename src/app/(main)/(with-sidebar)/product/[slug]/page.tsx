@@ -30,7 +30,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
     return (
       <div className="bg-[#eefbf6] min-h-screen">
-        <div className="max-w-[1440px] mx-auto px-[60px] py-6">
+        <div className="max-w-[1400px] mx-auto px-[60px] py-6">
           {/* Breadcrumb */}
           <div className="flex items-center gap-1.5 text-[10.5px] font-medium mb-4.5">
             <span className="text-[#bebebe]">Marketplace</span>

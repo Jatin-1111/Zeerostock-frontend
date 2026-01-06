@@ -12,8 +12,9 @@ import {
 } from "lucide-react";
 import { supplierService, SupplierListing } from "@/services/supplier.service";
 import { useAuth } from "@/contexts/AuthContext";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import Link from "next/link";
+import { getTimeRemaining } from "@/utils/time.utils";
 
 export default function SupplierListings() {
   const { user } = useAuth();
@@ -49,11 +50,11 @@ export default function SupplierListings() {
         setListings(response.data.listings);
         setTotalPages(response.data.pagination.totalPages);
       } else {
-        toast.error(response.message || "Failed to fetch listings");
+        toast.error(response.message || "Unable to fetch your listings");
       }
     } catch (error) {
       console.error("Error fetching listings:", error);
-      toast.error("Failed to load listings");
+      toast.error("Unable to load your listings at this time");
     } finally {
       setLoading(false);
     }
@@ -151,12 +152,15 @@ export default function SupplierListings() {
               {listings.map((listing) => (
                 <div
                   key={listing.id}
-                  className="bg-white rounded-[20px] overflow-hidden relative"
-                  style={{ boxShadow: "0px 0px 6px 0px rgba(0, 0, 0, 0.25)" }}
+                  className="bg-white rounded-[20px] overflow-hidden relative flex flex-col"
+                  style={{
+                    boxShadow: "0px 0px 6px 0px rgba(0, 0, 0, 0.25)",
+                    height: "550px",
+                  }}
                 >
                   {/* Status Badge */}
                   <div
-                    className="absolute top-[30px] left-[309px] px-[12px] py-[3px] rounded-[80px] z-10"
+                    className="absolute top-[15px] right-[15px] px-[12px] py-[3px] rounded-[80px] z-10"
                     style={{
                       backgroundColor:
                         listing.status === "active"
@@ -168,11 +172,8 @@ export default function SupplierListings() {
                           : "#fee2e2",
                     }}
                   >
-                    <p
-                      className="text-[15px] font-medium leading-normal"
-                    >
-                      {listing.status.charAt(0).toUpperCase() +
-                        listing.status.slice(1)}
+                    <p className="text-[15px] font-medium leading-normal capitalize">
+                      {listing.status}
                     </p>
                   </div>
 
@@ -195,23 +196,28 @@ export default function SupplierListings() {
                   </div>
 
                   {/* Product Details */}
-                  <div className="px-[20px] pb-[20px]">
-                    {/* Title */}
-                    <h3 className="text-[20px] font-medium text-[#0d1b2a] mb-2 line-clamp-2">
-                      {listing.title}
-                    </h3>
+                  <div
+                    className="px-[20px] pb-[20px] flex flex-col"
+                    style={{ height: "calc(600px - 228px)" }}
+                  >
+                    {/* Title - Fixed height */}
+                    <div className="h-[56px] mb-2">
+                      <h3 className="text-[20px] font-medium text-[#0d1b2a] line-clamp-2">
+                        {listing.title}
+                      </h3>
+                    </div>
 
                     {/* Subtitle */}
-                    <p className="text-[14px] font-medium text-[#9c9c9c] mb-4">
+                    <p className="text-[14px] font-medium text-[#9c9c9c] mb-4 h-[20px]">
                       {listing.city || "Location not specified"}
                     </p>
 
                     {/* Pricing */}
-                    <div className="mb-4 flex items-center gap-3">
-                      <span className="text-[26px] font-bold text-[#1e3a8a]">
+                    <div className="mb-4 flex items-center gap-3 h-[36px]">
+                      <span className="text-[26px] font-bold text-[#1e3a8a] leading-none">
                         {formatCurrency(listing.price_after)}
                       </span>
-                      {listing.price_before && (
+                      {listing.price_before && listing.price_before > 0 && (
                         <div className="relative">
                           <span className="text-[18px] font-bold text-[#9c9c9c]">
                             {formatCurrency(listing.price_before)}
@@ -225,28 +231,25 @@ export default function SupplierListings() {
                     </div>
 
                     {/* Availability Info */}
-                    <div className="flex items-center gap-2 mb-4">
-                      <p className="text-[14px] font-medium text-[#9c9c9c]">
-                        Price alerts <span>₹</span>
-                        {(
-                          parseFloat(listing.price_after.toString()) *
-                          parseFloat(listing.quantity.toString())
-                        ).toLocaleString("en-IN")}
+                    <div className="flex items-center gap-2 mb-4 h-[20px]">
+                      <p className="text-[14px] font-medium text-[#9c9c9c] truncate">
+                        Total value:{" "}
+                        {formatCurrency(listing.price_after * listing.quantity)}
                       </p>
                       <span className="text-[14px] font-medium text-[#9c9c9c]">
                         |
                       </span>
-                      <p className="text-[14px] font-medium text-[#9c9c9c]">
+                      <p className="text-[14px] font-medium text-[#9c9c9c] truncate">
                         {listing.quantity} {listing.unit} available
                       </p>
                     </div>
 
                     {/* Stats Row */}
-                    <div className="flex items-center gap-4 pb-4 border-b border-[#e5e5e5] mb-4">
+                    <div className="flex items-center gap-4 pb-4 border-b border-[#e5e5e5] mb-4 h-[50px]">
                       <div className="flex items-center gap-2">
                         <Eye className="w-[22px] h-[22px] text-[#9c9c9c]" />
                         <span className="text-[12px] font-medium text-[#9c9c9c]">
-                          {listing.views_count}
+                          {listing.views_count || 0}
                         </span>
                       </div>
                       <div className="flex items-center gap-2">
@@ -254,25 +257,25 @@ export default function SupplierListings() {
                         <span className="text-[12px] font-medium text-[#9c9c9c]">
                           {listing.rating
                             ? Number(listing.rating).toFixed(1)
-                            : "0"}
+                            : "0.0"}
                         </span>
                       </div>
                       <div className="flex items-center gap-2">
                         <MessageCircle className="w-[22px] h-[22px] text-[#9c9c9c]" />
                         <span className="text-[12px] font-medium text-[#9c9c9c]">
-                          {listing.inquiries_count}
+                          {listing.inquiries_count || 0}
                         </span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Clock className="w-[22px] h-[22px] text-[#9c9c9c]" />
                         <span className="text-[12px] font-medium text-[#9c9c9c]">
-                          3d 20h
+                          {getTimeRemaining(listing.expires_at)}
                         </span>
                       </div>
                     </div>
 
-                    {/* Action Buttons */}
-                    <div className="flex gap-2">
+                    {/* Action Buttons - Pushed to bottom with mt-auto */}
+                    <div className="flex gap-2 h-[50px]">
                       <Link
                         href={`/supplier/listings/${listing.id}/edit`}
                         className="flex-1 h-[50px] flex items-center justify-center gap-2 px-5 py-4 border border-[#9c9c9c] rounded-[15px] hover:bg-gray-50 transition-colors"

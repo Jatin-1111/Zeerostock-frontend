@@ -16,7 +16,7 @@ import {
   SupplierDashboardStats,
 } from "@/services/supplier.service";
 import { useAuth } from "@/contexts/AuthContext";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 // Force this page to be dynamically rendered
 export const dynamic = "force-dynamic";

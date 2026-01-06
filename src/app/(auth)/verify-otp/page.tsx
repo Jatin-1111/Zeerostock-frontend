@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 function VerifyOTPContent() {
   const router = useRouter();
@@ -107,7 +107,7 @@ function VerifyOTPContent() {
       });
 
       if (success) {
-        toast.success("Email verified successfully!");
+        toast.success("Your email has been verified successfully");
 
         // Clear pending verification
         localStorage.removeItem("pendingVerification");
@@ -151,7 +151,7 @@ function VerifyOTPContent() {
       const data = await response.json();
 
       if (data.success) {
-        toast.success("New OTP sent to your email!");
+        toast.success("A new verification code has been sent to your email");
         setTimer(600); // Reset timer
         setOtp(["", "", "", "", "", ""]);
         inputRefs.current[0]?.focus();

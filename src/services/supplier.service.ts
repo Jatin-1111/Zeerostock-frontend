@@ -29,6 +29,10 @@ export interface SupplierListing {
   category_slug: string;
   rating: number;
   review_count: number;
+  category_id?: number;
+  gallery_images?: string | string[];
+  available_quantity?: number;
+  min_order_quantity?: number;
 }
 
 export interface SupplierDashboardStats {

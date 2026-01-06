@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { Upload, ChevronDown, X, Eye } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { supplierService } from "@/services/supplier.service";
@@ -34,10 +34,13 @@ interface Category {
   name: string;
 }
 
-export default function NewListing() {
+export default function EditListing() {
   const router = useRouter();
+  const params = useParams();
+  const listingId = params?.id as string;
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
+  const [loadingData, setLoadingData] = useState(true);
   const [categoriesLoading, setCategoriesLoading] = useState(true);
   const [categories, setCategories] = useState<Category[]>([]);
   const [uploadingImages, setUploadingImages] = useState(false);
@@ -78,8 +81,84 @@ export default function NewListing() {
       return;
     }
     fetchCategories();
+    if (listingId) {
+      fetchListingData();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, router]);
+  }, [user, router, listingId]);
+
+  const fetchListingData = async () => {
+    try {
+      setLoadingData(true);
+      const response = await supplierService.getListingById(listingId);
+
+      if (response.success && response.data) {
+        const listing = response.data;
+
+        // Parse expires_at to date input format (YYYY-MM-DD)
+        let expiresAtFormatted = "";
+        if (listing.expires_at) {
+          const date = new Date(listing.expires_at);
+          expiresAtFormatted = date.toISOString().split("T")[0];
+        }
+
+        setFormData({
+          title: listing.title || "",
+          description: listing.description || "",
+          categoryId: listing.category_id?.toString() || "",
+          priceBefore: listing.price_before?.toString() || "",
+          priceAfter: listing.price_after?.toString() || "",
+          discountPercent: listing.discount_percent?.toString() || "",
+          imageUrl: listing.image_url || "",
+          galleryImages: listing.gallery_images
+            ? typeof listing.gallery_images === "string"
+              ? JSON.parse(listing.gallery_images)
+              : listing.gallery_images
+            : [],
+          condition: listing.condition || "good",
+          quantity: listing.quantity?.toString() || "1",
+          unit: listing.unit || "pieces",
+          city: listing.city || "",
+          state: listing.state || "",
+          listingType: listing.listing_type || "fixed",
+          expiresAt: expiresAtFormatted,
+          availableQuantity: listing.available_quantity?.toString() || "",
+          minOrderQuantity: listing.min_order_quantity?.toString() || "1",
+        });
+
+        // Set uploaded images
+        const images: Array<{ url: string; fileKey: string }> = [];
+        if (listing.image_url) {
+          images.push({
+            url: listing.image_url,
+            fileKey: listing.image_url.split("/").pop() || "",
+          });
+        }
+        if (listing.gallery_images) {
+          const gallery =
+            typeof listing.gallery_images === "string"
+              ? JSON.parse(listing.gallery_images)
+              : listing.gallery_images;
+          gallery.forEach((url: string) => {
+            images.push({
+              url,
+              fileKey: url.split("/").pop() || "",
+            });
+          });
+        }
+        setUploadedImages(images);
+      } else {
+        toast.error("Unable to load listing details");
+        router.push("/supplier/listings");
+      }
+    } catch (error) {
+      console.error("Error fetching listing:", error);
+      toast.error("Failed to load listing. Please try again.");
+      router.push("/supplier/listings");
+    } finally {
+      setLoadingData(false);
+    }
+  };
 
   const fetchCategories = async () => {
     try {
@@ -90,13 +169,11 @@ export default function NewListing() {
         setCategories(response.data.categories);
       } else {
         console.warn("No categories data received:", response);
-        // Use fallback categories
         setCategories(getFallbackCategories());
       }
     } catch (error) {
       console.error("Error fetching categories:", error);
       toast.error("Failed to load categories. Using default categories.");
-      // Use fallback categories
       setCategories(getFallbackCategories());
     } finally {
       setCategoriesLoading(false);
@@ -183,7 +260,6 @@ export default function NewListing() {
   }, []);
 
   const uploadToS3 = async (files: FileList) => {
-    // Check if adding these files would exceed the limit
     const currentImageCount = uploadedImages.length;
     const newImageCount = files.length;
     const totalImages = currentImageCount + newImageCount;
@@ -195,8 +271,7 @@ export default function NewListing() {
       return;
     }
 
-    // Validate file sizes (max 10MB per file)
-    const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB in bytes
+    const MAX_FILE_SIZE = 10 * 1024 * 1024;
     const invalidFiles: string[] = [];
 
     Array.from(files).forEach((file) => {
@@ -220,12 +295,10 @@ export default function NewListing() {
     try {
       const formDataToSend = new FormData();
 
-      // Append all files to FormData
       Array.from(files).forEach((file) => {
         formDataToSend.append("images", file);
       });
 
-      // Get auth token (same token key as api-client.ts)
       const TOKEN_KEY =
         process.env.NEXT_PUBLIC_JWT_TOKEN_KEY || "zeerostock_access_token";
       const token = localStorage.getItem(TOKEN_KEY);
@@ -233,7 +306,6 @@ export default function NewListing() {
         throw new Error("Authentication required. Please login again.");
       }
 
-      // Upload to backend S3 endpoint
       const response = await fetch(
         `${
           process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000/api"
@@ -249,7 +321,6 @@ export default function NewListing() {
 
       if (!response.ok) {
         const errorData = await response.json();
-        // Handle file size error specifically
         if (errorData.message && errorData.message.includes("File too large")) {
           throw new Error("One or more files exceed the 10MB size limit");
         }
@@ -259,7 +330,6 @@ export default function NewListing() {
       const data = await response.json();
 
       if (data.success && data.data.images) {
-        // Store both URL and fileKey for each image
         interface S3Image {
           url: string;
           fileKey: string;
@@ -271,7 +341,6 @@ export default function NewListing() {
 
         setUploadedImages((prev) => [...prev, ...images]);
 
-        // Set first image as main image if not set
         if (!formData.imageUrl && images.length > 0) {
           setFormData((prev) => ({
             ...prev,
@@ -329,13 +398,11 @@ export default function NewListing() {
     const imageToRemove = uploadedImages[indexToRemove];
 
     try {
-      // Get auth token
       const TOKEN_KEY =
         process.env.NEXT_PUBLIC_JWT_TOKEN_KEY || "zeerostock_access_token";
       const token = localStorage.getItem(TOKEN_KEY);
 
       if (token && imageToRemove.fileKey) {
-        // Delete from S3 via backend
         const response = await fetch(
           `${
             process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000/api"
@@ -356,14 +423,11 @@ export default function NewListing() {
         }
       }
 
-      // Remove from uploaded images array
       setUploadedImages((prev) =>
         prev.filter((_, index) => index !== indexToRemove)
       );
 
-      // Update formData
       setFormData((prev) => {
-        // If removing the main image
         if (prev.imageUrl === imageToRemove.url) {
           const remainingImages = uploadedImages.filter(
             (_, index) => index !== indexToRemove
@@ -374,7 +438,6 @@ export default function NewListing() {
             galleryImages: remainingImages.slice(1).map((img) => img.url),
           };
         } else {
-          // If removing from gallery
           return {
             ...prev,
             galleryImages: prev.galleryImages.filter(
@@ -399,7 +462,6 @@ export default function NewListing() {
     e.preventDefault();
     setValidationErrors({});
 
-    // Client-side validations
     const errors: Record<string, string> = {};
 
     if (!formData.title || formData.title.trim().length < 10) {
@@ -449,15 +511,13 @@ export default function NewListing() {
     setLoading(true);
 
     try {
-      // Prepare expires_at: if date is set, set to end of day (23:59:59)
       let expiresAt = null;
       if (formData.expiresAt) {
         const expiryDate = new Date(formData.expiresAt);
-        expiryDate.setHours(23, 59, 59, 999); // Set to end of day
+        expiryDate.setHours(23, 59, 59, 999);
         expiresAt = expiryDate.toISOString();
       }
 
-      // Prepare data for submission - only send fields from the form
       const submitData = {
         title: formData.title,
         description: formData.description,
@@ -484,44 +544,44 @@ export default function NewListing() {
         expiresAt: expiresAt || undefined,
       };
 
-      const response = await supplierService.createListing(submitData);
+      const response = await supplierService.updateListing(
+        listingId,
+        submitData
+      );
 
       if (response.success) {
-        toast.success("Your listing has been created successfully");
+        toast.success("Your listing has been updated successfully");
         router.push("/supplier/listings");
       } else {
-        // Handle validation errors from backend
-        if (response.errors && Array.isArray(response.errors)) {
-          const backendErrors: Record<string, string> = {};
-          response.errors.forEach((err: { field: string; message: string }) => {
-            backendErrors[err.field] = err.message;
-          });
-          setValidationErrors(backendErrors);
-          toast.error(response.message || "Validation failed");
-        } else {
-          toast.error(response.message || "Failed to create listing");
-        }
+        toast.error(response.message || "Failed to update listing");
       }
-    } catch (error: any) {
-      console.error("Error creating listing:", error);
-      // Check if error response has validation errors
-      if (error?.response?.data?.errors) {
+    } catch (error) {
+      console.error("Error updating listing:", error);
+      const err = error as {
+        response?: {
+          data?: {
+            errors?: Array<{ field: string; message: string }>;
+            message?: string;
+          };
+        };
+        message?: string;
+      };
+
+      if (err?.response?.data?.errors) {
         const backendErrors: Record<string, string> = {};
-        error.response.data.errors.forEach(
-          (err: { field: string; message: string }) => {
-            backendErrors[err.field] = err.message;
-          }
-        );
+        err.response.data.errors.forEach((validationError) => {
+          backendErrors[validationError.field] = validationError.message;
+        });
         setValidationErrors(backendErrors);
         toast.error(
-          error.response.data.message ||
+          err.response.data.message ||
             "Validation failed. Please check your inputs."
         );
-      } else if (error?.response?.data?.message) {
-        toast.error(error.response.data.message);
+      } else if (err?.response?.data?.message) {
+        toast.error(err.response.data.message);
       } else {
         toast.error(
-          error.message || "Failed to create listing. Please try again."
+          err?.message || "Failed to update listing. Please try again."
         );
       }
     } finally {
@@ -529,9 +589,19 @@ export default function NewListing() {
     }
   };
 
+  if (loadingData) {
+    return (
+      <div className="min-h-screen bg-[#EEFBF6] flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading listing details...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#EEFBF6]">
-      {/* Image Preview Modal with Framer Motion Animations */}
       <AnimatePresence>
         {previewImage && (
           <motion.div
@@ -572,12 +642,10 @@ export default function NewListing() {
       </AnimatePresence>
 
       <div className="mx-auto max-w-[1440px] px-20 py-8">
-        {/* Page Title */}
         <h1 className="mb-5 text-[27px] font-semibold text-[#0d1b2a]">
-          My Inventory
+          Edit Product Listing
         </h1>
 
-        {/* Form Container */}
         <form
           onSubmit={handleSubmit}
           className="relative min-h-[791px] w-full rounded-[15px] bg-white p-[23px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)]"
@@ -610,9 +678,6 @@ export default function NewListing() {
                 {validationErrors.title}
               </p>
             )}
-            <p className="mt-1 text-xs text-[#6b7280]">
-              {formData.title.length}/500 characters
-            </p>
           </div>
 
           {/* Listing Type */}
@@ -1043,7 +1108,6 @@ export default function NewListing() {
                 className="hidden"
               />
 
-              {/* Display uploaded images with animations */}
               {uploadedImages.length > 0 && (
                 <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2">
                   {uploadedImages.map((image, index) => (
@@ -1064,11 +1128,9 @@ export default function NewListing() {
                         alt={`Upload ${index + 1}`}
                         className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
                       />
-                      {/* Preview overlay on hover with smooth animation */}
                       <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-all duration-300 group-hover:bg-black/50">
                         <Eye className="h-6 w-6 text-white opacity-0 scale-50 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100" />
                       </div>
-                      {/* Remove button with animation */}
                       <button
                         type="button"
                         onClick={(e) => {
@@ -1080,7 +1142,6 @@ export default function NewListing() {
                       >
                         <X className="h-3 w-3" />
                       </button>
-                      {/* Main image indicator with slide animation */}
                       {index === 0 && (
                         <div className="absolute bottom-0 left-0 right-0 bg-[#2aae7a] bg-opacity-90 px-1 py-0.5 text-center text-[10px] font-medium text-white animate-in slide-in-from-bottom duration-300">
                           Main
@@ -1140,6 +1201,7 @@ export default function NewListing() {
                 placeholder="Select duration"
                 className="h-[42px] w-full rounded-[8px] border border-[#bebebe] px-3 py-2 text-sm text-black placeholder:text-[#9c9c9c] focus:border-[#0d1b2a] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a]"
               />
+              <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#9c9c9c]" />
             </div>
           </div>
 
@@ -1150,7 +1212,7 @@ export default function NewListing() {
               disabled={loading || uploadingImages}
               className="flex h-[45px] w-full items-center justify-center gap-2 rounded-[11px] bg-[#1e3a8a] px-4 py-3 text-base font-semibold text-white transition-colors hover:bg-[#1e40af] disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {loading ? "Creating..." : "List Product"}
+              {loading ? "Updating..." : "Update Product"}
             </button>
           </div>
         </form>

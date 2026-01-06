@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 const imgUpscaleRe2 =
   "https://www.figma.com/api/mcp/asset/81fa2263-b943-4cba-b6b4-86e7e69d9a8e";
@@ -18,7 +18,6 @@ export default function Header() {
     try {
       await logout();
       setIsUserMenuOpen(false);
-      toast.success("Logged out successfully!");
       router.push("/");
     } catch {
       toast.error("Failed to logout");

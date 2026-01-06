@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useCartStore } from "@/stores/cartStore";
 import { cartService } from "@/services/cart.service";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { Shield, Truck } from "lucide-react";
 
 export default function OrderSummary() {
@@ -77,7 +77,7 @@ export default function OrderSummary() {
     try {
       const response = await cartService.applyCoupon(promoCode);
       if (response.success && response.data) {
-        toast.success("Coupon applied successfully!");
+        // Toast is handled by cartStore
         // Update discount from response
         if (response.data?.discount) {
           setSummary((prev) => ({
@@ -87,7 +87,6 @@ export default function OrderSummary() {
         }
       }
     } catch (error) {
-      toast.error("Failed to apply coupon");
       console.error(error);
     } finally {
       setIsApplyingCoupon(false);

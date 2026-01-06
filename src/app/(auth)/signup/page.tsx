@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -62,7 +62,7 @@ export default function SignUpPage() {
       });
 
       if (response.success) {
-        toast.success("Signup successful! Please verify your email!");
+        // Toast is handled by AuthContext
 
         // Store email for OTP verification page
         localStorage.setItem(

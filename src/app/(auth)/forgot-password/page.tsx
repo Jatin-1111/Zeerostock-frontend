@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { authService } from "@/services/auth.service";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
@@ -19,7 +19,7 @@ export default function ForgotPasswordPage() {
 
       if (response.success) {
         setSubmitted(true);
-        toast.success("Password reset email sent successfully!");
+        toast.success("Password reset link sent to your email");
       }
     } catch (error: any) {
       toast.error(

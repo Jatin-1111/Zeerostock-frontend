@@ -101,11 +101,11 @@ export default function BuyerDashboardPage() {
       </div>
 
       <div className="flex gap-6 mt-6">
-        <div className="flex-[3]">
+        <div className="flex-3">
           <ActiveRFQsList />
         </div>
 
-        <div className="flex-[1] mt-14">
+        <div className="flex-1 mt-14">
           <CostSavings />
         </div>
       </div>

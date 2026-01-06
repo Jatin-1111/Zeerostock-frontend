@@ -82,7 +82,7 @@ export default function ProductDescription({
             <h2 className="text-[22.5px] font-medium text-[#0d1b2a] mb-4.5">
               Product description
             </h2>
-            <p className="text-[18.75px] font-normal text-[#9c9c9c] leading-[24.75px] mb-9">
+            <p className="text-[18.75px] font-normal text-[#9c9c9c] leading-[24.75px] mb-9 wrap-break-words overflow-wrap-anywhere">
               {(productData.description as string) ||
                 "High-quality structural steel coils manufactured to ASTM A36 specifications. These coils are perfect for construction projects, infrastructure development, and industrial applications. All materials come with full certification and quality guarantees."}
             </p>

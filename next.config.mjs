@@ -33,6 +33,12 @@ const nextConfig = {
         port: "",
         pathname: "/api/mcp/asset/**",
       },
+      {
+        protocol: "https",
+        hostname: "zeerostock-documents.s3.ap-south-1.amazonaws.com",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };

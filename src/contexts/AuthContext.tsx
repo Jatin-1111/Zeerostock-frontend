@@ -16,7 +16,7 @@ import {
   SignupFormData,
   OTPVerifyData,
 } from "@/types/api.types";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 interface AuthContextType {
   user: User | null;
@@ -100,7 +100,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
       if (response.success && response.data) {
         setUser(response.data.user);
-        toast.success("Login successful!");
+        toast.success("Welcome back! Login successful");
 
         // Merge guest cart if exists
         try {
@@ -133,7 +133,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         const response = await authService.signup(data);
 
         if (response.success) {
-          toast.success("OTP sent! Please verify your account.");
+          toast.success("Verification code sent to your email");
           return {
             success: true,
             identifier: data.businessEmail || data.mobile,
@@ -162,7 +162,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
         if (response.success && response.data) {
           setUser(response.data.user);
-          toast.success("Account verified successfully!");
+          toast.success("Your account has been verified successfully");
           return true;
         }
 
@@ -186,7 +186,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       const response = await authService.sendLoginOTP(mobile);
 
       if (response.success) {
-        toast.success("OTP sent to your mobile!");
+        toast.success("Verification code sent to your mobile number");
         return true;
       }
 
@@ -210,7 +210,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
         if (response.success && response.data) {
           setUser(response.data.user);
-          toast.success("Login successful!");
+          toast.success("Welcome back! Login successful");
 
           // Merge guest cart if exists
           try {
@@ -242,7 +242,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       await authService.logout();
       setUser(null);
       cartService.clearGuestSession();
-      toast.success("Logged out successfully");
+      toast.success("You have been logged out successfully");
       router.push("/");
     } catch (error: unknown) {
       console.error("Logout error:", error);

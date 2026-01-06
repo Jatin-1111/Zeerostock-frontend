@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/contexts/AuthContext";
-import { Toaster } from "react-hot-toast";
+import { Toaster } from "sonner";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -27,27 +27,20 @@ export default function RootLayout({
         <AuthProvider>
           {children}
           <Toaster
-            position="top-right"
+            position="bottom-right"
+            expand={false}
+            richColors
+            closeButton
+            duration={3500}
             toastOptions={{
-              duration: 4000,
               style: {
-                background: "#333",
-                color: "#fff",
+                padding: "16px",
+                gap: "12px",
+                width: "fit-content",
+                minWidth: "200px",
+                maxWidth: "500px",
               },
-              success: {
-                duration: 3000,
-                iconTheme: {
-                  primary: "#10b981",
-                  secondary: "#fff",
-                },
-              },
-              error: {
-                duration: 4000,
-                iconTheme: {
-                  primary: "#ef4444",
-                  secondary: "#fff",
-                },
-              },
+              className: "font-medium",
             }}
           />
         </AuthProvider>

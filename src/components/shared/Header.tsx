@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { Globe, User } from "lucide-react";
 import EnhancedSearchInput from "@/components/search/EnhancedSearchInput";
 
@@ -23,7 +23,6 @@ export default function Header() {
     try {
       await logout();
       setIsUserMenuOpen(false);
-      toast.success("Logged out successfully!");
       router.push("/");
     } catch {
       toast.error("Failed to logout");
@@ -31,7 +30,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 w-full z-50 shadow-[0px_5px_8px_0px_rgba(0,0,0,0.25)] bg-gradient-to-b from-[#43C786] to-[#0A2540]">
+    <header className="sticky top-0 w-full z-50 shadow-[0px_5px_8px_0px_rgba(0,0,0,0.25)] bg-linear-to-b from-[#43C786] to-[#0A2540]">
       <div className="container mx-auto h-20 flex items-center justify-between px-20 gap-8">
         {/* Logo - Left Side */}
         <Link href="/" className="shrink-0">

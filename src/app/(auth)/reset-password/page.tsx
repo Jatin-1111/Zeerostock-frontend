@@ -4,7 +4,7 @@ import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { authService } from "@/services/auth.service";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 function ResetPasswordForm() {
   const [newPassword, setNewPassword] = useState("");
@@ -73,7 +73,7 @@ function ResetPasswordForm() {
 
       if (response.success) {
         setSuccess(true);
-        toast.success("Password reset successfully!");
+        toast.success("Your password has been reset successfully");
         setTimeout(() => {
           router.push("/login");
         }, 2000);

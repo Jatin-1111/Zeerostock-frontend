@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { cartService } from "@/services/cart.service";
 import { Cart, CartItem, CartPricing } from "@/types/api.types";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 interface CartState {
   cart: Cart | null;
@@ -83,7 +83,7 @@ export const useCartStore = create<CartState>((set, get) => ({
         // Refresh cart after adding
         console.log("Fetching updated cart...");
         await get().fetchCart();
-        toast.success("Added to cart!");
+        toast.success("Item added to cart successfully");
         return true;
       }
       toast.error(response.message || "Failed to add to cart");
@@ -120,7 +120,7 @@ export const useCartStore = create<CartState>((set, get) => ({
       const response = await cartService.removeFromCart(itemId);
       if (response.success) {
         await get().fetchCart();
-        toast.success("Item removed from cart");
+        toast.success("Item has been removed from your cart");
         return true;
       }
       toast.error(response.message || "Failed to remove item");
@@ -144,7 +144,7 @@ export const useCartStore = create<CartState>((set, get) => ({
           itemCount: 0,
           pricing: null,
         });
-        toast.success("Cart cleared");
+        toast.success("Your cart has been cleared");
         return true;
       }
       toast.error(response.message || "Failed to clear cart");
@@ -163,7 +163,7 @@ export const useCartStore = create<CartState>((set, get) => ({
       const response = await cartService.applyCoupon(couponCode);
       if (response.success) {
         await get().fetchCart();
-        toast.success("Coupon applied!");
+        toast.success("Coupon code applied successfully");
         return true;
       }
       toast.error(response.message || "Invalid coupon code");
@@ -182,7 +182,7 @@ export const useCartStore = create<CartState>((set, get) => ({
       const response = await cartService.removeCoupon();
       if (response.success) {
         await get().fetchCart();
-        toast.success("Coupon removed");
+        toast.success("Coupon code has been removed");
         return true;
       }
       return false;

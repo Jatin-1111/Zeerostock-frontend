@@ -25,11 +25,11 @@ export default function ProductImageGallery({
   return (
     <div className="bg-white rounded-[15px] shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)] p-4.5 space-y-3">
       {/* Discount Badge */}
-      {discountPercent && discountPercent > 0 && (
+      {/* {discountPercent && discountPercent > 0 && (
         <div className="absolute top-7.5 left-7.5 bg-red-500 text-white text-[10.5px] font-bold px-2.25 py-1.5 rounded-[3.75px] z-10">
           -{discountPercent}% OFF
         </div>
-      )}
+      )} */}
 
       {/* Main Image */}
       <div className="w-full aspect-[1.4] bg-gray-50 rounded-[15px] overflow-hidden relative">

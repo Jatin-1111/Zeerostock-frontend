@@ -75,6 +75,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     initAuth();
   }, [refreshUser]);
 
+  // Listen for user data updates from backend (e.g., after token refresh)
+  useEffect(() => {
+    const handleUserDataRefresh = (event: Event) => {
+      const customEvent = event as CustomEvent;
+      if (customEvent.detail) {
+        // Update user state with fresh backend data
+        setUser(customEvent.detail);
+      }
+    };
+
+    // Listen for custom userDataRefreshed events
+    window.addEventListener("userDataRefreshed", handleUserDataRefresh);
+
+    return () => {
+      window.removeEventListener("userDataRefreshed", handleUserDataRefresh);
+    };
+  }, []);
+
   // Login with email/phone + password
   const login = useCallback(async (data: LoginFormData): Promise<boolean> => {
     try {

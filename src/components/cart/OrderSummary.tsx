@@ -104,29 +104,6 @@ export default function OrderSummary() {
 
   return (
     <div className="w-full space-y-4">
-      {/* Promo Code */}
-      <div className="w-full bg-white rounded-2xl shadow-md p-6">
-        <h3 className="text-lg font-medium text-[#0d1b2a] mb-4">
-          Have a promo code?
-        </h3>
-        <div className="flex gap-3">
-          <input
-            type="text"
-            value={promoCode}
-            onChange={(e) => setPromoCode(e.target.value)}
-            placeholder="Enter Code"
-            className="flex-1 h-[42px] px-4 text-sm font-medium text-[#bebebe] border border-[#bebebe] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-transparent"
-          />
-          <button
-            onClick={handleApplyCoupon}
-            disabled={isApplyingCoupon}
-            className="h-[42px] px-8 bg-[#1e3a8a] text-white text-sm font-semibold rounded-xl hover:bg-[#152d6b] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {isApplyingCoupon ? "Applying..." : "Apply"}
-          </button>
-        </div>
-      </div>
-
       {/* Order Summary */}
       <div className="w-full bg-white rounded-2xl shadow-md p-6">
         <h3 className="text-lg font-medium text-[#0d1b2a] mb-5">
@@ -208,6 +185,30 @@ export default function OrderSummary() {
               Fast Shipping Options
             </span>
           </div>
+        </div>
+      </div>
+
+      {/* Promo Code */}
+      <div className="w-full bg-white rounded-2xl shadow-md p-6">
+        <h3 className="text-lg font-medium text-[#0d1b2a] mb-4">
+          Have a promo code?
+        </h3>
+        {/* Changed to flex-col on mobile to prevent overflow */}
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <input
+            type="text"
+            value={promoCode}
+            onChange={(e) => setPromoCode(e.target.value)}
+            placeholder="Enter Code"
+            className="h-[42px] w-full flex-1 min-w-0 px-4 text-sm font-medium text-[#0d1b2a] placeholder:text-[#9ca3af] border border-[#bebebe] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-transparent transition-all"
+          />
+          <button
+            onClick={handleApplyCoupon}
+            disabled={isApplyingCoupon}
+            className="h-[42px] w-full sm:w-auto px-8 bg-[#1e3a8a] text-white text-sm font-semibold rounded-xl hover:bg-[#152d6b] transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+          >
+            {isApplyingCoupon ? "Applying..." : "Apply"}
+          </button>
         </div>
       </div>
     </div>

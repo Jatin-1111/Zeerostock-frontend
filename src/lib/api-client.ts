@@ -144,6 +144,37 @@ apiClient.interceptors.response.use(
         const { accessToken } = response.data.data;
         localStorage.setItem(TOKEN_KEY, accessToken);
 
+        // Fetch fresh user data to prevent stale activeRole issues
+        try {
+          const userResponse = await axios.get(`${API_BASE_URL}/auth/me`, {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          });
+
+          if (userResponse.data.success && userResponse.data.data) {
+            const USER_DATA_KEY =
+              process.env.NEXT_PUBLIC_USER_DATA_KEY || "zeerostock_user";
+            localStorage.setItem(
+              USER_DATA_KEY,
+              JSON.stringify(userResponse.data.data)
+            );
+
+            // Dispatch custom event to notify AuthContext about backend data update
+            window.dispatchEvent(
+              new CustomEvent("userDataRefreshed", {
+                detail: userResponse.data.data,
+              })
+            );
+          }
+        } catch (userError) {
+          console.warn(
+            "Failed to refresh user data after token refresh:",
+            userError
+          );
+          // Continue anyway - token refresh succeeded
+        }
+
         // Process queued requests
         processQueue(null, accessToken);
         isRefreshing = false;

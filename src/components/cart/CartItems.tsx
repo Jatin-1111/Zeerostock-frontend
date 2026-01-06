@@ -83,7 +83,7 @@ export default function CartItems() {
           </p>
           <a
             href="/marketplace"
-            className="inline-block px-6 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors text-sm font-medium"
+            className="inline-block px-6 py-2 bg-[#1e3a8a] text-white rounded-lg hover:bg-[#17327c] transition-colors text-sm font-medium"
           >
             Browse Products
           </a>

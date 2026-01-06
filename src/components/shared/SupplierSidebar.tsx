@@ -11,16 +11,14 @@ import {
   Settings,
   Menu,
   X,
-  ShoppingBag,
   Zap,
   ShoppingCart,
   CreditCard,
   Eye,
-  ShieldCheck,
   LogOut,
   AlertCircle,
   Mail,
-  ChevronLeft,
+  ArrowLeft,
 } from "lucide-react";
 
 export default function SupplierSidebar() {
@@ -34,71 +32,74 @@ export default function SupplierSidebar() {
       {/* Mobile menu button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden fixed top-4 left-4 z-40 p-2 bg-gray-900 text-white rounded"
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-white border border-gray-300 rounded"
       >
-        {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
       </button>
 
-      {/* Overlay */}
-      {isOpen && (
-        <div
-          className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-30"
-          onClick={() => setIsOpen(false)}
-        />
-      )}
-
       {/* Sidebar */}
-      <aside
-        className={`fixed lg:sticky top-0 left-0 h-screen lg:h-[calc(100vh-73px)] w-[263px] bg-white shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] z-30 transform transition-transform duration-300 ease-in-out overflow-x-hidden ${
+      <div
+        className={`fixed lg:sticky top-0 left-0 h-screen lg:h-[calc(100vh-73px)] w-[300px] flex-shrink-0 bg-white shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } lg:translate-x-0 lg:top-[73px] overflow-y-auto`}
+        } lg:translate-x-0 transition-transform duration-300 ease-in-out z-40 lg:top-[73px] flex flex-col overflow-hidden`}
       >
         {/* Header */}
-        <div className="h-[60px] border-b border-[#8B8B8B] flex items-center justify-center relative">
-          <h1
-            
-            className="font-medium text-[20px] text-[#1E3A8A] leading-normal"
-          >
+        <div className="h-[60px] flex items-center justify-center border-b border-[#8b8b8b] relative flex-shrink-0">
+          <h2 className="font-medium text-[20px] text-[#1e3a8a] leading-normal">
             Supplier Menu
-          </h1>
-          <button className="absolute right-[15px] top-1/2 -translate-y-1/2">
-            <ChevronLeft className="w-5 h-5 text-gray-600" />
+          </h2>
+          <button
+            className="absolute right-[21px] w-[21px] h-[21px]"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            <ArrowLeft className="w-[21px] h-[21px] text-[#1e3a8a]" />
           </button>
         </div>
 
-        <nav className="px-1 pt-5 pb-[135px]">
+        <div className="px-1 pb-7 flex-1 overflow-y-auto">
           {/* INVENTORY MANAGEMENT Section */}
-          <div className="mb-[23px]">
-            <h3
-              
-              className="font-medium text-[19px] text-black leading-normal mb-[8px] px-[20px]"
-            >
+          <div className="mt-[37px] mb-8">
+            <h3 className="font-medium text-[19px] text-black leading-normal px-5 mb-[29px]">
               Inventory Management
             </h3>
-            <div className="space-y-0">
+            <nav className="space-y-[5px]">
               <Link
                 href="/supplier/listings"
-                className={`flex items-center gap-[15px] px-[19px] py-[15px] rounded-[9px] relative ${
+                className={`flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-5 relative ${
                   isActive("/supplier/listings")
-                    ? "bg-[#EEFFEF] ml-[4px]"
-                    : "ml-[4px] hover:bg-gray-50"
+                    ? "bg-[#eeffef] ml-1"
+                    : "hover:bg-gray-100"
                 }`}
               >
                 {isActive("/supplier/listings") && (
-                  <div className="absolute left-[-4px] top-0 w-[4px] h-full bg-[#2AAE7A] rounded-br-[4px] rounded-tr-[4px]" />
+                  <div className="absolute left-0 top-0 w-1 h-full bg-[#2aae7a] rounded-tr-sm rounded-br-sm" />
                 )}
-                <Package
-                  className={`w-[19px] h-[19px] ${
-                    isActive("/supplier/listings")
-                      ? "text-[#2AAE7A]"
-                      : "text-[#8B8B8B]"
-                  }`}
-                />
+                <div className="w-[19px] h-[19px] shrink-0">
+                  <Package
+                    className={`w-[19px] h-[19px] ${
+                      isActive("/supplier/listings")
+                        ? "text-[#2aae7a]"
+                        : "text-[#8b8b8b]"
+                    }`}
+                  />
+                </div>
                 <span
                   className={`font-medium text-[17px] leading-normal ${
                     isActive("/supplier/listings")
-                      ? "text-[#2AAE7A]"
-                      : "text-[#8B8B8B]"
+                      ? "text-[#2aae7a]"
+                      : "text-[#8b8b8b]"
                   }`}
                 >
                   My Listings
@@ -106,135 +107,310 @@ export default function SupplierSidebar() {
               </Link>
               <Link
                 href="/supplier/listings/new"
-                className="flex items-center gap-[15px] px-[19px] py-[15px] rounded-[9px] ml-[4px] hover:bg-gray-50"
+                className={`flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-5 relative ${
+                  isActive("/supplier/listings/new")
+                    ? "bg-[#eeffef] ml-1"
+                    : "hover:bg-gray-100"
+                }`}
               >
-                <Zap className="w-[19px] h-[19px] text-[#8B8B8B]" />
-                <span className="font-medium text-[17px] text-[#8B8B8B] leading-normal">
+                {isActive("/supplier/listings/new") && (
+                  <div className="absolute left-0 top-0 w-1 h-full bg-[#2aae7a] rounded-tr-sm rounded-br-sm" />
+                )}
+                <div className="w-[19px] h-[19px] shrink-0">
+                  <Zap
+                    className={`w-[19px] h-[19px] ${
+                      isActive("/supplier/listings/new")
+                        ? "text-[#2aae7a]"
+                        : "text-[#8b8b8b]"
+                    }`}
+                  />
+                </div>
+                <span
+                  className={`font-medium text-[17px] leading-normal ${
+                    isActive("/supplier/listings/new")
+                      ? "text-[#2aae7a]"
+                      : "text-[#8b8b8b]"
+                  }`}
+                >
                   Quick List
                 </span>
               </Link>
               <Link
                 href="/supplier/analytics"
-                className="flex items-center gap-[15px] px-[19px] py-[15px] rounded-[9px] ml-[4px] hover:bg-gray-50"
+                className={`flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-5 relative ${
+                  isActive("/supplier/analytics")
+                    ? "bg-[#eeffef] ml-1"
+                    : "hover:bg-gray-100"
+                }`}
               >
-                <BarChart3 className="w-[19px] h-[19px] text-[#8B8B8B]" />
-                <span className="font-medium text-[17px] text-[#8B8B8B] leading-normal">
+                {isActive("/supplier/analytics") && (
+                  <div className="absolute left-0 top-0 w-1 h-full bg-[#2aae7a] rounded-tr-sm rounded-br-sm" />
+                )}
+                <div className="w-[19px] h-[19px] shrink-0">
+                  <BarChart3
+                    className={`w-[19px] h-[19px] ${
+                      isActive("/supplier/analytics")
+                        ? "text-[#2aae7a]"
+                        : "text-[#8b8b8b]"
+                    }`}
+                  />
+                </div>
+                <span
+                  className={`font-medium text-[17px] leading-normal ${
+                    isActive("/supplier/analytics")
+                      ? "text-[#2aae7a]"
+                      : "text-[#8b8b8b]"
+                  }`}
+                >
                   Performance
                 </span>
               </Link>
-            </div>
+            </nav>
           </div>
 
           {/* SALES & ORDERS Section */}
-          <div className="mb-[23px]">
-            <h3
-              
-              className="font-medium text-[19px] text-black leading-normal mb-[8px] px-[20px]"
-            >
+          <div className="mb-8">
+            <h3 className="font-medium text-[19px] text-black leading-normal px-5 mb-[29px]">
               Sales &amp; Orders
             </h3>
-            <div className="space-y-0">
+            <nav className="space-y-[5px]">
               <Link
                 href="/supplier/orders"
-                className="flex items-center gap-[15px] px-[19px] py-[15px] rounded-[9px] ml-[4px] hover:bg-gray-50"
+                className={`flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-5 relative ${
+                  isActive("/supplier/orders")
+                    ? "bg-[#eeffef] ml-1"
+                    : "hover:bg-gray-100"
+                }`}
               >
-                <ShoppingCart className="w-[19px] h-[19px] text-[#8B8B8B]" />
-                <span className="font-medium text-[17px] text-[#8B8B8B] leading-normal">
+                {isActive("/supplier/orders") && (
+                  <div className="absolute left-0 top-0 w-1 h-full bg-[#2aae7a] rounded-tr-sm rounded-br-sm" />
+                )}
+                <div className="w-[19px] h-[19px] shrink-0">
+                  <ShoppingCart
+                    className={`w-[19px] h-[19px] ${
+                      isActive("/supplier/orders")
+                        ? "text-[#2aae7a]"
+                        : "text-[#8b8b8b]"
+                    }`}
+                  />
+                </div>
+                <span
+                  className={`font-medium text-[17px] leading-normal ${
+                    isActive("/supplier/orders")
+                      ? "text-[#2aae7a]"
+                      : "text-[#8b8b8b]"
+                  }`}
+                >
                   Order Management
                 </span>
               </Link>
               <Link
                 href="/supplier/dashboard"
-                className="flex items-center gap-[15px] px-[19px] py-[15px] rounded-[9px] ml-[4px] hover:bg-gray-50"
+                className={`flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-5 relative ${
+                  isActive("/supplier/dashboard")
+                    ? "bg-[#eeffef] ml-1"
+                    : "hover:bg-gray-100"
+                }`}
               >
-                <LayoutDashboard className="w-[19px] h-[19px] text-[#8B8B8B]" />
-                <span className="font-medium text-[17px] text-[#8B8B8B] leading-normal">
+                {isActive("/supplier/dashboard") && (
+                  <div className="absolute left-0 top-0 w-1 h-full bg-[#2aae7a] rounded-tr-sm rounded-br-sm" />
+                )}
+                <div className="w-[19px] h-[19px] shrink-0">
+                  <LayoutDashboard
+                    className={`w-[19px] h-[19px] ${
+                      isActive("/supplier/dashboard")
+                        ? "text-[#2aae7a]"
+                        : "text-[#8b8b8b]"
+                    }`}
+                  />
+                </div>
+                <span
+                  className={`font-medium text-[17px] leading-normal ${
+                    isActive("/supplier/dashboard")
+                      ? "text-[#2aae7a]"
+                      : "text-[#8b8b8b]"
+                  }`}
+                >
                   Dashboard
                 </span>
               </Link>
               <Link
                 href="/supplier/payments"
-                className="flex items-center gap-[15px] px-[19px] py-[15px] rounded-[9px] ml-[4px] hover:bg-gray-50"
+                className={`flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-5 relative ${
+                  isActive("/supplier/payments")
+                    ? "bg-[#eeffef] ml-1"
+                    : "hover:bg-gray-100"
+                }`}
               >
-                <CreditCard className="w-[19px] h-[19px] text-[#8B8B8B]" />
-                <span className="font-medium text-[17px] text-[#8B8B8B] leading-normal">
+                {isActive("/supplier/payments") && (
+                  <div className="absolute left-0 top-0 w-1 h-full bg-[#2aae7a] rounded-tr-sm rounded-br-sm" />
+                )}
+                <div className="w-[19px] h-[19px] shrink-0">
+                  <CreditCard
+                    className={`w-[19px] h-[19px] ${
+                      isActive("/supplier/payments")
+                        ? "text-[#2aae7a]"
+                        : "text-[#8b8b8b]"
+                    }`}
+                  />
+                </div>
+                <span
+                  className={`font-medium text-[17px] leading-normal ${
+                    isActive("/supplier/payments")
+                      ? "text-[#2aae7a]"
+                      : "text-[#8b8b8b]"
+                  }`}
+                >
                   Payments
                 </span>
               </Link>
               <Link
                 href="/supplier/market-analytics"
-                className="flex items-center gap-[15px] px-[19px] py-[15px] rounded-[9px] ml-[4px] hover:bg-gray-50"
+                className={`flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-5 relative ${
+                  isActive("/supplier/market-analytics")
+                    ? "bg-[#eeffef] ml-1"
+                    : "hover:bg-gray-100"
+                }`}
               >
-                <Eye className="w-[19px] h-[19px] text-[#8B8B8B]" />
-                <span className="font-medium text-[17px] text-[#8B8B8B] leading-normal">
+                {isActive("/supplier/market-analytics") && (
+                  <div className="absolute left-0 top-0 w-1 h-full bg-[#2aae7a] rounded-tr-sm rounded-br-sm" />
+                )}
+                <div className="w-[19px] h-[19px] shrink-0">
+                  <Eye
+                    className={`w-[19px] h-[19px] ${
+                      isActive("/supplier/market-analytics")
+                        ? "text-[#2aae7a]"
+                        : "text-[#8b8b8b]"
+                    }`}
+                  />
+                </div>
+                <span
+                  className={`font-medium text-[17px] leading-normal ${
+                    isActive("/supplier/market-analytics")
+                      ? "text-[#2aae7a]"
+                      : "text-[#8b8b8b]"
+                  }`}
+                >
                   Market Analytics
                 </span>
               </Link>
-            </div>
+            </nav>
           </div>
 
           {/* ACCOUNT Section */}
-          <div className="mb-[23px]">
-            <h3
-              
-              className="font-medium text-[19px] text-black leading-normal mb-[8px] px-[20px]"
-            >
+          <div className="mb-8">
+            <h3 className="font-medium text-[19px] text-black leading-normal px-5 mb-[29px]">
               Account
             </h3>
-            <div className="space-y-0">
+            <nav className="space-y-[5px]">
               <Link
                 href="/supplier/profile"
-                className="flex items-center gap-[15px] px-[19px] py-[15px] rounded-[9px] ml-[4px] hover:bg-gray-50"
+                className={`flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-5 relative ${
+                  isActive("/supplier/profile")
+                    ? "bg-[#eeffef] ml-1"
+                    : "hover:bg-gray-100"
+                }`}
               >
-                <User className="w-[19px] h-[19px] text-[#8B8B8B]" />
-                <span className="font-medium text-[17px] text-[#8B8B8B] leading-normal">
+                {isActive("/supplier/profile") && (
+                  <div className="absolute left-0 top-0 w-1 h-full bg-[#2aae7a] rounded-tr-sm rounded-br-sm" />
+                )}
+                <div className="w-[19px] h-[19px] shrink-0">
+                  <User
+                    className={`w-[19px] h-[19px] ${
+                      isActive("/supplier/profile")
+                        ? "text-[#2aae7a]"
+                        : "text-[#8b8b8b]"
+                    }`}
+                  />
+                </div>
+                <span
+                  className={`font-medium text-[17px] leading-normal ${
+                    isActive("/supplier/profile")
+                      ? "text-[#2aae7a]"
+                      : "text-[#8b8b8b]"
+                  }`}
+                >
                   Profile
                 </span>
               </Link>
               <Link
                 href="/supplier/settings"
-                className="flex items-center gap-[15px] px-[19px] py-[15px] rounded-[9px] ml-[4px] hover:bg-gray-50"
+                className={`flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-5 relative ${
+                  isActive("/supplier/settings")
+                    ? "bg-[#eeffef] ml-1"
+                    : "hover:bg-gray-100"
+                }`}
               >
-                <Settings className="w-[19px] h-[19px] text-[#8B8B8B]" />
-                <span className="font-medium text-[17px] text-[#8B8B8B] leading-normal">
+                {isActive("/supplier/settings") && (
+                  <div className="absolute left-0 top-0 w-1 h-full bg-[#2aae7a] rounded-tr-sm rounded-br-sm" />
+                )}
+                <div className="w-[19px] h-[19px] shrink-0">
+                  <Settings
+                    className={`w-[19px] h-[19px] ${
+                      isActive("/supplier/settings")
+                        ? "text-[#2aae7a]"
+                        : "text-[#8b8b8b]"
+                    }`}
+                  />
+                </div>
+                <span
+                  className={`font-medium text-[17px] leading-normal ${
+                    isActive("/supplier/settings")
+                      ? "text-[#2aae7a]"
+                      : "text-[#8b8b8b]"
+                  }`}
+                >
                   Settings
                 </span>
               </Link>
               <Link
                 href="/login"
-                className="flex items-center gap-[15px] px-[19px] py-[15px] rounded-[9px] ml-[4px] hover:bg-red-50"
+                className="flex items-center gap-[15px] rounded-[9px] py-[15px] pl-[23px] pr-5 hover:bg-red-50"
               >
-                <LogOut className="w-[19px] h-[19px] text-[#FF0001]" />
-                <span className="font-medium text-[17px] text-[#FF0001] leading-normal">
+                <div className="w-[19px] h-[19px] shrink-0">
+                  <LogOut className="w-[19px] h-[19px] text-[#ff0001]" />
+                </div>
+                <span className="font-medium text-[17px] text-[#ff0001] leading-normal">
                   Sign Out
                 </span>
               </Link>
-            </div>
+            </nav>
           </div>
-        </nav>
-
-        {/* Footer Section */}
-        <div className="absolute bottom-px left-1/2 -translate-x-1/2 w-[255px] bg-[#F0F0F0] rounded-[15px] overflow-hidden">
-          <Link
-            href="/supplier/contact"
-            className="flex items-center gap-[11px] px-[23px] py-[15px] hover:bg-gray-200 transition-colors"
-          >
-            <AlertCircle className="w-[19px] h-[19px] text-black" />
-            <span className="font-medium text-[17px] text-black leading-normal">
-              Help &amp; Support
-            </span>
-          </Link>
-          <Link
-            href="/feedback"
-            className="flex items-center gap-[11px] px-[23px] py-[13px] hover:bg-gray-200 transition-colors"
-          >
-            <Mail className="w-[18px] h-[18px] text-black" />
-            <span className="font-medium text-[17px] text-black leading-normal">
-              Send Feedback
-            </span>
-          </Link>
+          {/* Help & Support Card */}
+          <div className="mx-auto w-[255px] bg-[#f0f0f0] rounded-[15px] overflow-clip h-[104px] relative">
+            <Link
+              href="/supplier/contact"
+              className="flex items-end gap-[11px] absolute left-[23px] top-[23px] hover:opacity-80"
+            >
+              <div className="w-[19px] h-[19px] shrink-0">
+                <AlertCircle className="w-[19px] h-[19px] text-black" />
+              </div>
+              <span className="font-medium text-[17px] text-black leading-normal">
+                Help &amp; Support
+              </span>
+            </Link>
+            <Link
+              href="/feedback"
+              className="flex items-center gap-[11px] absolute left-[23px] top-[62px] hover:opacity-80"
+            >
+              <div className="w-[18px] h-[18px] shrink-0">
+                <Mail className="w-[18px] h-[18px] text-black" />
+              </div>
+              <span className="font-medium text-[17px] text-black leading-normal">
+                Send Feedback
+              </span>
+            </Link>
+          </div>
         </div>
-      </aside>
+      </div>
+
+      {/* Overlay for mobile */}
+      {isOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black/80 bg-opacity-50 z-30"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
     </>
   );
 }

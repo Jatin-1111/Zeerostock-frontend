@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { Upload, ChevronDown } from "lucide-react";
+import { Upload, ChevronDown, X, Eye } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { supplierService } from "@/services/supplier.service";
 import { marketplaceService } from "@/services/marketplace.service";
 import { useAuth } from "@/contexts/AuthContext";
@@ -40,7 +41,11 @@ export default function NewListing() {
   const [categoriesLoading, setCategoriesLoading] = useState(true);
   const [categories, setCategories] = useState<Category[]>([]);
   const [uploadingImages, setUploadingImages] = useState(false);
-  const [uploadedImages, setUploadedImages] = useState<string[]>([]);
+  const [uploadedImages, setUploadedImages] = useState<
+    Array<{ url: string; fileKey: string }>
+  >([]);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [formData, setFormData] = useState<FormData>({
     title: "",
@@ -149,98 +154,109 @@ export default function NewListing() {
     }
   };
 
-  const uploadToCloudinary = async (files: FileList) => {
-    setUploadingImages(true);
-    const uploadedUrls: string[] = [];
+  const handleDropdownSelect = (name: string, value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+    setOpenDropdown(null);
+  };
 
-    const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
-    const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
+  const toggleDropdown = (dropdownName: string) => {
+    setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
+  };
 
-    // Check if Cloudinary is configured
-    if (!cloudName || !uploadPreset) {
-      toast.error(
-        "Cloudinary not configured. Using placeholder images for testing."
-      );
-
-      // Use placeholder images for testing
-      const placeholders = Array.from(files).map(
-        (_, index) =>
-          `https://placehold.co/600x400/e2e8f0/1e293b?text=Product+Image+${
-            uploadedImages.length + index + 1
-          }`
-      );
-
-      setUploadedImages((prev) => [...prev, ...placeholders]);
-
-      if (!formData.imageUrl && placeholders.length > 0) {
-        setFormData((prev) => ({
-          ...prev,
-          imageUrl: placeholders[0],
-          galleryImages: placeholders.slice(1),
-        }));
-      } else {
-        setFormData((prev) => ({
-          ...prev,
-          galleryImages: [...prev.galleryImages, ...placeholders],
-        }));
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest(".custom-dropdown")) {
+        setOpenDropdown(null);
       }
+    };
 
-      setUploadingImages(false);
-      toast.success(
-        `${placeholders.length} placeholder image(s) added. Configure Cloudinary for real uploads.`
-      );
-      return;
-    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const uploadToS3 = async (files: FileList) => {
+    setUploadingImages(true);
 
     try {
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        const formData = new FormData();
-        formData.append("file", file);
-        formData.append("upload_preset", uploadPreset);
+      const formDataToSend = new FormData();
 
-        const response = await fetch(
-          `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-          {
-            method: "POST",
-            body: formData,
-          }
-        );
+      // Append all files to FormData
+      Array.from(files).forEach((file) => {
+        formDataToSend.append("images", file);
+      });
 
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.error?.message || "Upload failed");
-        }
-
-        const data = await response.json();
-        if (data.secure_url) {
-          uploadedUrls.push(data.secure_url);
-        }
+      // Get auth token (same token key as api-client.ts)
+      const TOKEN_KEY =
+        process.env.NEXT_PUBLIC_JWT_TOKEN_KEY || "zeerostock_access_token";
+      const token = localStorage.getItem(TOKEN_KEY);
+      if (!token) {
+        throw new Error("Authentication required. Please login again.");
       }
 
-      setUploadedImages((prev) => [...prev, ...uploadedUrls]);
+      // Upload to backend S3 endpoint
+      const response = await fetch(
+        `${
+          process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000/api"
+        }/supplier/listings/upload-images`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formDataToSend,
+        }
+      );
 
-      // Set first image as main image if not set
-      if (!formData.imageUrl && uploadedUrls.length > 0) {
-        setFormData((prev) => ({
-          ...prev,
-          imageUrl: uploadedUrls[0],
-          galleryImages: uploadedUrls.slice(1),
-        }));
-      } else {
-        setFormData((prev) => ({
-          ...prev,
-          galleryImages: [...prev.galleryImages, ...uploadedUrls],
-        }));
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Upload failed");
       }
 
-      toast.success(`${uploadedUrls.length} image(s) uploaded successfully!`);
+      const data = await response.json();
+
+      if (data.success && data.data.images) {
+        // Store both URL and fileKey for each image
+        interface S3Image {
+          url: string;
+          fileKey: string;
+        }
+        const images = data.data.images.map((img: S3Image) => ({
+          url: img.url,
+          fileKey: img.fileKey,
+        }));
+
+        setUploadedImages((prev) => [...prev, ...images]);
+
+        // Set first image as main image if not set
+        if (!formData.imageUrl && images.length > 0) {
+          setFormData((prev) => ({
+            ...prev,
+            imageUrl: images[0].url,
+            galleryImages: images.slice(1).map((img: S3Image) => img.url),
+          }));
+        } else {
+          setFormData((prev) => ({
+            ...prev,
+            galleryImages: [
+              ...prev.galleryImages,
+              ...images.map((img: S3Image) => img.url),
+            ],
+          }));
+        }
+
+        toast.success(`${images.length} image(s) uploaded successfully!`);
+      }
     } catch (error) {
       console.error("Error uploading images:", error);
       toast.error(
         `Upload failed: ${
           error instanceof Error ? error.message : "Unknown error"
-        }. Check Cloudinary settings.`
+        }`
       );
     } finally {
       setUploadingImages(false);
@@ -250,7 +266,7 @@ export default function NewListing() {
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files.length > 0) {
-      uploadToCloudinary(files);
+      uploadToS3(files);
     }
   };
 
@@ -258,12 +274,82 @@ export default function NewListing() {
     e.preventDefault();
     const files = e.dataTransfer.files;
     if (files && files.length > 0) {
-      uploadToCloudinary(files);
+      uploadToS3(files);
     }
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
+  };
+
+  const handleRemoveImage = async (indexToRemove: number) => {
+    const imageToRemove = uploadedImages[indexToRemove];
+
+    try {
+      // Get auth token
+      const TOKEN_KEY =
+        process.env.NEXT_PUBLIC_JWT_TOKEN_KEY || "zeerostock_access_token";
+      const token = localStorage.getItem(TOKEN_KEY);
+
+      if (token && imageToRemove.fileKey) {
+        // Delete from S3 via backend
+        const response = await fetch(
+          `${
+            process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000/api"
+          }/supplier/listings/delete-image`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ fileKey: imageToRemove.fileKey }),
+          }
+        );
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || "Failed to delete image");
+        }
+      }
+
+      // Remove from uploaded images array
+      setUploadedImages((prev) =>
+        prev.filter((_, index) => index !== indexToRemove)
+      );
+
+      // Update formData
+      setFormData((prev) => {
+        // If removing the main image
+        if (prev.imageUrl === imageToRemove.url) {
+          const remainingImages = uploadedImages.filter(
+            (_, index) => index !== indexToRemove
+          );
+          return {
+            ...prev,
+            imageUrl: remainingImages.length > 0 ? remainingImages[0].url : "",
+            galleryImages: remainingImages.slice(1).map((img) => img.url),
+          };
+        } else {
+          // If removing from gallery
+          return {
+            ...prev,
+            galleryImages: prev.galleryImages.filter(
+              (url) => url !== imageToRemove.url
+            ),
+          };
+        }
+      });
+
+      toast.success("Image removed successfully");
+    } catch (error) {
+      console.error("Error removing image:", error);
+      toast.error(
+        `Failed to remove image: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`
+      );
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -330,6 +416,46 @@ export default function NewListing() {
 
   return (
     <div className="min-h-screen bg-[#EEFBF6]">
+      {/* Image Preview Modal with Framer Motion Animations */}
+      <AnimatePresence>
+        {previewImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
+            onClick={() => setPreviewImage(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="relative max-h-[90vh] max-w-[90vw]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={previewImage}
+                alt="Preview"
+                className="max-h-[90vh] max-w-[90vw] rounded-lg object-contain shadow-2xl"
+              />
+              <motion.button
+                type="button"
+                onClick={() => setPreviewImage(null)}
+                className="absolute -right-4 -top-4 flex h-10 w-10 items-center justify-center rounded-full bg-red-500 text-white shadow-lg"
+                whileHover={{ scale: 1.1, backgroundColor: "#dc2626" }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.2 }}
+                title="Close preview"
+              >
+                <X className="h-5 w-5" />
+              </motion.button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="mx-auto max-w-[1440px] px-20 py-8">
         {/* Page Title */}
         <h1 className="mb-5 text-[27px] font-semibold text-[#0d1b2a]">
@@ -366,20 +492,59 @@ export default function NewListing() {
             </label>
           </div>
           <div className="absolute left-[calc(50%+10px)] top-[52px] w-[calc(50%-33px)]">
-            <div className="relative">
-              <select
-                name="listingType"
-                value={formData.listingType}
-                onChange={handleInputChange}
-                required
-                className="h-[42px] w-full appearance-none rounded-[8px] border border-[#bebebe] px-3 py-2 text-sm text-[#9c9c9c] focus:border-[#0d1b2a] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a]"
+            <div className="relative custom-dropdown">
+              <button
+                type="button"
+                onClick={() => toggleDropdown("listingType")}
+                className="h-[42px] w-full appearance-none rounded-[8px] border border-[#bebebe] px-3 py-2 text-left text-sm transition-all duration-300 hover:border-[#2aae7a] hover:shadow-md focus:border-[#0d1b2a] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a] focus:scale-[1.01] flex items-center justify-between"
               >
-                <option value="">Select Type</option>
-                <option value="fixed">Fixed Price</option>
-                <option value="negotiable">Negotiable</option>
-                <option value="auction">Auction</option>
-              </select>
-              <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#9c9c9c]" />
+                <span
+                  className={
+                    formData.listingType ? "text-black" : "text-[#9c9c9c]"
+                  }
+                >
+                  {formData.listingType === "fixed" && "Fixed Price"}
+                  {formData.listingType === "negotiable" && "Negotiable"}
+                  {formData.listingType === "auction" && "Auction"}
+                  {!formData.listingType && "Select Type"}
+                </span>
+                <motion.div
+                  animate={{ rotate: openDropdown === "listingType" ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronDown className="h-5 w-5 text-[#9c9c9c] transition-colors duration-300" />
+                </motion.div>
+              </button>
+              <AnimatePresence>
+                {openDropdown === "listingType" && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="absolute z-50 w-full overflow-hidden rounded-[8px] border border-[#bebebe] bg-white shadow-lg mt-1"
+                  >
+                    <div className="max-h-[200px] overflow-y-auto">
+                      {[
+                        { value: "fixed", label: "Fixed Price" },
+                        { value: "negotiable", label: "Negotiable" },
+                        { value: "auction", label: "Auction" },
+                      ].map((option) => (
+                        <button
+                          key={option.value}
+                          type="button"
+                          onClick={() =>
+                            handleDropdownSelect("listingType", option.value)
+                          }
+                          className="w-full px-3 py-2 text-left text-sm hover:bg-[#f0fdf4] transition-colors duration-200 text-black"
+                        >
+                          {option.label}
+                        </button>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
 
@@ -390,25 +555,57 @@ export default function NewListing() {
             </label>
           </div>
           <div className="absolute left-[23px] top-[154px] w-[calc(50%-33px)]">
-            <div className="relative">
-              <select
-                name="categoryId"
-                value={formData.categoryId}
-                onChange={handleInputChange}
-                required
+            <div className="relative custom-dropdown">
+              <button
+                type="button"
+                onClick={() => !categoriesLoading && toggleDropdown("category")}
                 disabled={categoriesLoading}
-                className="h-[42px] w-full appearance-none rounded-[8px] border border-[#bebebe] px-3 py-2 text-sm text-[#9c9c9c] focus:border-[#0d1b2a] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a] disabled:bg-gray-100"
+                className="h-[42px] w-full appearance-none rounded-[8px] border border-[#bebebe] px-3 py-2 text-left text-sm transition-all duration-300 hover:border-[#2aae7a] hover:shadow-md focus:border-[#0d1b2a] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a] focus:scale-[1.01] disabled:bg-gray-100 disabled:hover:border-[#bebebe] disabled:hover:shadow-none flex items-center justify-between"
               >
-                <option value="">
-                  {categoriesLoading ? "Loading..." : "Select category"}
-                </option>
-                {categories.map((cat) => (
-                  <option key={cat.id} value={cat.id}>
-                    {cat.name}
-                  </option>
-                ))}
-              </select>
-              <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#9c9c9c]" />
+                <span
+                  className={
+                    formData.categoryId ? "text-black" : "text-[#9c9c9c]"
+                  }
+                >
+                  {categoriesLoading
+                    ? "Loading..."
+                    : formData.categoryId
+                    ? categories.find((c) => c.id === formData.categoryId)?.name
+                    : "Select category"}
+                </span>
+                <motion.div
+                  animate={{ rotate: openDropdown === "category" ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronDown className="h-5 w-5 text-[#9c9c9c] transition-colors duration-300" />
+                </motion.div>
+              </button>
+              <AnimatePresence>
+                {openDropdown === "category" && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="absolute z-50 w-full overflow-hidden rounded-[8px] border border-[#bebebe] bg-white shadow-lg mt-1"
+                  >
+                    <div className="max-h-[200px] overflow-y-auto">
+                      {categories.map((cat) => (
+                        <button
+                          key={cat.id}
+                          type="button"
+                          onClick={() =>
+                            handleDropdownSelect("categoryId", cat.id)
+                          }
+                          className="w-full px-3 py-2 text-left text-sm hover:bg-[#f0fdf4] transition-colors duration-200 text-black"
+                        >
+                          {cat.name}
+                        </button>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
 
@@ -419,22 +616,63 @@ export default function NewListing() {
             </label>
           </div>
           <div className="absolute left-[calc(50%+10px)] top-[154px] w-[calc(50%-33px)]">
-            <div className="relative">
-              <select
-                name="condition"
-                value={formData.condition}
-                onChange={handleInputChange}
-                required
-                className="h-[42px] w-full appearance-none rounded-[8px] border border-[#bebebe] px-3 py-2 text-sm text-[#9c9c9c] focus:border-[#0d1b2a] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a]"
+            <div className="relative custom-dropdown">
+              <button
+                type="button"
+                onClick={() => toggleDropdown("condition")}
+                className="h-[42px] w-full appearance-none rounded-[8px] border border-[#bebebe] px-3 py-2 text-left text-sm transition-all duration-300 hover:border-[#2aae7a] hover:shadow-md focus:border-[#0d1b2a] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a] focus:scale-[1.01] flex items-center justify-between"
               >
-                <option value="">Select condition</option>
-                <option value="new">New</option>
-                <option value="like-new">Like New</option>
-                <option value="good">Good</option>
-                <option value="fair">Fair</option>
-                <option value="refurbished">Refurbished</option>
-              </select>
-              <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#9c9c9c]" />
+                <span
+                  className={
+                    formData.condition ? "text-black" : "text-[#9c9c9c]"
+                  }
+                >
+                  {formData.condition === "new" && "New"}
+                  {formData.condition === "like-new" && "Like New"}
+                  {formData.condition === "good" && "Good"}
+                  {formData.condition === "fair" && "Fair"}
+                  {formData.condition === "refurbished" && "Refurbished"}
+                  {!formData.condition && "Select condition"}
+                </span>
+                <motion.div
+                  animate={{ rotate: openDropdown === "condition" ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronDown className="h-5 w-5 text-[#9c9c9c] transition-colors duration-300" />
+                </motion.div>
+              </button>
+              <AnimatePresence>
+                {openDropdown === "condition" && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="absolute z-50 w-full overflow-hidden rounded-[8px] border border-[#bebebe] bg-white shadow-lg mt-1"
+                  >
+                    <div className="max-h-[200px] overflow-y-auto">
+                      {[
+                        { value: "new", label: "New" },
+                        { value: "like-new", label: "Like New" },
+                        { value: "good", label: "Good" },
+                        { value: "fair", label: "Fair" },
+                        { value: "refurbished", label: "Refurbished" },
+                      ].map((option) => (
+                        <button
+                          key={option.value}
+                          type="button"
+                          onClick={() =>
+                            handleDropdownSelect("condition", option.value)
+                          }
+                          className="w-full px-3 py-2 text-left text-sm hover:bg-[#f0fdf4] transition-colors duration-200 text-black"
+                        >
+                          {option.label}
+                        </button>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
 
@@ -455,7 +693,6 @@ export default function NewListing() {
                 required
                 className="h-[42px] w-full rounded-[8px] border border-[#bebebe] px-3 py-2 text-sm text-black placeholder:text-[#9c9c9c] focus:border-[#0d1b2a] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a]"
               />
-              <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#9c9c9c]" />
             </div>
           </div>
 
@@ -485,25 +722,67 @@ export default function NewListing() {
             </label>
           </div>
           <div className="absolute left-[calc(66.66%-7px)] top-[256px] w-[calc(33.33%-16px)]">
-            <div className="relative">
-              <select
-                name="unit"
-                value={formData.unit}
-                onChange={handleInputChange}
-                required
-                className="h-[42px] w-full appearance-none rounded-[8px] border border-[#bebebe] px-3 py-2 text-sm text-[#9c9c9c] focus:border-[#0d1b2a] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a]"
+            <div className="relative custom-dropdown">
+              <button
+                type="button"
+                onClick={() => toggleDropdown("unit")}
+                className="h-[42px] w-full appearance-none rounded-[8px] border border-[#bebebe] px-3 py-2 text-left text-sm transition-all duration-300 hover:border-[#2aae7a] hover:shadow-md focus:border-[#0d1b2a] focus:outline-none focus:ring-1 focus:ring-[#0d1b2a] focus:scale-[1.01] flex items-center justify-between"
               >
-                <option value="">Select Units</option>
-                <option value="pieces">Pieces</option>
-                <option value="kg">Kilograms</option>
-                <option value="tons">Tons</option>
-                <option value="liters">Liters</option>
-                <option value="meters">Meters</option>
-                <option value="units">Units</option>
-                <option value="boxes">Boxes</option>
-                <option value="pallets">Pallets</option>
-              </select>
-              <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#9c9c9c]" />
+                <span
+                  className={formData.unit ? "text-black" : "text-[#9c9c9c]"}
+                >
+                  {formData.unit === "pieces" && "Pieces"}
+                  {formData.unit === "kg" && "Kilograms"}
+                  {formData.unit === "tons" && "Tons"}
+                  {formData.unit === "liters" && "Liters"}
+                  {formData.unit === "meters" && "Meters"}
+                  {formData.unit === "units" && "Units"}
+                  {formData.unit === "boxes" && "Boxes"}
+                  {formData.unit === "pallets" && "Pallets"}
+                  {!formData.unit && "Select Units"}
+                </span>
+                <motion.div
+                  animate={{ rotate: openDropdown === "unit" ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronDown className="h-5 w-5 text-[#9c9c9c] transition-colors duration-300" />
+                </motion.div>
+              </button>
+              <AnimatePresence>
+                {openDropdown === "unit" && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="absolute z-50 w-full overflow-hidden rounded-[8px] border border-[#bebebe] bg-white shadow-lg mt-1"
+                  >
+                    <div className="max-h-[200px] overflow-y-auto">
+                      {[
+                        { value: "pieces", label: "Pieces" },
+                        { value: "kg", label: "Kilograms" },
+                        { value: "tons", label: "Tons" },
+                        { value: "liters", label: "Liters" },
+                        { value: "meters", label: "Meters" },
+                        { value: "units", label: "Units" },
+                        { value: "boxes", label: "Boxes" },
+                        { value: "pallets", label: "Pallets" },
+                      ].map((option) => (
+                        <button
+                          key={option.value}
+                          type="button"
+                          onClick={() =>
+                            handleDropdownSelect("unit", option.value)
+                          }
+                          className="w-full px-3 py-2 text-left text-sm hover:bg-[#f0fdf4] transition-colors duration-200 text-black"
+                        >
+                          {option.label}
+                        </button>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
 
@@ -537,10 +816,10 @@ export default function NewListing() {
               onClick={() => fileInputRef.current?.click()}
               onDrop={handleDrop}
               onDragOver={handleDragOver}
-              className="relative flex h-full w-full cursor-pointer flex-col items-center justify-center rounded-[15px] border-2 border-dashed border-[#9c9c9c] transition-colors hover:border-[#2aae7a]"
+              className="relative flex h-full w-full cursor-pointer flex-col items-center justify-center rounded-[15px] border-2 border-dashed border-[#9c9c9c] transition-all duration-300 hover:border-[#2aae7a] hover:bg-[#f0fdf4] hover:shadow-md"
             >
-              <Upload className="mb-9 h-[38px] w-[38px] text-[#9c9c9c]" />
-              <p className="mb-3 text-[13px] font-medium text-[#2aae7a]">
+              <Upload className="mb-9 h-[38px] w-[38px] text-[#9c9c9c] transition-all duration-300 hover:scale-110 hover:text-[#2aae7a]" />
+              <p className="mb-3 text-[13px] font-medium text-[#2aae7a] transition-all duration-200">
                 Drop & drag images here or click to select
               </p>
               <button
@@ -550,9 +829,35 @@ export default function NewListing() {
                   fileInputRef.current?.click();
                 }}
                 disabled={uploadingImages}
-                className="rounded-[11px] bg-[#f2f2f2] px-4 py-2 text-base font-medium text-[#9c9c9c] transition-colors hover:bg-gray-300 disabled:opacity-50"
+                className="rounded-[11px] bg-[#f2f2f2] px-4 py-2 text-base font-medium text-[#9c9c9c] transition-all duration-300 hover:scale-105 hover:bg-gray-300 hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {uploadingImages ? "Uploading..." : "Choose Files"}
+                {uploadingImages ? (
+                  <span className="flex items-center gap-2">
+                    <svg
+                      className="h-4 w-4 animate-spin"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
+                    </svg>
+                    Uploading...
+                  </span>
+                ) : (
+                  "Choose Files"
+                )}
               </button>
               <input
                 ref={fileInputRef}
@@ -563,19 +868,49 @@ export default function NewListing() {
                 className="hidden"
               />
 
-              {/* Display uploaded images */}
+              {/* Display uploaded images with animations */}
               {uploadedImages.length > 0 && (
                 <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2">
-                  {uploadedImages.map((url, index) => (
+                  {uploadedImages.map((image, index) => (
                     <div
                       key={index}
-                      className="h-16 w-16 overflow-hidden rounded-lg border-2 border-[#2aae7a]"
+                      className="group relative h-24 w-24 overflow-hidden rounded-lg border-2 border-[#2aae7a] cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-lg hover:border-[#1e8a5a] animate-in fade-in zoom-in-95"
+                      style={{
+                        animationDelay: `${index * 50}ms`,
+                        animationDuration: "300ms",
+                      }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setPreviewImage(image.url);
+                      }}
                     >
                       <img
-                        src={url}
+                        src={image.url}
                         alt={`Upload ${index + 1}`}
-                        className="h-full w-full object-cover"
+                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
                       />
+                      {/* Preview overlay on hover with smooth animation */}
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-all duration-300 group-hover:bg-black/50">
+                        <Eye className="h-6 w-6 text-white opacity-0 scale-50 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100" />
+                      </div>
+                      {/* Remove button with animation */}
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleRemoveImage(index);
+                        }}
+                        className="absolute right-0 top-0 z-10 flex h-6 w-6 items-center justify-center rounded-bl-md bg-red-500 text-white transition-all duration-200 hover:h-7 hover:w-7 hover:bg-red-600 hover:shadow-md"
+                        title="Remove image"
+                      >
+                        <X className="h-3 w-3" />
+                      </button>
+                      {/* Main image indicator with slide animation */}
+                      {index === 0 && (
+                        <div className="absolute bottom-0 left-0 right-0 bg-[#2aae7a] bg-opacity-90 px-1 py-0.5 text-center text-[10px] font-medium text-white animate-in slide-in-from-bottom duration-300">
+                          Main
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>

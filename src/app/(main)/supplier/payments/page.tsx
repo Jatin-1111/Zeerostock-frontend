@@ -208,8 +208,8 @@ export default function PaymentMethodsPage() {
     <div className="min-h-screen">
       <div className="mx-auto w-full max-w-[1440px] px-[80px] py-[40px]">
         {/* Page Header with scaling */}
-        <div className="mb-[30px] w-[133.33%] origin-top-left scale-[0.75]">
-          <div className="mb-[71px] flex items-center rounded-[20px] bg-white px-[81px] py-[20px] shadow-[0px_0px_10px_0px_rgba(24,181,34,0.25)]">
+        <div className="mb-[15px] w-[133.33%] origin-top-left scale-[0.75]">
+          <div className="mb-[30px] flex items-center rounded-[20px] bg-white px-[81px] py-[20px] shadow-[0px_0px_10px_0px_rgba(24,181,34,0.25)]">
             <div className="flex items-center gap-[34px]">
               {/* Icon Box */}
               <div className="flex items-center justify-center rounded-[10px] bg-[#EEFFEF] p-[15px] shadow-[0px_0px_10px_0px_rgba(24,181,34,0.25)]">
@@ -233,7 +233,7 @@ export default function PaymentMethodsPage() {
         <PaymentMethodsStats summary={paymentSummary} />
 
         {/* Tabs Navigation with scaling */}
-        <div className="mb-[50px] mt-[50px] w-[133.33%] origin-top-left scale-[0.75]">
+        <div className="mb-[25px] mt-[25px] w-[133.33%] origin-top-left scale-[0.75]">
           <div className="relative">
             {/* Horizontal line under all tabs */}
             <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-[#E5E7EB]" />

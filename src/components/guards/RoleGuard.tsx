@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import toast from "react-hot-toast";
@@ -17,10 +17,12 @@ export default function RoleGuard({
   redirectTo,
 }: RoleGuardProps) {
   const router = useRouter();
-  const { user, isAuthenticated, loading } = useAuth();
+  const { user, isAuthenticated, loading, refreshUser } = useAuth();
+  const isVerifyingRef = useRef(false);
 
   useEffect(() => {
-    if (loading) return;
+    // Skip if already verifying or still loading
+    if (loading || isVerifyingRef.current) return;
 
     if (!isAuthenticated || !user) {
       toast.error("Please login to access this page");
@@ -28,16 +30,39 @@ export default function RoleGuard({
       return;
     }
 
-    if (user.activeRole !== allowedRole) {
+    // If role doesn't match, refresh user data from backend before blocking
+    // This prevents false positives from stale data
+    if (user.activeRole !== allowedRole && !isVerifyingRef.current) {
+      isVerifyingRef.current = true;
+
+      refreshUser()
+        .catch(() => {
+          toast.error("Failed to verify access. Please login again.");
+          router.push("/login");
+        })
+        .finally(() => {
+          isVerifyingRef.current = false;
+        });
+      return;
+    }
+
+    // After refresh, if still wrong role, redirect
+    if (user.activeRole !== allowedRole && isVerifyingRef.current === false) {
       toast.error(
         `This page is only accessible for ${allowedRole}s. Please logout and login with a ${allowedRole} account.`
       );
-
-      // Redirect based on user's current role
       const redirectPath = redirectTo || `/${user.activeRole}/dashboard`;
       router.push(redirectPath);
     }
-  }, [isAuthenticated, user, loading, allowedRole, router, redirectTo]);
+  }, [
+    isAuthenticated,
+    user,
+    loading,
+    allowedRole,
+    router,
+    redirectTo,
+    refreshUser,
+  ]);
 
   // Show loading state
   if (loading) {

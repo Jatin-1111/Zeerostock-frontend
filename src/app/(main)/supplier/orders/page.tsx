@@ -144,7 +144,7 @@ export default function SupplierOrders() {
   }
 
   return (
-    <div className="mx-auto min-h-screen w-full max-w-full bg-[#EEFBF6] px-12 py-6">
+    <div className="w-full bg-[#EEFBF6] px-12 py-6">
       {/* Header */}
       <div className="mb-9 flex items-center justify-between">
         <h1 className="text-[27px] font-semibold text-[#0d1b2a]">My orders</h1>
@@ -157,123 +157,125 @@ export default function SupplierOrders() {
       {/* Table */}
       {orders.length > 0 ? (
         <>
-          <div className="w-full overflow-hidden rounded-[15px] bg-white shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)]">
-            {/* Table Headers */}
-            <div className="flex h-[69px] items-center border-b border-[#e5e5e5] px-[30px]">
-              <div className="flex-[1_1_120px] min-w-[120px]">
-                <p className="text-[15px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
-                  ORDER ID
-                </p>
-              </div>
-              <div className="flex-[1_1_150px] min-w-[150px]">
-                <p className="text-[15px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
-                  SUPPLIER
-                </p>
-              </div>
-              <div className="flex-[1.5_1_200px] min-w-[200px]">
-                <p className="text-[15px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
-                  ITEMS
-                </p>
-              </div>
-              <div className="flex-[1_1_120px] min-w-[120px]">
-                <p className="text-[15px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
-                  AMOUNT
-                </p>
-              </div>
-              <div className="flex-[1_1_120px] min-w-[120px]">
-                <p className="text-[15px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
-                  STATUS
-                </p>
-              </div>
-              <div className="flex-[1_1_120px] min-w-[120px]">
-                <p className="text-[15px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
-                  ORDER
-                  <br />
-                  DATE
-                </p>
-              </div>
-              <div className="flex-[1_1_120px] min-w-[120px]">
-                <p className="text-[15px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
-                  EXPECTED
-                  <br />
-                  DATE
-                </p>
-              </div>
-              <div className="flex-[0_0_80px] min-w-[80px]">
-                <p className="text-[15px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
-                  ACTIONS
-                </p>
-              </div>
-            </div>
-
-            {/* Table Rows */}
-            {orders.map((order) => (
-              <div
-                key={order.id}
-                className="flex h-[75px] items-center border-b border-[#e5e5e5] px-[30px] transition-colors hover:bg-gray-50"
-              >
-                {/* Order ID */}
+          <div className="w-full overflow-x-auto rounded-[15px] bg-white shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)]">
+            <div className="min-w-[1030px]">
+              {/* Table Headers */}
+              <div className="flex h-[69px] items-center border-b border-[#e5e5e5] px-[30px]">
                 <div className="flex-[1_1_120px] min-w-[120px]">
-                  <p className="text-[15px] font-medium leading-[21px] tracking-[0.38px] text-[#9c9c9c]">
-                    {order.order_number}
+                  <p className="text-[15px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
+                    ORDER ID
                   </p>
                 </div>
-
-                {/* Supplier/Buyer */}
                 <div className="flex-[1_1_150px] min-w-[150px]">
-                  <p className="inline-block border-b-2 border-[#2aae7a] pb-[2px] text-[15px] font-normal leading-[21px] tracking-[0.38px] text-black">
-                    {order.buyer_company || order.buyer_name}
+                  <p className="text-[15px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
+                    SUPPLIER
                   </p>
                 </div>
-
-                {/* Items */}
                 <div className="flex-[1.5_1_200px] min-w-[200px]">
-                  <p className="truncate text-[15px] font-normal leading-[21px] tracking-[0.38px] text-black">
-                    {order.items[0]?.product_title || "N/A"}
+                  <p className="text-[15px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
+                    ITEMS
                   </p>
                 </div>
-
-                {/* Amount */}
                 <div className="flex-[1_1_120px] min-w-[120px]">
-                  <p className="text-[15px] font-normal leading-[21px] tracking-[0.38px] text-black">
-                    {formatCurrency(order.total_amount)}
+                  <p className="text-[15px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
+                    AMOUNT
                   </p>
                 </div>
-
-                {/* Status */}
                 <div className="flex-[1_1_120px] min-w-[120px]">
-                  <p
-                    className="text-[15px] font-normal capitalize leading-[21px] tracking-[0.38px]"
-                    style={{
-                      color: getStatusColor(order.status),
-                    }}
-                  >
-                    {order.status}
+                  <p className="text-[15px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
+                    STATUS
                   </p>
                 </div>
-
-                {/* Order Date */}
                 <div className="flex-[1_1_120px] min-w-[120px]">
-                  <p className="text-[15px] font-normal leading-[21px] tracking-[0.38px] text-black">
-                    {formatDate(order.created_at)}
+                  <p className="text-[15px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
+                    ORDER
+                    <br />
+                    DATE
                   </p>
                 </div>
-
-                {/* Expected Date */}
                 <div className="flex-[1_1_120px] min-w-[120px]">
-                  <p className="text-[15px] font-normal leading-[21px] tracking-[0.38px] text-black">
-                    {formatDate(order.updated_at)}
+                  <p className="text-[15px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
+                    EXPECTED
+                    <br />
+                    DATE
                   </p>
                 </div>
-
-                {/* Actions */}
                 <div className="flex-[0_0_80px] min-w-[80px]">
-                  <button className="rounded-[8px] border-[0.38px] border-[#747474] p-1.5 transition-colors hover:bg-gray-100">
-                    <MoreVertical className="h-5 w-5 text-[#747474]" />
-                  </button>
+                  <p className="text-[15px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
+                    ACTIONS
+                  </p>
                 </div>
               </div>
-            ))}
+
+              {/* Table Rows */}
+              {orders.map((order) => (
+                <div
+                  key={order.id}
+                  className="flex h-[75px] items-center border-b border-[#e5e5e5] px-[30px] transition-colors hover:bg-gray-50"
+                >
+                  {/* Order ID */}
+                  <div className="flex-[1_1_120px] min-w-[120px]">
+                    <p className="text-[15px] font-medium leading-[21px] tracking-[0.38px] text-[#9c9c9c]">
+                      {order.order_number}
+                    </p>
+                  </div>
+
+                  {/* Supplier/Buyer */}
+                  <div className="flex-[1_1_150px] min-w-[150px]">
+                    <p className="inline-block border-b-2 border-[#2aae7a] pb-[2px] text-[15px] font-normal leading-[21px] tracking-[0.38px] text-black">
+                      {order.buyer_company || order.buyer_name}
+                    </p>
+                  </div>
+
+                  {/* Items */}
+                  <div className="flex-[1.5_1_200px] min-w-[200px]">
+                    <p className="truncate text-[15px] font-normal leading-[21px] tracking-[0.38px] text-black">
+                      {order.items[0]?.product_title || "N/A"}
+                    </p>
+                  </div>
+
+                  {/* Amount */}
+                  <div className="flex-[1_1_120px] min-w-[120px]">
+                    <p className="text-[15px] font-normal leading-[21px] tracking-[0.38px] text-black">
+                      {formatCurrency(order.total_amount)}
+                    </p>
+                  </div>
+
+                  {/* Status */}
+                  <div className="flex-[1_1_120px] min-w-[120px]">
+                    <p
+                      className="text-[15px] font-normal capitalize leading-[21px] tracking-[0.38px]"
+                      style={{
+                        color: getStatusColor(order.status),
+                      }}
+                    >
+                      {order.status}
+                    </p>
+                  </div>
+
+                  {/* Order Date */}
+                  <div className="flex-[1_1_120px] min-w-[120px]">
+                    <p className="text-[15px] font-normal leading-[21px] tracking-[0.38px] text-black">
+                      {formatDate(order.created_at)}
+                    </p>
+                  </div>
+
+                  {/* Expected Date */}
+                  <div className="flex-[1_1_120px] min-w-[120px]">
+                    <p className="text-[15px] font-normal leading-[21px] tracking-[0.38px] text-black">
+                      {formatDate(order.updated_at)}
+                    </p>
+                  </div>
+
+                  {/* Actions */}
+                  <div className="flex-[0_0_80px] min-w-[80px]">
+                    <button className="rounded-[8px] border-[0.38px] border-[#747474] p-1.5 transition-colors hover:bg-gray-100">
+                      <MoreVertical className="h-5 w-5 text-[#747474]" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Pagination */}

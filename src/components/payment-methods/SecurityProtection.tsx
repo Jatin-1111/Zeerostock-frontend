@@ -3,8 +3,8 @@
 // Custom SVG Components
 const SecuritySafeIcon = () => (
   <svg
-    width="33"
-    height="33"
+    width="25"
+    height="25"
     viewBox="0 0 33 33"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -22,8 +22,8 @@ const SecuritySafeIcon = () => (
 
 const LockIcon = () => (
   <svg
-    width="35"
-    height="35"
+    width="26"
+    height="26"
     viewBox="0 0 35 35"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -50,8 +50,8 @@ const LockIcon = () => (
 
 const ShieldCheckIcon = () => (
   <svg
-    width="30"
-    height="30"
+    width="23"
+    height="23"
     viewBox="0 0 30 30"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -96,22 +96,22 @@ export default function SecurityProtection() {
   ];
 
   return (
-    <div className="scale-75 origin-top-left w-[133.33%]">
-      <div className="bg-white rounded-[20px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] relative p-0 h-[524px]">
+    <div className="w-full">
+      <div className="bg-white rounded-[15px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] relative p-0 h-[393px]">
         {/* Title with Icon */}
-        <div className="absolute left-[74px] top-[52px] -translate-y-1/2 flex items-center gap-[15px]">
+        <div className="absolute left-[56px] top-[39px] -translate-y-1/2 flex items-center gap-[11px]">
           <SecuritySafeIcon />
-          <h3 className="font-semibold text-[26px] text-[#0D1B2A] tracking-[0.5px] leading-[24px] m-0">
+          <h3 className="font-semibold text-[20px] text-[#0D1B2A] tracking-[0.5px] leading-[18px] m-0">
             Security & Protection
           </h3>
         </div>
 
         {/* Info Box */}
-        <div className="absolute left-[83px] right-[83px] top-[132px] bg-[#EEFFEF] border border-[#2AAE7A] rounded-[20px] py-[25px] pl-[25px] pr-[55px] flex gap-[15px] items-center">
+        <div className="absolute left-[62px] right-[62px] top-[99px] bg-[#EEFFEF] border border-[#2AAE7A] rounded-[15px] py-[19px] pl-[19px] pr-[41px] flex gap-[11px] items-center">
           <div className="shrink-0">
             <LockIcon />
           </div>
-          <p className="font-medium text-[20px] text-[#9C9C9C] leading-normal m-0 flex-1">
+          <p className="font-medium text-[15px] text-[#9C9C9C] leading-normal m-0 flex-1">
             All payment information is encrypted and stored securely. Zeerostock
             uses industry-standard PCI DSS compliance to protect your financial
             data.
@@ -119,17 +119,17 @@ export default function SecurityProtection() {
         </div>
 
         {/* Security Features Grid */}
-        <div className="absolute left-[39px] right-[39px] top-[299px] grid grid-cols-2 grid-rows-[repeat(2,75px)] gap-[30px]">
+        <div className="absolute left-[29px] right-[29px] top-[224px] grid grid-cols-2 grid-rows-[repeat(2,56px)] gap-[23px]">
           {securityFeatures.map((feature, index) => (
-            <div key={index} className="flex gap-[12px] items-start">
-              <div className="shrink-0 w-[51px] h-[40px] flex items-center justify-center p-[10px]">
+            <div key={index} className="flex gap-[9px] items-start">
+              <div className="shrink-0 w-[38px] h-[30px] flex items-center justify-center p-[8px]">
                 <ShieldCheckIcon />
               </div>
-              <div className="flex flex-col gap-[15px]">
-                <p className="font-medium text-[30px] text-[#0D1B2A] tracking-[0.5px] leading-[24px] m-0">
+              <div className="flex flex-col gap-[11px]">
+                <p className="font-medium text-[20px] text-[#0D1B2A] tracking-[0.5px] leading-[18px] m-0">
                   {feature.title}
                 </p>
-                <p className="font-medium text-[20px] text-[#9C9C9C] leading-[28px] m-0">
+                <p className="font-medium text-[12px] text-[#9C9C9C] leading-[21px] m-0">
                   {feature.description}
                 </p>
               </div>

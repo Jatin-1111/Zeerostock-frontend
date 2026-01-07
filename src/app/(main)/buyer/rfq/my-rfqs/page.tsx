@@ -71,13 +71,13 @@ export default function MyRFQsPage() {
 
   return (
     <div className="min-h-screen bg-[#eefbf6] pt-24 pb-12">
-      <div className="max-w-7xl mx-auto px-8">
+      <div className="max-w-5xl mx-auto px-6">
         {/* Header */}
-        <div className="flex items-center justify-between mb-12">
-          <h1 className="font-semibold text-3xl text-[#0d1b2a]">My RFQs</h1>
+        <div className="flex items-center justify-between mb-8">
+          <h1 className="font-semibold text-2xl text-[#0d1b2a]">My RFQs</h1>
           <Link
             href="/buyer/rfq/post"
-            className="bg-[#1e3a8a] text-white px-8 py-3 rounded-xl font-semibold text-sm hover:bg-[#1e3a8a]/90 transition-colors"
+            className="bg-[#1e3a8a] text-white px-6 py-2.5 rounded-xl font-semibold text-sm hover:bg-[#1e3a8a]/90 transition-colors"
           >
             + Post New RFQ
           </Link>
@@ -85,7 +85,7 @@ export default function MyRFQsPage() {
 
         {/* Error Message */}
         {error && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+          <div className="mb-6 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
             {error}
           </div>
         )}
@@ -115,28 +115,28 @@ export default function MyRFQsPage() {
               <table className="w-full">
                 <thead className="bg-gray-50 border-b border-gray-200">
                   <tr>
-                    <th className="px-6 py-4 text-left font-medium text-sm text-[#0d1b2a] tracking-wide">
+                    <th className="px-3 py-3 text-left font-medium text-xs text-[#0d1b2a] tracking-wide">
                       RFQ ID
                     </th>
-                    <th className="px-6 py-4 text-left font-medium text-sm text-[#0d1b2a] tracking-wide">
+                    <th className="px-3 py-3 text-left font-medium text-xs text-[#0d1b2a] tracking-wide">
                       TITLE
                     </th>
-                    <th className="px-6 py-4 text-left font-medium text-sm text-[#0d1b2a] tracking-wide">
-                      QUANTITY
+                    <th className="px-3 py-3 text-left font-medium text-xs text-[#0d1b2a] tracking-wide">
+                      QTY
                     </th>
-                    <th className="px-6 py-4 text-left font-medium text-sm text-[#0d1b2a] tracking-wide">
+                    <th className="px-3 py-3 text-left font-medium text-xs text-[#0d1b2a] tracking-wide">
                       BUDGET
                     </th>
-                    <th className="px-6 py-4 text-left font-medium text-sm text-[#0d1b2a] tracking-wide">
+                    <th className="px-3 py-3 text-left font-medium text-xs text-[#0d1b2a] tracking-wide">
                       STATUS
                     </th>
-                    <th className="px-6 py-4 text-left font-medium text-sm text-[#0d1b2a] tracking-wide">
-                      POSTED DATE
+                    <th className="px-3 py-3 text-left font-medium text-xs text-[#0d1b2a] tracking-wide">
+                      POSTED
                     </th>
-                    <th className="px-6 py-4 text-left font-medium text-sm text-[#0d1b2a] tracking-wide">
-                      EXPIRES ON
+                    <th className="px-3 py-3 text-left font-medium text-xs text-[#0d1b2a] tracking-wide">
+                      EXPIRES
                     </th>
-                    <th className="px-6 py-4 text-center font-medium text-sm text-[#0d1b2a] tracking-wide">
+                    <th className="px-3 py-3 text-center font-medium text-xs text-[#0d1b2a] tracking-wide">
                       QUOTES
                     </th>
                   </tr>
@@ -148,28 +148,28 @@ export default function MyRFQsPage() {
                       className="hover:bg-gray-50 transition-colors"
                     >
                       {/* RFQ ID */}
-                      <td className="px-6 py-5 font-medium text-sm text-gray-500 whitespace-nowrap">
+                      <td className="px-3 py-3 font-medium text-xs text-gray-500 whitespace-nowrap">
                         {rfq.rfqNumber}
                       </td>
 
                       {/* Title */}
-                      <td className="px-6 py-5">
+                      <td className="px-3 py-3">
                         <Link
                           href={`/buyer/rfq/${rfq.id}`}
-                          className="text-sm text-gray-900 hover:text-[#2aae7a] transition-colors line-clamp-2 max-w-md"
+                          className="text-sm text-gray-900 hover:text-[#2aae7a] transition-colors line-clamp-2 max-w-xs"
                         >
                           {rfq.title}
                         </Link>
                       </td>
 
                       {/* Quantity */}
-                      <td className="px-6 py-5 text-sm text-gray-700 whitespace-nowrap">
+                      <td className="px-3 py-3 text-xs text-gray-700 whitespace-nowrap">
                         <span className="font-medium">{rfq.quantity}</span>{" "}
                         <span className="text-gray-500">{rfq.unit}</span>
                       </td>
 
                       {/* Budget */}
-                      <td className="px-6 py-5 text-sm text-gray-900 whitespace-nowrap">
+                      <td className="px-3 py-3 text-xs text-gray-900 whitespace-nowrap">
                         {rfq.budgetMax ? (
                           `₹${parseFloat(String(rfq.budgetMax)).toLocaleString(
                             "en-IN"
@@ -180,9 +180,9 @@ export default function MyRFQsPage() {
                       </td>
 
                       {/* Status */}
-                      <td className="px-6 py-5">
+                      <td className="px-3 py-3">
                         <span
-                          className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border ${getStatusBadge(
+                          className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border ${getStatusBadge(
                             rfq.status
                           )}`}
                         >
@@ -191,18 +191,18 @@ export default function MyRFQsPage() {
                       </td>
 
                       {/* Posted Date */}
-                      <td className="px-6 py-5 text-sm text-gray-700 whitespace-nowrap">
+                      <td className="px-3 py-3 text-xs text-gray-700 whitespace-nowrap">
                         {formatDate(rfq.createdAt)}
                       </td>
 
                       {/* Expires On */}
-                      <td className="px-6 py-5 text-sm text-gray-700 whitespace-nowrap">
+                      <td className="px-3 py-3 text-xs text-gray-700 whitespace-nowrap">
                         {formatDate(rfq.expiresAt)}
                       </td>
 
                       {/* Quotes Count */}
-                      <td className="px-6 py-5 text-center">
-                        <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 font-semibold text-sm text-blue-700">
+                      <td className="px-3 py-3 text-center">
+                        <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-blue-100 font-semibold text-xs text-blue-700">
                           {rfq.quoteCount || 0}
                         </span>
                       </td>
@@ -216,11 +216,11 @@ export default function MyRFQsPage() {
 
         {/* Pagination */}
         {!isLoading && rfqs.length > 0 && totalPages > 1 && (
-          <div className="flex justify-center items-center gap-4 mt-8">
+          <div className="flex justify-center items-center gap-3 mt-6">
             <button
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="px-5 py-2 bg-[#1e3a8a] text-white rounded-lg text-sm font-medium hover:bg-[#1e3a8a]/90 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
+              className="px-4 py-2 bg-[#1e3a8a] text-white rounded-lg text-sm font-medium hover:bg-[#1e3a8a]/90 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
             >
               Previous
             </button>
@@ -230,7 +230,7 @@ export default function MyRFQsPage() {
             <button
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
-              className="px-5 py-2 bg-[#1e3a8a] text-white rounded-lg text-sm font-medium hover:bg-[#1e3a8a]/90 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
+              className="px-4 py-2 bg-[#1e3a8a] text-white rounded-lg text-sm font-medium hover:bg-[#1e3a8a]/90 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
             >
               Next
             </button>

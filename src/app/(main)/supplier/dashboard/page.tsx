@@ -142,8 +142,8 @@ export default function SupplierDashboard() {
       <div className="max-w-300 mx-auto py-12 px-5">
         <div className="flex justify-between">
           {/* Welcome Header */}
-          <div className="mb-[18px]">
-            <h1 className="text-[27px] font-semibold text-[#0d1b2a] mb-[6px]">
+          <div className="mb-4.5">
+            <h1 className="text-[27px] font-semibold text-[#0d1b2a] mb-1.5">
               Welcome Back, {user?.companyName || user?.firstName}
             </h1>
             <p className="text-lg font-medium text-[#9c9c9c]">
@@ -157,44 +157,44 @@ export default function SupplierDashboard() {
               href="/supplier/inventory"
               className="inline-flex items-center gap-2 px-4 py-[11px] bg-[#2aae7a] text-white text-base font-semibold rounded-[11px] hover:bg-[#25996b] transition-colors"
             >
-              <Plus className="w-[18px] h-[18px]" />
+              <Plus className="w-4.5 h-4.5" />
               Add Product
             </Link>
           </div>
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[18px] mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4.5 mb-6">
           {/* Active Listings */}
           <div
-            className="bg-white rounded-[15px] p-[18px] relative overflow-hidden"
+            className="bg-white rounded-[15px] p-4.5 relative overflow-hidden"
             style={{ boxShadow: "0px 0px 6px 0px rgba(24, 181, 34, 0.25)" }}
           >
-            <p className="text-base font-medium text-[#9c9c9c] mb-[6px]">
+            <p className="text-base font-medium text-[#9c9c9c] mb-1.5">
               Active Listings
             </p>
-            <p className="text-2xl font-semibold text-[#0d1b2a] mb-[6px]">
+            <p className="text-2xl font-semibold text-[#0d1b2a] mb-1.5">
               {stats.listings.active_listings}
             </p>
             <p className="text-xs font-medium text-[#9c9c9c]">
               {formatNumber(stats.listings.total_views)} total views
             </p>
-            <div className="absolute right-[18px] top-1/2 -translate-y-1/2 w-[44px] h-[44px] flex items-center justify-center">
+            <div className="absolute right-4.5 top-1/2 -translate-y-1/2 w-[44px] h-[44px] flex items-center justify-center">
               <Package className="w-6 h-6 text-[#2aae7a]" strokeWidth={1.5} />
             </div>
           </div>
 
           {/* RFQ Matches */}
           <div
-            className="bg-white rounded-[15px] p-[18px] relative overflow-hidden"
+            className="bg-white rounded-[15px] p-4.5 relative overflow-hidden"
             style={{ boxShadow: "0px 0px 6px 0px rgba(24, 181, 34, 0.25)" }}
           >
-            <p className="text-base font-medium text-[#9c9c9c] mb-[6px]">
+            <p className="text-base font-medium text-[#9c9c9c] mb-1.5">
               RFQ Matches
             </p>
-            <p className="text-2xl font-semibold text-[#0d1b2a] mb-[6px]">5</p>
+            <p className="text-2xl font-semibold text-[#0d1b2a] mb-1.5">5</p>
             <p className="text-xs font-medium text-[#9c9c9c]">Processing</p>
-            <div className="absolute right-[18px] top-1/2 -translate-y-1/2 w-[45px] h-[45px] bg-[#dbeafe] rounded-full flex items-center justify-center">
+            <div className="absolute right-4.5 top-1/2 -translate-y-1/2 w-[45px] h-[45px] bg-[#dbeafe] rounded-full flex items-center justify-center">
               <MessageSquarePlus
                 className="w-[23px] h-[23px] text-[#3b82f6]"
                 strokeWidth={1.5}
@@ -204,19 +204,19 @@ export default function SupplierDashboard() {
 
           {/* Monthly Revenue */}
           <div
-            className="bg-white rounded-[15px] p-[18px] relative overflow-hidden"
+            className="bg-white rounded-[15px] p-4.5 relative overflow-hidden"
             style={{ boxShadow: "0px 0px 6px 0px rgba(24, 181, 34, 0.25)" }}
           >
-            <p className="text-base font-medium text-[#9c9c9c] mb-[6px]">
+            <p className="text-base font-medium text-[#9c9c9c] mb-1.5">
               Monthly Revenue
             </p>
-            <p className="text-2xl font-semibold text-[#2aae7a] mb-[6px]">
+            <p className="text-2xl font-semibold text-[#2aae7a] mb-1.5">
               {formatCurrency(stats.orders.revenue_this_month)}
             </p>
             <p className="text-xs font-medium text-[#2aae7a]">
               +12% from last month
             </p>
-            <div className="absolute right-[18px] top-1/2 -translate-y-1/2 w-[45px] h-[45px] bg-[#eeffef] rounded-full flex items-center justify-center">
+            <div className="absolute right-4.5 top-1/2 -translate-y-1/2 w-[45px] h-[45px] bg-[#eeffef] rounded-full flex items-center justify-center">
               <TrendingUp
                 className="w-[23px] h-[23px] text-[#2aae7a]"
                 strokeWidth={1.5}
@@ -226,17 +226,17 @@ export default function SupplierDashboard() {
 
           {/* Pending Orders */}
           <div
-            className="bg-white rounded-[15px] p-[18px] relative overflow-hidden"
+            className="bg-white rounded-[15px] p-4.5 relative overflow-hidden"
             style={{ boxShadow: "0px 0px 6px 0px rgba(24, 181, 34, 0.25)" }}
           >
-            <p className="text-base font-medium text-[#9c9c9c] mb-[6px]">
+            <p className="text-base font-medium text-[#9c9c9c] mb-1.5">
               Pending Orders
             </p>
-            <p className="text-2xl font-semibold text-[#eab308] mb-[6px]">
+            <p className="text-2xl font-semibold text-[#eab308] mb-1.5">
               {stats.orders.pending_orders}
             </p>
             <p className="text-xs font-medium text-[#9c9c9c]">Last 30 days</p>
-            <div className="absolute right-[18px] top-1/2 -translate-y-1/2 w-[45px] h-[45px] bg-[#fef9c3] rounded-full flex items-center justify-center">
+            <div className="absolute right-4.5 top-1/2 -translate-y-1/2 w-[45px] h-[45px] bg-[#fef9c3] rounded-full flex items-center justify-center">
               <Clock
                 className="w-[23px] h-[23px] text-[#eab308]"
                 strokeWidth={1.5}
@@ -246,10 +246,10 @@ export default function SupplierDashboard() {
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-[18px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4.5">
           {/* Active Listings Performance */}
           <div
-            className="bg-white rounded-[15px] p-[18px]"
+            className="bg-white rounded-[15px] p-4.5"
             style={{ boxShadow: "0px 0px 6px 0px rgba(0, 0, 0, 0.25)" }}
           >
             <h2 className="text-lg font-medium text-[#0d1b2a] mb-6">
@@ -262,13 +262,13 @@ export default function SupplierDashboard() {
                 <p className="text-gray-600 mb-3">No listings yet</p>
                 <Link
                   href="/supplier/inventory"
-                  className="px-3 py-[6px] bg-gray-900 text-white text-xs hover:bg-gray-800"
+                  className="px-3 py-1.5 bg-gray-900 text-white text-xs hover:bg-gray-800"
                 >
                   Create Your First Listing
                 </Link>
               </div>
             ) : (
-              <div className="space-y-[18px]">
+              <div className="space-y-4.5">
                 {stats.recentActivity.slice(0, 3).map((listing) => (
                   <div
                     key={listing.id}
@@ -289,10 +289,10 @@ export default function SupplierDashboard() {
                       )}
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-[17px] font-medium text-black mb-[6px] line-clamp-1">
+                      <h3 className="text-[17px] font-medium text-black mb-1.5 line-clamp-1">
                         {listing.title}
                       </h3>
-                      <div className="flex items-center gap-[6px] mb-[9px]">
+                      <div className="flex items-center gap-1.5 mb-[9px]">
                         <span className="bg-[#eeffef] px-[9px] py-[3px] rounded-full text-[11px] font-medium text-[#2aae7a]">
                           Electronics
                         </span>
@@ -300,7 +300,7 @@ export default function SupplierDashboard() {
                           Active
                         </span>
                       </div>
-                      <div className="flex items-center gap-[18px] text-sm text-[#9c9c9c]">
+                      <div className="flex items-center gap-4.5 text-sm text-[#9c9c9c]">
                         <span className="font-medium">
                           {listing.views_count} Views
                         </span>
@@ -310,15 +310,15 @@ export default function SupplierDashboard() {
                         <span className="font-medium">12 Bids</span>
                       </div>
                     </div>
-                    <div className="text-right self-start pt-[6px]">
-                      <p className="text-[23px] font-semibold text-black mb-[6px]">
+                    <div className="text-right self-start pt-1.5">
+                      <p className="text-[23px] font-semibold text-black mb-1.5">
                         {formatCurrency(listing.price_after)}
                       </p>
                       <p className="text-base font-medium text-[#9c9c9c] mb-6">
                         600 units
                       </p>
-                      <div className="flex items-center gap-[6px] text-[17px] text-[#0d1b2a]">
-                        <Clock className="w-[18px] h-[18px]" />
+                      <div className="flex items-center gap-1.5 text-[17px] text-[#0d1b2a]">
+                        <Clock className="w-4.5 h-4.5" />
                         <span className="font-medium">3d 14h</span>
                       </div>
                     </div>
@@ -329,20 +329,20 @@ export default function SupplierDashboard() {
           </div>
 
           {/* Right Sidebar */}
-          <div className="space-y-[18px]">
+          <div className="space-y-4.5">
             {/* Performance Insights */}
             <div
-              className="bg-white rounded-[15px] p-[18px]"
+              className="bg-white rounded-[15px] p-4.5"
               style={{ boxShadow: "0px 0px 6px 0px rgba(0, 0, 0, 0.25)" }}
             >
-              <h3 className="text-lg font-medium text-[#0d1b2a] mb-[18px]">
+              <h3 className="text-lg font-medium text-[#0d1b2a] mb-4.5">
                 Performance Insights
               </h3>
 
               {/* Rating Display */}
-              <div className="flex items-center justify-center mb-[18px]">
+              <div className="flex items-center justify-center mb-4.5">
                 <p className="text-[29px] font-medium text-[#2aae7a]">4.8</p>
-                <Star className="w-7 h-7 text-[#2aae7a] fill-[#2aae7a] ml-[6px]" />
+                <Star className="w-7 h-7 text-[#2aae7a] fill-[#2aae7a] ml-1.5" />
               </div>
               <p className="text-base font-medium text-[#9c9c9c] text-center mb-6">
                 Supplier Rating
@@ -379,10 +379,10 @@ export default function SupplierDashboard() {
 
             {/* Top RFQ Match */}
             <div
-              className="bg-white rounded-[15px] p-[18px]"
+              className="bg-white rounded-[15px] p-4.5"
               style={{ boxShadow: "0px 0px 6px 0px rgba(0, 0, 0, 0.25)" }}
             >
-              <h3 className="text-lg font-medium text-[#0d1b2a] mb-[18px]">
+              <h3 className="text-lg font-medium text-[#0d1b2a] mb-4.5">
                 Top RFQ Match
               </h3>
               <p className="text-base font-medium text-[#0d1b2a] mb-[3px]">
@@ -391,7 +391,7 @@ export default function SupplierDashboard() {
               <p className="text-sm font-medium text-[#9c9c9c] mb-3">
                 95% Match
               </p>
-              <p className="text-lg font-semibold text-black mb-[18px]">
+              <p className="text-lg font-semibold text-black mb-4.5">
                 ₹180,000
               </p>
               <Link

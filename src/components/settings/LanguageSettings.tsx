@@ -1,14 +1,17 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Globe, ChevronDown, Save } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 import {
-  getSettings,
-  updateLanguagePreferences,
-} from "@/services/settings.service";
+  getUserSettings,
+  updateUserLanguagePreferences,
+} from "@/services/user-settings.service";
 import type { LanguagePreferences } from "@/types/buyer.types";
+import { toast } from "sonner";
 
 export default function LanguageSettings() {
+  const { user } = useAuth();
   const [formData, setFormData] = useState<LanguagePreferences>({
     language: "English",
     region: "United States",
@@ -21,25 +24,37 @@ export default function LanguageSettings() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
-  useEffect(() => {
-    loadSettings();
-  }, []);
+  const activeRole = user?.activeRole || "buyer";
 
-  const loadSettings = async () => {
+  const loadSettings = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await getSettings();
+      setError(null);
+
+      console.log("[LanguageSettings] Loading with activeRole:", activeRole);
+
+      // Use role-based settings loader
+      const response = await getUserSettings(activeRole);
 
       if (response.success && response.data) {
         setFormData(response.data.language);
+      } else {
+        throw new Error(response.message || "Failed to load settings");
       }
-    } catch (err: any) {
+    } catch (err) {
       console.error("Failed to load settings:", err);
-      setError(err.message || "Failed to load settings");
+      const message =
+        err instanceof Error ? err.message : "Failed to load settings";
+      setError(message);
+      toast.error(message);
     } finally {
       setLoading(false);
     }
-  };
+  }, [activeRole]);
+
+  useEffect(() => {
+    loadSettings();
+  }, [loadSettings]);
 
   const handleSave = async () => {
     setSaving(true);
@@ -47,17 +62,27 @@ export default function LanguageSettings() {
     setSuccess(null);
 
     try {
-      const response = await updateLanguagePreferences(formData);
+      // Use role-based update
+      const response = await updateUserLanguagePreferences(
+        formData,
+        activeRole
+      );
 
-      if (response.success) {
+      if (response?.success) {
         setSuccess("Language preferences updated successfully");
+        toast.success("Language preferences updated successfully");
         setTimeout(() => setSuccess(null), 3000);
       } else {
-        throw new Error(response.message || "Update failed");
+        throw new Error(response?.message || "Update failed");
       }
-    } catch (err: any) {
+    } catch (err) {
       console.error("Failed to update language settings:", err);
-      setError(err.message || "Failed to update language preferences");
+      const errorMsg =
+        err instanceof Error
+          ? err.message
+          : "Failed to update language preferences";
+      setError(errorMsg);
+      toast.error(errorMsg);
     } finally {
       setSaving(false);
     }

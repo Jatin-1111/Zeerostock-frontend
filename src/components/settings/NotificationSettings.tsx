@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { MessageSquareDot, BookText, Save } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 import {
-  getSettings,
-  updateNotificationPreferences,
-} from "@/services/settings.service";
+  getUserSettings,
+  updateUserNotificationPreferences,
+} from "@/services/user-settings.service";
 
 // Local type definition for notification settings structure
 interface NotificationSettings {
@@ -24,6 +25,7 @@ interface NotificationSettings {
 }
 
 export default function NotificationSettings() {
+  const { user } = useAuth();
   const [settings, setSettings] = useState<NotificationSettings>({
     emailNotifications: {
       orderUpdates: true,
@@ -43,41 +45,51 @@ export default function NotificationSettings() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
-  useEffect(() => {
-    loadSettings();
-  }, []);
+  const activeRole = user?.activeRole || "buyer";
 
-  const loadSettings = async () => {
+  const loadSettings = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await getSettings();
+      console.log(
+        "[NotificationSettings] Loading with activeRole:",
+        activeRole
+      );
+      const response = await getUserSettings(activeRole);
 
       if (response.success && response.data) {
         // Transform backend NotificationPreferences to component NotificationSettings format
         const backendPrefs = response.data.notifications;
-        const componentSettings: NotificationSettings = {
-          emailNotifications: {
-            orderUpdates: backendPrefs.email,
-            promotions: backendPrefs.marketing,
-            accountActivity: backendPrefs.alerts,
-            newMessages: backendPrefs.email, // Using email as a proxy
-          },
-          pushNotifications: {
-            orderUpdates: backendPrefs.push,
-            promotions: backendPrefs.marketing,
-            accountActivity: backendPrefs.alerts,
-            newMessages: backendPrefs.push, // Using push as a proxy
-          },
-        };
-        setSettings(componentSettings);
+        if (backendPrefs) {
+          const componentSettings: NotificationSettings = {
+            emailNotifications: {
+              orderUpdates: backendPrefs.email,
+              promotions: backendPrefs.marketing,
+              accountActivity: backendPrefs.alerts,
+              newMessages: backendPrefs.email, // Using email as a proxy
+            },
+            pushNotifications: {
+              orderUpdates: backendPrefs.push,
+              promotions: backendPrefs.marketing,
+              accountActivity: backendPrefs.alerts,
+              newMessages: backendPrefs.push, // Using push as a proxy
+            },
+          };
+          setSettings(componentSettings);
+        }
       }
-    } catch (err: any) {
+    } catch (err) {
       console.error("Failed to load settings:", err);
-      setError(err.message || "Failed to load settings");
+      const message =
+        err instanceof Error ? err.message : "Failed to load settings";
+      setError(message);
     } finally {
       setLoading(false);
     }
-  };
+  }, [activeRole]);
+
+  useEffect(() => {
+    loadSettings();
+  }, [loadSettings]);
 
   const handleToggle = (
     type: "emailNotifications" | "pushNotifications",
@@ -116,7 +128,10 @@ export default function NotificationSettings() {
           settings.pushNotifications.accountActivity,
       };
 
-      const response = await updateNotificationPreferences(backendPrefs);
+      const response = await updateUserNotificationPreferences(
+        backendPrefs,
+        activeRole
+      );
 
       if (response.success) {
         setSuccess("Notification preferences updated successfully");
@@ -124,9 +139,13 @@ export default function NotificationSettings() {
       } else {
         throw new Error(response.message || "Update failed");
       }
-    } catch (err: any) {
+    } catch (err) {
       console.error("Failed to update notification settings:", err);
-      setError(err.message || "Failed to update notification preferences");
+      const message =
+        err instanceof Error
+          ? err.message
+          : "Failed to update notification preferences";
+      setError(message);
     } finally {
       setSaving(false);
     }

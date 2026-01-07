@@ -43,7 +43,7 @@ export const UnitInput: React.FC<UnitInputProps> = ({
       </label>
       <div className="flex gap-[4px]">
         <input
-          type="text"
+          type="number"
           name={name}
           value={value}
           onChange={onChange}

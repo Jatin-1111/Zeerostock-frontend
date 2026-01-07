@@ -31,26 +31,39 @@ export default function RoleGuard({
     }
 
     // If role doesn't match, refresh user data from backend before blocking
-    // This prevents false positives from stale data
+    // This prevents false positives from stale data (e.g., after role switch)
     if (user.activeRole !== allowedRole && !isVerifyingRef.current) {
       isVerifyingRef.current = true;
 
       refreshUser()
+        .then(() => {
+          // After refresh, check again
+          isVerifyingRef.current = false;
+        })
         .catch(() => {
           toast.error("Failed to verify access. Please login again.");
           router.push("/login");
-        })
-        .finally(() => {
           isVerifyingRef.current = false;
         });
       return;
     }
 
-    // After refresh, if still wrong role, redirect
-    if (user.activeRole !== allowedRole && isVerifyingRef.current === false) {
-      toast.error(
-        `This page is only accessible for ${allowedRole}s. Please logout and login with a ${allowedRole} account.`
-      );
+    // After refresh, if still wrong role, check if user has the required role
+    if (user.activeRole !== allowedRole && !isVerifyingRef.current) {
+      const userRoles = user.roles || [];
+
+      // If user has the required role but it's not active, suggest switching
+      if (userRoles.includes(allowedRole)) {
+        toast.error(
+          `This page requires ${allowedRole} mode. Please switch to ${allowedRole} mode from settings.`
+        );
+      } else {
+        // User doesn't have the required role at all
+        toast.error(
+          `This page is only accessible for ${allowedRole}s. You don't have ${allowedRole} access.`
+        );
+      }
+
       const redirectPath = redirectTo || `/${user.activeRole}/dashboard`;
       router.push(redirectPath);
     }

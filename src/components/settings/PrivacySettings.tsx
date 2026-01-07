@@ -1,14 +1,17 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 import {
-  getSettings,
-  updatePrivacySettings,
-} from "@/services/settings.service";
+  getUserSettings,
+  updateUserPrivacySettings,
+} from "@/services/user-settings.service";
 import type { PrivacySettings } from "@/types/buyer.types";
 import { Bell, Download, Trash2 } from "lucide-react";
+import { toast } from "sonner";
 
 export default function PrivacySettingsComponent() {
+  const { user } = useAuth();
   const [privacy, setPrivacy] = useState<PrivacySettings>({
     dataSharing: true,
     analytics: true,
@@ -18,25 +21,30 @@ export default function PrivacySettingsComponent() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
-  useEffect(() => {
-    loadSettings();
-  }, []);
+  const activeRole = user?.activeRole || "buyer";
 
-  const loadSettings = async () => {
+  const loadSettings = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await getSettings();
+      console.log("[PrivacySettings] Loading with activeRole:", activeRole);
+      const response = await getUserSettings(activeRole);
 
-      if (response.success && response.data) {
+      if (response.success && response.data && response.data.privacy) {
         setPrivacy(response.data.privacy);
       }
-    } catch (err: any) {
+    } catch (err) {
       console.error("Failed to load settings:", err);
-      setError(err.message || "Failed to load settings");
+      const message =
+        err instanceof Error ? err.message : "Failed to load settings";
+      setError(message);
     } finally {
       setLoading(false);
     }
-  };
+  }, [activeRole]);
+
+  useEffect(() => {
+    loadSettings();
+  }, [loadSettings]);
 
   const togglePrivacy = async (key: keyof PrivacySettings) => {
     const newValue = !privacy[key];
@@ -49,17 +57,23 @@ export default function PrivacySettingsComponent() {
     setSuccess(null);
 
     try {
-      const response = await updatePrivacySettings({ [key]: newValue });
+      const response = await updateUserPrivacySettings(
+        { [key]: newValue },
+        activeRole
+      );
 
       if (response.success) {
         setSuccess("Privacy settings updated");
         setTimeout(() => setSuccess(null), 3000);
+        toast.success("Privacy settings updated");
       } else {
         throw new Error(response.message || "Update failed");
       }
-    } catch (err: any) {
+    } catch (err) {
       console.error("Failed to update privacy settings:", err);
-      setError(err.message || "Failed to update settings");
+      const message =
+        err instanceof Error ? err.message : "Failed to update settings";
+      setError(message);
       // Revert on error
       setPrivacy({ ...privacy, [key]: !newValue });
     } finally {

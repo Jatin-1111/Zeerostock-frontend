@@ -7,6 +7,10 @@ import {
   ApiResponse,
 } from "@/types/api.types";
 
+const TOKEN_KEY =
+  process.env.NEXT_PUBLIC_JWT_TOKEN_KEY || "zeerostock_access_token";
+const REFRESH_TOKEN_KEY =
+  process.env.NEXT_PUBLIC_REFRESH_TOKEN_KEY || "zeerostock_refresh_token";
 const USER_DATA_KEY =
   process.env.NEXT_PUBLIC_USER_DATA_KEY || "zeerostock_user";
 
@@ -30,21 +34,36 @@ export const roleService = {
    */
   async switchRole(
     role: "buyer" | "supplier"
-  ): Promise<ApiResponse<{ activeRole: string }>> {
-    const response = await apiRequest<{ activeRole: string }>(
-      "post",
-      "/roles/switch-role",
-      { role }
-    );
+  ): Promise<
+    ApiResponse<{
+      user: any;
+      accessToken: string;
+      refreshToken: string;
+      activeRole: string;
+    }>
+  > {
+    const response = await apiRequest<{
+      user: any;
+      accessToken: string;
+      refreshToken: string;
+      activeRole: string;
+    }>("post", "/roles/switch-role", { role });
 
-    // Update stored user data with new active role
-    if (response.success && typeof window !== "undefined") {
-      const userData = localStorage.getItem(USER_DATA_KEY);
-      if (userData) {
-        const user = JSON.parse(userData);
-        user.activeRole = role;
-        localStorage.setItem(USER_DATA_KEY, JSON.stringify(user));
-      }
+    // Backend returns new tokens and updated user object
+    if (response.success && response.data && typeof window !== "undefined") {
+      const { user, accessToken, refreshToken } = response.data;
+
+      // Store new tokens
+      localStorage.setItem(TOKEN_KEY, accessToken);
+      localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
+
+      // Store updated user data with new active role
+      localStorage.setItem(USER_DATA_KEY, JSON.stringify(user));
+
+      console.log(
+        "[RoleService] Updated localStorage with new role:",
+        user.activeRole
+      );
     }
 
     return response;

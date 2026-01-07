@@ -43,16 +43,7 @@ export default function MarketplaceHero() {
   };
 
   return (
-    <div
-      className="relative w-full max-w-[1200px] h-[400px] mx-auto rounded-2xl shadow-[0px_0px_10px_0px_rgba(0,0,0,0.25)] overflow-hidden"
-      style={{
-        backgroundImage: "url('/hero-marketplace.jpg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundColor: "#eefbf6",
-      }}
-    >
+    <div className="relative w-full max-w-[1200px] mx-auto rounded-2xl shadow-[0px_0px_10px_0px_rgba(0,0,0,0.25)] overflow-hidden h-[400px] bg-[#eefbf6] bg-[url('/hero-marketplace.jpg')] bg-cover bg-center bg-no-repeat">
       {/* Main heading */}
       <h1 className="absolute left-1/2 top-[77.5px] -translate-x-1/2 -translate-y-1/2 font-normal text-7xl text-[#0d1b2a] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] whitespace-nowrap m-0">
         B2B Surplus Marketplace

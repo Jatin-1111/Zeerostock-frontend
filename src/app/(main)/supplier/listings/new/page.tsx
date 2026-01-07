@@ -776,6 +776,7 @@ export default function NewListing() {
                   value={formData.diameterMin}
                   onChange={handleInputChange}
                   placeholder="eg., 200-400"
+                  type="number"
                 />
 
                 <FormInput
@@ -784,6 +785,7 @@ export default function NewListing() {
                   value={formData.wallThicknessMin}
                   onChange={handleInputChange}
                   placeholder="eg., 5-10"
+                  type="number"
                 />
               </div>
 

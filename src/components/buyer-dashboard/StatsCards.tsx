@@ -39,34 +39,34 @@ export default function StatsCards({ stats, isLoading }: StatsCardsProps) {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[22px]">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[16.5px]">
       {statsData.map((stat, index) => {
         const Icon = stat.icon;
         return (
           <div
             key={index}
-            className="bg-white rounded-[15px] shadow-[0px_0px_5px_0px_rgba(24,181,34,0.25)] h-[101px] px-[11px] py-[24px] relative overflow-hidden"
+            className="bg-white rounded-[11px] shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)] h-[76px] px-[8px] py-[18px] relative overflow-hidden"
           >
             {/* Icon Circle */}
             <div
-              className="absolute left-[11px] top-1/2 -translate-y-1/2 w-[52px] h-[52px] rounded-full flex items-center justify-center"
+              className="absolute left-[8px] top-1/2 -translate-y-1/2 w-[39px] h-[39px] rounded-full flex items-center justify-center"
               style={{ backgroundColor: stat.bgColor }}
             >
               <Icon
-                className="w-[38px] h-[38px] text-[#1e3a8a]"
+                className="w-[28.5px] h-[28.5px] text-[#1e3a8a]"
                 strokeWidth={1.5}
               />
             </div>
 
             {/* Text Content */}
-            <div className="ml-[68px]">
-              <p className="text-[15px] font-medium text-[#9c9c9c] leading-normal mb-2">
+            <div className="ml-[51px]">
+              <p className="text-[11px] font-medium text-[#9c9c9c] leading-normal mb-1.5">
                 {stat.label}
               </p>
               {isLoading ? (
-                <div className="animate-pulse bg-gray-200 h-6 w-15 rounded"></div>
+                <div className="animate-pulse bg-gray-200 h-4.5 w-11 rounded"></div>
               ) : (
-                <p className="text-[24px] font-semibold text-[#0d1b2a] leading-normal">
+                <p className="text-[18px] font-semibold text-[#0d1b2a] leading-normal">
                   {stat.value}
                 </p>
               )}

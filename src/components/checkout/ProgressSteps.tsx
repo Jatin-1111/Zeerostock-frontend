@@ -10,19 +10,19 @@ export default function ProgressSteps({ currentStep }: ProgressStepsProps) {
   ];
 
   return (
-    <div className="flex items-center justify-center mb-9">
+    <div className="flex items-center justify-center mb-7">
       {steps.map((step, index) => {
         const isActive = currentStep >= step.number;
         return (
           <div key={step.number} className="flex items-center">
             <div className="flex flex-col items-center">
               <div
-                className={`w-[60px] h-[60px] rounded-[15px] flex items-center justify-center shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)] ${
+                className={`w-[45px] h-[45px] rounded-[11px] flex items-center justify-center shadow-[0px_0px_3.4px_0px_rgba(0,0,0,0.25)] ${
                   isActive ? "bg-[#2AAE7A]" : "bg-white"
                 }`}
               >
                 <svg
-                  className="w-[38px] h-[38px]"
+                  className="w-[29px] h-[29px]"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke={isActive ? "white" : "#9c9c9c"}
@@ -54,12 +54,12 @@ export default function ProgressSteps({ currentStep }: ProgressStepsProps) {
                   )}
                 </svg>
               </div>
-              <span className="mt-2 text-[15px] font-medium text-[#0d1b2a]">
+              <span className="mt-1.5 text-[11px] font-medium text-[#0d1b2a]">
                 {step.label}
               </span>
             </div>
             {index < steps.length - 1 && (
-              <div className="w-[211px] h-[1px] bg-[#bebebe] mx-[15px] -mt-[30px]"></div>
+              <div className="w-[158px] h-[1px] bg-[#bebebe] mx-[11px] -mt-[23px]"></div>
             )}
           </div>
         );

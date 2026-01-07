@@ -137,17 +137,17 @@ export default function PostRFQPage() {
   }
 
   return (
-    <div className="min-h-screen px-15 py-6">
-      <div className="max-w-[1000px] mx-auto">
-        <h1 className="text-[27px] font-semibold text-[#0d1b2a] mb-6">
+    <div className="min-h-screen px-11 py-4.5">
+      <div className="max-w-[750px] mx-auto">
+        <h1 className="text-[20px] font-semibold text-[#0d1b2a] mb-4.5">
           Post New RFQ
         </h1>
 
         {/* Success Message */}
         {success && (
-          <div className="mb-5 p-3 bg-green-50 border border-green-200 flex items-center gap-2 rounded-[8px]">
-            <Check className="w-4 h-4 text-green-600 shrink-0" />
-            <p className="text-sm text-green-800">
+          <div className="mb-4 p-2 bg-green-50 border border-green-200 flex items-center gap-1.5 rounded-[6px]">
+            <Check className="w-3 h-3 text-green-600 shrink-0" />
+            <p className="text-xs text-green-800">
               RFQ created successfully! Suppliers will start sending quotes
               soon.
             </p>
@@ -156,19 +156,19 @@ export default function PostRFQPage() {
 
         {/* Error Message */}
         {error && (
-          <div className="mb-5 p-3 bg-red-50 border border-red-200 flex items-center gap-2 rounded-[8px]">
-            <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
-            <p className="text-sm text-red-800">{error}</p>
+          <div className="mb-4 p-2 bg-red-50 border border-red-200 flex items-center gap-1.5 rounded-[6px]">
+            <AlertCircle className="w-3 h-3 text-red-600 shrink-0" />
+            <p className="text-xs text-red-800">{error}</p>
           </div>
         )}
 
         <form
           onSubmit={handleSubmit}
-          className="bg-white rounded-[15px] shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)] p-[23px]"
+          className="bg-white rounded-[11px] shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] p-[17px]"
         >
           {/* Product Title */}
-          <div className="mb-6">
-            <label className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]">
+          <div className="mb-4.5">
+            <label className="block text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
               Product Title<span className="text-red-600">*</span>
             </label>
             <input
@@ -178,16 +178,16 @@ export default function PostRFQPage() {
               onChange={(e) =>
                 setFormData({ ...formData, title: e.target.value })
               }
-              className="w-full h-[56px] px-4 border border-[#bebebe] rounded-[10px] text-[16px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+              className="w-full h-[42px] px-3 border border-[#bebebe] rounded-[7.5px] text-[12px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
               required
               disabled={loading}
             />
           </div>
 
           {/* Category and Industry */}
-          <div className="grid grid-cols-2 gap-[30px] mb-6">
+          <div className="grid grid-cols-2 gap-[22.5px] mb-4.5">
             <div>
-              <label className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]">
+              <label className="block text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
                 Category<span className="text-red-600">*</span>
               </label>
               <select
@@ -195,7 +195,7 @@ export default function PostRFQPage() {
                 onChange={(e) =>
                   setFormData({ ...formData, categoryId: e.target.value })
                 }
-                className="w-full h-[42px] px-3 border border-[#bebebe] rounded-[8px] text-[12px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe] appearance-none bg-white"
+                className="w-full h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe] appearance-none bg-white"
                 required
                 disabled={loading}
               >

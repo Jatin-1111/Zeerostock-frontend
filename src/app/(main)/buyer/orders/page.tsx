@@ -161,96 +161,96 @@ export default function MyOrdersPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#eefbf6] pb-[45px] pt-[100.5px]">
-      <div className="mx-auto max-w-[1440px] px-10">
+    <div className="relative min-h-screen bg-[#eefbf6] pb-[34px] pt-[75px]">
+      <div className="mx-auto max-w-[1440px] px-7.5">
         {/* Page Title and Export Button */}
-        <div className="mb-[80.25px] flex items-center justify-between">
-          <h1 className="m-0 text-[27px] font-semibold text-[#0d1b2a]">
+        <div className="mb-[60px] flex items-center justify-between">
+          <h1 className="m-0 text-[20px] font-semibold text-[#0d1b2a]">
             My Orders
           </h1>
-          <button className="flex h-[45px] cursor-pointer items-center gap-[7.5px] rounded-[11.25px] border-none bg-[#1e3a8a] px-[82.5px] text-[13.5px] font-semibold text-white">
+          <button className="flex h-[34px] cursor-pointer items-center gap-[5.5px] rounded-[8.5px] border-none bg-[#1e3a8a] px-[62px] text-[10px] font-semibold text-white">
             <FrameIcon />
             Export Orders
           </button>
         </div>
 
         {error && (
-          <div className="mb-[15px] rounded-[6px] border border-[#fcc] bg-[#fee] p-[12px] text-[#c00]">
+          <div className="mb-[11px] rounded-[4.5px] border border-[#fcc] bg-[#fee] p-[9px] text-[#c00] text-xs">
             {error}
           </div>
         )}
 
         {/* Orders Table */}
-        <div className="min-h-[371.25px] w-full overflow-hidden rounded-[15px] bg-white shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)]">
+        <div className="min-h-[278px] w-full overflow-hidden rounded-[11px] bg-white shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)]">
           {/* Table Headers */}
-          <div className="grid h-[69px] w-full grid-cols-[140px_200px_1fr_140px_120px_140px_140px_120px] items-center border-b border-[#e5e5e5]">
-            <div className="pl-[22.5px] text-[15px] font-medium tracking-[0.5px] text-[#0d1b2a]">
+          <div className="grid h-[52px] w-full grid-cols-[105px_150px_1fr_105px_90px_105px_105px_90px] items-center border-b border-[#e5e5e5]">
+            <div className="pl-[17px] text-[11px] font-medium tracking-[0.4px] text-[#0d1b2a]">
               ORDER ID
             </div>
-            <div className="text-[15px] font-medium tracking-[0.5px] text-[#0d1b2a]">
+            <div className="text-[11px] font-medium tracking-[0.4px] text-[#0d1b2a]">
               SUPPLIER
             </div>
-            <div className="text-[15px] font-medium tracking-[0.5px] text-[#0d1b2a]">
+            <div className="text-[11px] font-medium tracking-[0.4px] text-[#0d1b2a]">
               ITEMS
             </div>
-            <div className="text-[15px] font-medium tracking-[0.5px] text-[#0d1b2a]">
+            <div className="text-[11px] font-medium tracking-[0.4px] text-[#0d1b2a]">
               AMOUNT
             </div>
-            <div className="text-[15px] font-medium tracking-[0.5px] text-[#0d1b2a]">
+            <div className="text-[11px] font-medium tracking-[0.4px] text-[#0d1b2a]">
               STATUS
             </div>
-            <div className="text-[15px] font-medium leading-[18px] tracking-[0.5px] text-[#0d1b2a]">
+            <div className="text-[11px] font-medium leading-[13.5px] tracking-[0.4px] text-[#0d1b2a]">
               ORDER
               <br />
               DATE
             </div>
-            <div className="text-[15px] font-medium leading-[18px] tracking-[0.5px] text-[#0d1b2a]">
+            <div className="text-[11px] font-medium leading-[13.5px] tracking-[0.4px] text-[#0d1b2a]">
               EXPECTED
               <br />
               DATE
             </div>
-            <div className="text-[15px] font-medium tracking-[0.5px] text-[#0d1b2a]">
+            <div className="text-[11px] font-medium tracking-[0.4px] text-[#0d1b2a]">
               ACTIONS
             </div>
           </div>
 
           {/* Table Rows */}
           {isLoading ? (
-            <div className="py-[45px] text-center text-[15px] text-[#9c9c9c]">
+            <div className="py-[34px] text-center text-[11px] text-[#9c9c9c]">
               <div className="animate-pulse">Loading orders...</div>
             </div>
           ) : orders.length === 0 ? (
-            <div className="py-[45px] text-center text-[15px] text-[#9c9c9c]">
+            <div className="py-[34px] text-center text-[11px] text-[#9c9c9c]">
               No orders found
             </div>
           ) : (
             orders.map((order, index) => (
               <div
                 key={order.orderId || order.orderNumber}
-                className="grid h-[75px] w-full grid-cols-[140px_200px_1fr_140px_120px_140px_140px_120px] items-center bg-white shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]"
+                className="grid h-[56px] w-full grid-cols-[105px_150px_1fr_105px_90px_105px_105px_90px] items-center bg-white shadow-[0px_1.5px_3px_0px_rgba(0,0,0,0.25)]"
               >
                 {/* Order ID */}
-                <div className="pl-[22.5px] text-[15px] font-medium leading-[21px] tracking-[0.5px] text-[#9c9c9c]">
+                <div className="pl-[17px] text-[11px] font-medium leading-[16px] tracking-[0.4px] text-[#9c9c9c]">
                   {order.orderNumber}
                 </div>
 
                 {/* Supplier - with green underline on hover */}
                 <div className="flex flex-col">
-                  <div className="inline-block cursor-pointer border-b-2 border-transparent p-[7.5px] text-[15px] font-normal leading-[21px] tracking-[0.5px] text-black transition-all duration-200 hover:border-[#18b522]">
+                  <div className="inline-block cursor-pointer border-b-2 border-transparent p-[5.5px] text-[11px] font-normal leading-[16px] tracking-[0.4px] text-black transition-all duration-200 hover:border-[#18b522]">
                     {order.supplierName}
                   </div>
                 </div>
 
                 {/* Items */}
                 <div
-                  className="overflow-hidden text-ellipsis whitespace-nowrap text-[15px] font-normal leading-[21px] tracking-[0.5px] text-black"
+                  className="overflow-hidden text-ellipsis whitespace-nowrap text-[11px] font-normal leading-[16px] tracking-[0.4px] text-black"
                   title={order.items}
                 >
                   {order.items}
                 </div>
 
                 {/* Amount */}
-                <div className="text-[15px] font-normal leading-[21px] tracking-[0.5px] text-black">
+                <div className="text-[11px] font-normal leading-[16px] tracking-[0.4px] text-black">
                   ₹
                   {parseFloat(String(order.totalAmount || 0)).toLocaleString(
                     "en-IN",
@@ -260,14 +260,14 @@ export default function MyOrdersPage() {
 
                 {/* Status */}
                 <div
-                  className="text-[15px] font-normal leading-[21px] tracking-[0.5px] capitalize"
+                  className="text-[11px] font-normal leading-[16px] tracking-[0.4px] capitalize"
                   style={{ color: getStatusColor(order.status) }}
                 >
                   {order.status}
                 </div>
 
                 {/* Order Date */}
-                <div className="text-[15px] font-normal leading-[21px] tracking-[0.5px] text-black">
+                <div className="text-[11px] font-normal leading-[16px] tracking-[0.4px] text-black">
                   {new Date(order.orderDate).toLocaleDateString("en-IN", {
                     year: "numeric",
                     month: "2-digit",
@@ -276,7 +276,7 @@ export default function MyOrdersPage() {
                 </div>
 
                 {/* Expected Date */}
-                <div className="text-[15px] font-normal leading-[21px] tracking-[0.5px] text-black">
+                <div className="text-[11px] font-normal leading-[16px] tracking-[0.4px] text-black">
                   {order.estimatedDelivery
                     ? new Date(order.estimatedDelivery).toLocaleDateString(
                         "en-IN",
@@ -286,9 +286,9 @@ export default function MyOrdersPage() {
                 </div>
 
                 {/* Actions */}
-                <div className="pl-[12px]">
+                <div className="pl-[9px]">
                   <Link href={`/buyer/track-order/${order.orderNumber}`}>
-                    <button className="flex cursor-pointer items-center justify-center rounded-[7.5px] border-[0.5px] border-[#747474] bg-transparent p-[7.5px]">
+                    <button className="flex cursor-pointer items-center justify-center rounded-[5.5px] border-[0.4px] border-[#747474] bg-transparent p-[5.5px]">
                       <FrameIcon />
                     </button>
                   </Link>
@@ -300,21 +300,21 @@ export default function MyOrdersPage() {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="mt-[30px] flex justify-center gap-[12px] items-center">
+          <div className="mt-[22.5px] flex justify-center gap-[9px] items-center">
             <button
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="cursor-pointer rounded-[6px] border-2 border-[#0d1b2a] bg-white px-[18px] py-[9px] text-[12px] disabled:cursor-not-allowed disabled:opacity-50"
+              className="cursor-pointer rounded-[4.5px] border-2 border-[#0d1b2a] bg-white px-[13.5px] py-[6.75px] text-[9px] disabled:cursor-not-allowed disabled:opacity-50"
             >
               Previous
             </button>
-            <span className="text-[12px] text-[#0d1b2a]">
+            <span className="text-[9px] text-[#0d1b2a]">
               Page {currentPage} of {totalPages}
             </span>
             <button
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
-              className="cursor-pointer rounded-[6px] border-2 border-[#0d1b2a] bg-white px-[18px] py-[9px] text-[12px] disabled:cursor-not-allowed disabled:opacity-50"
+              className="cursor-pointer rounded-[4.5px] border-2 border-[#0d1b2a] bg-white px-[13.5px] py-[6.75px] text-[9px] disabled:cursor-not-allowed disabled:opacity-50"
             >
               Next
             </button>

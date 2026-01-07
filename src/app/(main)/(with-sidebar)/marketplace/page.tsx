@@ -27,7 +27,7 @@ function MarketplaceContent() {
 
   // Otherwise, show the default marketplace page
   return (
-    <div className="max-w-full bg-[#EEFBF6] py-16">
+    <div className="max-w-full bg-[#EEFBF6] py-12">
       <MarketplaceHero />
       <CategorySection />
       {/* <TodayDealsSection /> */}
@@ -42,7 +42,7 @@ function MarketplaceContent() {
 
 export default function MarketplacePage() {
   return (
-    <Suspense fallback={<div className="p-8 text-center">Loading...</div>}>
+    <Suspense fallback={<div className="p-6 text-center">Loading...</div>}>
       <MarketplaceContent />
     </Suspense>
   );

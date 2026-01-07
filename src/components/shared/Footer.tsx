@@ -8,29 +8,29 @@ export default function Footer() {
   return (
     <footer className="w-full bg-[#eefbf6]">
       {/* Main Footer Content */}
-      <div className="w-full bg-[#0d1e23] py-16 px-4 sm:px-8 md:px-20">
-        <div className="max-w-[1440px] mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
+      <div className="w-full bg-[#0d1e23] py-12 px-3 sm:px-6 md:px-15">
+        <div className="max-w-[1080px] mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-9">
             {/* Logo and Tagline */}
-            <div className="flex flex-col gap-4 items-center lg:items-start">
+            <div className="flex flex-col gap-3 items-center lg:items-start">
               <Link href="/home" className="shrink-0">
                 <img
                   src={"/Zeerostock Logo B White.png"}
                   alt="Zeerostock"
-                  className="h-[140px]"
+                  className="h-[105px]"
                 />
               </Link>
-              <p className="text-[14px] leading-normal text-[#d0d0d0] text-center lg:text-left">
+              <p className="text-[10.5px] leading-normal text-[#d0d0d0] text-center lg:text-left">
                 Turning idle inventory into opportunity.
               </p>
             </div>
 
             {/* Company Links */}
-            <div className="flex flex-col gap-[18px]">
-              <h3 className="text-[20px] leading-normal font-medium text-white">
+            <div className="flex flex-col gap-[13.5px]">
+              <h3 className="text-[15px] leading-normal font-medium text-white">
                 Company
               </h3>
-              <div className="flex flex-col gap-2 text-[14px] leading-6 text-[#d0d0d0]">
+              <div className="flex flex-col gap-1.5 text-[10.5px] leading-6 text-[#d0d0d0]">
                 <Link
                   href="/about"
                   className="hover:text-white transition-colors"
@@ -47,11 +47,11 @@ export default function Footer() {
             </div>
 
             {/* Policy Links */}
-            <div className="flex flex-col gap-[18px]">
-              <h3 className="text-[20px] leading-normal font-medium text-white">
+            <div className="flex flex-col gap-[13.5px]">
+              <h3 className="text-[15px] leading-normal font-medium text-white">
                 Policy
               </h3>
-              <div className="flex flex-col gap-2 text-[14px] leading-6 text-[#d0d0d0]">
+              <div className="flex flex-col gap-1.5 text-[10.5px] leading-6 text-[#d0d0d0]">
                 <Link
                   href="/terms-conditions"
                   className="hover:text-white transition-colors"
@@ -68,11 +68,11 @@ export default function Footer() {
             </div>
 
             {/* Quick Links & Support Combined */}
-            <div className="flex flex-col gap-[18px]">
-              <h3 className="text-[20px] leading-normal font-medium text-white">
+            <div className="flex flex-col gap-[13.5px]">
+              <h3 className="text-[15px] leading-normal font-medium text-white">
                 Quick Links
               </h3>
-              <div className="flex flex-col gap-2 text-[14px] leading-6 text-[#d0d0d0]">
+              <div className="flex flex-col gap-1.5 text-[10.5px] leading-6 text-[#d0d0d0]">
                 <Link
                   href="/for-buyer"
                   className="hover:text-white transition-colors"
@@ -101,17 +101,17 @@ export default function Footer() {
             </div>
 
             {/* Newsletter Signup */}
-            <div className="flex flex-col gap-6">
-              <h3 className="text-[20px] leading-normal font-medium text-white">
+            <div className="flex flex-col gap-[18px]">
+              <h3 className="text-[15px] leading-normal font-medium text-white">
                 Join Our Network
               </h3>
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-3">
                 <input
                   type="email"
                   placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full h-[50px] bg-gray-800 border border-[#8f8f8f] rounded-xl px-4 text-[15px] leading-[22px] text-[#d0d0d0] placeholder:text-dimgray focus:outline-none focus:border-[#2aae7a] placeholder:text-[#696969]"
+                  className="w-full h-[37.5px] bg-gray-800 border border-[#8f8f8f] rounded-xl px-3 text-[11.25px] leading-[22px] text-[#d0d0d0] placeholder:text-dimgray focus:outline-none focus:border-[#2aae7a] placeholder:text-[#696969]"
                 />
                 <button
                   onClick={() => {
@@ -122,7 +122,7 @@ export default function Footer() {
                       setEmail("");
                     }
                   }}
-                  className="w-full h-[50px] bg-[#2aae7a] text-[#0d1e23] text-[18px] leading-[22px] font-medium rounded-xl hover:bg-[#2aae7a]/90 transition-colors"
+                  className="w-full h-[37.5px] bg-[#2aae7a] text-[#0d1e23] text-[13.5px] leading-[22px] font-medium rounded-xl hover:bg-[#2aae7a]/90 transition-colors"
                 >
                   Subscribe
                 </button>
@@ -131,14 +131,14 @@ export default function Footer() {
           </div>
 
           {/* Social Media Icons */}
-          <div className="flex items-center justify-center lg:justify-end gap-2.5 mt-12">
+          <div className="flex items-center justify-center lg:justify-end gap-2 mt-9">
             <a
               href="#"
-              className="w-10 h-10 bg-[#2aae7a] rounded-full flex items-center justify-center hover:bg-[#2aae7a]/80 transition-colors"
+              className="w-[30px] h-[30px] bg-[#2aae7a] rounded-full flex items-center justify-center hover:bg-[#2aae7a]/80 transition-colors"
               aria-label="Facebook"
             >
               <svg
-                className="w-5 h-5 text-white"
+                className="w-[15px] h-[15px] text-white"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
@@ -147,11 +147,11 @@ export default function Footer() {
             </a>
             <a
               href="https://x.com/zeerostock?s=21"
-              className="w-10 h-10 bg-[#2aae7a] rounded-full flex items-center justify-center hover:bg-[#2aae7a]/80 transition-colors"
+              className="w-[30px] h-[30px] bg-[#2aae7a] rounded-full flex items-center justify-center hover:bg-[#2aae7a]/80 transition-colors"
               aria-label="Twitter/X"
             >
               <svg
-                className="w-5 h-5 text-white"
+                className="w-[15px] h-[15px] text-white"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
@@ -160,11 +160,11 @@ export default function Footer() {
             </a>
             <a
               href="https://www.linkedin.com/company/zeerostock-ventures/"
-              className="w-10 h-10 bg-[#2aae7a] rounded-full flex items-center justify-center hover:bg-[#2aae7a]/80 transition-colors"
+              className="w-[30px] h-[30px] bg-[#2aae7a] rounded-full flex items-center justify-center hover:bg-[#2aae7a]/80 transition-colors"
               aria-label="LinkedIn"
             >
               <svg
-                className="w-5 h-5 text-white"
+                className="w-[15px] h-[15px] text-white"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
@@ -173,11 +173,11 @@ export default function Footer() {
             </a>
             <a
               href="https://www.instagram.com/zeerostock_ventures?igsh=MTZsMGh4ZjJ6cjVpeQ%3D%3D&utm_source=qr"
-              className="w-10 h-10 bg-[#2aae7a] rounded-full flex items-center justify-center hover:bg-[#2aae7a]/80 transition-colors"
+              className="w-[30px] h-[30px] bg-[#2aae7a] rounded-full flex items-center justify-center hover:bg-[#2aae7a]/80 transition-colors"
               aria-label="Instagram"
             >
               <svg
-                className="w-5 h-5 text-white"
+                className="w-[15px] h-[15px] text-white"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
@@ -187,18 +187,18 @@ export default function Footer() {
           </div>
 
           {/* Divider Line */}
-          <div className="w-full h-px bg-gray-600 my-6" />
+          <div className="w-full h-px bg-gray-600 my-[18px]" />
 
           {/* Copyright */}
-          <p className="text-[15px] leading-6 text-[#d0d0d0] text-center">
+          <p className="text-[11.25px] leading-6 text-[#d0d0d0] text-center">
             © 2025 Zeerostock Ventures. All Rights Reserved.
           </p>
         </div>
       </div>
 
       {/* Bottom Disclaimer - Now with proper light background visibility */}
-      <div className="max-w-[900px] mx-auto px-4 py-6">
-        <p className="text-[15px] leading-6 text-[#0d1e23] text-center">
+      <div className="max-w-[675px] mx-auto px-3 py-[18px]">
+        <p className="text-[11.25px] leading-6 text-[#0d1e23] text-center">
           Zeerostock is a registered trademark. Our platform facilitates B2B
           transactions with industry-leading security and compliance standards.
           For enterprise solutions and partnership, contact our business

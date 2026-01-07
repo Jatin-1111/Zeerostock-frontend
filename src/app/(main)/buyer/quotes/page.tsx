@@ -183,14 +183,14 @@ export default function MyQuotesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#eefbf6] px-[60px] py-[100px]">
+    <div className="min-h-screen bg-[#eefbf6] px-[45px] py-[75px]">
       {/* Page Title */}
-      <h1 className="text-[27px] font-semibold text-[#0d1b2a] mb-[43px]">
+      <h1 className="text-[20px] font-semibold text-[#0d1b2a] mb-[32px]">
         My Quotes
       </h1>
 
       {/* Divider Line */}
-      <div className="w-full h-[1px] bg-gray-300 mb-[30px]" />
+      <div className="w-full h-[1px] bg-gray-300 mb-[22.5px]" />
 
       {/* Loading State */}
       {loading ? (

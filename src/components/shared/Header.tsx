@@ -31,23 +31,23 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 w-full z-50 shadow-[0px_5px_8px_0px_rgba(0,0,0,0.25)] bg-linear-to-b from-[#43C786] to-[#0A2540]">
-      <div className="container mx-auto h-20 flex items-center justify-between px-20 gap-8">
+      <div className="container mx-auto h-[60px] flex items-center justify-between px-[60px] gap-6">
         {/* Logo - Left Side */}
         <Link href="/" className="shrink-0">
           <img
             src={"/Zeerostock Logo B White.png"}
             alt="Zeerostock"
-            className="h-[125px]"
+            className="h-[94px]"
           />
         </Link>
 
         {/* Right Side - Nav, Search, Icons */}
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-6">
           {/* Navigation Links */}
-          <nav className="flex items-center gap-[60px]">
+          <nav className="flex items-center gap-[45px]">
             <Link
               href="/home"
-              className={`font-semibold text-[20px] leading-normal whitespace-nowrap transition-colors ${
+              className={`font-semibold text-[15px] leading-normal whitespace-nowrap transition-colors ${
                 isActive("/home")
                   ? "text-[#58ea50]"
                   : "text-white hover:text-[#58ea50]"
@@ -57,7 +57,7 @@ export default function Header() {
             </Link>
             <Link
               href="/about"
-              className={`font-semibold text-[20px] leading-normal whitespace-nowrap transition-colors ${
+              className={`font-semibold text-[15px] leading-normal whitespace-nowrap transition-colors ${
                 isActive("/about")
                   ? "text-[#58ea50]"
                   : "text-white hover:text-[#58ea50]"
@@ -69,7 +69,7 @@ export default function Header() {
             {(!isAuthenticated || user?.activeRole !== "supplier") && (
               <Link
                 href="/buyer/dashboard"
-                className={`font-semibold text-[20px] leading-normal whitespace-nowrap transition-colors ${
+                className={`font-semibold text-[15px] leading-normal whitespace-nowrap transition-colors ${
                   isActive("/buyer")
                     ? "text-[#58ea50]"
                     : "text-white hover:text-[#58ea50]"
@@ -82,7 +82,7 @@ export default function Header() {
             {(!isAuthenticated || user?.activeRole !== "buyer") && (
               <Link
                 href="/supplier/dashboard"
-                className={`font-semibold text-[20px] leading-normal whitespace-nowrap transition-colors ${
+                className={`font-semibold text-[15px] leading-normal whitespace-nowrap transition-colors ${
                   isActive("/supplier")
                     ? "text-[#58ea50]"
                     : "text-white hover:text-[#58ea50]"
@@ -93,7 +93,7 @@ export default function Header() {
             )}
             <Link
               href="/roi"
-              className={`font-semibold text-[20px] leading-normal whitespace-nowrap transition-colors ${
+              className={`font-semibold text-[15px] leading-normal whitespace-nowrap transition-colors ${
                 isActive("/roi")
                   ? "text-[#58ea50]"
                   : "text-white hover:text-[#58ea50]"
@@ -104,23 +104,23 @@ export default function Header() {
           </nav>
 
           {/* Search Bar */}
-          <div className="w-[250px]">
+          <div className="w-[188px]">
             <EnhancedSearchInput
               placeholder="Search Industrial Equipment, etc"
-              className="rounded-full text-[11px] font-semibold py-2"
+              className="rounded-full text-[8px] font-semibold py-1.5"
               showPopularSearches={false}
             />
           </div>
 
           {/* Right Side Icons */}
-          <div className="flex items-center gap-4 shrink-0">
+          <div className="flex items-center gap-3 shrink-0">
             {/* Language Selector */}
             <button
-              className="flex items-center gap-2 px-4 py-2 rounded-full hover:bg-white/10 transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:bg-white/10 transition-colors"
               aria-label="Change language"
             >
               <svg
-                className="w-5 h-5 text-white"
+                className="w-[15px] h-[15px] text-white"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -131,7 +131,7 @@ export default function Header() {
                   strokeWidth="2"
                 />
               </svg>
-              <span className="text-white text-[14px] font-medium">EN</span>
+              <span className="text-white text-[10.5px] font-medium">EN</span>
             </button>
 
             {/* WhatsApp */}
@@ -139,11 +139,11 @@ export default function Header() {
               href="https://wa.me/918956835375"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-[44px] h-[44px] bg-[#25D366] rounded-full flex items-center justify-center hover:bg-[#25D366]/90 transition-colors"
+              className="w-[33px] h-[33px] bg-[#25D366] rounded-full flex items-center justify-center hover:bg-[#25D366]/90 transition-colors"
               aria-label="Contact us on WhatsApp"
             >
               <svg
-                className="w-6 h-6 text-white"
+                className="w-[18px] h-[18px] text-white"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
@@ -155,22 +155,22 @@ export default function Header() {
             <div className="relative">
               <button
                 onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                className="bg-[#0a2540] rounded-full flex items-center justify-center p-2.5 hover:bg-[#0d2f52] transition-colors"
+                className="bg-[#0a2540] rounded-full flex items-center justify-center p-2 hover:bg-[#0d2f52] transition-colors"
               >
-                <User className="w-5 h-5 text-white" />
+                <User className="w-[15px] h-[15px] text-white" />
               </button>
 
               {isUserMenuOpen && (
-                <div className="absolute right-0 mt-2 w-56 bg-white border-2 border-gray-900 rounded-lg shadow-lg z-20">
+                <div className="absolute right-0 mt-1.5 w-[168px] bg-white border-2 border-gray-900 rounded-lg shadow-lg z-20">
                   {isAuthenticated && user ? (
                     // Logged In User Menu
-                    <div className="py-2">
+                    <div className="py-1.5">
                       {/* User Info */}
-                      <div className="px-4 py-3 border-b border-gray-200">
-                        <p className="text-sm font-semibold text-gray-900">
+                      <div className="px-3 py-2 border-b border-gray-200">
+                        <p className="text-[10.5px] font-semibold text-gray-900">
                           {user.firstName} {user.lastName}
                         </p>
-                        <p className="text-xs text-gray-600 truncate">
+                        <p className="text-[9px] text-gray-600 truncate">
                           {user.email}
                         </p>
                       </div>
@@ -179,11 +179,11 @@ export default function Header() {
                       <div className="py-1">
                         <Link
                           href={`/${user.activeRole}/dashboard`}
-                          className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-900 hover:bg-gray-100 transition-colors"
+                          className="flex items-center gap-2 px-3 py-2 text-[10.5px] text-gray-900 hover:bg-gray-100 transition-colors"
                           onClick={() => setIsUserMenuOpen(false)}
                         >
                           <svg
-                            className="w-4 h-4"
+                            className="w-[12px] h-[12px]"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -199,11 +199,11 @@ export default function Header() {
                         </Link>
                         <Link
                           href={`/${user.activeRole}/settings`}
-                          className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-900 hover:bg-gray-100 transition-colors"
+                          className="flex items-center gap-2 px-3 py-2 text-[10.5px] text-gray-900 hover:bg-gray-100 transition-colors"
                           onClick={() => setIsUserMenuOpen(false)}
                         >
                           <svg
-                            className="w-4 h-4"
+                            className="w-[12px] h-[12px]"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -230,10 +230,10 @@ export default function Header() {
                       {/* Logout */}
                       <button
                         onClick={handleLogout}
-                        className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors"
+                        className="w-full flex items-center gap-2 px-3 py-2 text-[10.5px] text-red-600 hover:bg-red-50 transition-colors"
                       >
                         <svg
-                          className="w-4 h-4"
+                          className="w-[12px] h-[12px]"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -250,28 +250,28 @@ export default function Header() {
                     </div>
                   ) : (
                     // Logged Out User Menu
-                    <div className="py-2">
-                      <div className="px-4 py-3 border-b border-gray-200">
-                        <p className="text-sm font-semibold text-gray-900">
+                    <div className="py-1.5">
+                      <div className="px-3 py-2 border-b border-gray-200">
+                        <p className="text-[10.5px] font-semibold text-gray-900">
                           Welcome to Zeerostock
                         </p>
-                        <p className="text-xs text-gray-600">
+                        <p className="text-[9px] text-gray-600">
                           Sign in to access your account
                         </p>
                       </div>
 
-                      <div className="p-3 space-y-2">
+                      <div className="p-2 space-y-1.5">
                         <Link
                           href="/login"
                           onClick={() => setIsUserMenuOpen(false)}
-                          className="block w-full px-4 py-2 text-sm font-medium text-white bg-[#1a5f52] hover:bg-[#164b42] rounded-lg transition-colors text-center"
+                          className="block w-full px-3 py-1.5 text-[10.5px] font-medium text-white bg-[#1a5f52] hover:bg-[#164b42] rounded-lg transition-colors text-center"
                         >
                           Login
                         </Link>
                         <Link
                           href="/signup"
                           onClick={() => setIsUserMenuOpen(false)}
-                          className="block w-full px-4 py-2 text-sm font-medium text-[#1a5f52] bg-white border-2 border-[#1a5f52] hover:bg-gray-50 rounded-lg transition-colors text-center"
+                          className="block w-full px-3 py-1.5 text-[10.5px] font-medium text-[#1a5f52] bg-white border-2 border-[#1a5f52] hover:bg-gray-50 rounded-lg transition-colors text-center"
                         >
                           Sign Up
                         </Link>
@@ -279,8 +279,8 @@ export default function Header() {
 
                       <hr className="my-1 border-gray-200" />
 
-                      <div className="px-4 py-2">
-                        <p className="text-xs text-gray-500 text-center">
+                      <div className="px-3 py-1.5">
+                        <p className="text-[9px] text-gray-500 text-center">
                           New to Zeerostock?{" "}
                           <Link
                             href="/about"

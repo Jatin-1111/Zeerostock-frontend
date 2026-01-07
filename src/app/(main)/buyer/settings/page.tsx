@@ -15,8 +15,8 @@ export default function SettingsPage() {
 
   return (
     <div className="bg-white min-h-screen">
-      <div className="max-w-8xl mx-auto py-12 pl-2 pr-6">
-        <div className="flex flex-col lg:flex-row gap-8">
+      <div className="max-w-8xl mx-auto py-9 pl-1.5 pr-4.5">
+        <div className="flex flex-col lg:flex-row gap-6">
           {/* Sidebar */}
           <SettingsSidebar
             activeTab={activeTab}

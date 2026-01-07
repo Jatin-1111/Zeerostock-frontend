@@ -108,25 +108,25 @@ export default function ExploreProductGrid({
       <div className="flex-1">
         {/* Header with Search */}
         <div className="bg-white shadow-[0px_1px_5px_0px_rgba(0,0,0,0.25)]">
-          <div className="flex items-center gap-[14px] px-[14px] py-[20px]">
+          <div className="flex items-center gap-[10.5px] px-[10.5px] py-[15px]">
             {/* Menu Button - Toggle Filter Sidebar */}
             <button
               onClick={() => setIsFilterOpen(!isFilterOpen)}
               className="text-gray-700 transition-colors"
               aria-label="Toggle filters"
             >
-              <Menu className="w-[26px] h-[26px]" />
+              <Menu className="w-[19.5px] h-[19.5px]" />
             </button>
 
             {/* Search Bar */}
-            <div className="flex-1 max-w-[591px]">
-              <div className="flex items-center gap-[245px] bg-[rgba(235,235,235,0.65)] rounded-[11px] shadow-[0px_0px_5px_0px_rgba(24,181,34,0.5)] px-[14px] py-[6px]">
+            <div className="flex-1 max-w-[443px]">
+              <div className="flex items-center gap-[184px] bg-[rgba(235,235,235,0.65)] rounded-[8px] shadow-[0px_0px_5px_0px_rgba(24,181,34,0.5)] px-[10.5px] py-[4.5px]">
                 <div className="flex items-center gap-[6px]">
-                  <span className="text-[13px] font-semibold text-[#374151] opacity-80">
+                  <span className="text-[10px] font-semibold text-[#374151] opacity-80">
                     All
                   </span>
                   <svg
-                    className="w-[20px] h-[20px] text-[#374151] opacity-80"
+                    className="w-[15px] h-[15px] text-[#374151] opacity-80"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -138,7 +138,7 @@ export default function ExploreProductGrid({
                       d="M19 9l-7 7-7-7"
                     />
                   </svg>
-                  <div className="w-0 h-[26px] border-l-2 border-gray-300 mx-[3px]"></div>
+                  <div className="w-0 h-[19.5px] border-l-2 border-gray-300 mx-[2px]"></div>
                   <input
                     type="text"
                     placeholder="Search for products, categories, etc"
@@ -149,14 +149,14 @@ export default function ExploreProductGrid({
                         handleSearch(searchQuery);
                       }
                     }}
-                    className="flex-1 bg-transparent text-[11px] font-medium text-[#374151] opacity-80 focus:outline-none placeholder:text-[#374151] placeholder:opacity-80 min-w-[169px]"
+                    className="flex-1 bg-transparent text-[8px] font-medium text-[#374151] opacity-80 focus:outline-none placeholder:text-[#374151] placeholder:opacity-80 min-w-[127px]"
                   />
                 </div>
                 <div className="flex items-center gap-[8px]">
-                  <div className="w-0 h-[26px] border-l-2 border-gray-300"></div>
+                  <div className="w-0 h-[19.5px] border-l-2 border-gray-300"></div>
                   <button
                     onClick={() => handleSearch(searchQuery)}
-                    className="text-[14px] font-medium text-[#374151] opacity-80 hover:opacity-100 transition-opacity"
+                    className="text-[10.5px] font-medium text-[#374151] opacity-80 hover:opacity-100 transition-opacity"
                   >
                     Search
                   </button>
@@ -168,12 +168,12 @@ export default function ExploreProductGrid({
 
         {/* Error Message */}
         {error && (
-          <div className="px-[14px] py-3">
-            <div className="p-[14px] bg-red-50 border border-red-200 rounded-[11px]">
+          <div className="px-[10.5px] py-2">
+            <div className="p-[10.5px] bg-red-50 border border-red-200 rounded-[8px]">
               <div className="flex items-start justify-between">
                 <div className="flex items-start gap-3">
                   <svg
-                    className="w-6 h-6 text-red-600 mt-0.5 shrink-0"
+                    className="w-[18px] h-[18px] text-red-600 mt-0.5 shrink-0"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -184,15 +184,15 @@ export default function ExploreProductGrid({
                     />
                   </svg>
                   <div>
-                    <h3 className="text-base font-semibold text-red-800 mb-1">
+                    <h3 className="text-[12px] font-semibold text-red-800 mb-0.5">
                       Error Loading Products
                     </h3>
-                    <p className="text-sm text-red-600">{error}</p>
+                    <p className="text-[10.5px] text-red-600">{error}</p>
                   </div>
                 </div>
                 <button
                   onClick={() => fetchProducts(searchQuery)}
-                  className="ml-3 px-4 py-2 text-sm bg-red-600 text-white rounded-[10px] hover:bg-red-700 transition-colors shrink-0"
+                  className="ml-3 px-3 py-1.5 text-[10.5px] bg-red-600 text-white rounded-[8px] hover:bg-red-700 transition-colors shrink-0"
                 >
                   Try Again
                 </button>
@@ -202,30 +202,30 @@ export default function ExploreProductGrid({
         )}
 
         {/* Products Grid */}
-        <div className="p-[14px]">
+        <div className="p-[10.5px]">
           {isLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[14px]">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[10.5px]">
               {[1, 2, 3, 4, 5, 6].map((i) => (
                 <div
                   key={i}
-                  className="bg-white rounded-[11px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] overflow-hidden"
+                  className="bg-white rounded-[8px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] overflow-hidden"
                 >
-                  <div className="bg-gray-200 aspect-283/202 animate-pulse m-[6px] rounded-[11px]"></div>
-                  <div className="px-[12px] pb-[11px] space-y-3">
-                    <div className="h-5 bg-gray-200 rounded animate-pulse"></div>
-                    <div className="h-5 bg-gray-200 rounded w-2/3 animate-pulse"></div>
-                    <div className="h-5 bg-gray-200 rounded w-1/2 animate-pulse"></div>
+                  <div className="bg-gray-200 aspect-283/202 animate-pulse m-[4.5px] rounded-[8px]"></div>
+                  <div className="px-[9px] pb-[8px] space-y-2">
+                    <div className="h-4 bg-gray-200 rounded animate-pulse"></div>
+                    <div className="h-4 bg-gray-200 rounded w-2/3 animate-pulse"></div>
+                    <div className="h-4 bg-gray-200 rounded w-1/2 animate-pulse"></div>
                   </div>
                 </div>
               ))}
             </div>
           ) : products.length === 0 ? (
-            <div className="text-center py-12">
-              <div className="text-gray-400 text-5xl mb-3">🔍</div>
-              <h3 className="text-xl font-semibold text-[#0d1b2a] mb-2">
+            <div className="text-center py-9">
+              <div className="text-gray-400 text-4xl mb-2">🔍</div>
+              <h3 className="text-[15px] font-semibold text-[#0d1b2a] mb-1.5">
                 {searchQuery ? "No products found" : "No products available"}
               </h3>
-              <p className="text-[#787878] mb-3 text-base">
+              <p className="text-[#787878] mb-2 text-[12px]">
                 {searchQuery
                   ? `Try adjusting your search or filters`
                   : "Check back later for new products"}
@@ -236,7 +236,7 @@ export default function ExploreProductGrid({
                     setSearchQuery("");
                     router.push("/marketplace");
                   }}
-                  className="px-[14px] py-[7px] bg-[#1e3a8a] text-white text-sm rounded-[8px] hover:bg-[#1e3a8a]/90 transition-colors"
+                  className="px-[10.5px] py-[5px] bg-[#1e3a8a] text-white text-[10.5px] rounded-[6px] hover:bg-[#1e3a8a]/90 transition-colors"
                 >
                   Clear Search
                 </button>
@@ -244,48 +244,50 @@ export default function ExploreProductGrid({
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[14px]">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[10.5px]">
                 {products.map((product, index) => (
                   <div
                     key={product?.productId || index}
-                    className="bg-white rounded-[11px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] overflow-hidden hover:shadow-lg transition-shadow"
+                    className="bg-white rounded-[8px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] overflow-hidden hover:shadow-lg transition-shadow"
                   >
                     {/* Product Image */}
-                    <div className="relative bg-gray-100 aspect-283/202 flex items-center justify-center overflow-hidden m-[6px] rounded-[11px]">
+                    <div className="relative bg-gray-100 aspect-283/202 flex items-center justify-center overflow-hidden m-[4.5px] rounded-[8px]">
                       {product?.image ? (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img
                           src={product.image}
                           alt={product?.title || "Product"}
-                          className="w-full h-full object-cover rounded-[11px]"
+                          className="w-full h-full object-cover rounded-[8px]"
                           onError={(e) => {
                             e.currentTarget.style.display = "none";
                           }}
                         />
                       ) : (
-                        <span className="text-gray-400 text-sm">No Image</span>
+                        <span className="text-gray-400 text-[10.5px]">
+                          No Image
+                        </span>
                       )}
                     </div>
 
                     {/* Product Info */}
-                    <div className="px-[12px] pb-[11px]">
+                    <div className="px-[9px] pb-[8px]">
                       {/* Title and Reviews */}
-                      <div className="mb-[5px]">
-                        <h3 className="text-[11px] font-medium text-[#0d1b2a] mb-1 line-clamp-2">
+                      <div className="mb-[4px]">
+                        <h3 className="text-[8px] font-medium text-[#0d1b2a] mb-0.5 line-clamp-2">
                           {product?.title || "Untitled Product"}
                         </h3>
-                        <span className="text-[8px] font-medium text-[#787878]">
+                        <span className="text-[6px] font-medium text-[#787878]">
                           {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                           ({(product as any)?.reviewCount || "1336"})
                         </span>
                       </div>
 
                       {/* Rating */}
-                      <div className="flex items-center gap-1 mb-[5px]">
+                      <div className="flex items-center gap-0.5 mb-[4px]">
                         {[1, 2, 3, 4, 5].map((star) => (
                           <svg
                             key={star}
-                            className="w-[11px] h-[11px]"
+                            className="w-[8px] h-[8px]"
                             viewBox="0 0 19 18"
                             fill={star <= 4 ? "#FFD700" : "none"}
                             stroke={star > 4 ? "#FFD700" : "none"}
@@ -297,9 +299,9 @@ export default function ExploreProductGrid({
                       </div>
 
                       {/* Location */}
-                      <div className="flex items-center gap-1 mb-3">
+                      <div className="flex items-center gap-0.5 mb-2">
                         <svg
-                          className="w-[10px] h-[11px] text-[#0d1b2a]"
+                          className="w-[7.5px] h-[8px] text-[#0d1b2a]"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -317,19 +319,19 @@ export default function ExploreProductGrid({
                             d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                           />
                         </svg>
-                        <span className="text-[11px] font-medium text-[#0d1b2a]">
+                        <span className="text-[8px] font-medium text-[#0d1b2a]">
                           {product?.city || "Mumbai"}, IN
                         </span>
                       </div>
 
                       {/* Price */}
-                      <div className="mb-3">
-                        <span className="text-[15px] font-bold text-[#1e3a8a]">
+                      <div className="mb-2">
+                        <span className="text-[11px] font-bold text-[#1e3a8a]">
                           ₹{(product?.price || 0).toLocaleString("en-IN")}
                         </span>
                         {product?.originalPrice &&
                           product.originalPrice > (product.price || 0) && (
-                            <span className="text-[11px] font-bold text-[#787878] line-through ml-2 relative">
+                            <span className="text-[8px] font-bold text-[#787878] line-through ml-1.5 relative">
                               ₹{product.originalPrice.toLocaleString("en-IN")}
                               <span className="absolute left-0 top-1/2 w-full h-0.5 bg-[#787878]"></span>
                             </span>
@@ -338,7 +340,7 @@ export default function ExploreProductGrid({
 
                       {/* View Deal Button */}
                       <Link href={`/product/${product?.slug || "unknown"}`}>
-                        <button className="w-full py-[8px] bg-[#1e3a8a] text-white text-[11px] font-semibold rounded-[8px] hover:bg-[#1e3a8a]/90 transition-colors">
+                        <button className="w-full py-[6px] bg-[#1e3a8a] text-white text-[8px] font-semibold rounded-[6px] hover:bg-[#1e3a8a]/90 transition-colors">
                           View Deal
                         </button>
                       </Link>
@@ -349,10 +351,10 @@ export default function ExploreProductGrid({
 
               {/* Load More Button */}
               {totalPages > currentPage && (
-                <div className="flex justify-center mt-6">
+                <div className="flex justify-center mt-[18px]">
                   <button
                     onClick={() => setCurrentPage((prev) => prev + 1)}
-                    className="px-6 py-3 bg-white border-2 border-[#1e3a8a] text-[#1e3a8a] text-[11px] font-medium rounded-[8px] hover:bg-[#1e3a8a] hover:text-white transition-colors"
+                    className="px-[18px] py-2 bg-white border-2 border-[#1e3a8a] text-[#1e3a8a] text-[8px] font-medium rounded-[6px] hover:bg-[#1e3a8a] hover:text-white transition-colors"
                   >
                     Load More Products
                   </button>

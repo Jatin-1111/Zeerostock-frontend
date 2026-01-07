@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { buyerService } from "@/services/buyer.service";
+import { CreditCard } from "lucide-react";
 import BuyerPaymentMethodsStats from "@/components/buyer-payment-methods/BuyerPaymentMethodsStats";
 import BuyerSavedPaymentMethods from "@/components/buyer-payment-methods/BuyerSavedPaymentMethods";
 import BuyerSecurityProtection from "@/components/buyer-payment-methods/BuyerSecurityProtection";
@@ -208,22 +209,25 @@ export default function BuyerPaymentMethodsPage() {
 
   return (
     <div className="min-h-screen">
-      <div className="mx-auto w-full max-w-[1440px] px-[80px] py-[40px]">
-        {/* Page Header with scaling */}
-        <div className="mb-[15px] w-[133.33%] origin-top-left scale-[0.75]">
-          <div className="flex items-center rounded-[20px] bg-white px-[81px] py-[20px] shadow-[0px_0px_10px_0px_rgba(24,181,34,0.25)]">
-            <div className="flex items-center gap-[34px]">
+      <div className="mx-auto w-full max-w-[1440px] px-[45px] py-[23px]">
+        {/* Page Header */}
+        <div className="mb-[8px]">
+          <div className="flex items-center rounded-[11px] bg-white px-[46px] py-[11px] shadow-[0px_0px_8px_0px_rgba(24,181,34,0.25)]">
+            <div className="flex items-center gap-[20px]">
               {/* Icon Box */}
-              <div className="flex items-center justify-center rounded-[10px] bg-[#EEFFEF] p-[15px] shadow-[0px_0px_10px_0px_rgba(24,181,34,0.25)]">
-                <CardIcon />
+              <div className="flex items-center justify-center rounded-[6px] bg-[#EEFFEF] p-[8px] shadow-[0px_0px_8px_0px_rgba(24,181,34,0.25)]">
+                <CreditCard
+                  className="w-[26px] h-[26px] text-[#2AAE7A]"
+                  strokeWidth={1.5}
+                />
               </div>
 
               {/* Text Content */}
               <div className="flex flex-col">
-                <h1 className="m-0 text-[36px] font-semibold leading-normal text-[#0D1B2A]">
+                <h1 className="m-0 text-[20px] font-semibold leading-normal text-[#0D1B2A]">
                   Payment Method
                 </h1>
-                <p className="m-0 text-[24px] font-medium leading-normal text-[#9C9C9C]">
+                <p className="m-0 text-[14px] font-medium leading-normal text-[#9C9C9C]">
                   Manage payment method and transaction history
                 </p>
               </div>
@@ -234,14 +238,14 @@ export default function BuyerPaymentMethodsPage() {
         {/* Stats Cards */}
         <BuyerPaymentMethodsStats summary={paymentSummary} />
 
-        {/* Tabs Navigation with scaling */}
-        <div className="mb-[25px] mt-[25px] w-[133.33%] origin-top-left scale-[0.75]">
+        {/* Tabs Navigation */}
+        <div className="mb-[14px] mt-[14px]">
           <div className="relative">
             {/* Horizontal line under all tabs */}
             <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-[#E5E7EB]" />
 
             {/* Tabs */}
-            <div className="relative flex gap-[65px] pl-[40px]">
+            <div className="relative flex gap-[37px] pl-[23px]">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
@@ -253,14 +257,14 @@ export default function BuyerPaymentMethodsPage() {
                         | "invoices"
                     )
                   }
-                  className={`relative cursor-pointer border-none bg-transparent py-[8px] text-[20px] font-medium leading-[24px] tracking-[0.5px] transition-colors duration-200 ${
+                  className={`relative cursor-pointer border-none bg-transparent py-[5px] text-[11px] font-medium leading-[14px] tracking-[0.3px] transition-colors duration-200 ${
                     activeTab === tab.id ? "text-[#2AAE7A]" : "text-[#0D1B2A]"
                   }`}
                 >
                   {tab.label}
                   {/* Active underline */}
                   {activeTab === tab.id && (
-                    <div className="absolute bottom-[-1px] left-0 right-0 h-[3px] rounded-t-[2px] bg-[#2AAE7A]" />
+                    <div className="absolute bottom-[-1px] left-0 right-0 h-[1.5px] rounded-t-[1.5px] bg-[#2AAE7A]" />
                   )}
                 </button>
               ))}
@@ -270,7 +274,7 @@ export default function BuyerPaymentMethodsPage() {
 
         {/* Tab Content */}
         {activeTab === "payment-methods" && (
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-[17px]">
             <BuyerSavedPaymentMethods
               methods={[]}
               loading={false}

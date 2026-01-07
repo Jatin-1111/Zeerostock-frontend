@@ -46,21 +46,21 @@ export default function AllProductsSection() {
   };
 
   return (
-    <div className="max-w-[1200px] mx-auto py-12 px-4">
+    <div className="max-w-[900px] mx-auto py-9 px-3">
       {/* Header with title and filters */}
-      <div className="flex items-center justify-between mb-8">
-        <h2 className="font-semibold text-[32px] text-[#1a1a1a] m-0">
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="font-semibold text-[24px] text-[#1a1a1a] m-0">
           All products
         </h2>
 
         {/* Filters */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           {/* Category dropdown */}
           <div className="relative">
             <select
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="w-[200px] h-10 px-3 pr-10 border border-gray-300 rounded-lg text-sm text-gray-700 bg-white cursor-pointer appearance-none"
+              className="w-[150px] h-[30px] px-2 pr-8 border border-gray-300 rounded-lg text-[10.5px] text-gray-700 bg-white cursor-pointer appearance-none"
             >
               <option value="all">All Categories (15,420)</option>
               <option value="Maharashtra">Maharashtra</option>
@@ -90,7 +90,7 @@ export default function AllProductsSection() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="w-[140px] h-10 px-3 pr-10 border border-gray-300 rounded-lg text-sm text-gray-700 bg-white cursor-pointer appearance-none"
+              className="w-[105px] h-[30px] px-2 pr-8 border border-gray-300 rounded-lg text-[10.5px] text-gray-700 bg-white cursor-pointer appearance-none"
             >
               <option value="relevance">Relevance</option>
               <option value="price_asc">Low to High</option>
@@ -114,8 +114,8 @@ export default function AllProductsSection() {
           </div>
 
           {/* More Filters button */}
-          <button className="flex items-center gap-2 px-4 h-10 border border-gray-300 rounded-lg bg-white hover:bg-gray-50 transition-colors cursor-pointer">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <button className="flex items-center gap-1.5 px-3 h-[30px] border border-gray-300 rounded-lg bg-white hover:bg-gray-50 transition-colors cursor-pointer">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
               <path
                 d="M22 3H2L10 12.46V19L14 21V12.46L22 3Z"
                 stroke="#666"
@@ -124,47 +124,45 @@ export default function AllProductsSection() {
                 strokeLinejoin="round"
               />
             </svg>
-            <span className="text-sm text-gray-700">More Filters</span>
+            <span className="text-[10.5px] text-gray-700">More Filters</span>
           </button>
         </div>
       </div>
 
       {isLoading ? (
-        <div className="grid grid-cols-4 gap-5">
+        <div className="grid grid-cols-4 gap-4">
           {[1, 2, 3, 4].map((i) => (
             <div
               key={i}
               className="bg-white rounded-xl overflow-hidden shadow-md"
             >
-              <div className="w-full h-40 bg-gray-200 animate-pulse"></div>
-              <div className="p-4">
-                <div className="h-5 bg-gray-200 mb-2 rounded animate-pulse"></div>
-                <div className="h-5 bg-gray-200 w-3/5 rounded animate-pulse"></div>
+              <div className="w-full h-30 bg-gray-200 animate-pulse"></div>
+              <div className="p-3">
+                <div className="h-4 bg-gray-200 mb-1.5 rounded animate-pulse"></div>
+                <div className="h-4 bg-gray-200 w-3/5 rounded animate-pulse"></div>
               </div>
             </div>
           ))}
         </div>
       ) : products.length === 0 ? (
-        <div className="text-center py-16">
-          <div className="text-5xl mb-5">🏪</div>
-          <h3 className="text-2xl text-[#0d1b2a] mb-3">
-            No products available
-          </h3>
-          <p className="text-base text-gray-600 mb-5 max-w-lg mx-auto">
+        <div className="text-center py-12">
+          <div className="text-4xl mb-4">🏪</div>
+          <h3 className="text-xl text-[#0d1b2a] mb-2">No products available</h3>
+          <p className="text-sm text-gray-600 mb-4 max-w-lg mx-auto">
             {location !== "all"
               ? `No products found in ${location}. Try selecting a different location.`
               : "Products are being added to our marketplace. Check back soon!"}
           </p>
           <button
             onClick={() => fetchProducts()}
-            className="px-6 py-2.5 bg-[#1e3a8a] text-white border-none rounded-lg cursor-pointer text-base hover:bg-[#2d4a9a] transition-colors"
+            className="px-[18px] py-2 bg-[#1e3a8a] text-white border-none rounded-lg cursor-pointer text-[12px] hover:bg-[#2d4a9a] transition-colors"
           >
             Refresh
           </button>
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-4 gap-5">
+          <div className="grid grid-cols-4 gap-4">
             {products.map((product, index) => (
               <Link
                 key={product?.productId || index}
@@ -173,7 +171,7 @@ export default function AllProductsSection() {
               >
                 <div className="bg-white rounded-xl shadow-md overflow-hidden hover:-translate-y-1 transition-transform duration-200 cursor-pointer">
                   {/* Product image */}
-                  <div className="w-full h-40 bg-gray-100">
+                  <div className="w-full h-30 bg-gray-100">
                     {product?.image ? (
                       <img
                         src={product.image}
@@ -187,18 +185,18 @@ export default function AllProductsSection() {
                   </div>
 
                   {/* Product details */}
-                  <div className="p-4">
-                    <h3 className="font-medium text-base text-[#1a1a1a] m-0 mb-2 truncate">
+                  <div className="p-3">
+                    <h3 className="font-medium text-[12px] text-[#1a1a1a] m-0 mb-1.5 truncate">
                       {product?.title || "Product"}
                     </h3>
 
                     {/* Stars and rating count */}
-                    <div className="flex items-center gap-1.5 mb-1">
+                    <div className="flex items-center gap-1 mb-0.5">
                       {[...Array(5)].map((_, i) => (
                         <svg
                           key={i}
-                          width="14"
-                          height="14"
+                          width="10.5"
+                          height="10.5"
                           viewBox="0 0 19 18"
                           fill="none"
                         >
@@ -208,14 +206,16 @@ export default function AllProductsSection() {
                           />
                         </svg>
                       ))}
-                      <span className="text-xs text-gray-500 ml-1">(2338)</span>
+                      <span className="text-[9px] text-gray-500 ml-0.5">
+                        (2338)
+                      </span>
                     </div>
 
                     {/* Location */}
-                    <div className="flex items-center gap-1.5 mb-3">
+                    <div className="flex items-center gap-1 mb-2">
                       <svg
-                        width="14"
-                        height="14"
+                        width="10.5"
+                        height="10.5"
                         viewBox="0 0 24 24"
                         fill="none"
                       >
@@ -224,26 +224,26 @@ export default function AllProductsSection() {
                           fill="#666"
                         />
                       </svg>
-                      <span className="text-xs text-gray-600">
+                      <span className="text-[9px] text-gray-600">
                         {product?.city || "Mumbai"},IN
                       </span>
                     </div>
 
                     {/* Price */}
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="font-bold text-2xl text-[#2D4A9A]">
+                    <div className="flex items-center gap-1.5 mb-2">
+                      <span className="font-bold text-xl text-[#2D4A9A]">
                         ₹{(product?.price || 0).toLocaleString("en-IN")}
                       </span>
                       {product?.originalPrice &&
                         product.originalPrice > (product.price || 0) && (
-                          <span className="text-sm text-gray-400 line-through">
+                          <span className="text-[10.5px] text-gray-400 line-through">
                             ₹{product.originalPrice.toLocaleString("en-IN")}
                           </span>
                         )}
                     </div>
 
                     {/* View Deal button */}
-                    <button className="w-full h-10 bg-[#2D4A9A] rounded-lg border-none cursor-pointer font-semibold text-sm text-white hover:bg-[#3d5aaa] transition-colors">
+                    <button className="w-full h-[30px] bg-[#2D4A9A] rounded-lg border-none cursor-pointer font-semibold text-[10.5px] text-white hover:bg-[#3d5aaa] transition-colors">
                       View Deal
                     </button>
                   </div>
@@ -253,9 +253,9 @@ export default function AllProductsSection() {
           </div>
 
           {/* Load More button */}
-          <div className="text-center mt-10">
+          <div className="text-center mt-8">
             <Link href="/marketplace?filter=all" className="no-underline">
-              <button className="px-8 py-2.5 text-lg text-[#0d1b2a] bg-transparent border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+              <button className="px-6 py-2 text-[14px] text-[#0d1b2a] bg-transparent border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
                 Load More Products
               </button>
             </Link>

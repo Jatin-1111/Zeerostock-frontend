@@ -20,17 +20,17 @@ export default function RelatedProducts() {
   ];
 
   return (
-    <div className="w-full bg-white rounded-2xl shadow-md p-6">
-      <h3 className="text-lg font-medium text-[#0d1b2a] mb-6">
+    <div className="w-full bg-white rounded-2xl shadow-md p-4.5">
+      <h3 className="text-xs font-medium text-[#0d1b2a] mb-4.5">
         You might also like
       </h3>
 
       <div className="space-y-0">
         {products.map((product, index) => (
           <div key={index}>
-            <div className="flex items-center gap-6 py-4">
+            <div className="flex items-center gap-4.5 py-3">
               {/* Product Image */}
-              <div className="w-[90px] h-[90px] bg-gray-100 rounded-lg shrink-0 relative overflow-hidden">
+              <div className="w-[68px] h-[68px] bg-gray-100 rounded-lg shrink-0 relative overflow-hidden">
                 {product.image ? (
                   <Image
                     src={product.image}
@@ -39,7 +39,7 @@ export default function RelatedProducts() {
                     className="object-cover"
                   />
                 ) : (
-                  <span className="absolute inset-0 flex items-center justify-center text-xs text-gray-400">
+                  <span className="absolute inset-0 flex items-center justify-center text-[9px] text-gray-400">
                     No Image
                   </span>
                 )}
@@ -47,10 +47,10 @@ export default function RelatedProducts() {
 
               {/* Product Info */}
               <div className="flex-1">
-                <h4 className="text-base font-medium text-[#0d1b2a] mb-2">
+                <h4 className="text-xs font-medium text-[#0d1b2a] mb-1.5">
                   {product.title}
                 </h4>
-                <p className="text-xl font-semibold text-[#2aae7a] tracking-wide">
+                <p className="text-[15px] font-semibold text-[#2aae7a] tracking-wide">
                   {product.price}
                 </p>
               </div>

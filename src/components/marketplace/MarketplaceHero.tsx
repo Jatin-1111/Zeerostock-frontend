@@ -1,13 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function MarketplaceHero() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const filterRef = useRef<HTMLDivElement>(null);
 
   const categories = [
     "All",
@@ -30,6 +35,27 @@ export default function MarketplaceHero() {
     "Food Containers",
   ];
 
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+      if (
+        filterRef.current &&
+        !filterRef.current.contains(event.target as Node)
+      ) {
+        setIsFilterOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
@@ -43,32 +69,45 @@ export default function MarketplaceHero() {
   };
 
   return (
-    <div className="relative w-full max-w-[1200px] mx-auto rounded-2xl shadow-[0px_0px_10px_0px_rgba(0,0,0,0.25)] overflow-hidden h-[400px] bg-[#eefbf6] bg-[url('/hero-marketplace.jpg')] bg-cover bg-center bg-no-repeat">
+    <div
+      className="relative w-full max-w-[900px] mx-auto rounded-2xl shadow-[0px_0px_8px_0px_rgba(0,0,0,0.25)] h-[300px] bg-[#eefbf6] bg-[url('/hero-marketplace.jpg')] bg-cover bg-center bg-no-repeat"
+      style={{ overflow: "visible" }}
+    >
       {/* Main heading */}
-      <h1 className="absolute left-1/2 top-[77.5px] -translate-x-1/2 -translate-y-1/2 font-normal text-7xl text-[#0d1b2a] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] whitespace-nowrap m-0">
+      <h1 className="absolute left-1/2 top-[58px] -translate-x-1/2 -translate-y-1/2 font-normal text-[54px] text-[#0d1b2a] drop-shadow-[0_3px_3px_rgba(0,0,0,0.25)] whitespace-nowrap m-0">
         B2B Surplus Marketplace
       </h1>
 
       {/* Subheading */}
-      <p className="absolute left-1/2 top-[155.5px] -translate-x-1/2 -translate-y-1/2 font-medium text-2xl text-[#787878] whitespace-nowrap m-0">
+      <p className="absolute left-1/2 top-[117px] -translate-x-1/2 -translate-y-1/2 font-medium text-[18px] text-[#787878] whitespace-nowrap m-0">
         Millions of products. Thousands of suppliers. One marketplace
       </p>
 
       {/* Search bar */}
       <form
         onSubmit={handleSearch}
-        className="absolute left-1/2 top-[240px] -translate-x-1/2 bg-[#EBEBEB] bg-opacity-65 border border-gray-200 rounded-full flex items-center h-[65px] w-[819px]"
+        className="absolute left-1/2 top-[180px] -translate-x-1/2 bg-[#EBEBEB] bg-opacity-65 border border-gray-200 rounded-full flex items-center h-[49px] w-[614px]"
       >
         {/* All dropdown */}
-        <div className="relative">
+        <div className="relative" ref={dropdownRef}>
           <div
-            className="flex items-center gap-1 px-4 cursor-pointer"
-            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            className="flex items-center gap-1 px-3 cursor-pointer"
+            onClick={() => {
+              setIsDropdownOpen(!isDropdownOpen);
+              if (!isDropdownOpen) setIsFilterOpen(false);
+            }}
           >
-            <span className="font-medium text-sm text-gray-700 whitespace-nowrap">
+            <span className="font-medium text-[10.5px] text-gray-700 whitespace-nowrap">
               {selectedCategory}
             </span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+            <motion.svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              animate={{ rotate: isDropdownOpen ? 180 : 0 }}
+              transition={{ duration: 0.2 }}
+            >
               <path
                 d="M6 9L12 15L18 9"
                 stroke="#374151"
@@ -76,30 +115,39 @@ export default function MarketplaceHero() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
-            </svg>
+            </motion.svg>
           </div>
 
           {/* Dropdown menu */}
-          {isDropdownOpen && (
-            <div className="absolute top-full left-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50 w-48 max-h-80 overflow-y-auto">
-              {categories.map((category) => (
-                <div
-                  key={category}
-                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm text-gray-700"
-                  onClick={() => {
-                    setSelectedCategory(category);
-                    setIsDropdownOpen(false);
-                  }}
-                >
-                  {category}
-                </div>
-              ))}
-            </div>
-          )}
+          <AnimatePresence>
+            {isDropdownOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="absolute top-full left-0 mt-1.5 bg-white border border-gray-200 rounded-lg shadow-lg z-[9999] w-36 max-h-60 overflow-y-auto"
+              >
+                {categories.map((category) => (
+                  <motion.div
+                    key={category}
+                    whileHover={{ backgroundColor: "#f3f4f6" }}
+                    className="px-3 py-1.5 cursor-pointer text-[10.5px] text-gray-700"
+                    onClick={() => {
+                      setSelectedCategory(category);
+                      setIsDropdownOpen(false);
+                    }}
+                  >
+                    {category}
+                  </motion.div>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Divider */}
-        <div className="w-px h-6 bg-[#58606D]" />
+        <div className="w-px h-[18px] bg-[#58606D]" />
 
         {/* Search input */}
         <input
@@ -107,23 +155,83 @@ export default function MarketplaceHero() {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Search for products, categories, etc"
-          className="flex-1 border-none bg-transparent outline-none font-normal text-sm text-gray-700 px-4"
+          className="flex-1 border-none bg-transparent outline-none font-normal text-[10.5px] text-gray-700 px-3"
         />
 
         {/* Divider */}
         <div className="w-px h-6 bg-[#58606D]" />
 
         {/* Filter icon */}
-        <div className="px-3 cursor-pointer flex items-center">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path
-              d="M22 3H2L10 12.46V19L14 21V12.46L22 3Z"
-              stroke="#374151"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+        <div className="relative" ref={filterRef}>
+          <div
+            className="px-2 cursor-pointer flex items-center"
+            onClick={() => {
+              setIsFilterOpen(!isFilterOpen);
+              if (!isFilterOpen) setIsDropdownOpen(false);
+            }}
+          >
+            <motion.svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              animate={{ scale: isFilterOpen ? 1.1 : 1 }}
+              transition={{ duration: 0.2 }}
+            >
+              <path
+                d="M22 3H2L10 12.46V19L14 21V12.46L22 3Z"
+                stroke="#374151"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </motion.svg>
+          </div>
+
+          {/* Filter dropdown */}
+          <AnimatePresence>
+            {isFilterOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="absolute top-full right-0 mt-1.5 bg-white border border-gray-200 rounded-lg shadow-lg z-[9999] w-48 p-3"
+              >
+                <div className="text-[10.5px] font-medium text-gray-700 mb-2">
+                  Quick Filters
+                </div>
+                <motion.div
+                  whileHover={{ backgroundColor: "#f3f4f6" }}
+                  className="px-2 py-1.5 cursor-pointer text-[10.5px] text-gray-600 rounded"
+                  onClick={() => setIsFilterOpen(false)}
+                >
+                  Price: Low to High
+                </motion.div>
+                <motion.div
+                  whileHover={{ backgroundColor: "#f3f4f6" }}
+                  className="px-2 py-1.5 cursor-pointer text-[10.5px] text-gray-600 rounded"
+                  onClick={() => setIsFilterOpen(false)}
+                >
+                  Price: High to Low
+                </motion.div>
+                <motion.div
+                  whileHover={{ backgroundColor: "#f3f4f6" }}
+                  className="px-2 py-1.5 cursor-pointer text-[10.5px] text-gray-600 rounded"
+                  onClick={() => setIsFilterOpen(false)}
+                >
+                  Newest First
+                </motion.div>
+                <motion.div
+                  whileHover={{ backgroundColor: "#f3f4f6" }}
+                  className="px-2 py-1.5 cursor-pointer text-[10.5px] text-gray-600 rounded"
+                  onClick={() => setIsFilterOpen(false)}
+                >
+                  Most Popular
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Divider */}
@@ -132,7 +240,7 @@ export default function MarketplaceHero() {
         {/* Search button */}
         <button
           type="submit"
-          className="font-medium text-sm text-gray-700 bg-transparent border-none cursor-pointer px-5 h-full"
+          className="font-medium text-[10.5px] text-gray-700 bg-transparent border-none cursor-pointer px-4 h-full"
         >
           Search
         </button>

@@ -88,16 +88,16 @@ export default function WishlistPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#eefbf6] px-[60px] py-[45px]">
+    <div className="min-h-screen bg-[#eefbf6] px-[45px] py-[34px]">
       <div className="max-w-[1440px] mx-auto">
         {/* Header */}
-        <div className="mb-[30px] flex justify-between items-center">
-          <h1 className="text-[27px] font-semibold text-[#0d1b2a] m-0">
+        <div className="mb-[22.5px] flex justify-between items-center">
+          <h1 className="text-[20px] font-semibold text-[#0d1b2a] m-0">
             My Wishlist
           </h1>
           <button
             onClick={clearUnavailableItems}
-            className="text-[12px] font-semibold text-[#1e3a8a] bg-transparent border-none cursor-pointer px-3 py-1.5"
+            className="text-[9px] font-semibold text-[#1e3a8a] bg-transparent border-none cursor-pointer px-2 py-1"
           >
             Clear Unavailable Items
           </button>
@@ -105,48 +105,48 @@ export default function WishlistPage() {
 
         {/* Error Message */}
         {error && (
-          <div className="mb-[23px] p-[15px] bg-[#fee] border border-[#fcc] text-[#c33] rounded-lg text-xs">
+          <div className="mb-[17px] p-[11px] bg-[#fee] border border-[#fcc] text-[#c33] rounded-lg text-[9px]">
             {error}
           </div>
         )}
 
         {/* Loading State */}
         {isLoading ? (
-          <div className="grid grid-cols-[repeat(auto-fill,minmax(263px,1fr))] gap-[23px]">
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(197px,1fr))] gap-[17px]">
             {[...Array(6)].map((_, i) => (
               <div
                 key={i}
-                className="bg-[#fbfbfb] rounded-[11px] p-[19px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.15)]"
+                className="bg-[#fbfbfb] rounded-[8px] p-[14px] shadow-[0px_0px_2px_0px_rgba(0,0,0,0.15)]"
               >
-                <div className="w-full aspect-[4/3] bg-[#e5e5e5] rounded-lg mb-[15px] animate-pulse" />
-                <div className="h-[15px] bg-[#e5e5e5] rounded mb-[9px] animate-pulse" />
-                <div className="h-[15px] bg-[#e5e5e5] rounded w-3/4 animate-pulse" />
+                <div className="w-full aspect-[4/3] bg-[#e5e5e5] rounded-lg mb-[11px] animate-pulse" />
+                <div className="h-[11px] bg-[#e5e5e5] rounded mb-[7px] animate-pulse" />
+                <div className="h-[11px] bg-[#e5e5e5] rounded w-3/4 animate-pulse" />
               </div>
             ))}
           </div>
         ) : items.length === 0 ? (
           /* Empty State */
-          <div className="text-center py-[75px]">
-            <div className="inline-flex items-center justify-center w-[60px] h-[60px] mb-[23px]">
-              <Heart className="w-[60px] h-[60px] text-[#9c9c9c]" />
+          <div className="text-center py-[56px]">
+            <div className="inline-flex items-center justify-center w-[45px] h-[45px] mb-[17px]">
+              <Heart className="w-[45px] h-[45px] text-[#9c9c9c]" />
             </div>
-            <h2 className="text-2xl font-semibold text-[#0d1b2a] mb-[11px]">
+            <h2 className="text-lg font-semibold text-[#0d1b2a] mb-[8px]">
               Your wishlist is empty
             </h2>
-            <p className="text-[13.5px] text-[#9c9c9c] mb-[30px]">
+            <p className="text-[10px] text-[#9c9c9c] mb-[22.5px]">
               Start adding products to your wishlist to keep track of items you
               love
             </p>
             <Link
               href="/marketplace"
-              className="inline-flex items-center justify-center bg-[#1e3a8a] text-white px-[30px] py-[11px] rounded-lg text-[13.5px] font-semibold no-underline transition-colors hover:bg-[#152d6b]"
+              className="inline-flex items-center justify-center bg-[#1e3a8a] text-white px-[22.5px] py-[8px] rounded-lg text-[10px] font-semibold no-underline transition-colors hover:bg-[#152d6b]"
             >
               Browse Products
             </Link>
           </div>
         ) : (
           /* Product Grid */
-          <div className="grid grid-cols-[repeat(auto-fill,minmax(263px,1fr))] gap-[23px]">
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(197px,1fr))] gap-[17px]">
             {items.map((item) => {
               // Skip items without product data
               if (!item.product) {
@@ -160,14 +160,14 @@ export default function WishlistPage() {
               return (
                 <div
                   key={item.id}
-                  className="bg-[#fbfbfb] rounded-[11px] p-[19px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.15)] relative flex flex-col"
+                  className="bg-[#fbfbfb] rounded-[8px] p-[14px] shadow-[0px_0px_2px_0px_rgba(0,0,0,0.15)] relative flex flex-col"
                 >
                   {/* Product Image */}
                   <Link
                     href={`/product/${item.product?.slug || ""}`}
                     className="no-underline"
                   >
-                    <div className="relative w-full aspect-[4/3] bg-[#f0f0f0] rounded-lg overflow-hidden mb-[15px]">
+                    <div className="relative w-full aspect-[4/3] bg-[#f0f0f0] rounded-lg overflow-hidden mb-[11px]">
                       {item.product?.imageUrl ? (
                         <img
                           src={item.product?.imageUrl}

@@ -12,44 +12,44 @@ export default function CartPage() {
 
   return (
     <div className="min-h-screen bg-[#EEFBF6]">
-      <div className="w-full px-6 md:px-20 py-10">
+      <div className="w-full px-4.5 md:px-15 py-7.5">
         {/* Page Header */}
-        <div className="mb-8 bg-white rounded-2xl shadow-sm px-8 py-6 flex items-center justify-between">
-          <div className="flex items-center gap-6">
+        <div className="mb-6 bg-white rounded-2xl shadow-sm px-6 py-4.5 flex items-center justify-between">
+          <div className="flex items-center gap-4.5">
             {/* Cart Icon */}
-            <div className="w-14 h-14 bg-[#EEFBF6] rounded-lg flex items-center justify-center">
+            <div className="w-10.5 h-10.5 bg-[#EEFBF6] rounded-lg flex items-center justify-center">
               <ShoppingCart
-                className="w-8 h-8 text-[#2aae7a]"
+                className="w-6 h-6 text-[#2aae7a]"
                 strokeWidth={2}
               />
             </div>
 
             {/* Title Section */}
             <div>
-              <h1 className="text-3xl font-semibold text-[#0d1b2a] mb-1">
+              <h1 className="text-2xl font-semibold text-[#0d1b2a] mb-0.75">
                 Shopping Cart
               </h1>
-              <p className="text-base text-[#9c9c9c]">
+              <p className="text-xs text-[#9c9c9c]">
                 {itemCount} {itemCount === 1 ? "item" : "items"} in your cart
               </p>
             </div>
           </div>
 
           {/* Browse Button */}
-          <button className="px-8 py-3 bg-white border-2 border-[#1e3a8a] text-[#1e3a8a] rounded-xl text-base font-semibold hover:bg-[#1e3a8a] hover:text-white transition-colors">
+          <button className="px-6 py-2 bg-white border-2 border-[#1e3a8a] text-[#1e3a8a] rounded-xl text-xs font-semibold hover:bg-[#1e3a8a] hover:text-white transition-colors">
             Browse More Items
           </button>
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4.5">
           {/* Left Column - Cart Items */}
           <div className="lg:col-span-2">
             <CartItems />
           </div>
 
           {/* Right Column - Order Summary & Related Products */}
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4.5">
             <OrderSummary />
             <RelatedProducts />
           </div>

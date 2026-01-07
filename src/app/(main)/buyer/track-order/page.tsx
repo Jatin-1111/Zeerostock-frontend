@@ -19,12 +19,12 @@ export default function TrackOrderPage() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center bg-[#eefbf6] px-[60px] py-[45px]">
+    <div className="flex min-h-screen flex-col items-center bg-[#eefbf6] px-[45px] py-[34px]">
       {/* Header Icon */}
-      <div className="mb-[22.5px] flex items-center justify-center rounded-[200px] bg-[#eeffef] p-[18.75px] shadow-[0px_0px_2px_0px_rgba(0,0,0,0.25)]">
+      <div className="mb-[17px] flex items-center justify-center rounded-[150px] bg-[#eeffef] p-[14px] shadow-[0px_0px_1.5px_0px_rgba(0,0,0,0.25)]">
         <svg
-          width="45"
-          height="45"
+          width="34"
+          height="34"
           viewBox="0 0 60 60"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -56,38 +56,38 @@ export default function TrackOrderPage() {
       </div>
 
       {/* Title and Description */}
-      <div className="mb-[33.75px] max-w-[480.75px] text-center">
-        <h1 className="mb-[11.25px] text-[30px] font-semibold leading-normal text-[#0d1b2a]">
+      <div className="mb-[25px] max-w-[360px] text-center">
+        <h1 className="mb-[8.5px] text-[22.5px] font-semibold leading-normal text-[#0d1b2a]">
           Track Your Order
         </h1>
-        <p className="text-[18px] font-medium leading-normal text-[#9c9c9c]">
+        <p className="text-[13.5px] font-medium leading-normal text-[#9c9c9c]">
           Enter your order ID to see real-time tracking information
         </p>
       </div>
 
       {/* Main Card */}
-      <div className="w-[825px] max-w-[90vw] rounded-[15px] bg-white px-[22.5px] py-[36px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)]">
+      <div className="w-[619px] max-w-[90vw] rounded-[11px] bg-white px-[17px] py-[27px] shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)]">
         {/* Order ID Section */}
         <form onSubmit={handleSubmit}>
-          <div className="mb-[30px]">
-            <label className="mb-[11.25px] block text-[18px] font-medium text-[#0d1b2a]">
+          <div className="mb-[22.5px]">
+            <label className="mb-[8.5px] block text-[13.5px] font-medium text-[#0d1b2a]">
               Order ID
             </label>
-            <div className="flex gap-[11.25px]">
+            <div className="flex gap-[8.5px]">
               <input
                 type="text"
                 placeholder="e.g., ORD-2025-000005"
                 value={orderId}
                 onChange={(e) => setOrderId(e.target.value)}
-                className="h-[42px] flex-1 rounded-[7.5px] border border-[#bebebe] pl-[12px] text-[12px] text-[#9c9c9c] outline-none"
+                className="h-[32px] flex-1 rounded-[5.5px] border border-[#bebebe] pl-[9px] text-[9px] text-[#9c9c9c] outline-none"
               />
               <button
                 type="submit"
-                className="flex h-[42px] w-[172.5px] cursor-pointer items-center justify-center gap-[7.5px] rounded-[11.25px] border-none bg-[#1e3a8a] text-[15px] font-semibold text-white"
+                className="flex h-[32px] w-[129px] cursor-pointer items-center justify-center gap-[5.5px] rounded-[8.5px] border-none bg-[#1e3a8a] text-[11px] font-semibold text-white"
               >
                 <svg
-                  width="12.6"
-                  height="12.6"
+                  width="9.5"
+                  height="9.5"
                   viewBox="0 0 17 17"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -112,11 +112,11 @@ export default function TrackOrderPage() {
           </div>
 
           {/* Info Box */}
-          <div className="mb-[30px] rounded-[15px] bg-[#c0daff] px-[22.5px] py-[18.75px]">
-            <div className="mb-[11.25px] flex items-center gap-[7.5px]">
+          <div className="mb-[22.5px] rounded-[11px] bg-[#c0daff] px-[17px] py-[14px]">
+            <div className="mb-[8.5px] flex items-center gap-[5.5px]">
               <svg
-                width="16.5"
-                height="16.5"
+                width="12.5"
+                height="12.5"
                 viewBox="0 0 22 22"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -135,11 +135,11 @@ export default function TrackOrderPage() {
                   strokeLinecap="round"
                 />
               </svg>
-              <h3 className="m-0 text-[15px] font-semibold text-[#085396]">
+              <h3 className="m-0 text-[11px] font-semibold text-[#085396]">
                 Where to find your Tracking ID?
               </h3>
             </div>
-            <ul className="m-0 pl-[22.5px] text-[15px] leading-[22.5px] text-[#085396]">
+            <ul className="m-0 pl-[17px] text-[11px] leading-[17px] text-[#085396]">
               <li>Check your order confirmation email</li>
               <li>
                 Find it in your account dashboard under &quot;My Orders&quot;
@@ -153,18 +153,18 @@ export default function TrackOrderPage() {
 
           {/* Quick Actions Section */}
           <div>
-            <h3 className="mb-[15px] text-[16.5px] font-medium text-[#0d1b2a]">
+            <h3 className="mb-[11px] text-[12.5px] font-medium text-[#0d1b2a]">
               Quick Actions
             </h3>
-            <div className="flex justify-between gap-[73.5px]">
+            <div className="flex justify-between gap-[55px]">
               <button
                 type="button"
                 onClick={() => router.push("/buyer/orders")}
-                className="flex flex-1 cursor-pointer items-center justify-center gap-[7.5px] rounded-[11.25px] border border-[#9c9c9c] bg-white px-[3.75px] py-[7.5px] text-[15px] font-medium text-[#9c9c9c]"
+                className="flex flex-1 cursor-pointer items-center justify-center gap-[5.5px] rounded-[8.5px] border border-[#9c9c9c] bg-white px-[3px] py-[5.5px] text-[11px] font-medium text-[#9c9c9c]"
               >
                 <svg
-                  width="16.5"
-                  height="16.5"
+                  width="12.5"
+                  height="12.5"
                   viewBox="0 0 22 22"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -181,11 +181,11 @@ export default function TrackOrderPage() {
               <button
                 type="button"
                 onClick={() => router.push("/buyer/support")}
-                className="flex flex-1 cursor-pointer items-center justify-center gap-[7.5px] rounded-[11.25px] border border-[#9c9c9c] bg-white px-[3.75px] py-[7.5px] text-[15px] font-medium text-[#9c9c9c]"
+                className="flex flex-1 cursor-pointer items-center justify-center gap-[5.5px] rounded-[8.5px] border border-[#9c9c9c] bg-white px-[3px] py-[5.5px] text-[11px] font-medium text-[#9c9c9c]"
               >
                 <svg
-                  width="16.5"
-                  height="16.5"
+                  width="12.5"
+                  height="12.5"
                   viewBox="0 0 22 22"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"

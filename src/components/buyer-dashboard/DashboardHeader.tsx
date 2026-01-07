@@ -34,28 +34,28 @@ export default function DashboardHeader({ userName }: DashboardHeaderProps) {
   }, [userName]);
 
   return (
-    <div className="flex items-center justify-between mb-5">
+    <div className="flex items-center justify-between mb-4">
       <div className="flex flex-col">
-        <h1 className="text-[27px] font-semibold text-[#0d1b2a] leading-normal">
+        <h1 className="text-[20px] font-semibold text-[#0d1b2a] leading-normal">
           Welcome Back, {displayName}
         </h1>
-        <p className="text-[18px] font-medium text-[#9c9c9c] leading-normal mt-1">
+        <p className="text-[13.5px] font-medium text-[#9c9c9c] leading-normal mt-0.75">
           Here's your procurement overview
         </p>
       </div>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2">
         <Link
           href="/buyer/rfq"
-          className="h-[45px] px-[45px] bg-[#1e3a8a] text-white rounded-[11px] font-semibold text-[15px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center gap-[8px]"
+          className="h-[34px] px-[34px] bg-[#1e3a8a] text-white rounded-[8px] font-semibold text-[11px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center gap-[6px]"
         >
-          <Plus className="w-5 h-5" />
+          <Plus className="w-4 h-4" />
           Post New RFQ
         </Link>
         <Link
           href="/buyer/quotes"
-          className="h-[45px] px-[45px] bg-white border border-[#9c9c9c] text-[#9c9c9c] rounded-[11px] font-semibold text-[15px] hover:bg-gray-50 transition-colors flex items-center gap-[8px] relative"
+          className="h-[34px] px-[34px] bg-white border border-[#9c9c9c] text-[#9c9c9c] rounded-[8px] font-semibold text-[11px] hover:bg-gray-50 transition-colors flex items-center gap-[6px] relative"
         >
-          <MessageSquare className="w-5 h-5" />
+          <MessageSquare className="w-4 h-4" />
           My Quotes
         </Link>
       </div>

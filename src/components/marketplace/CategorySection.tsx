@@ -10,7 +10,7 @@ export default function CategorySection() {
       name: "Electronics",
       icon: (
         <svg
-          className="w-16 h-16"
+          className="w-12 h-12"
           viewBox="0 0 64 64"
           fill="none"
           stroke="currentColor"
@@ -28,7 +28,7 @@ export default function CategorySection() {
       name: "Industrial",
       icon: (
         <svg
-          className="w-16 h-16"
+          className="w-12 h-12"
           viewBox="0 0 64 64"
           fill="none"
           stroke="currentColor"
@@ -51,7 +51,7 @@ export default function CategorySection() {
       name: "Construction",
       icon: (
         <svg
-          className="w-16 h-16"
+          className="w-12 h-12"
           viewBox="0 0 64 64"
           fill="none"
           stroke="currentColor"
@@ -70,7 +70,7 @@ export default function CategorySection() {
       name: "Agriculture",
       icon: (
         <svg
-          className="w-16 h-16"
+          className="w-12 h-12"
           viewBox="0 0 64 64"
           fill="none"
           stroke="currentColor"
@@ -90,7 +90,7 @@ export default function CategorySection() {
       name: "Cosmetics",
       icon: (
         <svg
-          className="w-16 h-16"
+          className="w-12 h-12"
           viewBox="0 0 64 64"
           fill="none"
           stroke="currentColor"
@@ -123,7 +123,7 @@ export default function CategorySection() {
       name: "Appliances",
       icon: (
         <svg
-          className="w-16 h-16"
+          className="w-12 h-12"
           viewBox="0 0 64 64"
           fill="none"
           stroke="currentColor"
@@ -141,7 +141,7 @@ export default function CategorySection() {
       name: "Hand Tools",
       icon: (
         <svg
-          className="w-16 h-16"
+          className="w-12 h-12"
           viewBox="0 0 64 64"
           fill="none"
           stroke="currentColor"
@@ -160,7 +160,7 @@ export default function CategorySection() {
       name: "Decor",
       icon: (
         <svg
-          className="w-16 h-16"
+          className="w-12 h-12"
           viewBox="0 0 64 64"
           fill="none"
           stroke="currentColor"
@@ -179,7 +179,7 @@ export default function CategorySection() {
       name: "Cleaning items",
       icon: (
         <svg
-          className="w-16 h-16"
+          className="w-12 h-12"
           viewBox="0 0 64 64"
           fill="none"
           stroke="currentColor"
@@ -205,7 +205,7 @@ export default function CategorySection() {
       name: "Fasteners",
       icon: (
         <svg
-          className="w-16 h-16"
+          className="w-12 h-12"
           viewBox="0 0 64 64"
           fill="none"
           stroke="currentColor"
@@ -224,7 +224,7 @@ export default function CategorySection() {
       name: "Plumbing Materials",
       icon: (
         <svg
-          className="w-16 h-16"
+          className="w-12 h-12"
           viewBox="0 0 64 64"
           fill="none"
           stroke="currentColor"
@@ -243,7 +243,7 @@ export default function CategorySection() {
       name: "Electricals",
       icon: (
         <svg
-          className="w-16 h-16"
+          className="w-12 h-12"
           viewBox="0 0 64 64"
           fill="none"
           stroke="currentColor"
@@ -261,7 +261,7 @@ export default function CategorySection() {
       name: "Power Tools",
       icon: (
         <svg
-          className="w-16 h-16"
+          className="w-12 h-12"
           viewBox="0 0 64 64"
           fill="none"
           stroke="currentColor"
@@ -280,7 +280,7 @@ export default function CategorySection() {
       name: "PPE",
       icon: (
         <svg
-          className="w-16 h-16"
+          className="w-12 h-12"
           viewBox="0 0 64 64"
           fill="none"
           stroke="currentColor"
@@ -317,7 +317,7 @@ export default function CategorySection() {
       name: "Abrasives",
       icon: (
         <svg
-          className="w-16 h-16"
+          className="w-12 h-12"
           viewBox="0 0 64 64"
           fill="none"
           stroke="currentColor"
@@ -341,7 +341,7 @@ export default function CategorySection() {
       name: "Chisels & Drill bits",
       icon: (
         <svg
-          className="w-16 h-16"
+          className="w-12 h-12"
           viewBox="0 0 64 64"
           fill="none"
           stroke="currentColor"
@@ -389,27 +389,27 @@ export default function CategorySection() {
   const displayedCategories = showAll ? categories : categories.slice(0, 6);
 
   return (
-    <div className="max-w-[1200px] mx-auto py-12 px-4">
-      <div className="flex justify-between items-center mb-8">
-        <h2 className="font-semibold text-[28px] text-[#1a1a1a] m-0">
+    <div className="max-w-[900px] mx-auto py-9 px-3">
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="font-semibold text-[21px] text-[#1a1a1a] m-0">
           Shop by Category
         </h2>
         <button
           onClick={() => setShowAll(!showAll)}
-          className="font-medium text-base text-gray-600 bg-transparent border-none cursor-pointer hover:text-[#2D4A9A] transition-colors"
+          className="font-medium text-[12px] text-gray-600 bg-transparent border-none cursor-pointer hover:text-[#2D4A9A] transition-colors"
         >
           {showAll ? "Show less" : "View all categories"}
         </button>
       </div>
 
-      <div className="grid grid-cols-6 gap-4">
+      <div className="grid grid-cols-6 gap-3">
         {displayedCategories.map((category, index) => (
           <button
             key={index}
-            className="bg-white rounded-xl shadow-md p-6 flex flex-col items-center gap-4 border-none cursor-pointer hover:-translate-y-1 transition-transform duration-200"
+            className="bg-white rounded-xl shadow-md p-[18px] flex flex-col items-center gap-3 border-none cursor-pointer hover:-translate-y-1 transition-transform duration-200"
           >
             <div className="text-gray-700">{category.icon}</div>
-            <span className="font-medium text-sm text-[#1a1a1a] text-center leading-tight">
+            <span className="font-medium text-[10.5px] text-[#1a1a1a] text-center leading-tight">
               {category.name}
             </span>
           </button>

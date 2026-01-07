@@ -2,7 +2,7 @@ export default function WhyChooseSection() {
   const reasons = [
     {
       icon: (
-        <svg className="w-10 h-10" viewBox="0 0 24 24" fill="none">
+        <svg className="w-[30px] h-[30px]" viewBox="0 0 24 24" fill="none">
           <path
             d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
             stroke="#10b981"
@@ -32,7 +32,7 @@ export default function WhyChooseSection() {
     },
     {
       icon: (
-        <svg className="w-10 h-10" viewBox="0 0 24 24" fill="none">
+        <svg className="w-[30px] h-[30px]" viewBox="0 0 24 24" fill="none">
           <circle cx="12" cy="12" r="9" stroke="#ec4899" strokeWidth="2" />
           <path
             d="M12 3C7.5 3 4 7.5 4 12C4 16.5 7.5 21 12 21"
@@ -83,16 +83,18 @@ export default function WhyChooseSection() {
   ];
 
   return (
-    <div className="max-w-[1200px] mx-auto py-12 px-4">
-      <div className="flex justify-center gap-16">
+    <div className="max-w-[900px] mx-auto py-9 px-3">
+      <div className="flex justify-center gap-12">
         {reasons.map((reason, index) => (
-          <div key={index} className="flex flex-col items-center w-56 gap-4">
-            <div className="mb-2">{reason.icon}</div>
-            <div className="flex flex-col gap-2 text-center">
-              <h3 className="font-medium text-lg text-[#1a1a1a] m-0">
+          <div key={index} className="flex flex-col items-center w-42 gap-3">
+            <div className="mb-1.5">{reason.icon}</div>
+            <div className="flex flex-col gap-1.5 text-center">
+              <h3 className="font-medium text-[14px] text-[#1a1a1a] m-0">
                 {reason.title}
               </h3>
-              <p className="text-sm text-gray-600 m-0">{reason.description}</p>
+              <p className="text-[10.5px] text-gray-600 m-0">
+                {reason.description}
+              </p>
             </div>
           </div>
         ))}

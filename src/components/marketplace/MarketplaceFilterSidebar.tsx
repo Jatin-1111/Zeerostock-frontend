@@ -107,9 +107,9 @@ export default function MarketplaceFilterSidebar({
     option: FilterOption;
     onChange: () => void;
   }) => (
-    <div className="flex items-center justify-between py-2">
+    <div className="flex items-center justify-between py-1.5">
       <label
-        className={`text-[15px] font-medium cursor-pointer ${
+        className={`text-[11px] font-medium cursor-pointer ${
           option.checked ? "text-[#2aae7a]" : "text-[#787878]"
         }`}
       >
@@ -117,13 +117,13 @@ export default function MarketplaceFilterSidebar({
       </label>
       <button
         onClick={onChange}
-        className={`w-[23px] h-[23px] border-2 rounded-[4px] flex items-center justify-center cursor-pointer transition-colors ${
+        className={`w-[17px] h-[17px] border-2 rounded-[4px] flex items-center justify-center cursor-pointer transition-colors ${
           option.checked
             ? "bg-[#2aae7a] border-[#2aae7a]"
             : "bg-white border-[#cacaca]"
         }`}
       >
-        {option.checked && <Check className="w-[15px] h-[15px] text-white" />}
+        {option.checked && <Check className="w-[11px] h-[11px] text-white" />}
       </button>
     </div>
   );
@@ -145,21 +145,23 @@ export default function MarketplaceFilterSidebar({
           shadow-[1px_0px_4px_0px_rgba(0,0,0,0.25)]
           transition-all duration-300 ease-in-out
           overflow-y-auto overflow-x-hidden
-          ${isOpen ? "w-[266px] opacity-100" : "w-0 opacity-0"}
+          ${isOpen ? "w-[200px] opacity-100" : "w-0 opacity-0"}
         `}
       >
         <div
-          className={`w-[266px] px-[18px] py-6 ${isOpen ? "" : "invisible"}`}
+          className={`w-[200px] px-[13.5px] py-[18px] ${
+            isOpen ? "" : "invisible"
+          }`}
         >
           {/* Header */}
-          <div className="flex items-center gap-2 mb-6">
-            <Filter className="w-[23px] h-[23px] text-[#0d1b2a]" />
-            <h2 className="text-[20px] font-medium text-[#0d1b2a]">Filters</h2>
+          <div className="flex items-center gap-1.5 mb-[18px]">
+            <Filter className="w-[17px] h-[17px] text-[#0d1b2a]" />
+            <h2 className="text-[15px] font-medium text-[#0d1b2a]">Filters</h2>
           </div>
 
           {/* Categories */}
-          <div className="mb-[18px]">
-            <h3 className="text-[20px] font-medium text-[#0d1b2a] mb-3">
+          <div className="mb-[13.5px]">
+            <h3 className="text-[15px] font-medium text-[#0d1b2a] mb-2">
               Categories
             </h3>
             <div className="space-y-1">
@@ -175,11 +177,11 @@ export default function MarketplaceFilterSidebar({
             </div>
           </div>
 
-          <div className="w-full h-px bg-gray-200 my-[18px]"></div>
+          <div className="w-full h-px bg-gray-200 my-[13.5px]"></div>
 
           {/* Industries */}
-          <div className="mb-[18px]">
-            <h3 className="text-[20px] font-medium text-[#0d1b2a] mb-3">
+          <div className="mb-[13.5px]">
+            <h3 className="text-[15px] font-medium text-[#0d1b2a] mb-2">
               Industries
             </h3>
             <div className="space-y-1">
@@ -195,18 +197,18 @@ export default function MarketplaceFilterSidebar({
             </div>
           </div>
 
-          <div className="w-full h-px bg-gray-200 my-[18px]"></div>
+          <div className="w-full h-px bg-gray-200 my-[13.5px]"></div>
 
           {/* Price Range */}
-          <div className="mb-[18px]">
-            <h3 className="text-[20px] font-medium text-[#0d1b2a] mb-2">
+          <div className="mb-[13.5px]">
+            <h3 className="text-[15px] font-medium text-[#0d1b2a] mb-1.5">
               Price Range
             </h3>
-            <p className="text-[14px] font-medium text-[#0d1b2a] mb-3">
+            <p className="text-[10.5px] font-medium text-[#0d1b2a] mb-2">
               ₹{priceRange.min.toLocaleString()}- ₹
               {priceRange.max.toLocaleString()}
             </p>
-            <div className="relative pt-2 pb-[18px]">
+            <div className="relative pt-1.5 pb-[13.5px]">
               <input
                 type="range"
                 min="0"
@@ -223,11 +225,11 @@ export default function MarketplaceFilterSidebar({
             </div>
           </div>
 
-          <div className="w-full h-px bg-gray-200 my-[18px]"></div>
+          <div className="w-full h-px bg-gray-200 my-[13.5px]"></div>
 
           {/* Condition */}
-          <div className="mb-[18px]">
-            <h3 className="text-[20px] font-medium text-[#0d1b2a] mb-3">
+          <div className="mb-[13.5px]">
+            <h3 className="text-[15px] font-medium text-[#0d1b2a] mb-2">
               Condition
             </h3>
             <div className="space-y-1">
@@ -243,11 +245,11 @@ export default function MarketplaceFilterSidebar({
             </div>
           </div>
 
-          <div className="w-full h-px bg-gray-200 my-[18px]"></div>
+          <div className="w-full h-px bg-gray-200 my-[13.5px]"></div>
 
           {/* Listing Type */}
-          <div className="mb-[18px]">
-            <h3 className="text-[20px] font-medium text-[#0d1b2a] mb-3">
+          <div className="mb-[13.5px]">
+            <h3 className="text-[15px] font-medium text-[#0d1b2a] mb-2">
               Listing Type
             </h3>
             <div className="space-y-1">
@@ -267,11 +269,11 @@ export default function MarketplaceFilterSidebar({
             </div>
           </div>
 
-          <div className="w-full h-px bg-gray-200 my-[18px]"></div>
+          <div className="w-full h-px bg-gray-200 my-[13.5px]"></div>
 
           {/* Features */}
-          <div className="mb-[18px]">
-            <h3 className="text-[20px] font-medium text-[#0d1b2a] mb-3">
+          <div className="mb-[13.5px]">
+            <h3 className="text-[15px] font-medium text-[#0d1b2a] mb-2">
               Features
             </h3>
             <div className="space-y-1">

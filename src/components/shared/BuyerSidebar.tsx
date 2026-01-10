@@ -51,20 +51,20 @@ export default function BuyerSidebar({
 
       {/* Sidebar */}
       <div
-        className={`fixed lg:sticky top-0 left-0 h-full w-[225px] bg-white shadow-[0px_0px_2px_0px_rgba(0,0,0,0.25)] transform ${
+        className={`fixed lg:sticky top-0 left-0 min-h-screen w-[220px] bg-white shadow-[0px_0px_2px_0px_rgba(0,0,0,0.25)] transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } lg:translate-x-0 transition-transform duration-300 ease-in-out z-40 overflow-y-auto lg:top-[73px]`}
       >
         {/* Header */}
-        <div className="h-[45px] flex items-center justify-center border-b border-[#8b8b8b] relative">
-          <h2 className="font-medium text-[15px] text-[#1e3a8a] leading-normal">
+        <div className="h-[40px] flex items-center justify-center border-b border-[#8b8b8b] relative">
+          <h2 className="font-medium text-[13px] text-[#1e3a8a] leading-normal">
             Buyer Menu
           </h2>
           <button
-            className="absolute right-[16px] w-[16px] h-[16px]"
+            className="absolute right-[14px] w-[14px] h-[14px]"
             onClick={handleToggle}
           >
-            <ArrowLeft className="w-[16px] h-[16px] text-[#1e3a8a]" />
+            <ArrowLeft className="w-[14px] h-[14px] text-[#1e3a8a]" />
           </button>
         </div>
 

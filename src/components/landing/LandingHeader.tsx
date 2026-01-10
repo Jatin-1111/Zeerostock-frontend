@@ -25,48 +25,48 @@ export default function Header() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 h-20">
-      <div className="absolute inset-0 bg-linear-to-b from-[#43C786] to-[#0A2540] backdrop-blur-[8.8px]" />
-      <div className="relative h-full max-w-[1440px] mx-auto px-20 flex items-center justify-between">
+    <header className="fixed top-0 left-0 right-0 z-50 h-13">
+      <div className="absolute inset-0 bg-linear-to-b from-[#43C786] to-[#0A2540] backdrop-blur-[5.9px]" />
+      <div className="relative h-full max-w-[960px] mx-auto px-13 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="shrink-0">
           <img
             src={"/Zeerostock Logo B White.png"}
             alt="Zeerostock"
-            className="w-auto h-[125px]"
+            className="w-auto h-[83px]"
           />
         </Link>
         {/* Navigation */}
-        <nav className="flex items-center gap-8">
+        <nav className="flex items-center gap-5">
           <Link
             href="/home"
-            className="text-white text-[20px] font-medium hover:text-white/90 transition-colors"
+            className="text-white text-[13px] font-medium hover:text-white/90 transition-colors"
           >
             Home
           </Link>
           <Link
             href="/about"
-            className="text-white text-[20px] font-medium hover:text-white/90 transition-colors"
+            className="text-white text-[13px] font-medium hover:text-white/90 transition-colors"
           >
             About Us
           </Link>
           <Link
             href="/helpdesk"
-            className="text-white text-[20px] font-medium hover:text-white/90 transition-colors"
+            className="text-white text-[13px] font-medium hover:text-white/90 transition-colors"
           >
             Contact Us
           </Link>
         </nav>
 
         {/* Right Side Actions */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           {/* Language Selector */}
           <button
-            className="flex items-center gap-2 px-4 py-2 rounded-full hover:bg-white/10 transition-colors"
+            className="flex items-center gap-1 px-3 py-1 rounded-full hover:bg-white/10 transition-colors"
             aria-label="Change language"
           >
             <svg
-              className="w-5 h-5 text-white"
+              className="w-3 h-3 text-white"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -77,7 +77,7 @@ export default function Header() {
                 strokeWidth="2"
               />
             </svg>
-            <span className="text-white text-[14px] font-medium">EN</span>
+            <span className="text-white text-[9px] font-medium">EN</span>
           </button>
 
           {/* WhatsApp Icon */}
@@ -85,11 +85,11 @@ export default function Header() {
             href="https://wa.me/918956835375"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-[44px] h-[44px] bg-[#25D366] rounded-full flex items-center justify-center hover:bg-[#25D366]/90 transition-colors"
+            className="w-[29px] h-[29px] bg-[#25D366] rounded-full flex items-center justify-center hover:bg-[#25D366]/90 transition-colors"
             aria-label="Contact us on WhatsApp"
           >
             <svg
-              className="w-6 h-6 text-white"
+              className="w-4 h-4 text-white"
               fill="currentColor"
               viewBox="0 0 24 24"
             >
@@ -101,11 +101,11 @@ export default function Header() {
           <div className="relative">
             <button
               onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-              className="w-[44px] h-[44px] bg-[#0a2540] rounded-full flex items-center justify-center hover:bg-[#0a2540]/90 transition-colors"
+              className="w-[29px] h-[29px] bg-[#0a2540] rounded-full flex items-center justify-center hover:bg-[#0a2540]/90 transition-colors"
               aria-label="User profile"
             >
               <svg
-                className="w-6 h-6 text-white"
+                className="w-4 h-4 text-white"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -120,29 +120,29 @@ export default function Header() {
             </button>
 
             {isUserMenuOpen && (
-              <div className="absolute right-0 mt-2 w-56 bg-white border-2 border-gray-900 rounded-lg shadow-lg z-20">
+              <div className="absolute right-0 mt-[5px] w-[149px] bg-white border border-gray-900 rounded-[5px] shadow-lg z-20">
                 {isAuthenticated && user ? (
                   // Logged In User Menu
-                  <div className="py-2">
+                  <div className="py-[5px]">
                     {/* User Info */}
-                    <div className="px-4 py-3 border-b border-gray-200">
-                      <p className="text-sm font-semibold text-gray-900">
+                    <div className="px-[11px] py-2 border-b border-gray-200">
+                      <p className="text-[9px] font-semibold text-gray-900">
                         {user.firstName} {user.lastName}
                       </p>
-                      <p className="text-xs text-gray-600 truncate">
+                      <p className="text-[8px] text-gray-600 truncate">
                         {user.email}
                       </p>
                     </div>
 
                     {/* Menu Items */}
-                    <div className="py-1">
+                    <div className="py-[3px]">
                       <Link
                         href="/buyer/dashboard"
-                        className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-900 hover:bg-gray-100 transition-colors"
+                        className="flex items-center gap-2 px-[11px] py-[7px] text-[9px] text-gray-900 hover:bg-gray-100 transition-colors"
                         onClick={() => setIsUserMenuOpen(false)}
                       >
                         <svg
-                          className="w-4 h-4"
+                          className="w-[11px] h-[11px]"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -158,11 +158,11 @@ export default function Header() {
                       </Link>
                       <Link
                         href="/buyer/settings"
-                        className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-900 hover:bg-gray-100 transition-colors"
+                        className="flex items-center gap-2 px-[11px] py-[7px] text-[9px] text-gray-900 hover:bg-gray-100 transition-colors"
                         onClick={() => setIsUserMenuOpen(false)}
                       >
                         <svg
-                          className="w-4 h-4"
+                          className="w-[11px] h-[11px]"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -184,15 +184,15 @@ export default function Header() {
                       </Link>
                     </div>
 
-                    <hr className="my-1 border-gray-200" />
+                    <hr className="my-[3px] border-gray-200" />
 
                     {/* Logout */}
                     <button
                       onClick={handleLogout}
-                      className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors"
+                      className="w-full flex items-center gap-2 px-[11px] py-[7px] text-[9px] text-red-600 hover:bg-red-50 transition-colors"
                     >
                       <svg
-                        className="w-4 h-4"
+                        className="w-[11px] h-[11px]"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -209,37 +209,37 @@ export default function Header() {
                   </div>
                 ) : (
                   // Logged Out User Menu
-                  <div className="py-2">
-                    <div className="px-4 py-3 border-b border-gray-200">
-                      <p className="text-sm font-semibold text-gray-900">
+                  <div className="py-[5px]">
+                    <div className="px-[11px] py-2 border-b border-gray-200">
+                      <p className="text-[9px] font-semibold text-gray-900">
                         Welcome to Zeerostock
                       </p>
-                      <p className="text-xs text-gray-600">
+                      <p className="text-[8px] text-gray-600">
                         Sign in to access your account
                       </p>
                     </div>
 
-                    <div className="p-3 space-y-2">
+                    <div className="p-2 space-y-[5px]">
                       <Link
                         href="/login"
                         onClick={() => setIsUserMenuOpen(false)}
-                        className="block w-full px-4 py-2 text-sm font-medium text-white bg-[#1a5f52] hover:bg-[#164b42] rounded-lg transition-colors text-center"
+                        className="block w-full px-[11px] py-[5px] text-[9px] font-medium text-white bg-[#1a5f52] hover:bg-[#164b42] rounded-[5px] transition-colors text-center"
                       >
                         Login
                       </Link>
                       <Link
                         href="/signup"
                         onClick={() => setIsUserMenuOpen(false)}
-                        className="block w-full px-4 py-2 text-sm font-medium text-[#1a5f52] bg-white border-2 border-[#1a5f52] hover:bg-gray-50 rounded-lg transition-colors text-center"
+                        className="block w-full px-[11px] py-[5px] text-[9px] font-medium text-[#1a5f52] bg-white border border-[#1a5f52] hover:bg-gray-50 rounded-[5px] transition-colors text-center"
                       >
                         Sign Up
                       </Link>
                     </div>
 
-                    <hr className="my-1 border-gray-200" />
+                    <hr className="my-[3px] border-gray-200" />
 
-                    <div className="px-4 py-2">
-                      <p className="text-xs text-gray-500 text-center">
+                    <div className="px-[11px] py-[5px]">
+                      <p className="text-[8px] text-gray-500 text-center">
                         New to Zeerostock?{" "}
                         <Link
                           href="/about"

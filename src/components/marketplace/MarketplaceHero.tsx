@@ -86,7 +86,7 @@ export default function MarketplaceHero() {
       {/* Search bar */}
       <form
         onSubmit={handleSearch}
-        className="absolute left-1/2 top-[180px] -translate-x-1/2 bg-[#EBEBEB] bg-opacity-65 border border-gray-200 rounded-full flex items-center h-[49px] w-[614px]"
+        className="absolute left-1/2 top-[180px] -translate-x-1/2 bg-[#EBEBEB] border border-gray-200 rounded-full flex items-center h-[49px] w-[614px]"
       >
         {/* All dropdown */}
         <div className="relative" ref={dropdownRef}>
@@ -126,12 +126,12 @@ export default function MarketplaceHero() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
-                className="absolute top-full left-0 mt-1.5 bg-white border border-gray-200 rounded-lg shadow-lg z-[9999] w-36 max-h-60 overflow-y-auto"
+                className="absolute top-full left-0 mt-1.5 bg-[#EBEBEB] border border-gray-200 rounded-lg shadow-lg z-[9999] space-y-[0.5px] w-36 max-h-60 overflow-y-auto"
               >
                 {categories.map((category) => (
                   <motion.div
                     key={category}
-                    whileHover={{ backgroundColor: "#f3f4f6" }}
+                    whileHover={{ backgroundColor: "#d3d1d1" }}
                     className="px-3 py-1.5 cursor-pointer text-[10.5px] text-gray-700"
                     onClick={() => {
                       setSelectedCategory(category);
@@ -196,34 +196,34 @@ export default function MarketplaceHero() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
-                className="absolute top-full right-0 mt-1.5 bg-white border border-gray-200 rounded-lg shadow-lg z-[9999] w-48 p-3"
+                className="absolute top-full right-0 mt-1.5 bg-[#EBEBEB] border border-gray-200 rounded-lg shadow-lg space-y-[0.5px] z-[9999] w-48 p-3"
               >
                 <div className="text-[10.5px] font-medium text-gray-700 mb-2">
                   Quick Filters
                 </div>
                 <motion.div
-                  whileHover={{ backgroundColor: "#f3f4f6" }}
+                  whileHover={{ backgroundColor: "#d3d1d1" }}
                   className="px-2 py-1.5 cursor-pointer text-[10.5px] text-gray-600 rounded"
                   onClick={() => setIsFilterOpen(false)}
                 >
                   Price: Low to High
                 </motion.div>
                 <motion.div
-                  whileHover={{ backgroundColor: "#f3f4f6" }}
+                  whileHover={{ backgroundColor: "#d3d1d1" }}
                   className="px-2 py-1.5 cursor-pointer text-[10.5px] text-gray-600 rounded"
                   onClick={() => setIsFilterOpen(false)}
                 >
                   Price: High to Low
                 </motion.div>
                 <motion.div
-                  whileHover={{ backgroundColor: "#f3f4f6" }}
+                  whileHover={{ backgroundColor: "#d3d1d1" }}
                   className="px-2 py-1.5 cursor-pointer text-[10.5px] text-gray-600 rounded"
                   onClick={() => setIsFilterOpen(false)}
                 >
                   Newest First
                 </motion.div>
                 <motion.div
-                  whileHover={{ backgroundColor: "#f3f4f6" }}
+                  whileHover={{ backgroundColor: "#d3d1d1" }}
                   className="px-2 py-1.5 cursor-pointer text-[10.5px] text-gray-600 rounded"
                   onClick={() => setIsFilterOpen(false)}
                 >

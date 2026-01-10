@@ -79,10 +79,25 @@ apiClient.interceptors.response.use(
 
     // If error response doesn't exist, it might be a network error
     if (!error.response) {
-      console.error("Network error:", error.message);
+      console.error("❌ Network error:", error.message);
+      console.error("Details:", {
+        code: error.code,
+        url: originalRequest?.url,
+        baseURL: API_BASE_URL,
+      });
+
+      // Check if it's a connection refused error
+      if (error.code === "ECONNREFUSED" || error.code === "ERR_NETWORK") {
+        return Promise.reject({
+          success: false,
+          message: `Cannot connect to server at ${API_BASE_URL}. Please ensure the backend server is running.`,
+          errorCode: "NETWORK_ERROR",
+        });
+      }
+
       return Promise.reject({
         success: false,
-        message: "Network error. Please check your connection.",
+        message: "Network error. Please check your internet connection.",
         errorCode: "NETWORK_ERROR",
       });
     }
@@ -108,6 +123,8 @@ apiClient.interceptors.response.use(
       !originalRequest._retry &&
       !isAuthEndpoint
     ) {
+      console.log("🔄 Token expired, attempting refresh...");
+
       if (isRefreshing) {
         // Queue this request until refresh completes
         return new Promise((resolve, reject) => {
@@ -209,6 +226,13 @@ apiClient.interceptors.response.use(
     }
 
     // Handle other errors
+    console.error("❌ API Error:", {
+      status: error.response?.status,
+      url: originalRequest?.url,
+      message: error.response?.data?.message,
+      errorCode: error.response?.data?.errorCode,
+    });
+
     const errorResponse: ApiError = {
       success: false,
       message:

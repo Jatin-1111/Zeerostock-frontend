@@ -185,7 +185,7 @@ export default function PostRFQPage() {
           </div>
 
           {/* Category and Industry */}
-          <div className="grid grid-cols-2 gap-[22.5px] mb-4.5">
+          <div className="grid grid-cols-2 gap-[17px] mb-4.5">
             <div>
               <label className="block text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
                 Category<span className="text-red-600">*</span>
@@ -211,7 +211,7 @@ export default function PostRFQPage() {
             </div>
 
             <div>
-              <label className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]">
+              <label className="block text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
                 Industry<span className="text-red-600">*</span>
               </label>
               <select
@@ -219,7 +219,7 @@ export default function PostRFQPage() {
                 onChange={(e) =>
                   setFormData({ ...formData, industryId: e.target.value })
                 }
-                className="w-full h-[42px] px-3 border border-[#bebebe] rounded-[8px] text-[12px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe] appearance-none bg-white"
+                className="w-full h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe] appearance-none bg-white"
                 required
                 disabled={loading}
               >
@@ -236,9 +236,9 @@ export default function PostRFQPage() {
           </div>
 
           {/* Quantity and Unit */}
-          <div className="grid grid-cols-2 gap-[30px] mb-6">
+          <div className="grid grid-cols-2 gap-[22.5px] mb-4.5">
             <div>
-              <label className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]">
+              <label className="block text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
                 Quantity<span className="text-red-600">*</span>
               </label>
               <input
@@ -248,7 +248,7 @@ export default function PostRFQPage() {
                 onChange={(e) =>
                   setFormData({ ...formData, quantity: Number(e.target.value) })
                 }
-                className="w-full h-[42px] px-3 border border-[#bebebe] rounded-[8px] text-[12px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+                className="w-full h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
                 required
                 min="1"
                 disabled={loading}
@@ -256,7 +256,7 @@ export default function PostRFQPage() {
             </div>
 
             <div>
-              <label className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]">
+              <label className="block text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
                 Unit
               </label>
               <select
@@ -264,7 +264,7 @@ export default function PostRFQPage() {
                 onChange={(e) =>
                   setFormData({ ...formData, unit: e.target.value as RFQUnit })
                 }
-                className="w-full h-[42px] px-3 border border-[#bebebe] rounded-[8px] text-[12px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe] appearance-none bg-white"
+                className="w-full h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe] appearance-none bg-white"
                 required
                 disabled={loading}
               >
@@ -285,9 +285,9 @@ export default function PostRFQPage() {
           </div>
 
           {/* Budget Range and Required by Date */}
-          <div className="grid grid-cols-2 gap-[30px] mb-6">
+          <div className="grid grid-cols-2 gap-[22.5px] mb-4.5">
             <div>
-              <label className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]">
+              <label className="block text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
                 Budget
               </label>
               <input
@@ -301,14 +301,14 @@ export default function PostRFQPage() {
                     budgetMax: value ? Number(value) : undefined,
                   });
                 }}
-                className="w-full h-[42px] px-3 border border-[#bebebe] rounded-[8px] text-[12px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+                className="w-full h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
                 disabled={loading}
                 min="0"
               />
             </div>
 
             <div>
-              <label className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]">
+              <label className="block text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
                 Required by Date
               </label>
               <input
@@ -318,15 +318,15 @@ export default function PostRFQPage() {
                 onChange={(e) =>
                   setFormData({ ...formData, requiredByDate: e.target.value })
                 }
-                className="w-full h-[42px] px-3 border border-[#bebebe] rounded-[8px] text-[12px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+                className="w-full h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
                 disabled={loading}
               />
             </div>
           </div>
 
           {/* Detailed Requirements */}
-          <div className="mb-6">
-            <label className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]">
+          <div className="mb-4.5">
+            <label className="block text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
               Detailed Requirements
             </label>
             <textarea
@@ -338,16 +338,16 @@ export default function PostRFQPage() {
                   detailedRequirements: e.target.value,
                 })
               }
-              rows={4}
-              className="w-full px-3 py-2 border border-[#bebebe] rounded-[8px] text-[12px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe] resize-none"
+              rows={3}
+              className="w-full px-2 py-1.5 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe] resize-none"
               disabled={loading}
             />
           </div>
 
           {/* Preferred Location and RFQ Duration */}
-          <div className="grid grid-cols-2 gap-[30px] mb-9">
+          <div className="grid grid-cols-2 gap-[22.5px] mb-[27px]">
             <div>
-              <label className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]">
+              <label className="block text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
                 Preferred Location
               </label>
               <input
@@ -360,13 +360,13 @@ export default function PostRFQPage() {
                     preferredLocation: e.target.value,
                   })
                 }
-                className="w-full h-[42px] px-3 border border-[#bebebe] rounded-[8px] text-[12px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+                className="w-full h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
                 disabled={loading}
               />
             </div>
 
             <div>
-              <label className="block text-[17px] font-medium text-[#0d1b2a] mb-[5px]">
+              <label className="block text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
                 RFQ Duration<span className="text-red-600">*</span>
               </label>
               <select
@@ -377,7 +377,7 @@ export default function PostRFQPage() {
                     durationDays: Number(e.target.value),
                   })
                 }
-                className="w-full h-[42px] px-3 border border-[#bebebe] rounded-[8px] text-[12px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe] appearance-none bg-white"
+                className="w-full h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe] appearance-none bg-white"
                 required
                 disabled={loading}
               >

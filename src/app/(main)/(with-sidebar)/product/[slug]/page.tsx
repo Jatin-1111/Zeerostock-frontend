@@ -29,37 +29,33 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
     );
 
     return (
-      <div className="bg-[#eefbf6] min-h-screen">
-        <div className="max-w-[1200px] mx-auto px-[20px] py-6">
-          {/* Breadcrumb */}
-          <div className="flex items-center gap-1.5 text-[10.5px] font-medium mb-4.5">
-            <span className="text-[#bebebe]">Marketplace</span>
-            <span className="text-[#bebebe] text-[12px]">/</span>
-            <span className="text-[#bebebe]">Materials</span>
-            <span className="text-[#bebebe] text-[12px]">/</span>
-            <span className="text-[#0d1b2a]">{product.title as string}</span>
-          </div>
-
-          <div className="grid grid-cols-[750px_1fr] gap-7.5">
-            <div className="relative">
+      <div className="min-h-screen bg-[#eefbf6]">
+        <div className="max-w-200 mx-auto px-5 py-6">
+          {/* Image Gallery and Product Info Grid */}
+          <div className="grid grid-cols-2 gap-5 mb-5">
+            <div>
               <ProductImageGallery
                 images={productImages}
                 title={product.title}
                 discountPercent={product.discountPercent}
               />
             </div>
-            <ProductInfo product={response.data as never} />
+            <div>
+              <ProductInfo product={response.data as never} />
+            </div>
           </div>
-          <div className="mt-6">
+
+          {/* Description Section */}
+          <div className="mb-5">
             <ProductDescription product={response.data as never} />
           </div>
 
           {/* Return Policy Section */}
-          <div className="mt-6 bg-white rounded-[15px] shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)] px-7.5 py-6">
-            <h2 className="text-[22.5px] font-medium text-[#0d1b2a] mb-4.5">
+          <div className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] px-4 py-6">
+            <h2 className="text-[15px] font-medium text-[#0d1b2a] mb-4">
               Return Policy
             </h2>
-            <p className="text-[18.75px] font-normal text-[#9c9c9c] leading-[24.75px]">
+            <p className="text-[12.5px] font-normal text-[#9c9c9c] leading-[14px]">
               {(product.returnPolicy as string) ||
                 "30-day return policy for unused items in original packaging. Buyer responsible for return shipping costs."}
             </p>

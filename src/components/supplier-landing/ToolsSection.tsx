@@ -50,42 +50,42 @@ export default function ToolsSection() {
   ];
 
   return (
-    <div className="w-full bg-[#eeffef] px-[60px] py-[75px]">
-      <div className="max-w-[1320px] mx-auto">
+    <div className="w-full bg-[#eeffef] px-[40px] py-[50px]">
+      <div className="max-w-[880px] mx-auto">
         {/* Heading Section */}
-        <div className="text-center mb-[67px]">
-          <h2 className="text-[39px] leading-[52px] font-medium text-[#0d1b2a] mb-[11px]">
+        <div className="text-center mb-[45px]">
+          <h2 className="text-[26px] leading-[35px] font-medium text-[#0d1b2a] mb-[7px]">
             Powerful Tools for{" "}
             <span className="text-[#2ec096]">Successful Selling</span>
           </h2>
-          <p className="text-[18px] font-semibold text-[#9c9c9c]">
+          <p className="text-[12px] font-semibold text-[#9c9c9c]">
             Everything you need to list, promote, and sell your surplus
             inventory efficiently.
           </p>
         </div>
 
         {/* Tools Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-[60px] gap-y-[60px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-[40px] gap-y-[40px]">
           {tools.map((tool, index) => (
             <div
               key={index}
-              className="bg-[#2aae7a] rounded-[30px] overflow-hidden min-h-[215px] flex flex-col items-center text-center px-[19px] pt-[23px] pb-[23px]"
+              className="bg-[#2aae7a] rounded-[20px] overflow-hidden min-h-[143px] flex flex-col items-center text-center px-[13px] pt-[15px] pb-[15px]"
             >
               {/* Icon Container */}
-              <div className="bg-[#eeffef] rounded-[45px] p-[11px] flex items-center justify-center mb-[23px]">
+              <div className="bg-[#eeffef] rounded-[30px] p-[7px] flex items-center justify-center mb-[15px]">
                 <tool.icon
-                  className="w-[30px] h-[30px] text-[#2aae7a]"
+                  className="w-[20px] h-[20px] text-[#2aae7a]"
                   strokeWidth={2}
                 />
               </div>
 
               {/* Title */}
-              <h3 className="text-[17px] leading-[20px] font-semibold text-[#022778] mb-[15px]">
+              <h3 className="text-[11px] leading-[13px] font-semibold text-[#022778] mb-[10px]">
                 {tool.title}
               </h3>
 
               {/* Description */}
-              <p className="text-[12px] leading-[16px] font-semibold text-white">
+              <p className="text-[8px] leading-[11px] font-semibold text-white">
                 {tool.description}
               </p>
             </div>

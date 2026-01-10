@@ -9,7 +9,7 @@ import CTASection from "@/components/about/CTASection";
 
 export default function AboutPage() {
   return (
-    <div className="bg-[#EEFBF6] space-y-3">
+    <div className="space-y-3">
       <HeroSection />
       <MissionSection />
       <TestimonialSection />

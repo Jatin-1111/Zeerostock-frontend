@@ -161,7 +161,7 @@ export default function MyOrdersPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#eefbf6] pb-[34px] pt-[75px]">
+    <div className="relative min-h-screen pb-[34px] pt-[75px]">
       <div className="mx-auto max-w-[1440px] px-7.5">
         {/* Page Title and Export Button */}
         <div className="mb-[60px] flex items-center justify-between">

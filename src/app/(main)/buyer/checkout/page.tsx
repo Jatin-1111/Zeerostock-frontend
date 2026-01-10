@@ -229,37 +229,33 @@ function CheckoutContent() {
   };
 
   return (
-    <div className="min-h-screen bg-[#EEFBF6] py-10">
-      <div className="max-w-[1440px] mx-auto px-15">
+    <div className="min-h-screen bg-[#EEFBF6] py-3.5">
+      <div className="max-w-[480px] mx-auto px-5">
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-2.5">
           <div className="text-center">
-            <h1
-              className="text-[27px] font-semibold text-[#0d1b2a]"
-            >
+            <h1 className="text-[9px] font-semibold text-[#0d1b2a]">
               Checkout
             </h1>
-            <p
-              className="text-[18px] font-medium text-[#9c9c9c]"
-            >
+            <p className="text-[6px] font-medium text-[#9c9c9c]">
               Secure payment and shipping information
             </p>
           </div>
         </div>
 
         {error && (
-          <div className="mb-5 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600">
+          <div className="mb-1.5 p-1 bg-red-50 border border-red-200 rounded-lg text-red-600 text-[8px]">
             {error}
           </div>
         )}
 
         {/* Progress Steps */}
-        <div className="mb-9">
+        <div className="mb-3">
           <ProgressSteps currentStep={currentStep} />
         </div>
 
         {/* Main Content Flexbox */}
-        <div className="flex flex-col lg:flex-row gap-6 w-full max-w-[1440px]">
+        <div className="flex flex-col lg:flex-row gap-2 w-full max-w-[480px]">
           {/* Left Side - Step Content */}
           <div className="w-full lg:w-3/4">
             {currentStep === 1 && (

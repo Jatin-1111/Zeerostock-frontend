@@ -161,8 +161,8 @@ export default function EnhancedSearchInput({
     <div className={`relative ${className}`}>
       {/* Search Input */}
       <div className="relative flex items-center">
-        <div className="absolute left-3 pointer-events-none">
-          <Search className="w-5 h-5 text-gray-600" />
+        <div className="absolute left-2 pointer-events-none">
+          <Search className="w-[13px] h-[13px] text-gray-600" />
         </div>
         <input
           ref={inputRef}
@@ -173,14 +173,14 @@ export default function EnhancedSearchInput({
           onFocus={() => setShowDropdown(true)}
           placeholder={placeholder}
           autoFocus={autoFocus}
-          className="w-full pl-10 pr-10 py-3 border text-gray-600 border-gray-300 rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5f52] focus:border-transparent"
+          className="w-full pl-[27px] pr-[27px] py-2 border text-gray-600 border-gray-300 rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5f52] focus:border-transparent text-[9px]"
         />
         {query && (
           <button
             onClick={clearQuery}
-            className="absolute right-3 p-1 hover:bg-gray-100 rounded-full transition-colors"
+            className="absolute right-2 p-[3px] hover:bg-gray-100 rounded-full transition-colors"
           >
-            <X className="w-4 h-4 text-gray-600" />
+            <X className="w-[11px] h-[11px] text-gray-600" />
           </button>
         )}
       </div>
@@ -189,29 +189,29 @@ export default function EnhancedSearchInput({
       {(showEmptyState || showSuggestionsState) && (
         <div
           ref={dropdownRef}
-          className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-96 overflow-y-auto"
+          className="absolute top-full left-0 right-0 mt-[5px] bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-[256px] overflow-y-auto"
         >
           {/* Loading State */}
           {isLoading && (
-            <div className="p-4 text-center text-gray-500">
-              <div className="animate-spin inline-block w-5 h-5 border-2 border-gray-300 border-t-[#1a5f52] rounded-full"></div>
+            <div className="p-[11px] text-center text-gray-500">
+              <div className="animate-spin inline-block w-[13px] h-[13px] border border-gray-300 border-t-[#1a5f52] rounded-full"></div>
             </div>
           )}
 
           {/* Suggestions */}
           {!isLoading && suggestions.length > 0 && (
-            <div className="py-2">
-              <div className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase">
+            <div className="py-[5px]">
+              <div className="px-[11px] py-[5px] text-[8px] font-semibold text-gray-500 uppercase">
                 Suggestions
               </div>
               {suggestions.map((suggestion, index) => (
                 <button
                   key={index}
                   onClick={() => handleSuggestionClick(suggestion)}
-                  className="w-full px-4 py-2.5 text-left hover:bg-gray-50 transition-colors flex items-center gap-3"
+                  className="w-full px-[11px] py-[7px] text-left hover:bg-gray-50 transition-colors flex items-center gap-2"
                 >
-                  <Search className="w-4 h-4 text-gray-400" />
-                  <span className="text-gray-900">{suggestion}</span>
+                  <Search className="w-[11px] h-[11px] text-gray-400" />
+                  <span className="text-gray-900 text-[9px]">{suggestion}</span>
                 </button>
               ))}
             </div>
@@ -219,11 +219,11 @@ export default function EnhancedSearchInput({
 
           {/* Did You Mean */}
           {didYouMean && (
-            <div className="px-4 py-3 border-t border-gray-100">
-              <span className="text-sm text-gray-600">Did you mean: </span>
+            <div className="px-[11px] py-2 border-t border-gray-100">
+              <span className="text-[9px] text-gray-600">Did you mean: </span>
               <button
                 onClick={() => handleSuggestionClick(didYouMean)}
-                className="text-sm text-[#1a5f52] hover:underline font-medium"
+                className="text-[9px] text-[#1a5f52] hover:underline font-medium"
               >
                 {didYouMean}
               </button>
@@ -232,19 +232,19 @@ export default function EnhancedSearchInput({
 
           {/* Recent Searches */}
           {query.length === 0 && recentSearches.length > 0 && (
-            <div className="py-2">
-              <div className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase flex items-center gap-2">
-                <Clock className="w-3 h-3" />
+            <div className="py-[5px]">
+              <div className="px-[11px] py-[5px] text-[8px] font-semibold text-gray-500 uppercase flex items-center gap-[5px]">
+                <Clock className="w-2 h-2" />
                 Recent Searches
               </div>
               {recentSearches.map((search, index) => (
                 <button
                   key={index}
                   onClick={() => handleSuggestionClick(search)}
-                  className="w-full px-4 py-2.5 text-left hover:bg-gray-50 transition-colors flex items-center gap-3"
+                  className="w-full px-[11px] py-[7px] text-left hover:bg-gray-50 transition-colors flex items-center gap-2"
                 >
-                  <Clock className="w-4 h-4 text-gray-400" />
-                  <span className="text-gray-900">{search}</span>
+                  <Clock className="w-[11px] h-[11px] text-gray-400" />
+                  <span className="text-gray-900 text-[9px]">{search}</span>
                 </button>
               ))}
             </div>
@@ -254,19 +254,19 @@ export default function EnhancedSearchInput({
           {query.length === 0 &&
             popularSearches.length > 0 &&
             (!isAuthenticated || recentSearches.length === 0) && (
-              <div className="py-2 border-t border-gray-100">
-                <div className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase flex items-center gap-2">
-                  <TrendingUp className="w-3 h-3" />
+              <div className="py-[5px] border-t border-gray-100">
+                <div className="px-[11px] py-[5px] text-[8px] font-semibold text-gray-500 uppercase flex items-center gap-[5px]">
+                  <TrendingUp className="w-2 h-2" />
                   Popular Searches
                 </div>
                 {popularSearches.map((search, index) => (
                   <button
                     key={index}
                     onClick={() => handleSuggestionClick(search)}
-                    className="w-full px-4 py-2.5 text-left hover:bg-gray-50 transition-colors flex items-center gap-3"
+                    className="w-full px-[11px] py-[7px] text-left hover:bg-gray-50 transition-colors flex items-center gap-2"
                   >
-                    <TrendingUp className="w-4 h-4 text-gray-400" />
-                    <span className="text-gray-900">{search}</span>
+                    <TrendingUp className="w-[11px] h-[11px] text-gray-400" />
+                    <span className="text-gray-900 text-[9px]">{search}</span>
                   </button>
                 ))}
               </div>
@@ -277,9 +277,9 @@ export default function EnhancedSearchInput({
             query.length >= 2 &&
             suggestions.length === 0 &&
             !didYouMean && (
-              <div className="px-4 py-6 text-center text-gray-500">
-                <Search className="w-8 h-8 mx-auto mb-2 text-gray-300" />
-                <p className="text-sm">No suggestions found</p>
+              <div className="px-[11px] py-4 text-center text-gray-500">
+                <Search className="w-[21px] h-[21px] mx-auto mb-[5px] text-gray-300" />
+                <p className="text-[9px]">No suggestions found</p>
               </div>
             )}
         </div>

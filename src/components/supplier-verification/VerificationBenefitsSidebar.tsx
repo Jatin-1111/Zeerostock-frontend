@@ -98,13 +98,13 @@ function BenefitItem({
   description: string;
 }) {
   return (
-    <div className="flex items-start gap-4">
-      <div className="shrink-0 mt-1">{icon}</div>
-      <div>
-        <h4 className="font-semibold text-[17px] text-[#0d1b2a] mb-[5px]">
+    <div className="flex items-start gap-0 h-[61px]">
+      <div className="shrink-0 w-[19px] h-[19px] mt-[21px]">{icon}</div>
+      <div className="ml-8">
+        <h4 className="font-semibold text-[15px] text-black mb-1.5 leading-tight">
           {title}
         </h4>
-        <p className="font-medium text-[11px] text-[#9c9c9c] leading-normal">
+        <p className="font-medium text-[9px] text-[#9c9c9c] leading-[14px] max-w-[206px]">
           {description}
         </p>
       </div>
@@ -139,28 +139,65 @@ function ImpactCard({
 
 export function VerificationBenefitsSidebar() {
   return (
-    <div className="w-[345px] space-y-[23px]">
+    <div className="w-[269px]">
       {/* Verification Benefits Card */}
-      <div className="bg-white shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] rounded-[15px] p-[23px]">
-        <h3 className="font-semibold text-[18px] text-[#0d1b2a] mb-8">
-          Verification Benefits
-        </h3>
+      <div className="bg-[#f9fffd] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] rounded-[13px] h-[297px] overflow-hidden">
+        <div className="px-5 pt-4 pb-3">
+          <h3 className="font-semibold text-[16px] text-black">
+            Verification Benefits
+          </h3>
+        </div>
 
-        <div className="space-y-[23px]">
+        <div className="px-5 space-y-0">
           <BenefitItem
-            icon={<Shield className="w-5 h-5 text-[#2aae7a]" />}
+            icon={
+              <svg
+                className="w-[19px] h-[19px]"
+                viewBox="0 0 28 28"
+                fill="none"
+              >
+                <path
+                  d="M14 2L4 7v7c0 6.3 4.3 12.2 10 14 5.7-1.8 10-7.7 10-14V7l-10-5z"
+                  stroke="#2AAE7A"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  fill="none"
+                />
+                <path
+                  d="M10 14l2.5 2.5L18 11"
+                  stroke="#2AAE7A"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            }
             title="Trusted Badge"
             description="Display verified supplier badge on all listings"
           />
           <BenefitItem
             icon={
-              <svg className="w-7 h-7" viewBox="0 0 28 28" fill="none">
+              <svg
+                className="w-[19px] h-[19px]"
+                viewBox="0 0 28 28"
+                fill="none"
+              >
                 <path
-                  d="M14 10v8M10 14l4 4 4-4"
+                  d="M14 9c-3.5 0-6.5 2.3-7.5 5.5C7.5 17.7 10.5 20 14 20s6.5-2.3 7.5-5.5c-1-3.2-4-5.5-7.5-5.5z"
                   stroke="#2AAE7A"
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
+                  fill="none"
+                />
+                <circle
+                  cx="14"
+                  cy="14.5"
+                  r="2.5"
+                  stroke="#2AAE7A"
+                  strokeWidth="2"
+                  fill="none"
                 />
               </svg>
             }
@@ -169,12 +206,26 @@ export function VerificationBenefitsSidebar() {
           />
           <BenefitItem
             icon={
-              <svg className="w-7 h-7" viewBox="0 0 28 28" fill="none">
+              <svg
+                className="w-[19px] h-[19px]"
+                viewBox="0 0 28 28"
+                fill="none"
+              >
                 <path
-                  d="M14 18c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4zM6 14h4M18 14h4M14 6v4M14 18v4"
+                  d="M7 15c0-3.9 3.1-7 7-7s7 3.1 7 7c0 2-1.6 5.5-6 9-1.3 1-2.7 1-4 0-4.4-3.5-6-7-6-9z"
                   stroke="#2AAE7A"
                   strokeWidth="2"
                   strokeLinecap="round"
+                  strokeLinejoin="round"
+                  fill="none"
+                />
+                <circle
+                  cx="14"
+                  cy="14"
+                  r="2"
+                  stroke="#2AAE7A"
+                  strokeWidth="2"
+                  fill="none"
                 />
               </svg>
             }
@@ -183,21 +234,39 @@ export function VerificationBenefitsSidebar() {
           />
           <BenefitItem
             icon={
-              <svg className="w-7 h-7" viewBox="0 0 28 28" fill="none">
+              <svg
+                className="w-[19px] h-[19px]"
+                viewBox="0 0 28 28"
+                fill="none"
+              >
                 <rect
                   x="6"
-                  y="8"
+                  y="9"
                   width="16"
                   height="12"
                   rx="2"
                   stroke="#2AAE7A"
                   strokeWidth="2"
+                  fill="none"
                 />
                 <path
-                  d="M10 12h8M10 16h4"
+                  d="M10 9V7c0-2.2 1.8-4 4-4s4 1.8 4 4v2"
                   stroke="#2AAE7A"
                   strokeWidth="2"
                   strokeLinecap="round"
+                />
+                <path
+                  d="M14 14v3"
+                  stroke="#2AAE7A"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M11 15l1.5 1.5L16 13"
+                  stroke="#2AAE7A"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             }
@@ -208,7 +277,7 @@ export function VerificationBenefitsSidebar() {
       </div>
 
       {/* Verification Impact Card */}
-      <div className="bg-white shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] rounded-[15px] p-[30px]">
+      <div className="bg-white shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] rounded-[15px] p-[30px] mt-[23px]">
         <h3 className="font-semibold text-[18px] text-[#0d1b2a] mb-[55px]">
           Verification Impact
         </h3>
@@ -236,7 +305,7 @@ export function VerificationBenefitsSidebar() {
       </div>
 
       {/* Need Help Card */}
-      <div className="bg-white shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] rounded-[15px] p-[30px]">
+      <div className="bg-white shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] rounded-[15px] p-[30px] mt-[23px]">
         <h3 className="font-semibold text-[18px] text-[#0d1b2a] mb-5">
           Need Help?
         </h3>

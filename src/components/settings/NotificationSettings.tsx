@@ -169,64 +169,64 @@ export default function NotificationSettings() {
   }) => (
     <div
       onClick={onChange}
-      className={`w-[36px] h-[19.5px] rounded-full relative cursor-pointer transition-colors duration-200 ease-in-out ${
+      className={`w-[27px] h-[14.63px] rounded-full relative cursor-pointer transition-colors duration-200 ease-in-out ${
         checked ? "bg-[#1e3a8a]" : "bg-[#e5e7eb]"
       }`}
     >
       <div
-        className={`w-[15px] h-[15px] bg-white rounded-full absolute top-[2.25px] shadow-sm transition-transform duration-200 ease-in-out ${
-          checked ? "translate-x-[18.75px]" : "translate-x-[2.25px]"
+        className={`w-[11.25px] h-[11.25px] bg-white rounded-full absolute top-[1.69px] shadow-sm transition-transform duration-200 ease-in-out ${
+          checked ? "translate-x-[14.06px]" : "translate-x-[1.69px]"
         }`}
       />
     </div>
   );
 
   return (
-    <div className="flex flex-col gap-[22.5px]">
+    <div className="flex flex-col gap-[16.88px]">
       {/* Header Section */}
       <div>
-        <h1 className="text-[26.25px] font-semibold text-[#0d1b2a] mb-[6px] leading-[1.2]">
+        <h1 className="text-[19.69px] font-semibold text-[#0d1b2a] mb-[4.5px] leading-[1.2]">
           Notification Settings
         </h1>
-        <p className="text-[12.75px] text-[#0d1b2a] font-normal">
+        <p className="text-[9.56px] text-[#0d1b2a] font-normal">
           Manage how you receive notifications and updates
         </p>
       </div>
 
       {/* Success/Error Messages */}
       {success && (
-        <div className="bg-[#f0fdf4] border border-[#86efac] text-[#166534] px-[12px] py-[9px] rounded-[6px]">
+        <div className="bg-[#f0fdf4] border border-[#86efac] text-[#166534] px-[9px] py-[6.75px] rounded-[4.5px]">
           {success}
         </div>
       )}
       {error && (
-        <div className="bg-[#fef2f2] border border-[#fecaca] text-[#991b1b] px-[12px] py-[9px] rounded-[6px]">
+        <div className="bg-[#fef2f2] border border-[#fecaca] text-[#991b1b] px-[9px] py-[6.75px] rounded-[4.5px]">
           {error}
         </div>
       )}
 
       {/* Email Notifications Card */}
-      <div className="bg-white rounded-[15px] shadow-[0px_1.5px_4.5px_0px_rgba(0,0,0,0.25)] p-[18px] relative">
+      <div className="bg-white rounded-[11.25px] shadow-[0px_1.13px_3.38px_0px_rgba(0,0,0,0.25)] p-[13.5px] relative">
         {/* Section Header */}
-        <div className="flex items-center gap-[15px] mb-[30px]">
-          <MessageSquareDot className="w-[19.5px] h-[19.5px] text-[#0d1b2a]" />
-          <h2 className="text-[18px] font-semibold text-[#0d1b2a]">
+        <div className="flex items-center gap-[11.25px] mb-[22.5px]">
+          <MessageSquareDot className="w-[14.63px] h-[14.63px] text-[#0d1b2a]" />
+          <h2 className="text-[13.5px] font-semibold text-[#0d1b2a]">
             Email Notifications
           </h2>
         </div>
 
         {/* Divider Line */}
-        <div className="absolute left-0 top-[67.5px] w-full h-[1px] bg-[#e5e7eb]" />
+        <div className="absolute left-0 top-[50.63px] w-full h-[0.75px] bg-[#e5e7eb]" />
 
         {/* List Items */}
-        <div className="flex flex-col gap-[22.5px] mt-[22.5px]">
+        <div className="flex flex-col gap-[16.88px] mt-[16.88px]">
           {/* Order Updates */}
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-[12.75px] font-medium text-[#0d1b2a] mb-[3px]">
+              <p className="text-[9.56px] font-medium text-[#0d1b2a] mb-[2.25px]">
                 Order Updates
               </p>
-              <p className="text-[10.5px] text-[#64748b]">
+              <p className="text-[7.88px] text-[#64748b]">
                 Receive emails about your order status and delivery
               </p>
             </div>
@@ -241,10 +241,10 @@ export default function NotificationSettings() {
           {/* New Messages */}
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-[12.75px] font-medium text-[#0d1b2a] mb-[3px]">
+              <p className="text-[9.56px] font-medium text-[#0d1b2a] mb-[2.25px]">
                 New Messages
               </p>
-              <p className="text-[10.5px] text-[#64748b]">
+              <p className="text-[7.88px] text-[#64748b]">
                 Get notified when you receive a new message
               </p>
             </div>
@@ -257,10 +257,10 @@ export default function NotificationSettings() {
           {/* Account Activity */}
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-[12.75px] font-medium text-[#0d1b2a] mb-[3px]">
+              <p className="text-[9.56px] font-medium text-[#0d1b2a] mb-[2.25px]">
                 Account Activity
               </p>
-              <p className="text-[10.5px] text-[#64748b]">
+              <p className="text-[7.88px] text-[#64748b]">
                 Alerts for security and account changes
               </p>
             </div>
@@ -275,10 +275,10 @@ export default function NotificationSettings() {
           {/* Promotions */}
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-[12.75px] font-medium text-[#0d1b2a] mb-[3px]">
+              <p className="text-[9.56px] font-medium text-[#0d1b2a] mb-[2.25px]">
                 Promotions & Offers
               </p>
-              <p className="text-[10.5px] text-[#64748b]">
+              <p className="text-[7.88px] text-[#64748b]">
                 Receive updates about sales and special offers
               </p>
             </div>
@@ -291,27 +291,27 @@ export default function NotificationSettings() {
       </div>
 
       {/* Push Notifications Card */}
-      <div className="bg-white rounded-[15px] shadow-[0px_1.5px_4.5px_0px_rgba(0,0,0,0.25)] p-[18px] relative">
+      <div className="bg-white rounded-[11.25px] shadow-[0px_1.13px_3.38px_0px_rgba(0,0,0,0.25)] p-[13.5px] relative">
         {/* Section Header */}
-        <div className="flex items-center gap-[15px] mb-[30px]">
-          <BookText className="w-[19.5px] h-[19.5px] text-[#0d1b2a]" />
-          <h2 className="text-[18px] font-semibold text-[#0d1b2a]">
+        <div className="flex items-center gap-[11.25px] mb-[22.5px]">
+          <BookText className="w-[14.63px] h-[14.63px] text-[#0d1b2a]" />
+          <h2 className="text-[13.5px] font-semibold text-[#0d1b2a]">
             Push Notifications
           </h2>
         </div>
 
         {/* Divider Line */}
-        <div className="absolute left-0 top-[67.5px] w-full h-[1px] bg-[#e5e7eb]" />
+        <div className="absolute left-0 top-[50.63px] w-full h-[0.75px] bg-[#e5e7eb]" />
 
         {/* List Items */}
-        <div className="flex flex-col gap-[22.5px] mt-[22.5px]">
+        <div className="flex flex-col gap-[16.88px] mt-[16.88px]">
           {/* Order Updates */}
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-[12.75px] font-medium text-[#0d1b2a] mb-[3px]">
+              <p className="text-[9.56px] font-medium text-[#0d1b2a] mb-[2.25px]">
                 Order Updates
               </p>
-              <p className="text-[10.5px] text-[#64748b]">
+              <p className="text-[7.88px] text-[#64748b]">
                 Get instant notifications about your orders
               </p>
             </div>
@@ -324,10 +324,10 @@ export default function NotificationSettings() {
           {/* New Messages */}
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-[12.75px] font-medium text-[#0d1b2a] mb-[3px]">
+              <p className="text-[9.56px] font-medium text-[#0d1b2a] mb-[2.25px]">
                 New Messages
               </p>
-              <p className="text-[10.5px] text-[#64748b]">
+              <p className="text-[7.88px] text-[#64748b]">
                 Instant alerts for new messages
               </p>
             </div>
@@ -340,10 +340,10 @@ export default function NotificationSettings() {
           {/* Account Activity */}
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-[12.75px] font-medium text-[#0d1b2a] mb-[3px]">
+              <p className="text-[9.56px] font-medium text-[#0d1b2a] mb-[2.25px]">
                 Account Activity
               </p>
-              <p className="text-[10.5px] text-[#64748b]">
+              <p className="text-[7.88px] text-[#64748b]">
                 Security alerts and important account updates
               </p>
             </div>
@@ -362,9 +362,9 @@ export default function NotificationSettings() {
         <button
           onClick={handleSave}
           disabled={saving}
-          className="flex items-center gap-[7.5px] py-[11.25px] px-[82.5px] bg-[#1e3a8a] text-white rounded-[9px] text-[15px] font-semibold hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 transition-opacity"
+          className="flex items-center gap-[5.63px] py-[8.44px] px-[61.88px] bg-[#1e3a8a] text-white rounded-[6.75px] text-[11.25px] font-semibold hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 transition-opacity"
         >
-          <Save className="w-[21px] h-[21px] text-white" />
+          <Save className="w-[15.75px] h-[15.75px] text-white" />
           {saving ? "Saving..." : "Save Changes"}
         </button>
       </div>

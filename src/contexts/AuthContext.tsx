@@ -95,31 +95,55 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   // Login with email/phone + password
   const login = useCallback(async (data: LoginFormData): Promise<boolean> => {
+    console.log("🔐 AuthContext: Starting login for", data.identifier);
     try {
       const response = await authService.login(data);
+      console.log("📥 AuthContext: Login response:", {
+        success: response.success,
+        hasData: !!response.data,
+        message: response.message,
+      });
 
       if (response.success && response.data) {
         setUser(response.data.user);
+        console.log(
+          "✅ AuthContext: User set successfully",
+          response.data.user.email
+        );
         toast.success("Welcome back! Login successful");
 
         // Merge guest cart if exists
         try {
           await cartService.mergeCart();
-        } catch {
-          console.log("No guest cart to merge");
+        } catch (cartError) {
+          console.log(
+            "ℹ️ No guest cart to merge or cart merge failed:",
+            cartError
+          );
         }
 
         return true;
       }
 
-      toast.error(response.message || "Login failed");
+      const errorMsg = response.message || "Login failed";
+      console.error("❌ AuthContext: Login failed:", errorMsg, response);
+      toast.error(errorMsg);
       return false;
     } catch (error: unknown) {
-      toast.error(
-        error instanceof Error
-          ? error.message
-          : "Login failed. Please try again."
-      );
+      console.error("❌ AuthContext: Login exception:", error);
+
+      let errorMessage = "Login failed. Please try again.";
+
+      if (error && typeof error === "object") {
+        if ("message" in error) {
+          errorMessage = error.message as string;
+        }
+        if ("errorCode" in error) {
+          console.error("Error code:", error.errorCode);
+        }
+      }
+
+      toast.error(errorMessage);
       return false;
     }
   }, []);
@@ -129,10 +153,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     async (
       data: SignupFormData
     ): Promise<{ success: boolean; identifier?: string }> => {
+      console.log("📝 AuthContext: Starting signup for", data.businessEmail);
       try {
         const response = await authService.signup(data);
+        console.log("📥 AuthContext: Signup response:", {
+          success: response.success,
+          message: response.message,
+        });
 
         if (response.success) {
+          console.log("✅ AuthContext: Signup successful, OTP sent");
           toast.success("Verification code sent to your email");
           return {
             success: true,
@@ -140,14 +170,32 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
           };
         }
 
-        toast.error(response.message || "Signup failed");
+        const errorMsg = response.message || "Signup failed";
+        console.error("❌ AuthContext: Signup failed:", errorMsg, response);
+        toast.error(errorMsg);
         return { success: false };
       } catch (error: unknown) {
-        toast.error(
-          error instanceof Error
-            ? error.message
-            : "Signup failed. Please try again."
-        );
+        console.error("❌ AuthContext: Signup exception:", error);
+
+        let errorMessage = "Signup failed. Please try again.";
+
+        if (error && typeof error === "object") {
+          if ("message" in error) {
+            errorMessage = error.message as string;
+          }
+          if ("errors" in error && Array.isArray(error.errors)) {
+            const validationErrors = (
+              error.errors as Array<{ field: string; message: string }>
+            )
+              .map((e) => e.message)
+              .join(", ");
+            if (validationErrors) {
+              errorMessage = validationErrors;
+            }
+          }
+        }
+
+        toast.error(errorMessage);
         return { success: false };
       }
     },
@@ -157,23 +205,45 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   // Verify OTP
   const verifyOTP = useCallback(
     async (data: OTPVerifyData): Promise<boolean> => {
+      console.log(
+        "🔢 AuthContext: Starting OTP verification for",
+        data.identifier
+      );
       try {
         const response = await authService.verifyOTP(data);
+        console.log("📥 AuthContext: OTP verification response:", {
+          success: response.success,
+          hasData: !!response.data,
+        });
 
         if (response.success && response.data) {
           setUser(response.data.user);
+          console.log(
+            "✅ AuthContext: OTP verified, user set successfully",
+            response.data.user.email
+          );
           toast.success("Your account has been verified successfully");
           return true;
         }
 
-        toast.error(response.message || "OTP verification failed");
+        const errorMsg = response.message || "OTP verification failed";
+        console.error(
+          "❌ AuthContext: OTP verification failed:",
+          errorMsg,
+          response
+        );
+        toast.error(errorMsg);
         return false;
       } catch (error: unknown) {
-        toast.error(
-          error instanceof Error
-            ? error.message
-            : "OTP verification failed. Please try again."
-        );
+        console.error("❌ AuthContext: OTP verification exception:", error);
+
+        let errorMessage = "OTP verification failed. Please try again.";
+
+        if (error && typeof error === "object" && "message" in error) {
+          errorMessage = error.message as string;
+        }
+
+        toast.error(errorMessage);
         return false;
       }
     },

@@ -41,30 +41,30 @@ export default function TestimonialsSectionV2() {
   ];
 
   const logos = [
-    { image: imgLogo1, width: "111.75px", height: "80.25px" },
-    { image: imgLogo2, width: "129px", height: "72.75px" },
-    { image: imgLogo3, width: "108px", height: "69px" },
-    { image: imgLogo4, width: "136.5px", height: "69px" },
-    { image: imgLogo5, width: "110.25px", height: "70.5px" },
+    { image: imgLogo1, width: "74.5px", height: "53.5px" },
+    { image: imgLogo2, width: "86px", height: "48.5px" },
+    { image: imgLogo3, width: "72px", height: "46px" },
+    { image: imgLogo4, width: "91px", height: "46px" },
+    { image: imgLogo5, width: "73.5px", height: "47px" },
   ];
 
   return (
-    <section className="w-full py-[19.5px]">
-      <div className="max-w-[1320px] mx-auto px-4">
+    <section className="w-full py-[13px]">
+      <div className="max-w-[880px] mx-auto px-4">
         {/* Title */}
-        <h2 className="text-center text-[37.5px] font-bold leading-normal mb-[6px]">
+        <h2 className="text-center text-[25px] font-bold leading-normal mb-[4px]">
           <span className="text-[#2ec096]">Trusted</span>
           <span className="text-[#0d1b2a]"> By Industry Leaders</span>
         </h2>
 
         {/* Subtitle */}
-        <p className="text-center text-[18px] font-semibold leading-normal text-[#6b7280] mb-[58.5px] max-w-[772.5px] mx-auto">
+        <p className="text-center text-[12px] font-semibold leading-normal text-[#6b7280] mb-[39px] max-w-[515px] mx-auto">
           See how businesses like yours are maximizing value from surplus
           inventory
         </p>
 
         {/* Logos */}
-        <div className="flex items-center justify-center gap-[30px] mb-[67.5px]">
+        <div className="flex items-center justify-center gap-[20px] mb-[45px]">
           {logos.map((logo, index) => (
             <div
               key={index}
@@ -84,14 +84,14 @@ export default function TestimonialsSectionV2() {
         </div>
 
         {/* Testimonials */}
-        <div className="flex gap-[59.25px] justify-center">
+        <div className="flex gap-[39.5px] justify-center">
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="bg-[#eeffef] rounded-[22.5px] shadow-[0px_0px_7.5px_0px_rgba(24,181,34,0.5)] w-[300px] overflow-hidden"
+              className="bg-[#eeffef] rounded-[15px] shadow-[0px_0px_5px_0px_rgba(24,181,34,0.5)] w-[200px] overflow-hidden"
             >
               {/* Image */}
-              <div className="relative h-[165px] w-full overflow-hidden rounded-t-[22.5px]">
+              <div className="relative h-[110px] w-full overflow-hidden rounded-t-[15px]">
                 <img
                   src={testimonial.image}
                   alt={testimonial.name}
@@ -100,19 +100,19 @@ export default function TestimonialsSectionV2() {
               </div>
 
               {/* Content */}
-              <div className="px-[15px] py-[30px]">
+              <div className="px-[10px] py-[20px]">
                 {/* Quote */}
-                <p className="text-[16.5px] font-medium leading-normal text-[#686868] mb-[30px]">
+                <p className="text-[11px] font-medium leading-normal text-[#686868] mb-[20px]">
                   {testimonial.quote}
                 </p>
 
                 {/* Name */}
-                <p className="text-[21px] font-bold leading-normal text-black mb-[7.5px]">
+                <p className="text-[14px] font-bold leading-normal text-black mb-[5px]">
                   {testimonial.name}
                 </p>
 
                 {/* Company */}
-                <p className="text-[15.75px] font-medium leading-normal text-black">
+                <p className="text-[10.5px] font-medium leading-normal text-black">
                   {testimonial.company}
                 </p>
               </div>

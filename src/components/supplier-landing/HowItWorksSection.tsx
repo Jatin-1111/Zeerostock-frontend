@@ -29,14 +29,14 @@ export default function HowItWorksSection() {
   ];
 
   return (
-    <div className="w-full bg-[#EEFBF6] px-[60px] py-[75px]">
-      <div className="max-w-[1320px] mx-auto">
+    <div className="w-full bg-[#EEFBF6] px-[40px] py-[50px]">
+      <div className="max-w-[880px] mx-auto">
         {/* Heading Section */}
-        <div className="text-center mb-[91px]">
-          <h2 className="text-[39px] leading-[59px] font-medium text-[#0d1b2a] mb-[11px]">
+        <div className="text-center mb-[61px]">
+          <h2 className="text-[26px] leading-[39px] font-medium text-[#0d1b2a] mb-[7px]">
             How <span className="text-[#2ec096]">Selling Works</span>
           </h2>
-          <p className="text-[18px] font-semibold text-[#9c9c9c]">
+          <p className="text-[12px] font-semibold text-[#9c9c9c]">
             Simple, efficient process to convert surplus inventory into revenue
           </p>
         </div>
@@ -44,26 +44,26 @@ export default function HowItWorksSection() {
         {/* Steps Grid with Line */}
         <div className="relative">
           {/* Horizontal Line positioned absolutely above circles */}
-          <div className="absolute top-[23px] left-0 right-0 h-[3px] bg-[#d1d1d1]" />
+          <div className="absolute top-[15px] left-0 right-0 h-[2px] bg-[#d1d1d1]" />
 
           {/* Steps Grid */}
-          <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[45px]">
+          <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[30px]">
             {steps.map((step) => (
               <div
                 key={step.number}
                 className="flex flex-col items-center text-center"
               >
                 {/* Number Circle */}
-                <div className="w-[47px] h-[47px] bg-[#eeffef] border-2 border-[#2aae7a] rounded-[75px] flex items-center justify-center font-semibold text-[23px] text-black mb-[62px] relative z-10">
+                <div className="w-[31px] h-[31px] bg-[#eeffef] border-2 border-[#2aae7a] rounded-[50px] flex items-center justify-center font-semibold text-[15px] text-black mb-[41px] relative z-10">
                   {step.number}
                 </div>
 
                 {/* Content */}
                 <div>
-                  <h3 className="text-[15px] leading-normal font-medium text-[#0d1b2a] mb-[12px]">
+                  <h3 className="text-[10px] leading-normal font-medium text-[#0d1b2a] mb-[8px]">
                     {step.title}
                   </h3>
-                  <p className="text-[11px] leading-normal text-[#9c9c9c]">
+                  <p className="text-[7px] leading-normal text-[#9c9c9c]">
                     {step.description}
                   </p>
                 </div>

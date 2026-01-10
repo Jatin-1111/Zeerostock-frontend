@@ -53,13 +53,13 @@ export default function IndustriesSection() {
   const duration = totalWidth / 50; // 50px per second speed
 
   return (
-    <section className="bg-[#EEFBF6] py-8 md:py-12 w-full mx-auto overflow-hidden">
+    <section className="bg-[#EEFBF6] py-[21px] md:py-[32px] mx-auto overflow-hidden">
       <div className="w-full max-w-[1200px] mx-auto">
-        <div className="text-center mb-6 md:mb-12">
-          <h2 className="text-xl md:text-3xl font-bold text-gray-900 mb-2 md:mb-3 leading-tight">
+        <div className="text-center mb-[16px] md:mb-[32px]">
+          <h2 className="text-[13px] md:text-[20px] font-bold text-gray-900 mb-[5px] md:mb-[8px] leading-tight">
             Perfect for Every Industry
           </h2>
-          <p className="text-sm md:text-base text-gray-600">
+          <p className="text-[9px] md:text-[11px] text-gray-600">
             No matter what your industry, find the surplus inventory you need at
             unbeatable prices
           </p>
@@ -72,7 +72,7 @@ export default function IndustriesSection() {
           onMouseLeave={() => setIsPaused(false)}
         >
           <motion.div
-            className="flex gap-4 py-4"
+            className="flex gap-[11px] py-[11px]"
             animate={{
               x: isPaused ? undefined : [-totalWidth, 0],
             }}
@@ -93,10 +93,10 @@ export default function IndustriesSection() {
               return (
                 <div
                   key={`${industry.title}-${index}`}
-                  className="bg-[#EEFFEF] rounded-[30px] shadow-[0px_0px_8px_0px_rgba(24,181,34,0.5)] shrink-0 w-[261px] h-[215px] relative overflow-hidden"
+                  className="bg-[#EEFFEF] rounded-[20px] shadow-[0px_0px_5px_0px_rgba(24,181,34,0.5)] shrink-0 w-[174px] h-[143px] relative overflow-hidden"
                 >
                   {/* Icon - Top Left */}
-                  <div className="absolute left-[23px] top-[21px] w-[30px] h-[30px]">
+                  <div className="absolute left-[15px] top-[14px] w-[20px] h-[20px]">
                     <Icon
                       className="w-full h-full text-[#2AAE7A]"
                       strokeWidth={1.5}
@@ -104,26 +104,26 @@ export default function IndustriesSection() {
                   </div>
 
                   {/* Savings Badge - Top Right Area */}
-                  <div className="absolute left-[calc(50%+39px)] top-[19px] -translate-x-1/2">
-                    <div className="bg-[#2AAE7A] px-[9px] py-0.5 rounded-full">
-                      <p className="text-white text-[11px] font-medium whitespace-nowrap leading-normal">
+                  <div className="absolute left-[calc(50%+26px)] top-[13px] -translate-x-1/2">
+                    <div className="bg-[#2AAE7A] px-[6px] py-[1px] rounded-full">
+                      <p className="text-white text-[7px] font-medium whitespace-nowrap leading-normal">
                         {industry.savings}
                       </p>
                     </div>
                   </div>
 
                   {/* Title */}
-                  <h3 className="absolute left-[23px] top-[75px] text-[#022778] text-[19px] font-semibold leading-normal drop-shadow-[0px_3px_3px_rgba(0,0,0,0.25)]">
+                  <h3 className="absolute left-[15px] top-[50px] text-[#022778] text-[13px] font-semibold leading-normal drop-shadow-[0px_3px_3px_rgba(0,0,0,0.25)]">
                     {industry.title}
                   </h3>
 
                   {/* Subtitle */}
-                  <p className="absolute left-[23px] top-[116px] text-[#2AAE7A] text-[14px] font-medium leading-normal">
+                  <p className="absolute left-[15px] top-[77px] text-[#2AAE7A] text-[9px] font-medium leading-normal">
                     {industry.subtitle}
                   </p>
 
                   {/* Description */}
-                  <p className="absolute left-[23px] top-[143px] w-[216px] text-[#727272] text-[11px] font-medium leading-normal">
+                  <p className="absolute left-[15px] top-[95px] w-[144px] text-[#727272] text-[7px] font-medium leading-normal">
                     {industry.description}
                   </p>
                 </div>

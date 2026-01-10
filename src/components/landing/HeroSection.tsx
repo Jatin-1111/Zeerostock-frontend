@@ -9,7 +9,7 @@ export default function HeroSection() {
   return (
     <section className="relative w-full overflow-hidden shadow-[0px_1px_4px_0px_rgba(24,181,34,0.25)]">
       {/* Background Image */}
-      <div className="absolute inset-0 h-[675px]">
+      <div className="absolute inset-0 h-[450px]">
         <img
           src="/landing-hero.png"
           alt="Industrial warehouse background"
@@ -18,35 +18,35 @@ export default function HeroSection() {
       </div>
 
       {/* Content - Full width container */}
-      <div className="relative h-[675px] w-full max-w-[1440px] mx-auto px-6 flex flex-col items-center justify-center">
-        {/* Main Headline - 80px reduced by 25% = 60px, top: 70px reduced by 25% = 52.5px */}
-        <h1 className="text-center mb-4 max-w-[667px] mt-[52px]">
-          <span className="text-[60px] leading-[60px] font-extrabold">
+      <div className="relative h-[450px] w-full max-w-[960px] mx-auto px-4 flex flex-col items-center justify-center">
+        {/* Main Headline */}
+        <h1 className="text-center mb-3 max-w-[445px] mt-[35px]">
+          <span className="text-[40px] leading-[40px] font-extrabold">
             <span className="text-white">Transform Surplus into </span>
             <span className="text-[#2aae7a]">Revenue Today</span>
           </span>
         </h1>
 
-        {/* Subtitle - 20px reduced by 25% = 15px */}
-        <p className="text-center text-white text-[15px] leading-[19px] font-semibold max-w-[622px] mb-9">
+        {/* Subtitle */}
+        <p className="text-center text-white text-[10px] leading-[13px] font-semibold max-w-[415px] mb-6">
           The only B2B marketplace you need to buy, sell or broker surplus
           inventory with complete trust and transparency
         </p>
 
-        {/* CTA Buttons - 280x70 reduced by 25% = 210x52.5, gap 8*0.75=6, text 22*0.75=16.5 */}
-        <div className="flex items-center gap-6 mb-[118px]">
+        {/* CTA Buttons */}
+        <div className="flex items-center gap-4 mb-[79px]">
           {isAuthenticated && user ? (
             // Logged In User - Go to Dashboard
             <>
               <Link
                 href="/buyer/dashboard"
-                className="w-[210px] h-[52px] bg-[#022778] text-white text-[17px] font-semibold rounded-lg hover:bg-[#022778]/90 transition-colors flex items-center justify-center"
+                className="w-[140px] h-[35px] bg-[#022778] text-white text-[11px] font-semibold rounded-lg hover:bg-[#022778]/90 transition-colors flex items-center justify-center"
               >
                 Go to Dashboard
               </Link>
               <Link
                 href="/marketplace"
-                className="w-[210px] h-[52px] bg-white text-[#2aae7a] text-[17px] font-semibold rounded-lg hover:bg-white/90 transition-colors flex items-center justify-center"
+                className="w-[140px] h-[35px] bg-white text-[#2aae7a] text-[11px] font-semibold rounded-lg hover:bg-white/90 transition-colors flex items-center justify-center"
               >
                 Browse Marketplace
               </Link>
@@ -56,13 +56,13 @@ export default function HeroSection() {
             <>
               <Link
                 href="/become-supplier"
-                className="w-[210px] h-[52px] bg-[#022778] text-white text-[17px] font-semibold rounded-lg hover:bg-[#022778]/90 transition-colors flex items-center justify-center"
+                className="w-[140px] h-[35px] bg-[#022778] text-white text-[11px] font-semibold rounded-lg hover:bg-[#022778]/90 transition-colors flex items-center justify-center"
               >
                 Start Selling
               </Link>
               <Link
                 href="/signup"
-                className="w-[210px] h-[52px] bg-white text-[#2aae7a] text-[17px] font-semibold rounded-lg hover:bg-white/90 transition-colors flex items-center justify-center"
+                className="w-[140px] h-[35px] bg-white text-[#2aae7a] text-[11px] font-semibold rounded-lg hover:bg-white/90 transition-colors flex items-center justify-center"
               >
                 Start Buying
               </Link>
@@ -70,9 +70,9 @@ export default function HeroSection() {
           )}
         </div>
 
-        {/* Stats Bar - 24px reduced by 25% = 18px, gap 16*0.75=12 */}
-        <div className="absolute bottom-0 left-0 right-0 h-[57px] flex items-center justify-center">
-          <div className="flex items-center justify-center gap-12 text-white text-[18px] font-bold">
+        {/* Stats Bar */}
+        <div className="absolute bottom-0 left-0 right-0 h-[38px] flex items-center justify-center">
+          <div className="flex items-center justify-center gap-8 text-white text-[12px] font-bold">
             <span>10,000 Businesses Connected</span>
             <span>$50M+ Inventory Traded</span>
             <span>97% Success Rate</span>

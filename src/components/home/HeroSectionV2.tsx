@@ -167,44 +167,44 @@ export default function HeroSectionV2() {
   };
 
   return (
-    <section className="relative w-full shadow-[0px_1px_4px_0px_rgba(24,181,34,0.25)] py-5">
+    <section className="relative w-full shadow-[0px_1px_4px_0px_rgba(24,181,34,0.25)] py-[13px]">
       {/* Background Image */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <img
           alt="Hero Background"
           className="absolute h-full w-full object-cover"
-          src={'/Home.jpg'}
+          src={"/Home.jpg"}
         />
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 flex flex-col items-center pt-[62px]">
+      <div className="relative z-10 flex flex-col items-center pt-[41px]">
         {/* Headline */}
-        <h1 className="text-center max-w-[761px] mb-[15px]">
-          <span className="text-[60px] leading-[70px] text-[#0d1b2a] font-medium block text-shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
+        <h1 className="text-center max-w-[507px] mb-[10px]">
+          <span className="text-[40px] leading-[47px] text-[#0d1b2a] font-medium block text-shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
             Unlock Hidden Value in{" "}
             <span className="text-[#2ec096]">Surplus Inventory</span>
           </span>
         </h1>
 
         {/* Subtitle */}
-        <p className="text-[15px] leading-[19px] text-[#868181] text-center font-semibold max-w-[761px]">
+        <p className="text-[10px] leading-[13px] text-[#868181] text-center font-semibold max-w-[507px]">
           Connect suppliers, buyers, and agents with trust, transparency, and
           speed.
         </p>
 
         {/* Search Bar */}
-        <div className="mt-[43px] bg-[rgba(251,251,251,0.65)] rounded-[50px] shadow-[0px_0px_40.7px_0px_rgba(0,0,0,0.25)] px-[19px] py-[7.5px] flex items-center gap-[45px]">
+        <div className="mt-[29px] bg-[rgba(251,251,251,0.65)] rounded-[33px] shadow-[0px_0px_27px_0px_rgba(0,0,0,0.25)] px-[13px] py-[5px] flex items-center gap-[30px]">
           {/* Left Section - Category Dropdown */}
-          <div className="flex items-center gap-[7.5px] relative">
+          <div className="flex items-center gap-[5px] relative">
             <button
               onClick={() => setShowCategoryDropdown(!showCategoryDropdown)}
-              className="flex items-center gap-[7.5px] hover:opacity-80 transition-opacity"
+              className="flex items-center gap-[5px] hover:opacity-80 transition-opacity"
             >
-              <span className="text-[16.5px] font-semibold text-gray-700 opacity-80 whitespace-nowrap">
+              <span className="text-[11px] font-semibold text-gray-700 opacity-80 whitespace-nowrap">
                 {selectedCategory}
               </span>
-              <ChevronDown className="w-[26px] h-[26px] text-gray-700 opacity-80" />
+              <ChevronDown className="w-[17px] h-[17px] text-gray-700 opacity-80" />
             </button>
 
             {/* Category Dropdown */}
@@ -225,7 +225,7 @@ export default function HeroSectionV2() {
               </div>
             )}
 
-            <div className="h-[34px] w-px bg-gray-300 mx-[10px]" />
+            <div className="h-[23px] w-px bg-gray-300 mx-[7px]" />
             <div className="relative flex-1">
               <input
                 type="text"
@@ -241,12 +241,12 @@ export default function HeroSectionV2() {
                   }
                 }}
                 placeholder="Search Industrial Equipment, Electronics, etc"
-                className="text-[14px] font-medium text-gray-700 opacity-80 pl-[7.5px] bg-transparent border-none outline-none w-[338px]"
+                className="text-[9px] font-medium text-gray-700 opacity-80 pl-[5px] bg-transparent border-none outline-none w-[225px]"
               />
 
               {/* Suggestions Dropdown */}
               {showSuggestions && (
-                <div className="absolute top-full left-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 z-50 w-[338px] max-h-60 overflow-y-auto">
+                <div className="absolute top-full left-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 z-50 w-[225px] max-h-40 overflow-y-auto">
                   {/* Suggestions */}
                   {suggestions.length > 0 && (
                     <div className="py-1.5">
@@ -306,18 +306,18 @@ export default function HeroSectionV2() {
           </div>
 
           {/* Right Section - Filter and Search */}
-          <div className="flex items-center gap-[11px] relative">
-            <div className="h-[34px] w-px bg-gray-300" />
+          <div className="flex items-center gap-[7px] relative">
+            <div className="h-[23px] w-px bg-gray-300" />
             <button
               onClick={() => setShowFilters(!showFilters)}
               className="hover:opacity-80 transition-opacity"
             >
-              <SlidersHorizontal className="w-[26px] h-[26px] text-gray-700 opacity-80" />
+              <SlidersHorizontal className="w-[17px] h-[17px] text-gray-700 opacity-80" />
             </button>
 
             {/* Filter Dropdown */}
             {showFilters && (
-              <div className="absolute top-full right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 z-50 w-[240px] p-3">
+              <div className="absolute top-full right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 z-50 w-[160px] p-2">
                 <h3 className="font-semibold text-gray-900 mb-2 text-sm">
                   Filters
                 </h3>
@@ -419,10 +419,10 @@ export default function HeroSectionV2() {
               </div>
             )}
 
-            <div className="h-[34px] w-px bg-gray-300" />
+            <div className="h-[23px] w-px bg-gray-300" />
             <button
               onClick={handleSearch}
-              className="text-[18px] font-medium text-gray-700 opacity-80 w-[63px] text-center hover:opacity-60 transition-opacity"
+              className="text-[12px] font-medium text-gray-700 opacity-80 w-[42px] text-center hover:opacity-60 transition-opacity"
             >
               Search
             </button>
@@ -430,24 +430,24 @@ export default function HeroSectionV2() {
         </div>
 
         {/* CTA Buttons */}
-        <div className="mt-[45px] flex gap-[17px]">
+        <div className="mt-[30px] flex gap-[11px]">
           <button
             onClick={() => router.push("/signup")}
-            className="bg-[#022778] text-white text-[16.5px] font-semibold rounded-xl h-[52.5px] w-[210px] flex items-center justify-center hover:opacity-90 transition-opacity"
+            className="bg-[#022778] text-white text-[11px] font-semibold rounded-xl h-[35px] w-[140px] flex items-center justify-center hover:opacity-90 transition-opacity"
           >
             Get Started
           </button>
           <button
             onClick={() => router.push("/marketplace")}
-            className="bg-white text-[#2aae7a] text-[16.5px] font-semibold rounded-xl h-[52.5px] w-[210px] flex items-center justify-center hover:opacity-90 transition-opacity"
+            className="bg-white text-[#2aae7a] text-[11px] font-semibold rounded-xl h-[35px] w-[140px] flex items-center justify-center hover:opacity-90 transition-opacity"
           >
             Explore Marketplace
           </button>
         </div>
 
         {/* Stats Bar */}
-        <div className="mt-[101px] text-center">
-          <p className="text-[18px] font-bold text-[#c8c8c8] whitespace-nowrap">
+        <div className="mt-[67px] text-center">
+          <p className="text-[12px] font-bold text-[#c8c8c8] whitespace-nowrap">
             10,000 Businesses Connected &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             $50M+ Inventory Traded &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 97%
             Success Rate &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 24/7 Support

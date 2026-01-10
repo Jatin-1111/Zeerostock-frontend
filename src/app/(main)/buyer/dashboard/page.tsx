@@ -87,7 +87,7 @@ export default function BuyerDashboardPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white px-15 py-4.5">
+    <div className="min-h-screen px-15 py-4.5">
       {error && (
         <div className="mb-2 p-2 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
           {error}

@@ -41,29 +41,29 @@ export default function TeamSection() {
         <div>
           <div className="relative w-full flex flex-col items-center">
             {/* Subtitle */}
-            <p className="font-medium text-lg text-center text-[#868181] mb-4">
+            <p className="font-medium text-[12px] text-center text-[#868181] mb-[11px]">
               Our Team
             </p>
 
             {/* Title */}
-            <h2 className="font-bold text-5xl text-center text-[#0d1b2a] mb-4">
+            <h2 className="font-bold text-[40px] text-center text-[#0d1b2a] mb-[11px]">
               Meet the People Behind{" "}
               <span className="text-[#2ec096]">Zeerostock</span>
             </h2>
 
             {/* Description */}
-            <p className="font-semibold text-lg text-center text-[#868181] max-w-3xl mb-20">
+            <p className="font-semibold text-[12px] text-center text-[#868181] max-w-3xl mb-[53px]">
               Our experienced leadership team brings together decades of
               expertise in technology, supply chain and B2B marketplaces.
             </p>
 
             {/* Team Grid */}
             <div className="w-full max-w-7xl mx-auto">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[32px]">
                 {team.map((member, index) => (
                   <div key={index} className="flex flex-col items-center">
                     {/* Profile Image */}
-                    <div className="w-[250px] h-[250px] rounded-full overflow-hidden mb-6 shadow-[0px_2px_10px_4px_rgba(0,0,0,0.25)]">
+                    <div className="w-[167px] h-[167px] rounded-full overflow-hidden mb-[16px] shadow-[0px_2px_10px_4px_rgba(0,0,0,0.25)]">
                       <img
                         alt={member.name}
                         className="w-full h-full object-cover"
@@ -72,17 +72,17 @@ export default function TeamSection() {
                     </div>
 
                     {/* Name */}
-                    <h3 className="font-semibold text-2xl text-black text-center mb-2">
+                    <h3 className="font-semibold text-[20px] text-black text-center mb-[5px]">
                       {member.name}
                     </h3>
 
                     {/* Role */}
-                    <p className="font-semibold text-lg text-[#3752ff] text-center mb-3">
+                    <p className="font-semibold text-[12px] text-[#3752ff] text-center mb-[8px]">
                       {member.role}
                     </p>
 
                     {/* Bio */}
-                    <p className="font-medium text-sm text-black text-center max-w-[250px] leading-relaxed">
+                    <p className="font-medium text-[9px] text-black text-center max-w-[167px] leading-relaxed">
                       {member.bio}
                     </p>
                   </div>

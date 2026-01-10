@@ -64,37 +64,37 @@ function HelpDeskContent() {
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <div className="px-15 py-6">
-        <div className="flex flex-col gap-3">
-          <h1 className="text-[30px] font-semibold text-[#0d1b2a]">
+      <div className="px-[40px] py-[16px]">
+        <div className="flex flex-col gap-[8px]">
+          <h1 className="text-[20px] font-semibold text-[#0d1b2a]">
             Help & Support
           </h1>
-          <p className="text-lg font-medium text-[#9c9c9c]">
+          <p className="text-[12px] font-medium text-[#9c9c9c]">
             Get the help you need to succeed on Zeerostock
           </p>
         </div>
       </div>
 
       {/* Contact Cards */}
-      <div className="px-15 pb-9">
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+      <div className="px-[40px] pb-[24px]">
+        <div className="grid grid-cols-1 gap-[11px] md:grid-cols-4">
           {supportCards.map((card) => {
             const IconComponent = card.icon;
             return (
               <div
                 key={card.id}
-                className="flex min-h-[215px] flex-col items-center rounded-[15px] border border-gray-200 bg-white p-6 shadow-sm"
+                className="flex min-h-[143px] flex-col items-center rounded-[10px] border border-gray-200 bg-white p-[16px] shadow-sm"
               >
-                <div className="mb-4 flex h-9 w-9 items-center justify-center">
+                <div className="mb-[11px] flex h-[24px] w-[24px] items-center justify-center">
                   <IconComponent
-                    className="h-9 w-9 text-[#18b522]"
+                    className="h-[24px] w-[24px] text-[#18b522]"
                     strokeWidth={1.5}
                   />
                 </div>
-                <p className="mb-2 text-center text-base font-semibold text-[#0d1b2a]">
+                <p className="mb-[5px] text-center text-[11px] font-semibold text-[#0d1b2a]">
                   {card.title}
                 </p>
-                <p className="mb-6 text-center text-sm font-medium leading-relaxed text-[#9c9c9c]">
+                <p className="mb-[16px] text-center text-[9px] font-medium leading-relaxed text-[#9c9c9c]">
                   {card.description}
                 </p>
 
@@ -102,12 +102,12 @@ function HelpDeskContent() {
                 {card.href !== "#" ? (
                   <a
                     href={card.href}
-                    className="mt-auto flex w-[150px] items-center justify-center rounded-[15px] bg-[#1e3a8a] px-2 py-2 text-sm font-medium text-white transition-colors hover:bg-[#1e3a8a]/90"
+                    className="mt-auto flex w-[100px] items-center justify-center rounded-[10px] bg-[#1e3a8a] px-[5px] py-[5px] text-[9px] font-medium text-white transition-colors hover:bg-[#1e3a8a]/90"
                   >
                     {card.buttonText}
                   </a>
                 ) : (
-                  <button className="mt-auto w-[150px] rounded-[15px] bg-[#1e3a8a] px-2 py-2 text-sm font-medium text-white transition-colors hover:bg-[#1e3a8a]/90">
+                  <button className="mt-auto w-[100px] rounded-[10px] bg-[#1e3a8a] px-[5px] py-[5px] text-[9px] font-medium text-white transition-colors hover:bg-[#1e3a8a]/90">
                     {card.buttonText}
                   </button>
                 )}
@@ -118,14 +118,14 @@ function HelpDeskContent() {
       </div>
 
       {/* Tabs */}
-      <div className="px-15">
+      <div className="px-[40px]">
         <div className="border-b border-gray-300">
-          <div className="flex gap-8">
+          <div className="flex gap-[21px]">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`pb-3 text-sm font-medium border-b-2 transition-colors ${
+                className={`pb-[8px] text-[9px] font-medium border-b-[1px] transition-colors ${
                   activeTab === tab.id
                     ? "border-gray-900 text-gray-900"
                     : "border-transparent text-gray-600 hover:text-gray-900"
@@ -139,7 +139,7 @@ function HelpDeskContent() {
       </div>
 
       {/* Tab Content */}
-      <div className="px-15 py-9">
+      <div className="px-[40px] py-[24px]">
         {activeTab === "faq" && <FAQTab />}
         {activeTab === "guides" && <GuidesTab />}
         {activeTab === "report" && <ReportBugTab />}

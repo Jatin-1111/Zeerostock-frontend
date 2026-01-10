@@ -21,6 +21,7 @@ export default function SettingsPage() {
           <SettingsSidebar
             activeTab={activeTab}
             onTabChange={(tab) => setActiveTab(tab as Tab)}
+            classname=""
           />
 
           {/* Content Area */}

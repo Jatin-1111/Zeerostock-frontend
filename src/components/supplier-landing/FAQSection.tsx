@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ChevronUp } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -39,46 +40,69 @@ export default function FAQSection() {
   };
 
   return (
-    <div className="w-full bg-[#EEFBF6] px-[60px] py-[75px]">
-      <div className="max-w-[1320px] mx-auto">
+    <div className="w-full bg-[#EEFBF6] px-[40px] py-[50px]">
+      <div className="max-w-[880px] mx-auto">
         {/* Heading Section */}
-        <div className="text-center mb-[130px]">
-          <h2 className="text-[39px] leading-[59px] font-medium text-[#0d1b2a] mb-[11px]">
+        <div className="text-center mb-[87px]">
+          <h2 className="text-[26px] leading-[39px] font-medium text-[#0d1b2a] mb-[7px]">
             Frequently Asked Questions
           </h2>
-          <p className="text-[18px] font-semibold text-[#9c9c9c]">
+          <p className="text-[12px] font-semibold text-[#9c9c9c]">
             Quick answers to common questions
           </p>
         </div>
 
         {/* FAQ List */}
-        <div className="space-y-[30px]">
+        <div className="space-y-[20px]">
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="bg-[#fbfbfb] rounded-[15px] shadow-[0px_3px_4px_0px_rgba(0,0,0,0.25)] overflow-hidden"
+              className="bg-[#fbfbfb] rounded-[10px] shadow-[0px_3px_4px_0px_rgba(0,0,0,0.25)] overflow-hidden"
             >
               <button
                 onClick={() => toggleFAQ(index)}
-                className="w-full flex items-center justify-between px-[23px] py-[23px] text-left"
+                className="w-full flex items-center justify-between px-[15px] py-[15px] text-left"
               >
-                <span className="text-[20px] leading-[21px] font-medium text-[#0d1b2a] tracking-[0.5px] pr-4">
+                <span className="text-[13px] leading-[14px] font-medium text-[#0d1b2a] tracking-[0.5px] pr-4">
                   {faq.question}
                 </span>
-                <ChevronUp
-                  className={`w-[21px] h-[21px] text-[#0d1b2a] transition-transform shrink-0 ${
-                    openIndex === index ? "" : "rotate-180"
-                  }`}
-                  strokeWidth={2}
-                />
+
+                {/* Animated the rotation with Motion too, way smoother than class switching */}
+                <motion.div
+                  animate={{ rotate: openIndex === index ? 0 : 180 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronUp
+                    className="w-[14px] h-[14px] text-[#0d1b2a]"
+                    strokeWidth={2}
+                  />
+                </motion.div>
               </button>
-              {openIndex === index && (
-                <div className="px-[23px] pb-[23px]">
-                  <p className="text-[15px] leading-[21px] font-medium text-[#9c9c9c] tracking-[0.5px]">
-                    {faq.answer}
-                  </p>
-                </div>
-              )}
+
+              <AnimatePresence initial={false}>
+                {openIndex === index && (
+                  <motion.div
+                    initial="collapsed"
+                    animate="open"
+                    exit="collapsed"
+                    variants={{
+                      open: { opacity: 1, height: "auto" },
+                      collapsed: { opacity: 0, height: 0 },
+                    }}
+                    transition={{
+                      duration: 0.3,
+                      ease: [0.04, 0.62, 0.23, 0.98],
+                    }}
+                  >
+                    {/* Inner div is needed for padding so it doesn't jerk during animation */}
+                    <div className="px-[15px] pb-[15px]">
+                      <p className="text-[10px] leading-[14px] font-medium text-[#9c9c9c] tracking-[0.5px]">
+                        {faq.answer}
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           ))}
         </div>

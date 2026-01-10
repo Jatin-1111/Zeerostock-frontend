@@ -95,69 +95,69 @@ export default function PaymentMethod({
   ];
 
   return (
-    <div className="flex flex-col gap-[15px]">
+    <div className="flex flex-col gap-[10px]">
       {/* Payment Method Selection */}
-      <div className="bg-white rounded-[15px] shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)] p-[23px]">
-        <div className="flex items-center gap-[15px] mb-[26px]">
+      <div className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] p-[15px]">
+        <div className="flex items-center gap-[10px] mb-[17px]">
           <CreditCard
-            className="w-[20px] h-[20px] text-[#0d1b2a]"
+            className="w-[13px] h-[13px] text-[#0d1b2a]"
             strokeWidth={1.5}
           />
-          <h2 className="font-semibold text-[18px] text-[#0d1b2a] m-0">
+          <h2 className="font-semibold text-[12px] text-[#0d1b2a] m-0">
             Payment Method
           </h2>
         </div>
 
-        <div className="flex flex-col gap-[15px]">
+        <div className="flex flex-col gap-[10px]">
           {paymentMethods.map((method) => (
             <div
               key={method.id}
               onClick={() => onMethodSelect(method.id)}
-              className={`rounded-[15px] h-[90px] p-[15px_16px] cursor-pointer relative border-2 ${
+              className={`rounded-[10px] h-[60px] p-[10px] cursor-pointer relative border-2 ${
                 selectedMethod === method.id
                   ? "bg-[#eeffef] border-[#2aae7a]"
                   : "bg-white border-[#e8e8e8]"
               }`}
             >
-              <div className="flex items-start gap-[11px]">
+              <div className="flex items-start gap-[7px]">
                 {/* Radio Button */}
                 <div
-                  className={`w-[16px] h-[16px] rounded-full border-2 flex items-center justify-center shrink-0 mt-[8px] ${
+                  className={`w-[11px] h-[11px] rounded-full border-2 flex items-center justify-center shrink-0 mt-[5px] ${
                     selectedMethod === method.id
                       ? "border-[#2aae7a]"
                       : "border-[#bebebe]"
                   }`}
                 >
                   {selectedMethod === method.id && (
-                    <div className="w-[8px] h-[8px] rounded-full bg-[#2aae7a]" />
+                    <div className="w-[5px] h-[5px] rounded-full bg-[#2aae7a]" />
                   )}
                 </div>
 
                 {/* Content */}
                 <div className="flex-1">
-                  <div className="flex items-center gap-[9px] mb-0">
-                    <span className="font-medium text-[14px] text-[#0d1b2a]">
+                  <div className="flex items-center gap-[6px] mb-0">
+                    <span className="font-medium text-[9px] text-[#0d1b2a]">
                       {method.name}
                     </span>
                     {method.recommended && (
-                      <div className="bg-[#eeffef] text-[#2aae7a] px-[4px] rounded-[15px] font-medium text-[10px] leading-[18px]">
+                      <div className="bg-[#eeffef] text-[#2aae7a] px-[3px] rounded-[10px] font-medium text-[7px] leading-[12px]">
                         Recommended
                       </div>
                     )}
                   </div>
-                  <p className="text-[12px] font-normal text-[#9c9c9c] mb-[2px] leading-[18px] tracking-[0.5px]">
+                  <p className="text-[8px] font-normal text-[#9c9c9c] mb-[1px] leading-[12px] tracking-[0.3px]">
                     {method.description}
                   </p>
-                  <p className="text-[12px] font-normal text-[#9c9c9c] m-0 leading-[18px] tracking-[0.5px]">
+                  <p className="text-[8px] font-normal text-[#9c9c9c] m-0 leading-[12px] tracking-[0.3px]">
                     {method.processingInfo}
                   </p>
                 </div>
 
                 {/* Card Logos (only for card payment) */}
                 {method.id === "card" && (
-                  <div className="flex items-center gap-[8px] mt-[18px]">
+                  <div className="flex items-center gap-[5px] mt-[12px]">
                     {/* Visa SVG */}
-                    <div className="w-[45px] h-auto">
+                    <div className="w-[30px] h-auto">
                       <svg
                         viewBox="0 -140 780 780"
                         version="1.1"
@@ -181,7 +181,7 @@ export default function PaymentMethod({
                     </div>
 
                     {/* Mastercard SVG */}
-                    <div className="w-[38px] h-auto">
+                    <div className="w-[25px] h-auto">
                       <svg
                         viewBox="0 -9 58 58"
                         fill="none"
@@ -225,15 +225,15 @@ export default function PaymentMethod({
 
       {/* Payment Details (only for card payment) */}
       {selectedMethod === "card" && (
-        <div className="bg-white rounded-[15px] shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)] p-[23px]">
-          <h3 className="font-semibold text-[18px] text-[#0d1b2a] mb-[26px]">
+        <div className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] p-[15px]">
+          <h3 className="font-semibold text-[12px] text-[#0d1b2a] mb-[17px]">
             Payment Details
           </h3>
 
-          <div className="flex flex-col gap-[42px]">
+          <div className="flex flex-col gap-[28px]">
             {/* Card Number */}
             <div>
-              <label className="block font-medium text-[13px] text-[#0d1b2a] mb-[8px]">
+              <label className="block font-medium text-[9px] text-[#0d1b2a] mb-[5px]">
                 Card Number<span className="text-red-500">*</span>
               </label>
               <input
@@ -244,14 +244,14 @@ export default function PaymentMethod({
                 }
                 placeholder="XXXX XXXX XXXX XXXX"
                 maxLength={19}
-                className="w-full h-[42px] px-[12px] border border-[#9c9c9c] rounded-[8px] text-[12px] font-normal text-[#9c9c9c] tracking-[0.5px]"
+                className="w-full h-[28px] px-[8px] border border-[#9c9c9c] rounded-[5px] text-[8px] font-normal text-[#9c9c9c] tracking-[0.3px]"
               />
             </div>
 
             {/* Expiry Date & CVV */}
-            <div className="flex gap-[34px]">
-              <div className="w-[270px]">
-                <label className="block font-medium text-[13px] text-[#0d1b2a] mb-[8px]">
+            <div className="flex gap-[23px]">
+              <div className="w-[180px]">
+                <label className="block font-medium text-[9px] text-[#0d1b2a] mb-[5px]">
                   Expiry Date<span className="text-red-500">*</span>
                 </label>
                 <input
@@ -262,11 +262,11 @@ export default function PaymentMethod({
                   }
                   placeholder="MM/YY"
                   maxLength={5}
-                  className="w-full h-[42px] px-[12px] border border-[#9c9c9c] rounded-[8px] text-[12px] font-normal text-[#9c9c9c] tracking-[0.5px]"
+                  className="w-full h-[28px] px-[8px] border border-[#9c9c9c] rounded-[5px] text-[8px] font-normal text-[#9c9c9c] tracking-[0.3px]"
                 />
               </div>
-              <div className="w-[270px]">
-                <label className="block font-medium text-[13px] text-[#0d1b2a] mb-[8px]">
+              <div className="w-[180px]">
+                <label className="block font-medium text-[9px] text-[#0d1b2a] mb-[5px]">
                   CVV<span className="text-red-500">*</span>
                 </label>
                 <input
@@ -275,14 +275,14 @@ export default function PaymentMethod({
                   onChange={(e) => handleDetailsChange("cvv", e.target.value)}
                   placeholder="XXX"
                   maxLength={4}
-                  className="w-full h-[42px] px-[12px] border border-[#9c9c9c] rounded-[8px] text-[12px] font-normal text-[#9c9c9c] tracking-[0.5px]"
+                  className="w-full h-[28px] px-[8px] border border-[#9c9c9c] rounded-[5px] text-[8px] font-normal text-[#9c9c9c] tracking-[0.3px]"
                 />
               </div>
             </div>
 
             {/* Name on Card */}
             <div>
-              <label className="block font-medium text-[13px] text-[#0d1b2a] mb-[8px]">
+              <label className="block font-medium text-[9px] text-[#0d1b2a] mb-[5px]">
                 Name on Card<span className="text-red-500">*</span>
               </label>
               <input
@@ -292,7 +292,7 @@ export default function PaymentMethod({
                   handleDetailsChange("cardName", e.target.value)
                 }
                 placeholder="John Doe"
-                className="w-full h-[42px] px-[12px] border border-[#9c9c9c] rounded-[8px] text-[12px] font-normal text-[#9c9c9c] tracking-[0.5px]"
+                className="w-full h-[28px] px-[8px] border border-[#9c9c9c] rounded-[5px] text-[8px] font-normal text-[#9c9c9c] tracking-[0.3px]"
               />
             </div>
           </div>
@@ -300,43 +300,43 @@ export default function PaymentMethod({
       )}
 
       {/* Billing Address */}
-      <div className="bg-white rounded-[20px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] p-[30px]">
-        <div className="flex items-center gap-[20px] mb-[25px]">
+      <div className="bg-white rounded-[13px] shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] p-[20px]">
+        <div className="flex items-center gap-[13px] mb-[17px]">
           <MapPin
-            className="w-[26px] h-[26px] text-[#0d1b2a]"
+            className="w-[17px] h-[17px] text-[#0d1b2a]"
             strokeWidth={1.5}
           />
-          <h3 className="font-semibold text-[24px] text-[#0d1b2a] m-0">
+          <h3 className="font-semibold text-[16px] text-[#0d1b2a] m-0">
             Billing Address
           </h3>
         </div>
 
         {/* Checkbox */}
-        <label className="flex items-center gap-[12px] mb-[15px] group select-none">
-          <div className="relative flex items-center justify-center w-[24px] h-[24px]">
+        <label className="flex items-center gap-[8px] mb-[10px] group select-none">
+          <div className="relative flex items-center justify-center w-[16px] h-[16px]">
             <input
               type="checkbox"
               checked={useSameAddress}
               onChange={(e) => setUseSameAddress(e.target.checked)}
-              className="peer appearance-none w-full h-full border-2 border-[#e2e2e2] rounded-[6px] bg-white checked:bg-[#2aae7a] checked:border-[#2aae7a] transition-all duration-200 cursor-pointer hover:border-[#2aae7a]"
+              className="peer appearance-none w-full h-full border-2 border-[#e2e2e2] rounded-[4px] bg-white checked:bg-[#2aae7a] checked:border-[#2aae7a] transition-all duration-200 cursor-pointer hover:border-[#2aae7a]"
             />
             <Check
-              className="absolute w-[16px] h-[16px] text-white opacity-0 transform scale-50 peer-checked:opacity-100 peer-checked:scale-100 transition-all duration-200 pointer-events-none"
+              className="absolute w-[11px] h-[11px] text-white opacity-0 transform scale-50 peer-checked:opacity-100 peer-checked:scale-100 transition-all duration-200 pointer-events-none"
               strokeWidth={3}
             />
           </div>
-          <span className="font-medium text-[17px] text-[#0d1b2a] transition-colors">
+          <span className="font-medium text-[11px] text-[#0d1b2a] transition-colors">
             Same as Shipping Address
           </span>
         </label>
 
         {/* Billing Address Form (when checkbox unchecked) */}
         {!useSameAddress && (
-          <div className="flex flex-col gap-[42px] mt-[23px]">
+          <div className="flex flex-col gap-[28px] mt-[15px]">
             {/* First Name & Last Name */}
-            <div className="flex gap-[34px]">
-              <div className="w-[270px]">
-                <label className="block font-medium text-[13px] text-[#0d1b2a] mb-[8px]">
+            <div className="flex gap-[23px]">
+              <div className="w-[180px]">
+                <label className="block font-medium text-[9px] text-[#0d1b2a] mb-[5px]">
                   First Name
                 </label>
                 <input
@@ -346,11 +346,11 @@ export default function PaymentMethod({
                     handleBillingChange("firstName", e.target.value)
                   }
                   placeholder="John"
-                  className="w-full h-[42px] px-[12px] border border-[#bebebe] rounded-[8px] text-[12px] font-normal text-[#0d1b2a] tracking-[0.5px]"
+                  className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[8px] font-normal text-[#0d1b2a] tracking-[0.3px]"
                 />
               </div>
-              <div className="w-[270px]">
-                <label className="block font-medium text-[13px] text-[#0d1b2a] mb-[8px]">
+              <div className="w-[180px]">
+                <label className="block font-medium text-[9px] text-[#0d1b2a] mb-[5px]">
                   Last Name
                 </label>
                 <input
@@ -360,14 +360,14 @@ export default function PaymentMethod({
                     handleBillingChange("lastName", e.target.value)
                   }
                   placeholder="Smith"
-                  className="w-full h-[42px] px-[12px] border border-[#bebebe] rounded-[8px] text-[12px] font-normal text-[#0d1b2a] tracking-[0.5px]"
+                  className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[8px] font-normal text-[#0d1b2a] tracking-[0.3px]"
                 />
               </div>
             </div>
 
             {/* Company Name */}
             <div>
-              <label className="block font-medium text-[13px] text-[#0d1b2a] mb-[8px]">
+              <label className="block font-medium text-[9px] text-[#0d1b2a] mb-[5px]">
                 Company Name
               </label>
               <input
@@ -377,13 +377,13 @@ export default function PaymentMethod({
                   handleBillingChange("companyName", e.target.value)
                 }
                 placeholder="MetelCorp Ltd"
-                className="w-full h-[42px] px-[12px] border border-[#bebebe] rounded-[8px] text-[12px] font-normal text-[#0d1b2a] tracking-[0.5px]"
+                className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[8px] font-normal text-[#0d1b2a] tracking-[0.3px]"
               />
             </div>
 
             {/* Street Address */}
             <div>
-              <label className="block font-medium text-[13px] text-[#0d1b2a] mb-[8px]">
+              <label className="block font-medium text-[9px] text-[#0d1b2a] mb-[5px]">
                 Street Address
               </label>
               <input
@@ -393,14 +393,14 @@ export default function PaymentMethod({
                   handleBillingChange("streetAddress", e.target.value)
                 }
                 placeholder="123 Business Ave"
-                className="w-full h-[42px] px-[12px] border border-[#bebebe] rounded-[8px] text-[12px] font-normal text-[#0d1b2a] tracking-[0.5px]"
+                className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[8px] font-normal text-[#0d1b2a] tracking-[0.3px]"
               />
             </div>
 
             {/* City, State, ZIP */}
-            <div className="flex gap-[19px]">
-              <div className="w-[191px]">
-                <label className="block font-medium text-[13px] text-[#0d1b2a] mb-[8px]">
+            <div className="flex gap-[13px]">
+              <div className="w-[127px]">
+                <label className="block font-medium text-[9px] text-[#0d1b2a] mb-[5px]">
                   City
                 </label>
                 <input
@@ -408,11 +408,11 @@ export default function PaymentMethod({
                   value={billingAddress.city}
                   onChange={(e) => handleBillingChange("city", e.target.value)}
                   placeholder="Metropolis"
-                  className="w-full h-[42px] px-[12px] border border-[#bebebe] rounded-[8px] text-[12px] font-normal text-[#0d1b2a] tracking-[0.5px]"
+                  className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[8px] font-normal text-[#0d1b2a] tracking-[0.3px]"
                 />
               </div>
-              <div className="w-[195px]">
-                <label className="block font-medium text-[13px] text-[#0d1b2a] mb-[8px]">
+              <div className="w-[130px]">
+                <label className="block font-medium text-[9px] text-[#0d1b2a] mb-[5px]">
                   State
                 </label>
                 <input
@@ -420,11 +420,11 @@ export default function PaymentMethod({
                   value={billingAddress.state}
                   onChange={(e) => handleBillingChange("state", e.target.value)}
                   placeholder="Karnataka"
-                  className="w-full h-[42px] px-[12px] border border-[#bebebe] rounded-[8px] text-[12px] font-normal text-[#0d1b2a] tracking-[0.5px]"
+                  className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[8px] font-normal text-[#0d1b2a] tracking-[0.3px]"
                 />
               </div>
-              <div className="w-[150px]">
-                <label className="block font-medium text-[13px] text-[#0d1b2a] mb-[8px]">
+              <div className="w-[100px]">
+                <label className="block font-medium text-[9px] text-[#0d1b2a] mb-[5px]">
                   ZIP Code
                 </label>
                 <input
@@ -434,7 +434,7 @@ export default function PaymentMethod({
                     handleBillingChange("zipCode", e.target.value)
                   }
                   placeholder="90210"
-                  className="w-full h-[42px] px-[12px] border border-[#bebebe] rounded-[8px] text-[12px] font-normal text-[#0d1b2a] tracking-[0.5px]"
+                  className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[8px] font-normal text-[#0d1b2a] tracking-[0.3px]"
                 />
               </div>
             </div>
@@ -443,10 +443,10 @@ export default function PaymentMethod({
       </div>
 
       {/* Navigation Buttons */}
-      <div className="flex justify-between gap-[11px] mt-0">
+      <div className="flex justify-between gap-[7px] mt-0">
         <button
           onClick={onBack}
-          className="h-[45px] px-12 bg-white border border-[#9c9c9c] rounded-[11px] text-[15px] font-semibold text-[#9c9c9c] hover:bg-gray-50 transition-colors cursor-pointer"
+          className="h-[30px] px-8 bg-white border border-[#9c9c9c] rounded-[7px] text-[10px] font-semibold text-[#9c9c9c] hover:bg-gray-50 transition-colors cursor-pointer"
         >
           Previous Step
         </button>
@@ -459,7 +459,7 @@ export default function PaymentMethod({
               !paymentDetails.expiryDate ||
               !paymentDetails.cvv)
           }
-          className="h-[45px] px-12 bg-[#1e3a8a] rounded-[11px] text-[15px] font-semibold text-white hover:bg-[#2d4a99] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="h-[30px] px-8 bg-[#1e3a8a] rounded-[7px] text-[10px] font-semibold text-white hover:bg-[#2d4a99] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           Continue
         </button>

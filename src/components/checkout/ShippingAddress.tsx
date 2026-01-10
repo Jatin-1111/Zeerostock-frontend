@@ -105,24 +105,24 @@ export default function ShippingAddress({
 
   if (isLoading) {
     return (
-      <div className="bg-white rounded-[20px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] p-8">
-        <div className="text-center py-8">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#0d1b2a] mx-auto"></div>
-          <p className="mt-4 text-[#9c9c9c]">Loading...</p>
+      <div className="bg-white rounded-[13px] shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] p-5">
+        <div className="text-center py-5">
+          <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-[#0d1b2a] mx-auto"></div>
+          <p className="mt-2.5 text-[#9c9c9c]">Loading...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-3">
       {/* Address Information Card */}
-      <div className="bg-white rounded-[15px] shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)] p-[23px]">
+      <div className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] p-[15px]">
         {/* Header with Location Icon */}
-        <div className="flex items-center gap-3 mb-6">
+        <div className="flex items-center gap-2 mb-4">
           <svg
-            width="20"
-            height="20"
+            width="13"
+            height="13"
             viewBox="0 0 26 26"
             fill="none"
             stroke="#0d1b2a"
@@ -141,23 +141,23 @@ export default function ShippingAddress({
               strokeLinejoin="round"
             />
           </svg>
-          <h2 className="text-[18px] font-semibold text-[#0d1b2a]">
+          <h2 className="text-[12px] font-semibold text-[#0d1b2a]">
             Address Information
           </h2>
         </div>
 
         {error && (
-          <div className="mb-5 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
+          <div className="mb-3 p-2 bg-red-50 border border-red-200 rounded-lg text-red-600 text-xs">
             {error}
           </div>
         )}
 
         {/* Form Fields */}
-        <div className="space-y-6">
+        <div className="space-y-4">
           {/* First Name & Last Name Row */}
-          <div className="grid grid-cols-2 gap-[34px]">
+          <div className="grid grid-cols-2 gap-[23px]">
             <div>
-              <label className="block text-[13px] font-medium text-[#0d1b2a] mb-2">
+              <label className="block text-[9px] font-medium text-[#0d1b2a] mb-1.5">
                 First Name
               </label>
               <input
@@ -165,11 +165,11 @@ export default function ShippingAddress({
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 placeholder="First Name"
-                className="w-full h-[42px] px-4 text-[12px] text-[#0d1b2a] border border-[#bebebe] rounded-[8px] focus:outline-none focus:border-[#0d1b2a]"
+                className="w-full h-[28px] px-2.5 text-[8px] text-[#0d1b2a] border border-[#bebebe] rounded-[5px] focus:outline-none focus:border-[#0d1b2a]"
               />
             </div>
             <div>
-              <label className="block text-[13px] font-medium text-[#0d1b2a] mb-2">
+              <label className="block text-[9px] font-medium text-[#0d1b2a] mb-1.5">
                 Last Name
               </label>
               <input
@@ -177,14 +177,14 @@ export default function ShippingAddress({
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 placeholder="Last Name"
-                className="w-full h-[42px] px-4 text-[12px] text-[#0d1b2a] border border-[#bebebe] rounded-[8px] focus:outline-none focus:border-[#0d1b2a]"
+                className="w-full h-[28px] px-2.5 text-[8px] text-[#0d1b2a] border border-[#bebebe] rounded-[5px] focus:outline-none focus:border-[#0d1b2a]"
               />
             </div>
           </div>
 
           {/* Company Name */}
           <div>
-            <label className="block text-[13px] font-medium text-[#0d1b2a] mb-2">
+            <label className="block text-[9px] font-medium text-[#0d1b2a] mb-1.5">
               Company Name
             </label>
             <input
@@ -192,13 +192,13 @@ export default function ShippingAddress({
               value={companyName}
               onChange={(e) => setCompanyName(e.target.value)}
               placeholder="Company Name"
-              className="w-full h-[42px] px-4 text-[12px] text-[#0d1b2a] border border-[#bebebe] rounded-[8px] focus:outline-none focus:border-[#0d1b2a]"
+              className="w-full h-[28px] px-2.5 text-[8px] text-[#0d1b2a] border border-[#bebebe] rounded-[5px] focus:outline-none focus:border-[#0d1b2a]"
             />
           </div>
 
           {/* Street Address */}
           <div>
-            <label className="block text-[13px] font-medium text-[#0d1b2a] mb-2">
+            <label className="block text-[9px] font-medium text-[#0d1b2a] mb-1.5">
               Street Address
             </label>
             <input
@@ -206,14 +206,14 @@ export default function ShippingAddress({
               value={streetAddress}
               onChange={(e) => setStreetAddress(e.target.value)}
               placeholder="Street Address"
-              className="w-full h-[42px] px-4 text-[12px] text-[#0d1b2a] border border-[#bebebe] rounded-[8px] focus:outline-none focus:border-[#0d1b2a]"
+              className="w-full h-[28px] px-2.5 text-[8px] text-[#0d1b2a] border border-[#bebebe] rounded-[5px] focus:outline-none focus:border-[#0d1b2a]"
             />
           </div>
 
           {/* City, State, ZIP Code Row */}
-          <div className="grid grid-cols-[191px_195px_150px] gap-[19px]">
+          <div className="grid grid-cols-[127px_130px_100px] gap-[13px]">
             <div>
-              <label className="block text-[13px] font-medium text-[#0d1b2a] mb-2">
+              <label className="block text-[9px] font-medium text-[#0d1b2a] mb-1.5">
                 City
               </label>
               <input
@@ -221,11 +221,11 @@ export default function ShippingAddress({
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
                 placeholder="City"
-                className="w-full h-[42px] px-4 text-[12px] text-[#0d1b2a] border border-[#bebebe] rounded-[8px] focus:outline-none focus:border-[#0d1b2a]"
+                className="w-full h-[28px] px-2.5 text-[8px] text-[#0d1b2a] border border-[#bebebe] rounded-[5px] focus:outline-none focus:border-[#0d1b2a]"
               />
             </div>
             <div>
-              <label className="block text-[13px] font-medium text-[#0d1b2a] mb-2">
+              <label className="block text-[9px] font-medium text-[#0d1b2a] mb-1.5">
                 State
               </label>
               <div className="relative">
@@ -234,12 +234,12 @@ export default function ShippingAddress({
                   value={state}
                   onChange={(e) => setState(e.target.value)}
                   placeholder="State"
-                  className="w-full h-[42px] px-4 text-[12px] text-[#0d1b2a] border border-[#bebebe] rounded-[8px] focus:outline-none focus:border-[#0d1b2a]"
+                  className="w-full h-[28px] px-2.5 text-[8px] text-[#0d1b2a] border border-[#bebebe] rounded-[5px] focus:outline-none focus:border-[#0d1b2a]"
                 />
               </div>
             </div>
             <div>
-              <label className="block text-[13px] font-medium text-[#0d1b2a] mb-2">
+              <label className="block text-[9px] font-medium text-[#0d1b2a] mb-1.5">
                 ZIP Code
               </label>
               <input
@@ -247,14 +247,14 @@ export default function ShippingAddress({
                 value={zipCode}
                 onChange={(e) => setZipCode(e.target.value)}
                 placeholder="ZIP Code"
-                className="w-full h-[42px] px-4 text-[12px] text-[#0d1b2a] border border-[#bebebe] rounded-[8px] focus:outline-none focus:border-[#0d1b2a]"
+                className="w-full h-[28px] px-2.5 text-[8px] text-[#0d1b2a] border border-[#bebebe] rounded-[5px] focus:outline-none focus:border-[#0d1b2a]"
               />
             </div>
           </div>
 
           {/* Phone Number */}
           <div>
-            <label className="block text-[13px] font-medium text-[#0d1b2a] mb-2">
+            <label className="block text-[9px] font-medium text-[#0d1b2a] mb-1.5">
               Phone Number
             </label>
             <input
@@ -262,13 +262,13 @@ export default function ShippingAddress({
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
               placeholder="Phone"
-              className="w-[308px] h-[42px] px-4 text-[12px] text-[#0d1b2a] border border-[#bebebe] rounded-[8px] focus:outline-none focus:border-[#0d1b2a]"
+              className="w-[205px] h-[28px] px-2.5 text-[8px] text-[#0d1b2a] border border-[#bebebe] rounded-[5px] focus:outline-none focus:border-[#0d1b2a]"
             />
           </div>
 
           {/* Special Delivery Instructions */}
           <div>
-            <label className="block text-[13px] font-medium text-[#0d1b2a] mb-2">
+            <label className="block text-[9px] font-medium text-[#0d1b2a] mb-1.5">
               Special Delivery Instruction
             </label>
             <textarea
@@ -276,7 +276,7 @@ export default function ShippingAddress({
               onChange={(e) => setSpecialInstructions(e.target.value)}
               placeholder="Instructions"
               rows={5}
-              className="w-full h-[135px] px-4 py-4 text-[12px] text-[#0d1b2a] border border-[#bebebe] rounded-[8px] focus:outline-none focus:border-[#0d1b2a] resize-none"
+              className="w-full h-[90px] px-2.5 py-2.5 text-[8px] text-[#0d1b2a] border border-[#bebebe] rounded-[5px] focus:outline-none focus:border-[#0d1b2a] resize-none"
             />
           </div>
         </div>

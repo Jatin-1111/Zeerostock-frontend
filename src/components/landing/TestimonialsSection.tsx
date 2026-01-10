@@ -83,8 +83,8 @@ export default function TestimonialsSection() {
   const variants = {
     center: {
       x: 0,
-      width: "674px",
-      height: "386px",
+      width: "449px",
+      height: "257px",
       zIndex: 20,
       filter: "brightness(1)",
       scale: 1,
@@ -93,9 +93,9 @@ export default function TestimonialsSection() {
       transition: { duration: 0.5, type: "spring" as const },
     },
     left: {
-      x: "-410px",
-      width: "114px",
-      height: "330px",
+      x: "-273px",
+      width: "76px",
+      height: "220px",
       zIndex: 10,
       filter: "brightness(0.4)",
       scale: 1,
@@ -105,9 +105,9 @@ export default function TestimonialsSection() {
       transition: { duration: 0.5, type: "spring" as const },
     },
     right: {
-      x: "410px",
-      width: "114px",
-      height: "330px",
+      x: "273px",
+      width: "76px",
+      height: "220px",
       zIndex: 10,
       filter: "brightness(0.4)",
       scale: 1,
@@ -119,22 +119,22 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section className="relative w-full bg-[#eefbf6] py-15 overflow-hidden">
-      <div className="max-w-[1440px] mx-auto px-4">
+    <section className="relative w-full bg-[#eefbf6] py-10 overflow-hidden">
+      <div className="max-w-[960px] mx-auto px-3">
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-[38px] leading-tight font-medium text-[#0d1b2a] mb-2">
+        <div className="text-center mb-8">
+          <h2 className="text-[25px] leading-tight font-medium text-[#0d1b2a] mb-1">
             Real Results from{" "}
             <span className="text-[#2aae7a]">Real Businesses</span>
           </h2>
-          <p className="text-lg font-semibold text-[#868181]">
+          <p className="text-[12px] font-semibold text-[#868181]">
             See how companies like yours are maximizing value from surplus
             inventory
           </p>
         </div>
 
         {/* Carousel Container */}
-        <div className="relative h-[400px] flex items-center justify-center">
+        <div className="relative h-[267px] flex items-center justify-center">
           {testimonials.map((item, index) => {
             const position = getCardPosition(index);
             const isCenter = position === "center";
@@ -162,7 +162,7 @@ export default function TestimonialsSection() {
                 animate={position}
                 variants={variants}
                 transition={transitionSettings}
-                className="absolute rounded-[30px] overflow-hidden shadow-xl bg-white"
+                className="absolute rounded-[20px] overflow-hidden shadow-xl bg-white"
               >
                 {/* Background Image */}
                 <img
@@ -184,7 +184,7 @@ export default function TestimonialsSection() {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1, transition: { delay: 0.1 } }}
                       exit={{ opacity: 0, transition: { duration: 0.1 } }}
-                      className="relative h-full flex flex-col items-center justify-center text-center px-12 z-20"
+                      className="relative h-full flex flex-col items-center justify-center text-center px-8 z-20"
                     >
                       {/* Navigation Buttons */}
                       <button
@@ -192,11 +192,11 @@ export default function TestimonialsSection() {
                           e.stopPropagation();
                           prevTestimonial();
                         }}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 w-[68px] h-[68px] bg-transparent rounded-full flex items-center justify-center hover:bg-white/10 transition-colors rotate-180 cursor-pointer z-30"
+                        className="absolute left-3 top-1/2 -translate-y-1/2 w-[45px] h-[45px] bg-transparent rounded-full flex items-center justify-center hover:bg-white/10 transition-colors rotate-180 cursor-pointer z-30"
                         aria-label="Previous testimonial"
                       >
                         <ChevronRight
-                          className="w-[68px] h-[68px] text-white"
+                          className="w-[45px] h-[45px] text-white"
                           strokeWidth={2}
                         />
                       </button>
@@ -206,27 +206,27 @@ export default function TestimonialsSection() {
                           e.stopPropagation();
                           nextTestimonial();
                         }}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 w-[68px] h-[68px] bg-transparent rounded-full flex items-center justify-center hover:bg-white/10 transition-colors cursor-pointer z-30"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 w-[45px] h-[45px] bg-transparent rounded-full flex items-center justify-center hover:bg-white/10 transition-colors cursor-pointer z-30"
                         aria-label="Next testimonial"
                       >
                         <ChevronRight
-                          className="w-[68px] h-[68px] text-white"
+                          className="w-[45px] h-[45px] text-white"
                           strokeWidth={2}
                         />
                       </button>
 
                       {/* Text Content */}
-                      <div className="mb-6 max-w-[450px]">
-                        <p className="text-[30px] leading-tight font-extrabold text-[#58ea50] mb-4">
+                      <div className="mb-4 max-w-[300px]">
+                        <p className="text-[20px] leading-tight font-extrabold text-[#58ea50] mb-3">
                           {item.savings}
                         </p>
-                        <h3 className="text-[30px] leading-tight text-left font-extrabold text-white mb-4">
+                        <h3 className="text-[20px] leading-tight text-left font-extrabold text-white mb-3">
                           {item.company}
                         </h3>
-                        <p className="text-[26px] leading-normal text-left font-bold text-white mb-4">
+                        <p className="text-[17px] leading-normal text-left font-bold text-white mb-3">
                           {item.industry}
                         </p>
-                        <p className="text-[21px] font-semibold text-left text-white">
+                        <p className="text-[14px] font-semibold text-left text-white">
                           {item.impact}
                         </p>
                       </div>
@@ -234,7 +234,7 @@ export default function TestimonialsSection() {
                       {/* CTA Button */}
                       <Link
                         href="/for-supplier"
-                        className="w-[300px] h-[53px] bg-[#2aae7a] rounded-[15px] text-[21px] font-bold text-white hover:bg-[#2aae7a]/90 transition-colors flex items-center justify-center"
+                        className="w-[200px] h-[35px] bg-[#2aae7a] rounded-[10px] text-[14px] font-bold text-white hover:bg-[#2aae7a]/90 transition-colors flex items-center justify-center"
                       >
                         Read Case Study
                       </Link>

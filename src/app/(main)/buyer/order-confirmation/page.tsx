@@ -343,7 +343,7 @@ function OrderConfirmationContent() {
       };
 
   return (
-    <div className="min-h-screen bg-[#EEFBF6] py-8">
+    <div className="min-h-screen py-8">
       <div className="max-w-[1440px] mx-auto px-20">
         {/* Success Icon and Header */}
         <div className="flex flex-col items-center mb-5">

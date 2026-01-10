@@ -55,42 +55,39 @@ export default function ShippingMethod({
   onBack,
 }: ShippingMethodProps) {
   return (
-    <div className="bg-white rounded-[15px] shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)] p-[22.5px_22.5px_30px_22.5px]">
+    <div className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] p-[15px_15px_20px_15px]">
       {/* Header */}
-      <div className="flex items-center gap-[15px] mb-[22.5px]">
-        <Truck
-          className="w-[19.5px] h-[19.5px] text-gray-900"
-          strokeWidth={1.5}
-        />
-        <h2 className="text-[18px] font-semibold text-[#0D1B2A]">
+      <div className="flex items-center gap-[10px] mb-[15px]">
+        <Truck className="w-[13px] h-[13px] text-gray-900" strokeWidth={1.5} />
+        <h2 className="text-[12px] font-semibold text-[#0D1B2A]">
           Shipping Method
         </h2>
       </div>
 
       {/* Shipping Options */}
-      <div className="space-y-[15px] mb-6">
+      <div className="space-y-[10px] mb-4">
         {shippingOptions.map((option) => (
           <div
             key={option.id}
             onClick={() => onMethodSelect(option.id)}
-            className={`h-[64px] rounded-[15px] cursor-pointer transition-all ${
+            className={`h-[43px] rounded-[10px] cursor-pointer transition-all ${
               selectedMethod === option.id
                 ? "bg-[#EEFFEF] border-[1.5px] border-[#2AAE7A]"
                 : "bg-white border border-[#E8E8E8]"
             }`}
           >
-            <div className="flex items-center gap-[11.25px] h-full px-[18px]">
+            <div className="flex items-center gap-[7.5px] h-full px-[12px]">
               {/* Radio Button */}
               <div className="shrink-0">
                 <div
-                  className={`w-[16px] h-[16px] rounded-full border-[1.5px] flex items-center justify-center ${
+                  className={`w-[11px] h-[11px] rounded-full border-[1px] flex items-center justify-center ${
                     selectedMethod === option.id
                       ? "border-[#2AAE7A]"
                       : "border-[#9C9C9C]"
                   }`}
                 >
                   {selectedMethod === option.id && (
-                    <div className="w-[8px] h-[8px] rounded-full bg-[#2AAE7A]" />
+                    <div className="w-[5px] h-[5px] rounded-full bg-[#2AAE7A]" />
                   )}
                 </div>
               </div>
@@ -99,10 +96,10 @@ export default function ShippingMethod({
               <div className="flex items-center justify-between flex-1">
                 {/* Left: Name and Description */}
                 <div className="flex flex-col">
-                  <h3 className="text-[13.5px] font-medium text-[#0D1B2A] leading-normal">
+                  <h3 className="text-[9px] font-medium text-[#0D1B2A] leading-normal">
                     {option.name}
                   </h3>
-                  <p className="text-[12px] text-[#9C9C9C] leading-[18px]">
+                  <p className="text-[8px] text-[#9C9C9C] leading-[12px]">
                     {option.description}
                   </p>
                 </div>
@@ -110,13 +107,13 @@ export default function ShippingMethod({
                 {/* Right: Price and Estimated Days */}
                 <div className="flex flex-col items-end text-right">
                   <p
-                    className={`text-[13.5px] font-medium leading-normal ${
+                    className={`text-[9px] font-medium leading-normal ${
                       option.price === 0 ? "text-[#2AAE7A]" : "text-[#0D1B2A]"
                     }`}
                   >
                     {option.price === 0 ? "FREE" : `$${option.price}`}
                   </p>
-                  <p className="text-[12px] text-[#9C9C9C] leading-[18px]">
+                  <p className="text-[8px] text-[#9C9C9C] leading-[12px]">
                     {option.estimatedDays}
                   </p>
                 </div>

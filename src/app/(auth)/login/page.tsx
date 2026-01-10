@@ -11,56 +11,81 @@ export default function LoginPage() {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
   const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
 
+    // Validation
     if (!identifier || !password) {
+      setError("Please enter your email/phone and password");
       return;
     }
 
-    setLoading(true);
-    const success = await login({
-      identifier,
-      password,
-      requestedRole: userType,
-    });
-    setLoading(false);
+    if (identifier.trim().length < 3) {
+      setError("Please enter a valid email or phone number");
+      return;
+    }
 
-    if (success) {
-      // Redirect based on user type preference
-      if (userType === "buyer") {
-        router.push("/buyer/dashboard");
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters");
+      return;
+    }
+
+    console.log("🔐 Login page: Attempting login", { identifier, userType });
+    setLoading(true);
+
+    try {
+      const success = await login({
+        identifier: identifier.trim(),
+        password,
+        requestedRole: userType,
+      });
+
+      if (success) {
+        console.log("✅ Login successful, redirecting...");
+        // Redirect based on user type preference
+        if (userType === "buyer") {
+          router.push("/buyer/dashboard");
+        } else {
+          router.push("/supplier/dashboard");
+        }
       } else {
-        router.push("/supplier/dashboard");
+        setError("Login failed. Please check your credentials and try again.");
       }
+    } catch (err) {
+      console.error("❌ Login error:", err);
+      setError("An unexpected error occurred. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center px-4 py-8">
-      <div className="w-full max-w-md bg-white border-2 border-gray-200 rounded-lg p-8 placeholder:text-gray-400">
-        <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 mb-3">
+    <div className="min-h-screen bg-white flex items-center justify-center px-2 py-4">
+      <div className="w-full max-w-xs bg-white border border-gray-200 rounded-lg p-4 placeholder:text-gray-400">
+        <div className="mb-3">
+          <label className="block text-xs font-medium text-gray-700 mb-1.5">
             Login as:
           </label>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-2">
             <button
               type="button"
               onClick={() => setUserType("buyer")}
-              className={`py-8 border-2 rounded-lg transition-colors ${
+              className={`py-4 border rounded-lg transition-colors ${
                 userType === "buyer"
                   ? "border-gray-900 bg-white"
                   : "border-gray-300 hover:border-gray-400"
               }`}
             >
               <div className="text-center">
-                <div className="text-lg font-semibold text-gray-900 mb-1">
+                <div className="text-sm font-semibold text-gray-900 mb-0.5">
                   Buyer
                 </div>
-                <div className="text-xs text-gray-600">
+                <div className="text-[6px] text-gray-600">
                   Purchasing surplus
                   <br />
                   inventory
@@ -77,10 +102,10 @@ export default function LoginPage() {
               }`}
             >
               <div className="text-center">
-                <div className="text-lg font-semibold text-gray-900 mb-1">
+                <div className="text-sm font-semibold text-gray-900 mb-0.5">
                   Supplier
                 </div>
-                <div className="text-xs text-gray-600">
+                <div className="text-[6px] text-gray-600">
                   Selling surplus
                   <br />
                   stock
@@ -90,9 +115,26 @@ export default function LoginPage() {
           </div>
         </div>
 
-        <form className="space-y-4" onSubmit={handleSubmit}>
+        <form className="space-y-2" onSubmit={handleSubmit}>
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-700 px-2 py-1.5 rounded-lg text-xs flex items-start gap-1">
+              <svg
+                className="w-2.5 h-2.5 flex-shrink-0 mt-0.25"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <span>{error}</span>
+            </div>
+          )}
+
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-xs font-medium text-gray-700 mb-0.5">
               Email (or) Ph. number
             </label>
             <input
@@ -102,12 +144,12 @@ export default function LoginPage() {
               onChange={(e) => setIdentifier(e.target.value)}
               required
               disabled={loading}
-              className="w-full px-3 py-2 border text-black border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:bg-gray-100 placeholder:text-gray-400"
+              className="w-full px-1.5 py-1 border text-black border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 disabled:bg-gray-100 placeholder:text-gray-400 text-xs"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-xs font-medium text-gray-700 mb-0.5">
               Password
             </label>
             <div className="relative">
@@ -118,15 +160,15 @@ export default function LoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 disabled={loading}
-                className="w-full px-3 py-2 border text-black border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:bg-gray-100 placeholder:text-gray-400"
+                className="w-full px-1.5 py-1 border text-black border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 disabled:bg-gray-100 placeholder:text-gray-400 text-xs"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                className="absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
               >
                 <svg
-                  className="w-5 h-5"
+                  className="w-2.5 h-2.5"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -154,12 +196,12 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-gray-900 text-white rounded font-medium hover:bg-gray-800 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center"
+            className="w-full py-1.5 bg-gray-900 text-white rounded font-medium hover:bg-gray-800 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center text-xs"
           >
             {loading ? (
               <>
                 <svg
-                  className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                  className="animate-spin -ml-0.5 mr-1.5 h-2.5 w-2.5 text-white"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -185,23 +227,23 @@ export default function LoginPage() {
             )}
           </button>
 
-          <div className="text-center space-y-2">
+          <div className="text-center space-y-1">
             <Link
               href="/forgot-password"
-              className="text-sm text-blue-600 hover:underline block"
+              className="text-xs text-blue-600 hover:underline block"
             >
               Forgot your password?
             </Link>
-            <p className="text-sm text-gray-600">don&apos;t have a account?</p>
+            <p className="text-xs text-gray-600">don&apos;t have a account?</p>
             <Link
               href="/signup"
-              className="text-sm text-blue-600 hover:underline font-medium block"
+              className="text-xs text-blue-600 hover:underline font-medium block"
             >
               Create New Account
             </Link>
           </div>
 
-          <p className="text-center text-xs text-gray-500 mt-6">
+          <p className="text-center text-[10px] text-gray-500 mt-3">
             Trusted by 10,000+ businesses
           </p>
         </form>

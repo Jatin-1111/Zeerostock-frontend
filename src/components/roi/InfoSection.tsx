@@ -2,12 +2,12 @@ export default function InfoSection() {
   return (
     <section>
       <div className="max-w-full mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-[59px] mb-[45px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-[39px] mb-[30px]">
           {/* For Buyers */}
-          <div className="bg-white rounded-[15px] shadow-[0px_2px_6px_0px_rgba(0,0,0,0.25)] p-[23px] h-[275px]">
-            <div className="flex items-center gap-[11px] mb-[10px]">
+          <div className="bg-white rounded-[10px] shadow-[0px_2px_6px_0px_rgba(0,0,0,0.25)] p-[15px] h-[183px]">
+            <div className="flex items-center gap-[7px] mb-[7px]">
               <svg
-                className="w-[23px] h-[23px]"
+                className="w-[15px] h-[15px]"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -45,18 +45,18 @@ export default function InfoSection() {
                   strokeLinejoin="round"
                 />
               </svg>
-              <h3 className="text-[17px] font-semibold text-[#0d1b2a]">
+              <h3 className="text-[11px] font-semibold text-[#0d1b2a]">
                 For Buyers
               </h3>
             </div>
-            <p className="text-[14px] font-medium text-[#9c9c9c] mb-[23px]">
+            <p className="text-[9px] font-medium text-[#9c9c9c] mb-[15px]">
               Our buyer calculator helps you evaluate the profitability of
               purchasing surplus inventory by considering:
             </p>
-            <ul className="space-y-[8px]">
-              <li className="flex items-start gap-[12px]">
+            <ul className="space-y-[5px]">
+              <li className="flex items-start gap-[8px]">
                 <svg
-                  className="w-[20px] h-[20px] mt-[2px] flex-shrink-0"
+                  className="w-[13px] h-[13px] mt-[1px] flex-shrink-0"
                   viewBox="0 0 26 26"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -76,13 +76,13 @@ export default function InfoSection() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <span className="text-[14px] font-medium text-[#0d1b2a]">
+                <span className="text-[9px] font-medium text-[#0d1b2a]">
                   Purchase price and expected retail value
                 </span>
               </li>
-              <li className="flex items-start gap-[12px]">
+              <li className="flex items-start gap-[8px]">
                 <svg
-                  className="w-[20px] h-[20px] mt-[2px] flex-shrink-0"
+                  className="w-[13px] h-[13px] mt-[1px] flex-shrink-0"
                   viewBox="0 0 26 26"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -102,13 +102,13 @@ export default function InfoSection() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <span className="text-[14px] font-medium text-[#0d1b2a]">
+                <span className="text-[9px] font-medium text-[#0d1b2a]">
                   Shipping and processing costs
                 </span>
               </li>
-              <li className="flex items-start gap-[12px]">
+              <li className="flex items-start gap-[8px]">
                 <svg
-                  className="w-[20px] h-[20px] mt-[2px] flex-shrink-0"
+                  className="w-[13px] h-[13px] mt-[1px] flex-shrink-0"
                   viewBox="0 0 26 26"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -128,13 +128,13 @@ export default function InfoSection() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <span className="text-[14px] font-medium text-[#0d1b2a]">
+                <span className="text-[9px] font-medium text-[#0d1b2a]">
                   Volume discounts and break-even analysis
                 </span>
               </li>
-              <li className="flex items-start gap-[12px]">
+              <li className="flex items-start gap-[8px]">
                 <svg
-                  className="w-[20px] h-[20px] mt-[2px] flex-shrink-0"
+                  className="w-[13px] h-[13px] mt-[1px] flex-shrink-0"
                   viewBox="0 0 26 26"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -154,7 +154,7 @@ export default function InfoSection() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <span className="text-[14px] font-medium text-[#0d1b2a]">
+                <span className="text-[9px] font-medium text-[#0d1b2a]">
                   ROI percentage and profit margins
                 </span>
               </li>
@@ -162,21 +162,21 @@ export default function InfoSection() {
           </div>
 
           {/* For Sellers */}
-          <div className="bg-white rounded-[15px] shadow-[0px_2px_6px_0px_rgba(0,0,0,0.25)] p-[23px] h-[275px]">
-            <div className="flex items-center gap-[11px] mb-[10px]">
-              <span className="text-[27px] font-normal text-[#2aae7a]">₹</span>
-              <h3 className="text-[17px] font-semibold text-[#0d1b2a]">
+          <div className="bg-white rounded-[10px] shadow-[0px_2px_6px_0px_rgba(0,0,0,0.25)] p-[15px] h-[183px]">
+            <div className="flex items-center gap-[7px] mb-[7px]">
+              <span className="text-[18px] font-normal text-[#2aae7a]">₹</span>
+              <h3 className="text-[11px] font-semibold text-[#0d1b2a]">
                 For Sellers
               </h3>
             </div>
-            <p className="text-[14px] font-medium text-[#9c9c9c] mb-[23px]">
+            <p className="text-[9px] font-medium text-[#9c9c9c] mb-[15px]">
               Our seller calculator shows the financial benefits of liquidating
               excess inventory through:
             </p>
-            <ul className="space-y-[8px]">
-              <li className="flex items-start gap-[12px]">
+            <ul className="space-y-[5px]">
+              <li className="flex items-start gap-[8px]">
                 <svg
-                  className="w-[20px] h-[20px] mt-[2px] flex-shrink-0"
+                  className="w-[13px] h-[13px] mt-[1px] flex-shrink-0"
                   viewBox="0 0 26 26"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -196,13 +196,13 @@ export default function InfoSection() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <span className="text-[14px] font-medium text-[#0d1b2a]">
+                <span className="text-[9px] font-medium text-[#0d1b2a]">
                   Holding cost savings from faster liquidation
                 </span>
               </li>
-              <li className="flex items-start gap-[12px]">
+              <li className="flex items-start gap-[8px]">
                 <svg
-                  className="w-[20px] h-[20px] mt-[2px] flex-shrink-0"
+                  className="w-[13px] h-[13px] mt-[1px] flex-shrink-0"
                   viewBox="0 0 26 26"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -222,13 +222,13 @@ export default function InfoSection() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <span className="text-[14px] font-medium text-[#0d1b2a]">
+                <span className="text-[9px] font-medium text-[#0d1b2a]">
                   Marketplace fees and commission structure
                 </span>
               </li>
-              <li className="flex items-start gap-[12px]">
+              <li className="flex items-start gap-[8px]">
                 <svg
-                  className="w-[20px] h-[20px] mt-[2px] flex-shrink-0"
+                  className="w-[13px] h-[13px] mt-[1px] flex-shrink-0"
                   viewBox="0 0 26 26"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -248,13 +248,13 @@ export default function InfoSection() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <span className="text-[14px] font-medium text-[#0d1b2a]">
+                <span className="text-[9px] font-medium text-[#0d1b2a]">
                   Time-to-sell optimization benefits
                 </span>
               </li>
-              <li className="flex items-start gap-[12px]">
+              <li className="flex items-start gap-[8px]">
                 <svg
-                  className="w-[20px] h-[20px] mt-[2px] flex-shrink-0"
+                  className="w-[13px] h-[13px] mt-[1px] flex-shrink-0"
                   viewBox="0 0 26 26"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -274,7 +274,7 @@ export default function InfoSection() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <span className="text-[14px] font-medium text-[#0d1b2a]">
+                <span className="text-[9px] font-medium text-[#0d1b2a]">
                   Net proceeds and cash flow improvement
                 </span>
               </li>
@@ -283,11 +283,11 @@ export default function InfoSection() {
         </div>
 
         {/* Important Note */}
-        <div className="bg-[#c0daff] rounded-[15px] p-[30px] h-[158px]">
-          <h4 className="text-[17px] font-semibold text-[#085396] mb-[12px]">
+        <div className="bg-[#c0daff] rounded-[10px] p-[20px] h-[105px]">
+          <h4 className="text-[11px] font-semibold text-[#085396] mb-[8px]">
             Important Note
           </h4>
-          <p className="text-[14px] font-normal text-[#085396] leading-[23px]">
+          <p className="text-[9px] font-normal text-[#085396] leading-[15px]">
             These calculations are estimates based on the inputs provided and
             industry averages. Actual results may vary depending on market
             conditions, product specifics, and execution. Always conduct your

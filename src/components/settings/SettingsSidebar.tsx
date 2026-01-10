@@ -5,11 +5,13 @@ import { Bell, Eye, Globe, ShieldCheck, User } from "lucide-react";
 interface SettingsSidebarProps {
   activeTab: string;
   onTabChange: (tab: string) => void;
+  classname: string;
 }
 
 export default function SettingsSidebar({
   activeTab,
   onTabChange,
+  classname,
 }: SettingsSidebarProps) {
   const menuItems = [
     {
@@ -40,7 +42,9 @@ export default function SettingsSidebar({
   ];
 
   return (
-    <div className="w-full lg:w-[208px] bg-white min-h-screen relative">
+    <div
+      className={`w-full lg:w-[208px] bg-white relative ${classname}`}
+    >
       {/* Header */}
       <div className="px-[14px] mb-[30px]">
         <h2 className="text-[17px] font-semibold text-[#0d1b2a] mb-[4px]">

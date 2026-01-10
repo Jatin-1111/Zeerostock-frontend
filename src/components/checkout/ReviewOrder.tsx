@@ -91,49 +91,49 @@ export default function ReviewOrder({
   const shippingDisplay = getShippingMethodDisplay();
 
   return (
-    <div className="flex flex-col gap-[19px]">
+    <div className="flex flex-col gap-[13px]">
       {/* Order Summary Section */}
-      <div className="bg-white rounded-[15px] shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)] p-[23px] w-full">
-        <h2 className="font-semibold text-[18px] text-[#0d1b2a] mb-[15px]">
+      <div className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] p-[15px] w-full">
+        <h2 className="font-semibold text-[12px] text-[#0d1b2a] mb-[10px]">
           Order Summary
         </h2>
-        <div className="flex flex-col gap-[15px]">
+        <div className="flex flex-col gap-[10px]">
           {cartItems && cartItems.length > 0 ? (
             cartItems.map((item) => (
               <div
                 key={item.itemId}
-                className="bg-[#fbfbfb] rounded-[15px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] px-[19px] py-[18px] flex items-center gap-[19px] h-[90px] w-full"
+                className="bg-[#fbfbfb] rounded-[10px] shadow-[0px_0px_2px_0px_rgba(0,0,0,0.25)] px-[13px] py-[12px] flex items-center gap-[13px] h-[60px] w-full"
               >
                 {item.image && (
-                  <div className="w-[79px] h-[54px] rounded-[8px] overflow-hidden shrink-0">
+                  <div className="w-[53px] h-[36px] rounded-[5px] overflow-hidden shrink-0">
                     <Image
                       src={item.image}
                       alt={item.title}
-                      width={79}
-                      height={54}
+                      width={53}
+                      height={36}
                       className="w-full h-full object-cover"
                     />
                   </div>
                 )}
-                <div className="flex-1 flex flex-col gap-[2px]">
-                  <div className=" font-medium text-[14px] text-[#0d1b2a]">
+                <div className="flex-1 flex flex-col gap-[1px]">
+                  <div className=" font-medium text-[9px] text-[#0d1b2a]">
                     {item.title}
                   </div>
-                  <div className="text-[12px] text-[#9c9c9c] leading-[18px]">
+                  <div className="text-[8px] text-[#9c9c9c] leading-[12px]">
                     by {item.seller?.name || item.category || "Supplier"}
                   </div>
-                  <div className="text-[12px] text-[#9c9c9c] leading-[18px]">
+                  <div className="text-[8px] text-[#9c9c9c] leading-[12px]">
                     Qty: {item.quantity} x {item.price.toFixed(2)}
                   </div>
                 </div>
-                <div className=" font-medium text-[18px] text-[#0d1b2a] opacity-80">
+                <div className=" font-medium text-[12px] text-[#0d1b2a] opacity-80">
                   <span className=" font-bold">₹</span>
                   {(item.quantity * item.price).toFixed(0)}
                 </div>
               </div>
             ))
           ) : (
-            <div className="text-center text-[#9c9c9c] p-[30px]">
+            <div className="text-center text-[#9c9c9c] p-[20px]">
               No items in cart
             </div>
           )}
@@ -141,25 +141,25 @@ export default function ReviewOrder({
       </div>
 
       {/* Payment and Shipping Method */}
-      <div className="flex gap-[19px]">
+      <div className="flex gap-[13px]">
         {/* Payment Method */}
-        <div className="bg-white rounded-[15px] shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)] p-[23px] flex-1 h-[116px]">
-          <h3 className=" font-semibold text-[18px] text-[#0d1b2a] mb-[19px]">
+        <div className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] p-[15px] flex-1 h-[77px]">
+          <h3 className=" font-semibold text-[12px] text-[#0d1b2a] mb-[13px]">
             Payment Method
           </h3>
-          <div className="flex items-center gap-[8px]">
+          <div className="flex items-center gap-[5px]">
             {/* Payment Icon */}
             <div className="shrink-0">
               <CreditCard
-                className="w-[30px] h-[30px] text-[#0d1b2a]"
+                className="w-[20px] h-[20px] text-[#0d1b2a]"
                 strokeWidth={1.5}
               />
             </div>
-            <div className="flex flex-col gap-[2px]">
-              <div className=" font-medium text-[14px] text-[#0d1b2a]">
+            <div className="flex flex-col gap-[1px]">
+              <div className=" font-medium text-[9px] text-[#0d1b2a]">
                 {paymentDisplay.title}
               </div>
-              <div className="font-medium text-[12px] text-[#9c9c9c]">
+              <div className="font-medium text-[8px] text-[#9c9c9c]">
                 {paymentDisplay.subtitle}
               </div>
             </div>
@@ -167,23 +167,23 @@ export default function ReviewOrder({
         </div>
 
         {/* Shipping Method */}
-        <div className="bg-white rounded-[15px] shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)] p-[23px] flex-1 h-[116px]">
-          <h3 className=" font-semibold text-[18px] text-[#0d1b2a] mb-[19px]">
+        <div className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] p-[15px] flex-1 h-[77px]">
+          <h3 className=" font-semibold text-[12px] text-[#0d1b2a] mb-[13px]">
             Shipping Method
           </h3>
-          <div className="flex items-center gap-[8px]">
+          <div className="flex items-center gap-[5px]">
             {/* Shipping Icon */}
             <div className="shrink-0">
               <Truck
-                className="w-[30px] h-[30px] text-[#0d1b2a]"
+                className="w-[20px] h-[20px] text-[#0d1b2a]"
                 strokeWidth={1.5}
               />
             </div>
-            <div className="flex flex-col gap-[2px]">
-              <div className=" font-medium text-[14px] text-[#0d1b2a]">
+            <div className="flex flex-col gap-[1px]">
+              <div className=" font-medium text-[9px] text-[#0d1b2a]">
                 {shippingDisplay.title}
               </div>
-              <div className="font-medium text-[12px] text-[#9c9c9c]">
+              <div className="font-medium text-[8px] text-[#9c9c9c]">
                 {shippingDisplay.subtitle}
               </div>
             </div>
@@ -192,24 +192,24 @@ export default function ReviewOrder({
       </div>
 
       {/* Terms and Conditions Checkbox */}
-      <div className="bg-white rounded-[15px] shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)] px-[19px] py-[23px] flex items-start gap-[15px] w-full">
+      <div className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] px-[13px] py-[15px] flex items-start gap-[10px] w-full">
         <button
           onClick={() => setAgreedToTerms(!agreedToTerms)}
-          className={`w-[23px] h-[23px] rounded-[4px] flex items-center justify-center shrink-0 p-[4px] border-2 transition-colors ${
+          className={`w-[15px] h-[15px] rounded-[3px] flex items-center justify-center shrink-0 p-[3px] border-2 transition-colors ${
             agreedToTerms
               ? "bg-[#2aae7a] border-[#2aae7a]"
               : "bg-white border-[#bebebe]"
           }`}
         >
           {agreedToTerms && (
-            <Check className="w-[15px] h-[15px] text-white" strokeWidth={3} />
+            <Check className="w-[10px] h-[10px] text-white" strokeWidth={3} />
           )}
         </button>
         <div className="flex-1">
-          <div className=" font-medium text-[14px] text-[#0d1b2a] mb-[10px]">
+          <div className=" font-medium text-[9px] text-[#0d1b2a] mb-[7px]">
             I agree to the Terms of Service and Privacy Policy
           </div>
-          <div className=" font-medium text-[11px] text-[#9c9c9c] leading-[17px]">
+          <div className=" font-medium text-[7px] text-[#9c9c9c] leading-[11px]">
             By placing this order, you agree to our terms and acknowledge that
             you&apos;ve read our return policy.
           </div>
@@ -217,11 +217,11 @@ export default function ReviewOrder({
       </div>
 
       {/* Navigation Buttons */}
-      <div className="flex justify-between gap-[15px] mt-[8px] w-full">
+      <div className="flex justify-between gap-[10px] mt-[5px] w-full">
         <button
           onClick={onBack}
           disabled={isPlacingOrder}
-          className="h-[45px] px-[60px] py-[11px] bg-white border border-[#9c9c9c] rounded-[11px]  font-semibold text-[15px] text-[#9c9c9c] leading-[17px] hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 transition-colors"
+          className="h-[30px] px-[40px] py-[7px] bg-white border border-[#9c9c9c] rounded-[7px]  font-semibold text-[10px] text-[#9c9c9c] leading-[11px] hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 transition-colors"
         >
           Previous Step
         </button>
@@ -233,11 +233,11 @@ export default function ReviewOrder({
             cartItems.length === 0 ||
             !agreedToTerms
           }
-          className="h-[45px] px-[60px] py-[11px] bg-[#1e3a8a] border-none rounded-[11px]  font-semibold text-[15px] text-white leading-[17px] flex items-center justify-center gap-[8px] hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 transition-all"
+          className="h-[30px] px-[40px] py-[7px] bg-[#1e3a8a] border-none rounded-[7px]  font-semibold text-[10px] text-white leading-[11px] flex items-center justify-center gap-[5px] hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 transition-all"
         >
           {isPlacingOrder ? (
             <>
-              <Loader2 className="animate-spin h-[15px] w-[15px] text-white" />
+              <Loader2 className="animate-spin h-[10px] w-[10px] text-white" />
               Placing Order...
             </>
           ) : (

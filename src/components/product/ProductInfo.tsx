@@ -26,7 +26,7 @@ interface ProductInfoProps {
 export default function ProductInfo({ product: data }: ProductInfoProps) {
   const router = useRouter();
   const { addToCart } = useCartStore();
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated } = useAuth();
   const product = data.product;
   const auction = data.auction;
 
@@ -104,11 +104,6 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
     }
   };
   const handleAddToCart = async () => {
-    console.log("=== Add to Cart clicked ===");
-    console.log("Product ID:", product.id);
-    console.log("Quantity:", quantity);
-    console.log("Stock:", productStock);
-
     // Validation
     if (!product.id) {
       console.error("Product ID is missing!");
@@ -150,10 +145,6 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
   };
 
   const handleBuyNow = async () => {
-    console.log("=== Buy Now clicked ===");
-    console.log("Product ID:", product.id);
-    console.log("Quantity:", quantity);
-
     // Validation
     if (!product.id) {
       console.error("Product ID is missing!");
@@ -197,22 +188,22 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
   };
 
   return (
-    <div className="bg-white rounded-[15px] shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)] p-6 h-fit">
+    <div className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] p-4 h-fit">
       {/* Title with Wishlist Button */}
-      <div className="flex items-start justify-between gap-3 mb-3">
-        <h1 className="text-[25.5px] font-semibold text-[#1e3a8a] leading-normal flex-1">
+      <div className="flex items-start justify-between gap-2 mb-2">
+        <h1 className="text-[17px] font-semibold text-[#1e3a8a] leading-normal flex-1">
           {product.title as string}
         </h1>
         <button
           onClick={handleToggleWishlist}
           disabled={isTogglingWishlist}
-          className="flex-shrink-0 p-2 rounded-full hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed group"
+          className="shrink-0 p-1.33 rounded-full hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed group"
           aria-label={
             isWatchlisted ? "Remove from wishlist" : "Add to wishlist"
           }
         >
           <Heart
-            className={`w-6 h-6 transition-all ${
+            className={`w-4 h-4 transition-all ${
               isWatchlisted
                 ? "fill-red-500 text-red-500"
                 : "text-gray-400 group-hover:text-red-500"
@@ -222,24 +213,24 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
       </div>
 
       {/* Badges */}
-      <div className="flex items-center gap-2.25 mb-4.5">
-        <span className="px-2.25 py-0.75 bg-[#eeffef] text-[#2aae7a] text-[11.25px] font-medium rounded-[60px]">
+      <div className="flex items-center gap-1.5 mb-3">
+        <span className="px-1.5 py-0.5 bg-[#eeffef] text-[#2aae7a] text-[7.5px] font-medium rounded-[60px]">
           {(product.category as { name?: string })?.name || "Materials"}
         </span>
         {isAuction && (
-          <span className="px-2.25 py-0.75 bg-[#eeffef] text-[#2aae7a] text-[11.25px] font-medium rounded-[60px]">
+          <span className="px-1.5 py-0.5 bg-[#eeffef] text-[#2aae7a] text-[7.5px] font-medium rounded-[60px]">
             Auction
           </span>
         )}
-        <span className="px-2.25 py-0.75 bg-[#eeffef] text-[#2aae7a] text-[11.25px] font-medium rounded-[60px] capitalize">
+        <span className="px-1.5 py-0.5 bg-[#eeffef] text-[#2aae7a] text-[7.5px] font-medium rounded-[60px] capitalize">
           {product.condition as string}
         </span>
       </div>
 
       {/* Price */}
-      <div className="mb-4.5">
-        <div className="flex items-baseline gap-3 mb-1.5">
-          <span className="text-[30px] font-semibold text-[#0d1b2a]">
+      <div className="mb-3">
+        <div className="flex items-baseline gap-2 mb-1">
+          <span className="text-[20px] font-semibold text-[#0d1b2a]">
             {formatPrice(product.price as number)}
           </span>
           {(() => {
@@ -250,7 +241,7 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
               product.original_price > product.price
             ) {
               return (
-                <span className="text-[18px] font-medium text-[#bebebe] line-through">
+                <span className="text-[12px] font-medium text-[#bebebe] line-through">
                   {formatPrice(product.original_price)}
                 </span>
               );
@@ -258,7 +249,7 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
             return null;
           })()}
         </div>
-        <p className="text-[18px] font-medium text-[#bebebe] tracking-[0.375px]">
+        <p className="text-[12px] font-medium text-[#bebebe] tracking-[0.25px]">
           per {(product.unit as string) || "unit"} /{" "}
           {(product.stock_quantity as number) ||
             (product.quantity as number) ||
@@ -269,7 +260,7 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
 
       {/* Minimum Bid for Auction */}
       {isAuction && (
-        <p className="text-[15px] font-medium text-[#bebebe] tracking-[0.375px] mb-4.5">
+        <p className="text-[10px] font-medium text-[#bebebe] tracking-[0.25px] mb-3">
           minimum bid{" "}
           {formatPrice(
             (auction?.current_bid as number) || (product.price as number)
@@ -290,18 +281,18 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
 
       {/* Action Buttons */}
       {!isAuction && (
-        <div className="space-y-2.25">
+        <div className="space-y-1.5">
           <button
             onClick={handleBuyNow}
             disabled={isAddingToCart}
-            className="w-full bg-[#1e3a8a] text-white text-[15px] font-semibold py-3 rounded-[7.5px] hover:bg-[#1e3a8a]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-[#1e3a8a] text-white text-[10px] font-semibold py-2 rounded-[5px] hover:bg-[#1e3a8a]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isAddingToCart ? "Adding..." : "Buy Now"}
           </button>
           <button
             onClick={handleAddToCart}
             disabled={isAddingToCart}
-            className="w-full bg-white border-2 border-[#1e3a8a] text-[#1e3a8a] text-[15px] font-semibold py-3 rounded-[7.5px] hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-white border-2 border-[#1e3a8a] text-[#1e3a8a] text-[10px] font-semibold py-2 rounded-[5px] hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isAddingToCart ? "Adding..." : "Add to Cart"}
           </button>
@@ -310,80 +301,80 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
 
       {/* Place Your Bid Section */}
       {isAuction && (
-        <div className="mb-6">
-          <h3 className="text-base font-semibold text-gray-900 mb-4">
+        <div className="mb-2.67">
+          <h3 className="text-[10.67px] font-semibold text-gray-900 mb-2.67">
             Place Your Bid
           </h3>
 
           {/* Bid Amount */}
-          <div className="mb-3">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+          <div className="mb-2">
+            <label className="block text-[9.33px] font-medium text-gray-700 mb-1.33">
               Bid Amount (per tona)
             </label>
             <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-600">
+              <span className="absolute left-2 top-1/2 -translate-y-1/2 text-gray-600">
                 ₹
               </span>
               <input
                 type="number"
                 value={bidAmount}
                 onChange={(e) => setBidAmount(Number(e.target.value))}
-                className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                className="w-full pl-5.33 pr-2.67 py-1.33 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-transparent"
                 min={
                   (auction?.current_bid as number) || (product.price as number)
                 }
                 step={minimumIncrement}
               />
             </div>
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-[8px] text-gray-500 mt-0.67">
               Minimum increment: ₹{minimumIncrement.toLocaleString()}
             </p>
           </div>
 
           {/* Quantity */}
-          <div className="mb-3">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+          <div className="mb-2">
+            <label className="block text-[9.33px] font-medium text-gray-700 mb-1.33">
               Quantity (tona)
             </label>
             <input
               type="number"
               value={quantity}
               onChange={(e) => setQuantity(Number(e.target.value))}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+              className="w-full px-2.67 py-1.33 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-transparent"
               min={(product.minimum_order_quantity as number) || 1}
             />
           </div>
 
           {/* Message */}
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+          <div className="mb-2.67">
+            <label className="block text-[9.33px] font-medium text-gray-700 mb-1.33">
               Message Sales team (Optional)
             </label>
             <textarea
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Any specific requirements or questions"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-transparent resize-none h-20"
+              className="w-full px-2.67 py-1.33 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-900 focus:border-transparent resize-none h-13.33"
             />
           </div>
 
           {/* Estimated Total */}
-          <div className="bg-gray-50 rounded-lg p-4 mb-4">
-            <div className="flex items-center justify-between mb-1">
-              <span className="text-sm font-medium text-gray-700">
+          <div className="bg-gray-50 rounded-lg p-2.67 mb-2.67">
+            <div className="flex items-center justify-between mb-0.67">
+              <span className="text-[9.33px] font-medium text-gray-700">
                 Estimated Total:
               </span>
-              <span className="text-2xl font-bold text-gray-900">
+              <span className="text-[16px] font-bold text-gray-900">
                 {formatPrice(estimatedTotal)}
               </span>
             </div>
-            <p className="text-xs text-gray-600">
+            <p className="text-[8px] text-gray-600">
               {quantity} tona x {formatPrice(bidAmount)}
             </p>
           </div>
 
           {/* Place Bid Button */}
-          <button className="w-full bg-white border-2 border-gray-900 text-gray-900 font-medium py-3 rounded-lg hover:bg-gray-50 transition-colors mb-3 flex items-center justify-center gap-2">
+          <button className="w-full bg-white border-2 border-gray-900 text-gray-900 font-medium py-2 rounded-lg hover:bg-gray-50 transition-colors mb-2 flex items-center justify-center gap-1.33">
             <span>₹</span>
             <span>Place Bid</span>
           </button>

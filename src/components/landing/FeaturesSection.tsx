@@ -4,8 +4,8 @@ export default function FeaturesSection() {
   const features = [
     {
       icon: (
-        <div className="w-[80px] h-[80px] bg-white rounded-full flex items-center justify-center">
-          <Zap className="w-10 h-10 text-[#022778]" strokeWidth={2.5} />
+        <div className="w-[53px] h-[53px] bg-white rounded-full flex items-center justify-center">
+          <Zap className="w-7 h-7 text-[#022778]" strokeWidth={2.5} />
         </div>
       ),
       title: "Instant AI Matching",
@@ -13,8 +13,8 @@ export default function FeaturesSection() {
     },
     {
       icon: (
-        <div className="w-[80px] h-[80px] bg-white rounded-full flex items-center justify-center">
-          <TrendingUp className="w-10 h-10 text-[#022778]" strokeWidth={2.5} />
+        <div className="w-[53px] h-[53px] bg-white rounded-full flex items-center justify-center">
+          <TrendingUp className="w-7 h-7 text-[#022778]" strokeWidth={2.5} />
         </div>
       ),
       title: "Maximize ROI",
@@ -22,8 +22,8 @@ export default function FeaturesSection() {
     },
     {
       icon: (
-        <div className="w-[80px] h-[80px] bg-white rounded-full flex items-center justify-center">
-          <BadgeCheck className="w-10 h-10 text-[#022778]" strokeWidth={2.5} />
+        <div className="w-[53px] h-[53px] bg-white rounded-full flex items-center justify-center">
+          <BadgeCheck className="w-7 h-7 text-[#022778]" strokeWidth={2.5} />
         </div>
       ),
       title: "100% Verified",
@@ -31,8 +31,8 @@ export default function FeaturesSection() {
     },
     {
       icon: (
-        <div className="w-[80px] h-[80px] bg-white rounded-full flex items-center justify-center">
-          <Users className="w-10 h-10 text-[#022778]" strokeWidth={2.5} />
+        <div className="w-[53px] h-[53px] bg-white rounded-full flex items-center justify-center">
+          <Users className="w-7 h-7 text-[#022778]" strokeWidth={2.5} />
         </div>
       ),
       title: "Network Effects",
@@ -41,19 +41,19 @@ export default function FeaturesSection() {
   ];
 
   return (
-    <section className="w-full bg-[#eefbf6] py-20">
-      <div className="max-w-[1440px] mx-auto px-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <section className="w-full bg-[#eefbf6] py-13">
+      <div className="max-w-[960px] mx-auto px-13">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {features.map((feature, index) => (
             <div
               key={index}
-              className="bg-[#2aae7a] rounded-[40px] overflow-hidden h-[286px] flex flex-col items-center justify-center px-8 text-center"
+              className="bg-[#2aae7a] rounded-[27px] overflow-hidden h-[191px] flex flex-col items-center justify-center px-5 text-center"
             >
-              <div className="mb-6">{feature.icon}</div>
-              <h3 className="text-[22px] font-bold text-[#022778] mb-1">
+              <div className="mb-4">{feature.icon}</div>
+              <h3 className="text-[15px] font-bold text-[#022778] mb-1">
                 {feature.title}
               </h3>
-              <p className="text-[20px] font-semibold text-[#ffffff] ">
+              <p className="text-[13px] font-semibold text-[#ffffff] ">
                 {feature.description}
               </p>
             </div>

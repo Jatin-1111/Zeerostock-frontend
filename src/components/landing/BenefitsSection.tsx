@@ -12,7 +12,7 @@ export default function BenefitsSection() {
   ];
 
   return (
-    <section className="relative h-[899px] bg-[#fefefe]">
+    <section className="relative h-[600px] bg-[#fefefe]">
       {/* Background Graphic */}
       <div className="absolute inset-0 pointer-events-none">
         <img
@@ -22,29 +22,29 @@ export default function BenefitsSection() {
         />
       </div>
 
-      <div className="relative h-full max-w-[1440px] mx-auto flex flex-col items-center justify-center">
+      <div className="relative h-full max-w-[960px] mx-auto flex flex-col items-center justify-center">
         {/* Headline */}
-        <div className="text-center mb-12 max-w-[725px]">
-          <h2 className="text-[52px] leading-[52px] font-medium text-[#0a2540]">
+        <div className="text-center mb-8 max-w-[483px]">
+          <h2 className="text-[35px] leading-[35px] font-medium text-[#0a2540]">
             Everything You Need To
           </h2>
-          <h2 className="text-[52px] leading-[52px] font-medium text-[#2aae7a] mb-5">
+          <h2 className="text-[35px] leading-[35px] font-medium text-[#2aae7a] mb-3">
             Succeed
           </h2>
-          <p className="text-lg font-semibold text-[#868181]">
+          <p className="text-[12px] font-semibold text-[#868181]">
             Powerful tools and features designed specifically for B2B surplus
             inventory trading
           </p>
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-2 gap-x-24 gap-y-6 mb-12 max-w-[737px]">
+        <div className="grid grid-cols-2 gap-x-16 gap-y-4 mb-8 max-w-[491px]">
           {features.map((feature, index) => (
-            <div key={index} className="flex items-center gap-4">
-              <div className="w-[38px] h-[36px] flex items-center justify-center bg-[#2aae7a] rounded-lg shrink-0">
-                <Check className="w-5 h-5 text-white" strokeWidth={3} />
+            <div key={index} className="flex items-center gap-3">
+              <div className="w-[25px] h-[24px] flex items-center justify-center bg-[#2aae7a] rounded-lg shrink-0">
+                <Check className="w-3 h-3 text-white" strokeWidth={3} />
               </div>
-              <span className="text-[21px] leading-[25px] text-[#0a2540] font-medium">
+              <span className="text-[14px] leading-[17px] text-[#0a2540] font-medium">
                 {feature.title}
               </span>
             </div>
@@ -54,7 +54,7 @@ export default function BenefitsSection() {
         {/* CTA Button */}
         <Link
           href="/marketplace"
-          className="w-[300px] h-[53px] bg-[#1e3a8a] text-white text-[21px] font-medium rounded-[15px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center justify-center"
+          className="w-[200px] h-[35px] bg-[#1e3a8a] text-white text-[14px] font-medium rounded-[10px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center justify-center"
         >
           Explore Features
         </Link>

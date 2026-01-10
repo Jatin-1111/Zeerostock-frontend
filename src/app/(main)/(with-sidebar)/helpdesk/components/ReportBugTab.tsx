@@ -132,31 +132,31 @@ export default function ReportBugTab() {
 
   return (
     <div>
-      <h2 className="text-[23px] font-semibold text-[#0d1b2a] mb-6 ">
+      <h2 className="text-[15px] font-semibold text-[#0d1b2a] mb-[16px] ">
         Report a Bug
       </h2>
 
       {submitSuccess && (
-        <div className="max-w-4xl mb-4 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center gap-2">
-          <CheckCircle className="w-5 h-5 text-green-600" />
-          <p className="text-sm text-green-800 ">
+        <div className="max-w-4xl mb-[11px] p-[11px] bg-green-50 border border-green-200 rounded-[7px] flex items-center gap-[5px]">
+          <CheckCircle className="w-[13px] h-[13px] text-green-600" />
+          <p className="text-[9px] text-green-800 ">
             Bug report submitted successfully! We&apos;ll look into it.
           </p>
         </div>
       )}
 
       {submitError && (
-        <div className="max-w-4xl mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
-          <p className="text-sm text-red-800 ">{submitError}</p>
+        <div className="max-w-4xl mb-[11px] p-[11px] bg-red-50 border border-red-200 rounded-[7px]">
+          <p className="text-[9px] text-red-800 ">{submitError}</p>
         </div>
       )}
 
-      <form onSubmit={handleBugSubmit} className="max-w-[885px]">
-        <div className="bg-[#fbfbfb] rounded-[15px] shadow-[0px_0px_4.5px_0px_rgba(24,181,34,0.25)] p-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <form onSubmit={handleBugSubmit} className="max-w-[590px]">
+        <div className="bg-[#fbfbfb] rounded-[10px] shadow-[0px_0px_4.5px_0px_rgba(24,181,34,0.25)] p-[16px]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-[11px] mb-[11px]">
             {/* Bug Title */}
             <div>
-              <label className="block text-[17px] font-medium text-[#0d1b2a] mb-2 ">
+              <label className="block text-[11px] font-medium text-[#0d1b2a] mb-[5px] ">
                 Bug Title
               </label>
               <input
@@ -167,19 +167,19 @@ export default function ReportBugTab() {
                   setBugForm({ ...bugForm, title: e.target.value })
                 }
                 required
-                className="w-full px-4 py-3 border border-[#bebebe] rounded-[10px] text-base text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] "
+                className="w-full px-[11px] py-[8px] border border-[#bebebe] rounded-[7px] text-[11px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] "
               />
             </div>
 
             {/* Severity */}
             <div ref={severityRef} className="relative">
-              <label className="block text-[17px] font-medium text-[#0d1b2a] mb-2 ">
+              <label className="block text-[11px] font-medium text-[#0d1b2a] mb-[5px] ">
                 Severity
               </label>
               <button
                 type="button"
                 onClick={() => setSeverityOpen(!severityOpen)}
-                className="w-full px-4 py-3 border border-[#bebebe] rounded-[10px] text-base text-left focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] bg-white flex items-center justify-between"
+                className="w-full px-[11px] py-[8px] border border-[#bebebe] rounded-[7px] text-[11px] text-left focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] bg-white flex items-center justify-between"
               >
                 <span
                   className={
@@ -192,19 +192,19 @@ export default function ReportBugTab() {
                     : "Select severity"}
                 </span>
                 <ChevronDown
-                  className={`w-5 h-5 text-[#9c9c9c] transition-transform duration-300 ${
+                  className={`w-[13px] h-[13px] text-[#9c9c9c] transition-transform duration-300 ${
                     severityOpen ? "rotate-180" : ""
                   }`}
                 />
               </button>
               <div
-                className={`absolute z-10 w-full mt-1 bg-white border border-[#bebebe] rounded-[10px] shadow-lg overflow-hidden transition-all duration-300 ${
+                className={`absolute z-10 w-full mt-1 bg-white border border-[#bebebe] rounded-[7px] shadow-lg overflow-hidden transition-all duration-300 ${
                   severityOpen
-                    ? "max-h-[300px] opacity-100"
+                    ? "max-h-[200px] opacity-100"
                     : "max-h-0 opacity-0"
                 }`}
               >
-                <div className="py-1">
+                <div className="py-[3px]">
                   {severityLevels.map((level) => (
                     <button
                       key={level.value}
@@ -213,7 +213,7 @@ export default function ReportBugTab() {
                         setBugForm({ ...bugForm, severity: level.value });
                         setSeverityOpen(false);
                       }}
-                      className="w-full px-4 py-2.5 text-left text-base text-[#0d1b2a] hover:bg-[#eeffef] transition-colors"
+                      className="w-full px-[11px] py-[7px] text-left text-[11px] text-[#0d1b2a] hover:bg-[#eeffef] transition-colors"
                     >
                       {level.label}
                     </button>
@@ -224,14 +224,14 @@ export default function ReportBugTab() {
           </div>
 
           {/* Category */}
-          <div ref={categoryRef} className="mb-4 relative">
-            <label className="block text-[17px] font-medium text-[#0d1b2a] mb-2 ">
+          <div ref={categoryRef} className="mb-[11px] relative">
+            <label className="block text-[11px] font-medium text-[#0d1b2a] mb-[5px] ">
               Category
             </label>
             <button
               type="button"
               onClick={() => setCategoryOpen(!categoryOpen)}
-              className="w-full px-4 py-3 border border-[#bebebe] rounded-[10px] text-base text-left focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] bg-white flex items-center justify-between"
+              className="w-full px-[11px] py-[8px] border border-[#bebebe] rounded-[7px] text-[11px] text-left focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] bg-white flex items-center justify-between"
             >
               <span
                 className={
@@ -241,17 +241,17 @@ export default function ReportBugTab() {
                 {bugForm.category || "Select Category"}
               </span>
               <ChevronDown
-                className={`w-5 h-5 text-[#9c9c9c] transition-transform duration-300 ${
+                className={`w-[13px] h-[13px] text-[#9c9c9c] transition-transform duration-300 ${
                   categoryOpen ? "rotate-180" : ""
                 }`}
               />
             </button>
             <div
-              className={`absolute z-10 w-full mt-1 bg-white border border-[#bebebe] rounded-[10px] shadow-lg overflow-hidden transition-all duration-300 ${
-                categoryOpen ? "max-h-[300px] opacity-100" : "max-h-0 opacity-0"
+              className={`absolute z-10 w-full mt-1 bg-white border border-[#bebebe] rounded-[7px] shadow-lg overflow-hidden transition-all duration-300 ${
+                categoryOpen ? "max-h-[200px] opacity-100" : "max-h-0 opacity-0"
               }`}
             >
-              <div className="py-1 max-h-[250px] overflow-y-auto">
+              <div className="py-[3px] max-h-[167px] overflow-y-auto">
                 {categories.map((cat) => (
                   <button
                     key={cat}
@@ -260,7 +260,7 @@ export default function ReportBugTab() {
                       setBugForm({ ...bugForm, category: cat });
                       setCategoryOpen(false);
                     }}
-                    className="w-full px-4 py-2.5 text-left text-base text-[#0d1b2a] hover:bg-[#eeffef] transition-colors"
+                    className="w-full px-[11px] py-[7px] text-left text-[11px] text-[#0d1b2a] hover:bg-[#eeffef] transition-colors"
                   >
                     {cat}
                   </button>
@@ -270,8 +270,8 @@ export default function ReportBugTab() {
           </div>
 
           {/* Detailed Requirements */}
-          <div className="mb-4">
-            <label className="block text-[17px] font-medium text-[#0d1b2a] mb-2 ">
+          <div className="mb-[11px]">
+            <label className="block text-[11px] font-medium text-[#0d1b2a] mb-[5px] ">
               Detailed Requirements
             </label>
             <textarea
@@ -282,13 +282,13 @@ export default function ReportBugTab() {
                 setBugForm({ ...bugForm, description: e.target.value })
               }
               required
-              className="w-full px-4 py-3 border border-[#bebebe] rounded-[10px] text-base text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] resize-none "
+              className="w-full px-[11px] py-[8px] border border-[#bebebe] rounded-[7px] text-[11px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] resize-none "
             />
           </div>
 
           {/* Steps to Reproduce */}
-          <div className="mb-6">
-            <label className="block text-[17px] font-medium text-[#0d1b2a] mb-2 ">
+          <div className="mb-[16px]">
+            <label className="block text-[11px] font-medium text-[#0d1b2a] mb-[5px] ">
               Steps to Reproduce
             </label>
             <textarea
@@ -301,7 +301,7 @@ export default function ReportBugTab() {
                   steps_to_reproduce: e.target.value,
                 })
               }
-              className="w-full px-4 py-3 border border-[#bebebe] rounded-[10px] text-base text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] resize-none "
+              className="w-full px-[11px] py-[8px] border border-[#bebebe] rounded-[7px] text-[11px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] resize-none "
             />
           </div>
 
@@ -310,7 +310,7 @@ export default function ReportBugTab() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-[240px] h-[45px] bg-[#1e3a8a] text-white text-[15px] font-semibold rounded-[11px] hover:bg-[#1e3a8a]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 "
+              className="w-[160px] h-[30px] bg-[#1e3a8a] text-white text-[10px] font-semibold rounded-[7px] hover:bg-[#1e3a8a]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-[5px] "
             >
               {isSubmitting ? "Submitting..." : "Submit Bug Report"}
             </button>

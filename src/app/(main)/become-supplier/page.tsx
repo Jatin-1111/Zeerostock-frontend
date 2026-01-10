@@ -156,7 +156,105 @@ export default function SupplierVerificationPage() {
     }
   };
 
+  const validateStep1 = () => {
+    const { identityVerification, bankAccount } = formData;
+    if (!identityVerification.ownerName.trim()) {
+      alert("Please enter Owner/Director Name");
+      return false;
+    }
+    if (!identityVerification.idCard) {
+      alert("Please select Government ID type");
+      return false;
+    }
+    if (!identityVerification.proofOfAddress) {
+      alert("Please select Proof of Address type");
+      return false;
+    }
+    if (!bankAccount.bankName) {
+      alert("Please select Bank Name");
+      return false;
+    }
+    if (!bankAccount.accountHolderName.trim()) {
+      alert("Please enter Account Holder Name");
+      return false;
+    }
+    if (!bankAccount.accountNumber.trim()) {
+      alert("Please enter Account Number");
+      return false;
+    }
+    if (!bankAccount.ifscCode.trim()) {
+      alert("Please enter IFSC Code");
+      return false;
+    }
+    return true;
+  };
+
+  const validateStep2 = () => {
+    const { businessDetails, operationalInfo } = formData;
+    if (!businessDetails.legalBusinessName.trim()) {
+      alert("Please enter Legal Business Name");
+      return false;
+    }
+    if (!businessDetails.businessRegistrationNumber.trim()) {
+      alert("Please enter Business Registration Number");
+      return false;
+    }
+    if (!businessDetails.businessType) {
+      alert("Please select Business Type");
+      return false;
+    }
+    if (!businessDetails.taxId.trim()) {
+      alert("Please enter Tax ID (EIN)");
+      return false;
+    }
+    if (!businessDetails.yearEstablished.trim()) {
+      alert("Please enter Establishment Year");
+      return false;
+    }
+    if (!operationalInfo.primaryAddress.trim()) {
+      alert("Please enter Primary Business Address");
+      return false;
+    }
+    if (!operationalInfo.businessPhone.trim()) {
+      alert("Please enter Business Phone");
+      return false;
+    }
+    if (!operationalInfo.businessEmail.trim()) {
+      alert("Please enter Business Email");
+      return false;
+    }
+    return true;
+  };
+
+  const validateStep3 = () => {
+    const { documents } = formData;
+    const mandatoryDocs = [
+      { key: "governmentId", label: "Government ID" },
+      {
+        key: "certificateOfIncorporation",
+        label: "Certificate of Incorporation",
+      },
+      { key: "taxRegistration", label: "Tax Registration" },
+      { key: "proofOfAddress", label: "Proof of Address" },
+      { key: "businessLicense", label: "Business License" },
+    ];
+
+    for (const doc of mandatoryDocs) {
+      if (!documents[doc.key as keyof typeof documents]) {
+        alert(`Please upload ${doc.label}`);
+        return false;
+      }
+    }
+    return true;
+  };
+
   const handleNext = () => {
+    if (currentStep === 1 && !validateStep1()) {
+      return;
+    }
+    if (currentStep === 2 && !validateStep2()) {
+      return;
+    }
     if (currentStep < 3) {
       setCurrentStep(currentStep + 1);
     }
@@ -169,6 +267,9 @@ export default function SupplierVerificationPage() {
   };
 
   const handleSubmit = async () => {
+    if (!validateStep3()) {
+      return;
+    }
     setSubmitting(true);
     try {
       // Prepare data for submission
@@ -256,43 +357,54 @@ export default function SupplierVerificationPage() {
 
   // Show verification form
   return (
-    <div className="min-h-screen bg-white">
-      <div className="max-w-7xl mx-auto px-6 py-8">
-        {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-2">
-            <Shield className="w-8 h-8 text-gray-900" />
-            <h1 className="text-3xl font-bold text-gray-900">
+    <div className="min-h-screen bg-[#eefbf6]">
+      <div className="max-w-[960px] mx-auto px-4 py-10">
+        {/* Header - White rounded box with shadow and green accent */}
+        <div className="bg-white rounded-[13px] shadow-[0px_0px_3px_0px_rgba(24,181,34,0.25)] h-[77px] mb-4 flex items-center px-7 relative">
+          <div className="bg-[#eeffef] rounded-[7px] shadow-[0px_0px_7px_0px_rgba(24,181,34,0.25)] p-2.5 flex items-center justify-center">
+            <Shield className="w-[30px] h-[30px] text-[#2aae7a]" />
+          </div>
+          <div className="ml-6">
+            <h1 className="text-[20px] font-semibold text-[#0d1b2a] leading-tight">
               {isEditing
                 ? "Edit & Reapply for Verification"
                 : "Supplier Verification"}
             </h1>
+            <p className="text-[15px] font-medium text-[#9c9c9c] mt-0.5">
+              {isEditing
+                ? "Update your information and resubmit for verification"
+                : "Complete verification to unlock premium features and build buyer trust"}
+            </p>
           </div>
-          <p className="text-sm text-gray-600">
-            {isEditing
-              ? "Update your information and resubmit for verification"
-              : "Complete verification to unlock premium features and build buyer trust"}
-          </p>
         </div>
 
         {/* Progress Stepper */}
-        <div className="mb-8">
-          <div className="flex items-center justify-center gap-4">
+        <div className="mb-5 flex items-center justify-center">
+          <div className="flex items-center gap-0">
             {/* Step 1 */}
             <div className="flex items-center">
-              <div
-                className={`w-10 h-10 rounded-full border-2 flex items-center justify-center font-bold ${
-                  currentStep >= 1
-                    ? "bg-gray-900 text-white border-gray-900"
-                    : "bg-white text-gray-400 border-gray-300"
-                }`}
-              >
-                1
-              </div>
-              <div className="ml-3 text-left">
+              <div className="flex flex-col items-center">
+                <span
+                  className={`text-[8px] font-semibold mb-1 ${
+                    currentStep >= 1 ? "text-[#2aae7a]" : "text-[#dfdfdf]"
+                  }`}
+                >
+                  Step 1
+                </span>
                 <div
-                  className={`text-sm font-semibold ${
-                    currentStep >= 1 ? "text-gray-900" : "text-gray-400"
+                  className={`w-[30px] h-[30px] rounded-full flex items-center justify-center font-semibold text-[12px] ${
+                    currentStep >= 1
+                      ? "bg-[#2aae7a] text-white"
+                      : "bg-[#dfdfdf] text-[#8d8d8d]"
+                  }`}
+                >
+                  1
+                </div>
+              </div>
+              <div className="ml-3 text-left max-w-[100px]">
+                <div
+                  className={`text-[12px] font-semibold leading-tight ${
+                    currentStep >= 1 ? "text-[#2aae7a]" : "text-[#bebebe]"
                   }`}
                 >
                   Identity & Bank
@@ -302,57 +414,73 @@ export default function SupplierVerificationPage() {
 
             {/* Connector */}
             <div
-              className={`w-24 h-0.5 ${
-                currentStep >= 2 ? "bg-gray-900" : "bg-gray-300"
+              className={`w-[73px] h-[2px] mx-2 ${
+                currentStep >= 2 ? "bg-[#2aae7a]" : "bg-[#dfdfdf]"
               }`}
             ></div>
 
             {/* Step 2 */}
             <div className="flex items-center">
-              <div
-                className={`w-10 h-10 rounded-full border-2 flex items-center justify-center font-bold ${
-                  currentStep >= 2
-                    ? "bg-gray-900 text-white border-gray-900"
-                    : "bg-white text-gray-400 border-gray-300"
-                }`}
-              >
-                2
-              </div>
-              <div className="ml-3 text-left">
-                <div
-                  className={`text-sm font-semibold ${
-                    currentStep >= 2 ? "text-gray-900" : "text-gray-400"
+              <div className="flex flex-col items-center">
+                <span
+                  className={`text-[8px] font-semibold mb-1 ${
+                    currentStep >= 2 ? "text-[#2aae7a]" : "text-[#dfdfdf]"
                   }`}
                 >
-                  Business &
-                  <br />
-                  Operations Info
+                  Step 2
+                </span>
+                <div
+                  className={`w-[30px] h-[30px] rounded-full flex items-center justify-center font-semibold text-[12px] ${
+                    currentStep >= 2
+                      ? "bg-[#2aae7a] text-white"
+                      : "bg-[#dfdfdf] text-[#8d8d8d]"
+                  }`}
+                >
+                  2
+                </div>
+              </div>
+              <div className="ml-3 text-left max-w-[90px]">
+                <div
+                  className={`text-[12px] font-semibold leading-tight ${
+                    currentStep >= 2 ? "text-[#2aae7a]" : "text-[#bebebe]"
+                  }`}
+                >
+                  Business & Operation info
                 </div>
               </div>
             </div>
 
             {/* Connector */}
             <div
-              className={`w-24 h-0.5 ${
-                currentStep >= 3 ? "bg-gray-900" : "bg-gray-300"
+              className={`w-[73px] h-[2px] mx-2 ${
+                currentStep >= 3 ? "bg-[#2aae7a]" : "bg-[#dfdfdf]"
               }`}
             ></div>
 
             {/* Step 3 */}
             <div className="flex items-center">
-              <div
-                className={`w-10 h-10 rounded-full border-2 flex items-center justify-center font-bold ${
-                  currentStep >= 3
-                    ? "bg-gray-900 text-white border-gray-900"
-                    : "bg-white text-gray-400 border-gray-300"
-                }`}
-              >
-                3
-              </div>
-              <div className="ml-3 text-left">
+              <div className="flex flex-col items-center">
+                <span
+                  className={`text-[8px] font-semibold mb-1 ${
+                    currentStep >= 3 ? "text-[#2aae7a]" : "text-[#dfdfdf]"
+                  }`}
+                >
+                  Step 3
+                </span>
                 <div
-                  className={`text-sm font-semibold ${
-                    currentStep >= 3 ? "text-gray-900" : "text-gray-400"
+                  className={`w-[30px] h-[30px] rounded-full flex items-center justify-center font-semibold text-[12px] ${
+                    currentStep >= 3
+                      ? "bg-[#2aae7a] text-white"
+                      : "bg-[#dfdfdf] text-[#8d8d8d]"
+                  }`}
+                >
+                  3
+                </div>
+              </div>
+              <div className="ml-3 text-left max-w-[78px]">
+                <div
+                  className={`text-[12px] font-semibold leading-tight ${
+                    currentStep >= 3 ? "text-[#2aae7a]" : "text-[#bebebe]"
                   }`}
                 >
                   Documents
@@ -363,7 +491,7 @@ export default function SupplierVerificationPage() {
         </div>
 
         {/* Main Content */}
-        <div className="flex gap-6">
+        <div className="flex gap-4">
           {/* Left Column - Form Content */}
           <div className="flex-1">
             {currentStep === 1 && (
@@ -383,8 +511,8 @@ export default function SupplierVerificationPage() {
             )}
 
             {/* Navigation Buttons */}
-            <div className="flex justify-between mt-8">
-              <div className="flex gap-3">
+            <div className="flex justify-between mt-5">
+              <div className="flex gap-2">
                 {isEditing && (
                   <button
                     onClick={() => {
@@ -392,7 +520,7 @@ export default function SupplierVerificationPage() {
                       setCurrentStep(1);
                     }}
                     disabled={submitting}
-                    className="px-6 py-2 border-2 border-red-600 text-red-600 font-medium hover:bg-red-50 disabled:border-gray-300 disabled:text-gray-400 disabled:cursor-not-allowed"
+                    className="px-4 py-1.5 border-2 border-red-600 text-red-600 text-[13px] font-medium hover:bg-red-50 disabled:border-gray-300 disabled:text-gray-400 disabled:cursor-not-allowed rounded"
                   >
                     Cancel
                   </button>
@@ -400,10 +528,10 @@ export default function SupplierVerificationPage() {
                 <button
                   onClick={handlePrevious}
                   disabled={currentStep === 1 || submitting}
-                  className={`px-6 py-2 border-2 border-gray-900 font-medium ${
+                  className={`px-4 py-1.5 text-[13px] font-medium rounded ${
                     currentStep === 1 || submitting
-                      ? "text-gray-400 border-gray-300 cursor-not-allowed"
-                      : "text-gray-900 hover:bg-gray-100"
+                      ? "text-gray-400 cursor-not-allowed"
+                      : "text-gray-900 cursor-pointer"
                   }`}
                 >
                   ← Previous Step
@@ -413,36 +541,56 @@ export default function SupplierVerificationPage() {
                 <button
                   onClick={handleNext}
                   disabled={submitting}
-                  className="px-6 py-2 bg-gray-900 text-white font-medium hover:bg-gray-800 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                  className="px-5 py-2 bg-[#1e3a8a] text-white text-[13px] font-medium hover:bg-[#1e3a8a]/90 disabled:bg-gray-400 disabled:cursor-not-allowed rounded-[7px] flex items-center gap-1.5"
                 >
-                  Save & Continue →
+                  <span>Save & Continue</span>
+                  <svg
+                    className="w-[15px] h-[15px]"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
                 </button>
               ) : (
-                <div className="flex gap-3">
+                <div className="flex gap-2">
                   <button
                     onClick={() => {
                       /* Preview logic */
                     }}
                     disabled={submitting}
-                    className="px-6 py-2 border-2 border-gray-900 text-gray-900 font-medium hover:bg-gray-100 disabled:text-gray-400 disabled:border-gray-300 disabled:cursor-not-allowed"
+                    className="px-4 py-1.5 border-1 border-[#9C9C9C] text-gray-900 text-[13px] font-medium hover:bg-gray-100 disabled:text-gray-400 disabled:border-gray-300 disabled:cursor-not-allowed rounded"
                   >
                     Preview
                   </button>
                   <button
                     onClick={handleSubmit}
                     disabled={submitting}
-                    className="px-6 py-2 bg-gray-900 text-white font-medium hover:bg-gray-800 disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center gap-2"
+                    className="px-5 py-2 bg-[#2AAE7A] text-white text-[13px] font-medium hover:bg-[#1e3a8a]/90 disabled:bg-gray-400 disabled:cursor-not-allowed rounded-[7px] flex items-center gap-1.5"
                   >
                     {submitting ? (
                       <>
-                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <Loader2 className="w-3.5 h-3.5 animate-spin" />
                         {isEditing ? "Resubmitting..." : "Submitting..."}
                       </>
                     ) : (
                       <>
-                        {isEditing
-                          ? "Resubmit for Verification →"
-                          : "Submit for Verification →"}
+                        <span>
+                          {isEditing
+                            ? "Resubmit for Verification"
+                            : "Submit for Verification"}
+                        </span>
+                        <svg
+                          className="w-[15px] h-[15px]"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
                       </>
                     )}
                   </button>
@@ -453,7 +601,7 @@ export default function SupplierVerificationPage() {
 
           {/* Right Column - Benefits Sidebar (Hidden on Step 3) */}
           {currentStep !== 3 && (
-            <div className="w-80">
+            <div className="w-[269px]">
               <VerificationBenefitsSidebar />
             </div>
           )}

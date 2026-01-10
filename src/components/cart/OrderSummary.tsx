@@ -102,15 +102,15 @@ export default function OrderSummary() {
   };
 
   return (
-    <div className="w-full space-y-4">
+    <div className="w-full space-y-2.5">
       {/* Order Summary */}
-      <div className="w-full bg-white rounded-2xl shadow-md p-6">
-        <h3 className="text-lg font-medium text-[#0d1b2a] mb-5">
+      <div className="w-full bg-white rounded-2xl shadow-md p-4">
+        <h3 className="text-sm font-medium text-[#0d1b2a] mb-3.5">
           Order Summary
         </h3>
 
-        <div className="space-y-4 mb-5">
-          <div className="flex justify-between items-center text-base">
+        <div className="space-y-2.5 mb-3.5">
+          <div className="flex justify-between items-center text-sm">
             <span className="font-medium text-[#9c9c9c]">
               Subtotal ({summary.itemCount} items)
             </span>
@@ -119,7 +119,7 @@ export default function OrderSummary() {
             </span>
           </div>
           {summary.savings > 0 && (
-            <div className="flex justify-between items-center text-base">
+            <div className="flex justify-between items-center text-sm">
               <span className="font-medium text-[#2aae7a]">Total Saving</span>
               <span className="font-semibold text-[#2aae7a] tracking-wide">
                 -₹{summary.savings.toLocaleString("en-IN")}
@@ -127,7 +127,7 @@ export default function OrderSummary() {
             </div>
           )}
           {summary.couponDiscount > 0 && (
-            <div className="flex justify-between items-center text-base">
+            <div className="flex justify-between items-center text-sm">
               <span className="font-medium text-[#2aae7a]">
                 Coupon Discount
               </span>
@@ -136,13 +136,13 @@ export default function OrderSummary() {
               </span>
             </div>
           )}
-          <div className="flex justify-between items-center text-base">
+          <div className="flex justify-between items-center text-sm">
             <span className="font-medium text-[#9c9c9c]">Estimated Tax</span>
             <span className="font-semibold text-[#bebebe] tracking-wide">
               ₹{summary.tax.toLocaleString("en-IN")}
             </span>
           </div>
-          <div className="flex justify-between items-center text-base">
+          <div className="flex justify-between items-center text-sm">
             <span className="font-medium text-[#9c9c9c]">Shipping</span>
             <span className="font-semibold text-[#2aae7a] tracking-wide">
               {summary.shipping === 0
@@ -152,12 +152,12 @@ export default function OrderSummary() {
           </div>
         </div>
 
-        <div className="border-t border-gray-300 pt-4 mb-6">
+        <div className="border-t border-gray-300 pt-2.5 mb-4">
           <div className="flex justify-between items-center">
-            <span className="text-2xl font-semibold text-[#0d1b2a]">
+            <span className="text-base font-semibold text-[#0d1b2a]">
               Total :
             </span>
-            <span className="text-2xl font-semibold text-[#1e3a8a] tracking-wide">
+            <span className="text-base font-semibold text-[#1e3a8a] tracking-wide">
               ₹{summary.total.toLocaleString("en-IN")}
             </span>
           </div>
@@ -166,21 +166,21 @@ export default function OrderSummary() {
         <button
           onClick={handleCheckout}
           disabled={!items || items.length === 0}
-          className="w-full h-[45px] bg-[#1e3a8a] text-white text-base font-semibold rounded-xl hover:bg-[#152d6b] transition-colors mb-6 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full h-[30px] bg-[#1e3a8a] text-white text-sm font-semibold rounded-xl hover:bg-[#152d6b] transition-colors mb-4 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Proceed to Checkout
         </button>
 
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Shield className="w-5 h-5 text-[#bebebe]" />
-            <span className="text-sm font-medium text-[#bebebe] tracking-wide">
+          <div className="flex items-center gap-1.5">
+            <Shield className="w-3.5 h-3.5 text-[#bebebe]" />
+            <span className="text-xs font-medium text-[#bebebe] tracking-wide">
               SSL Secure Checkout
             </span>
           </div>
-          <div className="flex items-center gap-2">
-            <Truck className="w-5 h-5 text-[#bebebe]" />
-            <span className="text-sm font-medium text-[#bebebe] tracking-wide">
+          <div className="flex items-center gap-1.5">
+            <Truck className="w-3.5 h-3.5 text-[#bebebe]" />
+            <span className="text-xs font-medium text-[#bebebe] tracking-wide">
               Fast Shipping Options
             </span>
           </div>
@@ -188,23 +188,23 @@ export default function OrderSummary() {
       </div>
 
       {/* Promo Code */}
-      <div className="w-full bg-white rounded-2xl shadow-md p-6">
-        <h3 className="text-lg font-medium text-[#0d1b2a] mb-4">
+      <div className="w-full bg-white rounded-2xl shadow-md p-4">
+        <h3 className="text-sm font-medium text-[#0d1b2a] mb-2.5">
           Have a promo code?
         </h3>
         {/* Changed to flex-col on mobile to prevent overflow */}
-        <div className="flex flex-col gap-3 sm:flex-row">
+        <div className="flex flex-col gap-2 sm:flex-row">
           <input
             type="text"
             value={promoCode}
             onChange={(e) => setPromoCode(e.target.value)}
             placeholder="Enter Code"
-            className="h-[42px] w-full flex-1 min-w-0 px-4 text-sm font-medium text-[#0d1b2a] placeholder:text-[#9ca3af] border border-[#bebebe] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-transparent transition-all"
+            className="h-[28px] w-full flex-1 min-w-0 px-2.5 text-xs font-medium text-[#0d1b2a] placeholder:text-[#9ca3af] border border-[#bebebe] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-transparent transition-all"
           />
           <button
             onClick={handleApplyCoupon}
             disabled={isApplyingCoupon}
-            className="h-[42px] w-full sm:w-auto px-8 bg-[#1e3a8a] text-white text-sm font-semibold rounded-xl hover:bg-[#152d6b] transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+            className="h-[28px] w-full sm:w-auto px-5 bg-[#1e3a8a] text-white text-xs font-semibold rounded-xl hover:bg-[#152d6b] transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
           >
             {isApplyingCoupon ? "Applying..." : "Apply"}
           </button>

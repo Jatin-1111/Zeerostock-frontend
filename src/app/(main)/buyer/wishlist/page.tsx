@@ -1,16 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Trash2, Heart, ShoppingCart } from "lucide-react";
+import { Trash2, Heart, ShoppingCart, Bell, Clock } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { buyerService } from "@/services/buyer.service";
+import { cartService } from "@/services/cart.service";
 import type { WatchlistItem } from "@/types/buyer.types";
 
 export default function WishlistPage() {
+  const router = useRouter();
   const [items, setItems] = useState<WatchlistItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [removingId, setRemovingId] = useState<string | null>(null);
+  const [addingToCartId, setAddingToCartId] = useState<string | null>(null);
 
   useEffect(() => {
     fetchWatchlist();
@@ -50,7 +54,7 @@ export default function WishlistPage() {
         );
       }
     } catch (err) {
-      console.error("Error removing from watchlist:", err);
+      console.error("Error removing from wishlist:", err);
       alert("Failed to remove item from wishlist");
     } finally {
       setRemovingId(null);
@@ -87,68 +91,115 @@ export default function WishlistPage() {
     };
   };
 
+  const handleAddToCart = async (productId: string) => {
+    try {
+      setAddingToCartId(productId);
+      const response = await cartService.addToCart(productId, 1);
+      if (response.success) {
+        alert("Product added to cart successfully!");
+      } else {
+        alert(response.message || "Failed to add product to cart");
+      }
+    } catch (err) {
+      console.error("Error adding to cart:", err);
+      alert("Failed to add product to cart");
+    } finally {
+      setAddingToCartId(null);
+    }
+  };
+
+  const handleBuyNow = async (productId: string) => {
+    try {
+      setAddingToCartId(productId);
+      const response = await cartService.addToCart(productId, 1);
+      if (response.success) {
+        router.push("/buyer/cart");
+      } else {
+        alert(response.message || "Failed to add product to cart");
+      }
+    } catch (err) {
+      console.error("Error in buy now:", err);
+      alert("Failed to proceed with purchase");
+    } finally {
+      setAddingToCartId(null);
+    }
+  };
+
+  const getTimeRemaining = (expiresAt: string | null) => {
+    if (!expiresAt) return "No expiry";
+
+    const now = new Date();
+    const expiry = new Date(expiresAt);
+    const diff = expiry.getTime() - now.getTime();
+
+    if (diff <= 0) return "Expired";
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+    return `${days}d ${hours}h remaining`;
+  };
+
   return (
-    <div className="min-h-screen bg-[#eefbf6] px-[45px] py-[34px]">
-      <div className="max-w-[1440px] mx-auto">
-        {/* Header */}
-        <div className="mb-[22.5px] flex justify-between items-center">
-          <h1 className="text-[20px] font-semibold text-[#0d1b2a] m-0">
+    <div className="min-h-screen bg-white">
+      <div className="w-full mx-auto">
+        {/* Page Title */}
+        <div className="px-10 pt-4 pb-3">
+          <h1 className="text-lg font-semibold text-[#0d1b2a] m-0">
             My Wishlist
           </h1>
-          <button
-            onClick={clearUnavailableItems}
-            className="text-[9px] font-semibold text-[#1e3a8a] bg-transparent border-none cursor-pointer px-2 py-1"
-          >
-            Clear Unavailable Items
-          </button>
         </div>
 
         {/* Error Message */}
         {error && (
-          <div className="mb-[17px] p-[11px] bg-[#fee] border border-[#fcc] text-[#c33] rounded-lg text-[9px]">
+          <div className="mx-10 mb-3 px-2 py-1.5 bg-red-50 border border-red-200 text-red-600 rounded text-xs">
             {error}
           </div>
         )}
 
         {/* Loading State */}
         {isLoading ? (
-          <div className="grid grid-cols-[repeat(auto-fill,minmax(197px,1fr))] gap-[17px]">
+          <div className="grid grid-cols-3 gap-3.5 px-10">
             {[...Array(6)].map((_, i) => (
               <div
                 key={i}
-                className="bg-[#fbfbfb] rounded-[8px] p-[14px] shadow-[0px_0px_2px_0px_rgba(0,0,0,0.15)]"
+                className="bg-white rounded-[10px] shadow-sm overflow-hidden"
+                style={{
+                  boxShadow: "0px 0px 2.5px 0px rgba(255,255,255,0.25)",
+                }}
               >
-                <div className="w-full aspect-[4/3] bg-[#e5e5e5] rounded-lg mb-[11px] animate-pulse" />
-                <div className="h-[11px] bg-[#e5e5e5] rounded mb-[7px] animate-pulse" />
-                <div className="h-[11px] bg-[#e5e5e5] rounded w-3/4 animate-pulse" />
+                <div className="w-full h-[99px] bg-gray-200 animate-pulse" />
+                <div className="p-2.5">
+                  <div className="h-3 bg-gray-200 rounded mb-1.5 animate-pulse" />
+                  <div className="h-3 bg-gray-200 rounded w-3/4 animate-pulse" />
+                </div>
               </div>
             ))}
           </div>
         ) : items.length === 0 ? (
           /* Empty State */
-          <div className="text-center py-[56px]">
-            <div className="inline-flex items-center justify-center w-[45px] h-[45px] mb-[17px]">
-              <Heart className="w-[45px] h-[45px] text-[#9c9c9c]" />
+          <div className="text-center py-20 px-10">
+            <div className="inline-flex items-center justify-center w-16 h-16 mb-5">
+              <Heart className="w-16 h-16 text-gray-400" />
             </div>
-            <h2 className="text-lg font-semibold text-[#0d1b2a] mb-[8px]">
+            <h2 className="text-base font-semibold text-[#0d1b2a] mb-2">
               Your wishlist is empty
             </h2>
-            <p className="text-[10px] text-[#9c9c9c] mb-[22.5px]">
+            <p className="text-sm text-gray-500 mb-6">
               Start adding products to your wishlist to keep track of items you
               love
             </p>
             <Link
               href="/marketplace"
-              className="inline-flex items-center justify-center bg-[#1e3a8a] text-white px-[22.5px] py-[8px] rounded-lg text-[10px] font-semibold no-underline transition-colors hover:bg-[#152d6b]"
+              className="inline-flex items-center justify-center bg-[#1e3a8a] text-white px-8 py-2.5 rounded-lg text-sm font-medium no-underline transition-colors hover:bg-[#152d6b]"
             >
               Browse Products
             </Link>
           </div>
         ) : (
           /* Product Grid */
-          <div className="grid grid-cols-[repeat(auto-fill,minmax(197px,1fr))] gap-[17px]">
+          <div className="grid grid-cols-3 gap-3.5 px-10 pb-10">
             {items.map((item) => {
-              // Skip items without product data
               if (!item.product) {
                 console.warn("Item without product data:", item);
                 return null;
@@ -160,129 +211,171 @@ export default function WishlistPage() {
               return (
                 <div
                   key={item.id}
-                  className="bg-[#fbfbfb] rounded-[8px] p-[14px] shadow-[0px_0px_2px_0px_rgba(0,0,0,0.15)] relative flex flex-col"
+                  className="bg-white rounded-[10px] overflow-hidden relative flex flex-col"
+                  style={{
+                    boxShadow: "0px 0px 2.5px 0px rgba(255,255,255,0.25)",
+                  }}
                 >
                   {/* Product Image */}
-                  <Link
-                    href={`/product/${item.product?.slug || ""}`}
-                    className="no-underline"
-                  >
-                    <div className="relative w-full aspect-[4/3] bg-[#f0f0f0] rounded-lg overflow-hidden mb-[11px]">
-                      {item.product?.imageUrl ? (
-                        <img
-                          src={item.product?.imageUrl}
-                          alt={item.product?.title || "Product"}
-                          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center text-[#9c9c9c] text-base">
-                          No Image
-                        </div>
-                      )}
-                      {!isAvailable && (
-                        <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
-                          <span className="text-white text-xl font-semibold ">
-                            Not Available
-                          </span>
-                        </div>
-                      )}
+                  <div className="relative">
+                    <Link
+                      href={`/product/${item.product?.slug || ""}`}
+                      className="block no-underline"
+                    >
+                      <div className="relative w-full h-[99px] bg-gray-100 overflow-hidden">
+                        {item.product?.imageUrl ? (
+                          <img
+                            src={item.product?.imageUrl}
+                            alt={item.product?.title || "Product"}
+                            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">
+                            No Image
+                          </div>
+                        )}
+                        {!isAvailable && (
+                          <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
+                            <span className="text-white text-xs font-semibold">
+                              Not Available
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    </Link>
+
+                    {/* Trash Button - Top Left */}
+                    <button
+                      onClick={() =>
+                        item.product?.id && handleRemove(item.product?.id)
+                      }
+                      disabled={removingId === item.product?.id || !isAvailable}
+                      className="absolute top-[5px] left-[5px] bg-white/70 backdrop-blur-sm rounded-[15px] p-[5px] flex items-center justify-center cursor-pointer hover:bg-white/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      style={{ width: "22px", height: "22px" }}
+                      title="Remove from wishlist"
+                    >
+                      <Trash2 className="w-3 h-3 text-[#0d1b2a]" />
+                    </button>
+
+                    {/* Heart Button - Top Right */}
+                    <div
+                      className="absolute top-[5px] right-[5px] bg-white/70 backdrop-blur-sm rounded-[15px] p-[5px] flex items-center justify-center"
+                      style={{ width: "23px", height: "23px" }}
+                    >
+                      <Heart className="w-3.5 h-3.5 fill-red-500 text-red-500" />
                     </div>
-                  </Link>
-
-                  {/* Remove & Heart Buttons */}
-                  <button
-                    onClick={() =>
-                      item.product?.id && handleRemove(item.product?.id)
-                    }
-                    disabled={removingId === item.product?.id || !isAvailable}
-                    className={`absolute top-[26px] left-[26px] bg-white text-black border-2 border-[#0d1b2a] rounded-md p-1.5 flex items-center justify-center ${
-                      removingId === item.product?.id
-                        ? "cursor-wait"
-                        : "cursor-pointer"
-                    } ${!isAvailable ? "opacity-50" : "opacity-100"}`}
-                    title="Remove from wishlist"
-                  >
-                    <Trash2 className="w-3.5 h-3.5" />
-                  </button>
-
-                  <div className="absolute top-[26px] right-[26px] bg-white rounded-md p-1.5 flex items-center justify-center border-2 border-[#0d1b2a]">
-                    <Heart className="w-3.5 h-3.5 fill-[#0d1b2a] text-[#0d1b2a]" />
                   </div>
 
                   {/* Product Details */}
-                  <div className="flex-1 flex flex-col">
+                  <div className="flex-1 flex flex-col p-2.5">
+                    {/* Product Title */}
                     <Link
                       href={`/product/${item.product?.slug || ""}`}
-                      className="no-underline mb-[9px]"
+                      className="no-underline mb-1.5"
                     >
-                      <h3 className="text-[15px] font-semibold text-[#0d1b2a] m-0 leading-[1.4] hover:text-[#1e3a8a]">
+                      <h3 className="text-[10px] font-medium text-[#0d1b2a] m-0 leading-tight hover:text-[#1e3a8a]">
                         {item.product?.title || "Unknown Product"}
                       </h3>
                     </Link>
 
                     {/* Location */}
-                    {(item.product?.city || item.product?.state) && (
-                      <p className="text-[11px] text-[#9c9c9c] m-0 mb-[11px]">
-                        {item.product?.city}
-                        {item.product?.city && item.product?.state && ", "}
-                        {item.product?.state}
+                    {item.product?.city || item.product?.state ? (
+                      <p className="text-[7px] text-[#9c9c9c] m-0 mb-2">
+                        {[item.product?.city, item.product?.state]
+                          .filter(Boolean)
+                          .join(", ")}
                       </p>
-                    )}
+                    ) : null}
 
-                    {/* Price */}
-                    <div className="mb-[11px]">
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <span className="text-[21px] font-semibold text-[#0d1b2a]">
+                    {/* Price Section */}
+                    <div className="mb-2">
+                      <div className="flex items-center gap-1 mb-0.5 flex-wrap">
+                        <span className="text-[13px] font-bold text-[#1e3a8a]">
                           ₹{item.product.priceAfter?.toLocaleString()}
                         </span>
-                        {item.product?.priceBefore &&
-                          item.product?.priceBefore >
-                            (item.product?.priceAfter || 0) && (
-                            <>
-                              <span className="text-xs text-[#9c9c9c] line-through">
-                                ₹{item.product?.priceBefore?.toLocaleString()}
-                              </span>
-                              {item.product?.discountPercent && (
-                                <span className="bg-[#d4edda] text-[#155724] text-[11px] font-semibold px-2 py-0.5 rounded-[5px]">
-                                  {item.product?.discountPercent}% OFF
-                                </span>
-                              )}
-                            </>
-                          )}
                       </div>
 
-                      {/* Price Change Since Added */}
-                      {priceChange && (
-                        <p
-                          className={`text-[11px] mt-1.5 m-0 ${
-                            priceChange.isIncrease
-                              ? "text-[#dc3545]"
-                              : "text-[#28a745]"
-                          }`}
-                        >
-                          {priceChange.isIncrease ? "↑" : "↓"}{" "}
-                          {priceChange.percent.toFixed(1)}% since added
-                        </p>
+                      {/* Active Badge */}
+                      {isAvailable && (
+                        <div className="inline-flex items-center justify-center bg-[#eeffef] rounded-full px-1.5 py-0.5 mb-1.5">
+                          <span className="text-[7.5px] text-[#2aae7a] font-medium">
+                            Active
+                          </span>
+                        </div>
                       )}
                     </div>
 
-                    {/* Action Button */}
-                    {isAvailable ? (
-                      <Link
-                        href={`/product/${item.product?.slug || ""}`}
-                        className="flex items-center justify-center gap-2.5 w-full bg-[#1e3a8a] text-white p-3 rounded-[11px] text-base font-semibold no-underline mt-auto transition-colors hover:bg-[#152d6b]"
+                    {/* Price Alerts */}
+                    <div className="flex justify-between items-center">
+                      {item.priceAtAdd && (
+                        <p className="text-[7px] text-[#9c9c9c] m-0 mb-1">
+                          <span>Price alerts </span>
+                          <span className="font-bold">₹</span>
+                          {item.priceAtAdd.toLocaleString()}
+                        </p>
+                      )}
+                      {/* Time Remaining */}
+                      <div className="flex items-center gap-1 mb-1.5">
+                        <Clock className="w-2.5 h-2.5 text-[#9c9c9c]" />
+                        <span className="text-[6px] text-[#9c9c9c]">
+                          {getTimeRemaining(item.product?.expiresAt)}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Divider */}
+                    <div className="w-full h-px bg-gray-200 my-1.5"></div>
+
+                    {/* Action Buttons Grid */}
+                    <div className="grid grid-cols-2 gap-1.5 mt-auto">
+                      {/* Add to Cart */}
+                      <button
+                        onClick={() =>
+                          item.product?.id && handleAddToCart(item.product.id)
+                        }
+                        disabled={
+                          !isAvailable || addingToCartId === item.product?.id
+                        }
+                        className="border border-[#9c9c9c] bg-white text-[#9c9c9c] rounded-[7.5px] px-2.5 py-1.5 text-[8px] font-medium hover:border-gray-400 hover:text-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        <ShoppingCart className="w-[18px] h-[18px]" />
-                        View Product
-                      </Link>
-                    ) : (
+                        {addingToCartId === item.product?.id
+                          ? "Adding..."
+                          : "Add to cart"}
+                      </button>
+
+                      {/* Buy Now */}
+                      <button
+                        onClick={() =>
+                          item.product?.id && handleBuyNow(item.product.id)
+                        }
+                        disabled={
+                          !isAvailable || addingToCartId === item.product?.id
+                        }
+                        className="bg-[#1e3a8a] text-white rounded-[7.5px] px-2.5 py-1.5 text-[8px] font-medium hover:bg-[#152d6b] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        {addingToCartId === item.product?.id
+                          ? "Processing..."
+                          : "Buy Now"}
+                      </button>
+
+                      {/* Alert - Non-functional as requested */}
                       <button
                         disabled
-                        className="w-full bg-[#e5e5e5] text-[#9c9c9c] p-3 rounded-[11px] border-none text-base font-semibold cursor-not-allowed mt-auto"
+                        className="border border-[#9c9c9c] bg-white text-[#9c9c9c] rounded-[7.5px] px-2.5 py-1.5 text-[8px] font-medium opacity-50 cursor-not-allowed flex items-center justify-center gap-1"
+                        title="Price alerts coming soon"
                       >
-                        Not Available
+                        <Bell className="w-2.5 h-2.5" />
+                        Alert
                       </button>
-                    )}
+
+                      {/* View Details */}
+                      <Link
+                        href={`/product/${item.product?.slug || ""}`}
+                        className="bg-[#1e3a8a] text-white rounded-[7.5px] px-2.5 py-1.5 text-[8px] font-medium hover:bg-[#152d6b] transition-colors flex items-center justify-center no-underline"
+                      >
+                        View Details
+                      </Link>
+                    </div>
                   </div>
                 </div>
               );

@@ -107,22 +107,22 @@ export default function FAQTab() {
   return (
     <div className="overflow-hidden p-2">
       {/* FAQ Header */}
-      <div className="mb-4">
-        <h2 className="mb-1.5 text-[22.5px] font-semibold text-[#0d1b2a]">
+      <div className="mb-[11px]">
+        <h2 className="mb-[4px] text-[15px] font-semibold text-[#0d1b2a]">
           Frequently Asked Questions
         </h2>
-        <p className="text-[16.5px] font-medium text-[#9c9c9c]">
+        <p className="text-[11px] font-medium text-[#9c9c9c]">
           Find answers to common questions about using Zeerotock
         </p>
       </div>
 
       {/* Filter Buttons */}
-      <div className="mb-6 flex flex-wrap gap-1.5">
+      <div className="mb-[16px] flex flex-wrap gap-[4px]">
         {filterButtons.map((button) => (
           <button
             key={button.id}
             onClick={() => handleFilterChange(button.id)}
-            className={`rounded-[11px] px-3 py-1.5 text-xs font-medium transition-colors ${
+            className={`rounded-[7px] px-[8px] py-[4px] text-[8px] font-medium transition-colors ${
               activeFilter === button.id
                 ? "border border-[#2aae7a] bg-[#eeffef] text-[#2aae7a]"
                 : "border border-gray-300 bg-white text-gray-600 hover:border-[#2aae7a] hover:text-[#2aae7a]"
@@ -134,7 +134,7 @@ export default function FAQTab() {
       </div>
 
       {/* FAQ Accordion List */}
-      <motion.div layout className="space-y-3">
+      <motion.div layout className="space-y-[8px]">
         <AnimatePresence mode="popLayout">
           {filteredFaqs.length > 0 ? (
             filteredFaqs.map((faq, index) => (
@@ -145,21 +145,21 @@ export default function FAQTab() {
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.2 }}
                 key={faq.question} // Using question as key is better than index for filtering animations
-                className="overflow-hidden rounded-[15px] bg-[#fbfbfb] shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)]"
+                className="overflow-hidden rounded-[10px] bg-[#fbfbfb] shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)]"
               >
                 <button
                   onClick={() =>
                     setOpenFaqIndex(openFaqIndex === index ? null : index)
                   }
-                  className="flex w-full items-center justify-between px-6 py-5 text-left"
+                  className="flex w-full items-center justify-between px-[16px] py-[13px] text-left"
                 >
-                  <span className="text-[19.5px] font-medium tracking-tight text-black">
+                  <span className="text-[13px] font-medium tracking-tight text-black">
                     {faq.question}
                   </span>
                   {openFaqIndex === index ? (
-                    <ChevronUp className="h-5 w-5 shrink-0 text-gray-600" />
+                    <ChevronUp className="h-[13px] w-[13px] shrink-0 text-gray-600" />
                   ) : (
-                    <ChevronDown className="h-5 w-5 shrink-0 text-gray-600" />
+                    <ChevronDown className="h-[13px] w-[13px] shrink-0 text-gray-600" />
                   )}
                 </button>
 
@@ -172,8 +172,8 @@ export default function FAQTab() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                     >
-                      <div className="px-6 pb-5">
-                        <p className="text-[15px] font-medium leading-5 tracking-tight text-[#9c9c9c]">
+                      <div className="px-[16px] pb-[13px]">
+                        <p className="text-[10px] font-medium leading-[13px] tracking-tight text-[#9c9c9c]">
                           {faq.answer}
                         </p>
                       </div>

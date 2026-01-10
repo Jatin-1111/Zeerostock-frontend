@@ -8,14 +8,16 @@ import CTASection from "@/components/buyer/CTASection";
 
 export default function BuyerLandingPage() {
   return (
-    <div className="bg-[#eefbf6]">
-      <HeroSection />
-      <WhyChooseSection />
-      <TestimonialsSection />
-      <IndustriesSection />
-      <FeaturesSection />
-      <HowItWorksSection />
-      <CTASection />
+    <div className="min-h-screen w-full max-w-full">
+      <div className="space-y-3">
+        <HeroSection />
+        <WhyChooseSection />
+        <TestimonialsSection />
+        <IndustriesSection />
+        <FeaturesSection />
+        <HowItWorksSection />
+        <CTASection />
+      </div>
     </div>
   );
 }

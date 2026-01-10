@@ -92,14 +92,14 @@ function ResetPasswordForm() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center px-4 py-8">
-      <div className="w-full max-w-md bg-white border-2 border-gray-200 rounded-lg p-8 relative">
+    <div className="min-h-screen bg-white flex items-center justify-center px-2 py-4">
+      <div className="w-full max-w-xs bg-white border border-gray-200 rounded-lg p-4 relative">
         <button
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+          className="absolute top-2 right-2 text-gray-400 hover:text-gray-600"
           onClick={() => router.push("/login")}
         >
           <svg
-            className="w-6 h-6"
+            className="w-3 h-3"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -113,19 +113,19 @@ function ResetPasswordForm() {
           </svg>
         </button>
 
-        <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">
+        <div className="text-center mb-4">
+          <h1 className="text-base font-bold text-gray-900 mb-1">
             Set New Password
           </h1>
-          <p className="text-sm text-gray-600">
+          <p className="text-xs text-gray-600">
             Please enter your new password below
           </p>
         </div>
 
         {!success ? (
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-2">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-xs font-medium text-gray-700 mb-0.5">
                 New Password
               </label>
               <div className="relative">
@@ -134,17 +134,17 @@ function ResetPasswordForm() {
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                   placeholder="Enter new password"
-                  className="w-full px-3 py-2 border text-gray-800 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 placeholder:text-gray-400"
+                  className="w-full px-1.5 py-1 border text-gray-800 border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 placeholder:text-gray-400 text-xs"
                   required
                   disabled={loading}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                  className="absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
                 >
                   <svg
-                    className="w-5 h-5"
+                    className="w-2.5 h-2.5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -167,14 +167,14 @@ function ResetPasswordForm() {
                   </svg>
                 </button>
               </div>
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-[10px] text-gray-500 mt-0.5">
                 Must be at least 8 characters with uppercase, lowercase, and a
                 number
               </p>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-xs font-medium text-gray-700 mb-0.5">
                 Confirm Password
               </label>
               <div className="relative">
@@ -183,17 +183,17 @@ function ResetPasswordForm() {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Re-enter your password"
-                  className="w-full px-3 py-2 border text-gray-800 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-400 placeholder:text-gray-400"
+                  className="w-full px-1.5 py-1 border text-gray-800 border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 placeholder:text-gray-400 text-xs"
                   required
                   disabled={loading}
                 />
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                  className="absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
                 >
                   <svg
-                    className="w-5 h-5"
+                    className="w-2.5 h-2.5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -221,12 +221,12 @@ function ResetPasswordForm() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 bg-gray-900 text-white rounded font-medium hover:bg-gray-800 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="w-full py-1.5 bg-gray-900 text-white rounded font-medium hover:bg-gray-800 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center gap-1 text-xs"
             >
               {loading ? (
                 <>
                   <svg
-                    className="animate-spin h-5 w-5"
+                    className="animate-spin h-2.5 w-2.5"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -255,10 +255,10 @@ function ResetPasswordForm() {
             <div className="text-center">
               <Link
                 href="/login"
-                className="text-sm text-blue-600 hover:underline inline-flex items-center gap-1"
+                className="text-xs text-blue-600 hover:underline inline-flex items-center gap-0.5"
               >
                 <svg
-                  className="w-4 h-4"
+                  className="w-2 h-2"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -275,10 +275,10 @@ function ResetPasswordForm() {
             </div>
           </form>
         ) : (
-          <div className="text-center space-y-4">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+          <div className="text-center space-y-2">
+            <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mx-auto">
               <svg
-                className="w-8 h-8 text-green-600"
+                className="w-4 h-4 text-green-600"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -292,10 +292,10 @@ function ResetPasswordForm() {
               </svg>
             </div>
             <div>
-              <h2 className="text-xl font-bold text-gray-900 mb-2">
+              <h2 className="text-sm font-bold text-gray-900 mb-1">
                 Password Reset Successfully!
               </h2>
-              <p className="text-sm text-gray-600 mb-4">
+              <p className="text-xs text-gray-600 mb-2">
                 Your password has been changed successfully.
                 <br />
                 Redirecting you to login...
@@ -303,10 +303,10 @@ function ResetPasswordForm() {
             </div>
             <Link
               href="/login"
-              className="text-sm text-blue-600 hover:underline inline-flex items-center gap-1"
+              className="text-xs text-blue-600 hover:underline inline-flex items-center gap-0.5"
             >
               <svg
-                className="w-4 h-4"
+                className="w-2 h-2"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

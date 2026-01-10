@@ -9,7 +9,7 @@ import FinalCTASectionV2 from "@/components/home/FinalCTASectionV2";
 
 export default function HomeV1Page() {
   return (
-    <div className="w-full">
+    <div>
       <HeroSectionV2 />
       <PlatformSectionV2 />
       <UniqueFeaturesSectionV2 />

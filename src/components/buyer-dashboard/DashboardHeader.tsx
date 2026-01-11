@@ -45,7 +45,7 @@ export default function DashboardHeader({ userName }: DashboardHeaderProps) {
       </div>
       <div className="flex items-center gap-2">
         <Link
-          href="/buyer/rfq"
+          href="/buyer/rfq/post"
           className="h-[34px] px-[25px] bg-[#1e3a8a] text-white rounded-[8px] font-semibold text-[11px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center gap-[6px]"
         >
           <Plus className="w-4 h-4" />

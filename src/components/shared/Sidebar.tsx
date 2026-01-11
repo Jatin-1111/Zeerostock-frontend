@@ -345,7 +345,7 @@ export default function Sidebar({
                   <div className="absolute left-0 top-0 w-[3px] h-[36px] bg-[#2aae7a] rounded-tr-[3px] rounded-br-[3px]" />
                 )}
                 <Link
-                  href="/helpdesk"
+                  href="/contact"
                   onClick={() => setActiveItem("contact-us")}
                   className={`flex items-center gap-[10px] rounded-[6px] py-[10px] pl-[15px] pr-[13px] ml-[3px] ${
                     activeItem === "contact-us"

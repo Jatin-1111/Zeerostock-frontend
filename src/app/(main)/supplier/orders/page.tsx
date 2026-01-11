@@ -144,178 +144,182 @@ export default function SupplierOrders() {
   }
 
   return (
-    <div className="bg-[#EEFBF6] px-4 py-6 md:px-6 lg:px-12">
-      {/* Header */}
-      <div className="mb-9 flex items-center justify-between">
-        <h1 className="text-[27px] font-semibold text-[#0d1b2a]">My orders</h1>
-        <button className="flex h-[45px] w-[180px] items-center justify-center gap-2 rounded-[11px] bg-[#1e3a8a] text-[14px] font-semibold text-white transition-colors hover:bg-[#1e40af]">
-          <Download className="h-5 w-5" />
-          Export Orders
-        </button>
-      </div>
-
-      {/* Table */}
-      {orders.length > 0 ? (
-        <>
-          <div className="overflow-x-auto w-full rounded-[15px] bg-white shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)]">
-            <div className="min-w-fit">
-              {/* Table Headers */}
-              <div className="flex h-[69px] items-center border-b border-[#e5e5e5] px-[25px] gap-1">
-                <div className="w-[150px] flex-shrink-0">
-                  <p className="text-[14px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
-                    ORDER ID
-                  </p>
-                </div>
-                <div className="w-[150px] flex-shrink-0">
-                  <p className="text-[14px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
-                    SUPPLIER
-                  </p>
-                </div>
-                <div className="w-[220px] flex-shrink-0">
-                  <p className="text-[14px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
-                    ITEMS
-                  </p>
-                </div>
-                <div className="w-[100px] flex-shrink-0">
-                  <p className="text-[14px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
-                    AMOUNT
-                  </p>
-                </div>
-                <div className="w-[100px] flex-shrink-0">
-                  <p className="text-[14px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
-                    STATUS
-                  </p>
-                </div>
-                <div className="w-[110px] flex-shrink-0">
-                  <p className="text-[14px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
-                    ORDER DATE
-                  </p>
-                </div>
-                <div className="w-[110px] flex-shrink-0">
-                  <p className="text-[14px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
-                    EXPECTED DATE
-                  </p>
-                </div>
-                <div className="w-[70px] flex-shrink-0">
-                  <p className="text-[14px] font-medium leading-[18px] tracking-[0.38px] text-[#0d1b2a]">
-                    ACTIONS
-                  </p>
-                </div>
-              </div>
-
-              {/* Table Rows */}
-              {orders.map((order) => (
-                <div
-                  key={order.id}
-                  className="flex h-[75px] items-center border-b border-[#e5e5e5] px-[25px] transition-colors hover:bg-gray-50 gap-1"
-                >
-                  {/* Order ID */}
-                  <div className="w-[150px] flex-shrink-0">
-                    <p className="text-[14px] font-medium leading-[21px] tracking-[0.38px] text-[#9c9c9c]">
-                      {order.order_number}
-                    </p>
-                  </div>
-
-                  {/* Supplier/Buyer */}
-                  <div className="w-[150px] flex-shrink-0">
-                    <p className="truncate pb-[2px] text-[14px] font-normal leading-[21px] tracking-[0.38px] text-black">
-                      {order.buyer_company || order.buyer_name}
-                    </p>
-                  </div>
-
-                  {/* Items */}
-                  <div className="w-[220px] flex-shrink-0">
-                    <p className="truncate text-[14px] font-normal leading-[21px] tracking-[0.38px] text-black">
-                      {order.items[0]?.product_title || "N/A"}
-                    </p>
-                  </div>
-
-                  {/* Amount */}
-                  <div className="w-[100px] flex-shrink-0">
-                    <p className="text-[14px] font-normal leading-[21px] tracking-[0.38px] text-black">
-                      {formatCurrency(order.total_amount)}
-                    </p>
-                  </div>
-
-                  {/* Status */}
-                  <div className="w-[100px] flex-shrink-0">
-                    <p
-                      className="text-[14px] font-normal capitalize leading-[21px] tracking-[0.38px]"
-                      style={{
-                        color: getStatusColor(order.status),
-                      }}
-                    >
-                      {order.status}
-                    </p>
-                  </div>
-
-                  {/* Order Date */}
-                  <div className="w-[110px] flex-shrink-0">
-                    <p className="text-[14px] font-normal leading-[21px] tracking-[0.38px] text-black">
-                      {formatDate(order.created_at)}
-                    </p>
-                  </div>
-
-                  {/* Expected Date */}
-                  <div className="w-[110px] flex-shrink-0">
-                    <p className="text-[14px] font-normal leading-[21px] tracking-[0.38px] text-black">
-                      {formatDate(order.updated_at)}
-                    </p>
-                  </div>
-
-                  {/* Actions */}
-                  <div className="w-[70px] flex-shrink-0 flex justify-center items-center">
-                    <button className="rounded-[8px] border-[0.38px] border-[#747474] p-1.5 transition-colors hover:bg-gray-100">
-                      <MoreVertical className="h-5 w-5 text-[#747474]" />
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Pagination */}
-          {totalPages > 1 && (
-            <div className="mt-5 flex items-center justify-between">
-              <div className="text-[11px] text-[#9c9c9c]">
-                Page {currentPage} of {totalPages}
-              </div>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                  disabled={currentPage === 1}
-                  className="flex items-center gap-1.5 rounded-[8px] border border-[#9c9c9c] bg-[#EEFBF6] px-3 py-1.5 text-[11px] font-medium text-[#0d1b2a] transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
-                >
-                  <ChevronLeft className="h-3 w-3" />
-                  Previous
-                </button>
-                <button
-                  onClick={() =>
-                    setCurrentPage((p) => Math.min(totalPages, p + 1))
-                  }
-                  disabled={currentPage === totalPages}
-                  className="flex items-center gap-1.5 rounded-[8px] border border-[#9c9c9c] bg-[#EEFBF6] px-3 py-1.5 text-[11px] font-medium text-[#0d1b2a] transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
-                >
-                  Next
-                  <ChevronRight className="h-3 w-3" />
-                </button>
-              </div>
-            </div>
-          )}
-        </>
-      ) : (
-        <div className="w-full rounded-[15px] bg-[#EEFBF6] p-9 text-center shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)]">
-          <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-[#FAFAFA]">
-            <span className="text-2xl">📦</span>
-          </div>
-          <h3 className="mb-1.5 text-[15px] font-semibold text-[#0d1b2a]">
-            No Orders Yet
-          </h3>
-          <p className="text-[12px] text-[#9c9c9c]">
-            Orders from buyers will appear here
-          </p>
+    <div className="relative min-h-screen bg-[#EEFBF6] pt-[75px] pb-[34px]">
+      <div className="mx-auto max-w-[1440px] px-7.5">
+        {/* Header */}
+        <div className="mb-[60px] flex items-center justify-between">
+          <h1 className="text-[20px] font-semibold text-[#0d1b2a]">
+            My orders
+          </h1>
+          <button className="flex h-[34px] items-center justify-center gap-2 rounded-[8.5px] bg-[#1e3a8a] px-[30px] text-[10px] font-semibold text-white transition-colors hover:bg-[#1e40af]">
+            <Download className="h-5 w-5" />
+            Export Orders
+          </button>
         </div>
-      )}
+
+        {/* Table */}
+        {orders.length > 0 ? (
+          <>
+            <div className="overflow-x-auto w-full rounded-[11px] bg-white shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)]">
+              <div className="min-w-fit">
+                {/* Table Headers */}
+                <div className="flex h-[52px] items-center border-b border-[#e5e5e5] px-[25px] gap-1">
+                  <div className="w-[100px] flex-shrink-0">
+                    <p className="text-[11px] font-medium leading-[14px] tracking-[0.4px] text-[#0d1b2a]">
+                      ORDER ID
+                    </p>
+                  </div>
+                  <div className="w-[150px] flex-shrink-0">
+                    <p className="text-[11px] font-medium leading-[14px] tracking-[0.4px] text-[#0d1b2a]">
+                      SUPPLIER
+                    </p>
+                  </div>
+                  <div className="w-[150px] flex-shrink-0">
+                    <p className="text-[11px] font-medium leading-[14px] tracking-[0.4px] text-[#0d1b2a]">
+                      ITEMS
+                    </p>
+                  </div>
+                  <div className="w-[100px] flex-shrink-0">
+                    <p className="text-[11px] font-medium leading-[14px] tracking-[0.4px] text-[#0d1b2a]">
+                      AMOUNT
+                    </p>
+                  </div>
+                  <div className="w-[100px] flex-shrink-0">
+                    <p className="text-[11px] font-medium leading-[14px] tracking-[0.4px] text-[#0d1b2a]">
+                      STATUS
+                    </p>
+                  </div>
+                  <div className="w-[110px] flex-shrink-0">
+                    <p className="text-[11px] font-medium leading-[14px] tracking-[0.4px] text-[#0d1b2a]">
+                      ORDER DATE
+                    </p>
+                  </div>
+                  <div className="w-[110px] flex-shrink-0">
+                    <p className="text-[11px] font-medium leading-[14px] tracking-[0.4px] text-[#0d1b2a]">
+                      EXPECTED DATE
+                    </p>
+                  </div>
+                  <div className="w-[70px] flex-shrink-0">
+                    <p className="text-[11px] font-medium leading-[14px] tracking-[0.4px] text-[#0d1b2a]">
+                      ACTIONS
+                    </p>
+                  </div>
+                </div>
+
+                {/* Table Rows */}
+                {orders.map((order) => (
+                  <div
+                    key={order.id}
+                    className="flex h-[56px] items-center border-b border-[#e5e5e5] px-[25px] transition-colors hover:bg-gray-50 gap-1"
+                  >
+                    {/* Order ID */}
+                    <div className="w-[100px] flex-shrink-0">
+                      <p className="text-[11px] font-medium leading-[16px] tracking-[0.4px] text-[#9c9c9c]">
+                        {order.order_number}
+                      </p>
+                    </div>
+
+                    {/* Supplier/Buyer */}
+                    <div className="w-[150px] flex-shrink-0">
+                      <p className="truncate pb-[2px] text-[11px] font-normal leading-[16px] tracking-[0.4px] text-black">
+                        {order.buyer_company || order.buyer_name}
+                      </p>
+                    </div>
+
+                    {/* Items */}
+                    <div className="w-[150px] flex-shrink-0">
+                      <p className="truncate text-[11px] font-normal leading-[16px] tracking-[0.4px] text-black">
+                        {order.items[0]?.product_title || "N/A"}
+                      </p>
+                    </div>
+
+                    {/* Amount */}
+                    <div className="w-[100px] flex-shrink-0">
+                      <p className="text-[11px] font-normal leading-[16px] tracking-[0.4px] text-black">
+                        {formatCurrency(order.total_amount)}
+                      </p>
+                    </div>
+
+                    {/* Status */}
+                    <div className="w-[100px] flex-shrink-0">
+                      <p
+                        className="text-[11px] font-normal capitalize leading-[16px] tracking-[0.4px]"
+                        style={{
+                          color: getStatusColor(order.status),
+                        }}
+                      >
+                        {order.status}
+                      </p>
+                    </div>
+
+                    {/* Order Date */}
+                    <div className="w-[110px] flex-shrink-0">
+                      <p className="text-[11px] font-normal leading-[16px] tracking-[0.4px] text-black">
+                        {formatDate(order.created_at)}
+                      </p>
+                    </div>
+
+                    {/* Expected Date */}
+                    <div className="w-[110px] flex-shrink-0">
+                      <p className="text-[11px] font-normal leading-[16px] tracking-[0.4px] text-black">
+                        {formatDate(order.updated_at)}
+                      </p>
+                    </div>
+
+                    {/* Actions */}
+                    <div className="w-[70px] flex-shrink-0 flex justify-center items-center">
+                      <button className="rounded-[5.5px] border-[0.4px] border-[#747474] p-[5.5px] transition-colors hover:bg-gray-100">
+                        <MoreVertical className="h-5 w-5 text-[#747474]" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="mt-[22.5px] flex items-center justify-between">
+                <div className="text-[9px] text-[#9c9c9c]">
+                  Page {currentPage} of {totalPages}
+                </div>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                    disabled={currentPage === 1}
+                    className="flex items-center gap-1.5 rounded-[4.5px] border border-[#9c9c9c] bg-[#EEFBF6] px-[13.5px] py-[6.75px] text-[9px] font-medium text-[#0d1b2a] transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    <ChevronLeft className="h-3 w-3" />
+                    Previous
+                  </button>
+                  <button
+                    onClick={() =>
+                      setCurrentPage((p) => Math.min(totalPages, p + 1))
+                    }
+                    disabled={currentPage === totalPages}
+                    className="flex items-center gap-1.5 rounded-[4.5px] border border-[#9c9c9c] bg-[#EEFBF6] px-[13.5px] py-[6.75px] text-[9px] font-medium text-[#0d1b2a] transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    Next
+                    <ChevronRight className="h-3 w-3" />
+                  </button>
+                </div>
+              </div>
+            )}
+          </>
+        ) : (
+          <div className="w-full rounded-[11px] bg-[#EEFBF6] p-9 text-center shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)]">
+            <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-[#FAFAFA]">
+              <span className="text-2xl">📦</span>
+            </div>
+            <h3 className="mb-1.5 text-[15px] font-semibold text-[#0d1b2a]">
+              No Orders Yet
+            </h3>
+            <p className="text-[12px] text-[#9c9c9c]">
+              Orders from buyers will appear here
+            </p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

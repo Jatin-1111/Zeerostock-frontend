@@ -24,89 +24,6 @@ interface TransactionHistoryTableProps {
   onPageChange: (page: number) => void;
 }
 
-// Eye icon SVG
-const EyeIcon = () => (
-  <svg
-    width="25"
-    height="25"
-    viewBox="0 0 25 25"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M12.5 5C7.5 5 3.5 12.5 3.5 12.5C3.5 12.5 7.5 20 12.5 20C17.5 20 21.5 12.5 21.5 12.5C21.5 12.5 17.5 5 12.5 5Z"
-      stroke="#000000"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <circle cx="12.5" cy="12.5" r="3" stroke="#000000" strokeWidth="1.5" />
-  </svg>
-);
-
-// Download icon SVG
-const DownloadIcon = () => (
-  <svg
-    width="25"
-    height="25"
-    viewBox="0 0 25 25"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M12.5 3V16M12.5 16L18 10.5M12.5 16L7 10.5"
-      stroke="#000000"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M4 19H21"
-      stroke="#000000"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-    />
-  </svg>
-);
-
-// Checkmark icon SVG
-const CheckIcon = () => (
-  <svg
-    width="22"
-    height="22"
-    viewBox="0 0 22 22"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M5 11L9 15L17 7"
-      stroke="white"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
-
-// Timer icon SVG
-const TimerIcon = () => (
-  <svg
-    width="22"
-    height="22"
-    viewBox="0 0 22 22"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <circle cx="11" cy="12" r="8" stroke="#000000" strokeWidth="2" />
-    <path
-      d="M11 8V12L14 14"
-      stroke="#000000"
-      strokeWidth="2"
-      strokeLinecap="round"
-    />
-  </svg>
-);
-
 export default function TransactionHistoryTable({
   transactions,
   loading,
@@ -115,227 +32,131 @@ export default function TransactionHistoryTable({
   totalPages,
   onPageChange,
 }: TransactionHistoryTableProps) {
-  const getStatusStyles = (status: string) => {
-    const normalizedStatus = status.toLowerCase();
-    const styles: Record<
-      string,
-      { bg: string; text: string; label: string; icon?: string }
-    > = {
-      completed: {
-        bg: "#2AAE7A",
-        text: "#FFFFFF",
-        label: "Completed",
-        icon: "check",
-      },
-      success: {
-        bg: "#2AAE7A",
-        text: "#FFFFFF",
-        label: "Completed",
-        icon: "check",
-      },
-      pending: {
-        bg: "#FFCC33",
-        text: "#000000",
-        label: "Processing",
-        icon: "timer",
-      },
-      processing: {
-        bg: "#FFCC33",
-        text: "#000000",
-        label: "Processing",
-        icon: "timer",
-      },
-      failed: { bg: "#EF4444", text: "#FFFFFF", label: "Failed" },
-      cancelled: { bg: "#6B7280", text: "#FFFFFF", label: "Cancelled" },
-    };
-    return (
-      styles[normalizedStatus] || {
-        bg: "#6B7280",
-        text: "#FFFFFF",
-        label: status,
-      }
-    );
+  const getStatusColor = (status: string) => {
+    switch (status.toLowerCase()) {
+      case "completed":
+      case "success":
+        return "bg-green-100 text-green-700 border-green-200";
+      case "pending":
+      case "processing":
+        return "bg-yellow-100 text-yellow-700 border-yellow-200";
+      case "failed":
+        return "bg-red-100 text-red-700 border-red-200";
+      default:
+        return "bg-gray-100 text-gray-700 border-gray-200";
+    }
   };
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    });
-  };
-
-  const getTransactionType = (transaction: Transaction) => {
-    // Map payment methods or other data to transaction types
-    const method = transaction.payment_method?.toLowerCase() || "";
-    if (method.includes("refund")) return "Refund";
-    if (method.includes("payout")) return "Payout";
-    return "Payment";
-  };
-
-  if (loading) {
-    return (
-      <div className="w-full bg-white rounded-[20px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] overflow-hidden">
-        <div className="p-12 text-center">
-          <div className="w-16 h-16 border-4 border-gray-300 border-t-gray-900 rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600 text-[15px]">
-            Loading transactions...
-          </p>
-        </div>
-      </div>
-    );
-  }
 
   if (error) {
     return (
-      <div className="w-full bg-white rounded-[20px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] overflow-hidden">
-        <div className="p-12 text-center">
-          <div className="w-16 h-16 bg-red-100 border-2 border-red-600 mx-auto flex items-center justify-center mb-4 rounded">
-            <span className="text-3xl">❌</span>
-          </div>
-          <h3 className="text-[19.5px] font-semibold text-[#0D1B2A] mb-2">
-            Error
-          </h3>
-          <p className="text-gray-600 text-[15px]">{error}</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (transactions.length === 0) {
-    return (
-      <div className="w-full bg-white rounded-[20px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] overflow-hidden">
-        <div className="p-12 text-center">
-          <div className="w-16 h-16 bg-gray-100 border-2 border-gray-900 mx-auto flex items-center justify-center mb-4 rounded">
-            <span className="text-3xl">💳</span>
-          </div>
-          <h3 className="text-[19.5px] font-semibold text-[#0D1B2A] mb-2">
-            No Transactions Yet
-          </h3>
-          <p className="text-gray-600 text-[15px]">
-            Payment transactions will appear here
-          </p>
-        </div>
+      <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
+        <p className="text-red-700">{error}</p>
       </div>
     );
   }
 
   return (
-    <div
-      className="w-full"
-      style={{
-        transform: "scale(0.75)",
-        transformOrigin: "top left",
-        width: "133.33%",
-      }}
-    >
-      <div className="bg-white rounded-[20px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] overflow-hidden">
-        {/* Table Header */}
-        <div className="grid grid-cols-[186px_162px_312px_312px_257px_257px] gap-0 px-[30px] py-[41px] border-b border-gray-200">
-          <div className="text-[20px] font-medium text-[#0D1B2A] tracking-[0.5px]">
-            DATE
-          </div>
-          <div className="text-[20px] font-medium text-[#0D1B2A] tracking-[0.5px]">
-            TYPE
-          </div>
-          <div className="text-[20px] font-medium text-[#0D1B2A] tracking-[0.5px]">
-            DESCRIPTION
-          </div>
-          <div className="text-[20px] font-medium text-[#0D1B2A] tracking-[0.5px]">
-            AMOUNT
-          </div>
-          <div className="text-[20px] font-medium text-[#0D1B2A] tracking-[0.5px]">
-            STATUS
-          </div>
-          <div className="text-[20px] font-medium text-[#0D1B2A] tracking-[0.5px]">
-            ACTIONS
-          </div>
+    <div className="bg-white rounded-[15px] shadow-md overflow-hidden">
+      {loading ? (
+        <div className="py-11 text-center">
+          <div className="animate-spin h-6 w-6 border-[2px] border-[#2aae7a] border-t-transparent rounded-full mx-auto mb-2"></div>
+          <p className="text-gray-500 text-[9px]">Loading transactions...</p>
         </div>
-
-        {/* Table Rows */}
-        <div className="space-y-0">
-          {transactions.map((transaction) => {
-            const statusStyles = getStatusStyles(transaction.status);
-            const transactionType = getTransactionType(transaction);
-
-            return (
-              <div
-                key={transaction.id}
-                className="bg-white shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)] grid grid-cols-[186px_162px_312px_312px_257px_257px] gap-0 px-[30px] py-[36px] items-center"
+      ) : transactions.length === 0 ? (
+        <div className="py-11 text-center">
+          <p className="text-gray-500 text-[9px]">No transactions found</p>
+        </div>
+      ) : (
+        <>
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead className="bg-gray-50 border-b border-gray-200">
+                <tr>
+                  <th className="px-3 py-2 text-left font-medium text-[8px] text-[#0d1b2a]">
+                    TRANSACTION ID
+                  </th>
+                  <th className="px-3 py-2 text-left font-medium text-[8px] text-[#0d1b2a]">
+                    ORDER
+                  </th>
+                  <th className="px-3 py-2 text-left font-medium text-[8px] text-[#0d1b2a]">
+                    BUYER
+                  </th>
+                  <th className="px-3 py-2 text-left font-medium text-[8px] text-[#0d1b2a]">
+                    AMOUNT
+                  </th>
+                  <th className="px-3 py-2 text-left font-medium text-[8px] text-[#0d1b2a]">
+                    METHOD
+                  </th>
+                  <th className="px-3 py-2 text-left font-medium text-[8px] text-[#0d1b2a]">
+                    STATUS
+                  </th>
+                  <th className="px-3 py-2 text-left font-medium text-[8px] text-[#0d1b2a]">
+                    DATE
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {transactions.map((txn) => (
+                  <tr key={txn.id} className="hover:bg-gray-50">
+                    <td className="px-3 py-2 text-[8px] text-gray-600">
+                      {txn.transaction_id}
+                    </td>
+                    <td className="px-4.5 py-3 text-[10px] text-gray-900">
+                      {txn.order_number}
+                    </td>
+                    <td className="px-4.5 py-3 text-[10px] text-gray-900">
+                      {txn.buyer_name || txn.buyer_company}
+                    </td>
+                    <td className="px-4.5 py-3 text-[10px] text-gray-900 font-semibold">
+                      ₹{txn.amount.toLocaleString("en-IN")}
+                    </td>
+                    <td className="px-4.5 py-3 text-[10px] text-gray-700">
+                      {txn.payment_method}
+                    </td>
+                    <td className="px-4.5 py-3">
+                      <span
+                        className={`inline-flex px-2 py-0.5 rounded-full text-[9px] font-medium border ${getStatusColor(
+                          txn.status
+                        )}`}
+                      >
+                        {txn.status}
+                      </span>
+                    </td>
+                    <td className="px-4.5 py-3 text-[10px] text-gray-700">
+                      {new Date(txn.created_at).toLocaleDateString("en-IN", {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      })}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {totalPages > 1 && (
+            <div className="flex justify-center items-center gap-3 p-4.5 border-t">
+              <button
+                onClick={() => onPageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="px-4 py-1.5 bg-[#1e3a8a] text-white rounded-lg text-[10px] font-medium hover:bg-[#1e3a8a]/90 disabled:bg-gray-300 disabled:cursor-not-allowed"
               >
-                {/* Date */}
-                <div className="text-[20px] font-medium text-[#9C9C9C] tracking-[0.5px] leading-[28px]">
-                  {formatDate(transaction.created_at)}
-                </div>
-
-                {/* Type */}
-                <div className="text-[20px] text-black tracking-[0.5px] leading-[28px]">
-                  {transactionType}
-                </div>
-
-                {/* Description */}
-                <div className="text-[20px] text-black tracking-[0.5px] leading-[28px]">
-                  {transaction.order_number || transaction.buyer_name}
-                </div>
-
-                {/* Amount */}
-                <div className="text-[20px] text-black tracking-[0.5px] leading-[28px]">
-                  $
-                  {transaction.amount.toLocaleString("en-US", {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                  })}
-                </div>
-
-                {/* Status */}
-                <div>
-                  <div
-                    className="inline-flex items-center gap-[10px] px-[20px] py-[7px] rounded-[100px]"
-                    style={{
-                      backgroundColor: statusStyles.bg,
-                    }}
-                  >
-                    {statusStyles.icon === "check" && <CheckIcon />}
-                    {statusStyles.icon === "timer" && <TimerIcon />}
-                    <span
-                      className="text-[20px] tracking-[0.5px] leading-[28px]"
-                      style={{ color: statusStyles.text }}
-                    >
-                      {statusStyles.label}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Actions */}
-                <div className="flex items-center gap-[10px]">
-                  <button
-                    className="flex items-center justify-center p-[10px] border border-[#747474] rounded-[10px] hover:bg-gray-50 transition-colors"
-                    onClick={() =>
-                      alert(
-                        `View transaction ${transaction.transaction_id} details coming soon`
-                      )
-                    }
-                  >
-                    <EyeIcon />
-                  </button>
-                  <button
-                    className="flex items-center justify-center p-[10px] border border-[#747474] rounded-[10px] hover:bg-gray-50 transition-colors"
-                    onClick={() =>
-                      alert(
-                        `Download transaction ${transaction.transaction_id} coming soon`
-                      )
-                    }
-                  >
-                    <DownloadIcon />
-                  </button>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Pagination - keeping outside of scaled container for better usability */}
+                Previous
+              </button>
+              <span className="text-[10px]">
+                Page {currentPage} of {totalPages}
+              </span>
+              <button
+                onClick={() => onPageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className="px-4 py-1.5 bg-[#1e3a8a] text-white rounded-lg text-[10px] font-medium hover:bg-[#1e3a8a]/90 disabled:bg-gray-300 disabled:cursor-not-allowed"
+              >
+                Next
+              </button>
+            </div>
+          )}
+        </>
+      )}
     </div>
   );
 }

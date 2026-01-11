@@ -42,7 +42,7 @@ export const CustomDropdown: React.FC<CustomDropdownProps> = ({
 
   return (
     <div className={`custom-dropdown relative ${className}`}>
-      <label className="mb-[9px] block text-[12px] font-medium text-[#0d1b2a]">
+      <label className="mb-[6px] block text-[8px] font-medium text-[#0d1b2a]">
         {label}
         {required && "*"}
       </label>
@@ -50,27 +50,27 @@ export const CustomDropdown: React.FC<CustomDropdownProps> = ({
         type="button"
         onClick={onToggle}
         disabled={disabled}
-        className="h-[42px] w-full rounded-[6px] border border-[#e5e5e5] px-[12px] text-left text-[11px] text-black focus:border-[#2AAE7A] focus:outline-none focus:ring-1 focus:ring-[#2AAE7A] flex items-center justify-between disabled:bg-gray-50"
+        className="h-[28px] w-full rounded-[4px] border border-[#e5e5e5] px-[8px] text-left text-[7.33px] text-black focus:border-[#2AAE7A] focus:outline-none focus:ring-1 focus:ring-[#2AAE7A] flex items-center justify-between disabled:bg-gray-50"
       >
         <span className={!value ? "text-[#9c9c9c]" : ""}>
           {selectedOption ? selectedOption.label : placeholder}
         </span>
-        <ChevronDown className="h-[14px] w-[14px] text-[#9c9c9c]" />
+        <ChevronDown className="h-[9.33px] w-[9.33px] text-[#9c9c9c]" />
       </button>
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: -6.67 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="absolute z-50 mt-[4px] max-h-[150px] w-full overflow-y-auto rounded-[6px] border border-[#e5e5e5] bg-white shadow-lg"
+            exit={{ opacity: 0, y: -6.67 }}
+            className="absolute z-50 mt-[2.67px] max-h-[100px] w-full overflow-y-auto rounded-[4px] border border-[#e5e5e5] bg-white shadow-lg"
           >
             {options.map((option) => (
               <button
                 key={option.value}
                 type="button"
                 onClick={() => onSelect(name, option.value)}
-                className="w-full px-[12px] py-[8px] text-left text-[11px] text-black hover:bg-[#f0fdf4]"
+                className="w-full px-[8px] py-[5.33px] text-left text-[7.33px] text-black hover:bg-[#f0fdf4]"
               >
                 {option.label}
               </button>
@@ -78,7 +78,9 @@ export const CustomDropdown: React.FC<CustomDropdownProps> = ({
           </motion.div>
         )}
       </AnimatePresence>
-      {error && <p className="mt-[4px] text-[10px] text-red-500">{error}</p>}
+      {error && (
+        <p className="mt-[2.67px] text-[6.67px] text-red-500">{error}</p>
+      )}
     </div>
   );
 };

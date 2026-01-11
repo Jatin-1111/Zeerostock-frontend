@@ -1,14 +1,7 @@
-import Sidebar from "@/components/shared/Sidebar";
-
 export default function SidebarLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <div className="flex min-h-screen bg-[#EEFBF6]">
-      <Sidebar />
-      <main className="flex-1 overflow-x-hidden">{children}</main>
-    </div>
-  );
+  return <div className="flex-1 bg-[#EEFBF6]">{children}</div>;
 }

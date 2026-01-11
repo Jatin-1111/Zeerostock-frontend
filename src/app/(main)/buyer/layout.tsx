@@ -1,6 +1,5 @@
 "use client";
 
-import BuyerSidebar from "@/components/shared/BuyerSidebar";
 import RoleGuard from "@/components/guards/RoleGuard";
 
 export default function BuyerLayout({
@@ -10,10 +9,7 @@ export default function BuyerLayout({
 }>) {
   return (
     <RoleGuard allowedRole="buyer">
-      <div className="flex min-h-screen bg-[#EEFBF6]">
-        <BuyerSidebar />
-        <main className="flex-1">{children}</main>
-      </div>
+      <div className="flex-1 bg-[#EEFBF6]">{children}</div>
     </RoleGuard>
   );
 }

@@ -1,6 +1,5 @@
 "use client";
 
-import SupplierSidebar from "@/components/shared/SupplierSidebar";
 import RoleGuard from "@/components/guards/RoleGuard";
 
 export default function SupplierLayout({
@@ -10,10 +9,7 @@ export default function SupplierLayout({
 }) {
   return (
     <RoleGuard allowedRole="supplier">
-      <div className="flex min-h-screen bg-[#EEFBF6]">
-        <SupplierSidebar />
-        <main className="flex-1">{children}</main>
-      </div>
+      <div className="flex-1 bg-[#EEFBF6]">{children}</div>
     </RoleGuard>
   );
 }

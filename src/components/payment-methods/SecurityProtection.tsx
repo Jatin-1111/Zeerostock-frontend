@@ -1,140 +1,143 @@
 "use client";
 
-// Custom SVG Components
-const SecuritySafeIcon = () => (
-  <svg
-    width="25"
-    height="25"
-    viewBox="0 0 33 33"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M16.5 2.0625L3.4375 8.25V16.5C3.4375 23.925 8.8 30.8875 16.5 30.9375C24.2 30.8875 29.5625 23.925 29.5625 16.5V8.25L16.5 2.0625Z"
-      stroke="#2AAE7A"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      fill="none"
-    />
-  </svg>
-);
-
-const LockIcon = () => (
-  <svg
-    width="26"
-    height="26"
-    viewBox="0 0 35 35"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M9.375 16.25H25.625V26.25C25.625 27.35 24.725 28.25 23.625 28.25H11.375C10.275 28.25 9.375 27.35 9.375 26.25V16.25Z"
-      stroke="#2AAE7A"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      fill="none"
-    />
-    <path
-      d="M12.5 16.25V11.25C12.5 8.49 14.74 6.25 17.5 6.25C20.26 6.25 22.5 8.49 22.5 11.25V16.25"
-      stroke="#2AAE7A"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      fill="none"
-    />
-    <circle cx="17.5" cy="20.5" r="1.5" fill="#2AAE7A" />
-  </svg>
-);
-
-const ShieldCheckIcon = () => (
-  <svg
-    width="23"
-    height="23"
-    viewBox="0 0 30 30"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M15 2.5L4 7.5V15C4 21.075 8.4 26.55 15 27.5C21.6 26.55 26 21.075 26 15V7.5L15 2.5Z"
-      stroke="#2AAE7A"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      fill="none"
-    />
-    <path
-      d="M10 15L13.5 18.5L20 12"
-      stroke="#2AAE7A"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      fill="none"
-    />
-  </svg>
-);
+import { Shield, Lock } from "lucide-react";
 
 export default function SecurityProtection() {
-  const securityFeatures = [
-    {
-      title: "256-bit SSL Encryption",
-      description: "Bank-level security",
-    },
-    {
-      title: "Escrow Protection",
-      description: "Funds held securely",
-    },
-    {
-      title: "PCI DSS Compliant",
-      description: "Industry standard",
-    },
-    {
-      title: "Fraud Detection",
-      description: "24/7 monitoring",
-    },
-  ];
-
   return (
-    <div className="w-full">
-      <div className="bg-white rounded-[15px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] relative p-0 h-[393px]">
-        {/* Title with Icon */}
-        <div className="absolute left-[56px] top-[39px] -translate-y-1/2 flex items-center gap-[11px]">
-          <SecuritySafeIcon />
-          <h3 className="font-semibold text-[20px] text-[#0D1B2A] tracking-[0.5px] leading-[18px] m-0">
+    <div className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] overflow-hidden">
+      <div className="px-[17.5px] py-[17.5px]">
+        {/* Title with Shield Icon */}
+        <div className="flex items-center gap-[4.5px] mb-[31px]">
+          <Shield className="text-[#2aae7a] w-[16.5px] h-[16.5px] stroke-2" />
+          <p className="m-0 font-semibold text-[#0d1b2a] tracking-[0.25px] text-[13px] leading-[12px]">
             Security & Protection
-          </h3>
+          </p>
         </div>
 
-        {/* Info Box */}
-        <div className="absolute left-[62px] right-[62px] top-[99px] bg-[#EEFFEF] border border-[#2AAE7A] rounded-[15px] py-[19px] pl-[19px] pr-[41px] flex gap-[11px] items-center">
-          <div className="shrink-0">
-            <LockIcon />
-          </div>
-          <p className="font-medium text-[15px] text-[#9C9C9C] leading-normal m-0 flex-1">
+        {/* Security Notice with Lock Icon */}
+        <div className="flex items-center gap-[7.5px] rounded-[10px] border border-[#2aae7a] bg-[#eeffef] px-[12.5px] py-[12.5px] mb-[35px]">
+          <Lock className="text-[#2aae7a] w-[17.5px] h-[17.5px] stroke-2 shrink-0" />
+          <p className="m-0 font-medium text-[#9c9c9c] text-[10px] leading-normal">
             All payment information is encrypted and stored securely. Zeerostock
             uses industry-standard PCI DSS compliance to protect your financial
             data.
           </p>
         </div>
 
-        {/* Security Features Grid */}
-        <div className="absolute left-[29px] right-[29px] top-[224px] grid grid-cols-2 grid-rows-[repeat(2,56px)] gap-[23px]">
-          {securityFeatures.map((feature, index) => (
-            <div key={index} className="flex gap-[9px] items-start">
-              <div className="shrink-0 w-[38px] h-[30px] flex items-center justify-center p-[8px]">
-                <ShieldCheckIcon />
-              </div>
-              <div className="flex flex-col gap-[11px]">
-                <p className="font-medium text-[20px] text-[#0D1B2A] tracking-[0.5px] leading-[18px] m-0">
-                  {feature.title}
-                </p>
-                <p className="font-medium text-[12px] text-[#9C9C9C] leading-[21px] m-0">
-                  {feature.description}
-                </p>
-              </div>
+        {/* Security Features Grid - 2x2 */}
+        <div className="grid grid-cols-2 gap-x-[161.5px] gap-y-[26.25px]">
+          {/* Feature 1 - 256-bit SSL Encryption */}
+          <div className="flex items-center gap-[6px]">
+            <div className="flex w-[25.5px] h-[20px] shrink-0 items-center justify-center p-[5px]">
+              <svg width="15" height="15" viewBox="0 0 30 30" fill="none">
+                <rect
+                  x="5"
+                  y="10"
+                  width="20"
+                  height="15"
+                  rx="2"
+                  className="stroke-[#2aae7a] stroke-2"
+                />
+                <path
+                  d="M9 10V7C9 4.79086 10.7909 3 13 3H17C19.2091 3 21 4.79086 21 7V10"
+                  className="stroke-[#2aae7a] stroke-2"
+                />
+                <circle cx="15" cy="17.5" r="2" className="fill-[#2aae7a]" />
+              </svg>
             </div>
-          ))}
+            <div className="flex flex-col gap-[7.5px]">
+              <p className="m-0 font-medium text-[#0d1b2a] tracking-[0.25px] text-[15px] leading-[12px]">
+                256-bit SSL Encryption
+              </p>
+              <p className="m-0 font-medium text-[#9c9c9c] tracking-[0.25px] text-[10px] leading-[14px]">
+                Bank-level security
+              </p>
+            </div>
+          </div>
+
+          {/* Feature 2 - Escrow Protection */}
+          <div className="flex items-center gap-[6px]">
+            <div className="flex w-[25.5px] h-[20px] shrink-0 items-center justify-center p-[5px]">
+              <svg width="15" height="15" viewBox="0 0 30 30" fill="none">
+                <path
+                  d="M15 3L6 7V14C6 19 10 23 15 27C20 23 24 19 24 14V7L15 3Z"
+                  className="stroke-[#2aae7a] stroke-2"
+                />
+                <path
+                  d="M11 15L14 18L20 12"
+                  className="stroke-[#2aae7a] stroke-2 stroke-linecap-round stroke-linejoin-round"
+                />
+              </svg>
+            </div>
+            <div className="flex flex-col gap-[7.5px]">
+              <p className="m-0 font-medium text-[#0d1b2a] tracking-[0.25px] text-[15px] leading-[12px]">
+                Escrow Protection
+              </p>
+              <p className="m-0 font-medium text-[#9c9c9c] tracking-[0.25px] text-[10px] leading-[14px]">
+                Funds held securely
+              </p>
+            </div>
+          </div>
+
+          {/* Feature 3 - PCI DSS Compliant */}
+          <div className="flex items-center gap-[6px]">
+            <div className="flex w-[25.5px] h-[20px] shrink-0 items-center justify-center p-[5px]">
+              <svg width="15" height="15" viewBox="0 0 30 30" fill="none">
+                <rect
+                  x="5"
+                  y="8"
+                  width="20"
+                  height="16"
+                  rx="2"
+                  className="stroke-[#2aae7a] stroke-2"
+                />
+                <path d="M5 13H25" className="stroke-[#2aae7a] stroke-2" />
+                <rect
+                  x="8"
+                  y="18"
+                  width="6"
+                  height="3"
+                  rx="1"
+                  className="fill-[#2aae7a]"
+                />
+              </svg>
+            </div>
+            <div className="flex flex-col gap-[7.5px]">
+              <p className="m-0 font-medium text-[#0d1b2a] tracking-[0.25px] text-[15px] leading-[12px]">
+                PCI DSS Compliant
+              </p>
+              <p className="m-0 font-medium text-[#9c9c9c] tracking-[0.25px] text-[10px] leading-[14px]">
+                Industry standard
+              </p>
+            </div>
+          </div>
+
+          {/* Feature 4 - Fraud Detection */}
+          <div className="flex items-center gap-[6px]">
+            <div className="flex w-[25.5px] h-[20px] shrink-0 items-center justify-center p-[5px]">
+              <svg width="15" height="15" viewBox="0 0 30 30" fill="none">
+                <circle
+                  cx="15"
+                  cy="15"
+                  r="10"
+                  className="stroke-[#2aae7a] stroke-2"
+                />
+                <path
+                  d="M15 10V15L18 18"
+                  className="stroke-[#2aae7a] stroke-2 stroke-linecap-round"
+                />
+                <circle cx="22" cy="8" r="3" className="fill-[#2aae7a]" />
+              </svg>
+            </div>
+            <div className="flex flex-col gap-[7.5px]">
+              <p className="m-0 font-medium text-[#0d1b2a] tracking-[0.25px] text-[15px] leading-[12px]">
+                Fraud Detection
+              </p>
+              <p className="m-0 font-medium text-[#9c9c9c] tracking-[0.25px] text-[10px] leading-[14px]">
+                24/7 monitoring
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

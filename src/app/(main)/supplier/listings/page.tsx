@@ -112,9 +112,9 @@ export default function SupplierListings() {
 
   return (
     <div className="min-h-screen bg-[#EEFBF6]">
-      <div className="max-w-[1440px] mx-auto px-20 py-8">
+      <div className="max-w-[1440px] mx-auto px-10 py-4">
         {/* Page Title */}
-        <h1 className="text-[36px] font-semibold text-[#0d1b2a] mb-8">
+        <h1 className="text-[18px] font-semibold text-[#0d1b2a] mb-4">
           Active Listing
         </h1>
 
@@ -148,19 +148,19 @@ export default function SupplierListings() {
         ) : (
           <>
             {/* Listings Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
               {listings.map((listing) => (
                 <div
                   key={listing.id}
-                  className="bg-white rounded-[20px] overflow-hidden relative flex flex-col"
+                  className="bg-white rounded-[10px] overflow-hidden relative flex flex-col"
                   style={{
-                    boxShadow: "0px 0px 6px 0px rgba(0, 0, 0, 0.25)",
-                    height: "550px",
+                    boxShadow: "0px 0px 3px 0px rgba(0, 0, 0, 0.25)",
+                    height: "275px",
                   }}
                 >
                   {/* Status Badge */}
                   <div
-                    className="absolute top-[15px] right-[15px] px-[12px] py-[3px] rounded-[80px] z-10"
+                    className="absolute top-[7.5px] right-[7.5px] px-[6px] py-[1.5px] rounded-[40px] z-10"
                     style={{
                       backgroundColor:
                         listing.status === "active"
@@ -172,15 +172,15 @@ export default function SupplierListings() {
                           : "#fee2e2",
                     }}
                   >
-                    <p className="text-[15px] font-medium leading-normal capitalize">
+                    <p className="text-[7.5px] font-medium leading-normal capitalize">
                       {listing.status}
                     </p>
                   </div>
 
                   {/* Product Image */}
                   <div
-                    className="w-full h-[198px] bg-gray-200 rounded-[20px] m-[15px] overflow-hidden"
-                    style={{ width: "calc(100% - 30px)" }}
+                    className="w-full h-[99px] bg-gray-200 rounded-[10px] m-[7.5px] overflow-hidden"
+                    style={{ width: "calc(100% - 15px)" }}
                   >
                     {listing.image_url ? (
                       <img
@@ -197,33 +197,33 @@ export default function SupplierListings() {
 
                   {/* Product Details */}
                   <div
-                    className="px-[20px] pb-[20px] flex flex-col"
-                    style={{ height: "calc(600px - 228px)" }}
+                    className="px-[10px] pb-[10px] flex flex-col"
+                    style={{ height: "calc(300px - 114px)" }}
                   >
                     {/* Title - Fixed height */}
-                    <div className="h-[56px] mb-2">
-                      <h3 className="text-[20px] font-medium text-[#0d1b2a] line-clamp-2">
+                    <div className="h-[28px] mb-1">
+                      <h3 className="text-[10px] font-medium text-[#0d1b2a] line-clamp-2">
                         {listing.title}
                       </h3>
                     </div>
 
                     {/* Subtitle */}
-                    <p className="text-[14px] font-medium text-[#9c9c9c] mb-4 h-[20px]">
+                    <p className="text-[7px] font-medium text-[#9c9c9c] mb-2 h-[10px]">
                       {listing.city || "Location not specified"}
                     </p>
 
                     {/* Pricing */}
-                    <div className="mb-4 flex items-center gap-3 h-[36px]">
-                      <span className="text-[26px] font-bold text-[#1e3a8a] leading-none">
+                    <div className="mb-2 flex items-center gap-1.5 h-[18px]">
+                      <span className="text-[13px] font-bold text-[#1e3a8a] leading-none">
                         {formatCurrency(listing.price_after)}
                       </span>
                       {listing.price_before && listing.price_before > 0 && (
                         <div className="relative">
-                          <span className="text-[18px] font-bold text-[#9c9c9c]">
+                          <span className="text-[9px] font-bold text-[#9c9c9c]">
                             {formatCurrency(listing.price_before)}
                           </span>
                           <div
-                            className="absolute top-1/2 left-0 w-full h-[2px] bg-[#9c9c9c]"
+                            className="absolute top-1/2 left-0 w-full h-[1px] bg-[#9c9c9c]"
                             style={{ transform: "translateY(-50%)" }}
                           />
                         </div>
@@ -231,66 +231,66 @@ export default function SupplierListings() {
                     </div>
 
                     {/* Availability Info */}
-                    <div className="flex items-center gap-2 mb-4 h-[20px]">
-                      <p className="text-[14px] font-medium text-[#9c9c9c] truncate">
+                    <div className="flex items-center gap-1 mb-2 h-[10px]">
+                      <p className="text-[7px] font-medium text-[#9c9c9c] truncate">
                         Total value:{" "}
                         {formatCurrency(listing.price_after * listing.quantity)}
                       </p>
-                      <span className="text-[14px] font-medium text-[#9c9c9c]">
+                      <span className="text-[7px] font-medium text-[#9c9c9c]">
                         |
                       </span>
-                      <p className="text-[14px] font-medium text-[#9c9c9c] truncate">
+                      <p className="text-[7px] font-medium text-[#9c9c9c] truncate">
                         {listing.quantity} {listing.unit} available
                       </p>
                     </div>
 
                     {/* Stats Row */}
-                    <div className="flex items-center gap-4 pb-4 border-b border-[#e5e5e5] mb-4 h-[50px]">
-                      <div className="flex items-center gap-2">
-                        <Eye className="w-[22px] h-[22px] text-[#9c9c9c]" />
-                        <span className="text-[12px] font-medium text-[#9c9c9c]">
+                    <div className="flex items-center gap-2 pb-2 border-b border-[#e5e5e5] mb-2 h-[25px]">
+                      <div className="flex items-center gap-1">
+                        <Eye className="w-[11px] h-[11px] text-[#9c9c9c]" />
+                        <span className="text-[6px] font-medium text-[#9c9c9c]">
                           {listing.views_count || 0}
                         </span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Star className="w-[22px] h-[22px] text-[#9c9c9c]" />
-                        <span className="text-[12px] font-medium text-[#9c9c9c]">
+                      <div className="flex items-center gap-1">
+                        <Star className="w-[11px] h-[11px] text-[#9c9c9c]" />
+                        <span className="text-[6px] font-medium text-[#9c9c9c]">
                           {listing.rating
                             ? Number(listing.rating).toFixed(1)
                             : "0.0"}
                         </span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <MessageCircle className="w-[22px] h-[22px] text-[#9c9c9c]" />
-                        <span className="text-[12px] font-medium text-[#9c9c9c]">
+                      <div className="flex items-center gap-1">
+                        <MessageCircle className="w-[11px] h-[11px] text-[#9c9c9c]" />
+                        <span className="text-[6px] font-medium text-[#9c9c9c]">
                           {listing.inquiries_count || 0}
                         </span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Clock className="w-[22px] h-[22px] text-[#9c9c9c]" />
-                        <span className="text-[12px] font-medium text-[#9c9c9c]">
+                      <div className="flex items-center gap-1">
+                        <Clock className="w-[11px] h-[11px] text-[#9c9c9c]" />
+                        <span className="text-[6px] font-medium text-[#9c9c9c]">
                           {getTimeRemaining(listing.expires_at)}
                         </span>
                       </div>
                     </div>
 
                     {/* Action Buttons - Pushed to bottom with mt-auto */}
-                    <div className="flex gap-2 h-[50px]">
+                    <div className="flex gap-1 h-[25px]">
                       <Link
                         href={`/supplier/listings/${listing.id}/edit`}
-                        className="flex-1 h-[50px] flex items-center justify-center gap-2 px-5 py-4 border border-[#9c9c9c] rounded-[15px] hover:bg-gray-50 transition-colors"
+                        className="flex-1 h-[25px] flex items-center justify-center gap-1 px-2.5 py-2 border border-[#9c9c9c] rounded-[7.5px] hover:bg-gray-50 transition-colors"
                       >
-                        <Edit className="w-5 h-5 text-[#9c9c9c]" />
-                        <span className="text-[16px] font-medium text-[#9c9c9c]">
+                        <Edit className="w-2.5 h-2.5 text-[#9c9c9c]" />
+                        <span className="text-[8px] font-medium text-[#9c9c9c]">
                           Edit
                         </span>
                       </Link>
                       <Link
                         href={`/supplier/analytics?product=${listing.id}`}
-                        className="flex-1 h-[50px] flex items-center justify-center gap-2 px-5 py-4 bg-[#1e3a8a] rounded-[15px] hover:bg-[#1e40af] transition-colors"
+                        className="flex-1 h-[25px] flex items-center justify-center gap-1 px-2.5 py-2 bg-[#1e3a8a] rounded-[7.5px] hover:bg-[#1e40af] transition-colors"
                       >
-                        <BarChart3 className="w-5 h-5 text-white" />
-                        <span className="text-[16px] font-medium text-white">
+                        <BarChart3 className="w-2.5 h-2.5 text-white" />
+                        <span className="text-[8px] font-medium text-white">
                           Analytics
                         </span>
                       </Link>
@@ -302,21 +302,21 @@ export default function SupplierListings() {
 
             {/* Pagination */}
             {totalPages > 1 && (
-              <div className="flex items-center justify-center gap-2 mt-8">
+              <div className="flex items-center justify-center gap-1 mt-4">
                 <button
                   onClick={() => setPage((p) => Math.max(1, p - 1))}
                   disabled={page === 1}
-                  className="px-4 py-2 border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-2 py-1 border border-gray-300 text-[7px] font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Previous
                 </button>
-                <span className="px-4 py-2 text-sm text-gray-700">
+                <span className="px-2 py-1 text-[7px] text-gray-700">
                   Page {page} of {totalPages}
                 </span>
                 <button
                   onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                   disabled={page === totalPages}
-                  className="px-4 py-2 border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-2 py-1 border border-gray-300 text-[7px] font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Next
                 </button>

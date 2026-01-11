@@ -141,7 +141,7 @@ export default function WishlistPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
       <div className="w-full mx-auto">
         {/* Page Title */}
         <div className="px-10 pt-4 pb-3">
@@ -213,7 +213,7 @@ export default function WishlistPage() {
                   key={item.id}
                   className="bg-white rounded-[10px] overflow-hidden relative flex flex-col"
                   style={{
-                    boxShadow: "0px 0px 2.5px 0px rgba(255,255,255,0.25)",
+                    boxShadow: "0px 0px 3px 0px rgba(0, 0, 0, 0.25)"
                   }}
                 >
                   {/* Product Image */}

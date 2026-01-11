@@ -5,10 +5,14 @@ import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
-import { Globe, User } from "lucide-react";
+import { Globe, User, Menu } from "lucide-react";
 import EnhancedSearchInput from "@/components/search/EnhancedSearchInput";
 
-export default function Header() {
+interface HeaderProps {
+  onSidebarToggle?: () => void;
+}
+
+export default function Header({ onSidebarToggle }: HeaderProps) {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
@@ -32,14 +36,26 @@ export default function Header() {
   return (
     <header className="sticky top-0 w-full z-50 shadow-[0px_5px_8px_0px_rgba(0,0,0,0.25)] bg-linear-to-b from-[#43C786] to-[#0A2540]">
       <div className="container mx-auto h-[60px] flex items-center justify-between px-[150px]">
-        {/* Logo - Left Side */}
-        <Link href="/" className="shrink-0">
-          <img
-            src={"/Zeerostock Logo B White.png"}
-            alt="Zeerostock"
-            className="w-[112.5px]"
-          />
-        </Link>
+        {/* Menu Button + Logo - Left Side */}
+        <div className="flex items-center gap-3 shrink-0">
+          {/* Menu Button */}
+          <button
+            onClick={onSidebarToggle}
+            className="p-2 hover:bg-white/10 rounded transition-colors"
+            aria-label="Toggle sidebar"
+          >
+            <Menu className="w-[18px] h-[18px] text-white" />
+          </button>
+
+          {/* Logo */}
+          <Link href="/" className="shrink-0">
+            <img
+              src={"/Zeerostock Logo B White.png"}
+              alt="Zeerostock"
+              className="w-[112.5px]"
+            />
+          </Link>
+        </div>
 
         {/* Center Group - Navigation Links + Search Bar */}
         <div className="flex items-center gap-6">

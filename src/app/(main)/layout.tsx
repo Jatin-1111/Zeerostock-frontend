@@ -1,4 +1,4 @@
-import Header from "@/components/shared/Header";
+import MainLayoutWrapper from "@/components/shared/MainLayoutWrapper";
 import Footer from "@/components/shared/Footer";
 
 export default function MainLayout({
@@ -9,8 +9,7 @@ export default function MainLayout({
   return (
     <>
       <div className="min-h-screen">
-        <Header />
-        {children}
+        <MainLayoutWrapper>{children}</MainLayoutWrapper>
       </div>
       <Footer />
     </>

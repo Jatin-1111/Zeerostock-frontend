@@ -43,43 +43,13 @@ export default function Sidebar({
 
   return (
     <>
-      {/* Mobile menu button */}
-      <button
-        onClick={handleToggle}
-        className="lg:hidden fixed top-[11px] left-[11px] z-50 p-[5px] border border-white rounded-lg"
-      >
-        <svg
-          className="w-[16px] h-[16px]"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M4 6h16M4 12h16M4 18h16"
-          />
-        </svg>
-      </button>
-
       {/* Sidebar */}
-      <div
-        className={`fixed lg:sticky top-0 left-0 h-screen lg:h-[calc(100vh-49px)] w-[220px] bg-white shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] transform ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        } lg:translate-x-0 transition-transform duration-300 ease-in-out z-40 overflow-y-auto lg:top-[49px]`}
-      >
+      <div className="w-[220px] h-full bg-white shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] overflow-y-auto flex-shrink-0">
         {/* Header */}
-        <div className="h-[40px] flex items-center justify-center border-b border-[#8b8b8b] relative">
+        <div className="h-[40px] flex items-center justify-center border-b border-[#8b8b8b]">
           <h2 className="font-medium text-[13px] text-[#1e3a8a] leading-normal">
             Explore Zeerostock
           </h2>
-          <button
-            className="absolute right-[14px] w-[14px] h-[14px]"
-            onClick={handleToggle}
-          >
-            <ArrowLeft className="w-[14px] h-[14px] text-[#1e3a8a]" />
-          </button>
         </div>
 
         <div className="px-[3px] pb-[19px]">
@@ -468,14 +438,6 @@ export default function Sidebar({
           </div>
         </div>
       </div>
-
-      {/* Overlay for mobile */}
-      {isOpen && (
-        <div
-          className="lg:hidden fixed inset-0 bg-black/80 bg-opacity-50 z-30"
-          onClick={handleToggle}
-        />
-      )}
     </>
   );
 }

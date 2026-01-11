@@ -903,7 +903,7 @@ export default function NewListing() {
             <button
               type="submit"
               disabled={loading || uploadingImages}
-              className="h-[45px] w-[191px] rounded-[8px] bg-[#1e3a8a] text-[12px] font-semibold text-white hover:bg-[#1e40af] disabled:cursor-not-allowed disabled:opacity-50"
+              className="h-[40px] w-[150px] rounded-[8px] bg-[#1e3a8a] text-[10px] font-semibold text-white hover:bg-[#1e40af] disabled:cursor-not-allowed disabled:opacity-50"
             >
               {loading ? "Creating..." : "List Product"}
             </button>

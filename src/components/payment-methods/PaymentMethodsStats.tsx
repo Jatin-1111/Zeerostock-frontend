@@ -171,17 +171,17 @@ export default function PaymentMethodsStats({
 }: PaymentMethodsStatsProps) {
   if (!summary) {
     return (
-      <div className="mb-6 w-[133.33%] origin-top-left scale-[0.75]">
-        <div className="grid grid-cols-4 gap-[30px]">
+      <div className="mb-3">
+        <div className="grid grid-cols-4 gap-[17px]">
           {[1, 2, 3, 4].map((i) => (
             <div
               key={i}
-              className="relative h-[135px] animate-pulse rounded-[20px] bg-white shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)]"
+              className="relative h-[76px] animate-pulse rounded-[11px] bg-white shadow-[0px_0px_3px_0px_rgba(24,181,34,0.25)]"
             >
-              <div className="p-[17px]">
-                <div className="mb-[20px] h-[20px] w-[40%] rounded-[4px] bg-[#E5E7EB]"></div>
-                <div className="mb-[10px] h-[32px] w-[60%] rounded-[4px] bg-[#E5E7EB]"></div>
-                <div className="h-[14px] w-[50%] rounded-[4px] bg-[#E5E7EB]"></div>
+              <div className="p-[10px]">
+                <div className="mb-[11px] h-[11px] w-[40%] rounded-[2px] bg-[#E5E7EB]"></div>
+                <div className="mb-[6px] h-[18px] w-[60%] rounded-[2px] bg-[#E5E7EB]"></div>
+                <div className="h-[8px] w-[50%] rounded-[2px] bg-[#E5E7EB]"></div>
               </div>
             </div>
           ))}
@@ -193,16 +193,16 @@ export default function PaymentMethodsStats({
   const stats = [
     {
       icon: EmptyWalletIcon,
-      label: "Total Spent",
-      value: `$${(summary.total_received || 0).toLocaleString()}`,
-      subtitle: "This month",
+      label: "Total Received",
+      value: `₹${(summary.total_received || 0).toLocaleString("en-IN")}`,
+      subtitle: "All time",
       subtitleColor: "#9C9C9C",
       iconBgColor: "#DBEAFE",
     },
     {
       icon: TimerIcon,
       label: "Pending",
-      value: `$${(summary.pending_amount || 0).toLocaleString()}`,
+      value: `₹${(summary.pending_amount || 0).toLocaleString("en-IN")}`,
       subtitle: "Processing",
       subtitleColor: "#EAB308",
       iconBgColor: "#FEF9C3",
@@ -210,7 +210,7 @@ export default function PaymentMethodsStats({
     {
       icon: DiagramIcon,
       label: "This Month",
-      value: `$${(summary.received_this_month || 0).toLocaleString()}`,
+      value: `₹${(summary.received_this_month || 0).toLocaleString("en-IN")}`,
       subtitle: "+12% from last month",
       subtitleColor: "#2AAE7A",
       iconBgColor: "#EEFFEF",
@@ -226,26 +226,26 @@ export default function PaymentMethodsStats({
   ];
 
   return (
-    <div className="mb-6 w-[133.33%] origin-top-left scale-[0.75]">
-      <div className="grid grid-cols-4 gap-[30px]">
+    <div className="mb-3">
+      <div className="grid grid-cols-4 gap-[17px]">
         {stats.map((stat, index) => (
           <div
             key={index}
-            className="relative h-[135px] overflow-hidden rounded-[20px] bg-white shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)]"
+            className="relative h-[76px] overflow-hidden rounded-[11px] bg-white shadow-[0px_0px_3px_0px_rgba(24,181,34,0.25)]"
           >
             {/* Label */}
-            <div className="absolute left-[17px] top-[27px] -translate-y-1/2 text-[20px] font-medium leading-normal text-[#9C9C9C]">
+            <div className="absolute left-[10px] top-[15px] -translate-y-1/2 text-[11px] font-medium leading-normal text-[#9C9C9C]">
               {stat.label}
             </div>
 
             {/* Value */}
-            <div className="absolute left-[17px] top-[69px] -translate-y-1/2 text-[32px] font-semibold leading-normal text-[#0D1B2A]">
+            <div className="absolute left-[10px] top-[39px] -translate-y-1/2 text-[18px] font-semibold leading-normal text-[#0D1B2A]">
               {stat.value}
             </div>
 
             {/* Subtitle */}
             <div
-              className="absolute left-[17px] top-[102.5px] -translate-y-1/2 text-[14px] font-medium leading-normal"
+              className="absolute left-[10px] top-[58px] -translate-y-1/2 text-[8px] font-medium leading-normal"
               style={{ color: stat.subtitleColor }}
             >
               {stat.subtitle}
@@ -253,7 +253,7 @@ export default function PaymentMethodsStats({
 
             {/* Icon */}
             <div
-              className="absolute right-[20px] top-[20px] flex h-[44px] w-[44px] items-center justify-center rounded-[100px] p-[10px]"
+              className="absolute right-[11px] top-[11px] flex h-[25px] w-[25px] items-center justify-center rounded-[100px] p-[6px]"
               style={{ background: stat.iconBgColor }}
             >
               <stat.icon />

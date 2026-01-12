@@ -1,11 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
+import {
+  motion,
+  AnimatePresence,
+  useMotionValue,
+  useTransform,
+  PanInfo,
+} from "motion/react";
 
 export default function TestimonialSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+
+  const x = useMotionValue(0);
+  const rotate = useTransform(x, [-200, 0, 200], [-8, 0, 8]);
+  const opacity = useTransform(
+    x,
+    [-200, -100, 0, 100, 200],
+    [0.5, 0.8, 1, 0.8, 0.5]
+  );
+  const scale = useTransform(x, [-200, 0, 200], [0.95, 1, 0.95]);
 
   const testimonials = [
     {
@@ -34,64 +50,123 @@ export default function TestimonialSection() {
     },
   ];
 
-  const nextTestimonial = () => {
+  const nextTestimonial = useCallback(() => {
+    setDirection(1);
     setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-  };
+  }, [testimonials.length]);
 
-  const prevTestimonial = () => {
+  const prevTestimonial = useCallback(() => {
+    setDirection(-1);
     setCurrentIndex(
       (prev) => (prev - 1 + testimonials.length) % testimonials.length
     );
+  }, [testimonials.length]);
+
+  const handleDragEnd = (
+    e: MouseEvent | TouchEvent | PointerEvent,
+    info: PanInfo
+  ) => {
+    const threshold = 50;
+    const velocity = info.velocity.x;
+    const offset = info.offset.x;
+
+    if (offset < -threshold || velocity < -500) {
+      nextTestimonial();
+    } else if (offset > threshold || velocity > 500) {
+      prevTestimonial();
+    }
+
+    x.set(0);
+  };
+
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 250 : -250,
+      opacity: 0,
+      scale: 0.95,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      scale: 1,
+    },
+    exit: (direction: number) => ({
+      x: direction > 0 ? -250 : 250,
+      opacity: 0,
+      scale: 0.95,
+    }),
   };
 
   return (
-    <section className="w-full bg-[#EEFBF6] py-[43px]">
+    <section className="w-full bg-[#EEFBF6] py-6 sm:py-8 md:py-10 lg:py-[43px]">
       <div className="w-full max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative w-full flex flex-col items-center">
           {/* Title */}
-          <h2 className="font-bold text-[40px] leading-tight lg:leading-[50px] text-center text-[#0d1b2a] mb-[8px]">
+          <h2 className="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-[40px] leading-tight lg:leading-[50px] text-center text-[#0d1b2a] mb-2 sm:mb-[8px]">
             <span className="text-[#2ec096]">Trusted</span> By Industry Leaders
           </h2>
 
           {/* Subtitle */}
-          <p className="font-semibold text-[11px] leading-relaxed lg:leading-[24px] text-center text-[#686868] max-w-3xl mb-[43px]">
+          <p className="font-semibold text-xs sm:text-sm md:text-[11px] leading-relaxed lg:leading-[24px] text-center text-[#686868] max-w-full sm:max-w-lg md:max-w-2xl lg:max-w-3xl mb-6 sm:mb-8 md:mb-[43px] px-4 sm:px-0">
             See how businesses like yours are maximizing value from surplus
             inventory
           </p>
 
           {/* Testimonial Card Container */}
-          <div className="relative w-full max-w-2xl mx-auto px-[32px] sm:px-[43px]">
-            {/* Left Arrow */}
+          <div className="relative w-full max-w-full sm:max-w-xl md:max-w-2xl mx-auto px-8 sm:px-10 md:px-[32px] lg:px-[43px]">
+            {/* Left Arrow - Hidden on mobile */}
             <button
               onClick={prevTestimonial}
-              className="absolute left-[-27px] sm:left-[-33px] top-1/2 -translate-y-1/2 z-10 hover:opacity-80 transition-opacity bg-white rounded-full p-2 shadow-md"
+              className="hidden md:block absolute left-[-20px] sm:left-[-27px] md:left-[-33px] top-1/2 -translate-y-1/2 z-10 hover:opacity-80 transition-opacity bg-white rounded-full p-1.5 sm:p-2 shadow-md"
               aria-label="Previous testimonial"
             >
-              <ChevronLeft className="w-[16px] h-[16px] text-[#2ec096]" />
+              <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 md:w-[16px] md:h-[16px] text-[#2ec096]" />
             </button>
 
-            <AnimatePresence mode="wait">
+            <AnimatePresence
+              mode="popLayout"
+              initial={false}
+              custom={direction}
+            >
               <motion.div
                 key={currentIndex}
-                initial={{ opacity: 0, x: 100 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -100 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
-                className="relative bg-[#eeffef] rounded-[20px] p-[21px] sm:p-[27px] lg:p-[32px] min-h-[240px] flex flex-col justify-center shadow-sm"
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{
+                  type: "tween",
+                  duration: 0.25,
+                  ease: [0.4, 0, 0.2, 1],
+                }}
+                style={{ x, rotate, scale }}
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.15}
+                dragTransition={{
+                  power: 0.3,
+                  timeConstant: 200,
+                  modifyTarget: (target) => Math.round(target / 100) * 100,
+                }}
+                onDragEnd={handleDragEnd}
+                whileDrag={{ scale: 1.02, cursor: "grabbing" }}
+                whileTap={{ cursor: "grabbing" }}
+                className="relative bg-[#eeffef] rounded-xl sm:rounded-2xl md:rounded-[20px] p-4 sm:p-6 md:p-[21px] lg:p-[32px] min-h-52 sm:min-h-56 md:min-h-[240px] flex flex-col justify-center shadow-sm touch-pan-y cursor-grab select-none"
               >
                 {/* Content */}
-                <div className="text-center flex flex-col items-center gap-[16px]">
+                <div className="text-center flex flex-col items-center gap-3 sm:gap-4 md:gap-[16px]">
                   {/* Quote */}
-                  <p className="font-medium text-lg sm:text-xl lg:text-[15px] leading-relaxed lg:leading-[22px] text-[#686868]">
+                  <p className="font-medium text-sm sm:text-base md:text-lg lg:text-[15px] leading-relaxed lg:leading-[22px] text-[#686868]">
                     &quot;{testimonials[currentIndex].text}&quot;
                   </p>
 
                   {/* Stars */}
-                  <div className="flex justify-center gap-6 sm:gap-7 lg:gap-[21px]">
+                  <div className="flex justify-center gap-3 sm:gap-4 md:gap-6 lg:gap-[21px]">
                     {[...Array(5)].map((_, i) => (
                       <Star
                         key={i}
-                        className="w-[16px] h-[16px] fill-[#2ec096] text-[#2ec096]"
+                        className="w-3 h-3 sm:w-4 sm:h-4 md:w-[16px] md:h-[16px] fill-[#2ec096] text-[#2ec096]"
                       />
                     ))}
                   </div>
@@ -101,13 +176,13 @@ export default function TestimonialSection() {
 
                   {/* Author Info */}
                   <div className="flex flex-col items-center gap-2">
-                    <p className="font-bold text-xl sm:text-2xl lg:text-[19px] leading-tight lg:leading-[28px] text-black">
+                    <p className="font-bold text-base sm:text-lg md:text-xl lg:text-[19px] leading-tight lg:leading-[28px] text-black">
                       {testimonials[currentIndex].author}
                     </p>
-                    <p className="font-semibold text-lg sm:text-xl lg:text-[14px] leading-tight lg:leading-[17px] text-black">
+                    <p className="font-semibold text-sm sm:text-base md:text-lg lg:text-[14px] leading-tight lg:leading-[17px] text-black">
                       {testimonials[currentIndex].company}
                     </p>
-                    <p className="font-medium text-sm sm:text-base lg:text-[10px] leading-relaxed lg:leading-[15px] text-[#3f3737]">
+                    <p className="font-medium text-xs sm:text-sm md:text-base lg:text-[10px] leading-relaxed lg:leading-[15px] text-[#3f3737]">
                       {testimonials[currentIndex].badge}
                     </p>
                   </div>
@@ -115,17 +190,17 @@ export default function TestimonialSection() {
               </motion.div>
             </AnimatePresence>
 
-            {/* Right Arrow */}
+            {/* Right Arrow - Hidden on mobile */}
             <button
               onClick={nextTestimonial}
-              className="absolute right-[-27px] sm:right-[-33px] top-1/2 -translate-y-1/2 z-10 hover:opacity-80 transition-opacity bg-white rounded-full p-2 shadow-md"
+              className="hidden md:block absolute right-[-20px] sm:right-[-27px] md:right-[-33px] top-1/2 -translate-y-1/2 z-10 hover:opacity-80 transition-opacity bg-white rounded-full p-1.5 sm:p-2 shadow-md"
               aria-label="Next testimonial"
             >
-              <ChevronRight className="w-[16px] h-[16px] text-[#2ec096]" />
+              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-[16px] md:h-[16px] text-[#2ec096]" />
             </button>
 
             {/* Dots Navigation */}
-            <div className="flex justify-center gap-[11px] mt-[21px]">
+            <div className="flex justify-center gap-2 sm:gap-3 md:gap-[11px] mt-4 sm:mt-5 md:mt-[21px]">
               {testimonials.map((_, index) => (
                 <button
                   key={index}

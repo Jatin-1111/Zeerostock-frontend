@@ -65,8 +65,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
       if (storedUser && isAuth) {
         setUser(storedUser);
-        // Optionally fetch fresh user data
-        await refreshUser();
+        // Always fetch fresh user data from server to ensure role is up-to-date
+        // This prevents stale activeRole after token expiration/refresh
+        try {
+          await refreshUser();
+        } catch (error) {
+          console.error("Failed to refresh user on init:", error);
+          // If refresh fails and we have stored data, keep it
+          // The api-client interceptor will handle token refresh on next API call
+        }
       }
 
       setLoading(false);

@@ -1,7 +1,8 @@
 "use client";
 
-import { Send, AlertCircle, Check } from "lucide-react";
-import { useState, useEffect } from "react";
+import { Send, AlertCircle, Check, ChevronDown } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import rfqService from "@/services/rfq.service";
 import type {
   CreateRFQRequest,
@@ -31,6 +32,48 @@ export default function PostRFQPage() {
   const [loadingData, setLoadingData] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+
+  // Dropdown states
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+  const [isIndustryOpen, setIsIndustryOpen] = useState(false);
+  const [isUnitOpen, setIsUnitOpen] = useState(false);
+  const [isDurationOpen, setIsDurationOpen] = useState(false);
+
+  // Refs for click outside detection
+  const categoryRef = useRef<HTMLDivElement>(null);
+  const industryRef = useRef<HTMLDivElement>(null);
+  const unitRef = useRef<HTMLDivElement>(null);
+  const durationRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        categoryRef.current &&
+        !categoryRef.current.contains(event.target as Node)
+      ) {
+        setIsCategoryOpen(false);
+      }
+      if (
+        industryRef.current &&
+        !industryRef.current.contains(event.target as Node)
+      ) {
+        setIsIndustryOpen(false);
+      }
+      if (unitRef.current && !unitRef.current.contains(event.target as Node)) {
+        setIsUnitOpen(false);
+      }
+      if (
+        durationRef.current &&
+        !durationRef.current.contains(event.target as Node)
+      ) {
+        setIsDurationOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   // Load categories and industries on mount
   useEffect(() => {
@@ -137,17 +180,18 @@ export default function PostRFQPage() {
   }
 
   return (
-    <div className="min-h-screen px-11 py-4.5">
-      <div className="max-w-[750px] mx-auto">
-        <h1 className="text-[20px] font-semibold text-[#0d1b2a] mb-4.5">
+    <div className="flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 lg:px-11 py-8 sm:py-10">
+      {/* Added w-full so it doesn't shrink when flex column is applied */}
+      <div className="w-full max-w-[750px] mx-auto">
+        <h1 className="text-[16px] sm:text-[18px] md:text-[20px] font-semibold text-[#0d1b2a] mb-3 sm:mb-4 md:mb-4.5">
           Post New RFQ
         </h1>
 
         {/* Success Message */}
         {success && (
-          <div className="mb-4 p-2 bg-green-50 border border-green-200 flex items-center gap-1.5 rounded-[6px]">
+          <div className="mb-3 sm:mb-4 p-2 bg-green-50 border border-green-200 flex items-center gap-1.5 rounded-[6px]">
             <Check className="w-3 h-3 text-green-600 shrink-0" />
-            <p className="text-xs text-green-800">
+            <p className="text-[11px] sm:text-xs text-green-800">
               RFQ created successfully! Suppliers will start sending quotes
               soon.
             </p>
@@ -156,19 +200,19 @@ export default function PostRFQPage() {
 
         {/* Error Message */}
         {error && (
-          <div className="mb-4 p-2 bg-red-50 border border-red-200 flex items-center gap-1.5 rounded-[6px]">
+          <div className="mb-3 sm:mb-4 p-2 bg-red-50 border border-red-200 flex items-center gap-1.5 rounded-[6px]">
             <AlertCircle className="w-3 h-3 text-red-600 shrink-0" />
-            <p className="text-xs text-red-800">{error}</p>
+            <p className="text-[11px] sm:text-xs text-red-800">{error}</p>
           </div>
         )}
 
         <form
           onSubmit={handleSubmit}
-          className="bg-white rounded-[11px] shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] p-[17px]"
+          className="bg-white rounded-[10px] sm:rounded-[11px] shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] p-[14px] sm:p-[17px]"
         >
           {/* Product Title */}
-          <div className="mb-4.5">
-            <label className="block text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
+          <div className="mb-3 sm:mb-4 md:mb-4.5">
+            <label className="block text-[12px] sm:text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
               Product Title<span className="text-red-600">*</span>
             </label>
             <input
@@ -178,67 +222,128 @@ export default function PostRFQPage() {
               onChange={(e) =>
                 setFormData({ ...formData, title: e.target.value })
               }
-              className="w-full h-[42px] px-3 border border-[#bebebe] rounded-[7.5px] text-[12px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+              className="w-full h-[30px] sm:h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
               required
               disabled={loading}
             />
           </div>
 
-          {/* Category and Industry */}
-          <div className="grid grid-cols-2 gap-[17px] mb-4.5">
-            <div>
-              <label className="block text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
-                Category<span className="text-red-600">*</span>
-              </label>
-              <select
-                value={formData.categoryId}
-                onChange={(e) =>
-                  setFormData({ ...formData, categoryId: e.target.value })
-                }
-                className="w-full h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe] appearance-none bg-white"
-                required
+          {/* Category */}
+          <div className="mb-3 sm:mb-4 md:mb-4.5">
+            <label className="block text-[12px] sm:text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
+              Category<span className="text-red-600">*</span>
+            </label>
+            <div className="relative" ref={categoryRef}>
+              <button
+                type="button"
+                onClick={() => !loading && setIsCategoryOpen(!isCategoryOpen)}
+                className="w-full h-[30px] sm:h-[32px] px-2 pr-8 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] hover:border-[#8a8a8a] transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-left"
                 disabled={loading}
               >
-                <option value="" className="text-[#9c9c9c]">
-                  Select Category
-                </option>
-                {categories.map((cat) => (
-                  <option key={cat.id} value={cat.id}>
-                    {cat.name}
-                  </option>
-                ))}
-              </select>
+                <span
+                  className={
+                    formData.categoryId ? "text-gray-900" : "text-[#9c9c9c]"
+                  }
+                >
+                  {formData.categoryId
+                    ? categories.find((c) => c.id === formData.categoryId)?.name
+                    : "Select Category"}
+                </span>
+              </button>
+              <motion.div
+                animate={{ rotate: isCategoryOpen ? 180 : 0 }}
+                transition={{ duration: 0.2 }}
+                className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none"
+              >
+                <ChevronDown className="w-3.5 h-3.5 text-[#666]" />
+              </motion.div>
+              <AnimatePresence>
+                {isCategoryOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute z-50 w-full mt-1 bg-white border border-[#bebebe] rounded-[6px] shadow-lg max-h-[200px] overflow-y-auto"
+                  >
+                    {categories.map((cat) => (
+                      <div
+                        key={cat.id}
+                        onClick={() => {
+                          setFormData({ ...formData, categoryId: cat.id });
+                          setIsCategoryOpen(false);
+                        }}
+                        className="px-2 py-2 text-[9px] text-gray-900 hover:bg-[#f0f9ff] hover:text-[#1e3a8a] cursor-pointer transition-colors"
+                      >
+                        {cat.name}
+                      </div>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
+          </div>
 
-            <div>
-              <label className="block text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
-                Industry<span className="text-red-600">*</span>
-              </label>
-              <select
-                value={formData.industryId}
-                onChange={(e) =>
-                  setFormData({ ...formData, industryId: e.target.value })
-                }
-                className="w-full h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe] appearance-none bg-white"
-                required
+          {/* Industry */}
+          <div className="mb-3 sm:mb-4 md:mb-4.5">
+            <label className="block text-[12px] sm:text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
+              Industry<span className="text-red-600">*</span>
+            </label>
+            <div className="relative" ref={industryRef}>
+              <button
+                type="button"
+                onClick={() => !loading && setIsIndustryOpen(!isIndustryOpen)}
+                className="w-full h-[30px] sm:h-[32px] px-2 pr-8 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] hover:border-[#8a8a8a] transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-left"
                 disabled={loading}
               >
-                <option value="" className="text-[#9c9c9c]">
-                  Select industry
-                </option>
-                {industries.map((ind) => (
-                  <option key={ind.id} value={ind.id}>
-                    {ind.name}
-                  </option>
-                ))}
-              </select>
+                <span
+                  className={
+                    formData.industryId ? "text-gray-900" : "text-[#9c9c9c]"
+                  }
+                >
+                  {formData.industryId
+                    ? industries.find((i) => i.id === formData.industryId)?.name
+                    : "Select industry"}
+                </span>
+              </button>
+              <motion.div
+                animate={{ rotate: isIndustryOpen ? 180 : 0 }}
+                transition={{ duration: 0.2 }}
+                className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none"
+              >
+                <ChevronDown className="w-3.5 h-3.5 text-[#666]" />
+              </motion.div>
+              <AnimatePresence>
+                {isIndustryOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute z-50 w-full mt-1 bg-white border border-[#bebebe] rounded-[6px] shadow-lg max-h-[200px] overflow-y-auto"
+                  >
+                    {industries.map((ind) => (
+                      <div
+                        key={ind.id}
+                        onClick={() => {
+                          setFormData({ ...formData, industryId: ind.id });
+                          setIsIndustryOpen(false);
+                        }}
+                        className="px-2 py-2 text-[9px] text-gray-900 hover:bg-[#f0f9ff] hover:text-[#1e3a8a] cursor-pointer transition-colors"
+                      >
+                        {ind.name}
+                      </div>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
 
           {/* Quantity and Unit */}
-          <div className="grid grid-cols-2 gap-[22.5px] mb-4.5">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-[22.5px] mb-3 sm:mb-4 md:mb-4.5">
             <div>
-              <label className="block text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
+              <label className="block text-[12px] sm:text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
                 Quantity<span className="text-red-600">*</span>
               </label>
               <input
@@ -246,9 +351,12 @@ export default function PostRFQPage() {
                 placeholder="eg., 500"
                 value={formData.quantity || ""}
                 onChange={(e) =>
-                  setFormData({ ...formData, quantity: Number(e.target.value) })
+                  setFormData({
+                    ...formData,
+                    quantity: Number(e.target.value),
+                  })
                 }
-                className="w-full h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+                className="w-full h-[30px] sm:h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
                 required
                 min="1"
                 disabled={loading}
@@ -256,77 +364,108 @@ export default function PostRFQPage() {
             </div>
 
             <div>
-              <label className="block text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
+              <label className="block text-[12px] sm:text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
                 Unit
               </label>
-              <select
-                value={formData.unit}
-                onChange={(e) =>
-                  setFormData({ ...formData, unit: e.target.value as RFQUnit })
-                }
-                className="w-full h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe] appearance-none bg-white"
-                required
-                disabled={loading}
-              >
-                <option value="" className="text-[#9c9c9c]">
-                  Select Unit
-                </option>
-                {units.map((group) => (
-                  <optgroup key={group.category} label={group.category}>
-                    {group.items.map((unit) => (
-                      <option key={unit} value={unit}>
-                        {unit}
-                      </option>
-                    ))}
-                  </optgroup>
-                ))}
-              </select>
+              <div className="relative" ref={unitRef}>
+                <button
+                  type="button"
+                  onClick={() => !loading && setIsUnitOpen(!isUnitOpen)}
+                  className="w-full h-[30px] sm:h-[32px] px-2 pr-8 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] hover:border-[#8a8a8a] transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-left"
+                  disabled={loading}
+                >
+                  <span
+                    className={
+                      formData.unit ? "text-gray-900" : "text-[#9c9c9c]"
+                    }
+                  >
+                    {formData.unit || "Select Unit"}
+                  </span>
+                </button>
+                <motion.div
+                  animate={{ rotate: isUnitOpen ? 180 : 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none"
+                >
+                  <ChevronDown className="w-3.5 h-3.5 text-[#666]" />
+                </motion.div>
+                <AnimatePresence>
+                  {isUnitOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute z-50 w-full mt-1 bg-white border border-[#bebebe] rounded-[6px] shadow-lg max-h-[200px] overflow-y-auto"
+                    >
+                      {units.map((group) => (
+                        <div key={group.category}>
+                          <div className="px-2 py-1.5 text-[8px] font-semibold text-[#0d1b2a] bg-gray-50">
+                            {group.category}
+                          </div>
+                          {group.items.map((unit) => (
+                            <div
+                              key={unit}
+                              onClick={() => {
+                                setFormData({ ...formData, unit });
+                                setIsUnitOpen(false);
+                              }}
+                              className="px-2 pl-4 py-2 text-[9px] text-gray-900 hover:bg-[#f0f9ff] hover:text-[#1e3a8a] cursor-pointer transition-colors"
+                            >
+                              {unit}
+                            </div>
+                          ))}
+                        </div>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </div>
           </div>
 
-          {/* Budget Range and Required by Date */}
-          <div className="grid grid-cols-2 gap-[22.5px] mb-4.5">
-            <div>
-              <label className="block text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
-                Budget
-              </label>
-              <input
-                type="number"
-                placeholder="eg., 50,000"
-                value={formData.budgetMax || ""}
-                onChange={(e) => {
-                  const value = e.target.value;
-                  setFormData({
-                    ...formData,
-                    budgetMax: value ? Number(value) : undefined,
-                  });
-                }}
-                className="w-full h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
-                disabled={loading}
-                min="0"
-              />
-            </div>
+          {/* Budget Range */}
+          <div className="mb-3 sm:mb-4 md:mb-4.5">
+            <label className="block text-[12px] sm:text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
+              Budget Range
+            </label>
+            <input
+              type="number"
+              placeholder="eg., 20,000 - 50,000"
+              value={formData.budgetMax || ""}
+              onChange={(e) => {
+                const value = e.target.value;
+                setFormData({
+                  ...formData,
+                  budgetMax: value ? Number(value) : undefined,
+                });
+              }}
+              className="w-full h-[30px] sm:h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+              disabled={loading}
+              min="0"
+            />
+          </div>
 
-            <div>
-              <label className="block text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
-                Required by Date
-              </label>
-              <input
-                type="date"
-                placeholder="dd-mm-yy"
-                value={formData.requiredByDate || ""}
-                onChange={(e) =>
-                  setFormData({ ...formData, requiredByDate: e.target.value })
-                }
-                className="w-full h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
-                disabled={loading}
-              />
-            </div>
+          {/* Required by Date */}
+          <div className="mb-3 sm:mb-4 md:mb-4.5">
+            <label className="block text-[12px] sm:text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
+              Required by Date
+            </label>
+            <input
+              type="date"
+              placeholder="dd-mm-yy"
+              value={formData.requiredByDate || ""}
+              onChange={(e) =>
+                setFormData({ ...formData, requiredByDate: e.target.value })
+              }
+              className="w-full h-[30px] sm:h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+              disabled={loading}
+            />
           </div>
 
           {/* Detailed Requirements */}
-          <div className="mb-4.5">
-            <label className="block text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
+          <div className="mb-3 sm:mb-4 md:mb-4.5">
+            <label className="block text-[12px] sm:text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
               Detailed Requirements
             </label>
             <textarea
@@ -345,9 +484,9 @@ export default function PostRFQPage() {
           </div>
 
           {/* Preferred Location and RFQ Duration */}
-          <div className="grid grid-cols-2 gap-[22.5px] mb-[27px]">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-[22.5px] mb-[20px] sm:mb-[24px] md:mb-[27px]">
             <div>
-              <label className="block text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
+              <label className="block text-[12px] sm:text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
                 Preferred Location
               </label>
               <input
@@ -360,33 +499,64 @@ export default function PostRFQPage() {
                     preferredLocation: e.target.value,
                   })
                 }
-                className="w-full h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+                className="w-full h-[30px] sm:h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
                 disabled={loading}
               />
             </div>
 
             <div>
-              <label className="block text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
+              <label className="block text-[12px] sm:text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
                 RFQ Duration<span className="text-red-600">*</span>
               </label>
-              <select
-                value={formData.durationDays}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    durationDays: Number(e.target.value),
-                  })
-                }
-                className="w-full h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe] appearance-none bg-white"
-                required
-                disabled={loading}
-              >
-                {durations.map((duration) => (
-                  <option key={duration.value} value={duration.value}>
-                    {duration.label}
-                  </option>
-                ))}
-              </select>
+              <div className="relative" ref={durationRef}>
+                <button
+                  type="button"
+                  onClick={() => !loading && setIsDurationOpen(!isDurationOpen)}
+                  className="w-full h-[30px] sm:h-[32px] px-2 pr-8 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] hover:border-[#8a8a8a] transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-left"
+                  disabled={loading}
+                >
+                  <span className="text-gray-900">
+                    {
+                      durations.find((d) => d.value === formData.durationDays)
+                        ?.label
+                    }
+                  </span>
+                </button>
+                <motion.div
+                  animate={{ rotate: isDurationOpen ? 180 : 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none"
+                >
+                  <ChevronDown className="w-3.5 h-3.5 text-[#666]" />
+                </motion.div>
+                <AnimatePresence>
+                  {isDurationOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute z-50 w-full mt-1 bg-white border border-[#bebebe] rounded-[6px] shadow-lg max-h-[200px] overflow-y-auto"
+                    >
+                      {durations.map((duration) => (
+                        <div
+                          key={duration.value}
+                          onClick={() => {
+                            setFormData({
+                              ...formData,
+                              durationDays: duration.value,
+                            });
+                            setIsDurationOpen(false);
+                          }}
+                          className="px-2 py-2 text-[9px] text-gray-900 hover:bg-[#f0f9ff] hover:text-[#1e3a8a] cursor-pointer transition-colors"
+                        >
+                          {duration.label}
+                        </div>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </div>
           </div>
 
@@ -395,16 +565,16 @@ export default function PostRFQPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-[191px] h-[45px] bg-[#1e3a8a] text-white text-[15px] font-semibold rounded-[11px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center justify-center gap-[11px] disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full sm:w-[191px] h-[40px] sm:h-[45px] bg-[#1e3a8a] text-white text-[13px] sm:text-[15px] font-semibold rounded-[10px] sm:rounded-[11px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center justify-center gap-[9px] sm:gap-[11px] disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? (
                 <>
-                  <div className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full"></div>
+                  <div className="animate-spin h-4 sm:h-5 w-4 sm:w-5 border-2 border-white border-t-transparent rounded-full"></div>
                   Posting...
                 </>
               ) : (
                 <>
-                  <Send className="w-5 h-5" />
+                  <Send className="w-4 sm:w-5 h-4 sm:h-5" />
                   Post RFQ
                 </>
               )}

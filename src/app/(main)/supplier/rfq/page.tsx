@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   Star,
   Check,
@@ -44,6 +45,7 @@ interface RFQ {
 }
 
 export default function SupplierRFQ() {
+  const router = useRouter();
   const { user } = useAuth();
   const [rfqs, setRfqs] = useState<RFQ[]>([]);
   const [loading, setLoading] = useState(true);
@@ -362,9 +364,7 @@ export default function SupplierRFQ() {
                   {rfq.has_quoted ? (
                     <>
                       <button
-                        onClick={() =>
-                          (window.location.href = `/supplier/rfqs/${rfq.id}`)
-                        }
+                        onClick={() => router.push(`/supplier/rfq/${rfq.id}`)}
                         className="px-4 py-2 bg-gray-900 text-white text-sm font-medium hover:bg-gray-800 transition-colors flex items-center gap-2"
                       >
                         View Details
@@ -376,18 +376,14 @@ export default function SupplierRFQ() {
                   ) : rfq.status === "active" ? (
                     <>
                       <button
-                        onClick={() =>
-                          (window.location.href = `/supplier/rfqs/${rfq.id}`)
-                        }
+                        onClick={() => router.push(`/supplier/rfq/${rfq.id}`)}
                         className="px-4 py-2 bg-gray-900 text-white text-sm font-medium hover:bg-gray-800 transition-colors flex items-center gap-2"
                       >
                         <Check className="w-4 h-4" />
                         Submit Quote
                       </button>
                       <button
-                        onClick={() =>
-                          (window.location.href = `/supplier/rfqs/${rfq.id}`)
-                        }
+                        onClick={() => router.push(`/supplier/rfq/${rfq.id}`)}
                         className="px-4 py-2 bg-white border-2 border-gray-300 text-gray-900 text-sm font-medium hover:bg-gray-50 transition-colors"
                       >
                         View Details
@@ -395,9 +391,7 @@ export default function SupplierRFQ() {
                     </>
                   ) : (
                     <button
-                      onClick={() =>
-                        (window.location.href = `/supplier/rfqs/${rfq.id}`)
-                      }
+                      onClick={() => router.push(`/supplier/rfq/${rfq.id}`)}
                       className="px-4 py-2 bg-white border-2 border-gray-300 text-gray-900 text-sm font-medium hover:bg-gray-50 transition-colors"
                     >
                       View Details

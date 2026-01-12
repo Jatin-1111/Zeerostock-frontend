@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Filter, Check } from "lucide-react";
+import { marketplaceService } from "@/services/marketplace.service";
+import type { Category, Industry } from "@/types/api.types";
 
 interface FilterOption {
   id: string;
@@ -16,6 +18,8 @@ interface Filters {
   listingTypes: string[];
   features: string[];
   priceRange: { min: number; max: number };
+  categoryNames?: Record<string, string>; // Map of ID to name
+  industryNames?: Record<string, string>; // Map of ID to name
 }
 
 interface MarketplaceFilterSidebarProps {
@@ -29,27 +33,69 @@ export default function MarketplaceFilterSidebar({
   isOpen,
   onClose,
 }: MarketplaceFilterSidebarProps) {
-  const [priceRange, setPriceRange] = useState({ min: 30000, max: 50000 });
+  const [priceRange, setPriceRange] = useState({ min: 0, max: 100000 });
   const [categories, setCategories] = useState<FilterOption[]>([
     { id: "all", label: "All categories", checked: true },
-    { id: "materials", label: "Materials", checked: false },
-    { id: "electronics", label: "Electronics", checked: false },
-    { id: "electronics2", label: "Electronics", checked: false },
-    { id: "automotive", label: "Automotive", checked: false },
-    { id: "machinery", label: "Machinery", checked: false },
-    { id: "textiles", label: "Textiles", checked: false },
-    { id: "chemicals", label: "Chemicals", checked: false },
-    { id: "healthcare", label: "Healthcare", checked: false },
   ]);
 
   const [industries, setIndustries] = useState<FilterOption[]>([
     { id: "all", label: "All Industries", checked: false },
-    { id: "construction", label: "Construction", checked: false },
-    { id: "technology", label: "Techonolgy", checked: false },
-    { id: "manufacturing", label: "Manufacturing", checked: false },
-    { id: "fashion", label: "Fashion", checked: false },
-    { id: "medical", label: "Medical", checked: false },
   ]);
+
+  const [isLoadingCategories, setIsLoadingCategories] = useState(true);
+  const [isLoadingIndustries, setIsLoadingIndustries] = useState(true);
+
+  // Fetch categories from backend
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await marketplaceService.getCategories();
+        if (response.success && response.data?.categories) {
+          const categoryOptions: FilterOption[] = [
+            { id: "all", label: "All categories", checked: true },
+            ...response.data.categories.map((cat: Category) => ({
+              id: cat.id,
+              label: cat.name,
+              checked: false,
+            })),
+          ];
+          setCategories(categoryOptions);
+        }
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      } finally {
+        setIsLoadingCategories(false);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  // Fetch industries from backend
+  useEffect(() => {
+    const fetchIndustries = async () => {
+      try {
+        const response = await marketplaceService.getIndustries();
+        if (response.success && response.data?.industries) {
+          const industryOptions: FilterOption[] = [
+            { id: "all", label: "All Industries", checked: false },
+            ...response.data.industries.map((ind: Industry) => ({
+              id: ind.id,
+              label: ind.name,
+              checked: false,
+            })),
+          ];
+          setIndustries(industryOptions);
+        }
+      } catch (error) {
+        console.error("Error fetching industries:", error);
+      } finally {
+        setIsLoadingIndustries(false);
+      }
+    };
+
+    fetchIndustries();
+  }, []);
 
   const [conditions, setConditions] = useState<FilterOption[]>([
     { id: "new", label: "New", checked: false },
@@ -73,32 +119,152 @@ export default function MarketplaceFilterSidebar({
     { id: "bulkdiscount", label: "Bulk Discount", checked: false },
   ]);
 
+  // Trigger filter change whenever any filter state changes
+  useEffect(() => {
+    if (onFilterChange) {
+      const selectedCategories = categories
+        .filter((c) => c.checked && c.id !== "all")
+        .map((c) => c.id);
+      const selectedIndustries = industries
+        .filter((i) => i.checked && i.id !== "all")
+        .map((i) => i.id);
+      const selectedConditions = conditions
+        .filter((c) => c.checked)
+        .map((c) => c.id);
+      const selectedListingTypes = listingTypes
+        .filter((l) => l.checked)
+        .map((l) => l.id);
+      const selectedFeatures = features
+        .filter((f) => f.checked)
+        .map((f) => f.id);
+
+      // Create name mappings
+      const categoryNames: Record<string, string> = {};
+      categories.forEach((c) => {
+        categoryNames[c.id] = c.label;
+      });
+
+      const industryNames: Record<string, string> = {};
+      industries.forEach((i) => {
+        industryNames[i.id] = i.label;
+      });
+
+      onFilterChange({
+        categories: selectedCategories,
+        industries: selectedIndustries,
+        conditions: selectedConditions,
+        listingTypes: selectedListingTypes,
+        features: selectedFeatures,
+        priceRange,
+        categoryNames,
+        industryNames,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categories, industries, conditions, listingTypes, features, priceRange]);
+
+  // Handle Escape key to close sidebar
+  const handleEscapeKey = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === "Escape" && isOpen && onClose) {
+        onClose();
+      }
+    },
+    [isOpen, onClose]
+  );
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleEscapeKey);
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, [handleEscapeKey]);
+
   const handleCheckboxChange = (
     section: string,
     optionId: string,
-    setState: React.Dispatch<React.SetStateAction<FilterOption[]>>
+    setState: React.Dispatch<React.SetStateAction<FilterOption[]>>,
+    currentState: FilterOption[]
   ) => {
-    setState((prev) =>
-      prev.map((option) =>
-        option.id === optionId
-          ? { ...option, checked: !option.checked }
-          : option
-      )
-    );
-    // Trigger filter change callback
-    if (onFilterChange) {
-      setTimeout(() => {
-        onFilterChange({
-          categories: categories.filter((c) => c.checked).map((c) => c.id),
-          industries: industries.filter((i) => i.checked).map((i) => i.id),
-          conditions: conditions.filter((c) => c.checked).map((c) => c.id),
-          listingTypes: listingTypes.filter((l) => l.checked).map((l) => l.id),
-          features: features.filter((f) => f.checked).map((f) => f.id),
-          priceRange,
-        });
-      }, 0);
+    // Handle "All" logic for categories and industries
+    if (optionId === "all") {
+      setState((prev) =>
+        prev.map((option) => ({
+          ...option,
+          checked: option.id === "all",
+        }))
+      );
+    } else {
+      setState((prev) =>
+        prev.map((option) => {
+          if (option.id === optionId) {
+            return { ...option, checked: !option.checked };
+          }
+          // Uncheck "All" if any other option is checked
+          if (option.id === "all") {
+            return { ...option, checked: false };
+          }
+          return option;
+        })
+      );
     }
   };
+
+  const handlePriceChange = (type: "min" | "max", value: number) => {
+    setPriceRange((prev) => {
+      const newRange = { ...prev, [type]: value };
+      // Ensure min doesn't exceed max and max doesn't go below min
+      if (type === "min" && newRange.min > newRange.max) {
+        newRange.max = newRange.min;
+      } else if (type === "max" && newRange.max < newRange.min) {
+        newRange.min = newRange.max;
+      }
+      return newRange;
+    });
+  };
+
+  const clearAllFilters = () => {
+    setCategories((prev) =>
+      prev.map((option) => ({
+        ...option,
+        checked: option.id === "all",
+      }))
+    );
+    setIndustries((prev) =>
+      prev.map((option) => ({
+        ...option,
+        checked: false,
+      }))
+    );
+    setConditions((prev) =>
+      prev.map((option) => ({
+        ...option,
+        checked: false,
+      }))
+    );
+    setListingTypes((prev) =>
+      prev.map((option) => ({
+        ...option,
+        checked: false,
+      }))
+    );
+    setFeatures((prev) =>
+      prev.map((option) => ({
+        ...option,
+        checked: false,
+      }))
+    );
+    setPriceRange({ min: 0, max: 100000 });
+  };
+
+  // Count active filters (excluding "all" selections)
+  const activeFiltersCount =
+    categories.filter((c) => c.checked && c.id !== "all").length +
+    industries.filter((i) => i.checked && i.id !== "all").length +
+    conditions.filter((c) => c.checked).length +
+    listingTypes.filter((l) => l.checked).length +
+    features.filter((f) => f.checked).length +
+    (priceRange.min > 0 || priceRange.max < 100000 ? 1 : 0);
 
   const FilterCheckbox = ({
     option,
@@ -107,9 +273,10 @@ export default function MarketplaceFilterSidebar({
     option: FilterOption;
     onChange: () => void;
   }) => (
-    <div className="flex items-center justify-between py-1.5">
+    <div className="flex items-center justify-between py-[10px]">
       <label
-        className={`text-[11px] font-medium cursor-pointer ${
+        onClick={onChange}
+        className={`text-[12px] font-medium cursor-pointer select-none ${
           option.checked ? "text-[#2aae7a]" : "text-[#787878]"
         }`}
       >
@@ -117,13 +284,14 @@ export default function MarketplaceFilterSidebar({
       </label>
       <button
         onClick={onChange}
-        className={`w-[17px] h-[17px] border-2 rounded-[4px] flex items-center justify-center cursor-pointer transition-colors ${
+        className={`w-[15px] h-[15px] border-2 rounded-[4px] flex items-center justify-center cursor-pointer transition-colors flex-shrink-0 ${
           option.checked
             ? "bg-[#2aae7a] border-[#2aae7a]"
             : "bg-white border-[#cacaca]"
         }`}
+        aria-label={`${option.checked ? "Uncheck" : "Check"} ${option.label}`}
       >
-        {option.checked && <Check className="w-[11px] h-[11px] text-white" />}
+        {option.checked && <Check className="w-[10px] h-[10px] text-white" />}
       </button>
     </div>
   );
@@ -133,7 +301,7 @@ export default function MarketplaceFilterSidebar({
       {/* Mobile Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
           onClick={onClose}
         />
       )}
@@ -141,118 +309,170 @@ export default function MarketplaceFilterSidebar({
       {/* Sidebar */}
       <div
         className={`
-          sticky top-0 h-screen bg-white 
+          fixed lg:sticky lg:top-0 left-0 h-[calc(100vh-64px)] lg:h-screen bg-white 
           shadow-[1px_0px_4px_0px_rgba(0,0,0,0.25)]
           transition-all duration-300 ease-in-out
           overflow-y-auto overflow-x-hidden
-          ${isOpen ? "w-[200px] opacity-100" : "w-0 opacity-0"}
+          z-50 lg:z-auto
+          ${isOpen ? "w-[220px] opacity-100" : "w-0 opacity-0 lg:w-0"}
         `}
       >
         <div
-          className={`w-[200px] px-[13.5px] py-[18px] ${
+          className={`w-[220px] px-[13px] py-[25px] ${
             isOpen ? "" : "invisible"
           }`}
         >
           {/* Header */}
-          <div className="flex items-center gap-1.5 mb-[18px]">
-            <Filter className="w-[17px] h-[17px] text-[#0d1b2a]" />
-            <h2 className="text-[15px] font-medium text-[#0d1b2a]">Filters</h2>
+          <div className="flex items-center justify-between mb-[20px]">
+            <div className="flex items-center gap-[10px]">
+              <Filter className="w-[12px] h-[12px] text-[#0d1b2a]" />
+              <h2 className="text-[13px] font-medium text-[#0d1b2a]">
+                Filters
+              </h2>
+              {activeFiltersCount > 0 && (
+                <span className="bg-[#2aae7a] text-white text-[10px] font-medium px-1.5 py-0.5 rounded-full">
+                  {activeFiltersCount}
+                </span>
+              )}
+            </div>
+            {activeFiltersCount > 0 && (
+              <button
+                onClick={clearAllFilters}
+                className="text-[10px] font-medium text-[#2aae7a] hover:text-[#239662] transition-colors"
+              >
+                Clear All
+              </button>
+            )}
           </div>
 
           {/* Categories */}
-          <div className="mb-[13.5px]">
-            <h3 className="text-[15px] font-medium text-[#0d1b2a] mb-2">
+          <div className="mb-6">
+            <h3 className="text-[12px] font-medium text-[#0d1b2a] mb-[20px]">
               Categories
             </h3>
-            <div className="space-y-1">
+            <div className="space-y-[4px]">
               {categories.map((option) => (
                 <FilterCheckbox
                   key={option.id}
                   option={option}
                   onChange={() =>
-                    handleCheckboxChange("categories", option.id, setCategories)
+                    handleCheckboxChange(
+                      "categories",
+                      option.id,
+                      setCategories,
+                      categories
+                    )
                   }
                 />
               ))}
             </div>
           </div>
 
-          <div className="w-full h-px bg-gray-200 my-[13.5px]"></div>
+          <div className="w-full h-px bg-gray-200 my-[21px]"></div>
 
           {/* Industries */}
-          <div className="mb-[13.5px]">
-            <h3 className="text-[15px] font-medium text-[#0d1b2a] mb-2">
+          <div className="mb-6">
+            <h3 className="text-[12px] font-medium text-[#0d1b2a] mb-[20px]">
               Industries
             </h3>
-            <div className="space-y-1">
+            <div className="space-y-[4px]">
               {industries.map((option) => (
                 <FilterCheckbox
                   key={option.id}
                   option={option}
                   onChange={() =>
-                    handleCheckboxChange("industries", option.id, setIndustries)
+                    handleCheckboxChange(
+                      "industries",
+                      option.id,
+                      setIndustries,
+                      industries
+                    )
                   }
                 />
               ))}
             </div>
           </div>
 
-          <div className="w-full h-px bg-gray-200 my-[13.5px]"></div>
+          <div className="w-full h-px bg-gray-200 my-[21px]"></div>
 
           {/* Price Range */}
-          <div className="mb-[13.5px]">
-            <h3 className="text-[15px] font-medium text-[#0d1b2a] mb-1.5">
+          <div className="mb-6">
+            <h3 className="text-[12px] font-medium text-[#0d1b2a] mb-2">
               Price Range
             </h3>
-            <p className="text-[10.5px] font-medium text-[#0d1b2a] mb-2">
-              ₹{priceRange.min.toLocaleString()}- ₹
-              {priceRange.max.toLocaleString()}
+            <p className="text-[12px] font-medium text-[#0d1b2a] mb-3">
+              ₹{priceRange.min.toLocaleString("en-IN")}- ₹
+              {priceRange.max.toLocaleString("en-IN")}
             </p>
-            <div className="relative pt-1.5 pb-[13.5px]">
-              <input
-                type="range"
-                min="0"
-                max="100000"
-                value={priceRange.max}
-                onChange={(e) =>
-                  setPriceRange({
-                    ...priceRange,
-                    max: parseInt(e.target.value),
-                  })
-                }
-                className="w-full h-1 bg-gray-200 rounded-full appearance-none cursor-pointer accent-[#2aae7a]"
-              />
+            <div className="space-y-2">
+              <div>
+                <label className="text-[10px] text-[#787878] mb-1 block">
+                  Min: ₹{priceRange.min.toLocaleString("en-IN")}
+                </label>
+                <input
+                  type="range"
+                  min="0"
+                  max="100000"
+                  step="1000"
+                  value={priceRange.min}
+                  onChange={(e) =>
+                    handlePriceChange("min", parseInt(e.target.value))
+                  }
+                  className="w-full h-1 bg-gray-200 rounded-full appearance-none cursor-pointer accent-[#2aae7a]"
+                />
+              </div>
+              <div>
+                <label className="text-[10px] text-[#787878] mb-1 block">
+                  Max: ₹{priceRange.max.toLocaleString("en-IN")}
+                </label>
+                <input
+                  type="range"
+                  min="0"
+                  max="100000"
+                  step="1000"
+                  value={priceRange.max}
+                  onChange={(e) =>
+                    handlePriceChange("max", parseInt(e.target.value))
+                  }
+                  className="w-full h-1 bg-gray-200 rounded-full appearance-none cursor-pointer accent-[#2aae7a]"
+                />
+              </div>
             </div>
           </div>
 
-          <div className="w-full h-px bg-gray-200 my-[13.5px]"></div>
+          <div className="w-full h-px bg-gray-200 my-[21px]"></div>
 
           {/* Condition */}
-          <div className="mb-[13.5px]">
-            <h3 className="text-[15px] font-medium text-[#0d1b2a] mb-2">
+          <div className="mb-6">
+            <h3 className="text-[12px] font-medium text-[#0d1b2a] mb-[20px]">
               Condition
             </h3>
-            <div className="space-y-1">
+            <div className="space-y-[4px]">
               {conditions.map((option) => (
                 <FilterCheckbox
                   key={option.id}
                   option={option}
                   onChange={() =>
-                    handleCheckboxChange("conditions", option.id, setConditions)
+                    handleCheckboxChange(
+                      "conditions",
+                      option.id,
+                      setConditions,
+                      conditions
+                    )
                   }
                 />
               ))}
             </div>
           </div>
 
-          <div className="w-full h-px bg-gray-200 my-[13.5px]"></div>
+          <div className="w-full h-px bg-gray-200 my-[21px]"></div>
 
           {/* Listing Type */}
-          <div className="mb-[13.5px]">
-            <h3 className="text-[15px] font-medium text-[#0d1b2a] mb-2">
+          <div className="mb-6">
+            <h3 className="text-[12px] font-medium text-[#0d1b2a] mb-[20px]">
               Listing Type
             </h3>
-            <div className="space-y-1">
+            <div className="space-y-[4px]">
               {listingTypes.map((option) => (
                 <FilterCheckbox
                   key={option.id}
@@ -261,7 +481,8 @@ export default function MarketplaceFilterSidebar({
                     handleCheckboxChange(
                       "listingTypes",
                       option.id,
-                      setListingTypes
+                      setListingTypes,
+                      listingTypes
                     )
                   }
                 />
@@ -269,20 +490,25 @@ export default function MarketplaceFilterSidebar({
             </div>
           </div>
 
-          <div className="w-full h-px bg-gray-200 my-[13.5px]"></div>
+          <div className="w-full h-px bg-gray-200 my-[21px]"></div>
 
           {/* Features */}
-          <div className="mb-[13.5px]">
-            <h3 className="text-[15px] font-medium text-[#0d1b2a] mb-2">
+          <div className="mb-6">
+            <h3 className="text-[12px] font-medium text-[#0d1b2a] mb-[20px]">
               Features
             </h3>
-            <div className="space-y-1">
+            <div className="space-y-[4px]">
               {features.map((option) => (
                 <FilterCheckbox
                   key={option.id}
                   option={option}
                   onChange={() =>
-                    handleCheckboxChange("features", option.id, setFeatures)
+                    handleCheckboxChange(
+                      "features",
+                      option.id,
+                      setFeatures,
+                      features
+                    )
                   }
                 />
               ))}

@@ -50,7 +50,7 @@ export default function Header({ onSidebarToggle }: HeaderProps) {
           {/* Logo */}
           <Link href="/" className="shrink-0">
             <img
-              src={"/Zeerostock Logo B White.png"}
+              src={"/Zeerostock Logo-1.svg"}
               alt="Zeerostock"
               className="w-[112.5px]"
             />

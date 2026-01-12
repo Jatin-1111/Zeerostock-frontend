@@ -11,6 +11,7 @@ const imgUpscaleRe2 =
 
 export default function Header() {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const router = useRouter();
   const { user, isAuthenticated, logout } = useAuth();
 
@@ -25,44 +26,44 @@ export default function Header() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 h-13">
+    <header className="fixed top-0 left-0 right-0 z-50 h-[58px] sm:h-[60px] md:h-13">
       <div className="absolute inset-0 bg-linear-to-b from-[#43C786] to-[#0A2540] backdrop-blur-[5.9px]" />
-      <div className="relative h-full max-w-[960px] mx-auto px-13 flex items-center justify-between">
+      <div className="relative h-full max-w-[412px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[960px] mx-auto px-4 sm:px-6 md:px-8 lg:px-13 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="shrink-0">
           <img
-            src={"/Zeerostock Logo B White.png"}
+            src={"/Zeerostock Logo-1.svg"}
             alt="Zeerostock"
-            className="w-auto h-[83px]"
+            className="w-auto h-[80px] sm:h-[85px] md:h-[90px]"
           />
         </Link>
-        {/* Navigation */}
-        <nav className="flex items-center gap-5">
+        {/* Navigation - Hidden on mobile */}
+        <nav className="hidden md:flex items-center gap-3 lg:gap-5">
           <Link
             href="/home"
-            className="text-white text-[13px] font-medium hover:text-white/90 transition-colors"
+            className="text-white text-[11px] md:text-[12px] lg:text-[13px] font-medium hover:text-white/90 transition-colors"
           >
             Home
           </Link>
           <Link
             href="/about"
-            className="text-white text-[13px] font-medium hover:text-white/90 transition-colors"
+            className="text-white text-[11px] md:text-[12px] lg:text-[13px] font-medium hover:text-white/90 transition-colors"
           >
             About Us
           </Link>
           <Link
             href="/helpdesk"
-            className="text-white text-[13px] font-medium hover:text-white/90 transition-colors"
+            className="text-white text-[11px] md:text-[12px] lg:text-[13px] font-medium hover:text-white/90 transition-colors"
           >
             Contact Us
           </Link>
         </nav>
 
         {/* Right Side Actions */}
-        <div className="flex items-center gap-3">
-          {/* Language Selector */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Language Selector - Hidden on mobile */}
           <button
-            className="flex items-center gap-1 px-3 py-1 rounded-full hover:bg-white/10 transition-colors"
+            className="hidden sm:flex items-center gap-1 px-2 sm:px-3 py-1 rounded-full hover:bg-white/10 transition-colors"
             aria-label="Change language"
           >
             <svg
@@ -80,16 +81,16 @@ export default function Header() {
             <span className="text-white text-[9px] font-medium">EN</span>
           </button>
 
-          {/* WhatsApp Icon */}
+          {/* WhatsApp Icon - Hidden on mobile */}
           <Link
             href="https://wa.me/918956835375"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-[29px] h-[29px] bg-[#25D366] rounded-full flex items-center justify-center hover:bg-[#25D366]/90 transition-colors"
+            className="hidden sm:flex w-[27px] md:w-[29px] h-[27px] md:h-[29px] bg-[#25D366] rounded-full items-center justify-center hover:bg-[#25D366]/90 transition-colors"
             aria-label="Contact us on WhatsApp"
           >
             <svg
-              className="w-4 h-4 text-white"
+              className="w-[14px] md:w-4 h-[14px] md:h-4 text-white"
               fill="currentColor"
               viewBox="0 0 24 24"
             >
@@ -97,15 +98,81 @@ export default function Header() {
             </svg>
           </Link>
 
+          {/* Mobile Menu Dropdown Button - Visible only on mobile */}
+          <div className="relative md:hidden">
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="w-[24px] h-[24px] flex items-center justify-center"
+              aria-label="Mobile menu"
+            >
+              <svg
+                className="w-4 h-4 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
+
+            {/* Mobile Dropdown Menu */}
+            {isMobileMenuOpen && (
+              <div className="absolute right-0 mt-2 w-[180px] bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+                <div className="py-2">
+                  <Link
+                    href="/home"
+                    className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 transition-colors border-b border-gray-100"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Home
+                  </Link>
+                  <Link
+                    href="/about"
+                    className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 transition-colors border-b border-gray-100"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    About Us
+                  </Link>
+                  <Link
+                    href="/for-buyer"
+                    className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 transition-colors border-b border-gray-100"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Buyer
+                  </Link>
+                  <Link
+                    href="/for-supplier"
+                    className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 transition-colors border-b border-gray-100"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Suppliers
+                  </Link>
+                  <Link
+                    href="/roi-calculator"
+                    className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    ROI
+                  </Link>
+                </div>
+              </div>
+            )}
+          </div>
+
           {/* User Profile Dropdown */}
           <div className="relative">
             <button
               onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-              className="w-[29px] h-[29px] bg-[#0a2540] rounded-full flex items-center justify-center hover:bg-[#0a2540]/90 transition-colors"
+              className="w-[24px] sm:w-[27px] md:w-[29px] h-[24px] sm:h-[27px] md:h-[29px] bg-[#0a2540] rounded-full flex items-center justify-center hover:bg-[#0a2540]/90 transition-colors"
               aria-label="User profile"
             >
               <svg
-                className="w-4 h-4 text-white"
+                className="w-3 sm:w-[14px] md:w-4 h-3 sm:h-[14px] md:h-4 text-white"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -120,7 +187,7 @@ export default function Header() {
             </button>
 
             {isUserMenuOpen && (
-              <div className="absolute right-0 mt-[5px] w-[149px] bg-white border border-gray-900 rounded-[5px] shadow-lg z-20">
+              <div className="absolute right-0 mt-[5px] w-[140px] sm:w-[149px] bg-white border border-gray-900 rounded-[5px] shadow-lg z-20">
                 {isAuthenticated && user ? (
                   // Logged In User Menu
                   <div className="py-[5px]">

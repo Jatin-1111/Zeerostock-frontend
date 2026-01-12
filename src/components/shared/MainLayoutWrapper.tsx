@@ -37,16 +37,16 @@ export default function MainLayoutWrapper({
   const shouldShowSidebar = isPublicRoute || isBuyerRoute || isSupplierRoute;
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col min-h-screen">
       <Header onSidebarToggle={handleSidebarToggle} />
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 relative">
         {/* Show appropriate sidebar based on route */}
         {shouldShowSidebar && (
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: isSidebarOpen ? 220 : 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="flex-shrink-0 overflow-hidden h-full"
+            className="flex-shrink-0 overflow-hidden sticky top-0 self-start h-screen"
           >
             {isPublicRoute && (
               <Sidebar isOpen={isSidebarOpen} onToggle={setIsSidebarOpen} />

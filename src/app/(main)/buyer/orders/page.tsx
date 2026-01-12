@@ -22,21 +22,21 @@ const FrameIcon = () => (
   >
     <path
       d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z"
-      stroke="#292D32"
+      stroke="#ffffff"
       strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
     />
     <path
       d="M15.5 9L9 15.5"
-      stroke="#292D32"
+      stroke="#ffffff"
       strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
     />
     <path
       d="M15.5 14.13V9H10.37"
-      stroke="#292D32"
+      stroke="#ffffff"
       strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -164,11 +164,11 @@ export default function MyOrdersPage() {
     <div className="relative min-h-screen pb-[20px] sm:pb-[28px] md:pb-[34px] pt-[60px] sm:pt-[68px] md:pt-[75px]">
       <div className="mx-auto max-w-[1440px] px-4 sm:px-6 md:px-7.5">
         {/* Page Title and Export Button */}
-        <div className="mb-[40px] sm:mb-[50px] md:mb-[60px] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
+        <div className="mb-[40px] sm:mb-[50px] md:mb-[60px] flex flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
           <h1 className="m-0 text-[16px] sm:text-[18px] md:text-[20px] font-semibold text-[#0d1b2a]">
             My Orders
           </h1>
-          <button className="flex h-[30px] sm:h-[32px] md:h-[34px] cursor-pointer items-center gap-[4px] sm:gap-[5px] md:gap-[5.5px] rounded-[7px] sm:rounded-[8px] md:rounded-[8.5px] border-none bg-[#1e3a8a] px-[40px] sm:px-[50px] md:px-[62px] text-[9px] sm:text-[9.5px] md:text-[10px] font-semibold text-white">
+          <button className="flex h-[32px] sm:h-[34px] md:h-[36px] cursor-pointer items-center gap-[4px] sm:gap-[5px] md:gap-[5.5px] rounded-[7px] sm:rounded-[8px] md:rounded-[8.5px] border-none bg-[#1e3a8a] px-[20px] sm:px-[25px] md:px-[31px] text-[9px] sm:text-[9.5px] md:text-[10px] font-semibold text-white">
             <FrameIcon />
             Export Orders
           </button>

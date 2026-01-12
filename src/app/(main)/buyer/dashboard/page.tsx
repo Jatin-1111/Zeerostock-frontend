@@ -87,7 +87,7 @@ export default function BuyerDashboardPage() {
   }, []);
 
   return (
-    <div className="min-h-screen px-15 py-4.5">
+    <div className="min-h-screen px-4 sm:px-6 md:px-10 lg:px-15 py-3 sm:py-4 md:py-4.5">
       {error && (
         <div className="mb-2 p-2 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
           {error}
@@ -96,16 +96,16 @@ export default function BuyerDashboardPage() {
 
       <DashboardHeader userName={userName} />
 
-      <div className="mt-4.5">
+      <div className="mt-3 sm:mt-4 md:mt-4.5">
         <StatsCards stats={orderStats} isLoading={isLoading} />
       </div>
 
-      <div className="flex gap-4.5 mt-4.5">
-        <div className="flex-3">
+      <div className="flex flex-col lg:flex-row gap-3 sm:gap-4 md:gap-4.5 mt-3 sm:mt-4 md:mt-4.5">
+        <div className="flex-1 lg:flex-3">
           <ActiveRFQsList />
         </div>
 
-        <div className="flex-1 mt-10.5">
+        <div className="flex-1 lg:mt-10.5">
           <CostSavings />
         </div>
       </div>

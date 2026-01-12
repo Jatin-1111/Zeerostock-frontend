@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { Menu } from "lucide-react";
+import { Menu, ChevronDown, MapPin } from "lucide-react";
 import MarketplaceFilterSidebar from "@/components/marketplace/MarketplaceFilterSidebar";
 import { marketplaceService } from "@/services/marketplace.service";
 import type { Product } from "@/types/api.types";
@@ -28,60 +28,108 @@ export default function ExploreProductGrid({
   const [totalPages, setTotalPages] = useState(1);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [filters, setFilters] = useState<Record<string, any>>({});
+  const [activeFilters, setActiveFilters] = useState<Record<string, any>>({});
 
-  const fetchProducts = useCallback(
-    async (query?: string) => {
-      try {
-        setIsLoading(true);
-        setError(null);
+  const fetchProducts = async (query?: string) => {
+    try {
+      setIsLoading(true);
+      setError(null);
 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const apiFilters: Record<string, any> = {
-          page: currentPage,
-          limit: 20,
-          sortBy: sortBy === "relevance" ? undefined : sortBy,
-          ...filters,
-        };
+      // Build API filters from active filters
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const apiFilters: Record<string, any> = {
+        page: currentPage,
+        limit: 20,
+        sortBy: sortBy === "relevance" ? undefined : sortBy,
+      };
 
-        if (query) {
-          apiFilters.search = query;
+      // Add price range
+      if (activeFilters.priceRange) {
+        if (activeFilters.priceRange.min > 0) {
+          apiFilters.minPrice = activeFilters.priceRange.min;
         }
-
-        const response = await marketplaceService.getProducts(apiFilters);
-
-        if (response.success && response.data) {
-          const productsList = Array.isArray(response.data.products)
-            ? response.data.products
-            : [];
-          setProducts(productsList);
-          setTotalPages(response.data.pagination?.totalPages || 1);
-        } else {
-          // Handle case where API returns success but no data
-          setProducts([]);
-          setTotalPages(1);
+        if (activeFilters.priceRange.max < 100000) {
+          apiFilters.maxPrice = activeFilters.priceRange.max;
         }
-      } catch (err) {
-        console.error("Error fetching products:", err);
-        setError("Unable to load products. Please try again later.");
+      }
+
+      // Add conditions (array to comma-separated string)
+      if (activeFilters.conditions && activeFilters.conditions.length > 0) {
+        apiFilters.condition = activeFilters.conditions;
+      }
+
+      // Add listing types
+      if (activeFilters.listingTypes && activeFilters.listingTypes.length > 0) {
+        apiFilters.listingType = activeFilters.listingTypes;
+      }
+
+      // Add categories (use first category as categoryId)
+      if (activeFilters.categories && activeFilters.categories.length > 0) {
+        apiFilters.categoryId = activeFilters.categories[0];
+      }
+
+      // Add industries (use first industry as industryId)
+      if (activeFilters.industries && activeFilters.industries.length > 0) {
+        apiFilters.industryId = activeFilters.industries[0];
+      }
+
+      // Add features
+      if (activeFilters.features && activeFilters.features.length > 0) {
+        // Handle verified supplier
+        if (activeFilters.features.includes("verified")) {
+          apiFilters.verified = true;
+        }
+        // Handle trending - can be used with sort
+        if (activeFilters.features.includes("trending")) {
+          apiFilters.trending = true;
+        }
+        // Handle flash deal - high discount filter
+        if (activeFilters.features.includes("flashdeal")) {
+          apiFilters.minDiscount = 30; // 30% or more discount
+        }
+      }
+
+      if (query) {
+        apiFilters.search = query;
+      }
+
+      const response = await marketplaceService.getProducts(apiFilters);
+
+      if (response.success && response.data) {
+        const productsList = Array.isArray(response.data.products)
+          ? response.data.products
+          : [];
+        setProducts(productsList);
+        setTotalPages(response.data.pagination?.totalPages || 1);
+      } else {
+        // Handle case where API returns success but no data
         setProducts([]);
         setTotalPages(1);
-      } finally {
-        setIsLoading(false);
       }
-    },
-    [currentPage, sortBy, filters]
-  );
+    } catch (err) {
+      console.error("Error fetching products:", err);
+      setError("Unable to load products. Please try again later.");
+      setProducts([]);
+      setTotalPages(1);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
+  // Separate effect for search params
   useEffect(() => {
     const query = searchParams.get("q");
     if (query) {
       setSearchQuery(query);
-      fetchProducts(query);
-    } else {
-      fetchProducts();
     }
-  }, [searchParams, fetchProducts]);
+  }, [searchParams]);
+
+  // Fetch products when dependencies change
+  useEffect(() => {
+    const query = searchParams.get("q");
+    fetchProducts(query || undefined);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage, sortBy, activeFilters, searchParams]);
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
@@ -91,7 +139,35 @@ export default function ExploreProductGrid({
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleFilterChange = (newFilters: Record<string, any>) => {
-    setFilters(newFilters);
+    console.log("Filter change received:", newFilters);
+    setActiveFilters(newFilters);
+    setCurrentPage(1);
+  };
+
+  // Calculate total active filters count
+  const getActiveFiltersCount = () => {
+    let count = 0;
+    if (activeFilters.categories?.length > 0)
+      count += activeFilters.categories.length;
+    if (activeFilters.industries?.length > 0)
+      count += activeFilters.industries.length;
+    if (activeFilters.conditions?.length > 0)
+      count += activeFilters.conditions.length;
+    if (activeFilters.listingTypes?.length > 0)
+      count += activeFilters.listingTypes.length;
+    if (activeFilters.features?.length > 0)
+      count += activeFilters.features.length;
+    if (
+      activeFilters.priceRange &&
+      (activeFilters.priceRange.min > 0 ||
+        activeFilters.priceRange.max < 100000)
+    )
+      count += 1;
+    return count;
+  };
+
+  const clearAllFilters = () => {
+    setActiveFilters({});
     setCurrentPage(1);
   };
 
@@ -107,56 +183,54 @@ export default function ExploreProductGrid({
       {/* Main Content */}
       <div className="flex-1">
         {/* Header with Search */}
-        <div className="bg-white shadow-[0px_1px_5px_0px_rgba(0,0,0,0.25)]">
-          <div className="flex items-center gap-[10.5px] px-[10.5px] py-[15px]">
+        <div className="bg-white shadow-[0px_0.5px_2.5px_0px_rgba(0,0,0,0.25)]">
+          <div className="flex items-center gap-2.5 px-2.5 py-4">
             {/* Menu Button - Toggle Filter Sidebar */}
             <button
               onClick={() => setIsFilterOpen(!isFilterOpen)}
-              className="text-gray-700 transition-colors"
+              className="text-gray-700 transition-colors flex-shrink-0 relative"
               aria-label="Toggle filters"
             >
-              <Menu className="w-[19.5px] h-[19.5px]" />
+              <Menu className="w-5 h-5" />
+              {getActiveFiltersCount() > 0 && (
+                <span className="absolute -top-1 -right-1 bg-[#2aae7a] text-white text-[8px] font-bold px-1 py-0.5 rounded-full min-w-[16px] text-center">
+                  {getActiveFiltersCount()}
+                </span>
+              )}
             </button>
 
             {/* Search Bar */}
-            <div className="flex-1 max-w-[443px]">
-              <div className="flex items-center gap-[184px] bg-[rgba(235,235,235,0.65)] rounded-[8px] shadow-[0px_0px_5px_0px_rgba(24,181,34,0.5)] px-[10.5px] py-[4.5px]">
-                <div className="flex items-center gap-[6px]">
-                  <span className="text-[10px] font-semibold text-[#374151] opacity-80">
+            <div className="flex-1 max-w-2xl">
+              <div className="flex items-center bg-[rgba(235,235,235,0.65)] rounded-[10px] shadow-[0px_0px_2.5px_0px_rgba(24,181,34,0.5)] px-3 py-1.5">
+                {/* Category Dropdown */}
+                <div className="flex items-center gap-1.5 flex-shrink-0">
+                  <span className="text-[11px] font-semibold text-[#374151] opacity-80">
                     All
                   </span>
-                  <svg
-                    className="w-[15px] h-[15px] text-[#374151] opacity-80"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                  <div className="w-0 h-[19.5px] border-l-2 border-gray-300 mx-[2px]"></div>
-                  <input
-                    type="text"
-                    placeholder="Search for products, categories, etc"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        handleSearch(searchQuery);
-                      }
-                    }}
-                    className="flex-1 bg-transparent text-[8px] font-medium text-[#374151] opacity-80 focus:outline-none placeholder:text-[#374151] placeholder:opacity-80 min-w-[127px]"
-                  />
+                  <ChevronDown className="w-4 h-4 text-[#374151] opacity-80" />
+                  <div className="w-px h-5 bg-gray-300 mx-1"></div>
                 </div>
-                <div className="flex items-center gap-[8px]">
-                  <div className="w-0 h-[19.5px] border-l-2 border-gray-300"></div>
+
+                {/* Search Input */}
+                <input
+                  type="text"
+                  placeholder="Search for products, categories, etc"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      handleSearch(searchQuery);
+                    }
+                  }}
+                  className="flex-1 bg-transparent text-[9.5px] font-medium text-[#374151] opacity-80 focus:outline-none placeholder:text-[#374151] placeholder:opacity-80 min-w-0 px-2"
+                />
+
+                {/* Search Button */}
+                <div className="flex items-center gap-2 flex-shrink-0">
+                  <div className="w-px h-5 bg-gray-300"></div>
                   <button
                     onClick={() => handleSearch(searchQuery)}
-                    className="text-[10.5px] font-medium text-[#374151] opacity-80 hover:opacity-100 transition-opacity"
+                    className="text-[12px] font-medium text-[#374151] opacity-80 hover:opacity-100 transition-opacity px-2"
                   >
                     Search
                   </button>
@@ -164,16 +238,81 @@ export default function ExploreProductGrid({
               </div>
             </div>
           </div>
+
+          {/* Active Filters Display */}
+          {getActiveFiltersCount() > 0 && (
+            <div className="px-2.5 py-2 border-t border-gray-200 bg-gray-50">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-[10px] font-medium text-[#787878]">
+                  Active Filters:
+                </span>
+                {activeFilters.categories?.map((catId: string) => (
+                  <span
+                    key={catId}
+                    className="px-2 py-1 bg-[#2aae7a] text-white text-[9px] font-medium rounded-full"
+                  >
+                    {activeFilters.categoryNames?.[catId] || catId}
+                  </span>
+                ))}
+                {activeFilters.industries?.map((indId: string) => (
+                  <span
+                    key={indId}
+                    className="px-2 py-1 bg-[#1e3a8a] text-white text-[9px] font-medium rounded-full"
+                  >
+                    {activeFilters.industryNames?.[indId] || indId}
+                  </span>
+                ))}
+                {activeFilters.conditions?.map((cond: string) => (
+                  <span
+                    key={cond}
+                    className="px-2 py-1 bg-purple-600 text-white text-[9px] font-medium rounded-full"
+                  >
+                    {cond}
+                  </span>
+                ))}
+                {activeFilters.listingTypes?.map((type: string) => (
+                  <span
+                    key={type}
+                    className="px-2 py-1 bg-orange-600 text-white text-[9px] font-medium rounded-full"
+                  >
+                    {type}
+                  </span>
+                ))}
+                {activeFilters.features?.map((feat: string) => (
+                  <span
+                    key={feat}
+                    className="px-2 py-1 bg-pink-600 text-white text-[9px] font-medium rounded-full"
+                  >
+                    {feat}
+                  </span>
+                ))}
+                {activeFilters.priceRange &&
+                  (activeFilters.priceRange.min > 0 ||
+                    activeFilters.priceRange.max < 100000) && (
+                    <span className="px-2 py-1 bg-teal-600 text-white text-[9px] font-medium rounded-full">
+                      ₹{activeFilters.priceRange.min.toLocaleString()} - ₹
+                      {activeFilters.priceRange.max.toLocaleString()}
+                    </span>
+                  )}
+                <button
+                  onClick={clearAllFilters}
+                  className="ml-auto px-2 py-1 text-[9px] font-medium text-red-600 hover:text-red-700 hover:bg-red-50 rounded transition-colors"
+                >
+                  Clear All Filters
+                </button>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Error Message */}
         {error && (
-          <div className="px-[10.5px] py-2">
-            <div className="p-[10.5px] bg-red-50 border border-red-200 rounded-[8px]">
+          <div className="px-2.5 py-1">
+            <div className="p-2.5 bg-red-50 border border-red-200 rounded">
               <div className="flex items-start justify-between">
-                <div className="flex items-start gap-3">
+                <div className="flex items-start gap-1.5">
                   <svg
-                    className="w-[18px] h-[18px] text-red-600 mt-0.5 shrink-0"
+                    className="w-4 h-4 text-red-600 mt-0.5 shrink-0"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -184,15 +323,15 @@ export default function ExploreProductGrid({
                     />
                   </svg>
                   <div>
-                    <h3 className="text-[12px] font-semibold text-red-800 mb-0.5">
+                    <h3 className="text-[6px] font-semibold text-red-800 mb-0.5">
                       Error Loading Products
                     </h3>
-                    <p className="text-[10.5px] text-red-600">{error}</p>
+                    <p className="text-[5px] text-red-600">{error}</p>
                   </div>
                 </div>
                 <button
                   onClick={() => fetchProducts(searchQuery)}
-                  className="ml-3 px-3 py-1.5 text-[10.5px] bg-red-600 text-white rounded-[8px] hover:bg-red-700 transition-colors shrink-0"
+                  className="ml-1.5 px-1.5 py-0.5 text-[5px] bg-red-600 text-white rounded hover:bg-red-700 transition-colors shrink-0"
                 >
                   Try Again
                 </button>
@@ -202,30 +341,30 @@ export default function ExploreProductGrid({
         )}
 
         {/* Products Grid */}
-        <div className="p-[10.5px]">
+        <div className="p-2.5">
           {isLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[10.5px]">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2.5">
               {[1, 2, 3, 4, 5, 6].map((i) => (
                 <div
                   key={i}
-                  className="bg-white rounded-[8px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] overflow-hidden"
+                  className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] overflow-hidden"
                 >
-                  <div className="bg-gray-200 aspect-283/202 animate-pulse m-[4.5px] rounded-[8px]"></div>
-                  <div className="px-[9px] pb-[8px] space-y-2">
-                    <div className="h-4 bg-gray-200 rounded animate-pulse"></div>
-                    <div className="h-4 bg-gray-200 rounded w-2/3 animate-pulse"></div>
-                    <div className="h-4 bg-gray-200 rounded w-1/2 animate-pulse"></div>
+                  <div className="bg-gray-200 aspect-[283/202] animate-pulse m-1.5 rounded-[10px]"></div>
+                  <div className="px-2.5 pb-2 space-y-1">
+                    <div className="h-2 bg-gray-200 rounded animate-pulse"></div>
+                    <div className="h-2 bg-gray-200 rounded w-2/3 animate-pulse"></div>
+                    <div className="h-2 bg-gray-200 rounded w-1/2 animate-pulse"></div>
                   </div>
                 </div>
               ))}
             </div>
           ) : products.length === 0 ? (
-            <div className="text-center py-9">
-              <div className="text-gray-400 text-4xl mb-2">🔍</div>
-              <h3 className="text-[15px] font-semibold text-[#0d1b2a] mb-1.5">
+            <div className="text-center py-5">
+              <div className="text-gray-400 text-2xl mb-1">🔍</div>
+              <h3 className="text-[7.5px] font-semibold text-[#0d1b2a] mb-1">
                 {searchQuery ? "No products found" : "No products available"}
               </h3>
-              <p className="text-[#787878] mb-2 text-[12px]">
+              <p className="text-[#787878] mb-1 text-[6px]">
                 {searchQuery
                   ? `Try adjusting your search or filters`
                   : "Check back later for new products"}
@@ -236,7 +375,7 @@ export default function ExploreProductGrid({
                     setSearchQuery("");
                     router.push("/marketplace");
                   }}
-                  className="px-[10.5px] py-[5px] bg-[#1e3a8a] text-white text-[10.5px] rounded-[6px] hover:bg-[#1e3a8a]/90 transition-colors"
+                  className="px-2.5 py-1 bg-[#1e3a8a] text-white text-[5px] rounded hover:bg-[#1e3a8a]/90 transition-colors"
                 >
                   Clear Search
                 </button>
@@ -244,50 +383,50 @@ export default function ExploreProductGrid({
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[10.5px]">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2.5">
                 {products.map((product, index) => (
                   <div
                     key={product?.productId || index}
-                    className="bg-white rounded-[8px] shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] overflow-hidden hover:shadow-lg transition-shadow"
+                    className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] overflow-hidden hover:shadow-lg transition-shadow flex flex-col h-full"
                   >
                     {/* Product Image */}
-                    <div className="relative bg-gray-100 aspect-283/202 flex items-center justify-center overflow-hidden m-[4.5px] rounded-[8px]">
+                    <div className="relative bg-gray-100 aspect-[283/202] flex items-center justify-center overflow-hidden m-1.5 rounded-[10px] flex-shrink-0">
                       {product?.image ? (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img
                           src={product.image}
                           alt={product?.title || "Product"}
-                          className="w-full h-full object-cover rounded-[8px]"
+                          className="w-full h-full object-cover rounded-[10px]"
                           onError={(e) => {
                             e.currentTarget.style.display = "none";
                           }}
                         />
                       ) : (
-                        <span className="text-gray-400 text-[10.5px]">
+                        <span className="text-gray-400 text-[5px]">
                           No Image
                         </span>
                       )}
                     </div>
 
                     {/* Product Info */}
-                    <div className="px-[9px] pb-[8px]">
-                      {/* Title and Reviews */}
-                      <div className="mb-[4px]">
-                        <h3 className="text-[8px] font-medium text-[#0d1b2a] mb-0.5 line-clamp-2">
+                    <div className="px-2.5 pb-2 flex flex-col flex-1">
+                      {/* Title - Fixed Height */}
+                      <div className="mb-1 h-10 flex flex-col">
+                        <h3 className="text-[10px] font-medium text-[#0d1b2a] mb-0.5 line-clamp-2 flex-1">
                           {product?.title || "Untitled Product"}
                         </h3>
-                        <span className="text-[6px] font-medium text-[#787878]">
+                        <span className="text-[7px] font-medium text-[#787878]">
                           {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                           ({(product as any)?.reviewCount || "1336"})
                         </span>
                       </div>
 
-                      {/* Rating */}
-                      <div className="flex items-center gap-0.5 mb-[4px]">
+                      {/* Rating Stars - Fixed Height */}
+                      <div className="flex items-center gap-0.5 mb-1 h-2.5">
                         {[1, 2, 3, 4, 5].map((star) => (
                           <svg
                             key={star}
-                            className="w-[8px] h-[8px]"
+                            className="w-2.5 h-2.5"
                             viewBox="0 0 19 18"
                             fill={star <= 4 ? "#FFD700" : "none"}
                             stroke={star > 4 ? "#FFD700" : "none"}
@@ -298,49 +437,35 @@ export default function ExploreProductGrid({
                         ))}
                       </div>
 
-                      {/* Location */}
-                      <div className="flex items-center gap-0.5 mb-2">
-                        <svg
-                          className="w-[7.5px] h-[8px] text-[#0d1b2a]"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                          />
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                          />
-                        </svg>
-                        <span className="text-[8px] font-medium text-[#0d1b2a]">
+                      {/* Location - Fixed Height */}
+                      <div className="flex items-center gap-1 mb-1 h-3.5">
+                        <MapPin className="w-2 h-2 text-[#0d1b2a] flex-shrink-0" />
+                        <span className="text-[9px] font-medium text-[#0d1b2a] truncate">
                           {product?.city || "Mumbai"}, IN
                         </span>
                       </div>
 
-                      {/* Price */}
-                      <div className="mb-2">
-                        <span className="text-[11px] font-bold text-[#1e3a8a]">
+                      {/* Price - Fixed Height */}
+                      <div className="mb-1 flex items-center gap-1.5 h-5">
+                        <span className="text-[13.5px] font-bold text-[#1e3a8a]">
                           ₹{(product?.price || 0).toLocaleString("en-IN")}
                         </span>
                         {product?.originalPrice &&
                           product.originalPrice > (product.price || 0) && (
-                            <span className="text-[8px] font-bold text-[#787878] line-through ml-1.5 relative">
-                              ₹{product.originalPrice.toLocaleString("en-IN")}
-                              <span className="absolute left-0 top-1/2 w-full h-0.5 bg-[#787878]"></span>
+                            <span className="text-[10px] font-bold text-[#787878] relative inline-block">
+                              <span className="line-through">
+                                ₹{product.originalPrice.toLocaleString("en-IN")}
+                              </span>
                             </span>
                           )}
                       </div>
 
-                      {/* View Deal Button */}
-                      <Link href={`/product/${product?.slug || "unknown"}`}>
-                        <button className="w-full py-[6px] bg-[#1e3a8a] text-white text-[8px] font-semibold rounded-[6px] hover:bg-[#1e3a8a]/90 transition-colors">
+                      {/* View Deal Button - Fixed at Bottom */}
+                      <Link
+                        href={`/product/${product?.slug || "unknown"}`}
+                        className="mt-auto"
+                      >
+                        <button className="w-full py-2 bg-[#1e3a8a] text-white text-[10px] font-semibold rounded-[7.5px] hover:bg-[#1e3a8a]/90 transition-colors">
                           View Deal
                         </button>
                       </Link>
@@ -351,10 +476,10 @@ export default function ExploreProductGrid({
 
               {/* Load More Button */}
               {totalPages > currentPage && (
-                <div className="flex justify-center mt-[18px]">
+                <div className="flex justify-center mt-4">
                   <button
                     onClick={() => setCurrentPage((prev) => prev + 1)}
-                    className="px-[18px] py-2 bg-white border-2 border-[#1e3a8a] text-[#1e3a8a] text-[8px] font-medium rounded-[6px] hover:bg-[#1e3a8a] hover:text-white transition-colors"
+                    className="px-5 py-2.5 bg-white border-2 border-[#1e3a8a] text-[#1e3a8a] text-[15px] font-medium rounded hover:bg-[#1e3a8a] hover:text-white transition-colors"
                   >
                     Load More Products
                   </button>

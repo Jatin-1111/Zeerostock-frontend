@@ -12,12 +12,12 @@ export default function Footer() {
         <div className="max-w-[412px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1080px] mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-7 lg:gap-9">
             {/* Logo and Tagline */}
-            <div className="flex flex-col gap-3 items-center sm:items-start">
+            <div className="flex flex-col gap-3 items-start">
               <Link href="/home" className="shrink-0">
                 <img
                   src={"/Zeerostock Logo-1.svg"}
                   alt="Zeerostock"
-                  className="h-[37px] sm:h-[60px] md:h-[85px] lg:h-[105px]"
+                  className="h-[87px] sm:h-[60px] md:h-[85px] lg:h-[105px]"
                 />
               </Link>
               <p className="text-[10.5px] sm:text-[10.5px] leading-normal text-[#d0d0d0] text-center sm:text-left hidden sm:block">

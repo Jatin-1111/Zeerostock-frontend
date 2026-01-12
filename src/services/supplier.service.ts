@@ -536,4 +536,32 @@ export const supplierService = {
   > {
     return apiRequest("get", `/supplier/rfqs/${id}`);
   },
+
+  /**
+   * Submit a quote for an RFQ
+   */
+  async submitQuote(
+    rfqId: string,
+    quoteData: {
+      quotePrice: number;
+      deliveryDays: number;
+      validUntil: string;
+      notes?: string;
+    }
+  ): Promise<
+    ApiResponse<{
+      quote: {
+        id: string;
+        quote_number: string;
+        quote_price: number;
+        delivery_days: number;
+        valid_until: string;
+        notes: string | null;
+        status: string;
+        created_at: string;
+      };
+    }>
+  > {
+    return apiRequest("post", `/supplier/rfqs/${rfqId}/quotes`, quoteData);
+  },
 };

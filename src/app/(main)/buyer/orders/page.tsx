@@ -161,14 +161,14 @@ export default function MyOrdersPage() {
   };
 
   return (
-    <div className="relative min-h-screen pb-[34px] pt-[75px]">
-      <div className="mx-auto max-w-[1440px] px-7.5">
+    <div className="relative min-h-screen pb-[20px] sm:pb-[28px] md:pb-[34px] pt-[60px] sm:pt-[68px] md:pt-[75px]">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 md:px-7.5">
         {/* Page Title and Export Button */}
-        <div className="mb-[60px] flex items-center justify-between">
-          <h1 className="m-0 text-[20px] font-semibold text-[#0d1b2a]">
+        <div className="mb-[40px] sm:mb-[50px] md:mb-[60px] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
+          <h1 className="m-0 text-[16px] sm:text-[18px] md:text-[20px] font-semibold text-[#0d1b2a]">
             My Orders
           </h1>
-          <button className="flex h-[34px] cursor-pointer items-center gap-[5.5px] rounded-[8.5px] border-none bg-[#1e3a8a] px-[62px] text-[10px] font-semibold text-white">
+          <button className="flex h-[30px] sm:h-[32px] md:h-[34px] cursor-pointer items-center gap-[4px] sm:gap-[5px] md:gap-[5.5px] rounded-[7px] sm:rounded-[8px] md:rounded-[8.5px] border-none bg-[#1e3a8a] px-[40px] sm:px-[50px] md:px-[62px] text-[9px] sm:text-[9.5px] md:text-[10px] font-semibold text-white">
             <FrameIcon />
             Export Orders
           </button>
@@ -180,10 +180,10 @@ export default function MyOrdersPage() {
           </div>
         )}
 
-        {/* Orders Table */}
-        <div className="min-h-[278px] w-full overflow-hidden rounded-[11px] bg-white shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)]">
-          {/* Table Headers */}
-          <div className="grid h-[52px] w-full grid-cols-[105px_150px_1fr_105px_90px_105px_105px_90px] items-center border-b border-[#e5e5e5]">
+        {/* Orders Table/Cards */}
+        <div className="min-h-[200px] sm:min-h-[240px] lg:min-h-[278px] w-full overflow-hidden rounded-[10px] sm:rounded-[10.5px] lg:rounded-[11px] bg-white shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] sm:shadow-[0px_0px_4.2px_0px_rgba(0,0,0,0.25)] lg:shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)]">
+          {/* Table Headers - Hidden on mobile */}
+          <div className="hidden lg:grid h-[52px] w-full grid-cols-[105px_150px_1fr_105px_90px_105px_105px_90px] items-center border-b border-[#e5e5e5]">
             <div className="pl-[17px] text-[11px] font-medium tracking-[0.4px] text-[#0d1b2a]">
               ORDER ID
             </div>
@@ -214,28 +214,113 @@ export default function MyOrdersPage() {
             </div>
           </div>
 
-          {/* Table Rows */}
+          {/* Table Rows / Mobile Cards */}
           {isLoading ? (
-            <div className="py-[34px] text-center text-[11px] text-[#9c9c9c]">
+            <div className="py-[28px] sm:py-[31px] lg:py-[34px] text-center text-[10px] sm:text-[10.5px] lg:text-[11px] text-[#9c9c9c]">
               <div className="animate-pulse">Loading orders...</div>
             </div>
           ) : orders.length === 0 ? (
-            <div className="py-[34px] text-center text-[11px] text-[#9c9c9c]">
+            <div className="py-[28px] sm:py-[31px] lg:py-[34px] text-center text-[10px] sm:text-[10.5px] lg:text-[11px] text-[#9c9c9c]">
               No orders found
             </div>
           ) : (
             orders.map((order, index) => (
               <div
                 key={order.orderId || order.orderNumber}
-                className="grid h-[56px] w-full grid-cols-[105px_150px_1fr_105px_90px_105px_105px_90px] items-center bg-white shadow-[0px_1.5px_3px_0px_rgba(0,0,0,0.25)]"
+                className="lg:grid lg:h-[56px] lg:grid-cols-[105px_150px_1fr_105px_90px_105px_105px_90px] lg:items-center bg-white shadow-[0px_1.5px_3px_0px_rgba(0,0,0,0.25)] my-5 lg:my-0 mx-3 lg:mx-0 rounded-lg lg:rounded-none p-4 lg:p-0"
               >
+                {/* Mobile Card Layout */}
+                <div className="lg:hidden space-y-3">
+                  {/* Order ID and Status */}
+                  <div className="flex items-center justify-between">
+                    <div className="text-[11px] font-medium tracking-[0.4px] text-[#9c9c9c]">
+                      {order.orderNumber}
+                    </div>
+                    <div
+                      className="text-[11px] font-medium tracking-[0.4px] capitalize px-3 py-1 rounded-full"
+                      style={{
+                        color: getStatusColor(order.status),
+                        backgroundColor:
+                          getStatusColor(order.status) === "#2aae7a"
+                            ? "#e6f7f0"
+                            : "#fff4e6",
+                      }}
+                    >
+                      {order.status}
+                    </div>
+                  </div>
+
+                  {/* Items */}
+                  <div className="text-[12px] font-medium text-black">
+                    {order.items}
+                  </div>
+
+                  {/* Supplier */}
+                  <div className="text-[11px] text-[#6b7280]">
+                    Supplier:{" "}
+                    <span className="text-black font-medium">
+                      {order.supplierName}
+                    </span>
+                  </div>
+
+                  {/* Gray Section - Amount, Dates */}
+                  <div className="bg-[#f6f6f6] -mx-4 -mb-4 p-4 rounded-b-lg space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] text-[#6b7280]">Amount</span>
+                      <span className="text-[12px] font-medium text-black">
+                        ₹
+                        {parseFloat(
+                          String(order.totalAmount || 0)
+                        ).toLocaleString("en-IN", { maximumFractionDigits: 2 })}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] text-[#6b7280]">
+                        Order Date
+                      </span>
+                      <span className="text-[11px] text-black">
+                        {new Date(order.orderDate).toLocaleDateString("en-IN", {
+                          year: "numeric",
+                          month: "2-digit",
+                          day: "2-digit",
+                        })}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] text-[#6b7280]">
+                        Est. Delivery
+                      </span>
+                      <span className="text-[11px] text-black">
+                        {order.estimatedDelivery
+                          ? new Date(
+                              order.estimatedDelivery
+                            ).toLocaleDateString("en-IN", {
+                              year: "numeric",
+                              month: "2-digit",
+                              day: "2-digit",
+                            })
+                          : "N/A"}
+                      </span>
+                    </div>
+                    <div className="pt-2">
+                      <Link
+                        href={`/buyer/orders/${order.orderId}`}
+                        className="flex items-center justify-center gap-1.5 rounded-md bg-[#1e3a8a] px-4 py-2 text-[10px] font-medium text-white hover:bg-[#1e40af] transition-colors"
+                      >
+                        View Details
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Desktop Table Row */}
                 {/* Order ID */}
-                <div className="pl-[17px] text-[11px] font-medium leading-[16px] tracking-[0.4px] text-[#9c9c9c]">
+                <div className="hidden lg:block pl-[17px] text-[11px] font-medium leading-[16px] tracking-[0.4px] text-[#9c9c9c]">
                   {order.orderNumber}
                 </div>
 
                 {/* Supplier - with green underline on hover */}
-                <div className="flex flex-col">
+                <div className="hidden lg:flex flex-col">
                   <div className="inline-block cursor-pointer border-b-2 border-transparent p-[5.5px] text-[11px] font-normal leading-[16px] tracking-[0.4px] text-black transition-all duration-200 hover:border-[#18b522]">
                     {order.supplierName}
                   </div>
@@ -243,14 +328,14 @@ export default function MyOrdersPage() {
 
                 {/* Items */}
                 <div
-                  className="overflow-hidden text-ellipsis whitespace-nowrap text-[11px] font-normal leading-[16px] tracking-[0.4px] text-black"
+                  className="hidden lg:block overflow-hidden text-ellipsis whitespace-nowrap text-[11px] font-normal leading-[16px] tracking-[0.4px] text-black"
                   title={order.items}
                 >
                   {order.items}
                 </div>
 
                 {/* Amount */}
-                <div className="text-[11px] font-normal leading-[16px] tracking-[0.4px] text-black">
+                <div className="hidden lg:block text-[11px] font-normal leading-[16px] tracking-[0.4px] text-black">
                   ₹
                   {parseFloat(String(order.totalAmount || 0)).toLocaleString(
                     "en-IN",
@@ -260,14 +345,14 @@ export default function MyOrdersPage() {
 
                 {/* Status */}
                 <div
-                  className="text-[11px] font-normal leading-[16px] tracking-[0.4px] capitalize"
+                  className="hidden lg:block text-[11px] font-normal leading-[16px] tracking-[0.4px] capitalize"
                   style={{ color: getStatusColor(order.status) }}
                 >
                   {order.status}
                 </div>
 
                 {/* Order Date */}
-                <div className="text-[11px] font-normal leading-[16px] tracking-[0.4px] text-black">
+                <div className="hidden lg:block text-[11px] font-normal leading-[16px] tracking-[0.4px] text-black">
                   {new Date(order.orderDate).toLocaleDateString("en-IN", {
                     year: "numeric",
                     month: "2-digit",
@@ -276,7 +361,7 @@ export default function MyOrdersPage() {
                 </div>
 
                 {/* Expected Date */}
-                <div className="text-[11px] font-normal leading-[16px] tracking-[0.4px] text-black">
+                <div className="hidden lg:block text-[11px] font-normal leading-[16px] tracking-[0.4px] text-black">
                   {order.estimatedDelivery
                     ? new Date(order.estimatedDelivery).toLocaleDateString(
                         "en-IN",
@@ -286,7 +371,7 @@ export default function MyOrdersPage() {
                 </div>
 
                 {/* Actions */}
-                <div className="pl-[9px]">
+                <div className="hidden lg:block pl-[9px]">
                   <Link href={`/buyer/track-order/${order.orderNumber}`}>
                     <button className="flex cursor-pointer items-center justify-center rounded-[5.5px] border-[0.4px] border-[#747474] bg-transparent p-[5.5px]">
                       <FrameIcon />
@@ -300,21 +385,21 @@ export default function MyOrdersPage() {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="mt-[22.5px] flex justify-center gap-[9px] items-center">
+          <div className="mt-[18px] sm:mt-[20px] lg:mt-[22.5px] flex justify-center gap-[7px] sm:gap-[8px] lg:gap-[9px] items-center">
             <button
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="cursor-pointer rounded-[4.5px] border-2 border-[#0d1b2a] bg-white px-[13.5px] py-[6.75px] text-[9px] disabled:cursor-not-allowed disabled:opacity-50"
+              className="cursor-pointer rounded-[4px] sm:rounded-[4.2px] lg:rounded-[4.5px] border-2 border-[#0d1b2a] bg-white px-[11px] sm:px-[12px] lg:px-[13.5px] py-[5.5px] sm:py-[6px] lg:py-[6.75px] text-[8.5px] sm:text-[8.7px] lg:text-[9px] disabled:cursor-not-allowed disabled:opacity-50"
             >
               Previous
             </button>
-            <span className="text-[9px] text-[#0d1b2a]">
+            <span className="text-[8.5px] sm:text-[8.7px] lg:text-[9px] text-[#0d1b2a]">
               Page {currentPage} of {totalPages}
             </span>
             <button
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
-              className="cursor-pointer rounded-[4.5px] border-2 border-[#0d1b2a] bg-white px-[13.5px] py-[6.75px] text-[9px] disabled:cursor-not-allowed disabled:opacity-50"
+              className="cursor-pointer rounded-[4px] sm:rounded-[4.2px] lg:rounded-[4.5px] border-2 border-[#0d1b2a] bg-white px-[11px] sm:px-[12px] lg:px-[13.5px] py-[5.5px] sm:py-[6px] lg:py-[6.75px] text-[8.5px] sm:text-[8.7px] lg:text-[9px] disabled:cursor-not-allowed disabled:opacity-50"
             >
               Next
             </button>

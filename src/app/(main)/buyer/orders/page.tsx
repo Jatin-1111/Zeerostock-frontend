@@ -304,7 +304,7 @@ export default function MyOrdersPage() {
                     </div>
                     <div className="pt-2">
                       <Link
-                        href={`/buyer/orders/${order.orderId}`}
+                        href={`/buyer/track-order/${order.orderId}`}
                         className="flex items-center justify-center gap-1.5 rounded-md bg-[#1e3a8a] px-4 py-2 text-[10px] font-medium text-white hover:bg-[#1e40af] transition-colors"
                       >
                         View Details

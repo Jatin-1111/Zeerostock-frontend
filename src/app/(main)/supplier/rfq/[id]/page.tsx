@@ -42,7 +42,7 @@ interface RFQDetail {
   buyer_city: string | null;
   buyer_state: string | null;
   has_quoted: boolean;
-  buyer_email?: string;
+  buyer_email?: string | null;
 }
 
 export default function RFQDetailPage() {

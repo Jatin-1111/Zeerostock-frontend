@@ -6,12 +6,5 @@ export default function MainLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <>
-      <div className="min-h-screen">
-        <MainLayoutWrapper>{children}</MainLayoutWrapper>
-      </div>
-      <Footer />
-    </>
-  );
+  return <MainLayoutWrapper>{children}</MainLayoutWrapper>;
 }

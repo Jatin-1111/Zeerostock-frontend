@@ -7,6 +7,7 @@ import Header from "@/components/shared/Header";
 import Sidebar from "@/components/shared/Sidebar";
 import BuyerSidebar from "@/components/shared/BuyerSidebar";
 import SupplierSidebar from "@/components/shared/SupplierSidebar";
+import Footer from "@/components/shared/Footer";
 
 interface MainLayoutWrapperProps {
   children: React.ReactNode;
@@ -36,9 +37,9 @@ export default function MainLayoutWrapper({
   const shouldShowSidebar = isPublicRoute || isBuyerRoute || isSupplierRoute;
 
   return (
-    <>
+    <div className="flex flex-col h-full">
       <Header onSidebarToggle={handleSidebarToggle} />
-      <div className="flex h-[calc(100vh-60px)] overflow-hidden">
+      <div className="flex flex-1 overflow-hidden">
         {/* Show appropriate sidebar based on route */}
         {shouldShowSidebar && (
           <motion.div
@@ -69,11 +70,12 @@ export default function MainLayoutWrapper({
             marginLeft: 0,
           }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
-          className="flex-1 overflow-x-hidden"
+          className="flex-1 overflow-y-auto overflow-x-hidden flex flex-col"
         >
-          {children}
+          <div className="flex-1">{children}</div>
+          <Footer />
         </motion.main>
       </div>
-    </>
+    </div>
   );
 }

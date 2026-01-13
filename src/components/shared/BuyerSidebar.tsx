@@ -33,7 +33,7 @@ export default function BuyerSidebar({
       <div className="w-[220px] h-full bg-white shadow-[0px_0px_2px_0px_rgba(0,0,0,0.25)] overflow-y-auto flex-shrink-0">
         {/* Header */}
         <div className="h-[40px] flex items-center justify-center border-b border-[#8b8b8b]">
-          <h2 className="font-medium text-[13px] text-[#1e3a8a] leading-normal">
+          <h2 className="font-medium text-sm text-[#1e3a8a] leading-normal">
             Buyer Menu
           </h2>
         </div>

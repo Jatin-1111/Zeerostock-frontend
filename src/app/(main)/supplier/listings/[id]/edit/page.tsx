@@ -719,7 +719,7 @@ export default function EditListing() {
       </AnimatePresence>
 
       <div className="mx-auto max-w-[1080px] px-[60px] py-[22px]">
-        <h1 className="mb-[11px] text-[20px] font-semibold leading-[40px] text-[#0d1b2a]">
+        <h1 className="mb-[11px] text-xl font-semibold leading-snug text-[#0d1b2a]">
           Edit Product Listing
         </h1>
 

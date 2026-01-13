@@ -32,7 +32,7 @@ export const CertificationCheckbox: React.FC<CertificationCheckboxProps> = ({
           <path d="M2 6l3 3 5-5" />
         </svg>
       </div>
-      <span className="text-[7.33px] text-black">{label}</span>
+      <span className="text-xs text-black">{label}</span>
     </label>
   );
 };

@@ -9,7 +9,7 @@ export default function BuyerSecurityProtection() {
         {/* Title with Shield Icon */}
         <div className="flex items-center gap-[4.5px] mb-[31px]">
           <Shield className="text-[#2aae7a] w-[16.5px] h-[16.5px] stroke-2" />
-          <p className="m-0 font-semibold text-[#0d1b2a] tracking-[0.25px] text-[13px] leading-[12px]">
+          <p className="m-0 font-semibold text-[#0d1b2a] tracking-[0.25px] text-sm leading-tight">
             Security & Protection
           </p>
         </div>
@@ -17,7 +17,7 @@ export default function BuyerSecurityProtection() {
         {/* Security Notice with Lock Icon */}
         <div className="flex items-center gap-[7.5px] rounded-[10px] border border-[#2aae7a] bg-[#eeffef] px-[12.5px] py-[12.5px] mb-[35px]">
           <Lock className="text-[#2aae7a] w-[17.5px] h-[17.5px] stroke-2 shrink-0" />
-          <p className="m-0 font-medium text-[#9c9c9c] text-[10px] leading-normal">
+          <p className="m-0 font-medium text-[#9c9c9c] text-xs leading-normal">
             All payment information is encrypted and stored securely. Zeerostock
             uses industry-standard PCI DSS compliance to protect your financial
             data.
@@ -46,10 +46,10 @@ export default function BuyerSecurityProtection() {
               </svg>
             </div>
             <div className="flex flex-col gap-[7.5px]">
-              <p className="m-0 font-medium text-[#0d1b2a] tracking-[0.25px] text-[15px] leading-[12px]">
+              <p className="m-0 font-medium text-[#0d1b2a] tracking-[0.25px] text-base leading-tight">
                 256-bit SSL Encryption
               </p>
-              <p className="m-0 font-medium text-[#9c9c9c] tracking-[0.25px] text-[10px] leading-[14px]">
+              <p className="m-0 font-medium text-[#9c9c9c] tracking-[0.25px] text-xs leading-tight">
                 Bank-level security
               </p>
             </div>
@@ -70,10 +70,10 @@ export default function BuyerSecurityProtection() {
               </svg>
             </div>
             <div className="flex flex-col gap-[7.5px]">
-              <p className="m-0 font-medium text-[#0d1b2a] tracking-[0.25px] text-[15px] leading-[12px]">
+              <p className="m-0 font-medium text-[#0d1b2a] tracking-[0.25px] text-base leading-tight">
                 Escrow Protection
               </p>
-              <p className="m-0 font-medium text-[#9c9c9c] tracking-[0.25px] text-[10px] leading-[14px]">
+              <p className="m-0 font-medium text-[#9c9c9c] tracking-[0.25px] text-xs leading-tight">
                 Funds held securely
               </p>
             </div>
@@ -103,10 +103,10 @@ export default function BuyerSecurityProtection() {
               </svg>
             </div>
             <div className="flex flex-col gap-[7.5px]">
-              <p className="m-0 font-medium text-[#0d1b2a] tracking-[0.25px] text-[15px] leading-[12px]">
+              <p className="m-0 font-medium text-[#0d1b2a] tracking-[0.25px] text-base leading-tight">
                 PCI DSS Compliant
               </p>
-              <p className="m-0 font-medium text-[#9c9c9c] tracking-[0.25px] text-[10px] leading-[14px]">
+              <p className="m-0 font-medium text-[#9c9c9c] tracking-[0.25px] text-xs leading-tight">
                 Industry standard
               </p>
             </div>
@@ -130,10 +130,10 @@ export default function BuyerSecurityProtection() {
               </svg>
             </div>
             <div className="flex flex-col gap-[7.5px]">
-              <p className="m-0 font-medium text-[#0d1b2a] tracking-[0.25px] text-[15px] leading-[12px]">
+              <p className="m-0 font-medium text-[#0d1b2a] tracking-[0.25px] text-base leading-tight">
                 Fraud Detection
               </p>
-              <p className="m-0 font-medium text-[#9c9c9c] tracking-[0.25px] text-[10px] leading-[14px]">
+              <p className="m-0 font-medium text-[#9c9c9c] tracking-[0.25px] text-xs leading-tight">
                 24/7 monitoring
               </p>
             </div>

@@ -249,10 +249,10 @@ export default function AccountSettings() {
     <div className="flex flex-col gap-[16.88px]">
       {/* Header Section */}
       <div>
-        <h1 className="text-[19.69px] font-semibold text-[#0d1b2a] mb-[4.5px] leading-[1.2]">
+        <h1 className="text-xl font-semibold text-[#0d1b2a] mb-[4.5px] leading-[1.2]">
           Account Settings
         </h1>
-        <p className="text-[9.56px] text-[#0d1b2a] font-normal">
+        <p className="text-xs text-[#0d1b2a] font-normal">
           Manage your personal information and account details
         </p>
       </div>
@@ -274,7 +274,7 @@ export default function AccountSettings() {
         <div className="bg-white rounded-[11.25px] shadow-[0px_1.13px_3.38px_0px_rgba(0,0,0,0.25)] p-[13.5px] relative">
           {/* Section Header */}
           <div className="flex items-center gap-[11.25px] mb-[22.5px]">
-            <h2 className="text-[13.5px] font-semibold text-[#0d1b2a]">
+            <h2 className="text-sm font-semibold text-[#0d1b2a]">
               Select Profile
             </h2>
           </div>
@@ -289,7 +289,7 @@ export default function AccountSettings() {
               <button
                 onClick={() => handleRoleSwitch("buyer")}
                 disabled={switchingRole || currentRole === "buyer"}
-                className={`flex-1 h-[36.56px] px-[5.63px] py-[8.44px] rounded-[6.75px] text-[11.25px] font-semibold transition-all ${
+                className={`flex-1 h-[36.56px] px-[5.63px] py-[8.44px] rounded-[6.75px] text-xs font-semibold transition-all ${
                   currentRole === "buyer"
                     ? "bg-[#eeffef] border border-[#2aae7a] text-[#2aae7a] shadow-[0px_0px_5.63px_0px_rgba(24,181,34,0.25)]"
                     : "border border-[#9c9c9c] text-[#9c9c9c] hover:border-[#2aae7a] hover:text-[#2aae7a]"
@@ -306,7 +306,7 @@ export default function AccountSettings() {
               <button
                 onClick={() => handleRoleSwitch("supplier")}
                 disabled={switchingRole || currentRole === "supplier"}
-                className={`flex-1 h-[36.56px] px-[5.63px] py-[8.44px] rounded-[6.75px] text-[11.25px] font-semibold transition-all ${
+                className={`flex-1 h-[36.56px] px-[5.63px] py-[8.44px] rounded-[6.75px] text-xs font-semibold transition-all ${
                   currentRole === "supplier"
                     ? "bg-[#eeffef] border border-[#2aae7a] text-[#2aae7a] shadow-[0px_0px_5.63px_0px_rgba(24,181,34,0.25)]"
                     : "border border-[#9c9c9c] text-[#9c9c9c] hover:border-[#2aae7a] hover:text-[#2aae7a]"
@@ -320,7 +320,7 @@ export default function AccountSettings() {
           </div>
 
           {/* Helper Text */}
-          <p className="text-[9.56px] text-[#9c9c9c] text-center mt-[13.5px]">
+          <p className="text-xs text-[#9c9c9c] text-center mt-[13.5px]">
             Switch between your buyer and supplier profile instantly
           </p>
         </div>
@@ -331,7 +331,7 @@ export default function AccountSettings() {
         {/* Section Header */}
         <div className="flex items-center gap-[11.25px] mb-[22.5px]">
           <User className="w-[14.63px] h-[14.63px] text-[#0d1b2a]" />
-          <h2 className="text-[13.5px] font-semibold text-[#0d1b2a]">
+          <h2 className="text-sm font-semibold text-[#0d1b2a]">
             Personal Information
           </h2>
         </div>
@@ -344,7 +344,7 @@ export default function AccountSettings() {
           {/* First Row: First Name and Last Name */}
           <div className="grid grid-cols-2 gap-[27.56px]">
             <div>
-              <label className="block text-[9.56px] font-medium text-[#0d1b2a] mb-[7.88px]">
+              <label className="block text-xs font-medium text-[#0d1b2a] mb-[7.88px]">
                 First Name
               </label>
               <input
@@ -353,11 +353,11 @@ export default function AccountSettings() {
                 onChange={(e) =>
                   setFormData({ ...formData, firstName: e.target.value })
                 }
-                className="w-full h-[31.5px] px-[9px] border border-[#bebebe] rounded-[5.63px] text-[9px] text-[#0d1b2a] outline-none focus:border-[#2aae7a] transition-colors"
+                className="w-full h-[31.5px] px-[9px] border border-[#bebebe] rounded-[5.63px] text-xs text-[#0d1b2a] outline-none focus:border-[#2aae7a] transition-colors"
               />
             </div>
             <div>
-              <label className="block text-[9.56px] font-medium text-[#0d1b2a] mb-[7.88px]">
+              <label className="block text-xs font-medium text-[#0d1b2a] mb-[7.88px]">
                 Last Name
               </label>
               <input
@@ -366,7 +366,7 @@ export default function AccountSettings() {
                 onChange={(e) =>
                   setFormData({ ...formData, lastName: e.target.value })
                 }
-                className="w-full h-[31.5px] px-[9px] border border-[#bebebe] rounded-[5.63px] text-[9px] text-[#0d1b2a] outline-none focus:border-[#2aae7a] transition-colors"
+                className="w-full h-[31.5px] px-[9px] border border-[#bebebe] rounded-[5.63px] text-xs text-[#0d1b2a] outline-none focus:border-[#2aae7a] transition-colors"
               />
             </div>
           </div>
@@ -374,7 +374,7 @@ export default function AccountSettings() {
           {/* Second Row: Email and Phone */}
           <div className="grid grid-cols-2 gap-[27.56px]">
             <div>
-              <label className="block text-[9.56px] font-medium text-[#0d1b2a] mb-[7.88px]">
+              <label className="block text-xs font-medium text-[#0d1b2a] mb-[7.88px]">
                 Email Address
               </label>
               <input
@@ -383,11 +383,11 @@ export default function AccountSettings() {
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
                 }
-                className="w-full h-[31.5px] px-[9px] border border-[#bebebe] rounded-[5.63px] text-[9px] text-[#0d1b2a] outline-none focus:border-[#2aae7a] transition-colors"
+                className="w-full h-[31.5px] px-[9px] border border-[#bebebe] rounded-[5.63px] text-xs text-[#0d1b2a] outline-none focus:border-[#2aae7a] transition-colors"
               />
             </div>
             <div>
-              <label className="block text-[9.56px] font-medium text-[#0d1b2a] mb-[7.88px]">
+              <label className="block text-xs font-medium text-[#0d1b2a] mb-[7.88px]">
                 Phone Number
               </label>
               <input
@@ -396,7 +396,7 @@ export default function AccountSettings() {
                 onChange={(e) =>
                   setFormData({ ...formData, phone: e.target.value })
                 }
-                className="w-full h-[31.5px] px-[9px] border border-[#bebebe] rounded-[5.63px] text-[9px] text-[#0d1b2a] outline-none focus:border-[#2aae7a] transition-colors"
+                className="w-full h-[31.5px] px-[9px] border border-[#bebebe] rounded-[5.63px] text-xs text-[#0d1b2a] outline-none focus:border-[#2aae7a] transition-colors"
               />
             </div>
           </div>
@@ -408,7 +408,7 @@ export default function AccountSettings() {
         {/* Section Header */}
         <div className="flex items-center gap-[11.25px] mb-[22.5px]">
           <MapPin className="w-[14.63px] h-[14.63px] text-[#0d1b2a]" />
-          <h2 className="text-[13.5px] font-semibold text-[#0d1b2a]">
+          <h2 className="text-sm font-semibold text-[#0d1b2a]">
             Address Information
           </h2>
         </div>
@@ -420,7 +420,7 @@ export default function AccountSettings() {
         <div className="flex flex-col gap-[16.88px] mt-[16.88px]">
           {/* Street Address */}
           <div>
-            <label className="block text-[9.56px] font-medium text-[#0d1b2a] mb-[7.88px]">
+            <label className="block text-xs font-medium text-[#0d1b2a] mb-[7.88px]">
               Street Address
             </label>
             <input
@@ -429,14 +429,14 @@ export default function AccountSettings() {
               onChange={(e) =>
                 setFormData({ ...formData, street: e.target.value })
               }
-              className="w-full h-[31.5px] px-[9px] border border-[#bebebe] rounded-[5.63px] text-[9px] text-[#0d1b2a] outline-none focus:border-[#2aae7a] transition-colors"
+              className="w-full h-[31.5px] px-[9px] border border-[#bebebe] rounded-[5.63px] text-xs text-[#0d1b2a] outline-none focus:border-[#2aae7a] transition-colors"
             />
           </div>
 
           {/* City, State, ZIP */}
           <div className="grid grid-cols-[1fr_1fr_0.84fr] gap-[27.56px]">
             <div>
-              <label className="block text-[9.56px] font-medium text-[#0d1b2a] mb-[7.88px]">
+              <label className="block text-xs font-medium text-[#0d1b2a] mb-[7.88px]">
                 City
               </label>
               <input
@@ -445,11 +445,11 @@ export default function AccountSettings() {
                 onChange={(e) =>
                   setFormData({ ...formData, city: e.target.value })
                 }
-                className="w-full h-[31.5px] px-[9px] border border-[#bebebe] rounded-[5.63px] text-[9px] text-[#0d1b2a] outline-none focus:border-[#2aae7a] transition-colors"
+                className="w-full h-[31.5px] px-[9px] border border-[#bebebe] rounded-[5.63px] text-xs text-[#0d1b2a] outline-none focus:border-[#2aae7a] transition-colors"
               />
             </div>
             <div>
-              <label className="block text-[9.56px] font-medium text-[#0d1b2a] mb-[7.88px]">
+              <label className="block text-xs font-medium text-[#0d1b2a] mb-[7.88px]">
                 State
               </label>
               <input
@@ -458,11 +458,11 @@ export default function AccountSettings() {
                 onChange={(e) =>
                   setFormData({ ...formData, state: e.target.value })
                 }
-                className="w-full h-[31.5px] px-[9px] border border-[#bebebe] rounded-[5.63px] text-[9px] text-[#0d1b2a] outline-none focus:border-[#2aae7a] transition-colors"
+                className="w-full h-[31.5px] px-[9px] border border-[#bebebe] rounded-[5.63px] text-xs text-[#0d1b2a] outline-none focus:border-[#2aae7a] transition-colors"
               />
             </div>
             <div>
-              <label className="block text-[9.56px] font-medium text-[#0d1b2a] mb-[7.88px]">
+              <label className="block text-xs font-medium text-[#0d1b2a] mb-[7.88px]">
                 ZIP Code
               </label>
               <input
@@ -471,14 +471,14 @@ export default function AccountSettings() {
                 onChange={(e) =>
                   setFormData({ ...formData, zip: e.target.value })
                 }
-                className="w-full h-[31.5px] px-[9px] border border-[#bebebe] rounded-[5.63px] text-[9px] text-[#0d1b2a] outline-none focus:border-[#2aae7a] transition-colors"
+                className="w-full h-[31.5px] px-[9px] border border-[#bebebe] rounded-[5.63px] text-xs text-[#0d1b2a] outline-none focus:border-[#2aae7a] transition-colors"
               />
             </div>
           </div>
 
           {/* Bio / Company Description */}
           <div>
-            <label className="block text-[9.56px] font-medium text-[#0d1b2a] mb-[7.88px]">
+            <label className="block text-xs font-medium text-[#0d1b2a] mb-[7.88px]">
               Bio / Company Description
             </label>
             <textarea
@@ -486,7 +486,7 @@ export default function AccountSettings() {
               onChange={(e) =>
                 setFormData({ ...formData, bio: e.target.value })
               }
-              className="w-full h-[113.06px] p-[9px] border border-[#bebebe] rounded-[5.63px] text-[9px] text-[#0d1b2a] outline-none resize-none focus:border-[#2aae7a] transition-colors"
+              className="w-full h-[113.06px] p-[9px] border border-[#bebebe] rounded-[5.63px] text-xs text-[#0d1b2a] outline-none resize-none focus:border-[#2aae7a] transition-colors"
             />
           </div>
         </div>
@@ -498,7 +498,7 @@ export default function AccountSettings() {
           {/* Section Header */}
           <div className="flex items-center gap-[11.25px] mb-[22.5px]">
             <Building2 className="w-[14.63px] h-[14.63px] text-[#0d1b2a]" />
-            <h2 className="text-[13.5px] font-semibold text-[#0d1b2a]">
+            <h2 className="text-sm font-semibold text-[#0d1b2a]">
               Business Information & KYC
             </h2>
           </div>
@@ -510,10 +510,10 @@ export default function AccountSettings() {
           <div className="mt-[16.88px] mb-[16.88px] p-[11.25px] bg-[#f9fafb] rounded-[9px]">
             <div className="flex items-start justify-between mb-[8.44px]">
               <div>
-                <h3 className="text-[12.38px] font-semibold text-[#0d1b2a] mb-[5.63px]">
+                <h3 className="text-sm font-semibold text-[#0d1b2a] mb-[5.63px]">
                   KYC Verification Progress
                 </h3>
-                <p className="text-[9px] text-[#6b7280]">
+                <p className="text-xs text-[#6b7280]">
                   {kycProgress.percentage}% Complete -{" "}
                   {kycProgress.completedSections} of {kycProgress.totalSections}{" "}
                   sections verified
@@ -521,7 +521,7 @@ export default function AccountSettings() {
               </div>
               <div className="flex items-center gap-[6.75px] px-[11.25px] py-[4.5px] bg-[#fff7ed] border border-[#fb923c] rounded-[4.5px]">
                 <Clock className="w-[10.13px] h-[10.13px] text-[#ea580c]" />
-                <span className="text-[9px] font-medium text-[#ea580c]">
+                <span className="text-xs font-medium text-[#ea580c]">
                   {kycProgress.status}
                 </span>
               </div>
@@ -537,7 +537,7 @@ export default function AccountSettings() {
 
             {/* Percentage Text */}
             <div className="flex justify-end mt-[4.5px]">
-              <span className="text-[13.5px] font-bold text-[#0d1b2a]">
+              <span className="text-sm font-bold text-[#0d1b2a]">
                 {kycProgress.percentage}%
               </span>
             </div>
@@ -548,7 +548,7 @@ export default function AccountSettings() {
             {/* First Row: Business Legal Name and Business Registration Number */}
             <div className="grid grid-cols-2 gap-[27.56px]">
               <div>
-                <label className="block text-[9.56px] font-medium text-[#0d1b2a] mb-[7.88px]">
+                <label className="block text-xs font-medium text-[#0d1b2a] mb-[7.88px]">
                   Business Legal Name
                 </label>
                 <input
@@ -560,11 +560,11 @@ export default function AccountSettings() {
                       businessLegalName: e.target.value,
                     })
                   }
-                  className="w-full h-[31.5px] px-[9px] border border-[#bebebe] rounded-[5.63px] text-[9px] text-[#0d1b2a] outline-none focus:border-[#2aae7a] transition-colors"
+                  className="w-full h-[31.5px] px-[9px] border border-[#bebebe] rounded-[5.63px] text-xs text-[#0d1b2a] outline-none focus:border-[#2aae7a] transition-colors"
                 />
               </div>
               <div>
-                <label className="block text-[9.56px] font-medium text-[#0d1b2a] mb-[7.88px]">
+                <label className="block text-xs font-medium text-[#0d1b2a] mb-[7.88px]">
                   Business Registration Number
                 </label>
                 <input
@@ -576,7 +576,7 @@ export default function AccountSettings() {
                       businessRegistrationNumber: e.target.value,
                     })
                   }
-                  className="w-full h-[31.5px] px-[9px] border border-[#bebebe] rounded-[5.63px] text-[9px] text-[#0d1b2a] outline-none focus:border-[#2aae7a] transition-colors"
+                  className="w-full h-[31.5px] px-[9px] border border-[#bebebe] rounded-[5.63px] text-xs text-[#0d1b2a] outline-none focus:border-[#2aae7a] transition-colors"
                 />
               </div>
             </div>
@@ -584,7 +584,7 @@ export default function AccountSettings() {
             {/* Second Row: GST Number, Business Type, and Year Established */}
             <div className="grid grid-cols-[1fr_1fr_0.7fr] gap-[27.56px]">
               <div>
-                <label className="block text-[9.56px] font-medium text-[#0d1b2a] mb-[7.88px]">
+                <label className="block text-xs font-medium text-[#0d1b2a] mb-[7.88px]">
                   GST Number
                 </label>
                 <input
@@ -596,11 +596,11 @@ export default function AccountSettings() {
                       gstNumber: e.target.value,
                     })
                   }
-                  className="w-full h-[31.5px] px-[9px] border border-[#bebebe] rounded-[5.63px] text-[9px] text-[#0d1b2a] outline-none focus:border-[#2aae7a] transition-colors"
+                  className="w-full h-[31.5px] px-[9px] border border-[#bebebe] rounded-[5.63px] text-xs text-[#0d1b2a] outline-none focus:border-[#2aae7a] transition-colors"
                 />
               </div>
               <div>
-                <label className="block text-[9.56px] font-medium text-[#0d1b2a] mb-[7.88px]">
+                <label className="block text-xs font-medium text-[#0d1b2a] mb-[7.88px]">
                   Business Type
                 </label>
                 <select
@@ -611,7 +611,7 @@ export default function AccountSettings() {
                       businessType: e.target.value,
                     })
                   }
-                  className="w-full h-[31.5px] px-[9px] border border-[#bebebe] rounded-[5.63px] text-[9px] text-[#0d1b2a] outline-none focus:border-[#2aae7a] transition-colors appearance-none bg-white cursor-pointer"
+                  className="w-full h-[31.5px] px-[9px] border border-[#bebebe] rounded-[5.63px] text-xs text-[#0d1b2a] outline-none focus:border-[#2aae7a] transition-colors appearance-none bg-white cursor-pointer"
                   style={{
                     backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='9' viewBox='0 0 12 12'%3E%3Cpath fill='%230d1b2a' d='M6 9L1 4h10z'/%3E%3C/svg%3E")`,
                     backgroundRepeat: "no-repeat",
@@ -630,7 +630,7 @@ export default function AccountSettings() {
                 </select>
               </div>
               <div>
-                <label className="block text-[9.56px] font-medium text-[#0d1b2a] mb-[7.88px]">
+                <label className="block text-xs font-medium text-[#0d1b2a] mb-[7.88px]">
                   Year Established
                 </label>
                 <select
@@ -641,7 +641,7 @@ export default function AccountSettings() {
                       yearEstablished: e.target.value,
                     })
                   }
-                  className="w-full h-[31.5px] px-[9px] border border-[#bebebe] rounded-[5.63px] text-[9px] text-[#0d1b2a] outline-none focus:border-[#2aae7a] transition-colors appearance-none bg-white cursor-pointer"
+                  className="w-full h-[31.5px] px-[9px] border border-[#bebebe] rounded-[5.63px] text-xs text-[#0d1b2a] outline-none focus:border-[#2aae7a] transition-colors appearance-none bg-white cursor-pointer"
                   style={{
                     backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='9' viewBox='0 0 12 12'%3E%3Cpath fill='%230d1b2a' d='M6 9L1 4h10z'/%3E%3C/svg%3E")`,
                     backgroundRepeat: "no-repeat",
@@ -666,7 +666,7 @@ export default function AccountSettings() {
             <button
               onClick={handleSaveBusinessInfo}
               disabled={saving}
-              className="flex items-center gap-[4.22px] py-[6.33px] px-[46.41px] bg-[#2aae7a] text-white rounded-[5.06px] text-[8.44px] font-semibold hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 transition-opacity"
+              className="flex items-center gap-[4.22px] py-[6.33px] px-[46.41px] bg-[#2aae7a] text-white rounded-[5.06px] text-xs font-semibold hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 transition-opacity"
             >
               <Save className="w-[11.81px] h-[11.81px] text-white" />
               {saving ? "Saving..." : "Save Business Info"}
@@ -680,7 +680,7 @@ export default function AccountSettings() {
         <button
           onClick={handleSave}
           disabled={saving}
-          className="flex items-center gap-[5.63px] py-[8.44px] px-[61.88px] bg-[#1e3a8a] text-white rounded-[6.75px] text-[11.25px] font-semibold hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 transition-opacity"
+          className="flex items-center gap-[5.63px] py-[8.44px] px-[61.88px] bg-[#1e3a8a] text-white rounded-[6.75px] text-xs font-semibold hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 transition-opacity"
         >
           <Save className="w-[21px] h-[21px] text-white" />
           {saving ? "Saving..." : "Save Changes"}

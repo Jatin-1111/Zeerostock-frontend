@@ -101,7 +101,7 @@ export default function PrivacySettingsComponent() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-[90px]">
-        <div className="text-[#9c9c9c] text-[15px]">Loading settings...</div>
+        <div className="text-[#9c9c9c] text-base">Loading settings...</div>
       </div>
     );
   }
@@ -132,22 +132,22 @@ export default function PrivacySettingsComponent() {
     <div className="flex flex-col gap-[16.88px] w-full">
       {/* Title Section */}
       <div className="flex flex-col gap-[5.63px]">
-        <h1 className="text-[19.69px] font-semibold text-[#0d1b2a] leading-normal">
+        <h1 className="text-xl font-semibold text-[#0d1b2a] leading-normal">
           Privacy
         </h1>
-        <p className="text-[11.25px] font-medium text-[#9c9c9c] leading-normal">
+        <p className="text-xs font-medium text-[#9c9c9c] leading-normal">
           Control your privacy and data setting
         </p>
       </div>
 
       {/* Success/Error Messages */}
       {success && (
-        <div className="bg-[#dcfce7] border border-[#86efac] text-[#166534] px-[11.25px] py-[9px] rounded-[6.75px] text-[9.56px]">
+        <div className="bg-[#dcfce7] border border-[#86efac] text-[#166534] px-[11.25px] py-[9px] rounded-[6.75px] text-xs">
           {success}
         </div>
       )}
       {error && (
-        <div className="bg-[#fee2e2] border border-[#fca5a5] text-[#991b1b] px-[11.25px] py-[9px] rounded-[6.75px] text-[9.56px]">
+        <div className="bg-[#fee2e2] border border-[#fca5a5] text-[#991b1b] px-[11.25px] py-[9px] rounded-[6.75px] text-xs">
           {error}
         </div>
       )}
@@ -157,7 +157,7 @@ export default function PrivacySettingsComponent() {
         {/* Card Header */}
         <div className="flex items-center gap-[11.25px] pt-[16.88px] px-[16.88px] pb-[11.25px]">
           <Bell size={14.63} strokeWidth={2} color="#0d1b2a" />
-          <h2 className="text-[13.5px] font-semibold text-[#0d1b2a] leading-normal">
+          <h2 className="text-sm font-semibold text-[#0d1b2a] leading-normal">
             Privacy Control
           </h2>
         </div>
@@ -168,10 +168,10 @@ export default function PrivacySettingsComponent() {
         {/* Data Sharing Toggle Row */}
         <div className="flex items-center justify-between px-[19.69px] py-[19.69px] min-h-[27.56px]">
           <div className="flex flex-col gap-[5.06px]">
-            <p className="text-[9.56px] font-medium text-[#0d1b2a] leading-normal">
+            <p className="text-xs font-medium text-[#0d1b2a] leading-normal">
               Data sharing
             </p>
-            <p className="text-[8.44px] font-normal text-[#747474] leading-normal">
+            <p className="text-xs font-normal text-[#747474] leading-normal">
               Share anonymized data for platform improvement
             </p>
           </div>
@@ -184,10 +184,10 @@ export default function PrivacySettingsComponent() {
         {/* Analytics Tracking Toggle Row */}
         <div className="flex items-center justify-between px-[19.69px] py-[19.69px] min-h-[27.56px]">
           <div className="flex flex-col gap-[5.06px]">
-            <p className="text-[9.56px] font-medium text-[#0d1b2a] leading-normal">
+            <p className="text-xs font-medium text-[#0d1b2a] leading-normal">
               Analytics Tracking
             </p>
-            <p className="text-[8.44px] font-normal text-[#747474] leading-normal">
+            <p className="text-xs font-normal text-[#747474] leading-normal">
               Allow analytics tracking for better expreience
             </p>
           </div>
@@ -202,10 +202,10 @@ export default function PrivacySettingsComponent() {
 
         {/* Data Export & Deletion Section */}
         <div className="px-[19.69px] py-[19.69px] flex flex-col gap-[5.06px]">
-          <p className="text-[9.56px] font-medium text-[#0d1b2a] leading-normal">
+          <p className="text-xs font-medium text-[#0d1b2a] leading-normal">
             Data Export & Deletion
           </p>
-          <p className="text-[8.44px] font-normal text-[#747474] leading-normal">
+          <p className="text-xs font-normal text-[#747474] leading-normal">
             Export your data or permanently delete your account
           </p>
         </div>
@@ -218,7 +218,7 @@ export default function PrivacySettingsComponent() {
             className="flex items-center justify-center gap-[5.63px] px-[61.88px] py-[8.44px] bg-white border border-[#007bff] rounded-[6.75px] h-[30.94px] flex-shrink-0 hover:bg-gray-50 transition-colors"
           >
             <Download size={16.31} strokeWidth={2} color="#007bff" />
-            <span className="text-[11.25px] font-medium text-[#007bff] leading-[12.38px]">
+            <span className="text-xs font-medium text-[#007bff] leading-tight">
               Export My Data
             </span>
           </button>
@@ -229,7 +229,7 @@ export default function PrivacySettingsComponent() {
             className="flex items-center justify-center gap-[5.63px] px-[61.88px] py-[8.44px] bg-[#e53935] rounded-[6.75px] h-[30.94px] flex-shrink-0 hover:bg-[#d32f2f] transition-colors"
           >
             <Trash2 size={14.63} strokeWidth={2} color="white" />
-            <span className="text-[11.25px] font-medium text-white leading-[12.38px]">
+            <span className="text-xs font-medium text-white leading-tight">
               Delete Account
             </span>
           </button>
@@ -251,7 +251,7 @@ export default function PrivacySettingsComponent() {
             color="white"
             className="rotate-180"
           />
-          <span className="text-[11.25px] font-semibold text-white leading-[12.38px]">
+          <span className="text-xs font-semibold text-white leading-tight">
             Save Changes
           </span>
         </button>

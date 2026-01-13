@@ -254,75 +254,75 @@ export default function SupplierDetailPage() {
       <div className="grid grid-cols-2 gap-6">
         {/* Business Details */}
         <div>
-          <h3 className="text-[14px] font-bold text-black mb-4">
+          <h3 className="text-base font-bold text-black mb-4">
             Business Information
           </h3>
           <div className="space-y-3">
             <div>
-              <label className="text-[11px] text-gray-500 block mb-1">
+              <label className="text-xs text-gray-500 block mb-1">
                 Company Name
               </label>
-              <p className="text-[13px] text-black">
+              <p className="text-sm text-black">
                 {verification.companyName || "N/A"}
               </p>
             </div>
             <div>
-              <label className="text-[11px] text-gray-500 block mb-1">
+              <label className="text-xs text-gray-500 block mb-1">
                 Category
               </label>
-              <p className="text-[13px] text-black">
+              <p className="text-sm text-black">
                 {verification.category || "N/A"}
               </p>
             </div>
             <div>
-              <label className="text-[11px] text-gray-500 block mb-1">
+              <label className="text-xs text-gray-500 block mb-1">
                 GST Number
               </label>
-              <p className="text-[13px] text-black">
+              <p className="text-sm text-black">
                 {verification.gstNumber || "N/A"}
               </p>
             </div>
             <div>
-              <label className="text-[11px] text-gray-500 block mb-1">
+              <label className="text-xs text-gray-500 block mb-1">
                 PAN Number
               </label>
-              <p className="text-[13px] text-black">
+              <p className="text-sm text-black">
                 {verification.panNumber || "N/A"}
               </p>
             </div>
 
-            <h3 className="text-[14px] font-bold text-black mb-4 mt-6">
+            <h3 className="text-base font-bold text-black mb-4 mt-6">
               Contact Information
             </h3>
             <div>
-              <label className="text-[11px] text-gray-500 block mb-1">
+              <label className="text-xs text-gray-500 block mb-1">
                 Contact Person
               </label>
-              <p className="text-[13px] text-black">
+              <p className="text-sm text-black">
                 {verification.contactPerson || "N/A"}
               </p>
             </div>
             <div>
-              <label className="text-[11px] text-gray-500 block mb-1">
+              <label className="text-xs text-gray-500 block mb-1">
                 Registered Address
               </label>
-              <p className="text-[13px] text-black">
+              <p className="text-sm text-black">
                 {verification.registeredAddress || "N/A"}
               </p>
             </div>
             <div>
-              <label className="text-[11px] text-gray-500 block mb-1">
+              <label className="text-xs text-gray-500 block mb-1">
                 Business Phone
               </label>
-              <p className="text-[13px] text-black">
+              <p className="text-sm text-black">
                 {verification.contactPhone || "N/A"}
               </p>
             </div>
             <div>
-              <label className="text-[11px] text-gray-500 block mb-1">
+              <label className="text-xs text-gray-500 block mb-1">
                 Business Email
               </label>
-              <p className="text-[13px] text-black">
+              <p className="text-sm text-black">
                 {verification.contactEmail || "N/A"}
               </p>
             </div>
@@ -331,16 +331,16 @@ export default function SupplierDetailPage() {
 
         {/* Status & Identity Information */}
         <div>
-          <h3 className="text-[14px] font-bold text-black mb-4">
+          <h3 className="text-base font-bold text-black mb-4">
             Verification Status
           </h3>
           <div className="space-y-4">
             <div className="border border-gray-200 p-4 rounded">
-              <label className="text-[11px] text-gray-500 block mb-1">
+              <label className="text-xs text-gray-500 block mb-1">
                 Current Status
               </label>
               <p
-                className={`text-[16px] font-semibold ${
+                className={`text-lg font-semibold ${
                   verification.verificationStatus === "approved" ||
                   verification.verificationStatus === "verified"
                     ? "text-green-600"
@@ -358,10 +358,10 @@ export default function SupplierDetailPage() {
             </div>
 
             <div className="border border-gray-200 p-4 rounded">
-              <label className="text-[11px] text-gray-500 block mb-1">
+              <label className="text-xs text-gray-500 block mb-1">
                 Submitted Date
               </label>
-              <p className="text-[13px] text-black">
+              <p className="text-sm text-black">
                 {verification.submittedAt
                   ? new Date(verification.submittedAt).toLocaleDateString(
                       "en-US",
@@ -379,10 +379,10 @@ export default function SupplierDetailPage() {
 
             {verification.verifiedAt && (
               <div className="border border-gray-200 p-4 rounded">
-                <label className="text-[11px] text-gray-500 block mb-1">
+                <label className="text-xs text-gray-500 block mb-1">
                   Reviewed Date
                 </label>
-                <p className="text-[13px] text-black">
+                <p className="text-sm text-black">
                   {new Date(verification.verifiedAt).toLocaleDateString(
                     "en-US",
                     {
@@ -399,10 +399,10 @@ export default function SupplierDetailPage() {
 
             {verification.verificationStatus === "rejected" && (
               <div className="border border-red-200 bg-red-50 p-4 rounded">
-                <label className="text-[11px] text-red-600 block mb-1">
+                <label className="text-xs text-red-600 block mb-1">
                   Rejection Reason
                 </label>
-                <p className="text-[13px] text-red-800">
+                <p className="text-sm text-red-800">
                   Contact admin for details
                 </p>
               </div>
@@ -415,7 +415,7 @@ export default function SupplierDetailPage() {
 
   const renderDocuments = () => {
     if (!verification || !verification.documents) {
-      return <p className="text-[13px] text-gray-500">No documents uploaded</p>;
+      return <p className="text-sm text-gray-500">No documents uploaded</p>;
     }
 
     // Document labels mapping for better display names
@@ -442,12 +442,12 @@ export default function SupplierDetailPage() {
       .filter((doc) => doc.url); // Only show uploaded documents
 
     if (documents.length === 0) {
-      return <p className="text-[13px] text-gray-500">No documents uploaded</p>;
+      return <p className="text-sm text-gray-500">No documents uploaded</p>;
     }
 
     return (
       <div className="p-8">
-        <h3 className="text-[14px] font-bold text-black mb-4">
+        <h3 className="text-base font-bold text-black mb-4">
           Attached Documents ({documents.length})
         </h3>
         <div className="grid grid-cols-2 gap-4">
@@ -461,10 +461,10 @@ export default function SupplierDetailPage() {
                   <FileText className="w-5 h-5 text-blue-600" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-[12px] text-black font-medium truncate">
+                  <p className="text-sm text-black font-medium truncate">
                     {doc.label}
                   </p>
-                  <p className="text-[10px] text-gray-500">Uploaded Document</p>
+                  <p className="text-xs text-gray-500">Uploaded Document</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <button
@@ -494,12 +494,12 @@ export default function SupplierDetailPage() {
 
   const renderHistory = () => {
     if (history.length === 0) {
-      return <p className="text-[13px] text-gray-500">No history available</p>;
+      return <p className="text-sm text-gray-500">No history available</p>;
     }
 
     return (
       <div>
-        <h3 className="text-[14px] font-bold text-black mb-6">
+        <h3 className="text-base font-bold text-black mb-6">
           Verification Timeline
         </h3>
         <div className="relative">
@@ -520,16 +520,14 @@ export default function SupplierDetailPage() {
                 <div className="flex-1 pt-1">
                   <div className="bg-white border border-gray-200 p-4">
                     <div className="flex justify-between items-start mb-2">
-                      <h4 className="text-[13px] font-semibold text-black">
+                      <h4 className="text-sm font-semibold text-black">
                         {event.status
                           .replace(/_/g, " ")
                           .replace(/\b\w/g, (l) => l.toUpperCase())}
                       </h4>
                     </div>
-                    <p className="text-[11px] text-gray-600 mb-2">
-                      {event.notes}
-                    </p>
-                    <p className="text-[10px] text-gray-400">
+                    <p className="text-xs text-gray-600 mb-2">{event.notes}</p>
+                    <p className="text-xs text-gray-400">
                       {new Date(event.createdAt).toLocaleDateString("en-US", {
                         month: "short",
                         day: "numeric",
@@ -563,7 +561,7 @@ export default function SupplierDetailPage() {
       <AdminLayout>
         <div className="text-center py-12">
           <AlertCircle className="h-12 w-12 mx-auto mb-4 text-red-500" />
-          <p className="text-gray-500 text-[13px]">Verification not found</p>
+          <p className="text-gray-500 text-sm">Verification not found</p>
         </div>
       </AdminLayout>
     );
@@ -573,7 +571,7 @@ export default function SupplierDetailPage() {
     <AdminLayout>
       <button
         onClick={() => router.back()}
-        className="flex items-center gap-2 text-[13px] text-gray-600 hover:text-black mb-6"
+        className="flex items-center gap-2 text-sm text-gray-600 hover:text-black mb-6"
       >
         <ArrowLeft className="w-4 h-4" />
         Back to Verification
@@ -582,22 +580,22 @@ export default function SupplierDetailPage() {
       {error && (
         <div className="mb-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 flex items-center gap-2">
           <AlertCircle className="h-5 w-5" />
-          <span className="text-[13px]">{error}</span>
+          <span className="text-sm">{error}</span>
         </div>
       )}
 
       {success && (
         <div className="mb-4 bg-green-50 border border-green-200 text-green-700 px-4 py-3 flex items-center gap-2">
           <CheckCircle className="h-5 w-5" />
-          <span className="text-[13px]">{success}</span>
+          <span className="text-sm">{success}</span>
         </div>
       )}
 
       <div className="mb-6">
-        <h2 className="text-[24px] font-bold text-black mb-1">
+        <h2 className="text-2xl font-bold text-black mb-1">
           Supplier Verification Details
         </h2>
-        <p className="text-[13px] text-gray-500">
+        <p className="text-sm text-gray-500">
           Review supplier documents and verification status
         </p>
       </div>
@@ -607,7 +605,7 @@ export default function SupplierDetailPage() {
           <div className="flex gap-2 mb-6">
             <button
               onClick={() => setActiveTab("Overview")}
-              className={`px-4 py-2 text-[13px] font-medium transition-colors ${
+              className={`px-4 py-2 text-sm font-medium transition-colors ${
                 activeTab === "Overview"
                   ? "bg-black text-white"
                   : "bg-white text-gray-600 border border-gray-300 hover:bg-gray-50"
@@ -617,7 +615,7 @@ export default function SupplierDetailPage() {
             </button>
             <button
               onClick={() => setActiveTab("Documents")}
-              className={`px-4 py-2 text-[13px] font-medium transition-colors ${
+              className={`px-4 py-2 text-sm font-medium transition-colors ${
                 activeTab === "Documents"
                   ? "bg-black text-white"
                   : "bg-white text-gray-600 border border-gray-300 hover:bg-gray-50"
@@ -627,7 +625,7 @@ export default function SupplierDetailPage() {
             </button>
             <button
               onClick={() => setActiveTab("History")}
-              className={`px-4 py-2 text-[13px] font-medium transition-colors ${
+              className={`px-4 py-2 text-sm font-medium transition-colors ${
                 activeTab === "History"
                   ? "bg-black text-white"
                   : "bg-white text-gray-600 border border-gray-300 hover:bg-gray-50"
@@ -649,14 +647,14 @@ export default function SupplierDetailPage() {
         (verification.verificationStatus === "pending" ||
           verification.verificationStatus === "under_review") ? (
           <div className="bg-white border border-gray-200 p-6">
-            <h3 className="text-[14px] font-bold text-black mb-4">
+            <h3 className="text-base font-bold text-black mb-4">
               Verification Actions
             </h3>
             <div className="flex gap-3">
               <button
                 onClick={() => handleAction("approve")}
                 disabled={actionLoading}
-                className="flex-1 bg-green-600 text-white px-6 py-3 text-[14px] font-medium hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 rounded"
+                className="flex-1 bg-green-600 text-white px-6 py-3 text-base font-medium hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 rounded"
               >
                 <CheckCircle className="w-5 h-5" />
                 Approve Verification
@@ -664,7 +662,7 @@ export default function SupplierDetailPage() {
               <button
                 onClick={() => handleAction("review")}
                 disabled={actionLoading}
-                className="flex-1 bg-blue-600 text-white px-6 py-3 text-[14px] font-medium hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 rounded"
+                className="flex-1 bg-blue-600 text-white px-6 py-3 text-base font-medium hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 rounded"
               >
                 <Eye className="w-5 h-5" />
                 Mark Under Review
@@ -672,7 +670,7 @@ export default function SupplierDetailPage() {
               <button
                 onClick={() => handleAction("reject")}
                 disabled={actionLoading}
-                className="flex-1 bg-red-600 text-white px-6 py-3 text-[14px] font-medium hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 rounded"
+                className="flex-1 bg-red-600 text-white px-6 py-3 text-base font-medium hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 rounded"
               >
                 <XCircle className="w-5 h-5" />
                 Reject Verification

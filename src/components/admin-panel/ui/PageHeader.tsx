@@ -12,9 +12,9 @@ export default function PageHeader({
   return (
     <div className="flex justify-between items-start mb-6">
       <div>
-        <h2 className="text-[28px] font-bold text-black">{title}</h2>
+        <h2 className="text-2xl font-bold text-black">{title}</h2>
         {description && (
-          <p className="text-[14px] text-gray-500">{description}</p>
+          <p className="text-base text-gray-500">{description}</p>
         )}
       </div>
       {actions && <div className="flex items-center gap-2">{actions}</div>}

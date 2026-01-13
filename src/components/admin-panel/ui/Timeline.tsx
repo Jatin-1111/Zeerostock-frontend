@@ -27,7 +27,7 @@ export default function Timeline({
             <div key={index} className="flex-1">
               <div className="flex flex-col items-center relative">
                 <div
-                  className={`w-10 h-10 rounded-full flex items-center justify-center text-white text-[14px] font-medium z-10 ${
+                  className={`w-10 h-10 rounded-full flex items-center justify-center text-white text-base font-medium z-10 ${
                     item.completed
                       ? "bg-black"
                       : item.current
@@ -48,10 +48,10 @@ export default function Timeline({
                     }`}
                   />
                 )}
-                <p className="text-[12px] font-medium text-gray-900 mt-2 text-center">
+                <p className="text-sm font-medium text-gray-900 mt-2 text-center">
                   {item.title}
                 </p>
-                <p className="text-[10px] text-gray-500 mt-1 text-center">
+                <p className="text-xs text-gray-500 mt-1 text-center">
                   {item.timestamp}
                 </p>
               </div>
@@ -81,7 +81,7 @@ export default function Timeline({
                 {Icon ? (
                   <Icon className="w-6 h-6" />
                 ) : (
-                  <span className="text-[14px] font-medium">{index + 1}</span>
+                  <span className="text-base font-medium">{index + 1}</span>
                 )}
               </div>
               {index < items.length - 1 && (

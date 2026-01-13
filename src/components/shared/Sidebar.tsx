@@ -47,7 +47,7 @@ export default function Sidebar({
       <div className="w-[220px] h-full bg-white shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] overflow-y-auto flex-shrink-0">
         {/* Header */}
         <div className="h-[40px] flex items-center justify-center border-b border-[#8b8b8b]">
-          <h2 className="font-medium text-[13px] text-[#1e3a8a] leading-normal">
+          <h2 className="font-medium text-sm text-[#1e3a8a] leading-normal">
             Explore Zeerostock
           </h2>
         </div>
@@ -55,7 +55,7 @@ export default function Sidebar({
         <div className="px-[3px] pb-[19px]">
           {/* EXPLORE PRODUCTS Section */}
           <div className="mt-[25px] mb-6">
-            <h3 className="font-medium text-[12px] text-black leading-normal px-[11px] mb-[20px]">
+            <h3 className="font-medium text-sm text-black leading-normal px-[11px] mb-[20px]">
               Explore Products
             </h3>
             <nav className="space-y-[4px]">
@@ -84,7 +84,7 @@ export default function Sidebar({
                   </div>
                   <div className="flex justify-between">
                     <span
-                      className={`font-medium text-[12px] leading-normal ${
+                      className={`font-medium text-sm leading-normal ${
                         activeItem === "browse-categories"
                           ? "text-[#2aae7a]"
                           : "text-[#8b8b8b]"
@@ -100,7 +100,7 @@ export default function Sidebar({
                       }`}
                     >
                       <span
-                        className={`font-medium text-[8px] leading-normal ${
+                        className={`font-medium text-xs leading-normal ${
                           activeItem === "browse-categories"
                             ? "text-[#eeffef]"
                             : "text-white"
@@ -137,7 +137,7 @@ export default function Sidebar({
                     />
                   </div>
                   <span
-                    className={`font-medium text-[12px] leading-normal ${
+                    className={`font-medium text-sm leading-normal ${
                       activeItem === "trending-items"
                         ? "text-[#2aae7a]"
                         : "text-[#8b8b8b]"
@@ -172,7 +172,7 @@ export default function Sidebar({
                     />
                   </div>
                   <span
-                    className={`font-medium text-[12px] leading-normal ${
+                    className={`font-medium text-sm leading-normal ${
                       activeItem === "featured-deals"
                         ? "text-[#2aae7a]"
                         : "text-[#8b8b8b]"
@@ -187,7 +187,7 @@ export default function Sidebar({
 
           {/* GET STARTED Section */}
           <div className="mb-[21px]">
-            <h3 className="font-medium text-[12px] text-black leading-normal px-[13px] mb-[20px]">
+            <h3 className="font-medium text-sm text-black leading-normal px-[13px] mb-[20px]">
               Get Started
             </h3>
             <nav className="space-y-[4px]">
@@ -215,7 +215,7 @@ export default function Sidebar({
                     />
                   </div>
                   <span
-                    className={`font-medium text-[12px] leading-normal ${
+                    className={`font-medium text-sm leading-normal ${
                       activeItem === "for-buyers"
                         ? "text-[#2aae7a]"
                         : "text-[#8b8b8b]"
@@ -250,7 +250,7 @@ export default function Sidebar({
                     />
                   </div>
                   <span
-                    className={`font-medium text-[12px] leading-normal ${
+                    className={`font-medium text-sm leading-normal ${
                       activeItem === "for-suppliers"
                         ? "text-[#2aae7a]"
                         : "text-[#8b8b8b]"
@@ -285,7 +285,7 @@ export default function Sidebar({
                     />
                   </div>
                   <span
-                    className={`font-medium text-[12px] leading-normal ${
+                    className={`font-medium text-sm leading-normal ${
                       activeItem === "how-it-works"
                         ? "text-[#2aae7a]"
                         : "text-[#8b8b8b]"
@@ -300,7 +300,7 @@ export default function Sidebar({
 
           {/* RESOURCES Section */}
           <div className="mb-[21px]">
-            <h3 className="font-medium text-[12px] text-black leading-normal px-[13px] mb-[20px]">
+            <h3 className="font-medium text-sm text-black leading-normal px-[13px] mb-[20px]">
               Resources
             </h3>
             <nav className="space-y-[4px]">
@@ -328,7 +328,7 @@ export default function Sidebar({
                     />
                   </div>
                   <span
-                    className={`font-medium text-[13px] leading-normal ${
+                    className={`font-medium text-sm leading-normal ${
                       activeItem === "pricing"
                         ? "text-[#2aae7a]"
                         : "text-[#8b8b8b]"
@@ -363,7 +363,7 @@ export default function Sidebar({
                     />
                   </div>
                   <span
-                    className={`font-medium text-[13px] leading-normal ${
+                    className={`font-medium text-sm leading-normal ${
                       activeItem === "contact-us"
                         ? "text-[#2aae7a]"
                         : "text-[#8b8b8b]"
@@ -398,7 +398,7 @@ export default function Sidebar({
                     />
                   </div>
                   <span
-                    className={`font-medium text-[13px] leading-normal ${
+                    className={`font-medium text-sm leading-normal ${
                       activeItem === "settings"
                         ? "text-[#2aae7a]"
                         : "text-[#8b8b8b]"
@@ -420,7 +420,7 @@ export default function Sidebar({
               <div className="w-[12px] h-[12px] flex-shrink-0">
                 <AlertCircle className="w-[12px] h-[12px] text-black" />
               </div>
-              <span className="font-medium text-[12px] text-black leading-normal">
+              <span className="font-medium text-sm text-black leading-normal">
                 Help & Support
               </span>
             </Link>
@@ -431,7 +431,7 @@ export default function Sidebar({
               <div className="w-[12px] h-[12px] flex-shrink-0">
                 <Mail className="w-[12px] h-[12px] text-black" />
               </div>
-              <span className="font-medium text-[12px] text-black leading-normal">
+              <span className="font-medium text-sm text-black leading-normal">
                 Send Feedback
               </span>
             </Link>

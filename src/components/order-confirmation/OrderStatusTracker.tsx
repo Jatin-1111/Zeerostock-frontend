@@ -44,12 +44,12 @@ export default function OrderStatusTracker({
     <div className="bg-white rounded-[15px] p-[23px] mb-5 shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)]">
       {/* Header with Status Badge */}
       <div className="flex items-center justify-between mb-8">
-        <h2 className="font-medium text-[#0d1b2a] text-[18px] leading-normal">
+        <h2 className="font-medium text-[#0d1b2a] text-xl leading-normal">
           Order Status
         </h2>
         <div className="bg-[#FFCC33] flex items-center gap-[8px] px-[19px] py-[5px] rounded-[100px]">
           <Timer className="w-[17px] h-[17px] text-black" />
-          <span className="font-normal text-[15px] leading-[21px] text-black tracking-[0.5px]">
+          <span className="font-normal text-base leading-normal text-black tracking-[0.5px]">
             {currentStatus}
           </span>
         </div>
@@ -89,14 +89,14 @@ export default function OrderStatusTracker({
                   <div className="flex-1 flex items-start justify-between pt-[6px]">
                     <div className="flex flex-col gap-[4px] max-w-[247px]">
                       <h3
-                        className={`font-medium text-[15px] leading-normal ${getTextColor(
+                        className={`font-medium text-base leading-normal ${getTextColor(
                           step.status
                         )}`}
                       >
                         {step.title}
                       </h3>
                       <p
-                        className={`font-medium text-[14px] leading-normal ${getDescriptionColor(
+                        className={`font-medium text-base leading-normal ${getDescriptionColor(
                           step.status
                         )}`}
                       >
@@ -106,7 +106,7 @@ export default function OrderStatusTracker({
 
                     {/* Timestamp */}
                     <span
-                      className={`font-medium text-[14px] leading-normal whitespace-nowrap ml-4 ${getDescriptionColor(
+                      className={`font-medium text-base leading-normal whitespace-nowrap ml-4 ${getDescriptionColor(
                         step.status
                       )}`}
                     >

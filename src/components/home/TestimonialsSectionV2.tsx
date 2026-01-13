@@ -52,13 +52,13 @@ export default function TestimonialsSectionV2() {
     <section className="w-full py-2 sm:py-3 md:py-[13px]">
       <div className="max-w-full sm:max-w-2xl md:max-w-3xl lg:max-w-[880px] mx-auto px-4">
         {/* Title */}
-        <h2 className="text-center text-xl sm:text-2xl md:text-[25px] font-bold leading-normal mb-1 sm:mb-1.5 md:mb-[4px]">
+        <h2 className="text-center text-xl sm:text-2xl md:text-2xl font-bold leading-normal mb-1 sm:mb-1.5 md:mb-[4px]">
           <span className="text-[#2ec096]">Trusted</span>
           <span className="text-[#0d1b2a]"> By Industry Leaders</span>
         </h2>
 
         {/* Subtitle */}
-        <p className="text-center text-xs sm:text-sm md:text-[12px] font-semibold leading-normal text-[#6b7280] mb-6 sm:mb-8 md:mb-[39px] max-w-full sm:max-w-md md:max-w-[515px] mx-auto px-4 sm:px-0">
+        <p className="text-center text-xs sm:text-sm md:text-sm font-semibold leading-normal text-[#6b7280] mb-6 sm:mb-8 md:mb-[39px] max-w-full sm:max-w-md md:max-w-[515px] mx-auto px-4 sm:px-0">
           See how businesses like yours are maximizing value from surplus
           inventory
         </p>
@@ -102,17 +102,17 @@ export default function TestimonialsSectionV2() {
               {/* Content */}
               <div className="px-3 sm:px-4 md:px-[10px] py-4 sm:py-5 md:py-[20px]">
                 {/* Quote */}
-                <p className="text-xs sm:text-sm md:text-[11px] font-medium leading-normal text-[#686868] mb-4 sm:mb-5 md:mb-[20px]">
+                <p className="text-xs sm:text-sm md:text-xs font-medium leading-normal text-[#686868] mb-4 sm:mb-5 md:mb-[20px]">
                   {testimonial.quote}
                 </p>
 
                 {/* Name */}
-                <p className="text-sm sm:text-base md:text-[14px] font-bold leading-normal text-black mb-1 sm:mb-1.5 md:mb-[5px]">
+                <p className="text-sm sm:text-base md:text-base font-bold leading-normal text-black mb-1 sm:mb-1.5 md:mb-[5px]">
                   {testimonial.name}
                 </p>
 
                 {/* Company */}
-                <p className="text-[10px] sm:text-xs md:text-[10.5px] font-medium leading-normal text-black">
+                <p className="text-xs sm:text-xs md:text-xs font-medium leading-normal text-black">
                   {testimonial.company}
                 </p>
               </div>

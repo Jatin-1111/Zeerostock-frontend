@@ -57,10 +57,10 @@ export default function TrackOrderPage() {
 
       {/* Title and Description */}
       <div className="mb-[25px] max-w-[360px] text-center">
-        <h1 className="mb-[8.5px] text-[22.5px] font-semibold leading-normal text-[#0d1b2a]">
+        <h1 className="mb-[8.5px] text-2xl font-semibold leading-normal text-[#0d1b2a]">
           Track Your Order
         </h1>
-        <p className="text-[13.5px] font-medium leading-normal text-[#9c9c9c]">
+        <p className="text-sm font-medium leading-normal text-[#9c9c9c]">
           Enter your order ID to see real-time tracking information
         </p>
       </div>
@@ -70,7 +70,7 @@ export default function TrackOrderPage() {
         {/* Order ID Section */}
         <form onSubmit={handleSubmit}>
           <div className="mb-[22.5px]">
-            <label className="mb-[8.5px] block text-[13.5px] font-medium text-[#0d1b2a]">
+            <label className="mb-[8.5px] block text-sm font-medium text-[#0d1b2a]">
               Order ID
             </label>
             <div className="flex gap-[8.5px]">
@@ -79,11 +79,11 @@ export default function TrackOrderPage() {
                 placeholder="e.g., ORD-2025-000005"
                 value={orderId}
                 onChange={(e) => setOrderId(e.target.value)}
-                className="h-[32px] flex-1 rounded-[5.5px] border border-[#bebebe] pl-[9px] text-[9px] text-[#9c9c9c] outline-none"
+                className="h-[32px] flex-1 rounded-[5.5px] border border-[#bebebe] pl-[9px] text-xs text-[#9c9c9c] outline-none"
               />
               <button
                 type="submit"
-                className="flex h-[32px] w-[129px] cursor-pointer items-center justify-center gap-[5.5px] rounded-[8.5px] border-none bg-[#1e3a8a] text-[11px] font-semibold text-white"
+                className="flex h-[32px] w-[129px] cursor-pointer items-center justify-center gap-[5.5px] rounded-[8.5px] border-none bg-[#1e3a8a] text-xs font-semibold text-white"
               >
                 <svg
                   width="9.5"
@@ -135,11 +135,11 @@ export default function TrackOrderPage() {
                   strokeLinecap="round"
                 />
               </svg>
-              <h3 className="m-0 text-[11px] font-semibold text-[#085396]">
+              <h3 className="m-0 text-xs font-semibold text-[#085396]">
                 Where to find your Tracking ID?
               </h3>
             </div>
-            <ul className="m-0 pl-[17px] text-[11px] leading-[17px] text-[#085396]">
+            <ul className="m-0 pl-[17px] text-xs leading-tight text-[#085396]">
               <li>Check your order confirmation email</li>
               <li>
                 Find it in your account dashboard under &quot;My Orders&quot;
@@ -153,14 +153,14 @@ export default function TrackOrderPage() {
 
           {/* Quick Actions Section */}
           <div>
-            <h3 className="mb-[11px] text-[12.5px] font-medium text-[#0d1b2a]">
+            <h3 className="mb-[11px] text-sm font-medium text-[#0d1b2a]">
               Quick Actions
             </h3>
             <div className="flex justify-between gap-[55px]">
               <button
                 type="button"
                 onClick={() => router.push("/buyer/orders")}
-                className="flex flex-1 cursor-pointer items-center justify-center gap-[5.5px] rounded-[8.5px] border border-[#9c9c9c] bg-white px-[3px] py-[5.5px] text-[11px] font-medium text-[#9c9c9c]"
+                className="flex flex-1 cursor-pointer items-center justify-center gap-[5.5px] rounded-[8.5px] border border-[#9c9c9c] bg-white px-[3px] py-[5.5px] text-xs font-medium text-[#9c9c9c]"
               >
                 <svg
                   width="12.5"
@@ -181,7 +181,7 @@ export default function TrackOrderPage() {
               <button
                 type="button"
                 onClick={() => router.push("/buyer/support")}
-                className="flex flex-1 cursor-pointer items-center justify-center gap-[5.5px] rounded-[8.5px] border border-[#9c9c9c] bg-white px-[3px] py-[5.5px] text-[11px] font-medium text-[#9c9c9c]"
+                className="flex flex-1 cursor-pointer items-center justify-center gap-[5.5px] rounded-[8.5px] border border-[#9c9c9c] bg-white px-[3px] py-[5.5px] text-xs font-medium text-[#9c9c9c]"
               >
                 <svg
                   width="12.5"

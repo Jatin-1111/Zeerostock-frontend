@@ -31,10 +31,10 @@ export default function TermsConditionsPage() {
       {/* Header Section */}
       <div className="bg-white border-b border-gray-200 py-12">
         <div className="mx-auto px-8">
-          <h1 className="text-[40px] font-bold text-gray-900 mb-3">
+          <h1 className="text-3xl font-bold text-gray-900 mb-3">
             Terms & Conditions
           </h1>
-          <p className="text-[16px] text-gray-600">
+          <p className="text-lg text-gray-600">
             Understand the rules, policies, and legal terms governing the use of
             Zeerostock.
           </p>
@@ -48,10 +48,10 @@ export default function TermsConditionsPage() {
           <div className="flex-1 space-y-12">
             {/* 1. Introduction */}
             <section id="introduction">
-              <h2 className="text-[28px] font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">
                 1. Introduction
               </h2>
-              <p className="text-[15px] text-gray-700 leading-relaxed mb-4">
+              <p className="text-base text-gray-700 leading-relaxed mb-4">
                 Welcome to Zeerostock. These Terms and Conditions ("Terms")
                 govern your use of the Zeerostock website, mobile applications,
                 and services (collectively, the "Platform"). By accessing or
@@ -73,12 +73,12 @@ export default function TermsConditionsPage() {
                     />
                   </svg>
                 </div>
-                <p className="text-[13px] text-gray-700">
+                <p className="text-sm text-gray-700">
                   This document constitutes a legally binding agreement between
                   you and Zeerostock, Inc. Please read it carefully.
                 </p>
               </div>
-              <p className="text-[15px] text-gray-700 leading-relaxed">
+              <p className="text-base text-gray-700 leading-relaxed">
                 The Platform is a business-to-business (B2B) marketplace that
                 connects buyers ("Buyers") and sellers ("Suppliers") of goods
                 and services. Zeerostock provides the venue and tools for these
@@ -89,10 +89,10 @@ export default function TermsConditionsPage() {
 
             {/* 2. User Accounts & Eligibility */}
             <section id="user-accounts">
-              <h2 className="text-[28px] font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">
                 2. User Accounts & Eligibility
               </h2>
-              <p className="text-[15px] text-gray-700 leading-relaxed mb-4">
+              <p className="text-base text-gray-700 leading-relaxed mb-4">
                 To access certain features of the Platform, you must register
                 for an account. You must be at least 18 years old and represent
                 a legitimate business entity to create an account. You agree to
@@ -114,7 +114,7 @@ export default function TermsConditionsPage() {
                     />
                   </svg>
                 </div>
-                <p className="text-[13px] text-gray-700">
+                <p className="text-sm text-gray-700">
                   You are responsible for safeguarding your password and for all
                   activities that occur under your account. You agree to notify
                   Zeerostock immediately of any unauthorized use of your
@@ -125,15 +125,15 @@ export default function TermsConditionsPage() {
 
             {/* 3. Marketplace Policies */}
             <section id="marketplace">
-              <h2 className="text-[28px] font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">
                 3. Marketplace Policies
               </h2>
-              <p className="text-[15px] text-gray-700 leading-relaxed mb-3">
+              <p className="text-base text-gray-700 leading-relaxed mb-3">
                 All users must comply with all applicable laws, regulations, and
                 third-party rights. Prohibited activities include, but are not
                 limited to:
               </p>
-              <ul className="space-y-2 text-[15px] text-gray-700">
+              <ul className="space-y-2 text-base text-gray-700">
                 <li className="flex gap-2">
                   <span className="font-bold">•</span>
                   <span>
@@ -167,10 +167,10 @@ export default function TermsConditionsPage() {
 
             {/* 4. Payment & Fees */}
             <section id="payment-fees">
-              <h2 className="text-[28px] font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">
                 4. Payment & Fees
               </h2>
-              <p className="text-[15px] text-gray-700 leading-relaxed mb-4">
+              <p className="text-base text-gray-700 leading-relaxed mb-4">
                 Zeerostock may charge fees for certain services, such as listing
                 items or completing transactions. All applicable fees will be
                 disclosed to you prior to your use of the service. You agree to
@@ -192,7 +192,7 @@ export default function TermsConditionsPage() {
                     />
                   </svg>
                 </div>
-                <p className="text-[13px] text-gray-700">
+                <p className="text-sm text-gray-700">
                   By accessing this platform and making transactions, you agree
                   to these terms and the fee structures outlined in your seller
                   or buyer agreement.
@@ -204,14 +204,14 @@ export default function TermsConditionsPage() {
             <div className="border border-gray-300 rounded-lg p-6 mt-12 bg-white">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-[20px] font-bold text-gray-900 mb-1">
+                  <h3 className="text-xl font-bold text-gray-900 mb-1">
                     Need Clarification?
                   </h3>
-                  <p className="text-[14px] text-gray-600">
+                  <p className="text-base text-gray-600">
                     Our team is available to help you understand our policies
                   </p>
                 </div>
-                <button className="px-6 py-3 bg-gray-900 text-white text-[15px] font-semibold rounded-lg hover:bg-gray-800 transition-colors whitespace-nowrap ml-6">
+                <button className="px-6 py-3 bg-gray-900 text-white text-base font-semibold rounded-lg hover:bg-gray-800 transition-colors whitespace-nowrap ml-6">
                   Contact Legal Support
                 </button>
               </div>
@@ -221,7 +221,7 @@ export default function TermsConditionsPage() {
           {/* Right Sidebar - Page Contents */}
           <div className="w-[300px] shrink-0">
             <div className="sticky top-8 border border-gray-300 rounded-lg p-6">
-              <h3 className="text-[18px] font-semibold text-gray-900 mb-4 pb-3 border-b border-gray-300">
+              <h3 className="text-xl font-semibold text-gray-900 mb-4 pb-3 border-b border-gray-300">
                 Page Contents
               </h3>
               <nav className="space-y-1">
@@ -229,7 +229,7 @@ export default function TermsConditionsPage() {
                   <button
                     key={section.id}
                     onClick={() => scrollToSection(section.id)}
-                    className="w-full text-left px-3 py-2 text-[14px] text-gray-700 hover:bg-gray-100 rounded transition-colors"
+                    className="w-full text-left px-3 py-2 text-base text-gray-700 hover:bg-gray-100 rounded transition-colors"
                   >
                     {section.label}
                   </button>

@@ -148,10 +148,8 @@ export default function SupplierOrders() {
       <div className="mx-auto max-w-[1440px] px-7.5">
         {/* Header */}
         <div className="mb-[60px] flex items-center justify-between">
-          <h1 className="text-[20px] font-semibold text-[#0d1b2a]">
-            My orders
-          </h1>
-          <button className="flex h-[34px] items-center justify-center gap-2 rounded-[8.5px] bg-[#1e3a8a] px-[30px] text-[10px] font-semibold text-white transition-colors hover:bg-[#1e40af]">
+          <h1 className="text-xl font-semibold text-[#0d1b2a]">My orders</h1>
+          <button className="flex h-[34px] items-center justify-center gap-2 rounded-[8.5px] bg-[#1e3a8a] px-[30px] text-xs font-semibold text-white transition-colors hover:bg-[#1e40af]">
             <Download className="h-5 w-5" />
             Export Orders
           </button>
@@ -165,42 +163,42 @@ export default function SupplierOrders() {
                 {/* Table Headers */}
                 <div className="flex h-[52px] items-center border-b border-[#e5e5e5] px-[25px] gap-1">
                   <div className="w-[100px] flex-shrink-0">
-                    <p className="text-[11px] font-medium leading-[14px] tracking-[0.4px] text-[#0d1b2a]">
+                    <p className="text-xs font-medium leading-tight tracking-[0.4px] text-[#0d1b2a]">
                       ORDER ID
                     </p>
                   </div>
                   <div className="w-[150px] flex-shrink-0">
-                    <p className="text-[11px] font-medium leading-[14px] tracking-[0.4px] text-[#0d1b2a]">
+                    <p className="text-xs font-medium leading-tight tracking-[0.4px] text-[#0d1b2a]">
                       SUPPLIER
                     </p>
                   </div>
                   <div className="w-[150px] flex-shrink-0">
-                    <p className="text-[11px] font-medium leading-[14px] tracking-[0.4px] text-[#0d1b2a]">
+                    <p className="text-xs font-medium leading-tight tracking-[0.4px] text-[#0d1b2a]">
                       ITEMS
                     </p>
                   </div>
                   <div className="w-[100px] flex-shrink-0">
-                    <p className="text-[11px] font-medium leading-[14px] tracking-[0.4px] text-[#0d1b2a]">
+                    <p className="text-xs font-medium leading-tight tracking-[0.4px] text-[#0d1b2a]">
                       AMOUNT
                     </p>
                   </div>
                   <div className="w-[100px] flex-shrink-0">
-                    <p className="text-[11px] font-medium leading-[14px] tracking-[0.4px] text-[#0d1b2a]">
+                    <p className="text-xs font-medium leading-tight tracking-[0.4px] text-[#0d1b2a]">
                       STATUS
                     </p>
                   </div>
                   <div className="w-[110px] flex-shrink-0">
-                    <p className="text-[11px] font-medium leading-[14px] tracking-[0.4px] text-[#0d1b2a]">
+                    <p className="text-xs font-medium leading-tight tracking-[0.4px] text-[#0d1b2a]">
                       ORDER DATE
                     </p>
                   </div>
                   <div className="w-[110px] flex-shrink-0">
-                    <p className="text-[11px] font-medium leading-[14px] tracking-[0.4px] text-[#0d1b2a]">
+                    <p className="text-xs font-medium leading-tight tracking-[0.4px] text-[#0d1b2a]">
                       EXPECTED DATE
                     </p>
                   </div>
                   <div className="w-[70px] flex-shrink-0">
-                    <p className="text-[11px] font-medium leading-[14px] tracking-[0.4px] text-[#0d1b2a]">
+                    <p className="text-xs font-medium leading-tight tracking-[0.4px] text-[#0d1b2a]">
                       ACTIONS
                     </p>
                   </div>
@@ -214,28 +212,28 @@ export default function SupplierOrders() {
                   >
                     {/* Order ID */}
                     <div className="w-[100px] flex-shrink-0">
-                      <p className="text-[11px] font-medium leading-[16px] tracking-[0.4px] text-[#9c9c9c]">
+                      <p className="text-xs font-medium leading-tight tracking-[0.4px] text-[#9c9c9c]">
                         {order.order_number}
                       </p>
                     </div>
 
                     {/* Supplier/Buyer */}
                     <div className="w-[150px] flex-shrink-0">
-                      <p className="truncate pb-[2px] text-[11px] font-normal leading-[16px] tracking-[0.4px] text-black">
+                      <p className="truncate pb-[2px] text-xs font-normal leading-tight tracking-[0.4px] text-black">
                         {order.buyer_company || order.buyer_name}
                       </p>
                     </div>
 
                     {/* Items */}
                     <div className="w-[150px] flex-shrink-0">
-                      <p className="truncate text-[11px] font-normal leading-[16px] tracking-[0.4px] text-black">
+                      <p className="truncate text-xs font-normal leading-tight tracking-[0.4px] text-black">
                         {order.items[0]?.product_title || "N/A"}
                       </p>
                     </div>
 
                     {/* Amount */}
                     <div className="w-[100px] flex-shrink-0">
-                      <p className="text-[11px] font-normal leading-[16px] tracking-[0.4px] text-black">
+                      <p className="text-xs font-normal leading-tight tracking-[0.4px] text-black">
                         {formatCurrency(order.total_amount)}
                       </p>
                     </div>
@@ -243,7 +241,7 @@ export default function SupplierOrders() {
                     {/* Status */}
                     <div className="w-[100px] flex-shrink-0">
                       <p
-                        className="text-[11px] font-normal capitalize leading-[16px] tracking-[0.4px]"
+                        className="text-xs font-normal capitalize leading-tight tracking-[0.4px]"
                         style={{
                           color: getStatusColor(order.status),
                         }}
@@ -254,14 +252,14 @@ export default function SupplierOrders() {
 
                     {/* Order Date */}
                     <div className="w-[110px] flex-shrink-0">
-                      <p className="text-[11px] font-normal leading-[16px] tracking-[0.4px] text-black">
+                      <p className="text-xs font-normal leading-tight tracking-[0.4px] text-black">
                         {formatDate(order.created_at)}
                       </p>
                     </div>
 
                     {/* Expected Date */}
                     <div className="w-[110px] flex-shrink-0">
-                      <p className="text-[11px] font-normal leading-[16px] tracking-[0.4px] text-black">
+                      <p className="text-xs font-normal leading-tight tracking-[0.4px] text-black">
                         {formatDate(order.updated_at)}
                       </p>
                     </div>
@@ -280,14 +278,14 @@ export default function SupplierOrders() {
             {/* Pagination */}
             {totalPages > 1 && (
               <div className="mt-[22.5px] flex items-center justify-between">
-                <div className="text-[9px] text-[#9c9c9c]">
+                <div className="text-xs text-[#9c9c9c]">
                   Page {currentPage} of {totalPages}
                 </div>
                 <div className="flex gap-2">
                   <button
                     onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                     disabled={currentPage === 1}
-                    className="flex items-center gap-1.5 rounded-[4.5px] border border-[#9c9c9c] bg-[#EEFBF6] px-[13.5px] py-[6.75px] text-[9px] font-medium text-[#0d1b2a] transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="flex items-center gap-1.5 rounded-[4.5px] border border-[#9c9c9c] bg-[#EEFBF6] px-[13.5px] py-[6.75px] text-xs font-medium text-[#0d1b2a] transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     <ChevronLeft className="h-3 w-3" />
                     Previous
@@ -297,7 +295,7 @@ export default function SupplierOrders() {
                       setCurrentPage((p) => Math.min(totalPages, p + 1))
                     }
                     disabled={currentPage === totalPages}
-                    className="flex items-center gap-1.5 rounded-[4.5px] border border-[#9c9c9c] bg-[#EEFBF6] px-[13.5px] py-[6.75px] text-[9px] font-medium text-[#0d1b2a] transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="flex items-center gap-1.5 rounded-[4.5px] border border-[#9c9c9c] bg-[#EEFBF6] px-[13.5px] py-[6.75px] text-xs font-medium text-[#0d1b2a] transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     Next
                     <ChevronRight className="h-3 w-3" />
@@ -311,10 +309,10 @@ export default function SupplierOrders() {
             <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-[#FAFAFA]">
               <span className="text-2xl">📦</span>
             </div>
-            <h3 className="mb-1.5 text-[15px] font-semibold text-[#0d1b2a]">
+            <h3 className="mb-1.5 text-base font-semibold text-[#0d1b2a]">
               No Orders Yet
             </h3>
-            <p className="text-[12px] text-[#9c9c9c]">
+            <p className="text-sm text-[#9c9c9c]">
               Orders from buyers will appear here
             </p>
           </div>

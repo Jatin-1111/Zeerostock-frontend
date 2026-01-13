@@ -11,11 +11,11 @@ export default function FeaturesSection() {
     <section className="bg-[#EEFFEF] py-[27px] px-[5px] md:py-[43px] md:px-[21px] mx-auto">
       <div className="w-full max-w-[1600px] mx-auto">
         <div className="text-center mb-[21px] md:mb-[43px]">
-          <h2 className="text-[16px] md:text-[27px] font-bold text-gray-900 mb-[5px] md:mb-[11px] leading-tight">
+          <h2 className="text-lg md:text-2xl font-bold text-gray-900 mb-[5px] md:mb-[11px] leading-tight">
             Powerful Features for{" "}
             <span className="text-[#00B67A]">Smart Procurement</span>
           </h2>
-          <p className="text-[11px] md:text-[13px] text-gray-600 font-semibold">
+          <p className="text-xs md:text-sm text-gray-600 font-semibold">
             Everything you need to source, evaluate and purchase surplus
             inventory efficiently
           </p>
@@ -26,10 +26,10 @@ export default function FeaturesSection() {
             <div className="bg-[#EEFFEF] rounded-full p-[8px] md:p-[11px] mb-[11px] md:mb-[16px]">
               <Search className="w-[21px] h-[21px] md:w-[27px] md:h-[27px] text-[#00B67A]" />
             </div>
-            <h3 className="text-[12px] md:text-[13px] font-bold text-[#022778] mb-[8px] md:mb-[13px]">
+            <h3 className="text-sm md:text-sm font-bold text-[#022778] mb-[8px] md:mb-[13px]">
               Advance Search & Filtering
             </h3>
-            <p className="text-[9px] md:text-[11px] text-white font-semibold">
+            <p className="text-xs md:text-xs text-white font-semibold">
               Find specific products using detailed filters including
               specifications, location, condition, and price range.
             </p>
@@ -40,10 +40,10 @@ export default function FeaturesSection() {
             <div className="bg-[#EEFFEF] rounded-full p-[8px] md:p-[11px] mb-[11px] md:mb-[16px]">
               <TrendingUp className="w-[21px] h-[21px] md:w-[27px] md:h-[27px] text-[#00B67A]" />
             </div>
-            <h3 className="text-[12px] md:text-[13px] font-bold text-[#022778] mb-[8px] md:mb-[13px]">
+            <h3 className="text-sm md:text-sm font-bold text-[#022778] mb-[8px] md:mb-[13px]">
               Real-Time Market Data
             </h3>
-            <p className="text-[9px] md:text-[11px] text-white font-semibold">
+            <p className="text-xs md:text-xs text-white font-semibold">
               Access current market prices, demand trends, and supplier
               availability to make informed decisions.
             </p>
@@ -54,10 +54,10 @@ export default function FeaturesSection() {
             <div className="bg-[#EEFFEF] rounded-full p-[8px] md:p-[11px] mb-[11px] md:mb-[16px]">
               <ShieldCheck className="w-[21px] h-[21px] md:w-[27px] md:h-[27px] text-[#00B67A]" />
             </div>
-            <h3 className="text-[12px] md:text-[13px] font-bold text-[#022778] mb-[8px] md:mb-[13px]">
+            <h3 className="text-sm md:text-sm font-bold text-[#022778] mb-[8px] md:mb-[13px]">
               Supplier Verification
             </h3>
-            <p className="text-[9px] md:text-[11px] text-white font-semibold">
+            <p className="text-xs md:text-xs text-white font-semibold">
               All suppliers undergo rigorous verification including business
               licenses, financial stability, and quality standards.
             </p>
@@ -68,10 +68,10 @@ export default function FeaturesSection() {
             <div className="bg-[#EEFFEF] rounded-full p-[8px] md:p-[11px] mb-[11px] md:mb-[16px]">
               <ShoppingCart className="w-[21px] h-[21px] md:w-[27px] md:h-[27px] text-[#00B67A]" />
             </div>
-            <h3 className="text-[12px] md:text-[13px] font-bold text-[#022778] mb-[8px] md:mb-[13px]">
+            <h3 className="text-sm md:text-sm font-bold text-[#022778] mb-[8px] md:mb-[13px]">
               Bulk Purchase Tools
             </h3>
-            <p className="text-[9px] md:text-[11px] text-white font-semibold">
+            <p className="text-xs md:text-xs text-white font-semibold">
               Specialized tools for large-volume purchases including volume
               discounts and consolidated shipping.
             </p>
@@ -82,10 +82,10 @@ export default function FeaturesSection() {
             <div className="bg-[#EEFFEF] rounded-full p-[8px] md:p-[11px] mb-[11px] md:mb-[16px]">
               <Globe className="w-[21px] h-[21px] md:w-[27px] md:h-[27px] text-[#00B67A]" />
             </div>
-            <h3 className="text-[12px] md:text-[13px] font-bold text-[#022778] mb-[8px] md:mb-[13px]">
+            <h3 className="text-sm md:text-sm font-bold text-[#022778] mb-[8px] md:mb-[13px]">
               Global Logistics
             </h3>
-            <p className="text-[9px] md:text-[11px] text-white font-semibold">
+            <p className="text-xs md:text-xs text-white font-semibold">
               Integrated shipping solutions with tracking, insurance, and
               customs handling for international purchases.
             </p>

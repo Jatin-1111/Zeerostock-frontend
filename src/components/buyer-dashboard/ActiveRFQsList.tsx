@@ -106,12 +106,12 @@ export default function ActiveRFQsList() {
   return (
     <div className="space-y-3 sm:space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-[16px] sm:text-[18px] md:text-[20px] font-semibold text-[#0d1b2a] leading-normal">
+        <h2 className="text-lg sm:text-xl md:text-xl font-semibold text-[#0d1b2a] leading-normal">
           Active RFQs
         </h2>
         <Link
           href="/buyer/rfq"
-          className="text-[12px] sm:text-[13px] font-medium text-[#9c9c9c] hover:text-[#0d1b2a] transition-colors"
+          className="text-sm sm:text-sm font-medium text-[#9c9c9c] hover:text-[#0d1b2a] transition-colors"
         >
           See All
         </Link>
@@ -151,35 +151,35 @@ export default function ActiveRFQsList() {
                 {/* Top Row: Category and Budget */}
                 <div className="flex items-start sm:items-center justify-between mb-2 gap-2">
                   <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
-                    <p className="text-[10px] sm:text-[11px] font-medium text-[#9c9c9c] leading-normal">
+                    <p className="text-xs sm:text-xs font-medium text-[#9c9c9c] leading-normal">
                       {rfq.category?.name || "Uncategorized"}
                     </p>
                     <span
-                      className={`px-[6px] sm:px-[8px] py-0 h-[12px] sm:h-[13px] rounded-[10px] sm:rounded-[11px] text-[8px] sm:text-[9px] font-medium leading-[12px] sm:leading-[13px] inline-flex items-center ${getStatusColor(
+                      className={`px-[6px] sm:px-[8px] py-0 h-[12px] sm:h-[13px] rounded-[10px] sm:rounded-[11px] text-xs sm:text-xs font-medium leading-tight sm:leading-tight inline-flex items-center ${getStatusColor(
                         rfq.status
                       )}`}
                     >
                       {rfq.status.charAt(0).toUpperCase() + rfq.status.slice(1)}
                     </span>
                   </div>
-                  <div className="text-[15px] sm:text-[18px] font-semibold text-[#0d1b2a] leading-[13px] shrink-0">
+                  <div className="text-base sm:text-xl font-semibold text-[#0d1b2a] leading-tight shrink-0">
                     {budgetRange}
                   </div>
                 </div>
 
                 {/* Title */}
-                <h3 className="text-[13px] sm:text-[15px] font-semibold text-[#0d1b2a] leading-[13px] tracking-[0.3px] mb-1.5">
+                <h3 className="text-sm sm:text-base font-semibold text-[#0d1b2a] leading-tight tracking-[0.3px] mb-1.5">
                   {rfq.title}
                 </h3>
 
                 {/* Quantity and Time */}
                 <div className="flex items-center justify-between mb-3 sm:mb-4 gap-2">
-                  <p className="text-[10px] sm:text-[11px] font-medium text-[#9c9c9c] leading-normal">
+                  <p className="text-xs sm:text-xs font-medium text-[#9c9c9c] leading-normal">
                     {rfq.quotesCount || 0}{" "}
                     {(rfq.quotesCount || 0) === 1 ? "Response" : "Responses"}
                   </p>
                   <div className="flex items-center gap-2 sm:gap-3 flex-wrap justify-end">
-                    <p className="text-[10px] sm:text-[11px] font-medium text-[#9c9c9c] leading-normal">
+                    <p className="text-xs sm:text-xs font-medium text-[#9c9c9c] leading-normal">
                       {rfq.quantity} {rfq.unit}
                     </p>
                     <div className="flex items-center gap-[4px]">
@@ -187,7 +187,7 @@ export default function ActiveRFQsList() {
                         className="w-[11px] sm:w-[12px] h-[11px] sm:h-[12px] text-[#9c9c9c]"
                         strokeWidth={1.5}
                       />
-                      <span className="text-[10px] sm:text-[11px] font-medium text-[#9c9c9c] leading-normal">
+                      <span className="text-xs sm:text-xs font-medium text-[#9c9c9c] leading-normal">
                         {calculateTimeLeft(rfq.expiresAt)}
                       </span>
                     </div>
@@ -204,7 +204,7 @@ export default function ActiveRFQsList() {
                 <div className="absolute bottom-[14px] sm:bottom-[17px] left-[14px] sm:left-[17px] flex items-center gap-1.5 sm:gap-2 flex-wrap">
                   <Link
                     href={`/buyer/quotes?rfqId=${rfq.id}`}
-                    className="h-[30px] sm:h-[34px] px-[20px] sm:px-[26px] bg-[#1e3a8a] text-white rounded-[7px] sm:rounded-[8px] font-semibold text-[10px] sm:text-[11px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center gap-[5px] sm:gap-[6px]"
+                    className="h-[30px] sm:h-[34px] px-[20px] sm:px-[26px] bg-[#1e3a8a] text-white rounded-[7px] sm:rounded-[8px] font-semibold text-xs sm:text-xs hover:bg-[#1e3a8a]/90 transition-colors flex items-center gap-[5px] sm:gap-[6px]"
                   >
                     <Eye
                       className="w-[13px] sm:w-[14px] h-[13px] sm:h-[14px]"
@@ -215,7 +215,7 @@ export default function ActiveRFQsList() {
                   </Link>
                   <Link
                     href={`/buyer/rfq?edit=${rfq.id}`}
-                    className="h-[30px] sm:h-[34px] px-[24px] sm:px-[34px] bg-white border border-[#9c9c9c] text-[#9c9c9c] rounded-[7px] sm:rounded-[8px] font-semibold text-[10px] sm:text-[11px] hover:bg-gray-50 transition-colors flex items-center gap-[5px] sm:gap-[6px]"
+                    className="h-[30px] sm:h-[34px] px-[24px] sm:px-[34px] bg-white border border-[#9c9c9c] text-[#9c9c9c] rounded-[7px] sm:rounded-[8px] font-semibold text-xs sm:text-xs hover:bg-gray-50 transition-colors flex items-center gap-[5px] sm:gap-[6px]"
                   >
                     <Edit2
                       className="w-[12px] sm:w-[13px] h-[12px] sm:h-[13px]"

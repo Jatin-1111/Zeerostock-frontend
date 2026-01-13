@@ -302,10 +302,10 @@ export default function VerificationStatusView({
           <Shield className="w-[34px] h-[34px] text-[#2aae7a]" />
         </div>
         <div>
-          <h1 className="font-semibold text-[27px] text-[#0d1b2a] mb-0 leading-normal">
+          <h1 className="font-semibold text-2xl text-[#0d1b2a] mb-0 leading-normal">
             Supplier Verification
           </h1>
-          <p className="font-medium text-[18px] text-[#9c9c9c] leading-normal">
+          <p className="font-medium text-xl text-[#9c9c9c] leading-normal">
             Complete verification to unlock premium features and build buyer
             trust
           </p>
@@ -314,10 +314,10 @@ export default function VerificationStatusView({
 
       {/* Progress Section */}
       <div className="mb-[23px] bg-white shadow-[0px_3px_5px_0px_rgba(24,181,34,0.25)] rounded-[15px] px-8 py-[23px] relative">
-        <h2 className="font-semibold text-[21px] text-[#0d1b2a] mb-4 leading-normal">
+        <h2 className="font-semibold text-2xl text-[#0d1b2a] mb-4 leading-normal">
           Verification Progress
         </h2>
-        <p className="font-medium text-[18px] text-[#9c9c9c] mb-[35px] leading-normal">
+        <p className="font-medium text-xl text-[#9c9c9c] mb-[35px] leading-normal">
           {progress}% Complete - {completedSteps} of 5 sections verified
         </p>
 
@@ -331,7 +331,7 @@ export default function VerificationStatusView({
 
         {/* Percentage Badge */}
         <div className="absolute right-[27px] top-[54px]">
-          <span className="font-semibold text-[30px] text-[#0d1b2a]">
+          <span className="font-semibold text-3xl text-[#0d1b2a]">
             {progress}%
           </span>
         </div>
@@ -347,7 +347,7 @@ export default function VerificationStatusView({
           }`}
         >
           <Clock className="w-[17px] h-[17px] text-black" />
-          <span className="font-medium text-[15px] text-black">
+          <span className="font-medium text-base text-black">
             {status.status === "approved"
               ? "Verified"
               : status.status === "under_review"
@@ -417,7 +417,7 @@ export default function VerificationStatusView({
             />
           </svg>
           <p
-            className={`font-medium text-[17px] leading-normal ${
+            className={`font-medium text-lg leading-normal ${
               status.status === "approved"
                 ? "text-[#2aae7a]"
                 : status.status === "rejected"
@@ -437,7 +437,7 @@ export default function VerificationStatusView({
         <div className="mb-[23px]">
           <button
             onClick={onEditReapply}
-            className="w-full bg-gray-900 text-white font-semibold text-[16px] px-8 py-4 rounded-[10px] hover:bg-gray-800 transition-colors flex items-center justify-center gap-3 shadow-md"
+            className="w-full bg-gray-900 text-white font-semibold text-lg px-8 py-4 rounded-[10px] hover:bg-gray-800 transition-colors flex items-center justify-center gap-3 shadow-md"
           >
             <svg
               className="w-5 h-5"
@@ -482,13 +482,13 @@ export default function VerificationStatusView({
                           strokeLinecap="round"
                         />
                       </svg>
-                      <h3 className="font-semibold text-[18px] text-[#0d1b2a]">
+                      <h3 className="font-semibold text-xl text-[#0d1b2a]">
                         Business Information
                       </h3>
                     </div>
                     <div className="bg-[#eeffef] px-[15px] py-[5px] rounded-[15px] shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)] flex items-center gap-[8px]">
                       <CheckCircle2 className="w-[17px] h-[17px] text-[#2aae7a]" />
-                      <span className="font-medium text-[18px] text-[#2aae7a]">
+                      <span className="font-medium text-xl text-[#2aae7a]">
                         Verified
                       </span>
                     </div>
@@ -546,13 +546,13 @@ export default function VerificationStatusView({
                           strokeLinecap="round"
                         />
                       </svg>
-                      <h3 className="font-semibold text-[18px] text-[#0d1b2a]">
+                      <h3 className="font-semibold text-xl text-[#0d1b2a]">
                         Identity Verification
                       </h3>
                     </div>
                     <div className="bg-[#eeffef] px-[15px] py-[5px] rounded-[15px] shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)] flex items-center gap-[8px]">
                       <CheckCircle2 className="w-[17px] h-[17px] text-[#2aae7a]" />
-                      <span className="font-medium text-[18px] text-[#2aae7a]">
+                      <span className="font-medium text-xl text-[#2aae7a]">
                         Verified
                       </span>
                     </div>
@@ -612,7 +612,7 @@ export default function VerificationStatusView({
                           strokeLinecap="round"
                         />
                       </svg>
-                      <h3 className="font-semibold text-[18px] text-[#0d1b2a]">
+                      <h3 className="font-semibold text-xl text-[#0d1b2a]">
                         Business Documents
                       </h3>
                     </div>
@@ -629,7 +629,7 @@ export default function VerificationStatusView({
                         <Clock className="w-[17px] h-[17px] text-[#fc3]" />
                       )}
                       <span
-                        className={`font-medium text-[18px] ${
+                        className={`font-medium text-xl ${
                           status.status === "approved"
                             ? "text-[#2aae7a]"
                             : "text-[#fc3]"
@@ -680,13 +680,13 @@ export default function VerificationStatusView({
                           strokeLinecap="round"
                         />
                       </svg>
-                      <h3 className="font-semibold text-[18px] text-[#0d1b2a]">
+                      <h3 className="font-semibold text-xl text-[#0d1b2a]">
                         Bank Account Verification
                       </h3>
                     </div>
                     <div className="bg-[#eeffef] px-[15px] py-[5px] rounded-[15px] shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)] flex items-center gap-[8px]">
                       <CheckCircle2 className="w-[17px] h-[17px] text-[#2aae7a]" />
-                      <span className="font-medium text-[18px] text-[#2aae7a]">
+                      <span className="font-medium text-xl text-[#2aae7a]">
                         Verified
                       </span>
                     </div>
@@ -734,13 +734,13 @@ export default function VerificationStatusView({
                           strokeLinecap="round"
                         />
                       </svg>
-                      <h3 className="font-semibold text-[18px] text-[#0d1b2a]">
+                      <h3 className="font-semibold text-xl text-[#0d1b2a]">
                         Operational Information
                       </h3>
                     </div>
                     <div className="bg-[#eeffef] px-[15px] py-[5px] rounded-[15px] shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)] flex items-center gap-[8px]">
                       <CheckCircle2 className="w-[17px] h-[17px] text-[#2aae7a]" />
-                      <span className="font-medium text-[18px] text-[#2aae7a]">
+                      <span className="font-medium text-xl text-[#2aae7a]">
                         Verified
                       </span>
                     </div>
@@ -784,7 +784,7 @@ export default function VerificationStatusView({
               {status.status !== "approved" && status.status !== "verified" && (
                 <div className="bg-white shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] rounded-[15px] p-[30px]">
                   <div className="flex items-center mb-[23px]">
-                    <h3 className="font-semibold text-[18px] text-[#0d1b2a]">
+                    <h3 className="font-semibold text-xl text-[#0d1b2a]">
                       Additional Verification (Optional)
                     </h3>
                   </div>

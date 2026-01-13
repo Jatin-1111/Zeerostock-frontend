@@ -48,18 +48,18 @@ export default function TeamSection() {
         <div>
           <div className="relative w-full flex flex-col items-center">
             {/* Subtitle */}
-            <p className="font-medium text-xs sm:text-sm md:text-[12px] text-center text-[#868181] mb-2 sm:mb-[11px]">
+            <p className="font-medium text-xs sm:text-sm md:text-sm text-center text-[#868181] mb-2 sm:mb-[11px]">
               Our Team
             </p>
 
             {/* Title */}
-            <h2 className="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-[40px] text-center text-[#0d1b2a] mb-2 sm:mb-[11px]">
+            <h2 className="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-3xl text-center text-[#0d1b2a] mb-2 sm:mb-[11px]">
               Meet the People Behind{" "}
               <span className="text-[#2ec096]">Zeerostock</span>
             </h2>
 
             {/* Description */}
-            <p className="font-semibold text-xs sm:text-sm md:text-[12px] text-center text-[#868181] max-w-full sm:max-w-xl md:max-w-3xl mb-6 sm:mb-8 md:mb-10 lg:mb-[53px] px-4 sm:px-0">
+            <p className="font-semibold text-xs sm:text-sm md:text-sm text-center text-[#868181] max-w-full sm:max-w-xl md:max-w-3xl mb-6 sm:mb-8 md:mb-10 lg:mb-[53px] px-4 sm:px-0">
               Our experienced leadership team brings together decades of
               expertise in technology, supply chain and B2B marketplaces.
             </p>
@@ -108,7 +108,7 @@ export default function TeamSection() {
                     </p>
 
                     {/* Bio */}
-                    <p className="font-medium text-[10px] text-black text-center max-w-44 leading-relaxed px-2">
+                    <p className="font-medium text-xs text-black text-center max-w-44 leading-relaxed px-2">
                       {member.bio}
                     </p>
                   </div>
@@ -131,17 +131,17 @@ export default function TeamSection() {
                     </div>
 
                     {/* Name */}
-                    <h3 className="font-semibold text-[20px] text-black text-center mb-[5px]">
+                    <h3 className="font-semibold text-xl text-black text-center mb-[5px]">
                       {member.name}
                     </h3>
 
                     {/* Role */}
-                    <p className="font-semibold text-[12px] text-[#3752ff] text-center mb-[8px]">
+                    <p className="font-semibold text-sm text-[#3752ff] text-center mb-[8px]">
                       {member.role}
                     </p>
 
                     {/* Bio */}
-                    <p className="font-medium text-[9px] text-black text-center max-w-[167px] leading-relaxed">
+                    <p className="font-medium text-xs text-black text-center max-w-[167px] leading-relaxed">
                       {member.bio}
                     </p>
                   </div>

@@ -33,10 +33,10 @@ export default function HowItWorksSection() {
       <div className="max-w-[880px] mx-auto">
         {/* Heading Section */}
         <div className="text-center mb-[61px]">
-          <h2 className="text-[26px] leading-[39px] font-medium text-[#0d1b2a] mb-[7px]">
+          <h2 className="text-2xl leading-snug font-medium text-[#0d1b2a] mb-[7px]">
             How <span className="text-[#2ec096]">Selling Works</span>
           </h2>
-          <p className="text-[12px] font-semibold text-[#9c9c9c]">
+          <p className="text-sm font-semibold text-[#9c9c9c]">
             Simple, efficient process to convert surplus inventory into revenue
           </p>
         </div>
@@ -54,16 +54,16 @@ export default function HowItWorksSection() {
                 className="flex flex-col items-center text-center"
               >
                 {/* Number Circle */}
-                <div className="w-[31px] h-[31px] bg-[#eeffef] border-2 border-[#2aae7a] rounded-[50px] flex items-center justify-center font-semibold text-[15px] text-black mb-[41px] relative z-10">
+                <div className="w-[31px] h-[31px] bg-[#eeffef] border-2 border-[#2aae7a] rounded-[50px] flex items-center justify-center font-semibold text-base text-black mb-[41px] relative z-10">
                   {step.number}
                 </div>
 
                 {/* Content */}
                 <div>
-                  <h3 className="text-[10px] leading-normal font-medium text-[#0d1b2a] mb-[8px]">
+                  <h3 className="text-xs leading-normal font-medium text-[#0d1b2a] mb-[8px]">
                     {step.title}
                   </h3>
-                  <p className="text-[7px] leading-normal text-[#9c9c9c]">
+                  <p className="text-xs leading-normal text-[#9c9c9c]">
                     {step.description}
                   </p>
                 </div>

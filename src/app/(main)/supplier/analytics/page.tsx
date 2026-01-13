@@ -170,7 +170,7 @@ export default function SupplierAnalytics() {
             <p className="text-lg font-medium text-[#9c9c9c] mb-12">
               Total Revenue
             </p>
-            <p className="text-[34px] font-semibold text-[#2aae7a] mb-6">
+            <p className="text-3xl font-semibold text-[#2aae7a] mb-6">
               ₹{(overview.total_revenue || 0).toLocaleString()}
             </p>
             <p className="text-sm font-medium text-[#9c9c9c]">
@@ -186,7 +186,7 @@ export default function SupplierAnalytics() {
             <p className="text-lg font-medium text-[#9c9c9c] mb-12">
               Quote Win Rate
             </p>
-            <p className="text-[34px] font-semibold text-[#a855f7] mb-6">
+            <p className="text-3xl font-semibold text-[#a855f7] mb-6">
               {(overview.response_rate || 0).toFixed(1)}%
             </p>
             <p className="text-sm font-medium text-[#9c9c9c]">
@@ -202,7 +202,7 @@ export default function SupplierAnalytics() {
             <p className="text-lg font-medium text-[#9c9c9c] mb-12">
               Avg. Response Time
             </p>
-            <p className="text-[34px] font-semibold text-[#3b82f6] mb-6">
+            <p className="text-3xl font-semibold text-[#3b82f6] mb-6">
               {(overview.avg_response_hours || 0).toFixed(1)}h
             </p>
             <p className="text-sm font-medium text-[#9c9c9c]">
@@ -216,7 +216,7 @@ export default function SupplierAnalytics() {
 
         {/* Sales by Category Chart */}
         <div className="bg-white rounded-[15px] shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)] p-6 w-3/4">
-          <h2 className="text-[21px] font-medium text-[#0d1b2a] mb-9">
+          <h2 className="text-2xl font-medium text-[#0d1b2a] mb-9">
             Sales by Category
           </h2>
 

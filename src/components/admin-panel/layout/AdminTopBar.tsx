@@ -82,7 +82,7 @@ export default function AdminTopBar() {
                   <p className="text-xs text-gray-600 truncate">
                     {admin.email}
                   </p>
-                  <span className="inline-block mt-1 px-2 py-0.5 text-[10px] bg-black text-white rounded">
+                  <span className="inline-block mt-1 px-2 py-0.5 text-xs bg-black text-white rounded">
                     {admin.role || "Admin"}
                   </span>
                 </div>

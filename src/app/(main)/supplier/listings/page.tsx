@@ -114,7 +114,7 @@ export default function SupplierListings() {
     <div className="min-h-screen bg-[#EEFBF6]">
       <div className="max-w-[1440px] mx-auto px-10 py-4">
         {/* Page Title */}
-        <h1 className="text-[18px] font-semibold text-[#0d1b2a] mb-4">
+        <h1 className="text-xl font-semibold text-[#0d1b2a] mb-4">
           Active Listing
         </h1>
 
@@ -172,7 +172,7 @@ export default function SupplierListings() {
                           : "#fee2e2",
                     }}
                   >
-                    <p className="text-[7.5px] font-medium leading-normal capitalize">
+                    <p className="text-xs font-medium leading-normal capitalize">
                       {listing.status}
                     </p>
                   </div>
@@ -202,24 +202,24 @@ export default function SupplierListings() {
                   >
                     {/* Title - Fixed height */}
                     <div className="h-[28px] mb-1">
-                      <h3 className="text-[10px] font-medium text-[#0d1b2a] line-clamp-2">
+                      <h3 className="text-xs font-medium text-[#0d1b2a] line-clamp-2">
                         {listing.title}
                       </h3>
                     </div>
 
                     {/* Subtitle */}
-                    <p className="text-[7px] font-medium text-[#9c9c9c] mb-2 h-[10px]">
+                    <p className="text-xs font-medium text-[#9c9c9c] mb-2 h-[10px]">
                       {listing.city || "Location not specified"}
                     </p>
 
                     {/* Pricing */}
                     <div className="mb-2 flex items-center gap-1.5 h-[18px]">
-                      <span className="text-[13px] font-bold text-[#1e3a8a] leading-none">
+                      <span className="text-sm font-bold text-[#1e3a8a] leading-none">
                         {formatCurrency(listing.price_after)}
                       </span>
                       {listing.price_before && listing.price_before > 0 && (
                         <div className="relative">
-                          <span className="text-[9px] font-bold text-[#9c9c9c]">
+                          <span className="text-xs font-bold text-[#9c9c9c]">
                             {formatCurrency(listing.price_before)}
                           </span>
                           <div
@@ -232,14 +232,14 @@ export default function SupplierListings() {
 
                     {/* Availability Info */}
                     <div className="flex items-center gap-1 mb-2 h-[10px]">
-                      <p className="text-[7px] font-medium text-[#9c9c9c] truncate">
+                      <p className="text-xs font-medium text-[#9c9c9c] truncate">
                         Total value:{" "}
                         {formatCurrency(listing.price_after * listing.quantity)}
                       </p>
-                      <span className="text-[7px] font-medium text-[#9c9c9c]">
+                      <span className="text-xs font-medium text-[#9c9c9c]">
                         |
                       </span>
-                      <p className="text-[7px] font-medium text-[#9c9c9c] truncate">
+                      <p className="text-xs font-medium text-[#9c9c9c] truncate">
                         {listing.quantity} {listing.unit} available
                       </p>
                     </div>
@@ -248,13 +248,13 @@ export default function SupplierListings() {
                     <div className="flex items-center gap-2 pb-2 border-b border-[#e5e5e5] mb-2 h-[25px]">
                       <div className="flex items-center gap-1">
                         <Eye className="w-[11px] h-[11px] text-[#9c9c9c]" />
-                        <span className="text-[6px] font-medium text-[#9c9c9c]">
+                        <span className="text-xs font-medium text-[#9c9c9c]">
                           {listing.views_count || 0}
                         </span>
                       </div>
                       <div className="flex items-center gap-1">
                         <Star className="w-[11px] h-[11px] text-[#9c9c9c]" />
-                        <span className="text-[6px] font-medium text-[#9c9c9c]">
+                        <span className="text-xs font-medium text-[#9c9c9c]">
                           {listing.rating
                             ? Number(listing.rating).toFixed(1)
                             : "0.0"}
@@ -262,13 +262,13 @@ export default function SupplierListings() {
                       </div>
                       <div className="flex items-center gap-1">
                         <MessageCircle className="w-[11px] h-[11px] text-[#9c9c9c]" />
-                        <span className="text-[6px] font-medium text-[#9c9c9c]">
+                        <span className="text-xs font-medium text-[#9c9c9c]">
                           {listing.inquiries_count || 0}
                         </span>
                       </div>
                       <div className="flex items-center gap-1">
                         <Clock className="w-[11px] h-[11px] text-[#9c9c9c]" />
-                        <span className="text-[6px] font-medium text-[#9c9c9c]">
+                        <span className="text-xs font-medium text-[#9c9c9c]">
                           {getTimeRemaining(listing.expires_at)}
                         </span>
                       </div>
@@ -281,7 +281,7 @@ export default function SupplierListings() {
                         className="flex-1 h-[25px] flex items-center justify-center gap-1 px-2.5 py-2 border border-[#9c9c9c] rounded-[7.5px] hover:bg-gray-50 transition-colors"
                       >
                         <Edit className="w-2.5 h-2.5 text-[#9c9c9c]" />
-                        <span className="text-[8px] font-medium text-[#9c9c9c]">
+                        <span className="text-xs font-medium text-[#9c9c9c]">
                           Edit
                         </span>
                       </Link>
@@ -290,7 +290,7 @@ export default function SupplierListings() {
                         className="flex-1 h-[25px] flex items-center justify-center gap-1 px-2.5 py-2 bg-[#1e3a8a] rounded-[7.5px] hover:bg-[#1e40af] transition-colors"
                       >
                         <BarChart3 className="w-2.5 h-2.5 text-white" />
-                        <span className="text-[8px] font-medium text-white">
+                        <span className="text-xs font-medium text-white">
                           Analytics
                         </span>
                       </Link>
@@ -306,17 +306,17 @@ export default function SupplierListings() {
                 <button
                   onClick={() => setPage((p) => Math.max(1, p - 1))}
                   disabled={page === 1}
-                  className="px-2 py-1 border border-gray-300 text-[7px] font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-2 py-1 border border-gray-300 text-xs font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Previous
                 </button>
-                <span className="px-2 py-1 text-[7px] text-gray-700">
+                <span className="px-2 py-1 text-xs text-gray-700">
                   Page {page} of {totalPages}
                 </span>
                 <button
                   onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                   disabled={page === totalPages}
-                  className="px-2 py-1 border border-gray-300 text-[7px] font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-2 py-1 border border-gray-300 text-xs font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Next
                 </button>

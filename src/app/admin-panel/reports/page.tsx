@@ -239,10 +239,10 @@ export default function ReportsAnalyticsPage() {
         {/* Header */}
         <div className="flex justify-between items-start mb-6">
           <div>
-            <h2 className="text-[24px] font-bold text-black mb-1">
+            <h2 className="text-2xl font-bold text-black mb-1">
               Analytics Overview
             </h2>
-            <p className="text-[13px] text-gray-500">
+            <p className="text-sm text-gray-500">
               Welcome Back, here&apos;s your performance summary.
             </p>
           </div>
@@ -251,7 +251,7 @@ export default function ReportsAnalyticsPage() {
               <select
                 value={timeframe}
                 onChange={(e) => setTimeframe(e.target.value)}
-                className="appearance-none bg-white border border-gray-300 pl-4 pr-10 py-2 text-[13px] text-black cursor-pointer focus:outline-none focus:ring-2 focus:ring-black"
+                className="appearance-none bg-white border border-gray-300 pl-4 pr-10 py-2 text-sm text-black cursor-pointer focus:outline-none focus:ring-2 focus:ring-black"
               >
                 <option>Last 6 Month</option>
                 <option>Last 12 Month</option>
@@ -259,7 +259,7 @@ export default function ReportsAnalyticsPage() {
               </select>
               <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600 pointer-events-none" />
             </div>
-            <button className="bg-black text-white px-4 py-2 text-[13px] font-medium hover:bg-gray-900 transition-colors">
+            <button className="bg-black text-white px-4 py-2 text-sm font-medium hover:bg-gray-900 transition-colors">
               Export
             </button>
           </div>
@@ -275,15 +275,15 @@ export default function ReportsAnalyticsPage() {
                 className="bg-white border border-gray-200 p-4 relative"
               >
                 <div className="flex justify-between items-start mb-3">
-                  <span className="text-[12px] font-medium text-black">
+                  <span className="text-sm font-medium text-black">
                     {card.title}
                   </span>
                   <Icon className="w-5 h-5 text-gray-600" />
                 </div>
-                <div className="text-[24px] font-bold text-black mb-1">
+                <div className="text-2xl font-bold text-black mb-1">
                   {card.value}
                 </div>
-                <div className="text-[11px] text-gray-500">{card.change}</div>
+                <div className="text-xs text-gray-500">{card.change}</div>
               </div>
             );
           })}
@@ -295,19 +295,19 @@ export default function ReportsAnalyticsPage() {
           <div className="col-span-2 bg-white border border-gray-200 p-6">
             <div className="flex justify-between items-center mb-6">
               <div>
-                <h3 className="text-[14px] font-bold text-black">
+                <h3 className="text-base font-bold text-black">
                   Revenue & Order Trends
                 </h3>
-                <p className="text-[11px] text-gray-500">Last 6 months</p>
+                <p className="text-xs text-gray-500">Last 6 months</p>
               </div>
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-gray-400" />
-                  <span className="text-[11px] text-gray-600">Revenue</span>
+                  <span className="text-xs text-gray-600">Revenue</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-black" />
-                  <span className="text-[11px] text-gray-600">Orders</span>
+                  <span className="text-xs text-gray-600">Orders</span>
                 </div>
               </div>
             </div>
@@ -365,7 +365,7 @@ export default function ReportsAnalyticsPage() {
 
           {/* Category Distribution */}
           <div className="bg-white border border-gray-200 p-6">
-            <h3 className="text-[14px] font-bold text-black mb-6">
+            <h3 className="text-base font-bold text-black mb-6">
               Category Distribution
             </h3>
             <div className="flex flex-col items-center">
@@ -387,25 +387,25 @@ export default function ReportsAnalyticsPage() {
               </svg>
               {/* Legend */}
               <div className="space-y-2 w-full">
-                <div className="flex items-center justify-between text-[11px]">
+                <div className="flex items-center justify-between text-xs">
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-[#4B5563]" />
                     <span className="text-gray-600">Textiles 33%</span>
                   </div>
                 </div>
-                <div className="flex items-center justify-between text-[11px]">
+                <div className="flex items-center justify-between text-xs">
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-[#6B7280]" />
                     <span className="text-gray-600">Metals 15%</span>
                   </div>
                 </div>
-                <div className="flex items-center justify-between text-[11px]">
+                <div className="flex items-center justify-between text-xs">
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-[#9CA3AF]" />
                     <span className="text-gray-600">Automobile 10%</span>
                   </div>
                 </div>
-                <div className="flex items-center justify-between text-[11px]">
+                <div className="flex items-center justify-between text-xs">
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-[#D1D5DB]" />
                     <span className="text-gray-600">Electronics 25%</span>
@@ -420,23 +420,23 @@ export default function ReportsAnalyticsPage() {
         <div className="bg-white border border-gray-200 p-6 mb-6">
           <div className="flex justify-between items-center mb-6">
             <div>
-              <h3 className="text-[14px] font-bold text-black">
+              <h3 className="text-base font-bold text-black">
                 User Growth Trends
               </h3>
-              <p className="text-[11px] text-gray-500">Last 6 months</p>
+              <p className="text-xs text-gray-500">Last 6 months</p>
             </div>
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-gray-400" />
-                <span className="text-[11px] text-gray-600">Buyers</span>
+                <span className="text-xs text-gray-600">Buyers</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-black" />
-                <span className="text-[11px] text-gray-600">Supplier</span>
+                <span className="text-xs text-gray-600">Supplier</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-red-500" />
-                <span className="text-[11px] text-gray-600">Agents</span>
+                <span className="text-xs text-gray-600">Agents</span>
               </div>
             </div>
           </div>
@@ -498,30 +498,30 @@ export default function ReportsAnalyticsPage() {
         {/* Regional Performance Table */}
         <div className="bg-white border border-gray-200 mb-6">
           <div className="p-6 border-b border-gray-200">
-            <h3 className="text-[14px] font-bold text-black">
+            <h3 className="text-base font-bold text-black">
               Regional Performance
             </h3>
           </div>
           <table className="w-full">
             <thead className="bg-gray-50 border-b border-gray-200">
               <tr>
-                <th className="px-6 py-3 text-left text-[11px] font-bold text-black">
+                <th className="px-6 py-3 text-left text-xs font-bold text-black">
                   REGION
                 </th>
-                <th className="px-6 py-3 text-left text-[11px] font-bold text-black">
+                <th className="px-6 py-3 text-left text-xs font-bold text-black">
                   TRANSACTION
                   <br />
                   VOLUME
                 </th>
-                <th className="px-6 py-3 text-left text-[11px] font-bold text-black">
+                <th className="px-6 py-3 text-left text-xs font-bold text-black">
                   GROWTH (%)
                 </th>
-                <th className="px-6 py-3 text-left text-[11px] font-bold text-black">
+                <th className="px-6 py-3 text-left text-xs font-bold text-black">
                   AVG. ORDER
                   <br />
                   VALUE
                 </th>
-                <th className="px-6 py-3 text-left text-[11px] font-bold text-black">
+                <th className="px-6 py-3 text-left text-xs font-bold text-black">
                   MARKET
                   <br />
                   SHARE
@@ -531,19 +531,19 @@ export default function ReportsAnalyticsPage() {
             <tbody className="divide-y divide-gray-200">
               {regionalData.map((region, index) => (
                 <tr key={index} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 text-[13px] text-black">
+                  <td className="px-6 py-4 text-sm text-black">
                     {region.region}
                   </td>
-                  <td className="px-6 py-4 text-[13px] text-black">
+                  <td className="px-6 py-4 text-sm text-black">
                     {region.transactionVolume}
                   </td>
-                  <td className="px-6 py-4 text-[13px] text-black">
+                  <td className="px-6 py-4 text-sm text-black">
                     {region.growth}
                   </td>
-                  <td className="px-6 py-4 text-[13px] text-black">
+                  <td className="px-6 py-4 text-sm text-black">
                     {region.avgOrderValue}
                   </td>
-                  <td className="px-6 py-4 text-[13px] text-black">
+                  <td className="px-6 py-4 text-sm text-black">
                     {region.marketShare}
                   </td>
                 </tr>
@@ -557,7 +557,7 @@ export default function ReportsAnalyticsPage() {
           {/* Conversion Metrics */}
           <div className="bg-white border border-gray-200">
             <div className="p-4 border-b border-gray-200">
-              <h3 className="text-[13px] font-bold text-black">
+              <h3 className="text-sm font-bold text-black">
                 Conversion Metrics
               </h3>
             </div>
@@ -566,10 +566,10 @@ export default function ReportsAnalyticsPage() {
                 <div key={index} className="p-4 flex items-center gap-3">
                   <User className="w-5 h-5 text-gray-400" />
                   <div className="flex-1">
-                    <p className="text-[11px] text-gray-500 mb-1">
+                    <p className="text-xs text-gray-500 mb-1">
                       {metric.label}
                     </p>
-                    <p className="text-[16px] font-bold text-black">
+                    <p className="text-lg font-bold text-black">
                       {metric.value}
                     </p>
                   </div>
@@ -581,7 +581,7 @@ export default function ReportsAnalyticsPage() {
           {/* Platform Health */}
           <div className="bg-white border border-gray-200">
             <div className="p-4 border-b border-gray-200">
-              <h3 className="text-[13px] font-bold text-black">
+              <h3 className="text-sm font-bold text-black">
                 Platform Health
               </h3>
             </div>
@@ -590,10 +590,10 @@ export default function ReportsAnalyticsPage() {
                 <div key={index} className="p-4 flex items-center gap-3">
                   <User className="w-5 h-5 text-gray-400" />
                   <div className="flex-1">
-                    <p className="text-[11px] text-gray-500 mb-1">
+                    <p className="text-xs text-gray-500 mb-1">
                       {metric.label}
                     </p>
-                    <p className="text-[16px] font-bold text-black">
+                    <p className="text-lg font-bold text-black">
                       {metric.value}
                     </p>
                   </div>
@@ -605,7 +605,7 @@ export default function ReportsAnalyticsPage() {
           {/* Financial Metrics */}
           <div className="bg-white border border-gray-200">
             <div className="p-4 border-b border-gray-200">
-              <h3 className="text-[13px] font-bold text-black">
+              <h3 className="text-sm font-bold text-black">
                 Financial Metrics
               </h3>
             </div>
@@ -614,10 +614,10 @@ export default function ReportsAnalyticsPage() {
                 <div key={index} className="p-4 flex items-center gap-3">
                   <User className="w-5 h-5 text-gray-400" />
                   <div className="flex-1">
-                    <p className="text-[11px] text-gray-500 mb-1">
+                    <p className="text-xs text-gray-500 mb-1">
                       {metric.label}
                     </p>
-                    <p className="text-[16px] font-bold text-black">
+                    <p className="text-lg font-bold text-black">
                       {metric.value}
                     </p>
                   </div>

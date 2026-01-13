@@ -65,11 +65,11 @@ export default function InvoicesList({
       {loading ? (
         <div className="py-11 text-center">
           <div className="animate-spin h-6 w-6 border-[2px] border-[#2aae7a] border-t-transparent rounded-full mx-auto mb-2"></div>
-          <p className="text-gray-500 text-[9px]">Loading invoices...</p>
+          <p className="text-gray-500 text-xs">Loading invoices...</p>
         </div>
       ) : invoices.length === 0 ? (
         <div className="py-11 text-center">
-          <p className="text-gray-500 text-[9px]">No invoices found</p>
+          <p className="text-gray-500 text-xs">No invoices found</p>
         </div>
       ) : (
         <>
@@ -77,28 +77,28 @@ export default function InvoicesList({
             <table className="w-full">
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
-                  <th className="px-3 py-2 text-left font-medium text-[8px] text-[#0d1b2a]">
+                  <th className="px-3 py-2 text-left font-medium text-xs text-[#0d1b2a]">
                     INVOICE #
                   </th>
-                  <th className="px-3 py-2 text-left font-medium text-[8px] text-[#0d1b2a]">
+                  <th className="px-3 py-2 text-left font-medium text-xs text-[#0d1b2a]">
                     ORDER #
                   </th>
-                  <th className="px-3 py-2 text-left font-medium text-[8px] text-[#0d1b2a]">
+                  <th className="px-3 py-2 text-left font-medium text-xs text-[#0d1b2a]">
                     BUYER
                   </th>
-                  <th className="px-3 py-2 text-left font-medium text-[8px] text-[#0d1b2a]">
+                  <th className="px-3 py-2 text-left font-medium text-xs text-[#0d1b2a]">
                     AMOUNT
                   </th>
-                  <th className="px-3 py-2 text-left font-medium text-[8px] text-[#0d1b2a]">
+                  <th className="px-3 py-2 text-left font-medium text-xs text-[#0d1b2a]">
                     ISSUE DATE
                   </th>
-                  <th className="px-3 py-2 text-left font-medium text-[8px] text-[#0d1b2a]">
+                  <th className="px-3 py-2 text-left font-medium text-xs text-[#0d1b2a]">
                     DUE DATE
                   </th>
-                  <th className="px-3 py-2 text-left font-medium text-[8px] text-[#0d1b2a]">
+                  <th className="px-3 py-2 text-left font-medium text-xs text-[#0d1b2a]">
                     STATUS
                   </th>
-                  <th className="px-3 py-2 text-center font-medium text-[8px] text-[#0d1b2a]">
+                  <th className="px-3 py-2 text-center font-medium text-xs text-[#0d1b2a]">
                     ACTIONS
                   </th>
                 </tr>
@@ -106,25 +106,25 @@ export default function InvoicesList({
               <tbody className="divide-y divide-gray-100">
                 {invoices.map((invoice) => (
                   <tr key={invoice.id} className="hover:bg-gray-50">
-                    <td className="px-3 py-2 text-[8px] text-gray-900 font-medium">
+                    <td className="px-3 py-2 text-xs text-gray-900 font-medium">
                       {invoice.invoice_number}
                     </td>
-                    <td className="px-4.5 py-3 text-[10px] text-gray-600">
+                    <td className="px-4.5 py-3 text-xs text-gray-600">
                       {invoice.order_number}
                     </td>
-                    <td className="px-4.5 py-3 text-[10px] text-gray-900">
+                    <td className="px-4.5 py-3 text-xs text-gray-900">
                       {invoice.buyer_name || invoice.buyer_company}
                     </td>
-                    <td className="px-4.5 py-3 text-[10px] text-gray-900 font-semibold">
+                    <td className="px-4.5 py-3 text-xs text-gray-900 font-semibold">
                       ₹{invoice.total_amount.toLocaleString("en-IN")}
                     </td>
-                    <td className="px-4.5 py-3 text-[10px] text-gray-700">
+                    <td className="px-4.5 py-3 text-xs text-gray-700">
                       {new Date(invoice.issue_date).toLocaleDateString(
                         "en-IN",
                         { year: "numeric", month: "short", day: "numeric" }
                       )}
                     </td>
-                    <td className="px-4.5 py-3 text-[10px] text-gray-700">
+                    <td className="px-4.5 py-3 text-xs text-gray-700">
                       {new Date(invoice.due_date).toLocaleDateString("en-IN", {
                         year: "numeric",
                         month: "short",
@@ -133,7 +133,7 @@ export default function InvoicesList({
                     </td>
                     <td className="px-4.5 py-3">
                       <span
-                        className={`inline-flex px-2 py-0.5 rounded-full text-[9px] font-medium border ${getStatusColor(
+                        className={`inline-flex px-2 py-0.5 rounded-full text-xs font-medium border ${getStatusColor(
                           invoice.status
                         )}`}
                       >
@@ -145,7 +145,7 @@ export default function InvoicesList({
                         onClick={() =>
                           alert("Download functionality coming soon")
                         }
-                        className="inline-flex items-center gap-1.5 px-2 py-1.5 text-[10px] font-medium text-[#1e3a8a] hover:bg-blue-50 rounded-lg transition-colors"
+                        className="inline-flex items-center gap-1.5 px-2 py-1.5 text-xs font-medium text-[#1e3a8a] hover:bg-blue-50 rounded-lg transition-colors"
                       >
                         <Download className="w-3 h-3" />
                         Download
@@ -161,17 +161,17 @@ export default function InvoicesList({
               <button
                 onClick={() => onPageChange(currentPage - 1)}
                 disabled={currentPage === 1}
-                className="px-4 py-1.5 bg-[#1e3a8a] text-white rounded-lg text-[10px] font-medium hover:bg-[#1e3a8a]/90 disabled:bg-gray-300 disabled:cursor-not-allowed"
+                className="px-4 py-1.5 bg-[#1e3a8a] text-white rounded-lg text-xs font-medium hover:bg-[#1e3a8a]/90 disabled:bg-gray-300 disabled:cursor-not-allowed"
               >
                 Previous
               </button>
-              <span className="text-[10px]">
+              <span className="text-xs">
                 Page {currentPage} of {totalPages}
               </span>
               <button
                 onClick={() => onPageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className="px-4 py-1.5 bg-[#1e3a8a] text-white rounded-lg text-[10px] font-medium hover:bg-[#1e3a8a]/90 disabled:bg-gray-300 disabled:cursor-not-allowed"
+                className="px-4 py-1.5 bg-[#1e3a8a] text-white rounded-lg text-xs font-medium hover:bg-[#1e3a8a]/90 disabled:bg-gray-300 disabled:cursor-not-allowed"
               >
                 Next
               </button>

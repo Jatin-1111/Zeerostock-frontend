@@ -34,10 +34,10 @@ export default function OrderHeader({
 
       {/* Title and Subtitle */}
       <div className="mb-6">
-        <h1 className="font-semibold text-[40px] leading-normal text-[#0d1b2a] mb-4">
+        <h1 className="font-semibold text-3xl leading-normal text-[#0d1b2a] mb-4">
           Order Confirmed!
         </h1>
-        <p className="font-medium text-[24px] leading-normal text-[#9c9c9c] max-w-[894px] mx-auto">
+        <p className="font-medium text-2xl leading-normal text-[#9c9c9c] max-w-[894px] mx-auto">
           Thank you for your order. We&apos;ve received your order and will
           process it shortly
         </p>
@@ -50,7 +50,7 @@ export default function OrderHeader({
             className="w-[15px] h-[18px] text-[#9c9c9c]"
             strokeWidth={2}
           />
-          <span className="font-medium text-[22px] leading-normal text-[#9c9c9c]">
+          <span className="font-medium text-2xl leading-normal text-[#9c9c9c]">
             Order #{orderNumber}
           </span>
         </div>
@@ -59,7 +59,7 @@ export default function OrderHeader({
             className="w-[22px] h-[22px] text-[#9c9c9c]"
             strokeWidth={1.5}
           />
-          <span className="font-medium text-[22px] leading-normal text-[#9c9c9c]">
+          <span className="font-medium text-2xl leading-normal text-[#9c9c9c]">
             Placed on {placedDate}
           </span>
         </div>

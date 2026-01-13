@@ -17,14 +17,14 @@ export default function ROICalculatorSectionV2() {
         </div>
 
         {/* Title */}
-        <h2 className="text-center text-lg sm:text-xl md:text-[22.5px] font-bold leading-normal mb-1.5">
+        <h2 className="text-center text-lg sm:text-xl md:text-2xl font-bold leading-normal mb-1.5">
           <span className="text-[#0d1b2a]">Calculate Your </span>
           <span className="text-[#063576]">ROI</span>
           <span className="text-[#0d1b2a]"> Potential</span>
         </h2>
 
         {/* Subtitle */}
-        <p className="text-center text-xs sm:text-sm md:text-[12px] font-semibold leading-normal text-[#6b7280] mb-4 sm:mb-5 md:mb-[20px] max-w-full sm:max-w-sm md:max-w-[460px] mx-auto px-4 sm:px-0">
+        <p className="text-center text-xs sm:text-sm md:text-sm font-semibold leading-normal text-[#6b7280] mb-4 sm:mb-5 md:mb-[20px] max-w-full sm:max-w-sm md:max-w-[460px] mx-auto px-4 sm:px-0">
           Simple, streamlined processes designed for each type of user in the
           surplus inventory ecosystem
         </p>
@@ -33,7 +33,7 @@ export default function ROICalculatorSectionV2() {
         <div className="flex justify-center">
           <Link
             href="/roi"
-            className="bg-[#063576] text-white text-sm sm:text-base md:text-[14px] font-bold px-8 sm:px-12 md:px-[55px] py-2 sm:py-2.5 md:py-[7.5px] rounded-lg sm:rounded-xl md:rounded-[10px] h-10 sm:h-11 md:h-[41px] flex items-center justify-center hover:opacity-90 transition-opacity"
+            className="bg-[#063576] text-white text-sm sm:text-base md:text-base font-bold px-8 sm:px-12 md:px-[55px] py-2 sm:py-2.5 md:py-[7.5px] rounded-lg sm:rounded-xl md:rounded-[10px] h-10 sm:h-11 md:h-[41px] flex items-center justify-center hover:opacity-90 transition-opacity"
           >
             Go to Calculator
           </Link>

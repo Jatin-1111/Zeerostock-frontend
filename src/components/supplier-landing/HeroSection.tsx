@@ -19,7 +19,7 @@ export default function HeroSection() {
       {/* Content Container */}
       <div className="relative z-10 max-w-[880px] mx-auto">
         {/* Top Label */}
-        <p className="text-[15px] text-[#0d1b2a] mb-[15px] font-medium">
+        <p className="text-base text-[#0d1b2a] mb-[15px] font-medium">
           For Smart Suppliers
         </p>
 
@@ -28,13 +28,13 @@ export default function HeroSection() {
           {/* Left Content */}
           <div>
             {/* Heading */}
-            <h1 className="text-[26px] leading-[35px] font-normal text-[#0d1b2a] mb-[10px]">
+            <h1 className="text-2xl leading-snug font-normal text-[#0d1b2a] mb-[10px]">
               Turn Surplus Inventory into{" "}
               <span className="text-[#2ec096]">Immediate</span> Cash Flow
             </h1>
 
             {/* Description */}
-            <p className="text-[9px] leading-[13px] font-medium text-[#0d1b2a] mb-[15px]">
+            <p className="text-xs leading-tight font-medium text-[#0d1b2a] mb-[15px]">
               Connect with global buyers actively seeking surplus inventory. Our{" "}
               <span className="font-bold">AI-powered platform</span> matches
               your products with verified buyers, ensuring fast sales and secure
@@ -45,13 +45,13 @@ export default function HeroSection() {
             <div className="flex gap-[10px] mb-[15px]">
               <button
                 onClick={() => router.push("/become-supplier")}
-                className="bg-[#1e3a8a] text-white rounded-[6px] px-[13px] py-[8px] text-[11px] font-medium hover:bg-[#1e3a8a]/90 transition-colors"
+                className="bg-[#1e3a8a] text-white rounded-[6px] px-[13px] py-[8px] text-xs font-medium hover:bg-[#1e3a8a]/90 transition-colors"
               >
                 Start Selling Today
               </button>
               <button
                 onClick={() => router.push("/for-supplier")}
-                className="bg-white border border-[#1e3a8a] text-[#1e3a8a] rounded-[6px] px-[13px] py-[8px] text-[11px] font-medium hover:bg-gray-50 transition-colors"
+                className="bg-white border border-[#1e3a8a] text-[#1e3a8a] rounded-[6px] px-[13px] py-[8px] text-xs font-medium hover:bg-gray-50 transition-colors"
               >
                 View Success Stories
               </button>
@@ -66,7 +66,7 @@ export default function HeroSection() {
                     strokeWidth={2.5}
                   />
                 </div>
-                <span className="text-[13px] text-black font-medium">
+                <span className="text-sm text-black font-medium">
                   Free Listings
                 </span>
               </div>
@@ -77,7 +77,7 @@ export default function HeroSection() {
                     strokeWidth={2.5}
                   />
                 </div>
-                <span className="text-[13px] text-black font-medium">
+                <span className="text-sm text-black font-medium">
                   Verified Buyers Only
                 </span>
               </div>
@@ -88,7 +88,7 @@ export default function HeroSection() {
                     strokeWidth={2.5}
                   />
                 </div>
-                <span className="text-[13px] text-black font-medium">
+                <span className="text-sm text-black font-medium">
                   Secure Payments
                 </span>
               </div>

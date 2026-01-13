@@ -53,7 +53,7 @@ export default function SupplierSidebar({
       <div className="w-[220px] h-full bg-white shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] overflow-y-auto flex-shrink-0">
         {/* Header */}
         <div className="h-[40px] flex items-center justify-center border-b border-[#8b8b8b]">
-          <h2 className="font-medium text-[13px] text-[#1e3a8a] leading-normal">
+          <h2 className="font-medium text-sm text-[#1e3a8a] leading-normal">
             Supplier Menu
           </h2>
         </div>
@@ -61,7 +61,7 @@ export default function SupplierSidebar({
         <div className="px-1 pb-5">
           {/* INVENTORY MANAGEMENT Section */}
           <div className="mt-[25px] mb-6">
-            <h3 className="font-medium text-[12px] text-black leading-normal px-[11px] mb-[20px]">
+            <h3 className="font-medium text-sm text-black leading-normal px-[11px] mb-[20px]">
               Inventory Management
             </h3>
             <nav className="space-y-[4px]">
@@ -86,7 +86,7 @@ export default function SupplierSidebar({
                   />
                 </div>
                 <span
-                  className={`font-medium text-[11.2px] leading-normal ${
+                  className={`font-medium text-xs leading-normal ${
                     isActive("/supplier/listings")
                       ? "text-[#2aae7a]"
                       : "text-[#8b8b8b]"
@@ -116,7 +116,7 @@ export default function SupplierSidebar({
                   />
                 </div>
                 <span
-                  className={`font-medium text-[11.2px] leading-normal ${
+                  className={`font-medium text-xs leading-normal ${
                     isActive("/supplier/listings/new")
                       ? "text-[#2aae7a]"
                       : "text-[#8b8b8b]"
@@ -146,7 +146,7 @@ export default function SupplierSidebar({
                   />
                 </div>
                 <span
-                  className={`font-medium text-[11.2px] leading-normal ${
+                  className={`font-medium text-xs leading-normal ${
                     isActive("/supplier/analytics")
                       ? "text-[#2aae7a]"
                       : "text-[#8b8b8b]"
@@ -160,7 +160,7 @@ export default function SupplierSidebar({
 
           {/* SALES & ORDERS Section */}
           <div className="mb-6">
-            <h3 className="font-medium text-[12px] text-black leading-normal px-[11px] mb-[20px]">
+            <h3 className="font-medium text-sm text-black leading-normal px-[11px] mb-[20px]">
               Sales &amp; Orders
             </h3>
             <nav className="space-y-[4px]">
@@ -185,7 +185,7 @@ export default function SupplierSidebar({
                   />
                 </div>
                 <span
-                  className={`font-medium text-[11.2px] leading-normal ${
+                  className={`font-medium text-xs leading-normal ${
                     isActive("/supplier/orders")
                       ? "text-[#2aae7a]"
                       : "text-[#8b8b8b]"
@@ -215,7 +215,7 @@ export default function SupplierSidebar({
                   />
                 </div>
                 <span
-                  className={`font-medium text-[11.2px] leading-normal ${
+                  className={`font-medium text-xs leading-normal ${
                     isActive("/supplier/dashboard")
                       ? "text-[#2aae7a]"
                       : "text-[#8b8b8b]"
@@ -245,7 +245,7 @@ export default function SupplierSidebar({
                   />
                 </div>
                 <span
-                  className={`font-medium text-[11.2px] leading-normal ${
+                  className={`font-medium text-xs leading-normal ${
                     isActive("/supplier/payments")
                       ? "text-[#2aae7a]"
                       : "text-[#8b8b8b]"
@@ -275,7 +275,7 @@ export default function SupplierSidebar({
                   />
                 </div>
                 <span
-                  className={`font-medium text-[11.2px] leading-normal ${
+                  className={`font-medium text-xs leading-normal ${
                     isActive("/supplier/market-analytics")
                       ? "text-[#2aae7a]"
                       : "text-[#8b8b8b]"
@@ -289,7 +289,7 @@ export default function SupplierSidebar({
 
           {/* ACCOUNT Section */}
           <div className="mb-6">
-            <h3 className="font-medium text-[12px] text-black leading-normal px-[11px] mb-[20px]">
+            <h3 className="font-medium text-sm text-black leading-normal px-[11px] mb-[20px]">
               Account
             </h3>
             <nav className="space-y-[4px]">
@@ -314,7 +314,7 @@ export default function SupplierSidebar({
                   />
                 </div>
                 <span
-                  className={`font-medium text-[11.2px] leading-normal ${
+                  className={`font-medium text-xs leading-normal ${
                     isActive("/supplier/profile")
                       ? "text-[#2aae7a]"
                       : "text-[#8b8b8b]"
@@ -344,7 +344,7 @@ export default function SupplierSidebar({
                   />
                 </div>
                 <span
-                  className={`font-medium text-[11.2px] leading-normal ${
+                  className={`font-medium text-xs leading-normal ${
                     isActive("/supplier/settings")
                       ? "text-[#2aae7a]"
                       : "text-[#8b8b8b]"
@@ -360,7 +360,7 @@ export default function SupplierSidebar({
                 <div className="w-[13px] h-[13px] shrink-0">
                   <LogOut className="w-[13px] h-[13px] text-[#ff0001]" />
                 </div>
-                <span className="font-medium text-[11.2px] text-[#ff0001] leading-normal">
+                <span className="font-medium text-xs text-[#ff0001] leading-normal">
                   Sign Out
                 </span>
               </Link>
@@ -375,7 +375,7 @@ export default function SupplierSidebar({
               <div className="w-[13px] h-[13px] shrink-0">
                 <AlertCircle className="w-[13px] h-[13px] text-black" />
               </div>
-              <span className="font-medium text-[11.2px] text-black leading-normal">
+              <span className="font-medium text-xs text-black leading-normal">
                 Help &amp; Support
               </span>
             </Link>
@@ -386,7 +386,7 @@ export default function SupplierSidebar({
               <div className="w-[12px] h-[12px] shrink-0">
                 <Mail className="w-[12px] h-[12px] text-black" />
               </div>
-              <span className="font-medium text-[11.2px] text-black leading-normal">
+              <span className="font-medium text-xs text-black leading-normal">
                 Send Feedback
               </span>
             </Link>

@@ -72,20 +72,20 @@ export default function AdminLoginPage() {
         <div className="w-full max-w-[383px]">
           {/* Logo and Tagline */}
           <div className="mb-12">
-            <h1 className="mb-1 text-[32px] font-bold text-black">
+            <h1 className="mb-1 text-3xl font-bold text-black">
               Zeerostock
             </h1>
-            <p className="text-[14px] text-[#6B7280]">
+            <p className="text-base text-[#6B7280]">
               • Control • Compliance • Growth
             </p>
           </div>
 
           {/* Login Form */}
           <div className="mb-8">
-            <h2 className="mb-2 text-[36px] font-bold text-black">
+            <h2 className="mb-2 text-3xl font-bold text-black">
               Admin Log in
             </h2>
-            <p className="text-[14px] text-[#6B7280]">
+            <p className="text-base text-[#6B7280]">
               Enter your Admin ID and password to continue
             </p>
           </div>
@@ -105,7 +105,7 @@ export default function AdminLoginPage() {
             <div>
               <label
                 htmlFor="adminId"
-                className="mb-2 block text-[16px] font-medium text-black"
+                className="mb-2 block text-lg font-medium text-black"
               >
                 Admin ID
               </label>
@@ -115,7 +115,7 @@ export default function AdminLoginPage() {
                 value={adminId}
                 onChange={(e) => setAdminId(e.target.value.toUpperCase())}
                 placeholder="Enter your Admin ID (e.g., A3X7K9)"
-                className="w-full border border-black px-4 py-3 font-mono text-[14px] text-black uppercase placeholder:text-[#9CA3AF] focus:border-transparent focus:outline-none focus:ring-2 focus:ring-black"
+                className="w-full border border-black px-4 py-3 font-mono text-base text-black uppercase placeholder:text-[#9CA3AF] focus:border-transparent focus:outline-none focus:ring-2 focus:ring-black"
                 maxLength={6}
                 required
               />
@@ -128,7 +128,7 @@ export default function AdminLoginPage() {
             <div>
               <label
                 htmlFor="password"
-                className="mb-2 block text-[16px] font-medium text-black"
+                className="mb-2 block text-lg font-medium text-black"
               >
                 Password
               </label>
@@ -139,7 +139,7 @@ export default function AdminLoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
-                  className="w-full border border-black px-4 py-3 pr-12 text-[14px] text-black placeholder:text-[#9CA3AF] focus:border-transparent focus:outline-none focus:ring-2 focus:ring-black"
+                  className="w-full border border-black px-4 py-3 pr-12 text-base text-black placeholder:text-[#9CA3AF] focus:border-transparent focus:outline-none focus:ring-2 focus:ring-black"
                   required
                 />
                 <button
@@ -159,7 +159,7 @@ export default function AdminLoginPage() {
 
             {/* Contact Admin Note */}
             <div className="text-left">
-              <p className="text-[14px] text-[#6B7280]">
+              <p className="text-base text-[#6B7280]">
                 Don't have credentials?{" "}
                 <span className="font-medium text-black">
                   Contact your system administrator
@@ -171,7 +171,7 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-black py-3.5 text-[16px] font-medium text-white transition-colors hover:bg-gray-900 disabled:cursor-not-allowed disabled:bg-gray-400"
+              className="w-full bg-black py-3.5 text-lg font-medium text-white transition-colors hover:bg-gray-900 disabled:cursor-not-allowed disabled:bg-gray-400"
             >
               {loading ? "Signing in..." : "Sign in"}
             </button>
@@ -180,7 +180,7 @@ export default function AdminLoginPage() {
           {/* Authorization Notice */}
           <div className="mt-12 flex items-center gap-2 text-[#9CA3AF]">
             <ShieldCheck className="h-5 w-5" />
-            <span className="text-[14px]">For authorized personnel only</span>
+            <span className="text-base">For authorized personnel only</span>
           </div>
         </div>
       </div>

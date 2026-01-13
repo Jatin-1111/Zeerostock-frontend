@@ -85,7 +85,7 @@ export default function LoginPage() {
                 <div className="text-sm font-semibold text-gray-900 mb-0.5">
                   Buyer
                 </div>
-                <div className="text-[6px] text-gray-600">
+                <div className="text-xs text-gray-600">
                   Purchasing surplus
                   <br />
                   inventory
@@ -105,7 +105,7 @@ export default function LoginPage() {
                 <div className="text-sm font-semibold text-gray-900 mb-0.5">
                   Supplier
                 </div>
-                <div className="text-[6px] text-gray-600">
+                <div className="text-xs text-gray-600">
                   Selling surplus
                   <br />
                   stock
@@ -243,7 +243,7 @@ export default function LoginPage() {
             </Link>
           </div>
 
-          <p className="text-center text-[10px] text-gray-500 mt-3">
+          <p className="text-center text-xs text-gray-500 mt-3">
             Trusted by 10,000+ businesses
           </p>
         </form>

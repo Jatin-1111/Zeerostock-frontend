@@ -108,10 +108,10 @@ export default function FAQTab() {
     <div className="overflow-hidden p-2">
       {/* FAQ Header */}
       <div className="mb-[11px]">
-        <h2 className="mb-[4px] text-[15px] font-semibold text-[#0d1b2a]">
+        <h2 className="mb-[4px] text-base font-semibold text-[#0d1b2a]">
           Frequently Asked Questions
         </h2>
-        <p className="text-[11px] font-medium text-[#9c9c9c]">
+        <p className="text-xs font-medium text-[#9c9c9c]">
           Find answers to common questions about using Zeerotock
         </p>
       </div>
@@ -122,7 +122,7 @@ export default function FAQTab() {
           <button
             key={button.id}
             onClick={() => handleFilterChange(button.id)}
-            className={`rounded-[7px] px-[8px] py-[4px] text-[8px] font-medium transition-colors ${
+            className={`rounded-[7px] px-[8px] py-[4px] text-xs font-medium transition-colors ${
               activeFilter === button.id
                 ? "border border-[#2aae7a] bg-[#eeffef] text-[#2aae7a]"
                 : "border border-gray-300 bg-white text-gray-600 hover:border-[#2aae7a] hover:text-[#2aae7a]"
@@ -153,7 +153,7 @@ export default function FAQTab() {
                   }
                   className="flex w-full items-center justify-between px-[16px] py-[13px] text-left"
                 >
-                  <span className="text-[13px] font-medium tracking-tight text-black">
+                  <span className="text-sm font-medium tracking-tight text-black">
                     {faq.question}
                   </span>
                   {openFaqIndex === index ? (
@@ -173,7 +173,7 @@ export default function FAQTab() {
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                     >
                       <div className="px-[16px] pb-[13px]">
-                        <p className="text-[10px] font-medium leading-[13px] tracking-tight text-[#9c9c9c]">
+                        <p className="text-xs font-medium leading-tight tracking-tight text-[#9c9c9c]">
                           {faq.answer}
                         </p>
                       </div>

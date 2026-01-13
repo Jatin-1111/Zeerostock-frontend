@@ -50,7 +50,7 @@ export default function CartItems() {
     return (
       <div className="w-full bg-white rounded-xl sm:rounded-2xl shadow-md p-3 sm:p-4 md:p-5">
         <div className="text-center py-2 sm:py-3 md:py-4">
-          <p className="text-gray-500 text-[10px] sm:text-xs md:text-sm">
+          <p className="text-gray-500 text-xs sm:text-xs md:text-sm">
             Loading cart items...
           </p>
         </div>
@@ -77,15 +77,15 @@ export default function CartItems() {
               />
             </svg>
           </div>
-          <h3 className="text-[10px] sm:text-xs md:text-sm font-semibold text-gray-900 mb-1 sm:mb-2">
+          <h3 className="text-xs sm:text-xs md:text-sm font-semibold text-gray-900 mb-1 sm:mb-2">
             Your cart is empty
           </h3>
-          <p className="text-gray-500 mb-2 sm:mb-3 text-[8px] sm:text-[9px] md:text-[10px]">
+          <p className="text-gray-500 mb-2 sm:mb-3 text-xs sm:text-xs md:text-xs">
             Add items to your cart to see them here
           </p>
           <a
             href="/marketplace"
-            className="inline-block px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 bg-[#1e3a8a] text-white rounded-lg hover:bg-[#17327c] transition-colors text-[9px] sm:text-[10px] md:text-xs font-medium"
+            className="inline-block px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 bg-[#1e3a8a] text-white rounded-lg hover:bg-[#17327c] transition-colors text-xs sm:text-xs md:text-xs font-medium"
           >
             Browse Products
           </a>
@@ -98,7 +98,7 @@ export default function CartItems() {
     <div className="w-full bg-white rounded-xl sm:rounded-2xl shadow-md overflow-hidden">
       {/* Header */}
       <div className="bg-white shadow-sm px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0 border-b">
-        <h2 className="text-[10px] sm:text-xs md:text-sm font-medium text-[#0d1b2a]">
+        <h2 className="text-xs sm:text-xs md:text-sm font-medium text-[#0d1b2a]">
           Cart Items ({items.length})
         </h2>
 
@@ -122,7 +122,7 @@ export default function CartItems() {
                 />
               )}
             </div>
-            <span className="text-[10px] sm:text-xs md:text-sm font-medium text-[#0d1b2a]">
+            <span className="text-xs sm:text-xs md:text-sm font-medium text-[#0d1b2a]">
               Select All
             </span>
           </button>
@@ -134,7 +134,7 @@ export default function CartItems() {
               className="flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 border-2 border-red-500 rounded-lg sm:rounded-xl bg-white hover:bg-red-50 transition-colors w-full sm:w-auto justify-center"
             >
               <Trash2 className="w-3.5 h-3.5 sm:w-3 sm:h-3 text-red-500" />
-              <span className="text-[10px] sm:text-xs md:text-sm font-semibold text-red-500">
+              <span className="text-xs sm:text-xs md:text-sm font-semibold text-red-500">
                 Remove Selected
               </span>
             </button>
@@ -200,18 +200,18 @@ export default function CartItems() {
                 {/* Product Details */}
                 <div className="flex-1 min-w-0">
                   {/* Title and Tags */}
-                  <h3 className="text-[10px] sm:text-xs md:text-sm font-semibold text-[#1e3a8a] mb-1 sm:mb-1.5 line-clamp-2">
+                  <h3 className="text-xs sm:text-xs md:text-sm font-semibold text-[#1e3a8a] mb-1 sm:mb-1.5 line-clamp-2">
                     {item.title}
                   </h3>
 
                   <div className="flex items-center gap-1 sm:gap-1.5 mb-1 sm:mb-1.5 flex-wrap">
                     {item.category && (
-                      <span className="px-1.5 sm:px-2 py-0.5 bg-[#eeffef] text-[#2aae7a] text-[8px] sm:text-[9px] md:text-[10px] font-medium rounded-full">
+                      <span className="px-1.5 sm:px-2 py-0.5 bg-[#eeffef] text-[#2aae7a] text-xs sm:text-xs md:text-xs font-medium rounded-full">
                         {item.category}
                       </span>
                     )}
                     {item.condition && (
-                      <span className="px-1.5 sm:px-2 py-0.5 bg-[#eeffef] text-[#2aae7a] text-[8px] sm:text-[9px] md:text-[10px] font-medium rounded-full capitalize">
+                      <span className="px-1.5 sm:px-2 py-0.5 bg-[#eeffef] text-[#2aae7a] text-xs sm:text-xs md:text-xs font-medium rounded-full capitalize">
                         {item.condition}
                       </span>
                     )}
@@ -222,14 +222,14 @@ export default function CartItems() {
                     {item.seller?.name && (
                       <div className="flex items-center gap-0.5 sm:gap-1">
                         <MapPin className="w-3 h-3 sm:w-2.5 sm:h-2.5" />
-                        <span className="text-[8px] sm:text-[9px] md:text-[10px] font-medium truncate max-w-[100px] sm:max-w-none">
+                        <span className="text-xs sm:text-xs md:text-xs font-medium truncate max-w-[100px] sm:max-w-none">
                           {item.seller.name}
                         </span>
                       </div>
                     )}
                     <div className="flex items-center gap-0.5 sm:gap-1">
                       <Clock className="w-3 h-3 sm:w-2.5 sm:h-2.5" />
-                      <span className="text-[8px] sm:text-[9px] md:text-[10px] font-medium">
+                      <span className="text-xs sm:text-xs md:text-xs font-medium">
                         3-5 Days
                       </span>
                     </div>
@@ -253,7 +253,7 @@ export default function CartItems() {
 
                   {/* Quantity Selector */}
                   <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-2 sm:mb-2.5">
-                    <span className="text-[9px] sm:text-[10px] md:text-xs font-medium text-[#9c9c9c]">
+                    <span className="text-xs sm:text-xs md:text-xs font-medium text-[#9c9c9c]">
                       Quantity:
                     </span>
                     <div className="flex items-center border border-[#2aae7a] rounded-lg sm:rounded-xl overflow-hidden w-fit">
@@ -282,7 +282,7 @@ export default function CartItems() {
                             updateQuantity(item.itemId, newQty);
                           }
                         }}
-                        className="w-12 sm:w-10 md:w-12 h-7 sm:h-6 md:h-7 text-center text-[10px] sm:text-xs font-normal text-[#2aae7a] bg-white border-none focus:outline-none"
+                        className="w-12 sm:w-10 md:w-12 h-7 sm:h-6 md:h-7 text-center text-xs sm:text-xs font-normal text-[#2aae7a] bg-white border-none focus:outline-none"
                         min="1"
                         max={item.availability?.currentStock || 999}
                       />
@@ -306,24 +306,24 @@ export default function CartItems() {
                         />
                       </button>
                     </div>
-                    <span className="text-[8px] sm:text-[9px] md:text-[10px] text-[#9c9c9c]">
+                    <span className="text-xs sm:text-xs md:text-xs text-[#9c9c9c]">
                       (Min: 10, Max: 2000)
                     </span>
                   </div>
 
                   {/* Warnings */}
                   {item.availability?.priceChanged && (
-                    <div className="text-[9px] sm:text-[10px] md:text-xs text-orange-600 mb-1 sm:mb-1.5">
+                    <div className="text-xs sm:text-xs md:text-xs text-orange-600 mb-1 sm:mb-1.5">
                       ⚠️ Price has changed
                     </div>
                   )}
                   {!item.availability?.isAvailable && (
-                    <div className="text-[9px] sm:text-[10px] md:text-xs text-red-600 mb-1 sm:mb-1.5">
+                    <div className="text-xs sm:text-xs md:text-xs text-red-600 mb-1 sm:mb-1.5">
                       ❌ This product is no longer available
                     </div>
                   )}
                   {item.availability?.stockChanged && (
-                    <div className="text-[9px] sm:text-[10px] md:text-xs text-orange-600 mb-1 sm:mb-1.5">
+                    <div className="text-xs sm:text-xs md:text-xs text-orange-600 mb-1 sm:mb-1.5">
                       Only {item.availability.currentStock} left in stock
                     </div>
                   )}
@@ -334,10 +334,10 @@ export default function CartItems() {
                   {/* Bottom Row: Item Total */}
                   <div className="flex items-center justify-between">
                     <div>
-                      <span className="text-[9px] sm:text-[10px] md:text-xs text-[#9c9c9c] font-medium">
+                      <span className="text-xs sm:text-xs md:text-xs text-[#9c9c9c] font-medium">
                         Item Total:
                       </span>
-                      <span className="text-[10px] sm:text-xs md:text-sm font-medium text-[#1e3a8a] ml-1 sm:ml-2">
+                      <span className="text-xs sm:text-xs md:text-sm font-medium text-[#1e3a8a] ml-1 sm:ml-2">
                         ₹{(item.price * item.quantity).toLocaleString()}
                       </span>
                     </div>

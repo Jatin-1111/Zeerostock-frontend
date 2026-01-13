@@ -142,10 +142,10 @@ export default function SupplierDashboard() {
       <div className="flex justify-between items-start mb-4">
         {/* Welcome Header */}
         <div className="mb-4">
-          <h1 className="text-[20px] font-semibold text-[#0d1b2a] leading-normal">
+          <h1 className="text-xl font-semibold text-[#0d1b2a] leading-normal">
             Welcome Back, {user?.companyName || user?.firstName}
           </h1>
-          <p className="text-[13.5px] font-medium text-[#9c9c9c] leading-normal mt-0.75">
+          <p className="text-sm font-medium text-[#9c9c9c] leading-normal mt-0.75">
             Here&apos;s your business overview
           </p>
         </div>
@@ -154,7 +154,7 @@ export default function SupplierDashboard() {
         <div className="mb-4">
           <Link
             href="/supplier/inventory"
-            className="inline-flex items-center justify-center gap-[6px] h-[34px] px-[34px] bg-[#2aae7a] text-white text-[11px] font-semibold rounded-[8px] hover:bg-[#25996b] transition-colors"
+            className="inline-flex items-center justify-center gap-[6px] h-[34px] px-[34px] bg-[#2aae7a] text-white text-xs font-semibold rounded-[8px] hover:bg-[#25996b] transition-colors"
           >
             <Plus className="w-4 h-4" />
             Add Product
@@ -177,10 +177,10 @@ export default function SupplierDashboard() {
               />
             </div>
             <div className="ml-[51px]">
-              <p className="text-[11px] font-medium text-[#9c9c9c] leading-normal mb-1.5">
+              <p className="text-xs font-medium text-[#9c9c9c] leading-normal mb-1.5">
                 Active Listings
               </p>
-              <p className="text-[18px] font-semibold text-[#0d1b2a] leading-normal">
+              <p className="text-xl font-semibold text-[#0d1b2a] leading-normal">
                 {stats.listings.active_listings}
               </p>
             </div>
@@ -198,10 +198,10 @@ export default function SupplierDashboard() {
               />
             </div>
             <div className="ml-[51px]">
-              <p className="text-[11px] font-medium text-[#9c9c9c] leading-normal mb-1.5">
+              <p className="text-xs font-medium text-[#9c9c9c] leading-normal mb-1.5">
                 RFQ Matches
               </p>
-              <p className="text-[18px] font-semibold text-[#0d1b2a] leading-normal">
+              <p className="text-xl font-semibold text-[#0d1b2a] leading-normal">
                 5
               </p>
             </div>
@@ -219,10 +219,10 @@ export default function SupplierDashboard() {
               />
             </div>
             <div className="ml-[51px]">
-              <p className="text-[11px] font-medium text-[#9c9c9c] leading-normal mb-1.5">
+              <p className="text-xs font-medium text-[#9c9c9c] leading-normal mb-1.5">
                 Monthly Revenue
               </p>
-              <p className="text-[18px] font-semibold text-[#2aae7a] leading-normal">
+              <p className="text-xl font-semibold text-[#2aae7a] leading-normal">
                 {formatCurrency(stats.orders.revenue_this_month)}
               </p>
             </div>
@@ -240,10 +240,10 @@ export default function SupplierDashboard() {
               />
             </div>
             <div className="ml-[51px]">
-              <p className="text-[11px] font-medium text-[#9c9c9c] leading-normal mb-1.5">
+              <p className="text-xs font-medium text-[#9c9c9c] leading-normal mb-1.5">
                 Pending Orders
               </p>
-              <p className="text-[18px] font-semibold text-[#eab308] leading-normal">
+              <p className="text-xl font-semibold text-[#eab308] leading-normal">
                 {stats.orders.pending_orders}
               </p>
             </div>
@@ -259,7 +259,7 @@ export default function SupplierDashboard() {
             className="bg-white rounded-[11px] p-3.5 h-full"
             style={{ boxShadow: "0px 0px 4px 0px rgba(0, 0, 0, 0.25)" }}
           >
-            <h2 className="text-[15px] font-medium text-[#0d1b2a] mb-4.5">
+            <h2 className="text-base font-medium text-[#0d1b2a] mb-4.5">
               Active Listings Performance
             </h2>
 
@@ -269,7 +269,7 @@ export default function SupplierDashboard() {
                 <p className="text-sm text-gray-600 mb-2">No listings yet</p>
                 <Link
                   href="/supplier/inventory"
-                  className="inline-block px-2.5 py-1 bg-gray-900 text-white text-[10px] hover:bg-gray-800 rounded"
+                  className="inline-block px-2.5 py-1 bg-gray-900 text-white text-xs hover:bg-gray-800 rounded"
                 >
                   Create Your First Listing
                 </Link>
@@ -292,24 +292,24 @@ export default function SupplierDashboard() {
                           className="w-full h-full object-cover"
                         />
                       ) : (
-                        <span className="text-gray-400 text-[8px]">
+                        <span className="text-gray-400 text-xs">
                           No Image
                         </span>
                       )}
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-[13px] font-medium text-black mb-1 line-clamp-1">
+                      <h3 className="text-sm font-medium text-black mb-1 line-clamp-1">
                         {listing.title}
                       </h3>
                       <div className="flex items-center gap-1 mb-1.5">
-                        <span className="bg-[#eeffef] px-[7px] py-[2px] rounded-full text-[9px] font-medium text-[#2aae7a]">
+                        <span className="bg-[#eeffef] px-[7px] py-[2px] rounded-full text-xs font-medium text-[#2aae7a]">
                           Electronics
                         </span>
-                        <span className="bg-[#eeffef] px-[7px] py-[2px] rounded-full text-[9px] font-medium text-[#2aae7a]">
+                        <span className="bg-[#eeffef] px-[7px] py-[2px] rounded-full text-xs font-medium text-[#2aae7a]">
                           Active
                         </span>
                       </div>
-                      <div className="flex items-center gap-3 text-[11px] text-[#9c9c9c]">
+                      <div className="flex items-center gap-3 text-xs text-[#9c9c9c]">
                         <span className="font-medium">
                           {listing.views_count} Views
                         </span>
@@ -320,13 +320,13 @@ export default function SupplierDashboard() {
                       </div>
                     </div>
                     <div className="text-right self-start pt-1">
-                      <p className="text-[17px] font-semibold text-black mb-1">
+                      <p className="text-lg font-semibold text-black mb-1">
                         {formatCurrency(listing.price_after)}
                       </p>
-                      <p className="text-[12px] font-medium text-[#9c9c9c] mb-4">
+                      <p className="text-sm font-medium text-[#9c9c9c] mb-4">
                         600 units
                       </p>
-                      <div className="flex items-center gap-1 text-[13px] text-[#0d1b2a]">
+                      <div className="flex items-center gap-1 text-sm text-[#0d1b2a]">
                         <Clock className="w-3.5 h-3.5" />
                         <span className="font-medium">3d 14h</span>
                       </div>
@@ -345,42 +345,42 @@ export default function SupplierDashboard() {
             className="bg-white rounded-[11px] p-3.5 flex-1 flex flex-col"
             style={{ boxShadow: "0px 0px 4px 0px rgba(0, 0, 0, 0.25)" }}
           >
-            <h3 className="text-[15px] font-medium text-[#0d1b2a] mb-3.5">
+            <h3 className="text-base font-medium text-[#0d1b2a] mb-3.5">
               Performance Insights
             </h3>
 
             {/* Rating Display */}
             <div className="flex items-center justify-center mb-3">
-              <p className="text-[22px] font-medium text-[#2aae7a]">4.8</p>
+              <p className="text-2xl font-medium text-[#2aae7a]">4.8</p>
               <Star className="w-5 h-5 text-[#2aae7a] fill-[#2aae7a] ml-1" />
             </div>
-            <p className="text-[12px] font-medium text-[#9c9c9c] text-center mb-4">
+            <p className="text-sm font-medium text-[#9c9c9c] text-center mb-4">
               Supplier Rating
             </p>
 
             {/* Metrics */}
             <div className="space-y-2 flex-grow flex flex-col justify-center">
               <div className="flex justify-between items-center">
-                <span className="text-[12px] font-medium text-[#0d1b2a]">
+                <span className="text-sm font-medium text-[#0d1b2a]">
                   Response Rate
                 </span>
-                <span className="text-[12px] font-medium text-[#2aae7a]">
+                <span className="text-sm font-medium text-[#2aae7a]">
                   98%
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-[12px] font-medium text-[#0d1b2a]">
+                <span className="text-sm font-medium text-[#0d1b2a]">
                   On-Time Delivery
                 </span>
-                <span className="text-[12px] font-medium text-[#2aae7a]">
+                <span className="text-sm font-medium text-[#2aae7a]">
                   96%
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-[12px] font-medium text-[#0d1b2a]">
+                <span className="text-sm font-medium text-[#0d1b2a]">
                   Quote Win Rate
                 </span>
-                <span className="text-[12px] font-medium text-[#2aae7a]">
+                <span className="text-sm font-medium text-[#2aae7a]">
                   36%
                 </span>
               </div>
@@ -392,21 +392,21 @@ export default function SupplierDashboard() {
             className="bg-white rounded-[11px] p-3.5 flex-1 flex flex-col"
             style={{ boxShadow: "0px 0px 4px 0px rgba(0, 0, 0, 0.25)" }}
           >
-            <h3 className="text-[15px] font-medium text-[#0d1b2a] mb-3.5">
+            <h3 className="text-base font-medium text-[#0d1b2a] mb-3.5">
               Top RFQ Match
             </h3>
-            <p className="text-[12px] font-medium text-[#0d1b2a] mb-[2px]">
+            <p className="text-sm font-medium text-[#0d1b2a] mb-[2px]">
               Industrial Electronic
             </p>
-            <p className="text-[11px] font-medium text-[#9c9c9c] mb-2">
+            <p className="text-xs font-medium text-[#9c9c9c] mb-2">
               95% Match
             </p>
-            <p className="text-[15px] font-semibold text-black mb-3.5 flex-grow">
+            <p className="text-base font-semibold text-black mb-3.5 flex-grow">
               ₹180,000
             </p>
             <Link
               href="/supplier/rfq"
-              className="flex items-center justify-center gap-1.5 w-full h-[34px] bg-[#1e3a8a] text-white text-[10px] font-semibold rounded-[8px] hover:bg-[#1e40af] transition-colors"
+              className="flex items-center justify-center gap-1.5 w-full h-[34px] bg-[#1e3a8a] text-white text-xs font-semibold rounded-[8px] hover:bg-[#1e40af] transition-colors"
             >
               <Send className="w-3.5 h-3.5" />
               Submit Quote

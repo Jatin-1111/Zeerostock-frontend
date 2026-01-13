@@ -141,7 +141,7 @@ export default function ShippingAddress({
               strokeLinejoin="round"
             />
           </svg>
-          <h2 className="text-[12px] font-semibold text-[#0d1b2a]">
+          <h2 className="text-sm font-semibold text-[#0d1b2a]">
             Address Information
           </h2>
         </div>
@@ -157,7 +157,7 @@ export default function ShippingAddress({
           {/* First Name & Last Name Row */}
           <div className="grid grid-cols-2 gap-[23px]">
             <div>
-              <label className="block text-[9px] font-medium text-[#0d1b2a] mb-1.5">
+              <label className="block text-xs font-medium text-[#0d1b2a] mb-1.5">
                 First Name
               </label>
               <input
@@ -165,11 +165,11 @@ export default function ShippingAddress({
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 placeholder="First Name"
-                className="w-full h-[28px] px-2.5 text-[8px] text-[#0d1b2a] border border-[#bebebe] rounded-[5px] focus:outline-none focus:border-[#0d1b2a]"
+                className="w-full h-[28px] px-2.5 text-xs text-[#0d1b2a] border border-[#bebebe] rounded-[5px] focus:outline-none focus:border-[#0d1b2a]"
               />
             </div>
             <div>
-              <label className="block text-[9px] font-medium text-[#0d1b2a] mb-1.5">
+              <label className="block text-xs font-medium text-[#0d1b2a] mb-1.5">
                 Last Name
               </label>
               <input
@@ -177,14 +177,14 @@ export default function ShippingAddress({
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 placeholder="Last Name"
-                className="w-full h-[28px] px-2.5 text-[8px] text-[#0d1b2a] border border-[#bebebe] rounded-[5px] focus:outline-none focus:border-[#0d1b2a]"
+                className="w-full h-[28px] px-2.5 text-xs text-[#0d1b2a] border border-[#bebebe] rounded-[5px] focus:outline-none focus:border-[#0d1b2a]"
               />
             </div>
           </div>
 
           {/* Company Name */}
           <div>
-            <label className="block text-[9px] font-medium text-[#0d1b2a] mb-1.5">
+            <label className="block text-xs font-medium text-[#0d1b2a] mb-1.5">
               Company Name
             </label>
             <input
@@ -192,13 +192,13 @@ export default function ShippingAddress({
               value={companyName}
               onChange={(e) => setCompanyName(e.target.value)}
               placeholder="Company Name"
-              className="w-full h-[28px] px-2.5 text-[8px] text-[#0d1b2a] border border-[#bebebe] rounded-[5px] focus:outline-none focus:border-[#0d1b2a]"
+              className="w-full h-[28px] px-2.5 text-xs text-[#0d1b2a] border border-[#bebebe] rounded-[5px] focus:outline-none focus:border-[#0d1b2a]"
             />
           </div>
 
           {/* Street Address */}
           <div>
-            <label className="block text-[9px] font-medium text-[#0d1b2a] mb-1.5">
+            <label className="block text-xs font-medium text-[#0d1b2a] mb-1.5">
               Street Address
             </label>
             <input
@@ -206,14 +206,14 @@ export default function ShippingAddress({
               value={streetAddress}
               onChange={(e) => setStreetAddress(e.target.value)}
               placeholder="Street Address"
-              className="w-full h-[28px] px-2.5 text-[8px] text-[#0d1b2a] border border-[#bebebe] rounded-[5px] focus:outline-none focus:border-[#0d1b2a]"
+              className="w-full h-[28px] px-2.5 text-xs text-[#0d1b2a] border border-[#bebebe] rounded-[5px] focus:outline-none focus:border-[#0d1b2a]"
             />
           </div>
 
           {/* City, State, ZIP Code Row */}
           <div className="grid grid-cols-[127px_130px_100px] gap-[13px]">
             <div>
-              <label className="block text-[9px] font-medium text-[#0d1b2a] mb-1.5">
+              <label className="block text-xs font-medium text-[#0d1b2a] mb-1.5">
                 City
               </label>
               <input
@@ -221,11 +221,11 @@ export default function ShippingAddress({
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
                 placeholder="City"
-                className="w-full h-[28px] px-2.5 text-[8px] text-[#0d1b2a] border border-[#bebebe] rounded-[5px] focus:outline-none focus:border-[#0d1b2a]"
+                className="w-full h-[28px] px-2.5 text-xs text-[#0d1b2a] border border-[#bebebe] rounded-[5px] focus:outline-none focus:border-[#0d1b2a]"
               />
             </div>
             <div>
-              <label className="block text-[9px] font-medium text-[#0d1b2a] mb-1.5">
+              <label className="block text-xs font-medium text-[#0d1b2a] mb-1.5">
                 State
               </label>
               <div className="relative">
@@ -234,12 +234,12 @@ export default function ShippingAddress({
                   value={state}
                   onChange={(e) => setState(e.target.value)}
                   placeholder="State"
-                  className="w-full h-[28px] px-2.5 text-[8px] text-[#0d1b2a] border border-[#bebebe] rounded-[5px] focus:outline-none focus:border-[#0d1b2a]"
+                  className="w-full h-[28px] px-2.5 text-xs text-[#0d1b2a] border border-[#bebebe] rounded-[5px] focus:outline-none focus:border-[#0d1b2a]"
                 />
               </div>
             </div>
             <div>
-              <label className="block text-[9px] font-medium text-[#0d1b2a] mb-1.5">
+              <label className="block text-xs font-medium text-[#0d1b2a] mb-1.5">
                 ZIP Code
               </label>
               <input
@@ -247,14 +247,14 @@ export default function ShippingAddress({
                 value={zipCode}
                 onChange={(e) => setZipCode(e.target.value)}
                 placeholder="ZIP Code"
-                className="w-full h-[28px] px-2.5 text-[8px] text-[#0d1b2a] border border-[#bebebe] rounded-[5px] focus:outline-none focus:border-[#0d1b2a]"
+                className="w-full h-[28px] px-2.5 text-xs text-[#0d1b2a] border border-[#bebebe] rounded-[5px] focus:outline-none focus:border-[#0d1b2a]"
               />
             </div>
           </div>
 
           {/* Phone Number */}
           <div>
-            <label className="block text-[9px] font-medium text-[#0d1b2a] mb-1.5">
+            <label className="block text-xs font-medium text-[#0d1b2a] mb-1.5">
               Phone Number
             </label>
             <input
@@ -262,13 +262,13 @@ export default function ShippingAddress({
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
               placeholder="Phone"
-              className="w-[205px] h-[28px] px-2.5 text-[8px] text-[#0d1b2a] border border-[#bebebe] rounded-[5px] focus:outline-none focus:border-[#0d1b2a]"
+              className="w-[205px] h-[28px] px-2.5 text-xs text-[#0d1b2a] border border-[#bebebe] rounded-[5px] focus:outline-none focus:border-[#0d1b2a]"
             />
           </div>
 
           {/* Special Delivery Instructions */}
           <div>
-            <label className="block text-[9px] font-medium text-[#0d1b2a] mb-1.5">
+            <label className="block text-xs font-medium text-[#0d1b2a] mb-1.5">
               Special Delivery Instruction
             </label>
             <textarea
@@ -276,7 +276,7 @@ export default function ShippingAddress({
               onChange={(e) => setSpecialInstructions(e.target.value)}
               placeholder="Instructions"
               rows={5}
-              className="w-full h-[90px] px-2.5 py-2.5 text-[8px] text-[#0d1b2a] border border-[#bebebe] rounded-[5px] focus:outline-none focus:border-[#0d1b2a] resize-none"
+              className="w-full h-[90px] px-2.5 py-2.5 text-xs text-[#0d1b2a] border border-[#bebebe] rounded-[5px] focus:outline-none focus:border-[#0d1b2a] resize-none"
             />
           </div>
         </div>

@@ -33,11 +33,11 @@ export default function TestimonialsSection() {
       <div className="max-w-[880px] mx-auto">
         {/* Heading Section */}
         <div className="text-center mb-[84px]">
-          <h2 className="text-[26px] leading-[35px] font-medium text-[#0d1b2a] mb-[7px]">
+          <h2 className="text-2xl leading-snug font-medium text-[#0d1b2a] mb-[7px]">
             Real <span className="text-[#2ec096]">Results</span> from Real{" "}
             <span className="text-[#2ec096]">Suppliers</span>
           </h2>
-          <p className="text-[12px] font-semibold text-[#9c9c9c]">
+          <p className="text-sm font-semibold text-[#9c9c9c]">
             See how suppliers are converting surplus inventory into significant
             revenue
           </p>
@@ -48,7 +48,7 @@ export default function TestimonialsSection() {
           {testimonials.map((testimonial, index) => (
             <div key={index} className="flex flex-col">
               {/* Quote - Fixed Height */}
-              <p className="text-[7px] leading-normal font-medium text-[#727272] text-center mb-[32px] h-[29px]">
+              <p className="text-xs leading-normal font-medium text-[#727272] text-center mb-[32px] h-[29px]">
                 {testimonial.quote}
               </p>
 
@@ -63,7 +63,7 @@ export default function TestimonialsSection() {
               </div>
 
               {/* Metric */}
-              <p className="text-[10px] leading-normal font-semibold text-[#2aae7a] text-center mb-[15px]">
+              <p className="text-xs leading-normal font-semibold text-[#2aae7a] text-center mb-[15px]">
                 {testimonial.metric}
               </p>
 
@@ -71,7 +71,7 @@ export default function TestimonialsSection() {
               <div className="h-[1px] bg-[#d1d1d1] mb-[7px]" />
 
               {/* Author */}
-              <p className="text-[9px] leading-normal font-medium text-[#0d1b2a] text-center">
+              <p className="text-xs leading-normal font-medium text-[#0d1b2a] text-center">
                 {testimonial.name}
               </p>
             </div>

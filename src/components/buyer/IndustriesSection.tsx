@@ -56,10 +56,10 @@ export default function IndustriesSection() {
     <section className="bg-[#EEFBF6] py-[21px] md:py-[32px] mx-auto overflow-hidden">
       <div className="w-full max-w-[1200px] mx-auto">
         <div className="text-center mb-[16px] md:mb-[32px]">
-          <h2 className="text-[13px] md:text-[20px] font-bold text-gray-900 mb-[5px] md:mb-[8px] leading-tight">
+          <h2 className="text-sm md:text-xl font-bold text-gray-900 mb-[5px] md:mb-[8px] leading-tight">
             Perfect for Every Industry
           </h2>
-          <p className="text-[9px] md:text-[11px] text-gray-600">
+          <p className="text-xs md:text-xs text-gray-600">
             No matter what your industry, find the surplus inventory you need at
             unbeatable prices
           </p>
@@ -106,24 +106,24 @@ export default function IndustriesSection() {
                   {/* Savings Badge - Top Right Area */}
                   <div className="absolute left-[calc(50%+26px)] top-[13px] -translate-x-1/2">
                     <div className="bg-[#2AAE7A] px-[6px] py-[1px] rounded-full">
-                      <p className="text-white text-[7px] font-medium whitespace-nowrap leading-normal">
+                      <p className="text-white text-xs font-medium whitespace-nowrap leading-normal">
                         {industry.savings}
                       </p>
                     </div>
                   </div>
 
                   {/* Title */}
-                  <h3 className="absolute left-[15px] top-[50px] text-[#022778] text-[13px] font-semibold leading-normal drop-shadow-[0px_3px_3px_rgba(0,0,0,0.25)]">
+                  <h3 className="absolute left-[15px] top-[50px] text-[#022778] text-sm font-semibold leading-normal drop-shadow-[0px_3px_3px_rgba(0,0,0,0.25)]">
                     {industry.title}
                   </h3>
 
                   {/* Subtitle */}
-                  <p className="absolute left-[15px] top-[77px] text-[#2AAE7A] text-[9px] font-medium leading-normal">
+                  <p className="absolute left-[15px] top-[77px] text-[#2AAE7A] text-xs font-medium leading-normal">
                     {industry.subtitle}
                   </p>
 
                   {/* Description */}
-                  <p className="absolute left-[15px] top-[95px] w-[144px] text-[#727272] text-[7px] font-medium leading-normal">
+                  <p className="absolute left-[15px] top-[95px] w-[144px] text-[#727272] text-xs font-medium leading-normal">
                     {industry.description}
                   </p>
                 </div>

@@ -262,7 +262,7 @@ export default function SignUpPage() {
                 </svg>
               </button>
             </div>
-            <div className="mt-1 text-[10px] text-gray-600 space-y-0.5">
+            <div className="mt-1 text-xs text-gray-600 space-y-0.5">
               <p>Password must be at least 8 characters</p>
               <p>Password must contain at least one number</p>
               <p>Password must contain at least one special character *&$#@!</p>
@@ -335,11 +335,11 @@ export default function SignUpPage() {
             </Link>
           </div>
 
-          <p className="text-center text-[10px] text-gray-500 mt-3">
+          <p className="text-center text-xs text-gray-500 mt-3">
             Join 10,000+ trusted businesses
           </p>
 
-          <div className="flex justify-center gap-4 mt-2 text-[10px] text-gray-500">
+          <div className="flex justify-center gap-4 mt-2 text-xs text-gray-500">
             <span>256-bit SSL</span>
             <span>GDPR Compliant</span>
             <span>SOC 2 Certified</span>

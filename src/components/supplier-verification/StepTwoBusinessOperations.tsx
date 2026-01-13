@@ -16,7 +16,7 @@ export default function StepTwoBusinessOperations({
       {/* Business Details Section - Left */}
       <div className="bg-white rounded-[13px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] flex-1 flex flex-col overflow-hidden">
         <div className="border-b border-[#e5e5e5] px-3 py-2 flex-shrink-0">
-          <h2 className="text-[11px] font-semibold text-black">
+          <h2 className="text-xs font-semibold text-black">
             Business details
           </h2>
         </div>
@@ -24,7 +24,7 @@ export default function StepTwoBusinessOperations({
         <div className="px-3 py-4 space-y-4 flex-1 overflow-y-auto">
           {/* Legal Business Name */}
           <div>
-            <label className="block text-[9px] font-medium text-black mb-1.5">
+            <label className="block text-xs font-medium text-black mb-1.5">
               Legal Business Name
             </label>
             <input
@@ -36,13 +36,13 @@ export default function StepTwoBusinessOperations({
                   legalBusinessName: e.target.value,
                 })
               }
-              className="w-full h-[33px] px-2.5 text-[11px] border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] text-black placeholder:text-[#9c9c9c]"
+              className="w-full h-[33px] px-2.5 text-xs border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] text-black placeholder:text-[#9c9c9c]"
             />
           </div>
 
           {/* Business Registration Number */}
           <div>
-            <label className="block text-[9px] font-medium text-black mb-1.5">
+            <label className="block text-xs font-medium text-black mb-1.5">
               Business Registration Number
             </label>
             <input
@@ -54,13 +54,13 @@ export default function StepTwoBusinessOperations({
                   businessRegistrationNumber: e.target.value,
                 })
               }
-              className="w-full h-[33px] px-2.5 text-[11px] border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] text-black placeholder:text-[#9c9c9c]"
+              className="w-full h-[33px] px-2.5 text-xs border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] text-black placeholder:text-[#9c9c9c]"
             />
           </div>
 
           {/* Business Type */}
           <div>
-            <label className="block text-[9px] font-medium text-black mb-1.5">
+            <label className="block text-xs font-medium text-black mb-1.5">
               Business Type
             </label>
             <div className="relative">
@@ -71,7 +71,7 @@ export default function StepTwoBusinessOperations({
                     businessType: e.target.value,
                   })
                 }
-                className="w-full h-[33px] px-2.5 pr-8 text-[11px] border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] bg-white text-black appearance-none"
+                className="w-full h-[33px] px-2.5 pr-8 text-xs border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] bg-white text-black appearance-none"
               >
                 <option value="">Limited Liability Company</option>
                 <option value="sole_proprietorship">Sole Proprietorship</option>
@@ -91,7 +91,7 @@ export default function StepTwoBusinessOperations({
           {/* Tax ID (EIN) and Est. Year in two columns */}
           <div className="flex gap-3 flex-wrap">
             <div className="flex-1 min-w-[100px]">
-              <label className="block text-[9px] font-medium text-black mb-1.5">
+              <label className="block text-xs font-medium text-black mb-1.5">
                 Tax ID (EIN)
               </label>
               <input
@@ -101,11 +101,11 @@ export default function StepTwoBusinessOperations({
                 onChange={(e) =>
                   updateData("businessDetails", { taxId: e.target.value })
                 }
-                className="w-full h-[33px] px-2.5 text-[11px] border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] text-black placeholder:text-[#9c9c9c]"
+                className="w-full h-[33px] px-2.5 text-xs border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] text-black placeholder:text-[#9c9c9c]"
               />
             </div>
             <div className="w-[100px] min-w-[80px]">
-              <label className="block text-[9px] font-medium text-black mb-1.5">
+              <label className="block text-xs font-medium text-black mb-1.5">
                 Est. Year
               </label>
               <div className="relative">
@@ -118,7 +118,7 @@ export default function StepTwoBusinessOperations({
                       yearEstablished: e.target.value,
                     })
                   }
-                  className="w-full h-[33px] px-2.5 pr-8 text-[11px] border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] text-black placeholder:text-[#9c9c9c]"
+                  className="w-full h-[33px] px-2.5 pr-8 text-xs border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] text-black placeholder:text-[#9c9c9c]"
                 />
                 <div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none">
                   <svg width="10" height="5" viewBox="0 0 10 5" fill="none">
@@ -134,7 +134,7 @@ export default function StepTwoBusinessOperations({
       {/* Operational Information Section - Right */}
       <div className="bg-white rounded-[13px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] flex-1 flex flex-col overflow-hidden">
         <div className="border-b border-[#e5e5e5] px-3 py-2 flex-shrink-0">
-          <h2 className="text-[11px] font-semibold text-black">
+          <h2 className="text-xs font-semibold text-black">
             Operational Information
           </h2>
         </div>
@@ -142,7 +142,7 @@ export default function StepTwoBusinessOperations({
         <div className="px-3 py-4 space-y-4 flex-1 overflow-y-auto">
           {/* Primary Business Address */}
           <div>
-            <label className="block text-[9px] font-medium text-black mb-1.5">
+            <label className="block text-xs font-medium text-black mb-1.5">
               Primary Business Address
             </label>
             <textarea
@@ -154,17 +154,17 @@ export default function StepTwoBusinessOperations({
                 })
               }
               rows={2}
-              className="w-full h-[53px] px-2.5 py-2 text-[11px] border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] text-black placeholder:text-[#9c9c9c] resize-none"
+              className="w-full h-[53px] px-2.5 py-2 text-xs border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] text-black placeholder:text-[#9c9c9c] resize-none"
             />
           </div>
 
           {/* Warehouse Location */}
           <div>
             <div className="flex items-center justify-between mb-1.5">
-              <label className="block text-[9px] font-medium text-black">
+              <label className="block text-xs font-medium text-black">
                 Warehouse Location
               </label>
-              <button className="text-[9px] font-medium text-black">
+              <button className="text-xs font-medium text-black">
                 + Add
               </button>
             </div>
@@ -177,13 +177,13 @@ export default function StepTwoBusinessOperations({
                   warehouseLocation: e.target.value,
                 })
               }
-              className="w-full h-[33px] px-2.5 text-[11px] border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] text-[#898989] placeholder:text-[#898989]"
+              className="w-full h-[33px] px-2.5 text-xs border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] text-[#898989] placeholder:text-[#898989]"
             />
           </div>
 
           {/* Business Phone */}
           <div>
-            <label className="block text-[9px] font-medium text-black mb-1.5">
+            <label className="block text-xs font-medium text-black mb-1.5">
               Business Phone
             </label>
             <input
@@ -195,13 +195,13 @@ export default function StepTwoBusinessOperations({
                   businessPhone: e.target.value,
                 })
               }
-              className="w-full h-[33px] px-2.5 text-[11px] border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] text-black placeholder:text-[#9c9c9c]"
+              className="w-full h-[33px] px-2.5 text-xs border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] text-black placeholder:text-[#9c9c9c]"
             />
           </div>
 
           {/* Business Email */}
           <div>
-            <label className="block text-[9px] font-medium text-black mb-1.5">
+            <label className="block text-xs font-medium text-black mb-1.5">
               Business Email
             </label>
             <input
@@ -213,7 +213,7 @@ export default function StepTwoBusinessOperations({
                   businessEmail: e.target.value,
                 })
               }
-              className="w-full h-[33px] px-2.5 text-[11px] border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] text-black placeholder:text-[#9c9c9c]"
+              className="w-full h-[33px] px-2.5 text-xs border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] text-black placeholder:text-[#9c9c9c]"
             />
           </div>
         </div>

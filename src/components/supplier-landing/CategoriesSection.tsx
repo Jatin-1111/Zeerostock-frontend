@@ -38,11 +38,11 @@ export default function CategoriesSection() {
       <div className="max-w-[880px] mx-auto">
         {/* Heading Section */}
         <div className="text-center mb-[57px]">
-          <h2 className="text-[26px] leading-[35px] font-medium text-[#0d1b2a] mb-[7px]">
+          <h2 className="text-2xl leading-snug font-medium text-[#0d1b2a] mb-[7px]">
             <span className="text-[#2ec096]">High Demand</span> Inventory
             Categories
           </h2>
-          <p className="text-[12px] font-semibold text-[#9c9c9c]">
+          <p className="text-sm font-semibold text-[#9c9c9c]">
             Our platform has active buyers seeking these types of surplus
             inventory right now.
           </p>
@@ -56,19 +56,19 @@ export default function CategoriesSection() {
               className="bg-[#eeffef] rounded-[20px] shadow-[0px_0px_10px_0px_rgba(24,181,34,0.5)] p-[15px] pb-[22px] relative h-[93px] max-w-[95%] overflow-visible"
             >
               {/* Category Title */}
-              <h3 className="text-[13px] leading-normal font-semibold text-[#022778] mb-[12px]">
+              <h3 className="text-sm leading-normal font-semibold text-[#022778] mb-[12px]">
                 {category.name}
               </h3>
 
               {/* Demand Badge - Positioned to top right */}
               <div className="absolute top-[17px] right-[15px] bg-[#2aae7a] rounded-[40px] px-[6px] py-[1px]">
-                <p className="text-[7px] leading-normal font-medium text-white whitespace-nowrap">
+                <p className="text-xs leading-normal font-medium text-white whitespace-nowrap">
                   {category.demand}
                 </p>
               </div>
 
               {/* Description Text */}
-              <p className="text-[7px] leading-normal font-medium text-[#727272]">
+              <p className="text-xs leading-normal font-medium text-[#727272]">
                 <span className="inline">{category.subtitle}</span>{" "}
                 <span className="inline">{category.description}</span>
               </p>

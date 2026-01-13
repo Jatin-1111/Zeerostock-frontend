@@ -20,17 +20,17 @@ export default function Footer() {
                   className="h-[87px] sm:h-[60px] md:h-[85px] lg:h-[105px]"
                 />
               </Link>
-              <p className="text-[10.5px] sm:text-[10.5px] leading-normal text-[#d0d0d0] text-center sm:text-left hidden sm:block">
+              <p className="text-xs sm:text-xs leading-normal text-[#d0d0d0] text-center sm:text-left hidden sm:block">
                 Turning idle inventory into opportunity.
               </p>
             </div>
 
             {/* Company Links */}
             <div className="flex flex-col gap-[13.5px] sm:gap-[18px]">
-              <h3 className="text-[16px] sm:text-[15px] leading-normal font-medium text-white">
+              <h3 className="text-lg sm:text-base leading-normal font-medium text-white">
                 Company
               </h3>
-              <div className="flex flex-col gap-1.5 sm:gap-[5px] text-[13px] sm:text-[10.5px] leading-6 sm:leading-[24px] text-[#d0d0d0]">
+              <div className="flex flex-col gap-1.5 sm:gap-[5px] text-sm sm:text-xs leading-normal text-[#d0d0d0]">
                 <Link
                   href="/about"
                   className="hover:text-white transition-colors"
@@ -48,10 +48,10 @@ export default function Footer() {
 
             {/* Policy Links */}
             <div className="flex flex-col gap-[13.5px] sm:gap-[18px]">
-              <h3 className="text-[16px] sm:text-[15px] leading-normal font-medium text-white">
+              <h3 className="text-lg sm:text-base leading-normal font-medium text-white">
                 Policy
               </h3>
-              <div className="flex flex-col gap-1.5 sm:gap-[5px] text-[13px] sm:text-[10.5px] leading-6 sm:leading-[24px] text-[#d0d0d0]">
+              <div className="flex flex-col gap-1.5 sm:gap-[5px] text-sm sm:text-xs leading-normal text-[#d0d0d0]">
                 <Link
                   href="/terms-conditions"
                   className="hover:text-white transition-colors"
@@ -69,10 +69,10 @@ export default function Footer() {
 
             {/* Quick Links & Support Combined */}
             <div className="flex flex-col gap-[13.5px] sm:gap-[18px]">
-              <h3 className="text-[16px] sm:text-[15px] leading-normal font-medium text-white">
+              <h3 className="text-lg sm:text-base leading-normal font-medium text-white">
                 Ouick Links
               </h3>
-              <div className="flex flex-col gap-1.5 sm:gap-[5px] text-[13px] sm:text-[10.5px] leading-6 sm:leading-[24px] text-[#d0d0d0]">
+              <div className="flex flex-col gap-1.5 sm:gap-[5px] text-sm sm:text-xs leading-normal text-[#d0d0d0]">
                 <Link
                   href="/for-buyer"
                   className="hover:text-white transition-colors"
@@ -102,7 +102,7 @@ export default function Footer() {
 
             {/* Newsletter Signup */}
             <div className="flex flex-col gap-[18px]">
-              <h3 className="text-[20px] sm:text-[15px] leading-normal font-medium text-white">
+              <h3 className="text-xl sm:text-base leading-normal font-medium text-white">
                 Join Our Network
               </h3>
               <div className="flex flex-col gap-3">
@@ -111,7 +111,7 @@ export default function Footer() {
                   placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full h-[52px] sm:h-[37.5px] bg-[#1f2937] border-[0.5px] sm:border border-[#8f8f8f] rounded-xl px-3 sm:px-3 text-[15px] sm:text-[11.25px] leading-[22px] text-[#696969] placeholder:text-[#696969] focus:outline-none focus:border-[#2aae7a]"
+                  className="w-full h-[52px] sm:h-[37.5px] bg-[#1f2937] border-[0.5px] sm:border border-[#8f8f8f] rounded-xl px-3 sm:px-3 text-base sm:text-xs leading-normal text-[#696969] placeholder:text-[#696969] focus:outline-none focus:border-[#2aae7a]"
                 />
                 <button
                   onClick={() => {
@@ -122,7 +122,7 @@ export default function Footer() {
                       setEmail("");
                     }
                   }}
-                  className="w-full h-[52px] sm:h-[37.5px] bg-[#2aae7a] text-white text-[13.5px] sm:text-[13.5px] leading-[22px] font-medium rounded-xl hover:bg-[#2aae7a]/90 transition-colors flex items-center justify-center"
+                  className="w-full h-[52px] sm:h-[37.5px] bg-[#2aae7a] text-white text-sm font-medium rounded-xl hover:bg-[#2aae7a]/90 transition-colors flex items-center justify-center"
                 >
                   <svg
                     className="w-[30px] h-[30px] sm:hidden"
@@ -203,7 +203,7 @@ export default function Footer() {
           <div className="w-full h-px bg-gray-600 my-[18px]" />
 
           {/* Copyright */}
-          <p className="text-[14px] sm:text-[11.25px] leading-6 sm:leading-[24px] text-[#d0d0d0] text-center">
+          <p className="text-base sm:text-xs leading-normal text-[#d0d0d0] text-center">
             © 2025 Zeerostock Ventures. All Rights Reserved.
           </p>
         </div>
@@ -211,7 +211,7 @@ export default function Footer() {
 
       {/* Bottom Disclaimer - Now with proper light background visibility */}
       <div className="max-w-[380px] sm:max-w-[500px] md:max-w-[675px] mx-auto px-4 sm:px-3 py-[18px]">
-        <p className="text-[10px] sm:text-[11.25px] leading-[20px] sm:leading-6 text-[#0d1b2a] text-center">
+        <p className="text-xs leading-normal text-[#0d1b2a] text-center">
           Zeerostock is a registered trademark. Our platform facilitates B2B
           transactions with industry-leading security and compliance standards.
           For enterprise solutions and partnership, contact our business

@@ -54,11 +54,11 @@ export default function ToolsSection() {
       <div className="max-w-[880px] mx-auto">
         {/* Heading Section */}
         <div className="text-center mb-[45px]">
-          <h2 className="text-[26px] leading-[35px] font-medium text-[#0d1b2a] mb-[7px]">
+          <h2 className="text-2xl leading-snug font-medium text-[#0d1b2a] mb-[7px]">
             Powerful Tools for{" "}
             <span className="text-[#2ec096]">Successful Selling</span>
           </h2>
-          <p className="text-[12px] font-semibold text-[#9c9c9c]">
+          <p className="text-sm font-semibold text-[#9c9c9c]">
             Everything you need to list, promote, and sell your surplus
             inventory efficiently.
           </p>
@@ -80,12 +80,12 @@ export default function ToolsSection() {
               </div>
 
               {/* Title */}
-              <h3 className="text-[11px] leading-[13px] font-semibold text-[#022778] mb-[10px]">
+              <h3 className="text-xs leading-tight font-semibold text-[#022778] mb-[10px]">
                 {tool.title}
               </h3>
 
               {/* Description */}
-              <p className="text-[8px] leading-[11px] font-semibold text-white">
+              <p className="text-xs leading-tight font-semibold text-white">
                 {tool.description}
               </p>
             </div>

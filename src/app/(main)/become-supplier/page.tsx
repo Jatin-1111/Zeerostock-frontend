@@ -365,12 +365,12 @@ export default function SupplierVerificationPage() {
             <Shield className="w-[30px] h-[30px] text-[#2aae7a]" />
           </div>
           <div className="ml-6">
-            <h1 className="text-[20px] font-semibold text-[#0d1b2a] leading-tight">
+            <h1 className="text-xl font-semibold text-[#0d1b2a] leading-tight">
               {isEditing
                 ? "Edit & Reapply for Verification"
                 : "Supplier Verification"}
             </h1>
-            <p className="text-[15px] font-medium text-[#9c9c9c] mt-0.5">
+            <p className="text-base font-medium text-[#9c9c9c] mt-0.5">
               {isEditing
                 ? "Update your information and resubmit for verification"
                 : "Complete verification to unlock premium features and build buyer trust"}
@@ -385,14 +385,14 @@ export default function SupplierVerificationPage() {
             <div className="flex items-center">
               <div className="flex flex-col items-center">
                 <span
-                  className={`text-[8px] font-semibold mb-1 ${
+                  className={`text-xs font-semibold mb-1 ${
                     currentStep >= 1 ? "text-[#2aae7a]" : "text-[#dfdfdf]"
                   }`}
                 >
                   Step 1
                 </span>
                 <div
-                  className={`w-[30px] h-[30px] rounded-full flex items-center justify-center font-semibold text-[12px] ${
+                  className={`w-[30px] h-[30px] rounded-full flex items-center justify-center font-semibold text-sm ${
                     currentStep >= 1
                       ? "bg-[#2aae7a] text-white"
                       : "bg-[#dfdfdf] text-[#8d8d8d]"
@@ -403,7 +403,7 @@ export default function SupplierVerificationPage() {
               </div>
               <div className="ml-3 text-left max-w-[100px]">
                 <div
-                  className={`text-[12px] font-semibold leading-tight ${
+                  className={`text-sm font-semibold leading-tight ${
                     currentStep >= 1 ? "text-[#2aae7a]" : "text-[#bebebe]"
                   }`}
                 >
@@ -423,14 +423,14 @@ export default function SupplierVerificationPage() {
             <div className="flex items-center">
               <div className="flex flex-col items-center">
                 <span
-                  className={`text-[8px] font-semibold mb-1 ${
+                  className={`text-xs font-semibold mb-1 ${
                     currentStep >= 2 ? "text-[#2aae7a]" : "text-[#dfdfdf]"
                   }`}
                 >
                   Step 2
                 </span>
                 <div
-                  className={`w-[30px] h-[30px] rounded-full flex items-center justify-center font-semibold text-[12px] ${
+                  className={`w-[30px] h-[30px] rounded-full flex items-center justify-center font-semibold text-sm ${
                     currentStep >= 2
                       ? "bg-[#2aae7a] text-white"
                       : "bg-[#dfdfdf] text-[#8d8d8d]"
@@ -441,7 +441,7 @@ export default function SupplierVerificationPage() {
               </div>
               <div className="ml-3 text-left max-w-[90px]">
                 <div
-                  className={`text-[12px] font-semibold leading-tight ${
+                  className={`text-sm font-semibold leading-tight ${
                     currentStep >= 2 ? "text-[#2aae7a]" : "text-[#bebebe]"
                   }`}
                 >
@@ -461,14 +461,14 @@ export default function SupplierVerificationPage() {
             <div className="flex items-center">
               <div className="flex flex-col items-center">
                 <span
-                  className={`text-[8px] font-semibold mb-1 ${
+                  className={`text-xs font-semibold mb-1 ${
                     currentStep >= 3 ? "text-[#2aae7a]" : "text-[#dfdfdf]"
                   }`}
                 >
                   Step 3
                 </span>
                 <div
-                  className={`w-[30px] h-[30px] rounded-full flex items-center justify-center font-semibold text-[12px] ${
+                  className={`w-[30px] h-[30px] rounded-full flex items-center justify-center font-semibold text-sm ${
                     currentStep >= 3
                       ? "bg-[#2aae7a] text-white"
                       : "bg-[#dfdfdf] text-[#8d8d8d]"
@@ -479,7 +479,7 @@ export default function SupplierVerificationPage() {
               </div>
               <div className="ml-3 text-left max-w-[78px]">
                 <div
-                  className={`text-[12px] font-semibold leading-tight ${
+                  className={`text-sm font-semibold leading-tight ${
                     currentStep >= 3 ? "text-[#2aae7a]" : "text-[#bebebe]"
                   }`}
                 >
@@ -520,7 +520,7 @@ export default function SupplierVerificationPage() {
                       setCurrentStep(1);
                     }}
                     disabled={submitting}
-                    className="px-4 py-1.5 border-2 border-red-600 text-red-600 text-[13px] font-medium hover:bg-red-50 disabled:border-gray-300 disabled:text-gray-400 disabled:cursor-not-allowed rounded"
+                    className="px-4 py-1.5 border-2 border-red-600 text-red-600 text-sm font-medium hover:bg-red-50 disabled:border-gray-300 disabled:text-gray-400 disabled:cursor-not-allowed rounded"
                   >
                     Cancel
                   </button>
@@ -528,7 +528,7 @@ export default function SupplierVerificationPage() {
                 <button
                   onClick={handlePrevious}
                   disabled={currentStep === 1 || submitting}
-                  className={`px-4 py-1.5 text-[13px] font-medium rounded ${
+                  className={`px-4 py-1.5 text-sm font-medium rounded ${
                     currentStep === 1 || submitting
                       ? "text-gray-400 cursor-not-allowed"
                       : "text-gray-900 cursor-pointer"
@@ -541,7 +541,7 @@ export default function SupplierVerificationPage() {
                 <button
                   onClick={handleNext}
                   disabled={submitting}
-                  className="px-5 py-2 bg-[#1e3a8a] text-white text-[13px] font-medium hover:bg-[#1e3a8a]/90 disabled:bg-gray-400 disabled:cursor-not-allowed rounded-[7px] flex items-center gap-1.5"
+                  className="px-5 py-2 bg-[#1e3a8a] text-white text-sm font-medium hover:bg-[#1e3a8a]/90 disabled:bg-gray-400 disabled:cursor-not-allowed rounded-[7px] flex items-center gap-1.5"
                 >
                   <span>Save & Continue</span>
                   <svg
@@ -561,14 +561,14 @@ export default function SupplierVerificationPage() {
                       /* Preview logic */
                     }}
                     disabled={submitting}
-                    className="px-4 py-1.5 border-1 border-[#9C9C9C] text-gray-900 text-[13px] font-medium hover:bg-gray-100 disabled:text-gray-400 disabled:border-gray-300 disabled:cursor-not-allowed rounded"
+                    className="px-4 py-1.5 border-1 border-[#9C9C9C] text-gray-900 text-sm font-medium hover:bg-gray-100 disabled:text-gray-400 disabled:border-gray-300 disabled:cursor-not-allowed rounded"
                   >
                     Preview
                   </button>
                   <button
                     onClick={handleSubmit}
                     disabled={submitting}
-                    className="px-5 py-2 bg-[#2AAE7A] text-white text-[13px] font-medium hover:bg-[#1e3a8a]/90 disabled:bg-gray-400 disabled:cursor-not-allowed rounded-[7px] flex items-center gap-1.5"
+                    className="px-5 py-2 bg-[#2AAE7A] text-white text-sm font-medium hover:bg-[#1e3a8a]/90 disabled:bg-gray-400 disabled:cursor-not-allowed rounded-[7px] flex items-center gap-1.5"
                   >
                     {submitting ? (
                       <>

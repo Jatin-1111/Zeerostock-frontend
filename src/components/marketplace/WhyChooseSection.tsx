@@ -89,10 +89,10 @@ export default function WhyChooseSection() {
           <div key={index} className="flex flex-col items-center w-42 gap-3">
             <div className="mb-1.5">{reason.icon}</div>
             <div className="flex flex-col gap-1.5 text-center">
-              <h3 className="font-medium text-[14px] text-[#1a1a1a] m-0">
+              <h3 className="font-medium text-base text-[#1a1a1a] m-0">
                 {reason.title}
               </h3>
-              <p className="text-[10.5px] text-gray-600 m-0">
+              <p className="text-xs text-gray-600 m-0">
                 {reason.description}
               </p>
             </div>

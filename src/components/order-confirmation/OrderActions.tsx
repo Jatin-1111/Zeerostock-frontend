@@ -12,7 +12,7 @@ export default function OrderActions() {
   return (
     <div className="bg-white rounded-[15px] p-[23px] mb-5 shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)]">
       {/* Title */}
-      <h3 className="font-medium text-[#0d1b2a] text-[18px] leading-normal mb-6">
+      <h3 className="font-medium text-[#0d1b2a] text-xl leading-normal mb-6">
         Order Actions
       </h3>
 
@@ -39,7 +39,7 @@ export default function OrderActions() {
                 />
               </div>
               <span
-                className={`font-medium text-[15px] leading-[17px] ${
+                className={`font-medium text-base leading-normal ${
                   isHighlighted ? "text-[#1e3a8a]" : "text-[#9c9c9c]"
                 }`}
               >

@@ -54,7 +54,7 @@ export default function ProgressSteps({ currentStep }: ProgressStepsProps) {
                   )}
                 </svg>
               </div>
-              <span className="mt-1 text-[7px] font-medium text-[#0d1b2a]">
+              <span className="mt-1 text-xs font-medium text-[#0d1b2a]">
                 {step.label}
               </span>
             </div>

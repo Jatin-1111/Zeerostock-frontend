@@ -23,8 +23,8 @@ export function InfoCard({
 }) {
   return (
     <div className="bg-[#f6f6f6] rounded-[8px] px-[11px] py-[9px] relative">
-      <p className="font-medium text-[9px] text-[#9c9c9c] mb-[8px]">{label}</p>
-      <p className="font-medium text-[11px] text-[#0d1b2a]">{value}</p>
+      <p className="font-medium text-xs text-[#9c9c9c] mb-[8px]">{label}</p>
+      <p className="font-medium text-xs text-[#0d1b2a]">{value}</p>
       {verified && (
         <div className="absolute right-[11px] top-1/2 -translate-y-1/2">
           <CheckCircle2 className="w-[20px] h-[20px] text-[#2aae7a]" />
@@ -51,34 +51,30 @@ export function DocumentRowNew({
     <div className="bg-[#f6f6f6] rounded-[8px] px-5 py-[13px] flex items-center justify-between">
       <div>
         <div className="flex items-center gap-2">
-          <p className="font-medium text-[14px] text-[#0d1b2a]">{label}</p>
+          <p className="font-medium text-base text-[#0d1b2a]">{label}</p>
           {optional && (
-            <span className="font-medium text-[14px] text-[#9c9c9c]">
+            <span className="font-medium text-base text-[#9c9c9c]">
               (Optional)
             </span>
           )}
         </div>
-        <p className="font-medium text-[12px] text-[#9c9c9c] mt-[9px]">
-          {date}
-        </p>
+        <p className="font-medium text-sm text-[#9c9c9c] mt-[9px]">{date}</p>
       </div>
 
       {status === "verified" || status === "approved" ? (
         <div className="bg-[#eeffef] px-[10px] py-[5px] rounded-[15px] shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)] flex items-center gap-[5px]">
           <CheckCircle2 className="w-[18px] h-[18px] text-[#2aae7a]" />
-          <span className="font-medium text-[14px] text-[#2aae7a]">
-            Verified
-          </span>
+          <span className="font-medium text-base text-[#2aae7a]">Verified</span>
         </div>
       ) : status === "pending" || status === "under_review" ? (
         <div className="bg-[#fff3cf] px-[10px] py-[5px] rounded-[15px] shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)] flex items-center gap-[5px]">
           <Clock className="w-[18px] h-[18px] text-[#fc3]" />
-          <span className="font-medium text-[14px] text-[#fc3]">Pending</span>
+          <span className="font-medium text-base text-[#fc3]">Pending</span>
         </div>
       ) : (
         <button
           onClick={onUpload}
-          className="bg-[#1e3a8a] hover:bg-[#152e6b] text-white font-semibold text-[16px] px-5 py-[10px] rounded-[8px] flex items-center gap-[8px]"
+          className="bg-[#1e3a8a] hover:bg-[#152e6b] text-white font-semibold text-lg px-5 py-[10px] rounded-[8px] flex items-center gap-[8px]"
         >
           <Upload className="w-5 h-5" />
           Upload
@@ -101,10 +97,10 @@ function BenefitItem({
     <div className="flex items-start gap-0 h-[61px]">
       <div className="shrink-0 w-[19px] h-[19px] mt-[21px]">{icon}</div>
       <div className="ml-8">
-        <h4 className="font-semibold text-[15px] text-black mb-1.5 leading-tight">
+        <h4 className="font-semibold text-base text-black mb-1.5 leading-tight">
           {title}
         </h4>
-        <p className="font-medium text-[9px] text-[#9c9c9c] leading-[14px] max-w-[206px]">
+        <p className="font-medium text-xs text-[#9c9c9c] leading-tight max-w-[206px]">
           {description}
         </p>
       </div>
@@ -127,10 +123,8 @@ function ImpactCard({
     <div
       className={`${bgColor} rounded-[15px] h-[80px] flex flex-col items-center justify-center`}
     >
-      <p className={`font-semibold text-[26px] ${textColor} mb-[5px]`}>
-        {value}
-      </p>
-      <p className={`font-semibold text-[13px] ${textColor}`}>{label}</p>
+      <p className={`font-semibold text-2xl ${textColor} mb-[5px]`}>{value}</p>
+      <p className={`font-semibold text-sm ${textColor}`}>{label}</p>
     </div>
   );
 }
@@ -143,7 +137,7 @@ export function VerificationBenefitsSidebar() {
       {/* Verification Benefits Card */}
       <div className="bg-[#f9fffd] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] rounded-[13px] h-[297px] overflow-hidden">
         <div className="px-5 pt-4 pb-3">
-          <h3 className="font-semibold text-[16px] text-black">
+          <h3 className="font-semibold text-lg text-black">
             Verification Benefits
           </h3>
         </div>
@@ -278,7 +272,7 @@ export function VerificationBenefitsSidebar() {
 
       {/* Verification Impact Card */}
       <div className="bg-white shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] rounded-[15px] p-[30px] mt-[23px]">
-        <h3 className="font-semibold text-[18px] text-[#0d1b2a] mb-[55px]">
+        <h3 className="font-semibold text-xl text-[#0d1b2a] mb-[55px]">
           Verification Impact
         </h3>
 
@@ -306,21 +300,21 @@ export function VerificationBenefitsSidebar() {
 
       {/* Need Help Card */}
       <div className="bg-white shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] rounded-[15px] p-[30px] mt-[23px]">
-        <h3 className="font-semibold text-[18px] text-[#0d1b2a] mb-5">
+        <h3 className="font-semibold text-xl text-[#0d1b2a] mb-5">
           Need Help?
         </h3>
-        <p className="font-medium text-[18px] text-[#9c9c9c] leading-normal mb-[60px]">
+        <p className="font-medium text-xl text-[#9c9c9c] leading-normal mb-[60px]">
           Our verification team is here to assist you through the process
         </p>
 
         <Link href={"/helpdesk"}>
-          <button className="w-full bg-[#1e3a8a] hover:bg-[#152e6b] text-white font-semibold text-[16px] py-[17px] rounded-[8px] flex items-center justify-center gap-[8px] mb-[10px]">
+          <button className="w-full bg-[#1e3a8a] hover:bg-[#152e6b] text-white font-semibold text-lg py-[17px] rounded-[8px] flex items-center justify-center gap-[8px] mb-[10px]">
             <Phone className="w-5 h-5" />
             Contact Support
           </button>
         </Link>
         <Link href="/help-support">
-          <button className="w-full bg-white border border-[#9c9c9c] text-[#9c9c9c] font-semibold text-[12px] py-[13px] rounded-[8px] flex items-center justify-center gap-[8px]">
+          <button className="w-full bg-white border border-[#9c9c9c] text-[#9c9c9c] font-semibold text-sm py-[13px] rounded-[8px] flex items-center justify-center gap-[8px]">
             <FileText className="w-4 h-4" />
             View Guidelines
           </button>

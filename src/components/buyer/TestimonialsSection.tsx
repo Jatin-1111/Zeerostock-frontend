@@ -5,15 +5,15 @@ export default function TestimonialsSection() {
     <section className="bg-[#EEFFEF] py-[27px] px-[5px] md:py-[43px] md:px-[21px] mx-auto">
       <div className="w-full max-w-[1600px] mx-auto">
         <div className="text-center mb-[21px] md:mb-[43px]">
-          <p className="text-[8px] md:text-[9px] font-semibold text-[#0D1B2A] mb-[3px] tracking-wide uppercase">
+          <p className="text-xs md:text-xs font-semibold text-[#0D1B2A] mb-[3px] tracking-wide uppercase">
             Success Stories
           </p>
-          <h2 className="text-[16px] md:text-[27px] font-bold text-[#0D1B2A] mb-[5px] md:mb-[11px] leading-tight">
+          <h2 className="text-lg md:text-2xl font-bold text-[#0D1B2A] mb-[5px] md:mb-[11px] leading-tight">
             Real
             <span className="text-[#2AAE7A]"> Results </span>
             from Real <span className="text-[#2AAE7A]"> Buyers </span>
           </h2>
-          <p className="text-[11px] md:text-[13px] text-gray-600">
+          <p className="text-xs md:text-sm text-gray-600">
             See how procurement teams are achieving significant cost savings
           </p>
         </div>
@@ -33,13 +33,13 @@ export default function TestimonialsSection() {
               matching is incredible.&quot;
             </p>
             <div className="border-t border-gray-200 pt-[8px] mt-auto">
-              <p className="font-bold text-[#2AAE7A] text-[11px] md:text-[12px]">
+              <p className="font-bold text-[#2AAE7A] text-xs md:text-sm">
                 $3.2M annual savings
               </p>
-              <p className="text-[8px] md:text-[9px] text-gray-900 font-semibold mt-[3px] md:mt-[5px]">
+              <p className="text-xs md:text-xs text-gray-900 font-semibold mt-[3px] md:mt-[5px]">
                 Automotive Supplier
               </p>
-              <p className="text-[8px] md:text-[9px] text-gray-500">
+              <p className="text-xs md:text-xs text-gray-500">
                 California, USA
               </p>
             </div>
@@ -54,18 +54,18 @@ export default function TestimonialsSection() {
                 />
               ))}
             </div>
-            <p className="text-gray-700 text-[9px] md:text-[11px] mb-[11px] md:mb-[16px] font-medium">
+            <p className="text-gray-700 text-xs md:text-xs mb-[11px] md:mb-[16px] font-medium">
               &quot;Finally, a reliable platform for sourcing quality OEM
               surplus parts. The platform is a game changer.&quot;
             </p>
             <div className="border-t border-gray-200 pt-[8px] mt-auto">
-              <p className="font-bold text-[#2AAE7A] text-[11px] md:text-[12px]">
+              <p className="font-bold text-[#2AAE7A] text-xs md:text-sm">
                 $890K annual savings
               </p>
-              <p className="text-[8px] md:text-[9px] text-gray-900 font-semibold mt-[3px] md:mt-[5px]">
+              <p className="text-xs md:text-xs text-gray-900 font-semibold mt-[3px] md:mt-[5px]">
                 Electronics Manufacturer
               </p>
-              <p className="text-[8px] md:text-[9px] text-gray-500">
+              <p className="text-xs md:text-xs text-gray-500">
                 Singapore
               </p>
             </div>
@@ -80,18 +80,18 @@ export default function TestimonialsSection() {
                 />
               ))}
             </div>
-            <p className="text-gray-700 text-[9px] md:text-[11px] mb-[11px] md:mb-[16px] font-medium">
+            <p className="text-gray-700 text-xs md:text-xs mb-[11px] md:mb-[16px] font-medium">
               &quot;The verification process gives us complete peace of mind.
               We&apos;ve reduced our procurement time significantly.&quot;
             </p>
             <div className="border-t border-gray-200 pt-[8px] mt-auto">
-              <p className="font-bold text-[#2AAE7A] text-[11px] md:text-[12px]">
+              <p className="font-bold text-[#2AAE7A] text-xs md:text-sm">
                 $2.1M cost reduction
               </p>
-              <p className="text-[8px] md:text-[9px] text-gray-900 font-semibold mt-[3px] md:mt-[5px]">
+              <p className="text-xs md:text-xs text-gray-900 font-semibold mt-[3px] md:mt-[5px]">
                 Aerospace Supplier
               </p>
-              <p className="text-[8px] md:text-[9px] text-gray-500">
+              <p className="text-xs md:text-xs text-gray-500">
                 Texas, USA
               </p>
             </div>

@@ -42,7 +42,7 @@ export const CustomDropdown: React.FC<CustomDropdownProps> = ({
 
   return (
     <div className={`custom-dropdown relative ${className}`}>
-      <label className="mb-[6px] block text-[8px] font-medium text-[#0d1b2a]">
+      <label className="mb-[6px] block text-xs font-medium text-[#0d1b2a]">
         {label}
         {required && "*"}
       </label>
@@ -50,7 +50,7 @@ export const CustomDropdown: React.FC<CustomDropdownProps> = ({
         type="button"
         onClick={onToggle}
         disabled={disabled}
-        className="h-[28px] w-full rounded-[4px] border border-[#e5e5e5] px-[8px] text-left text-[7.33px] text-black focus:border-[#2AAE7A] focus:outline-none focus:ring-1 focus:ring-[#2AAE7A] flex items-center justify-between disabled:bg-gray-50"
+        className="h-[28px] w-full rounded-[4px] border border-[#e5e5e5] px-[8px] text-left text-xs text-black focus:border-[#2AAE7A] focus:outline-none focus:ring-1 focus:ring-[#2AAE7A] flex items-center justify-between disabled:bg-gray-50"
       >
         <span className={!value ? "text-[#9c9c9c]" : ""}>
           {selectedOption ? selectedOption.label : placeholder}
@@ -70,7 +70,7 @@ export const CustomDropdown: React.FC<CustomDropdownProps> = ({
                 key={option.value}
                 type="button"
                 onClick={() => onSelect(name, option.value)}
-                className="w-full px-[8px] py-[5.33px] text-left text-[7.33px] text-black hover:bg-[#f0fdf4]"
+                className="w-full px-[8px] py-[5.33px] text-left text-xs text-black hover:bg-[#f0fdf4]"
               >
                 {option.label}
               </button>
@@ -79,7 +79,7 @@ export const CustomDropdown: React.FC<CustomDropdownProps> = ({
         )}
       </AnimatePresence>
       {error && (
-        <p className="mt-[2.67px] text-[6.67px] text-red-500">{error}</p>
+        <p className="mt-[2.67px] text-xs text-red-500">{error}</p>
       )}
     </div>
   );

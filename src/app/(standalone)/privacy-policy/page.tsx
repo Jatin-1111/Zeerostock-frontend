@@ -28,10 +28,10 @@ export default function PrivacyPolicyPage() {
       {/* Header Section */}
       <div className="bg-white border-b border-gray-200 py-12">
         <div className="mx-auto px-8">
-          <h1 className="text-[40px] font-bold text-gray-900 mb-3">
+          <h1 className="text-3xl font-bold text-gray-900 mb-3">
             Privacy Policy
           </h1>
-          <p className="text-[16px] text-gray-600">
+          <p className="text-lg text-gray-600">
             Understand how Zeerostock collects, uses, stores and protects your
             data
           </p>
@@ -42,11 +42,11 @@ export default function PrivacyPolicyPage() {
       <div className="bg-white border-b border-gray-200">
         <div className="mx-auto px-8 py-6">
           <div className="bg-white border border-gray-300 rounded-lg p-4">
-            <p className="text-[13px] text-gray-900">
+            <p className="text-sm text-gray-900">
               <span className="font-semibold">Last Updated:</span> October 28,
               2024
             </p>
-            <p className="text-[13px] text-gray-700">
+            <p className="text-sm text-gray-700">
               <span className="font-semibold">Applies To:</span> Buyers,
               Suppliers and Partners on Zeerostock
             </p>
@@ -60,7 +60,7 @@ export default function PrivacyPolicyPage() {
           {/* Left Sidebar - On This Page */}
           <div className="w-[300px] shrink-0">
             <div className="sticky top-8 border border-gray-300 rounded-lg p-4">
-              <h3 className="text-[16px] font-semibold text-gray-900 mb-3 pb-3 border-b border-gray-300">
+              <h3 className="text-lg font-semibold text-gray-900 mb-3 pb-3 border-b border-gray-300">
                 On This Page
               </h3>
               <nav className="space-y-1">
@@ -68,7 +68,7 @@ export default function PrivacyPolicyPage() {
                   <button
                     key={section.id}
                     onClick={() => scrollToSection(section.id)}
-                    className="w-full text-left px-2 py-1.5 text-[13px] text-gray-700 hover:bg-gray-100 rounded transition-colors"
+                    className="w-full text-left px-2 py-1.5 text-sm text-gray-700 hover:bg-gray-100 rounded transition-colors"
                   >
                     {section.label}
                   </button>
@@ -103,10 +103,10 @@ export default function PrivacyPolicyPage() {
                     />
                   </svg>
                 </div>
-                <h3 className="text-[16px] font-semibold text-gray-900 mb-2">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   Transparency
                 </h3>
-                <p className="text-[13px] text-gray-600">
+                <p className="text-sm text-gray-600">
                   We are clear about what data we collect and why
                 </p>
               </div>
@@ -127,10 +127,10 @@ export default function PrivacyPolicyPage() {
                     />
                   </svg>
                 </div>
-                <h3 className="text-[16px] font-semibold text-gray-900 mb-2">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   Data Protection
                 </h3>
-                <p className="text-[13px] text-gray-600">
+                <p className="text-sm text-gray-600">
                   We are committed to safeguarding your personal and business
                   data
                 </p>
@@ -152,10 +152,10 @@ export default function PrivacyPolicyPage() {
                     />
                   </svg>
                 </div>
-                <h3 className="text-[16px] font-semibold text-gray-900 mb-2">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   Compliance
                 </h3>
-                <p className="text-[13px] text-gray-600">
+                <p className="text-sm text-gray-600">
                   We adhere to global standards like GDPR to protect your rights
                 </p>
               </div>
@@ -176,10 +176,10 @@ export default function PrivacyPolicyPage() {
                     />
                   </svg>
                 </div>
-                <h3 className="text-[16px] font-semibold text-gray-900 mb-2">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   User Control
                 </h3>
-                <p className="text-[13px] text-gray-600">
+                <p className="text-sm text-gray-600">
                   You have full power over your data with easy-to-use tools
                 </p>
               </div>
@@ -187,10 +187,10 @@ export default function PrivacyPolicyPage() {
 
             {/* Introduction Section */}
             <section id="introduction" className="space-y-6">
-              <h2 className="text-[28px] font-bold text-gray-900">
+              <h2 className="text-2xl font-bold text-gray-900">
                 Introduction
               </h2>
-              <p className="text-[15px] text-gray-700 leading-relaxed">
+              <p className="text-base text-gray-700 leading-relaxed">
                 Welcome to Zeerostock. We are committed to protecting your
                 privacy and ensuring transparency in how we use your data. This
                 Privacy Policy describes our practices concerning the
@@ -203,20 +203,20 @@ export default function PrivacyPolicyPage() {
               </p>
 
               <div className="space-y-4">
-                <h3 className="text-[20px] font-bold text-gray-900">
+                <h3 className="text-xl font-bold text-gray-900">
                   Information We Collect
                 </h3>
-                <p className="text-[15px] text-gray-700 leading-relaxed">
+                <p className="text-base text-gray-700 leading-relaxed">
                   To provide and improve our services, we collect several types
                   of information:
                 </p>
 
                 <div className="space-y-3">
                   <div>
-                    <h4 className="text-[16px] font-semibold text-gray-900 mb-1">
+                    <h4 className="text-lg font-semibold text-gray-900 mb-1">
                       Personal & Business Data
                     </h4>
-                    <p className="text-[15px] text-gray-700">
+                    <p className="text-base text-gray-700">
                       This includes your name, email, contact details, company
                       name, and role. UI enim ad minim veniam, quis nostrud
                       exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -224,10 +224,10 @@ export default function PrivacyPolicyPage() {
                     </p>
                   </div>
                   <div>
-                    <h4 className="text-[16px] font-semibold text-gray-900 mb-1">
+                    <h4 className="text-lg font-semibold text-gray-900 mb-1">
                       Transaction Data
                     </h4>
-                    <p className="text-[15px] text-gray-700">
+                    <p className="text-base text-gray-700">
                       Details about quotes, orders, payments, and transactions
                       on the platform. Duis aute irure dolor in reprehenderit in
                       voluptate velit esse cillum dolore eu fugiat nulla
@@ -238,10 +238,10 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-[20px] font-bold text-gray-900">
+                <h3 className="text-xl font-bold text-gray-900">
                   How We Use Your Information
                 </h3>
-                <p className="text-[15px] text-gray-700 leading-relaxed">
+                <p className="text-base text-gray-700 leading-relaxed">
                   Your data is used to operate, maintain, and enhance the
                   Zeerostock platform. This includes facilitating transactions,
                   personalizing your experience, and for analytics. Excepteur
@@ -251,10 +251,10 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-[20px] font-bold text-gray-900">
+                <h3 className="text-xl font-bold text-gray-900">
                   Data Sharing Policy
                 </h3>
-                <p className="text-[15px] text-gray-700 leading-relaxed">
+                <p className="text-base text-gray-700 leading-relaxed">
                   We do not sell your personal data. We may share information
                   with verified suppliers, logistics partners, and payment
                   processors to fulfill transactions. All third parties are
@@ -264,10 +264,10 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-[20px] font-bold text-gray-900">
+                <h3 className="text-xl font-bold text-gray-900">
                   Cookies & Tracking
                 </h3>
-                <p className="text-[15px] text-gray-700 leading-relaxed">
+                <p className="text-base text-gray-700 leading-relaxed">
                   We use cookies to improve functionality and for analytics. You
                   can manage your cookie preferences through your browser
                   settings. Sed do eiusmod tempor incididunt ut labore et dolore
@@ -277,10 +277,10 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-[20px] font-bold text-gray-900">
+                <h3 className="text-xl font-bold text-gray-900">
                   Data Security Measures
                 </h3>
-                <p className="text-[15px] text-gray-700 leading-relaxed">
+                <p className="text-base text-gray-700 leading-relaxed">
                   We implement robust security measures, including SSL
                   encryption and secure server architecture, to protect your
                   data from unauthorized access. However, no system is perfectly
@@ -290,10 +290,10 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-[20px] font-bold text-gray-900">
+                <h3 className="text-xl font-bold text-gray-900">
                   User Rights & Controls
                 </h3>
-                <p className="text-[15px] text-gray-700 leading-relaxed">
+                <p className="text-base text-gray-700 leading-relaxed">
                   You have the rights to access, modify, or delete your personal
                   information. You can also export your data or withdraw consent
                   for the use of any time by contacting our support team.
@@ -301,10 +301,10 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-[20px] font-bold text-gray-900">
+                <h3 className="text-xl font-bold text-gray-900">
                   Data Retention
                 </h3>
-                <p className="text-[15px] text-gray-700 leading-relaxed">
+                <p className="text-base text-gray-700 leading-relaxed">
                   We retain your data only for as long as necessary to provide
                   our services and comply with legal obligations. Specific
                   retention timelines are determined by the nature of the data
@@ -313,10 +313,10 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-[20px] font-bold text-gray-900">
+                <h3 className="text-xl font-bold text-gray-900">
                   Compliance & Certifications
                 </h3>
-                <p className="text-[15px] text-gray-700 leading-relaxed">
+                <p className="text-base text-gray-700 leading-relaxed">
                   Zeerostock is committed to global data protection standards.
                   We are compliant with GDPR and adhere to principles outlined
                   in SOC 2 standards to ensure the security and privacy of your
@@ -326,14 +326,14 @@ export default function PrivacyPolicyPage() {
 
               {/* Contact Information Box */}
               <div className="bg-white border border-gray-300 rounded-lg p-6 space-y-3">
-                <h4 className="text-[18px] font-bold text-gray-900">
+                <h4 className="text-xl font-bold text-gray-900">
                   Contact Information
                 </h4>
-                <p className="text-[14px] text-gray-700">
+                <p className="text-base text-gray-700">
                   For any questions or requests regarding your data, please
                   contact us.
                 </p>
-                <div className="text-[14px] text-gray-700 space-y-1">
+                <div className="text-base text-gray-700 space-y-1">
                   <p>
                     <span className="font-semibold">Email:</span>{" "}
                     privacy@zeerostock.com
@@ -352,18 +352,18 @@ export default function PrivacyPolicyPage() {
 
             {/* Question Box */}
             <div className="border border-gray-300 rounded-lg p-8 mt-12 bg-white">
-              <h3 className="text-[24px] font-bold text-gray-900 mb-2 text-center">
+              <h3 className="text-2xl font-bold text-gray-900 mb-2 text-center">
                 Have Questions About Your Privacy?
               </h3>
-              <p className="text-[14px] text-gray-600 mb-6 text-center">
+              <p className="text-base text-gray-600 mb-6 text-center">
                 Our team is here to help. Reach out to our support specialists
                 or consult our detailed guide on data requests.
               </p>
               <div className="flex items-center justify-center gap-4">
-                <button className="px-6 py-3 bg-gray-900 text-white text-[15px] font-semibold rounded-lg hover:bg-gray-800 transition-colors">
+                <button className="px-6 py-3 bg-gray-900 text-white text-base font-semibold rounded-lg hover:bg-gray-800 transition-colors">
                   Contact Support
                 </button>
-                <button className="px-6 py-3 border border-gray-900 text-gray-900 text-[15px] font-semibold rounded-lg hover:bg-gray-100 transition-colors">
+                <button className="px-6 py-3 border border-gray-900 text-gray-900 text-base font-semibold rounded-lg hover:bg-gray-100 transition-colors">
                   View Guide
                 </button>
               </div>

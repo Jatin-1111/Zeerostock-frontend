@@ -141,7 +141,7 @@ export default function AllProductsSection() {
       {/* Header with title and filters */}
       <div className="mb-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="font-semibold text-[24px] text-[#1a1a1a] m-0">
+          <h2 className="font-semibold text-2xl text-[#1a1a1a] m-0">
             All products
           </h2>
 
@@ -160,7 +160,7 @@ export default function AllProductsSection() {
                   if (!isCategoryOpen) setIsSortOpen(false);
                 }}
               >
-                <span className="text-[11px] text-[#787878] font-medium whitespace-nowrap">
+                <span className="text-xs text-[#787878] font-medium whitespace-nowrap">
                   {selectedCategory
                     ? selectedCategory
                     : `All Categories (${categories.length || 0})`}
@@ -189,7 +189,7 @@ export default function AllProductsSection() {
                   >
                     <motion.div
                       whileHover={{ backgroundColor: "#f3f4f6" }}
-                      className="px-3 py-1.5 cursor-pointer text-[11px] text-[#787878] font-medium"
+                      className="px-3 py-1.5 cursor-pointer text-xs text-[#787878] font-medium"
                       onClick={() => {
                         setSelectedCategory("");
                         setIsCategoryOpen(false);
@@ -201,7 +201,7 @@ export default function AllProductsSection() {
                       <motion.div
                         key={category.id}
                         whileHover={{ backgroundColor: "#f3f4f6" }}
-                        className="px-3 py-1.5 cursor-pointer text-[11px] text-[#787878] font-medium"
+                        className="px-3 py-1.5 cursor-pointer text-xs text-[#787878] font-medium"
                         onClick={() => {
                           setSelectedCategory(category.name);
                           setIsCategoryOpen(false);
@@ -228,7 +228,7 @@ export default function AllProductsSection() {
                   if (!isSortOpen) setIsCategoryOpen(false);
                 }}
               >
-                <span className="text-[11px] text-[#787878] font-medium whitespace-nowrap">
+                <span className="text-xs text-[#787878] font-medium whitespace-nowrap">
                   {sortOptions.find((opt) => opt.value === sortBy)?.label ||
                     "Relevance"}
                 </span>
@@ -258,7 +258,7 @@ export default function AllProductsSection() {
                       <motion.div
                         key={option.value}
                         whileHover={{ backgroundColor: "#f3f4f6" }}
-                        className="px-3 py-1.5 cursor-pointer text-[11px] text-[#787878] font-medium"
+                        className="px-3 py-1.5 cursor-pointer text-xs text-[#787878] font-medium"
                         onClick={() => {
                           setSortBy(option.value);
                           setIsSortOpen(false);
@@ -285,7 +285,7 @@ export default function AllProductsSection() {
                 strokeWidth={1.5}
               />
               <span
-                className={`text-[11px] font-medium ${
+                className={`text-xs font-medium ${
                   showFilters ? "text-[#1e3a8a]" : "text-[#787878]"
                 }`}
               >
@@ -322,13 +322,13 @@ export default function AllProductsSection() {
                 <div className="grid grid-cols-3 gap-6">
                   {/* Category Filter */}
                   <div>
-                    <label className="block text-[11px] font-semibold text-[#374151] mb-2">
+                    <label className="block text-xs font-semibold text-[#374151] mb-2">
                       Category
                     </label>
                     <select
                       value={selectedCategory}
                       onChange={(e) => setSelectedCategory(e.target.value)}
-                      className="w-full h-[36px] px-3 border border-[#d1d5db] rounded-[7px] text-[11px] text-[#374151] bg-white cursor-pointer appearance-none hover:border-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:ring-opacity-20 transition-all"
+                      className="w-full h-[36px] px-3 border border-[#d1d5db] rounded-[7px] text-xs text-[#374151] bg-white cursor-pointer appearance-none hover:border-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:ring-opacity-20 transition-all"
                     >
                       <option value="">All Categories</option>
                       {categories.map((cat) => (
@@ -341,7 +341,7 @@ export default function AllProductsSection() {
 
                   {/* Price Range */}
                   <div>
-                    <label className="block text-[11px] font-semibold text-[#374151] mb-2">
+                    <label className="block text-xs font-semibold text-[#374151] mb-2">
                       Price Range
                     </label>
                     <div className="flex items-center gap-2">
@@ -350,7 +350,7 @@ export default function AllProductsSection() {
                         placeholder="Min"
                         value={minPrice}
                         onChange={(e) => setMinPrice(e.target.value)}
-                        className="w-full h-[36px] px-3 border border-[#d1d5db] rounded-[7px] text-[11px] text-[#374151] placeholder:text-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:ring-opacity-20 transition-all"
+                        className="w-full h-[36px] px-3 border border-[#d1d5db] rounded-[7px] text-xs text-[#374151] placeholder:text-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:ring-opacity-20 transition-all"
                       />
                       <span className="text-[#9ca3af]">-</span>
                       <input
@@ -358,7 +358,7 @@ export default function AllProductsSection() {
                         placeholder="Max"
                         value={maxPrice}
                         onChange={(e) => setMaxPrice(e.target.value)}
-                        className="w-full h-[36px] px-3 border border-[#d1d5db] rounded-[7px] text-[11px] text-[#374151] placeholder:text-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:ring-opacity-20 transition-all"
+                        className="w-full h-[36px] px-3 border border-[#d1d5db] rounded-[7px] text-xs text-[#374151] placeholder:text-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:ring-opacity-20 transition-all"
                       />
                     </div>
                   </div>
@@ -369,7 +369,7 @@ export default function AllProductsSection() {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={clearFilters}
-                      className="flex-1 h-[36px] border border-[#d1d5db] rounded-[7px] text-[11px] font-medium text-[#374151] bg-white hover:bg-[#f9fafb] transition-colors"
+                      className="flex-1 h-[36px] border border-[#d1d5db] rounded-[7px] text-xs font-medium text-[#374151] bg-white hover:bg-[#f9fafb] transition-colors"
                     >
                       Clear All
                     </motion.button>
@@ -377,7 +377,7 @@ export default function AllProductsSection() {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={applyFilters}
-                      className="flex-1 h-[36px] bg-[#1e3a8a] rounded-[7px] text-[11px] font-medium text-white hover:bg-[#1e40af] transition-colors"
+                      className="flex-1 h-[36px] bg-[#1e3a8a] rounded-[7px] text-xs font-medium text-white hover:bg-[#1e40af] transition-colors"
                     >
                       Apply Filters
                     </motion.button>
@@ -391,14 +391,14 @@ export default function AllProductsSection() {
                   location !== "all") && (
                   <div className="mt-4 pt-4 border-t border-[#e5e7eb]">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="text-[10px] font-medium text-[#6b7280]">
+                      <span className="text-xs font-medium text-[#6b7280]">
                         Active Filters:
                       </span>
                       {selectedCategory && (
                         <motion.span
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
-                          className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#eff6ff] text-[#1e3a8a] rounded-full text-[10px] font-medium"
+                          className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#eff6ff] text-[#1e3a8a] rounded-full text-xs font-medium"
                         >
                           {selectedCategory}
                           <button
@@ -425,7 +425,7 @@ export default function AllProductsSection() {
                         <motion.span
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
-                          className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#eff6ff] text-[#1e3a8a] rounded-full text-[10px] font-medium"
+                          className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#eff6ff] text-[#1e3a8a] rounded-full text-xs font-medium"
                         >
                           ₹{minPrice || "0"} - ₹{maxPrice || "∞"}
                           <button
@@ -455,7 +455,7 @@ export default function AllProductsSection() {
                         <motion.span
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
-                          className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#eff6ff] text-[#1e3a8a] rounded-full text-[10px] font-medium"
+                          className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#eff6ff] text-[#1e3a8a] rounded-full text-xs font-medium"
                         >
                           {location}
                           <button
@@ -513,7 +513,7 @@ export default function AllProductsSection() {
           </p>
           <button
             onClick={() => fetchProducts()}
-            className="px-[18px] py-2 bg-[#1e3a8a] text-white border-none rounded-lg cursor-pointer text-[12px] hover:bg-[#2d4a9a] transition-colors"
+            className="px-[18px] py-2 bg-[#1e3a8a] text-white border-none rounded-lg cursor-pointer text-sm hover:bg-[#2d4a9a] transition-colors"
           >
             Refresh
           </button>
@@ -553,7 +553,7 @@ export default function AllProductsSection() {
 
                     {/* Product details */}
                     <div className="p-3">
-                      <h3 className="font-medium text-[12px] text-[#1a1a1a] m-0 mb-1.5 truncate">
+                      <h3 className="font-medium text-sm text-[#1a1a1a] m-0 mb-1.5 truncate">
                         {product?.title || "Product"}
                       </h3>
 
@@ -573,7 +573,7 @@ export default function AllProductsSection() {
                             />
                           </svg>
                         ))}
-                        <span className="text-[9px] text-gray-500 ml-0.5">
+                        <span className="text-xs text-gray-500 ml-0.5">
                           (2338)
                         </span>
                       </div>
@@ -591,7 +591,7 @@ export default function AllProductsSection() {
                             fill="#666"
                           />
                         </svg>
-                        <span className="text-[9px] text-gray-600">
+                        <span className="text-xs text-gray-600">
                           {product?.city || "Mumbai"},IN
                         </span>
                       </div>
@@ -603,14 +603,14 @@ export default function AllProductsSection() {
                         </span>
                         {product?.originalPrice &&
                           product.originalPrice > (product.price || 0) && (
-                            <span className="text-[10.5px] text-gray-400 line-through">
+                            <span className="text-xs text-gray-400 line-through">
                               ₹{product.originalPrice.toLocaleString("en-IN")}
                             </span>
                           )}
                       </div>
 
                       {/* View Deal button */}
-                      <button className="w-full h-[30px] bg-[#2D4A9A] rounded-lg border-none cursor-pointer font-semibold text-[10.5px] text-white hover:bg-[#3d5aaa] transition-colors">
+                      <button className="w-full h-[30px] bg-[#2D4A9A] rounded-lg border-none cursor-pointer font-semibold text-xs text-white hover:bg-[#3d5aaa] transition-colors">
                         View Deal
                       </button>
                     </div>
@@ -623,7 +623,7 @@ export default function AllProductsSection() {
           {/* Load More button */}
           <div className="text-center mt-8">
             <Link href="/marketplace?filter=all" className="no-underline">
-              <button className="px-6 py-2 text-[14px] text-[#0d1b2a] bg-transparent border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+              <button className="px-6 py-2 text-base text-[#0d1b2a] bg-transparent border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
                 Load More Products
               </button>
             </Link>

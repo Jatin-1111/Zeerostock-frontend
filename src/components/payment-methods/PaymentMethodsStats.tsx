@@ -234,18 +234,18 @@ export default function PaymentMethodsStats({
             className="relative h-[76px] overflow-hidden rounded-[11px] bg-white shadow-[0px_0px_3px_0px_rgba(24,181,34,0.25)]"
           >
             {/* Label */}
-            <div className="absolute left-[10px] top-[15px] -translate-y-1/2 text-[11px] font-medium leading-normal text-[#9C9C9C]">
+            <div className="absolute left-[10px] top-[15px] -translate-y-1/2 text-xs font-medium leading-normal text-[#9C9C9C]">
               {stat.label}
             </div>
 
             {/* Value */}
-            <div className="absolute left-[10px] top-[39px] -translate-y-1/2 text-[18px] font-semibold leading-normal text-[#0D1B2A]">
+            <div className="absolute left-[10px] top-[39px] -translate-y-1/2 text-xl font-semibold leading-normal text-[#0D1B2A]">
               {stat.value}
             </div>
 
             {/* Subtitle */}
             <div
-              className="absolute left-[10px] top-[58px] -translate-y-1/2 text-[8px] font-medium leading-normal"
+              className="absolute left-[10px] top-[58px] -translate-y-1/2 text-xs font-medium leading-normal"
               style={{ color: stat.subtitleColor }}
             >
               {stat.subtitle}

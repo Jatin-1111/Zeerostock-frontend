@@ -33,16 +33,16 @@ export default function ValuesSection() {
       <div className="w-full max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div>
           <div className="relative w-full flex flex-col items-center">
-            <p className="font-medium text-xs sm:text-sm md:text-[12px] text-center text-[#868181]">
+            <p className="font-medium text-xs sm:text-sm md:text-sm text-center text-[#868181]">
               Our Values
             </p>
             {/* Title */}
-            <h2 className="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-[35px] leading-tight lg:leading-[52px] text-center text-[#0d1b2a] mb-3 sm:mb-4">
+            <h2 className="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-3xl leading-tight lg:leading-snug text-center text-[#0d1b2a] mb-3 sm:mb-4">
               What Drives Us <span className="text-[#2ec096]">Forward</span>
             </h2>
 
             {/* Subtitle */}
-            <p className="font-semibold text-xs sm:text-sm md:text-base lg:text-[13px] leading-relaxed lg:leading-[20px] text-center text-[#868181] max-w-full sm:max-w-xl md:max-w-3xl mb-6 sm:mb-8 md:mb-10 lg:mb-[43px] px-4 sm:px-0">
+            <p className="font-semibold text-xs sm:text-sm md:text-base lg:text-sm leading-relaxed lg:leading-normal text-center text-[#868181] max-w-full sm:max-w-xl md:max-w-3xl mb-6 sm:mb-8 md:mb-10 lg:mb-[43px] px-4 sm:px-0">
               Our core values guide every decision we make and every
               relationship we build
             </p>
@@ -63,12 +63,12 @@ export default function ValuesSection() {
                       </div>
 
                       {/* Title */}
-                      <h3 className="font-semibold text-sm sm:text-base md:text-[15px] leading-snug md:leading-[22px] text-[#022778] mb-2 sm:mb-[8px]">
+                      <h3 className="font-semibold text-sm sm:text-base md:text-base leading-snug md:leading-normal text-[#022778] mb-2 sm:mb-[8px]">
                         {value.title}
                       </h3>
 
                       {/* Description */}
-                      <p className="font-medium text-xs sm:text-sm md:text-[11px] leading-relaxed md:leading-[16px] text-white">
+                      <p className="font-medium text-xs sm:text-sm md:text-xs leading-relaxed md:leading-tight text-white">
                         {value.description}
                       </p>
                     </div>

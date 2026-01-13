@@ -94,11 +94,11 @@ export default function SponsoredListingsSection() {
             strokeWidth="2"
           />
         </svg>
-        <h2 className="m-0 text-[26px] font-semibold text-[#0d1b2a]">
+        <h2 className="m-0 text-2xl font-semibold text-[#0d1b2a]">
           Sponsored Listing
         </h2>
         <div className="ml-[15px] rounded-[4px] bg-[#FFF1C2] px-[13px] py-[2px]">
-          <span className="text-[15px] font-medium text-[#0d1b2a]">
+          <span className="text-base font-medium text-[#0d1b2a]">
             Featured
           </span>
         </div>
@@ -129,7 +129,7 @@ export default function SponsoredListingsSection() {
 
               {/* Product details */}
               <div className="p-[20px]">
-                <h3 className="mb-[8px] mt-0 overflow-hidden text-ellipsis whitespace-nowrap text-[15px] font-medium text-[#0d1b2a]">
+                <h3 className="mb-[8px] mt-0 overflow-hidden text-ellipsis whitespace-nowrap text-base font-medium text-[#0d1b2a]">
                   {listing?.title || "Sponsored Product"}
                 </h3>
 
@@ -142,7 +142,7 @@ export default function SponsoredListingsSection() {
                       alt="Location"
                       className="h-[18px] w-[17px]"
                     />
-                    <span className="text-[12px] font-medium text-[#787878]">
+                    <span className="text-sm font-medium text-[#787878]">
                       {listing?.city || "Unknown"}
                     </span>
                   </div>
@@ -168,19 +168,19 @@ export default function SponsoredListingsSection() {
 
                 {/* Price */}
                 <div className="mb-[20px] flex items-center gap-[10px]">
-                  <span className="text-[22px] font-bold text-[#1e3a8a]">
+                  <span className="text-2xl font-bold text-[#1e3a8a]">
                     ₹{(listing?.price || 0).toLocaleString("en-IN")}
                   </span>
                   {listing?.originalPrice &&
                     listing.originalPrice > (listing.price || 0) && (
-                      <span className="text-[16px] font-medium text-[#787878] line-through">
+                      <span className="text-lg font-medium text-[#787878] line-through">
                         ₹{listing.originalPrice.toLocaleString("en-IN")}
                       </span>
                     )}
                 </div>
 
                 {/* View Deal button */}
-                <button className="mx-auto block h-[38px] w-[219px] cursor-pointer rounded-[11px] border-none bg-[#1e3a8a] text-[15px] font-semibold text-white">
+                <button className="mx-auto block h-[38px] w-[219px] cursor-pointer rounded-[11px] border-none bg-[#1e3a8a] text-base font-semibold text-white">
                   View Deal
                 </button>
               </div>

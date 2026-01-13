@@ -207,7 +207,7 @@ export default function PaymentMethodsPage() {
 
   return (
     <div className="min-h-screen">
-      <div className="mx-auto w-full max-w-[1440px] px-[45px] py-[23px]">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
         {/* Page Header */}
         <div className="mb-[8px]">
           <div className="flex items-center rounded-[11px] bg-white px-[46px] py-[11px] shadow-[0px_0px_8px_0px_rgba(24,181,34,0.25)]">

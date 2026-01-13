@@ -20,10 +20,10 @@ export default function MissionSection() {
           </p>
 
           {/* Stats Grid */}
-          <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-[16px] max-w-7xl mx-auto px-4">
+          <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto px-4">
             {/* Active Businesses */}
-            <div className="bg-[#eeffef] rounded-xl sm:rounded-2xl md:rounded-[20px] shadow-[0px_0px_10px_0px_rgba(24,181,34,0.5)] h-20 sm:h-24 md:h-[93px] flex flex-col items-center justify-center text-center px-3 sm:px-4">
-              <p className="font-semibold text-xs sm:text-xs md:text-sm text-black mb-1 sm:mb-[5px]">
+            <div className="bg-success-bg rounded-xl sm:rounded-2xl shadow-lg h-20 sm:h-24 md:h-24 flex flex-col items-center justify-center text-center px-3 sm:px-4">
+              <p className="font-semibold text-xs sm:text-xs md:text-sm text-black mb-1 sm:mb-1">
                 Active Businesses
               </p>
               <p className="font-bold text-xl sm:text-2xl md:text-2xl text-black">
@@ -32,8 +32,8 @@ export default function MissionSection() {
             </div>
 
             {/* Total Transaction Volume */}
-            <div className="bg-[#eeffef] rounded-xl sm:rounded-2xl md:rounded-[20px] shadow-[0px_0px_10px_0px_rgba(24,181,34,0.5)] h-20 sm:h-24 md:h-[93px] flex flex-col items-center justify-center text-center px-3 sm:px-4">
-              <p className="font-semibold text-xs sm:text-xs md:text-sm text-black mb-1 sm:mb-[5px]">
+            <div className="bg-success-bg rounded-xl sm:rounded-2xl shadow-lg h-20 sm:h-24 md:h-24 flex flex-col items-center justify-center text-center px-3 sm:px-4">
+              <p className="font-semibold text-xs sm:text-xs md:text-sm text-black mb-1 sm:mb-1">
                 Total Transaction Volume
               </p>
               <p className="font-bold text-xl sm:text-2xl md:text-2xl text-black">
@@ -42,8 +42,8 @@ export default function MissionSection() {
             </div>
 
             {/* Customer Satisfaction */}
-            <div className="bg-[#eeffef] rounded-xl sm:rounded-2xl md:rounded-[20px] shadow-[0px_0px_10px_0px_rgba(24,181,34,0.5)] h-20 sm:h-24 md:h-[93px] flex flex-col items-center justify-center text-center px-3 sm:px-4">
-              <p className="font-semibold text-xs sm:text-xs md:text-sm text-black mb-1 sm:mb-[5px]">
+            <div className="bg-success-bg rounded-xl sm:rounded-2xl shadow-lg h-20 sm:h-24 md:h-24 flex flex-col items-center justify-center text-center px-3 sm:px-4">
+              <p className="font-semibold text-xs sm:text-xs md:text-sm text-black mb-1 sm:mb-1">
                 Customer Satisfaction
               </p>
               <p className="font-bold text-xl sm:text-2xl md:text-2xl text-black">
@@ -52,7 +52,7 @@ export default function MissionSection() {
             </div>
 
             {/* Countries Served */}
-            <div className="bg-[#eeffef] rounded-xl sm:rounded-2xl md:rounded-[20px] shadow-[0px_0px_10px_0px_rgba(24,181,34,0.5)] h-20 sm:h-24 md:h-[93px] flex flex-col items-center justify-center text-center px-3 sm:px-4">
+            <div className="bg-success-bg rounded-xl sm:rounded-2xl shadow-lg h-20 sm:h-24 md:h-24 flex flex-col items-center justify-center text-center px-3 sm:px-4">
               <p className="font-semibold text-xs sm:text-xs md:text-sm text-black mb-1 sm:mb-[5px]">
                 Countries Served
               </p>

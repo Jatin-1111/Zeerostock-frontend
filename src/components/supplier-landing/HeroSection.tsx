@@ -17,14 +17,14 @@ export default function HeroSection() {
       </div>
 
       {/* Content Container */}
-      <div className="relative z-10 max-w-[880px] mx-auto">
+      <div className="relative z-10 max-w-5xl mx-auto">
         {/* Top Label */}
         <p className="text-base text-[#0d1b2a] mb-[15px] font-medium">
           For Smart Suppliers
         </p>
 
         {/* Main Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-[40px] items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           {/* Left Content */}
           <div>
             {/* Heading */}
@@ -42,7 +42,7 @@ export default function HeroSection() {
             </p>
 
             {/* Buttons */}
-            <div className="flex gap-[10px] mb-[15px]">
+            <div className="flex gap-2.5 mb-4">
               <button
                 onClick={() => router.push("/become-supplier")}
                 className="bg-[#1e3a8a] text-white rounded-[6px] px-[13px] py-[8px] text-xs font-medium hover:bg-[#1e3a8a]/90 transition-colors"
@@ -58,35 +58,26 @@ export default function HeroSection() {
             </div>
 
             {/* Features */}
-            <div className="flex flex-wrap gap-[10px]">
-              <div className="flex items-center gap-[3px]">
-                <div className="w-[25px] h-[20px] flex items-center justify-center">
-                  <Check
-                    className="w-[15px] h-[15px] text-black"
-                    strokeWidth={2.5}
-                  />
+            <div className="flex flex-wrap gap-2.5">
+              <div className="flex items-center gap-1">
+                <div className="w-6 h-5 flex items-center justify-center">
+                  <Check className="w-4 h-4 text-black" strokeWidth={2.5} />
                 </div>
                 <span className="text-sm text-black font-medium">
                   Free Listings
                 </span>
               </div>
-              <div className="flex items-center gap-[3px]">
-                <div className="w-[25px] h-[20px] flex items-center justify-center">
-                  <Check
-                    className="w-[15px] h-[15px] text-black"
-                    strokeWidth={2.5}
-                  />
+              <div className="flex items-center gap-1">
+                <div className="w-6 h-5 flex items-center justify-center">
+                  <Check className="w-4 h-4 text-black" strokeWidth={2.5} />
                 </div>
                 <span className="text-sm text-black font-medium">
                   Verified Buyers Only
                 </span>
               </div>
-              <div className="flex items-center gap-[3px]">
-                <div className="w-[25px] h-[20px] flex items-center justify-center">
-                  <Check
-                    className="w-[15px] h-[15px] text-black"
-                    strokeWidth={2.5}
-                  />
+              <div className="flex items-center gap-1">
+                <div className="w-6 h-5 flex items-center justify-center">
+                  <Check className="w-4 h-4 text-black" strokeWidth={2.5} />
                 </div>
                 <span className="text-sm text-black font-medium">
                   Secure Payments

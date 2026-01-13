@@ -265,12 +265,12 @@ export default function TrackOrderDetailPage() {
   const getStatusBgColor = (status: string): string => {
     const colors: Record<string, string> = {
       pending: "bg-orange-500",
-      confirmed: "bg-[#2aae7a]",
+      confirmed: "bg-success",
       processing: "bg-orange-500",
-      shipped: "bg-[#1e3a8a]",
-      in_transit: "bg-[#1e3a8a]",
-      out_for_delivery: "bg-[#2aae7a]",
-      delivered: "bg-[#2aae7a]",
+      shipped: "bg-primary",
+      in_transit: "bg-primary",
+      out_for_delivery: "bg-success",
+      delivered: "bg-success",
       cancelled: "bg-red-500",
     };
     return colors[status] || "bg-gray-400";
@@ -286,10 +286,10 @@ export default function TrackOrderDetailPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#eefbf6] px-3 sm:px-4 md:px-6 py-6 sm:py-8 flex items-center justify-center">
+      <div className="min-h-screen bg-page px-3 sm:px-4 md:px-6 py-6 sm:py-8 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-8 h-8 sm:w-9 sm:h-9 border-3 border-[#2aae7a] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-          <p className="text-xs sm:text-sm text-[#0d1b2a]">
+          <div className="w-8 h-8 sm:w-9 sm:h-9 border-3 border-secondary border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+          <p className="text-xs sm:text-sm text-dark">
             Loading order details...
           </p>
         </div>
@@ -305,7 +305,7 @@ export default function TrackOrderDetailPage() {
         </p>
         <button
           onClick={() => router.push("/buyer/track-order")}
-          className="px-4 sm:px-5 py-2 bg-[#1e3a8a] text-white border-none rounded-[11px] text-xs sm:text-sm cursor-pointer hover:bg-[#152e6b]"
+          className="px-4 sm:px-5 py-2 bg-primary text-white border-none rounded-xl text-xs sm:text-sm cursor-pointer hover:bg-primary-hover"
         >
           Track Another Order
         </button>
@@ -318,16 +318,16 @@ export default function TrackOrderDetailPage() {
   const lastUpdated = getLastUpdated();
 
   return (
-    <div className="min-h-screen bg-[#eefbf6] px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8">
+    <div className="min-h-screen bg-page px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8">
       {/* Back Navigation */}
       <Link
         href="/buyer/track-order"
-        className="inline-flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-[#0d1b2a] no-underline mb-3 sm:mb-4"
+        className="inline-flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-dark no-underline mb-3 sm:mb-4"
       >
         <ArrowLeft
           size={18}
-          className="sm:w-[21px] sm:h-[21px]"
-          color="#0d1b2a"
+          className="sm:w-5 sm:h-5"
+          color="var(--color-dark)"
         />
         <span>Track another order</span>
       </Link>
@@ -335,10 +335,10 @@ export default function TrackOrderDetailPage() {
       {/* Header Section */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0 mb-4 sm:mb-6">
         <div>
-          <h1 className="font-semibold text-xl sm:text-2xl md:text-3xl lg:text-3xl text-[#0d1b2a] m-0 leading-normal">
+          <h1 className="font-semibold text-xl sm:text-2xl md:text-3xl lg:text-3xl text-dark m-0 leading-normal">
             Order #{order.orderNumber}
           </h1>
-          <p className="font-normal text-sm sm:text-base text-[#9c9c9c] mt-2 sm:mt-3 mb-0">
+          <p className="font-normal text-sm sm:text-base text-muted mt-2 sm:mt-3 mb-0">
             Placed on {new Date(order.createdAt).toLocaleDateString("en-GB")}
           </p>
         </div>
@@ -409,7 +409,7 @@ export default function TrackOrderDetailPage() {
 
             <div className="relative">
               {/* Vertical Line */}
-              <div className="absolute left-[18px] sm:left-[20px] top-[37px] sm:top-[41px] w-[2px] h-[calc(100%-74px)] sm:h-[calc(100%-82px)] bg-[#e3e1e1]" />
+              <div className="absolute left-5 sm:left-5 top-10 sm:top-10 w-px h-[calc(100%-74px)] sm:h-[calc(100%-82px)] bg-border-light" />
 
               {trackingSteps.map((step, index) => (
                 <div
@@ -422,7 +422,7 @@ export default function TrackOrderDetailPage() {
                 >
                   {/* Step Icon */}
                   <div
-                    className={`w-9 h-9 sm:w-10 sm:h-10 md:w-[41px] md:h-[41px] rounded-[200px] ${
+                    className={`w-9 h-9 sm:w-10 sm:h-10 md:w-10 md:h-10 rounded-full ${
                       step.status === "completed" || step.status === "current"
                         ? "bg-[#2aae7a]"
                         : "bg-[#e3e1e1]"
@@ -498,7 +498,7 @@ export default function TrackOrderDetailPage() {
                   >
                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0">
                       {/* Date & Time */}
-                      <div className="w-full sm:w-[100px] md:w-[112px]">
+                      <div className="w-full sm:w-28 md:w-28">
                         <p className="font-medium text-sm sm:text-base text-black m-0">
                           {new Date(track.timestamp).toLocaleDateString(
                             "en-CA"
@@ -563,7 +563,7 @@ export default function TrackOrderDetailPage() {
               >
                 <div className="flex flex-col sm:flex-row gap-3">
                   {/* Product Image */}
-                  <div className="w-full sm:w-[100px] md:w-[121px] h-[180px] sm:h-[75px] md:h-[91px] rounded-[8px] bg-gray-100 overflow-hidden shrink-0">
+                  <div className="w-full sm:w-28 md:w-32 h-48 sm:h-20 md:h-24 rounded-lg bg-gray-100 overflow-hidden shrink-0">
                     {item.productImage ? (
                       <Image
                         src={item.productImage}
@@ -827,7 +827,7 @@ export default function TrackOrderDetailPage() {
             </h2>
 
             <div className="flex gap-2 mb-5 sm:mb-6">
-              <div className="w-[14px] h-[14px] mt-0.5 sm:mt-1 shrink-0">
+              <div className="w-4 h-4 mt-0.5 sm:mt-1 shrink-0">
                 <svg
                   width="14"
                   height="14"
@@ -864,11 +864,7 @@ export default function TrackOrderDetailPage() {
               <span className="font-semibold text-sm sm:text-base text-white">
                 Go to Dashboard
               </span>
-              <ChevronRight
-                size={16}
-                className="sm:w-[18px] sm:h-[18px]"
-                color="white"
-              />
+              <ChevronRight size={16} className="sm:w-5 sm:h-5" color="white" />
             </button>
           </div>
         </div>

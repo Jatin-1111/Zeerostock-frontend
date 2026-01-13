@@ -24,6 +24,36 @@
   /* For those big headers */
   --text-4xl: 40px;
   --text-5xl: 48px;
+
+  /* Brand colors */
+  --color-primary: #1e3a8a;
+  --color-primary-hover: #152e6b;
+  --color-secondary: #2aae7a;
+  --color-secondary-light: #2ec096;
+
+  /* UI colors */
+  --color-dark: #0d1b2a;
+  --color-text-muted: #9c9c9c;
+  --color-text-subtle: #868181;
+  --color-border: #bebebe;
+  --color-border-light: #e3e1e1;
+  --color-border-lighter: #e5e5e5;
+
+  /* State colors */
+  --color-success: #2aae7a;
+  --color-success-bg: #eeffef;
+  --color-info: #507df0;
+  --color-info-bg: #dff3ff;
+  --color-warning: #fc3;
+  --color-warning-bg: #fff3cf;
+  --color-error: #f05050;
+  --color-error-bg: #ffe5e5;
+
+  /* Background colors */
+  --color-bg-light: #fbfbfb;
+  --color-bg-lighter: #f9fffd;
+  --color-bg-page: #eefbf6;
+  --color-bg-gray: #eee;
 }
 
 @media (prefers-color-scheme: dark) {

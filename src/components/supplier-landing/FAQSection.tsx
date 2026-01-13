@@ -41,7 +41,7 @@ export default function FAQSection() {
 
   return (
     <div className="w-full bg-[#EEFBF6] px-[40px] py-[50px]">
-      <div className="max-w-[880px] mx-auto">
+      <div className="max-w-4xl mx-auto">
         {/* Heading Section */}
         <div className="text-center mb-[87px]">
           <h2 className="text-2xl leading-snug font-medium text-[#0d1b2a] mb-[7px]">
@@ -72,10 +72,7 @@ export default function FAQSection() {
                   animate={{ rotate: openIndex === index ? 0 : 180 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <ChevronUp
-                    className="w-[14px] h-[14px] text-[#0d1b2a]"
-                    strokeWidth={2}
-                  />
+                  <ChevronUp className="w-4 h-4 text-dark" strokeWidth={2} />
                 </motion.div>
               </button>
 

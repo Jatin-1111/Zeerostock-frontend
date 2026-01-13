@@ -168,7 +168,7 @@ export default function WishlistPage() {
                   boxShadow: "0px 0px 2.5px 0px rgba(255,255,255,0.25)",
                 }}
               >
-                <div className="w-full h-[80px] sm:h-[90px] md:h-[99px] bg-gray-200 animate-pulse" />
+                <div className="w-full h-20 sm:h-24 bg-gray-200 animate-pulse" />
                 <div className="p-2 sm:p-2.25 md:p-2.5">
                   <div className="h-2.5 sm:h-2.75 md:h-3 bg-gray-200 rounded mb-1.25 sm:mb-1.375 md:mb-1.5 animate-pulse" />
                   <div className="h-2.5 sm:h-2.75 md:h-3 bg-gray-200 rounded w-3/4 animate-pulse" />
@@ -222,7 +222,7 @@ export default function WishlistPage() {
                       href={`/product/${item.product?.slug || ""}`}
                       className="block no-underline"
                     >
-                      <div className="relative w-full h-[80px] sm:h-[90px] md:h-[99px] bg-gray-100 overflow-hidden">
+                      <div className="relative w-full h-20 sm:h-24 bg-gray-100 overflow-hidden">
                         {item.product?.imageUrl ? (
                           <img
                             src={item.product?.imageUrl}
@@ -250,7 +250,7 @@ export default function WishlistPage() {
                         item.product?.id && handleRemove(item.product?.id)
                       }
                       disabled={removingId === item.product?.id || !isAvailable}
-                      className="absolute top-[4px] sm:top-[4.5px] md:top-[5px] left-[4px] sm:left-[4.5px] md:left-[5px] bg-white/70 backdrop-blur-sm rounded-[13px] sm:rounded-[14px] md:rounded-[15px] p-[4px] sm:p-[4.5px] md:p-[5px] flex items-center justify-center cursor-pointer hover:bg-white/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="absolute top-1 left-1 bg-white/70 backdrop-blur-sm rounded-xl p-1 flex items-center justify-center cursor-pointer hover:bg-white/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                       style={{ width: "20px", height: "20px" }}
                       title="Remove from wishlist"
                     >
@@ -259,7 +259,7 @@ export default function WishlistPage() {
 
                     {/* Heart Button - Top Right */}
                     <div
-                      className="absolute top-[4px] sm:top-[4.5px] md:top-[5px] right-[4px] sm:right-[4.5px] md:right-[5px] bg-white/70 backdrop-blur-sm rounded-[13px] sm:rounded-[14px] md:rounded-[15px] p-[4px] sm:p-[4.5px] md:p-[5px] flex items-center justify-center"
+                      className="absolute top-1 right-1 bg-white/70 backdrop-blur-sm rounded-xl p-1 flex items-center justify-center"
                       style={{ width: "21px", height: "21px" }}
                     >
                       <Heart className="w-3 sm:w-3.25 md:w-3.5 h-3 sm:h-3.25 md:h-3.5 fill-red-500 text-red-500" />

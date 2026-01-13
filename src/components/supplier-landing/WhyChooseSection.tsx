@@ -33,7 +33,7 @@ export default function WhyChooseSection() {
   return (
     <div className="w-full bg-[#EEFBF6] px-[40px] py-[50px]">
       {/* Content Container */}
-      <div className="max-w-[880px] mx-auto">
+      <div className="max-w-5xl mx-auto">
         {/* Heading Section */}
         <div className="text-center mb-[45px]">
           <h2 className="text-2xl leading-snug font-medium text-[#0d1b2a] mb-[7px]">
@@ -47,17 +47,17 @@ export default function WhyChooseSection() {
         </div>
 
         {/* Benefits Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[11px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
           {benefits.map((benefit, index) => (
             <div
               key={index}
-              className="bg-[#2aae7a] rounded-[20px] shadow-[0px_0px_10px_0px_rgba(24,181,34,0.5)] p-[15px] pt-[15px] pb-[15px] text-center overflow-hidden h-[143px] flex flex-col"
+              className="bg-secondary rounded-2xl shadow-lg p-4 text-center overflow-hidden h-36 flex flex-col"
             >
               {/* Icon Container */}
               <div className="flex justify-center mb-[10px]">
-                <div className="w-[35px] h-[35px] bg-[#eeffef] rounded-[30px] flex items-center justify-center p-[7px]">
+                <div className="w-9 h-9 bg-success-bg rounded-full flex items-center justify-center p-2">
                   <benefit.icon
-                    className="w-[20px] h-[20px] text-[#2aae7a]"
+                    className="w-5 h-5 text-secondary"
                     strokeWidth={2}
                   />
                 </div>

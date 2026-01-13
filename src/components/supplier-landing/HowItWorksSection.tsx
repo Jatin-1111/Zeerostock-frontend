@@ -30,7 +30,7 @@ export default function HowItWorksSection() {
 
   return (
     <div className="w-full bg-[#EEFBF6] px-[40px] py-[50px]">
-      <div className="max-w-[880px] mx-auto">
+      <div className="max-w-4xl mx-auto">
         {/* Heading Section */}
         <div className="text-center mb-[61px]">
           <h2 className="text-2xl leading-snug font-medium text-[#0d1b2a] mb-[7px]">
@@ -44,17 +44,17 @@ export default function HowItWorksSection() {
         {/* Steps Grid with Line */}
         <div className="relative">
           {/* Horizontal Line positioned absolutely above circles */}
-          <div className="absolute top-[15px] left-0 right-0 h-[2px] bg-[#d1d1d1]" />
+          <div className="absolute top-4 left-0 right-0 h-px bg-border" />
 
           {/* Steps Grid */}
-          <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[30px]">
+          <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {steps.map((step) => (
               <div
                 key={step.number}
                 className="flex flex-col items-center text-center"
               >
                 {/* Number Circle */}
-                <div className="w-[31px] h-[31px] bg-[#eeffef] border-2 border-[#2aae7a] rounded-[50px] flex items-center justify-center font-semibold text-base text-black mb-[41px] relative z-10">
+                <div className="w-8 h-8 bg-success-bg border-2 border-secondary rounded-full flex items-center justify-center font-semibold text-base text-black mb-10 relative z-10">
                   {step.number}
                 </div>
 

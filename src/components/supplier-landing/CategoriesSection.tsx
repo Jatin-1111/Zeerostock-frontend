@@ -35,7 +35,7 @@ export default function CategoriesSection() {
   return (
     <div className="w-full bg-[#EEFBF6] px-[40px] py-[50px]">
       {/* Content Container */}
-      <div className="max-w-[880px] mx-auto">
+      <div className="max-w-4xl mx-auto">
         {/* Heading Section */}
         <div className="text-center mb-[57px]">
           <h2 className="text-2xl leading-snug font-medium text-[#0d1b2a] mb-[7px]">
@@ -53,7 +53,7 @@ export default function CategoriesSection() {
           {categories.map((category, index) => (
             <div
               key={index}
-              className="bg-[#eeffef] rounded-[20px] shadow-[0px_0px_10px_0px_rgba(24,181,34,0.5)] p-[15px] pb-[22px] relative h-[93px] max-w-[95%] overflow-visible"
+              className="bg-success-bg rounded-2xl shadow-lg p-4 pb-6 relative h-24 max-w-full overflow-visible"
             >
               {/* Category Title */}
               <h3 className="text-sm leading-normal font-semibold text-[#022778] mb-[12px]">
@@ -61,7 +61,7 @@ export default function CategoriesSection() {
               </h3>
 
               {/* Demand Badge - Positioned to top right */}
-              <div className="absolute top-[17px] right-[15px] bg-[#2aae7a] rounded-[40px] px-[6px] py-[1px]">
+              <div className="absolute top-4 right-4 bg-secondary rounded-full px-2 py-0.5">
                 <p className="text-xs leading-normal font-medium text-white whitespace-nowrap">
                   {category.demand}
                 </p>

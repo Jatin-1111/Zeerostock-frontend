@@ -162,7 +162,7 @@ export default function StepThreeDocuments({
         className="flex items-start py-3 border-b border-[#e5e5e5] last:border-b-0"
       >
         <div className="flex items-start gap-0 flex-1">
-          <div className="w-[19px] h-[19px] mt-0.5">
+          <div className="w-5 h-5 mt-0.5">
             {isUploaded ? (
               <CheckCircle
                 className="w-full h-full text-[#2aae7a]"
@@ -190,7 +190,7 @@ export default function StepThreeDocuments({
           {isUploaded ? (
             <div className="bg-[#eeffef] px-2.5 py-1 rounded-[13px] flex items-center gap-1.5">
               <CheckCircle
-                className="w-[15px] h-[15px] text-[#2aae7a]"
+                className="w-4 h-4 text-secondary"
                 strokeWidth={2.5}
               />
               <span className="text-sm font-medium text-[#2aae7a]">
@@ -265,14 +265,14 @@ export default function StepThreeDocuments({
               (Optional)
             </span>
           </div>
-          <div className="px-3 max-h-[200px] overflow-y-auto">
+          <div className="px-3 max-h-52 overflow-y-auto">
             {optionalDocs.map((doc) => renderDocumentRow(doc))}
           </div>
         </div>
       </div>
 
       {/* Right Column - Sidebar Sections */}
-      <div className="w-[273px] space-y-3">
+      <div className="w-72 space-y-3">
         {/* Verification Impact */}
         <div className="bg-[#f9fffd] rounded-[13px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] overflow-hidden">
           <div className="px-3 pt-3 pb-2">
@@ -305,9 +305,7 @@ export default function StepThreeDocuments({
         {/* Need Help Section */}
         <div className="bg-[#f9fffd] rounded-[13px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] overflow-hidden">
           <div className="px-3 pt-3 pb-2">
-            <h3 className="text-sm font-semibold text-[#0d1b2a]">
-              Need Help?
-            </h3>
+            <h3 className="text-sm font-semibold text-[#0d1b2a]">Need Help?</h3>
           </div>
           <div className="px-3 pb-3">
             <p className="text-xs font-medium text-[#9c9c9c] mb-3 leading-normal">

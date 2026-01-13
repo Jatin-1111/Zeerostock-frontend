@@ -22,6 +22,8 @@
   --text-2xl: 26px;
   --text-3xl: 32px;
   /* For those big headers */
+  --text-4xl: 40px;
+  --text-5xl: 48px;
 }
 
 @media (prefers-color-scheme: dark) {

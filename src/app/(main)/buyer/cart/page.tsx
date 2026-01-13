@@ -25,17 +25,17 @@ export default function CartPage() {
 
           {/* Title Section */}
           <div>
-            <h1 className="text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-semibold text-[#0d1b2a] mb-0.5">
+            <h1 className="text-[15px] sm:text-[20px] md:text-[25px] lg:text-[30px] font-semibold text-[#0d1b2a] mb-0.5">
               Shopping Cart
             </h1>
-            <p className="text-[7px] sm:text-[8px] md:text-[9px] lg:text-[10px] text-[#9c9c9c]">
+            <p className="text-[10px] sm:text-[11px] md:text-[12px] lg:text-[13px] text-[#9c9c9c]">
               {itemCount} {itemCount === 1 ? "item" : "items"} in your cart
             </p>
           </div>
         </div>
 
         {/* Browse Button */}
-        <button className="w-auto px-3 sm:px-4 md:px-5 py-1 sm:py-1.5 bg-white border border-[#1e3a8a] text-[#1e3a8a] rounded-lg sm:rounded-xl text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs font-semibold hover:bg-[#1e3a8a] hover:text-white transition-colors">
+        <button className="w-auto px-3 sm:px-4 md:px-5 py-1 sm:py-1.5 bg-white border border-[#1e3a8a] text-[#1e3a8a] rounded-lg sm:rounded-xl text-[10px] sm:text-[11px] md:text-[12px] lg:text-xs font-semibold hover:bg-[#1e3a8a] hover:text-white transition-colors">
           Browse More Items
         </button>
       </div>

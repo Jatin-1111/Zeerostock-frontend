@@ -22,9 +22,9 @@ export function InfoCard({
   verified?: boolean;
 }) {
   return (
-    <div className="bg-[#f6f6f6] rounded-[8px] px-[11px] py-[9px] relative">
-      <p className="font-medium text-xs text-[#9c9c9c] mb-[8px]">{label}</p>
-      <p className="font-medium text-xs text-[#0d1b2a]">{value}</p>
+    <div className="bg-gray-100 rounded-lg px-3 py-2 relative">
+      <p className="font-medium text-xs text-muted mb-2">{label}</p>
+      <p className="font-medium text-xs text-dark">{value}</p>
       {verified && (
         <div className="absolute right-[11px] top-1/2 -translate-y-1/2">
           <CheckCircle2 className="w-5 h-5 text-secondary" />
@@ -48,28 +48,26 @@ export function DocumentRowNew({
   onUpload?: () => void;
 }) {
   return (
-    <div className="bg-[#f6f6f6] rounded-[8px] px-5 py-[13px] flex items-center justify-between">
+    <div className="bg-gray-100 rounded-lg px-5 py-3 flex items-center justify-between">
       <div>
         <div className="flex items-center gap-2">
-          <p className="font-medium text-base text-[#0d1b2a]">{label}</p>
+          <p className="font-medium text-base text-dark">{label}</p>
           {optional && (
-            <span className="font-medium text-base text-[#9c9c9c]">
-              (Optional)
-            </span>
+            <span className="font-medium text-base text-muted">(Optional)</span>
           )}
         </div>
-        <p className="font-medium text-sm text-[#9c9c9c] mt-[9px]">{date}</p>
+        <p className="font-medium text-sm text-muted mt-2">{date}</p>
       </div>
 
       {status === "verified" || status === "approved" ? (
-        <div className="bg-[#eeffef] px-[10px] py-[5px] rounded-[15px] shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)] flex items-center gap-[5px]">
-          <CheckCircle2 className="w-[18px] h-[18px] text-[#2aae7a]" />
-          <span className="font-medium text-base text-[#2aae7a]">Verified</span>
+        <div className="bg-success-bg px-2.5 py-1 rounded-2xl shadow-sm flex items-center gap-1">
+          <CheckCircle2 className="w-4 h-4 text-secondary" />
+          <span className="font-medium text-base text-secondary">Verified</span>
         </div>
       ) : status === "pending" || status === "under_review" ? (
-        <div className="bg-[#fff3cf] px-[10px] py-[5px] rounded-[15px] shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)] flex items-center gap-[5px]">
-          <Clock className="w-[18px] h-[18px] text-[#fc3]" />
-          <span className="font-medium text-base text-[#fc3]">Pending</span>
+        <div className="bg-warning-bg px-2.5 py-1 rounded-2xl shadow-sm flex items-center gap-1">
+          <Clock className="w-4 h-4 text-warning" />
+          <span className="font-medium text-base text-warning">Pending</span>
         </div>
       ) : (
         <button
@@ -133,9 +131,9 @@ function ImpactCard({
 
 export function VerificationBenefitsSidebar() {
   return (
-    <div className="w-[269px]">
+    <div className="w-64">
       {/* Verification Benefits Card */}
-      <div className="bg-[#f9fffd] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] rounded-[13px] h-[297px] overflow-hidden">
+      <div className="bg-page shadow-md rounded-xl h-72 overflow-hidden">
         <div className="px-5 pt-4 pb-3">
           <h3 className="font-semibold text-lg text-black">
             Verification Benefits

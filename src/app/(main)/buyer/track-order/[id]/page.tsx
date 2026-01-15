@@ -299,7 +299,7 @@ export default function TrackOrderDetailPage() {
 
   if (error || !order) {
     return (
-      <div className="min-h-screen bg-page px-3 sm:px-4 md:px-6 py-6 sm:py-8 flex flex-col items-center justify-center">
+      <div className="min-h-screen bg-[#eefbf6] px-3 sm:px-4 md:px-6 py-6 sm:py-8 flex flex-col items-center justify-center">
         <p className="text-xs sm:text-sm text-red-500 mb-4">
           {error || "Order not found"}
         </p>
@@ -360,22 +360,18 @@ export default function TrackOrderDetailPage() {
           {/* Current Status Card */}
           <div className="bg-white rounded-[15px] shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] p-4 sm:p-5 md:p-6 relative">
             {/* Truck Icon */}
-            <div className="absolute left-4 sm:left-5 md:left-6 top-4 sm:top-5 md:top-6 bg-success-bg rounded-full p-2 sm:p-2.5 shadow-sm">
-              <Truck
-                size={18}
-                className="sm:w-5 sm:h-5"
-                color="var(--color-secondary)"
-              />
+            <div className="absolute left-4 sm:left-5 md:left-6 top-4 sm:top-5 md:top-6 bg-[#eeffef] rounded-[200px] p-2 sm:p-2.5 shadow-[0px_0px_2px_0px_rgba(0,0,0,0.25)]">
+              <Truck size={18} className="sm:w-5 sm:h-5" color="#2aae7a" />
             </div>
 
             {/* Status Text */}
-            <div className="ml-14 sm:ml-16 md:ml-20">
-              <h2 className="font-semibold text-base sm:text-lg text-dark m-0">
+            <div className="ml-[56px] sm:ml-[60px] md:ml-[70px]">
+              <h2 className="font-semibold text-base sm:text-lg text-[#0d1b2a] m-0">
                 {formatStatus(order.status)}
               </h2>
-              <p className="font-medium text-sm sm:text-base text-muted mt-2 mb-0">
+              <p className="font-medium text-sm sm:text-base text-[#9c9c9c] mt-2 mb-0">
                 <span className="font-normal">Current location:</span>{" "}
-                <span className="text-dark">
+                <span className="text-[#0d1b2a]">
                   {currentLocation || "Updating..."}
                 </span>
               </p>
@@ -387,19 +383,15 @@ export default function TrackOrderDetailPage() {
                 <RefreshCw
                   size={14}
                   className="sm:w-4 sm:h-4"
-                  color="var(--color-text-muted)"
+                  color="#9c9c9c"
                 />
-                <span className="font-medium text-xs sm:text-sm text-muted">
+                <span className="font-medium text-xs sm:text-sm text-[#9c9c9c]">
                   Last updated: {lastUpdated}
                 </span>
               </div>
               <div className="flex items-center gap-1.5 sm:gap-2">
-                <Calendar
-                  size={14}
-                  className="sm:w-4 sm:h-4"
-                  color="var(--color-text-muted)"
-                />
-                <span className="font-medium text-xs sm:text-sm text-muted">
+                <Calendar size={14} className="sm:w-4 sm:h-4" color="#9c9c9c" />
+                <span className="font-medium text-xs sm:text-sm text-[#9c9c9c]">
                   Est. delivery:{" "}
                   {order.deliveryEta
                     ? new Date(order.deliveryEta).toLocaleDateString("en-GB")
@@ -410,8 +402,8 @@ export default function TrackOrderDetailPage() {
           </div>
 
           {/* Tracking Progress Card */}
-          <div className="bg-white rounded-2xl shadow-md p-4 sm:p-5 md:p-6">
-            <h2 className="font-medium text-base sm:text-lg text-dark mt-0 mb-4 sm:mb-5 md:mb-6">
+          <div className="bg-white rounded-[15px] shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] p-4 sm:p-5 md:p-6">
+            <h2 className="font-medium text-base sm:text-lg text-[#0d1b2a] mt-0 mb-4 sm:mb-5 md:mb-6">
               Tracking Progress
             </h2>
 
@@ -452,23 +444,23 @@ export default function TrackOrderDetailPage() {
                     <h3
                       className={`font-semibold text-sm sm:text-base ${
                         step.status === "completed" || step.status === "current"
-                          ? "text-secondary"
-                          : "text-gray-500"
+                          ? "text-[#2aae7a]"
+                          : "text-[#7b7b7b]"
                       } m-0`}
                     >
                       {step.title}
                     </h3>
-                    <p className="font-medium text-xs sm:text-sm text-muted mt-1 mb-0">
+                    <p className="font-medium text-xs sm:text-sm text-[#9c9c9c] mt-1 mb-0">
                       {step.description}
                     </p>
                     {step.location && (
                       <div className="flex items-center gap-1 mt-1.5 sm:mt-2">
                         <MapPin
                           size={12}
-                          className="sm:w-3.5 sm:h-3.5"
-                          color="var(--color-text-muted)"
+                          className="sm:w-[14px] sm:h-[14px]"
+                          color="#9c9c9c"
                         />
-                        <span className="font-medium text-xs sm:text-sm text-muted">
+                        <span className="font-medium text-xs sm:text-sm text-[#9c9c9c]">
                           {step.location}
                         </span>
                       </div>
@@ -477,7 +469,7 @@ export default function TrackOrderDetailPage() {
 
                   {/* Timestamp */}
                   {step.timestamp && (
-                    <div className="hidden md:block font-medium text-sm text-muted whitespace-nowrap">
+                    <div className="hidden md:block font-medium text-sm text-[#9c9c9c] whitespace-nowrap">
                       {formatTimestamp(step.timestamp)}
                     </div>
                   )}
@@ -487,13 +479,13 @@ export default function TrackOrderDetailPage() {
           </div>
 
           {/* Detailed Shipping Events Card */}
-          <div className="bg-white rounded-2xl shadow-md pt-4 sm:pt-5 md:pt-6 pb-0 px-0 overflow-hidden">
-            <h2 className="font-medium text-base sm:text-lg text-dark mt-0 mb-2 sm:mb-3 ml-4 sm:ml-5 md:ml-6">
+          <div className="bg-white rounded-[15px] shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] pt-4 sm:pt-5 md:pt-6 pb-0 px-0 overflow-hidden">
+            <h2 className="font-medium text-base sm:text-lg text-[#0d1b2a] mt-0 mb-2 sm:mb-3 ml-4 sm:ml-5 md:ml-6">
               Detailed Shipping Events
             </h2>
 
             {/* Divider Line */}
-            <div className="w-full h-px bg-border-light" />
+            <div className="w-full h-px bg-[#e3e1e1]" />
 
             {order.tracking && order.tracking.length > 0 ? (
               order.tracking
@@ -536,10 +528,10 @@ export default function TrackOrderDetailPage() {
                         <div className="flex items-center gap-1">
                           <MapPin
                             size={12}
-                            className="sm:w-3.5 sm:h-3.5"
-                            color="var(--color-text-muted)"
+                            className="sm:w-[14px] sm:h-[14px]"
+                            color="#9c9c9c"
                           />
-                          <span className="font-medium text-xs sm:text-sm text-muted">
+                          <span className="font-medium text-xs sm:text-sm text-[#9c9c9c]">
                             {track.location}
                           </span>
                         </div>
@@ -549,7 +541,7 @@ export default function TrackOrderDetailPage() {
                 ))
             ) : (
               <div className="py-6 sm:py-8 px-4 sm:px-6 text-center">
-                <p className="text-xs sm:text-sm text-muted">
+                <p className="text-xs sm:text-sm text-[#9c9c9c]">
                   No detailed shipping events available yet
                 </p>
               </div>
@@ -557,15 +549,15 @@ export default function TrackOrderDetailPage() {
           </div>
 
           {/* Order Items Card */}
-          <div className="bg-white rounded-2xl shadow-md p-4 sm:p-5 md:p-6">
-            <h2 className="font-medium text-base sm:text-lg text-dark mt-0 mb-4 sm:mb-5 md:mb-6">
+          <div className="bg-white rounded-[15px] shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] p-4 sm:p-5 md:p-6">
+            <h2 className="font-medium text-base sm:text-lg text-[#0d1b2a] mt-0 mb-4 sm:mb-5 md:mb-6">
               Order Items:
             </h2>
 
             {order.items.map((item, index) => (
               <div
                 key={item.itemId || index}
-                className={`bg-gray-50 rounded-2xl shadow-sm p-3 sm:p-3.5 md:p-4 ${
+                className={`bg-[#fbfbfb] rounded-[15px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] p-3 sm:p-3.5 md:p-4 ${
                   index < order.items.length - 1 ? "mb-4 sm:mb-5 md:mb-6" : ""
                 }`}
               >
@@ -581,8 +573,8 @@ export default function TrackOrderDetailPage() {
                         className="object-cover w-full h-full"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-border-light">
-                        <span className="text-muted text-xs">No Image</span>
+                      <div className="w-full h-full flex items-center justify-center bg-[#e3e1e1]">
+                        <span className="text-[#9c9c9c] text-xs">No Image</span>
                       </div>
                     )}
                   </div>
@@ -592,10 +584,10 @@ export default function TrackOrderDetailPage() {
                     <h3 className="font-medium text-base sm:text-lg text-black mt-0 sm:mt-1 md:mt-2 mb-0">
                       {item.productTitle}
                     </h3>
-                    <p className="font-medium text-sm sm:text-base text-muted mt-1.5 sm:mt-2 mb-0">
+                    <p className="font-medium text-sm sm:text-base text-[#9c9c9c] mt-1.5 sm:mt-2 mb-0">
                       by {item.supplier?.name || "Seller"}
                     </p>
-                    <p className="font-medium text-sm sm:text-base text-muted mt-1.5 sm:mt-2 mb-0">
+                    <p className="font-medium text-sm sm:text-base text-[#9c9c9c] mt-1.5 sm:mt-2 mb-0">
                       Qty: {item.quantity} / Price: ₹
                       {item.unitPrice.toLocaleString()}
                     </p>
@@ -606,7 +598,7 @@ export default function TrackOrderDetailPage() {
                     <p className="font-semibold text-lg sm:text-xl md:text-xl text-black mt-0 sm:mt-3 md:mt-5 mb-0">
                       ₹{item.subtotal.toLocaleString()}
                     </p>
-                    <p className="font-medium text-sm sm:text-base text-muted mt-1.5 sm:mt-2 mb-0">
+                    <p className="font-medium text-sm sm:text-base text-[#9c9c9c] mt-1.5 sm:mt-2 mb-0">
                       Est. Date:{" "}
                       {order.deliveryEta
                         ? new Date(order.deliveryEta).toLocaleDateString(
@@ -618,14 +610,14 @@ export default function TrackOrderDetailPage() {
                 </div>
 
                 {/* Divider */}
-                <div className="w-full h-px bg-border-light my-3 sm:my-4" />
+                <div className="w-full h-px bg-[#e3e1e1] my-3 sm:my-4" />
 
                 {/* Tracking ID Row */}
                 <div className="flex justify-between items-center px-0.5 sm:px-1">
                   <span className="font-medium text-xs sm:text-sm text-black">
                     Tracking ID:
                   </span>
-                  <span className="font-medium text-xs sm:text-sm text-muted">
+                  <span className="font-medium text-xs sm:text-sm text-[#9c9c9c]">
                     {order.trackingNumber || "Not available"}
                   </span>
                 </div>
@@ -634,11 +626,11 @@ export default function TrackOrderDetailPage() {
           </div>
 
           {/* Shipping Address Card */}
-          <div className="bg-white rounded-2xl shadow-md p-4 sm:p-5 md:p-6">
-            <h2 className="font-medium text-base sm:text-lg text-dark mt-0 mb-3 sm:mb-4">
+          <div className="bg-white rounded-[15px] shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] p-4 sm:p-5 md:p-6">
+            <h2 className="font-medium text-base sm:text-lg text-[#0d1b2a] mt-0 mb-3 sm:mb-4">
               Shipping Address
             </h2>
-            <div className="font-normal text-sm sm:text-base text-muted leading-normal">
+            <div className="font-normal text-sm sm:text-base text-[#9c9c9c] leading-normal">
               <p className="m-0">{order.shippingAddress?.name}</p>
               <p className="m-0">
                 {order.shippingAddress?.addressLine1}
@@ -657,37 +649,37 @@ export default function TrackOrderDetailPage() {
         {/* Right Column */}
         <div className="flex flex-col gap-4 sm:gap-5 md:gap-6">
           {/* Carrier Information Card */}
-          <div className="bg-white rounded-2xl shadow-md p-4 sm:p-5 md:p-6">
-            <h2 className="font-medium text-base sm:text-lg text-dark mt-0 mb-4 sm:mb-5">
+          <div className="bg-white rounded-[15px] shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] p-4 sm:p-5 md:p-6">
+            <h2 className="font-medium text-base sm:text-lg text-[#0d1b2a] mt-0 mb-4 sm:mb-5">
               Carrier Information
             </h2>
 
             {/* Carrier */}
             <div className="mb-4 sm:mb-5">
-              <p className="font-medium text-xs sm:text-sm text-muted m-0">
+              <p className="font-medium text-xs sm:text-sm text-[#9c9c9c] m-0">
                 Carrier
               </p>
-              <p className="font-medium text-sm sm:text-base text-dark mt-1 mb-0">
+              <p className="font-medium text-sm sm:text-base text-[#0d1b2a] mt-1 mb-0">
                 {order.shippingPartner || "Not assigned yet"}
               </p>
             </div>
 
             {/* Tracking Number */}
             <div className="mb-4 sm:mb-5">
-              <p className="font-medium text-xs sm:text-sm text-muted m-0">
+              <p className="font-medium text-xs sm:text-sm text-[#9c9c9c] m-0">
                 Tracking Number
               </p>
-              <p className="font-medium text-sm sm:text-base text-dark mt-1 mb-0">
+              <p className="font-medium text-sm sm:text-base text-[#0d1b2a] mt-1 mb-0">
                 {order.trackingNumber || "Not available"}
               </p>
             </div>
 
             {/* Estimated Delivery */}
             <div className="mb-5 sm:mb-6">
-              <p className="font-medium text-xs sm:text-sm text-muted m-0">
+              <p className="font-medium text-xs sm:text-sm text-[#9c9c9c] m-0">
                 Estimated Delivery
               </p>
-              <p className="font-medium text-sm sm:text-base text-secondary mt-1 mb-0">
+              <p className="font-medium text-sm sm:text-base text-[#2aae7a] mt-1 mb-0">
                 {order.deliveryEta
                   ? formatDate(order.deliveryEta)
                   : "To be confirmed"}
@@ -711,14 +703,14 @@ export default function TrackOrderDetailPage() {
                   }
                   window.open(trackingUrl, "_blank");
                 }}
-                className="w-full p-2.5 sm:p-3 border border-muted rounded-xl bg-transparent flex items-center justify-center gap-2 cursor-pointer hover:bg-gray-50"
+                className="w-full p-2.5 sm:p-3 border border-[#9c9c9c] rounded-[11px] bg-transparent flex items-center justify-center gap-2 cursor-pointer hover:bg-gray-50"
               >
                 <ExternalLink
                   size={14}
                   className="sm:w-4 sm:h-4"
-                  color="var(--color-dark)"
+                  color="#0d1b2a"
                 />
-                <span className="font-medium text-sm sm:text-base text-dark">
+                <span className="font-medium text-sm sm:text-base text-[#0d1b2a]">
                   Track On Carrier Site
                 </span>
               </button>
@@ -726,24 +718,20 @@ export default function TrackOrderDetailPage() {
           </div>
 
           {/* Order Actions Card */}
-          <div className="bg-white rounded-2xl shadow-md p-4 sm:p-5 md:p-6">
-            <h2 className="font-medium text-base sm:text-lg text-dark mt-0 mb-4 sm:mb-5">
+          <div className="bg-white rounded-[15px] shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] p-4 sm:p-5 md:p-6">
+            <h2 className="font-medium text-base sm:text-lg text-[#0d1b2a] mt-0 mb-4 sm:mb-5">
               Order Actions
             </h2>
 
             {/* Download Invoice Button */}
             <button
               onClick={handleDownloadInvoice}
-              className="w-full py-2 px-2.5 sm:px-3 border border-primary rounded-xl bg-transparent flex items-center gap-2 cursor-pointer mb-2 hover:bg-blue-50"
+              className="w-full py-2 px-2.5 sm:px-3 border border-[#1e3a8a] rounded-[11px] bg-transparent flex items-center gap-2 cursor-pointer mb-2 hover:bg-blue-50"
             >
               <div className="p-1.5 sm:p-2">
-                <FileText
-                  size={14}
-                  className="sm:w-4 sm:h-4"
-                  color="var(--color-primary)"
-                />
+                <FileText size={14} className="sm:w-4 sm:h-4" color="#1e3a8a" />
               </div>
-              <span className="font-medium text-sm sm:text-base text-primary">
+              <span className="font-medium text-sm sm:text-base text-[#1e3a8a]">
                 Download Invoice
               </span>
             </button>
@@ -754,16 +742,12 @@ export default function TrackOrderDetailPage() {
                 navigator.clipboard.writeText(window.location.href);
                 toast.success("Tracking link copied to clipboard");
               }}
-              className="w-full py-2 px-2.5 sm:px-3 border border-muted rounded-xl bg-transparent flex items-center gap-2 cursor-pointer mb-2 hover:bg-gray-50"
+              className="w-full py-2 px-2.5 sm:px-3 border border-[#9c9c9c] rounded-[11px] bg-transparent flex items-center gap-2 cursor-pointer mb-2 hover:bg-gray-50"
             >
               <div className="p-1.5 sm:p-2">
-                <Share2
-                  size={14}
-                  className="sm:w-4 sm:h-4"
-                  color="var(--color-text-muted)"
-                />
+                <Share2 size={14} className="sm:w-4 sm:h-4" color="#9c9c9c" />
               </div>
-              <span className="font-medium text-sm sm:text-base text-muted">
+              <span className="font-medium text-sm sm:text-base text-[#9c9c9c]">
                 Share Tracking
               </span>
             </button>
@@ -771,40 +755,36 @@ export default function TrackOrderDetailPage() {
             {/* View Order Details Button */}
             <button
               onClick={() => router.push(`/buyer/orders`)}
-              className="w-full py-2 px-2.5 sm:px-3 border border-muted rounded-xl bg-transparent flex items-center gap-2 cursor-pointer hover:bg-gray-50"
+              className="w-full py-2 px-2.5 sm:px-3 border border-[#9c9c9c] rounded-[11px] bg-transparent flex items-center gap-2 cursor-pointer hover:bg-gray-50"
             >
               <div className="p-1.5 sm:p-2">
-                <Send
-                  size={14}
-                  className="sm:w-4 sm:h-4"
-                  color="var(--color-text-muted)"
-                />
+                <Send size={14} className="sm:w-4 sm:h-4" color="#9c9c9c" />
               </div>
-              <span className="font-medium text-sm sm:text-base text-muted">
+              <span className="font-medium text-sm sm:text-base text-[#9c9c9c]">
                 View Order Details
               </span>
             </button>
           </div>
 
           {/* Need Help Card */}
-          <div className="bg-white rounded-2xl shadow-md p-4 sm:p-5 md:p-6">
-            <h2 className="font-medium text-base sm:text-lg text-dark mt-0 mb-4 sm:mb-5">
+          <div className="bg-white rounded-[15px] shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] p-4 sm:p-5 md:p-6">
+            <h2 className="font-medium text-base sm:text-lg text-[#0d1b2a] mt-0 mb-4 sm:mb-5">
               Need Help?
             </h2>
 
             {/* Live Chat Support */}
             <button
               onClick={() => router.push("/buyer/support")}
-              className="w-full py-2 px-2.5 sm:px-3 border border-muted rounded-xl bg-transparent flex items-center gap-2 cursor-pointer mb-2 hover:bg-gray-50"
+              className="w-full py-2 px-2.5 sm:px-3 border border-[#9c9c9c] rounded-[11px] bg-transparent flex items-center gap-2 cursor-pointer mb-2 hover:bg-gray-50"
             >
               <div className="p-1.5 sm:p-2">
                 <MessageCircle
                   size={14}
                   className="sm:w-4 sm:h-4"
-                  color="var(--color-text-muted)"
+                  color="#9c9c9c"
                 />
               </div>
-              <span className="font-medium text-sm sm:text-base text-muted">
+              <span className="font-medium text-sm sm:text-base text-[#9c9c9c]">
                 Live Chat Support
               </span>
             </button>
@@ -812,17 +792,13 @@ export default function TrackOrderDetailPage() {
             {/* Call Support */}
             <a
               href="tel:+918956835375"
-              className="block w-full py-2 px-2.5 sm:px-3 border border-muted rounded-xl bg-transparent no-underline mb-2 box-border hover:bg-gray-50"
+              className="block w-full py-2 px-2.5 sm:px-3 border border-[#9c9c9c] rounded-[11px] bg-transparent no-underline mb-2 box-border hover:bg-gray-50"
             >
               <div className="flex items-center gap-2">
                 <div className="p-1.5 sm:p-2">
-                  <Phone
-                    size={14}
-                    className="sm:w-4 sm:h-4"
-                    color="var(--color-text-muted)"
-                  />
+                  <Phone size={14} className="sm:w-4 sm:h-4" color="#9c9c9c" />
                 </div>
-                <span className="font-medium text-sm sm:text-base text-muted">
+                <span className="font-medium text-sm sm:text-base text-[#9c9c9c]">
                   Call: +91 89568 35375
                 </span>
               </div>
@@ -831,17 +807,13 @@ export default function TrackOrderDetailPage() {
             {/* Email Support */}
             <a
               href="mailto:contact@zeerostock.com"
-              className="block w-full py-2 px-2.5 sm:px-3 border border-muted rounded-xl bg-transparent no-underline box-border hover:bg-gray-50"
+              className="block w-full py-2 px-2.5 sm:px-3 border border-[#9c9c9c] rounded-[11px] bg-transparent no-underline box-border hover:bg-gray-50"
             >
               <div className="flex items-center gap-2">
                 <div className="p-1.5 sm:p-2">
-                  <Mail
-                    size={14}
-                    className="sm:w-4 sm:h-4"
-                    color="var(--color-text-muted)"
-                  />
+                  <Mail size={14} className="sm:w-4 sm:h-4" color="#9c9c9c" />
                 </div>
-                <span className="font-medium text-sm sm:text-base text-muted">
+                <span className="font-medium text-sm sm:text-base text-[#9c9c9c]">
                   Email Support
                 </span>
               </div>
@@ -849,8 +821,8 @@ export default function TrackOrderDetailPage() {
           </div>
 
           {/* Delivery Instructions Card */}
-          <div className="bg-white rounded-2xl shadow-md p-4 sm:p-5 md:p-6">
-            <h2 className="font-medium text-base sm:text-lg text-dark mt-0 mb-4 sm:mb-5">
+          <div className="bg-white rounded-[15px] shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] p-4 sm:p-5 md:p-6">
+            <h2 className="font-medium text-base sm:text-lg text-[#0d1b2a] mt-0 mb-4 sm:mb-5">
               Delivery Instructions
             </h2>
 
@@ -867,18 +839,18 @@ export default function TrackOrderDetailPage() {
                     cx="9"
                     cy="9"
                     r="8"
-                    stroke="var(--color-text-muted)"
+                    stroke="#9c9c9c"
                     strokeWidth="1.5"
                   />
                   <path
                     d="M9 5V10M9 13H9.01"
-                    stroke="var(--color-text-muted)"
+                    stroke="#9c9c9c"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                   />
                 </svg>
               </div>
-              <p className="font-normal text-xs sm:text-sm text-muted leading-tight m-0">
+              <p className="font-normal text-xs sm:text-sm text-[#9c9c9c] leading-tight m-0">
                 Please ensure someone is available to receive and inspect the
                 shipment upon delivery.
               </p>
@@ -887,7 +859,7 @@ export default function TrackOrderDetailPage() {
             {/* Go to Dashboard Button */}
             <button
               onClick={() => router.push("/buyer/dashboard")}
-              className="w-full p-2.5 sm:p-3 bg-primary border-none rounded-xl flex items-center justify-center gap-3 sm:gap-4 cursor-pointer hover:bg-primary-hover"
+              className="w-full p-2.5 sm:p-3 bg-[#1e3a8a] border-none rounded-[11px] flex items-center justify-center gap-3 sm:gap-4 cursor-pointer hover:bg-[#152e6b]"
             >
               <span className="font-semibold text-sm sm:text-base text-white">
                 Go to Dashboard

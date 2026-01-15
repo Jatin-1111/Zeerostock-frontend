@@ -48,7 +48,7 @@ export default function TrendingListsSectionV2() {
   return (
     <section className="bg-[#eefbf6] w-full py-4 sm:py-5 md:py-[22px] px-4 sm:px-6 md:px-8 lg:px-[40px]">
       {/* Title - 75% scaled (50px → 38px) */}
-      <h2 className="text-center text-xl sm:text-2xl md:text-2xl font-bold mb-2 leading-normal">
+      <h2 className="text-center text-xl sm:text-2xl md:text-[25px] font-bold mb-2 leading-normal">
         <span className="text-[#0d1b2a]">Trending </span>
         <span className="text-[#2ec096]">Lists</span>
         <span className="text-[#0d1b2a]"> & </span>
@@ -57,7 +57,7 @@ export default function TrendingListsSectionV2() {
       </h2>
 
       {/* Subtitle - 75% scaled (25px → 19px) */}
-      <p className="text-center text-xs sm:text-sm md:text-sm font-semibold text-[#6b7280] mb-6 sm:mb-10 md:mb-[57px] leading-normal max-w-full sm:max-w-md md:max-w-[537px] mx-auto px-4 sm:px-0">
+      <p className="text-center text-xs sm:text-sm md:text-[13px] font-semibold text-[#6b7280] mb-6 sm:mb-10 md:mb-[57px] leading-normal max-w-full sm:max-w-md md:max-w-[537px] mx-auto px-4 sm:px-0">
         Discover high-demand inventory and stay informed with real-time market
         insights
       </p>
@@ -73,17 +73,17 @@ export default function TrendingListsSectionV2() {
             >
               {/* Product Info */}
               <div className="flex flex-col flex-1 min-w-0">
-                <h3 className="text-sm sm:text-base md:text-base font-bold text-[#2bc295] mb-1.5 leading-tight">
+                <h3 className="text-sm sm:text-base md:text-[15px] font-bold text-[#2bc295] mb-1.5 leading-tight">
                   {product.title}
                 </h3>
-                <p className="text-xs sm:text-xs md:text-xs font-semibold text-[#787878] mb-1.5 leading-tight">
+                <p className="text-[10px] sm:text-xs md:text-[11px] font-semibold text-[#787878] mb-1.5 leading-tight">
                   {product.category}
                 </p>
                 <div className="flex flex-col mt-auto">
-                  <span className="text-sm sm:text-base md:text-base font-bold text-[#0bd600] leading-tight">
+                  <span className="text-sm sm:text-base md:text-[15px] font-bold text-[#0bd600] leading-tight">
                     {product.currentPrice}
                   </span>
-                  <span className="text-xs sm:text-sm md:text-sm font-bold text-[#9dce98] line-through leading-tight">
+                  <span className="text-xs sm:text-sm md:text-[12px] font-bold text-[#9dce98] line-through leading-tight">
                     {product.originalPrice}
                   </span>
                 </div>
@@ -102,7 +102,7 @@ export default function TrendingListsSectionV2() {
 
               {/* Discount Badge - 75% scaled */}
               <div className="absolute top-2 right-2 bg-[#d0ffdb] px-1 py-[2px] rounded-[5px]">
-                <span className="text-xs font-bold text-[#18a328] leading-none">
+                <span className="text-[7px] font-bold text-[#18a328] leading-none">
                   {product.discount}
                 </span>
               </div>
@@ -112,7 +112,7 @@ export default function TrendingListsSectionV2() {
 
         {/* Right Column - Market Analysis, 75% scaled (638px → 479px, 727px → 545px) */}
         <div className="bg-[#063576] rounded-lg sm:rounded-xl md:rounded-[10px] shadow-[0px_0px_7px_0px_rgba(0,0,0,0.25)] w-full lg:w-[319px] lg:flex-1 p-3 sm:p-4 md:p-[14px] flex flex-col">
-          <h3 className="text-base sm:text-lg md:text-lg font-extrabold text-[#2bc295] mb-3 leading-normal">
+          <h3 className="text-base sm:text-lg md:text-[17px] font-extrabold text-[#2bc295] mb-3 leading-normal">
             Live Market Analysis
           </h3>
 
@@ -134,7 +134,7 @@ export default function TrendingListsSectionV2() {
                 key={index}
                 className="flex flex-col items-center text-center p-2 sm:p-3 md:p-[10px]"
               >
-                <h4 className="text-xs sm:text-sm md:text-sm font-bold text-[#2bc295] mb-2 leading-normal">
+                <h4 className="text-xs sm:text-sm md:text-[13px] font-bold text-[#2bc295] mb-2 leading-normal">
                   {data.title}
                 </h4>
                 <div className="flex items-center gap-2">
@@ -150,7 +150,7 @@ export default function TrendingListsSectionV2() {
                     />
                   )}
                   <span
-                    className={`text-lg sm:text-xl md:text-xl font-bold leading-normal ${
+                    className={`text-lg sm:text-xl md:text-[20px] font-bold leading-normal ${
                       data.isUp ? "text-[#0bd600]" : "text-[#ff0404]"
                     }`}
                   >

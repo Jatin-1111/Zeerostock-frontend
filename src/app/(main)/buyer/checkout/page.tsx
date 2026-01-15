@@ -234,17 +234,17 @@ function CheckoutContent() {
         {/* Header */}
         <div className="mb-2.5">
           <div className="text-center">
-            <h1 className="text-xs font-semibold text-[#0d1b2a]">
+            <h1 className="text-[9px] font-semibold text-[#0d1b2a]">
               Checkout
             </h1>
-            <p className="text-xs font-medium text-[#9c9c9c]">
+            <p className="text-[6px] font-medium text-[#9c9c9c]">
               Secure payment and shipping information
             </p>
           </div>
         </div>
 
         {error && (
-          <div className="mb-1.5 p-1 bg-red-50 border border-red-200 rounded-lg text-red-600 text-xs">
+          <div className="mb-1.5 p-1 bg-red-50 border border-red-200 rounded-lg text-red-600 text-[8px]">
             {error}
           </div>
         )}

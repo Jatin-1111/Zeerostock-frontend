@@ -67,7 +67,7 @@ export default function CostSavings() {
 
   return (
     <div className="bg-white rounded-[10px] sm:rounded-[11px] shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] p-[14px] sm:p-[17px] h-auto sm:h-[223px] relative overflow-hidden">
-      <h2 className="text-sm sm:text-base font-semibold text-[#0d1b2a] leading-tight tracking-[0.3px] mb-3 sm:mb-4">
+      <h2 className="text-[13px] sm:text-[15px] font-semibold text-[#0d1b2a] leading-[13px] tracking-[0.3px] mb-3 sm:mb-4">
         Cost Saving
       </h2>
 
@@ -80,7 +80,7 @@ export default function CostSavings() {
           {/* Average Cost Reduction Box */}
           <div className="bg-[#eeffef] rounded-[10px] sm:rounded-[11px] h-[70px] sm:h-[79px] w-full sm:w-[209px] mx-auto mb-3 sm:mb-4.5 flex flex-col items-center justify-center relative overflow-hidden">
             <div className="flex items-center gap-[6px] sm:gap-[8px] mb-1 sm:mb-1.5">
-              <p className="text-xl sm:text-xl font-semibold text-[#2aae7a] leading-tight tracking-[0.3px]">
+              <p className="text-[18px] sm:text-[20px] font-semibold text-[#2aae7a] leading-[13px] tracking-[0.3px]">
                 {avgSavings}
               </p>
               <ArrowDown
@@ -88,7 +88,7 @@ export default function CostSavings() {
                 strokeWidth={1.5}
               />
             </div>
-            <p className="text-xs sm:text-xs font-medium text-[#9c9c9c] leading-normal">
+            <p className="text-[10px] sm:text-[11px] font-medium text-[#9c9c9c] leading-normal">
               Avg. Cost Reduction
             </p>
           </div>
@@ -97,10 +97,10 @@ export default function CostSavings() {
           <div className="space-y-1.5 sm:space-y-2">
             {categorySavings.map((item, index) => (
               <div key={index} className="flex items-center justify-between">
-                <span className="text-xs sm:text-xs font-medium text-[#9c9c9c] leading-normal">
+                <span className="text-[10px] sm:text-[11px] font-medium text-[#9c9c9c] leading-normal">
                   {item.category}
                 </span>
-                <span className="text-xs sm:text-xs font-medium text-[#2aae7a] leading-normal">
+                <span className="text-[10px] sm:text-[11px] font-medium text-[#2aae7a] leading-normal">
                   {item.percentage}
                 </span>
               </div>

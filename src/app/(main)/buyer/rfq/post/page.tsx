@@ -183,7 +183,7 @@ export default function PostRFQPage() {
     <div className="flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 lg:px-11 py-8 sm:py-10">
       {/* Added w-full so it doesn't shrink when flex column is applied */}
       <div className="w-full max-w-[750px] mx-auto">
-        <h1 className="text-lg sm:text-xl md:text-xl font-semibold text-[#0d1b2a] mb-3 sm:mb-4 md:mb-4.5">
+        <h1 className="text-[16px] sm:text-[18px] md:text-[20px] font-semibold text-[#0d1b2a] mb-3 sm:mb-4 md:mb-4.5">
           Post New RFQ
         </h1>
 
@@ -191,7 +191,7 @@ export default function PostRFQPage() {
         {success && (
           <div className="mb-3 sm:mb-4 p-2 bg-green-50 border border-green-200 flex items-center gap-1.5 rounded-[6px]">
             <Check className="w-3 h-3 text-green-600 shrink-0" />
-            <p className="text-xs sm:text-xs text-green-800">
+            <p className="text-[11px] sm:text-xs text-green-800">
               RFQ created successfully! Suppliers will start sending quotes
               soon.
             </p>
@@ -202,7 +202,7 @@ export default function PostRFQPage() {
         {error && (
           <div className="mb-3 sm:mb-4 p-2 bg-red-50 border border-red-200 flex items-center gap-1.5 rounded-[6px]">
             <AlertCircle className="w-3 h-3 text-red-600 shrink-0" />
-            <p className="text-xs sm:text-xs text-red-800">{error}</p>
+            <p className="text-[11px] sm:text-xs text-red-800">{error}</p>
           </div>
         )}
 
@@ -212,7 +212,7 @@ export default function PostRFQPage() {
         >
           {/* Product Title */}
           <div className="mb-3 sm:mb-4 md:mb-4.5">
-            <label className="block text-sm sm:text-sm font-medium text-[#0d1b2a] mb-[4px]">
+            <label className="block text-[12px] sm:text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
               Product Title<span className="text-red-600">*</span>
             </label>
             <input
@@ -222,7 +222,7 @@ export default function PostRFQPage() {
               onChange={(e) =>
                 setFormData({ ...formData, title: e.target.value })
               }
-              className="w-full h-[30px] sm:h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-xs text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+              className="w-full h-[30px] sm:h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
               required
               disabled={loading}
             />
@@ -230,14 +230,14 @@ export default function PostRFQPage() {
 
           {/* Category */}
           <div className="mb-3 sm:mb-4 md:mb-4.5">
-            <label className="block text-sm sm:text-sm font-medium text-[#0d1b2a] mb-[4px]">
+            <label className="block text-[12px] sm:text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
               Category<span className="text-red-600">*</span>
             </label>
             <div className="relative" ref={categoryRef}>
               <button
                 type="button"
                 onClick={() => !loading && setIsCategoryOpen(!isCategoryOpen)}
-                className="w-full h-[30px] sm:h-[32px] px-2 pr-8 border border-[#bebebe] rounded-[6px] text-xs text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] hover:border-[#8a8a8a] transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-left"
+                className="w-full h-[30px] sm:h-[32px] px-2 pr-8 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] hover:border-[#8a8a8a] transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-left"
                 disabled={loading}
               >
                 <span
@@ -273,7 +273,7 @@ export default function PostRFQPage() {
                           setFormData({ ...formData, categoryId: cat.id });
                           setIsCategoryOpen(false);
                         }}
-                        className="px-2 py-2 text-xs text-gray-900 hover:bg-[#f0f9ff] hover:text-[#1e3a8a] cursor-pointer transition-colors"
+                        className="px-2 py-2 text-[9px] text-gray-900 hover:bg-[#f0f9ff] hover:text-[#1e3a8a] cursor-pointer transition-colors"
                       >
                         {cat.name}
                       </div>
@@ -286,14 +286,14 @@ export default function PostRFQPage() {
 
           {/* Industry */}
           <div className="mb-3 sm:mb-4 md:mb-4.5">
-            <label className="block text-sm sm:text-sm font-medium text-[#0d1b2a] mb-[4px]">
+            <label className="block text-[12px] sm:text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
               Industry<span className="text-red-600">*</span>
             </label>
             <div className="relative" ref={industryRef}>
               <button
                 type="button"
                 onClick={() => !loading && setIsIndustryOpen(!isIndustryOpen)}
-                className="w-full h-[30px] sm:h-[32px] px-2 pr-8 border border-[#bebebe] rounded-[6px] text-xs text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] hover:border-[#8a8a8a] transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-left"
+                className="w-full h-[30px] sm:h-[32px] px-2 pr-8 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] hover:border-[#8a8a8a] transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-left"
                 disabled={loading}
               >
                 <span
@@ -329,7 +329,7 @@ export default function PostRFQPage() {
                           setFormData({ ...formData, industryId: ind.id });
                           setIsIndustryOpen(false);
                         }}
-                        className="px-2 py-2 text-xs text-gray-900 hover:bg-[#f0f9ff] hover:text-[#1e3a8a] cursor-pointer transition-colors"
+                        className="px-2 py-2 text-[9px] text-gray-900 hover:bg-[#f0f9ff] hover:text-[#1e3a8a] cursor-pointer transition-colors"
                       >
                         {ind.name}
                       </div>
@@ -343,7 +343,7 @@ export default function PostRFQPage() {
           {/* Quantity and Unit */}
           <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-[22.5px] mb-3 sm:mb-4 md:mb-4.5">
             <div>
-              <label className="block text-sm sm:text-sm font-medium text-[#0d1b2a] mb-[4px]">
+              <label className="block text-[12px] sm:text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
                 Quantity<span className="text-red-600">*</span>
               </label>
               <input
@@ -356,7 +356,7 @@ export default function PostRFQPage() {
                     quantity: Number(e.target.value),
                   })
                 }
-                className="w-full h-[30px] sm:h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-xs text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+                className="w-full h-[30px] sm:h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
                 required
                 min="1"
                 disabled={loading}
@@ -364,14 +364,14 @@ export default function PostRFQPage() {
             </div>
 
             <div>
-              <label className="block text-sm sm:text-sm font-medium text-[#0d1b2a] mb-[4px]">
+              <label className="block text-[12px] sm:text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
                 Unit
               </label>
               <div className="relative" ref={unitRef}>
                 <button
                   type="button"
                   onClick={() => !loading && setIsUnitOpen(!isUnitOpen)}
-                  className="w-full h-[30px] sm:h-[32px] px-2 pr-8 border border-[#bebebe] rounded-[6px] text-xs text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] hover:border-[#8a8a8a] transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-left"
+                  className="w-full h-[30px] sm:h-[32px] px-2 pr-8 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] hover:border-[#8a8a8a] transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-left"
                   disabled={loading}
                 >
                   <span
@@ -400,7 +400,7 @@ export default function PostRFQPage() {
                     >
                       {units.map((group) => (
                         <div key={group.category}>
-                          <div className="px-2 py-1.5 text-xs font-semibold text-[#0d1b2a] bg-gray-50">
+                          <div className="px-2 py-1.5 text-[8px] font-semibold text-[#0d1b2a] bg-gray-50">
                             {group.category}
                           </div>
                           {group.items.map((unit) => (
@@ -410,7 +410,7 @@ export default function PostRFQPage() {
                                 setFormData({ ...formData, unit });
                                 setIsUnitOpen(false);
                               }}
-                              className="px-2 pl-4 py-2 text-xs text-gray-900 hover:bg-[#f0f9ff] hover:text-[#1e3a8a] cursor-pointer transition-colors"
+                              className="px-2 pl-4 py-2 text-[9px] text-gray-900 hover:bg-[#f0f9ff] hover:text-[#1e3a8a] cursor-pointer transition-colors"
                             >
                               {unit}
                             </div>
@@ -426,7 +426,7 @@ export default function PostRFQPage() {
 
           {/* Budget Range */}
           <div className="mb-3 sm:mb-4 md:mb-4.5">
-            <label className="block text-sm sm:text-sm font-medium text-[#0d1b2a] mb-[4px]">
+            <label className="block text-[12px] sm:text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
               Budget Range
             </label>
             <input
@@ -440,7 +440,7 @@ export default function PostRFQPage() {
                   budgetMax: value ? Number(value) : undefined,
                 });
               }}
-              className="w-full h-[30px] sm:h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-xs text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+              className="w-full h-[30px] sm:h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
               disabled={loading}
               min="0"
             />
@@ -448,7 +448,7 @@ export default function PostRFQPage() {
 
           {/* Required by Date */}
           <div className="mb-3 sm:mb-4 md:mb-4.5">
-            <label className="block text-sm sm:text-sm font-medium text-[#0d1b2a] mb-[4px]">
+            <label className="block text-[12px] sm:text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
               Required by Date
             </label>
             <input
@@ -458,14 +458,14 @@ export default function PostRFQPage() {
               onChange={(e) =>
                 setFormData({ ...formData, requiredByDate: e.target.value })
               }
-              className="w-full h-[30px] sm:h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-xs text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+              className="w-full h-[30px] sm:h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
               disabled={loading}
             />
           </div>
 
           {/* Detailed Requirements */}
           <div className="mb-3 sm:mb-4 md:mb-4.5">
-            <label className="block text-sm sm:text-sm font-medium text-[#0d1b2a] mb-[4px]">
+            <label className="block text-[12px] sm:text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
               Detailed Requirements
             </label>
             <textarea
@@ -478,7 +478,7 @@ export default function PostRFQPage() {
                 })
               }
               rows={3}
-              className="w-full px-2 py-1.5 border border-[#bebebe] rounded-[6px] text-xs text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe] resize-none"
+              className="w-full px-2 py-1.5 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe] resize-none"
               disabled={loading}
             />
           </div>
@@ -486,7 +486,7 @@ export default function PostRFQPage() {
           {/* Preferred Location and RFQ Duration */}
           <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-[22.5px] mb-[20px] sm:mb-[24px] md:mb-[27px]">
             <div>
-              <label className="block text-sm sm:text-sm font-medium text-[#0d1b2a] mb-[4px]">
+              <label className="block text-[12px] sm:text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
                 Preferred Location
               </label>
               <input
@@ -499,20 +499,20 @@ export default function PostRFQPage() {
                     preferredLocation: e.target.value,
                   })
                 }
-                className="w-full h-[30px] sm:h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-xs text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+                className="w-full h-[30px] sm:h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
                 disabled={loading}
               />
             </div>
 
             <div>
-              <label className="block text-sm sm:text-sm font-medium text-[#0d1b2a] mb-[4px]">
+              <label className="block text-[12px] sm:text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
                 RFQ Duration<span className="text-red-600">*</span>
               </label>
               <div className="relative" ref={durationRef}>
                 <button
                   type="button"
                   onClick={() => !loading && setIsDurationOpen(!isDurationOpen)}
-                  className="w-full h-[30px] sm:h-[32px] px-2 pr-8 border border-[#bebebe] rounded-[6px] text-xs text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] hover:border-[#8a8a8a] transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-left"
+                  className="w-full h-[30px] sm:h-[32px] px-2 pr-8 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] hover:border-[#8a8a8a] transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-left"
                   disabled={loading}
                 >
                   <span className="text-gray-900">
@@ -548,7 +548,7 @@ export default function PostRFQPage() {
                             });
                             setIsDurationOpen(false);
                           }}
-                          className="px-2 py-2 text-xs text-gray-900 hover:bg-[#f0f9ff] hover:text-[#1e3a8a] cursor-pointer transition-colors"
+                          className="px-2 py-2 text-[9px] text-gray-900 hover:bg-[#f0f9ff] hover:text-[#1e3a8a] cursor-pointer transition-colors"
                         >
                           {duration.label}
                         </div>
@@ -565,7 +565,7 @@ export default function PostRFQPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full sm:w-[191px] h-[40px] sm:h-[45px] bg-[#1e3a8a] text-white text-sm sm:text-base font-semibold rounded-[10px] sm:rounded-[11px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center justify-center gap-[9px] sm:gap-[11px] disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full sm:w-[191px] h-[40px] sm:h-[45px] bg-[#1e3a8a] text-white text-[13px] sm:text-[15px] font-semibold rounded-[10px] sm:rounded-[11px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center justify-center gap-[9px] sm:gap-[11px] disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? (
                 <>

@@ -24,7 +24,7 @@ export default function DataTable<T = Record<string, unknown>>({
             {columns.map((column, index) => (
               <th
                 key={index}
-                className={`px-4 py-3 text-left text-sm font-medium text-gray-600 ${
+                className={`px-4 py-3 text-left text-[12px] font-medium text-gray-600 ${
                   column.className || ""
                 }`}
               >
@@ -45,7 +45,7 @@ export default function DataTable<T = Record<string, unknown>>({
               {columns.map((column, colIndex) => (
                 <td
                   key={colIndex}
-                  className={`px-4 py-3 text-base text-gray-900 ${
+                  className={`px-4 py-3 text-[14px] text-gray-900 ${
                     column.className || ""
                   }`}
                 >

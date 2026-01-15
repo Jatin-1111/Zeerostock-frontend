@@ -66,10 +66,10 @@ function HelpDeskContent() {
       {/* Header */}
       <div className="px-[40px] py-[16px]">
         <div className="flex flex-col gap-[8px]">
-          <h1 className="text-xl font-semibold text-[#0d1b2a]">
+          <h1 className="text-[20px] font-semibold text-[#0d1b2a]">
             Help & Support
           </h1>
-          <p className="text-sm font-medium text-[#9c9c9c]">
+          <p className="text-[12px] font-medium text-[#9c9c9c]">
             Get the help you need to succeed on Zeerostock
           </p>
         </div>
@@ -91,10 +91,10 @@ function HelpDeskContent() {
                     strokeWidth={1.5}
                   />
                 </div>
-                <p className="mb-[5px] text-center text-xs font-semibold text-[#0d1b2a]">
+                <p className="mb-[5px] text-center text-[11px] font-semibold text-[#0d1b2a]">
                   {card.title}
                 </p>
-                <p className="mb-[16px] text-center text-xs font-medium leading-relaxed text-[#9c9c9c]">
+                <p className="mb-[16px] text-center text-[9px] font-medium leading-relaxed text-[#9c9c9c]">
                   {card.description}
                 </p>
 
@@ -102,12 +102,12 @@ function HelpDeskContent() {
                 {card.href !== "#" ? (
                   <a
                     href={card.href}
-                    className="mt-auto flex w-[100px] items-center justify-center rounded-[10px] bg-[#1e3a8a] px-[5px] py-[5px] text-xs font-medium text-white transition-colors hover:bg-[#1e3a8a]/90"
+                    className="mt-auto flex w-[100px] items-center justify-center rounded-[10px] bg-[#1e3a8a] px-[5px] py-[5px] text-[9px] font-medium text-white transition-colors hover:bg-[#1e3a8a]/90"
                   >
                     {card.buttonText}
                   </a>
                 ) : (
-                  <button className="mt-auto w-[100px] rounded-[10px] bg-[#1e3a8a] px-[5px] py-[5px] text-xs font-medium text-white transition-colors hover:bg-[#1e3a8a]/90">
+                  <button className="mt-auto w-[100px] rounded-[10px] bg-[#1e3a8a] px-[5px] py-[5px] text-[9px] font-medium text-white transition-colors hover:bg-[#1e3a8a]/90">
                     {card.buttonText}
                   </button>
                 )}
@@ -125,7 +125,7 @@ function HelpDeskContent() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`pb-[8px] text-xs font-medium border-b-[1px] transition-colors ${
+                className={`pb-[8px] text-[9px] font-medium border-b-[1px] transition-colors ${
                   activeTab === tab.id
                     ? "border-gray-900 text-gray-900"
                     : "border-transparent text-gray-600 hover:text-gray-900"

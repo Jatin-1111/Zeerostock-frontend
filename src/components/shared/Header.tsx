@@ -80,7 +80,7 @@ export default function Header({ onSidebarToggle }: HeaderProps) {
           <nav className="flex items-center gap-[45px]">
             <Link
               href="/home"
-              className={`font-semibold text-base leading-normal whitespace-nowrap transition-colors ${
+              className={`font-semibold text-[15px] leading-normal whitespace-nowrap transition-colors ${
                 isActive("/home")
                   ? "text-[#58ea50]"
                   : "text-white hover:text-[#58ea50]"
@@ -90,7 +90,7 @@ export default function Header({ onSidebarToggle }: HeaderProps) {
             </Link>
             <Link
               href="/about"
-              className={`font-semibold text-base leading-normal whitespace-nowrap transition-colors ${
+              className={`font-semibold text-[15px] leading-normal whitespace-nowrap transition-colors ${
                 isActive("/about")
                   ? "text-[#58ea50]"
                   : "text-white hover:text-[#58ea50]"
@@ -102,7 +102,7 @@ export default function Header({ onSidebarToggle }: HeaderProps) {
             {(!isAuthenticated || user?.activeRole !== "supplier") && (
               <Link
                 href="/buyer/dashboard"
-                className={`font-semibold text-base leading-normal whitespace-nowrap transition-colors ${
+                className={`font-semibold text-[15px] leading-normal whitespace-nowrap transition-colors ${
                   isActive("/buyer")
                     ? "text-[#58ea50]"
                     : "text-white hover:text-[#58ea50]"
@@ -115,7 +115,7 @@ export default function Header({ onSidebarToggle }: HeaderProps) {
             {(!isAuthenticated || user?.activeRole !== "buyer") && (
               <Link
                 href="/supplier/dashboard"
-                className={`font-semibold text-base leading-normal whitespace-nowrap transition-colors ${
+                className={`font-semibold text-[15px] leading-normal whitespace-nowrap transition-colors ${
                   isActive("/supplier")
                     ? "text-[#58ea50]"
                     : "text-white hover:text-[#58ea50]"
@@ -126,7 +126,7 @@ export default function Header({ onSidebarToggle }: HeaderProps) {
             )}
             <Link
               href="/roi"
-              className={`font-semibold text-base leading-normal whitespace-nowrap transition-colors ${
+              className={`font-semibold text-[15px] leading-normal whitespace-nowrap transition-colors ${
                 isActive("/roi")
                   ? "text-[#58ea50]"
                   : "text-white hover:text-[#58ea50]"
@@ -140,7 +140,7 @@ export default function Header({ onSidebarToggle }: HeaderProps) {
           <div className="w-[220px]">
             <EnhancedSearchInput
               placeholder="Search Industrial Equipment, etc"
-              className="rounded-full text-sm font-semibold py-1"
+              className="rounded-full text-[13px] font-semibold py-1"
               showPopularSearches={false}
             />
           </div>
@@ -253,7 +253,7 @@ export default function Header({ onSidebarToggle }: HeaderProps) {
             aria-label="Change language"
           >
             <Globe className="w-[16px] h-[16px] text-white" />
-            <span className="text-white text-xs font-medium">EN</span>
+            <span className="text-white text-[10.5px] font-medium">EN</span>
           </button>
 
           {/* WhatsApp (Desktop Only -> Hidden on Medium) */}
@@ -290,10 +290,10 @@ export default function Header({ onSidebarToggle }: HeaderProps) {
                     // Logged In User Menu
                     <div className="py-1.5">
                       <div className="px-3 py-2 border-b border-gray-200">
-                        <p className="text-xs font-semibold text-gray-900">
+                        <p className="text-[10.5px] font-semibold text-gray-900">
                           {user.firstName} {user.lastName}
                         </p>
-                        <p className="text-xs text-gray-600 truncate">
+                        <p className="text-[9px] text-gray-600 truncate">
                           {user.email}
                         </p>
                       </div>
@@ -301,7 +301,7 @@ export default function Header({ onSidebarToggle }: HeaderProps) {
                       <div className="py-1">
                         <Link
                           href={`/${user.activeRole}/dashboard`}
-                          className="flex items-center gap-2 px-3 py-2 text-xs text-gray-900 hover:bg-gray-100 transition-colors"
+                          className="flex items-center gap-2 px-3 py-2 text-[10.5px] text-gray-900 hover:bg-gray-100 transition-colors"
                           onClick={() => setIsUserMenuOpen(false)}
                         >
                           <LayoutDashboard className="w-[14px] h-[14px]" />
@@ -309,7 +309,7 @@ export default function Header({ onSidebarToggle }: HeaderProps) {
                         </Link>
                         <Link
                           href={`/${user.activeRole}/settings`}
-                          className="flex items-center gap-2 px-3 py-2 text-xs text-gray-900 hover:bg-gray-100 transition-colors"
+                          className="flex items-center gap-2 px-3 py-2 text-[10.5px] text-gray-900 hover:bg-gray-100 transition-colors"
                           onClick={() => setIsUserMenuOpen(false)}
                         >
                           <Settings className="w-[14px] h-[14px]" />
@@ -321,7 +321,7 @@ export default function Header({ onSidebarToggle }: HeaderProps) {
 
                       <button
                         onClick={handleLogout}
-                        className="w-full flex items-center gap-2 px-3 py-2 text-xs text-red-600 hover:bg-red-50 transition-colors"
+                        className="w-full flex items-center gap-2 px-3 py-2 text-[10.5px] text-red-600 hover:bg-red-50 transition-colors"
                       >
                         <LogOut className="w-[14px] h-[14px]" />
                         Logout
@@ -331,10 +331,10 @@ export default function Header({ onSidebarToggle }: HeaderProps) {
                     // Logged Out User Menu
                     <div className="py-1.5">
                       <div className="px-3 py-2 border-b border-gray-200">
-                        <p className="text-xs font-semibold text-gray-900">
+                        <p className="text-[10.5px] font-semibold text-gray-900">
                           Welcome to Zeerostock
                         </p>
-                        <p className="text-xs text-gray-600">
+                        <p className="text-[9px] text-gray-600">
                           Sign in to access your account
                         </p>
                       </div>
@@ -343,14 +343,14 @@ export default function Header({ onSidebarToggle }: HeaderProps) {
                         <Link
                           href="/login"
                           onClick={() => setIsUserMenuOpen(false)}
-                          className="block w-full px-3 py-1.5 text-xs font-medium text-white bg-[#1a5f52] hover:bg-[#164b42] rounded-lg transition-colors text-center"
+                          className="block w-full px-3 py-1.5 text-[10.5px] font-medium text-white bg-[#1a5f52] hover:bg-[#164b42] rounded-lg transition-colors text-center"
                         >
                           Login
                         </Link>
                         <Link
                           href="/signup"
                           onClick={() => setIsUserMenuOpen(false)}
-                          className="block w-full px-3 py-1.5 text-xs font-medium text-[#1a5f52] bg-white border-2 border-[#1a5f52] hover:bg-gray-50 rounded-lg transition-colors text-center"
+                          className="block w-full px-3 py-1.5 text-[10.5px] font-medium text-[#1a5f52] bg-white border-2 border-[#1a5f52] hover:bg-gray-50 rounded-lg transition-colors text-center"
                         >
                           Sign Up
                         </Link>
@@ -359,7 +359,7 @@ export default function Header({ onSidebarToggle }: HeaderProps) {
                       <hr className="my-1 border-gray-200" />
 
                       <div className="px-3 py-1.5">
-                        <p className="text-xs text-gray-500 text-center">
+                        <p className="text-[9px] text-gray-500 text-center">
                           New to Zeerostock?{" "}
                           <Link
                             href="/about"

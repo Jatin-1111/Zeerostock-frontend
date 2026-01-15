@@ -108,11 +108,11 @@ export default function VideoTutorialsLibrary({
             {/* Content */}
             <div className="p-[15px]">
               {/* Header */}
-              <h1 className="mb-[4px] text-base font-semibold leading-none text-[#0d1b2a]">
+              <h1 className="mb-[4px] text-[14px] font-semibold leading-none text-[#0d1b2a]">
                 Video Tutorial Library
               </h1>
 
-              <p className="mb-[11px] text-xs font-medium leading-normal text-[#9c9c9c]">
+              <p className="mb-[11px] text-[9px] font-medium leading-normal text-[#9c9c9c]">
                 Step-by-step videos to help you maximize your Zeerostock
                 experience
               </p>
@@ -124,12 +124,12 @@ export default function VideoTutorialsLibrary({
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search tutorial videos.."
-                  className="flex-1 bg-transparent text-xs font-medium text-[#374151] outline-none placeholder:text-[#374151] placeholder:opacity-80"
+                  className="flex-1 bg-transparent text-[7px] font-medium text-[#374151] outline-none placeholder:text-[#374151] placeholder:opacity-80"
                 />
                 <div className="flex items-center gap-[4px]">
                   <div className="h-[17px] w-[1px] bg-gray-300"></div>
                   <Search className="h-[9px] w-[9px] text-[#374151] opacity-80" />
-                  <p className="w-[32px] text-center text-xs font-medium text-[#374151] opacity-80">
+                  <p className="w-[32px] text-center text-[9px] font-medium text-[#374151] opacity-80">
                     Search
                   </p>
                 </div>
@@ -138,7 +138,7 @@ export default function VideoTutorialsLibrary({
               {/* Video Grid */}
               {filteredVideos.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-[40px]">
-                  <p className="text-xs font-medium text-[#9c9c9c]">
+                  <p className="text-[9px] font-medium text-[#9c9c9c]">
                     No videos found matching your search.
                   </p>
                 </div>
@@ -162,18 +162,18 @@ export default function VideoTutorialsLibrary({
                       {/* Card Content */}
                       <div className="flex flex-1 flex-col p-[8px]">
                         {/* Title */}
-                        <h3 className="mb-[8px] text-xs font-semibold leading-tight text-[#0d1b2a]">
+                        <h3 className="mb-[8px] text-[9px] font-semibold leading-[12px] text-[#0d1b2a]">
                           {video.title}
                         </h3>
 
                         {/* Description */}
-                        <p className="mb-[9px] flex-1 text-xs font-medium leading-tight text-[#9c9c9c]">
+                        <p className="mb-[9px] flex-1 text-[7px] font-medium leading-[8px] text-[#9c9c9c]">
                           {video.description}
                         </p>
 
                         {/* Duration Badge */}
                         <div className="mb-[5px] flex h-[13px] w-[36px] items-center justify-center rounded-[11px] bg-[#e2dfdf]">
-                          <p className="text-xs font-medium leading-tight text-[#818080]">
+                          <p className="text-[6px] font-medium leading-[8px] text-[#818080]">
                             {video.duration}
                           </p>
                         </div>
@@ -184,7 +184,7 @@ export default function VideoTutorialsLibrary({
                           whileTap={{ scale: 0.98 }}
                           className="flex h-[19px] w-[68px] items-center justify-center self-end rounded-[4px] bg-[#1e3a8a] transition-colors hover:bg-[#1e3a8a]/90"
                         >
-                          <p className="text-xs font-medium leading-tight text-white">
+                          <p className="text-[7px] font-medium leading-[8px] text-white">
                             Watch Video
                           </p>
                         </motion.button>

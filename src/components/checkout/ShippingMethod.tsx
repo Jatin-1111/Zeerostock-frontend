@@ -59,7 +59,7 @@ export default function ShippingMethod({
       {/* Header */}
       <div className="flex items-center gap-[10px] mb-[15px]">
         <Truck className="w-[13px] h-[13px] text-gray-900" strokeWidth={1.5} />
-        <h2 className="text-sm font-semibold text-[#0D1B2A]">
+        <h2 className="text-[12px] font-semibold text-[#0D1B2A]">
           Shipping Method
         </h2>
       </div>
@@ -96,10 +96,10 @@ export default function ShippingMethod({
               <div className="flex items-center justify-between flex-1">
                 {/* Left: Name and Description */}
                 <div className="flex flex-col">
-                  <h3 className="text-xs font-medium text-[#0D1B2A] leading-normal">
+                  <h3 className="text-[9px] font-medium text-[#0D1B2A] leading-normal">
                     {option.name}
                   </h3>
-                  <p className="text-xs text-[#9C9C9C] leading-tight">
+                  <p className="text-[8px] text-[#9C9C9C] leading-[12px]">
                     {option.description}
                   </p>
                 </div>
@@ -107,13 +107,13 @@ export default function ShippingMethod({
                 {/* Right: Price and Estimated Days */}
                 <div className="flex flex-col items-end text-right">
                   <p
-                    className={`text-xs font-medium leading-normal ${
+                    className={`text-[9px] font-medium leading-normal ${
                       option.price === 0 ? "text-[#2AAE7A]" : "text-[#0D1B2A]"
                     }`}
                   >
                     {option.price === 0 ? "FREE" : `$${option.price}`}
                   </p>
-                  <p className="text-xs text-[#9C9C9C] leading-tight">
+                  <p className="text-[8px] text-[#9C9C9C] leading-[12px]">
                     {option.estimatedDays}
                   </p>
                 </div>
@@ -127,14 +127,14 @@ export default function ShippingMethod({
       <div className="flex justify-between gap-3">
         <button
           onClick={onBack}
-          className="px-[18px] py-[7.5px] border-[1.5px] border-[#9C9C9C] text-[#9C9C9C] rounded-[6px] text-sm font-medium hover:bg-gray-50 transition-colors"
+          className="px-[18px] py-[7.5px] border-[1.5px] border-[#9C9C9C] text-[#9C9C9C] rounded-[6px] text-[13px] font-medium hover:bg-gray-50 transition-colors"
         >
           Back to Address
         </button>
         <button
           onClick={onContinue}
           disabled={!selectedMethod}
-          className="px-[24px] py-[7.5px] bg-[#1E3A8A] text-white rounded-[6px] text-sm font-medium hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="px-[24px] py-[7.5px] bg-[#1E3A8A] text-white rounded-[6px] text-[13px] font-medium hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           Continue
         </button>

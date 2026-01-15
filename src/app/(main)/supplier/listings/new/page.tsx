@@ -602,7 +602,7 @@ export default function NewListing() {
       {/* Main Container - 75% scale via smaller max-width and padding */}
       <div className="mx-auto max-w-[1080px] px-[60px] py-[22px]">
         {/* Page Title - 75% of original */}
-        <h1 className="mb-[11px] text-xl font-semibold leading-snug text-[#0d1b2a]">
+        <h1 className="mb-[11px] text-[20px] font-semibold leading-[40px] text-[#0d1b2a]">
           My Inventory
         </h1>
 
@@ -841,7 +841,7 @@ export default function NewListing() {
           <FormSection title="Compliance & Certification">
             <div className="space-y-[20px]">
               <div>
-                <label className="mb-[9px] block text-sm font-medium text-[#0d1b2a]">
+                <label className="mb-[9px] block text-[12px] font-medium text-[#0d1b2a]">
                   Available Certification
                 </label>
                 <div className="space-y-[12px]">
@@ -903,7 +903,7 @@ export default function NewListing() {
             <button
               type="submit"
               disabled={loading || uploadingImages}
-              className="h-[40px] w-[150px] rounded-[8px] bg-[#1e3a8a] text-xs font-semibold text-white hover:bg-[#1e40af] disabled:cursor-not-allowed disabled:opacity-50"
+              className="h-[40px] w-[150px] rounded-[8px] bg-[#1e3a8a] text-[10px] font-semibold text-white hover:bg-[#1e40af] disabled:cursor-not-allowed disabled:opacity-50"
             >
               {loading ? "Creating..." : "List Product"}
             </button>

@@ -100,10 +100,10 @@ export default function LanguageSettings() {
     <div className="flex flex-col gap-[16.88px]">
       {/* Header Section */}
       <div>
-        <h1 className="text-xl font-semibold text-[#0d1b2a] mb-[4.5px] leading-[1.2]">
+        <h1 className="text-[19.69px] font-semibold text-[#0d1b2a] mb-[4.5px] leading-[1.2]">
           Language & Region
         </h1>
-        <p className="text-xs text-[#0d1b2a] font-normal">
+        <p className="text-[9.56px] text-[#0d1b2a] font-normal">
           Configure your language preferences and regional settings
         </p>
       </div>
@@ -125,7 +125,7 @@ export default function LanguageSettings() {
         {/* Section Header */}
         <div className="flex items-center gap-[11.25px] mb-[22.5px]">
           <Globe className="w-[14.63px] h-[14.63px] text-[#0d1b2a]" />
-          <h2 className="text-sm font-semibold text-[#0d1b2a]">
+          <h2 className="text-[13.5px] font-semibold text-[#0d1b2a]">
             Language & Region Setting
           </h2>
         </div>
@@ -137,7 +137,7 @@ export default function LanguageSettings() {
         <div className="mt-[16.88px]">
           {/* Language Settings Section */}
           <div className="mb-[28.13px]">
-            <h3 className="text-xs font-semibold text-[#0d1b2a] mb-[14.06px]">
+            <h3 className="text-[11.25px] font-semibold text-[#0d1b2a] mb-[14.06px]">
               Language Setting
             </h3>
 
@@ -145,7 +145,7 @@ export default function LanguageSettings() {
             <div className="grid grid-cols-2 gap-[27.56px]">
               {/* Interface Language */}
               <div>
-                <label className="block text-xs font-medium text-[#0d1b2a] mb-[7.88px]">
+                <label className="block text-[9.56px] font-medium text-[#0d1b2a] mb-[7.88px]">
                   Interface Language
                 </label>
                 <input
@@ -154,13 +154,13 @@ export default function LanguageSettings() {
                   onChange={(e) =>
                     setFormData({ ...formData, language: e.target.value })
                   }
-                  className="w-full h-[31.5px] px-[9px] border border-[#bebebe] rounded-[5.63px] text-xs text-[#0d1b2a] outline-none"
+                  className="w-full h-[31.5px] px-[9px] border border-[#bebebe] rounded-[5.63px] text-[9px] text-[#0d1b2a] outline-none"
                 />
               </div>
 
               {/* Region */}
               <div>
-                <label className="block text-xs font-medium text-[#0d1b2a] mb-[7.88px]">
+                <label className="block text-[9.56px] font-medium text-[#0d1b2a] mb-[7.88px]">
                   Region
                 </label>
                 <input
@@ -169,7 +169,7 @@ export default function LanguageSettings() {
                   onChange={(e) =>
                     setFormData({ ...formData, region: e.target.value })
                   }
-                  className="w-full h-[31.5px] px-[9px] border border-[#bebebe] rounded-[5.63px] text-xs text-[#0d1b2a] outline-none"
+                  className="w-full h-[31.5px] px-[9px] border border-[#bebebe] rounded-[5.63px] text-[9px] text-[#0d1b2a] outline-none"
                 />
               </div>
             </div>
@@ -177,7 +177,7 @@ export default function LanguageSettings() {
 
           {/* Format Preferences Section */}
           <div>
-            <h3 className="text-xs font-semibold text-[#0d1b2a] mb-[14.06px]">
+            <h3 className="text-[11.25px] font-semibold text-[#0d1b2a] mb-[14.06px]">
               Format Perferences
             </h3>
 
@@ -185,7 +185,7 @@ export default function LanguageSettings() {
             <div className="grid grid-cols-2 gap-[27.56px] mb-[23.63px]">
               {/* Date Format */}
               <div>
-                <label className="block text-xs font-medium text-[#0d1b2a] mb-[7.88px]">
+                <label className="block text-[9.56px] font-medium text-[#0d1b2a] mb-[7.88px]">
                   Date Format
                 </label>
                 <div className="relative">
@@ -195,7 +195,7 @@ export default function LanguageSettings() {
                     onChange={(e) =>
                       setFormData({ ...formData, dateFormat: e.target.value })
                     }
-                    className="w-full h-[31.5px] pl-[9px] pr-[27px] border border-[#bebebe] rounded-[5.63px] text-xs text-[#0d1b2a] outline-none"
+                    className="w-full h-[31.5px] pl-[9px] pr-[27px] border border-[#bebebe] rounded-[5.63px] text-[9px] text-[#0d1b2a] outline-none"
                   />
                   <ChevronDown className="absolute right-[9px] top-1/2 -translate-y-1/2 w-[13.5px] h-[13.5px] text-[#0d1b2a] pointer-events-none" />
                 </div>
@@ -203,7 +203,7 @@ export default function LanguageSettings() {
 
               {/* Time Format */}
               <div>
-                <label className="block text-xs font-medium text-[#0d1b2a] mb-[7.88px]">
+                <label className="block text-[9.56px] font-medium text-[#0d1b2a] mb-[7.88px]">
                   Time Format
                 </label>
                 <div className="relative">
@@ -213,7 +213,7 @@ export default function LanguageSettings() {
                     onChange={(e) =>
                       setFormData({ ...formData, timeFormat: e.target.value })
                     }
-                    className="w-full h-[31.5px] pl-[9px] pr-[27px] border border-[#bebebe] rounded-[5.63px] text-xs text-[#0d1b2a] outline-none"
+                    className="w-full h-[31.5px] pl-[9px] pr-[27px] border border-[#bebebe] rounded-[5.63px] text-[9px] text-[#0d1b2a] outline-none"
                   />
                   <ChevronDown className="absolute right-[9px] top-1/2 -translate-y-1/2 w-[13.5px] h-[13.5px] text-[#0d1b2a] pointer-events-none" />
                 </div>
@@ -222,7 +222,7 @@ export default function LanguageSettings() {
 
             {/* Currency - Single Column (Width calc approximated to ~50% minus gap) */}
             <div className="w-[calc(50%-13.78px)]">
-              <label className="block text-xs font-medium text-[#0d1b2a] mb-[7.88px]">
+              <label className="block text-[9.56px] font-medium text-[#0d1b2a] mb-[7.88px]">
                 Currency
               </label>
               <div className="relative">
@@ -232,7 +232,7 @@ export default function LanguageSettings() {
                   onChange={(e) =>
                     setFormData({ ...formData, currency: e.target.value })
                   }
-                  className="w-full h-[31.5px] pl-[9px] pr-[27px] border border-[#bebebe] rounded-[5.63px] text-xs text-[#0d1b2a] outline-none"
+                  className="w-full h-[31.5px] pl-[9px] pr-[27px] border border-[#bebebe] rounded-[5.63px] text-[9px] text-[#0d1b2a] outline-none"
                 />
                 <ChevronDown className="absolute right-[9px] top-1/2 -translate-y-1/2 w-[13.5px] h-[13.5px] text-[#0d1b2a] pointer-events-none" />
               </div>
@@ -246,7 +246,7 @@ export default function LanguageSettings() {
         <button
           onClick={handleSave}
           disabled={saving}
-          className="flex items-center gap-[5.63px] py-[8.44px] px-[61.88px] bg-[#1e3a8a] text-white rounded-[6.75px] text-xs font-semibold hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 transition-opacity"
+          className="flex items-center gap-[5.63px] py-[8.44px] px-[61.88px] bg-[#1e3a8a] text-white rounded-[6.75px] text-[11.25px] font-semibold hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 transition-opacity"
         >
           <Save className="w-[21px] h-[21px] text-white" />
           {saving ? "Saving..." : "Save Changes"}

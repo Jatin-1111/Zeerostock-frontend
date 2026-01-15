@@ -82,11 +82,11 @@ export default function TodayDealsSection() {
 
         {/* Heading and Tag */}
         <div>
-          <h2 className="mb-[8px] text-3xl font-semibold text-[#0d1b2a]">
+          <h2 className="mb-[8px] text-[35px] font-semibold text-[#0d1b2a]">
             Today&apos;s Featured Deals
           </h2>
           <div className="inline-block rounded-[5px] bg-[#FFD700] px-[21.5px] py-[3px]">
-            <span className="text-xl font-semibold text-[#0d1b2a]">
+            <span className="text-[18px] font-semibold text-[#0d1b2a]">
               Save up to 70%
             </span>
           </div>
@@ -114,7 +114,7 @@ export default function TodayDealsSection() {
                     }}
                   />
                 ) : (
-                  <div className="flex h-full w-full items-center justify-center text-base text-[#9ca3af]">
+                  <div className="flex h-full w-full items-center justify-center text-[14px] text-[#9ca3af]">
                     Product Image
                   </div>
                 )}
@@ -123,7 +123,7 @@ export default function TodayDealsSection() {
               {/* Product Info */}
               <div className="px-[20px]">
                 {/* Title */}
-                <h3 className="mb-[7px] mt-[12px] overflow-hidden text-ellipsis whitespace-nowrap text-base font-medium text-[#0d1b2a]">
+                <h3 className="mb-[7px] mt-[12px] overflow-hidden text-ellipsis whitespace-nowrap text-[15px] font-medium text-[#0d1b2a]">
                   {deal?.title || "Special Deal"}
                 </h3>
 
@@ -136,7 +136,7 @@ export default function TodayDealsSection() {
                         fill="#0d1b2a"
                       />
                     </svg>
-                    <span className="text-sm font-medium text-[#0d1b2a]">
+                    <span className="text-[12px] font-medium text-[#0d1b2a]">
                       {deal?.city || "Mumbai"}, IN
                     </span>
                   </div>
@@ -159,12 +159,12 @@ export default function TodayDealsSection() {
 
                 {/* Price */}
                 <div className="mb-[23px]">
-                  <span className="mr-[12px] text-2xl font-bold text-[#1e3a8a]">
+                  <span className="mr-[12px] text-[29px] font-bold text-[#1e3a8a]">
                     ₹{(deal?.price || 15000).toLocaleString("en-IN")}
                   </span>
                   {deal?.originalPrice &&
                     deal.originalPrice > (deal.price || 0) && (
-                      <span className="relative text-2xl font-bold text-[#787878] line-through">
+                      <span className="relative text-[21px] font-bold text-[#787878] line-through">
                         ₹{deal.originalPrice.toLocaleString("en-IN")}
                       </span>
                     )}
@@ -172,7 +172,7 @@ export default function TodayDealsSection() {
 
                 {/* View Deal Button */}
                 <div className="cursor-pointer rounded-[15px] bg-[#1e3a8a] p-[14px] text-center">
-                  <span className="text-2xl font-semibold text-white">
+                  <span className="text-[22px] font-semibold text-white">
                     View Deal
                   </span>
                 </div>

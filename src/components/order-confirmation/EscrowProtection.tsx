@@ -17,25 +17,25 @@ export default function EscrowProtection({
           className="w-[25px] h-[25px] text-[#2aae7a]"
           strokeWidth={1.5}
         />
-        <h3 className="font-medium text-[#0d1b2a] text-xl leading-normal">
+        <h3 className="font-medium text-[#0d1b2a] text-[18px] leading-normal">
           Escrow Protection
         </h3>
       </div>
 
       {/* Main Description */}
-      <p className="font-medium text-[#9c9c9c] text-base leading-normal mb-8">
+      <p className="font-medium text-[#9c9c9c] text-[15px] leading-normal mb-8">
         Your payment of ${amount} is securely held in escrow until {releaseDate}
         . Funds will be released to suppliers automatically after the escrow
         period, or when you confirm receipt and satisfaction.
       </p>
 
       {/* View More Details Button */}
-      <button className="w-[165px] mx-auto block bg-[#1e3a8a] text-white font-medium text-base leading-normal py-[11px] rounded-[15px] hover:bg-[#1e3a8a]/90 transition-colors">
+      <button className="w-[165px] mx-auto block bg-[#1e3a8a] text-white font-medium text-[14px] leading-[17px] py-[11px] rounded-[15px] hover:bg-[#1e3a8a]/90 transition-colors">
         View More Details
       </button>
 
       {/* Footer Note */}
-      <p className="font-medium text-[#9c9c9c] text-sm leading-normal text-center mt-5">
+      <p className="font-medium text-[#9c9c9c] text-[12px] leading-normal text-center mt-5">
         You can release funds early or extend the escrow period if needed
       </p>
     </div>

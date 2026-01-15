@@ -54,8 +54,8 @@ export default function PieChart({
                 className="w-3 h-3 rounded-full"
                 style={{ backgroundColor: slice.color }}
               />
-              <span className="text-sm text-gray-900">{slice.label}</span>
-              <span className="text-sm text-gray-500">
+              <span className="text-[12px] text-gray-900">{slice.label}</span>
+              <span className="text-[12px] text-gray-500">
                 {slice.percentage.toFixed(1)}%
               </span>
             </div>

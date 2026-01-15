@@ -64,13 +64,13 @@ export default function HowItWorksSectionV2() {
     <section className="w-full py-4 sm:py-5 md:py-[22.5px]">
       <div className="max-w-full sm:max-w-2xl md:max-w-3xl lg:max-w-[880px] mx-auto px-4">
         {/* Title */}
-        <h2 className="text-center text-xl sm:text-2xl md:text-2xl font-bold leading-normal mb-1 sm:mb-1.5 md:mb-[5px]">
+        <h2 className="text-center text-xl sm:text-2xl md:text-[25px] font-bold leading-normal mb-1 sm:mb-1.5 md:mb-[5px]">
           <span className="text-[#0d1b2a]">How It </span>
           <span className="text-[#2ec096]">Works</span>
         </h2>
 
         {/* Subtitle */}
-        <p className="text-center text-xs sm:text-sm md:text-sm font-semibold leading-normal text-[#6b7280] mb-6 sm:mb-8 md:mb-[38.5px] max-w-full sm:max-w-md md:max-w-[495px] mx-auto px-4 sm:px-0">
+        <p className="text-center text-xs sm:text-sm md:text-[12px] font-semibold leading-normal text-[#6b7280] mb-6 sm:mb-8 md:mb-[38.5px] max-w-full sm:max-w-md md:max-w-[495px] mx-auto px-4 sm:px-0">
           Simple, streamlined processes designed for each type of user in the
           surplus inventory ecosystem
         </p>
@@ -79,7 +79,7 @@ export default function HowItWorksSectionV2() {
         <div className="flex flex-col lg:flex-row gap-6 sm:gap-8 md:gap-10 lg:gap-[46px] justify-center">
           {/* Left Column - For Buyers */}
           <div className="w-full lg:w-[300px]">
-            <h3 className="text-base sm:text-lg md:text-lg font-semibold leading-normal text-[#0d1b2a] text-center mb-3 sm:mb-4 md:mb-[17.5px]">
+            <h3 className="text-base sm:text-lg md:text-[17.5px] font-semibold leading-normal text-[#0d1b2a] text-center mb-3 sm:mb-4 md:mb-[17.5px]">
               FOR BUYERS
             </h3>
             <div className="flex flex-col gap-0">
@@ -91,7 +91,7 @@ export default function HowItWorksSectionV2() {
                   >
                     {/* Number Badge */}
                     <div className="bg-[#eeffef] border border-[#2aae7a] rounded-full w-10 h-10 sm:w-11 sm:h-11 md:w-[39.5px] md:h-[40px] flex items-center justify-center shrink-0">
-                      <span className="text-lg sm:text-xl md:text-xl font-medium leading-normal text-black">
+                      <span className="text-lg sm:text-xl md:text-[20px] font-medium leading-normal text-black">
                         {step.number}
                       </span>
                     </div>
@@ -106,10 +106,10 @@ export default function HowItWorksSectionV2() {
                       />
                       {/* Content */}
                       <div className="relative px-3 sm:px-3.5 md:px-4 py-2.5 sm:py-2.5 md:py-3">
-                        <h4 className="text-sm sm:text-base md:text-base font-semibold leading-tight text-[#1e3a8a] mb-1.5 sm:mb-2">
+                        <h4 className="text-sm sm:text-base md:text-[15px] font-semibold leading-tight text-[#1e3a8a] mb-1.5 sm:mb-2">
                           {step.title}
                         </h4>
-                        <p className="text-xs sm:text-xs md:text-xs font-semibold leading-snug text-[#6b7280]">
+                        <p className="text-[10px] sm:text-xs md:text-[11px] font-semibold leading-snug text-[#6b7280]">
                           {step.description}
                         </p>
                       </div>
@@ -134,7 +134,7 @@ export default function HowItWorksSectionV2() {
 
           {/* Right Column - For Suppliers */}
           <div className="w-full lg:w-[300px]">
-            <h3 className="text-base sm:text-lg md:text-lg font-semibold leading-normal text-[#0d1b2a] text-center mb-3 sm:mb-4 md:mb-[17.5px]">
+            <h3 className="text-base sm:text-lg md:text-[17.5px] font-semibold leading-normal text-[#0d1b2a] text-center mb-3 sm:mb-4 md:mb-[17.5px]">
               FOR SUPPLIERS
             </h3>
             <div className="flex flex-col gap-0">
@@ -146,7 +146,7 @@ export default function HowItWorksSectionV2() {
                   >
                     {/* Number Badge */}
                     <div className="bg-[#eeffef] border border-[#2aae7a] rounded-full w-10 h-10 sm:w-11 sm:h-11 md:w-[39.5px] md:h-[40px] flex items-center justify-center shrink-0">
-                      <span className="text-lg sm:text-xl md:text-xl font-medium leading-normal text-black">
+                      <span className="text-lg sm:text-xl md:text-[20px] font-medium leading-normal text-black">
                         {step.number}
                       </span>
                     </div>
@@ -161,10 +161,10 @@ export default function HowItWorksSectionV2() {
                       />
                       {/* Content */}
                       <div className="relative px-3 sm:px-3.5 md:px-4 py-2.5 sm:py-2.5 md:py-3">
-                        <h4 className="text-sm sm:text-base md:text-base font-semibold leading-tight text-[#2ec096] mb-1.5 sm:mb-2">
+                        <h4 className="text-sm sm:text-base md:text-[15px] font-semibold leading-tight text-[#2ec096] mb-1.5 sm:mb-2">
                           {step.title}
                         </h4>
-                        <p className="text-xs sm:text-xs md:text-xs font-semibold leading-snug text-[#6b7280]">
+                        <p className="text-[10px] sm:text-xs md:text-[11px] font-semibold leading-snug text-[#6b7280]">
                           {step.description}
                         </p>
                       </div>

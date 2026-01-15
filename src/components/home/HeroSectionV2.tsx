@@ -181,15 +181,15 @@ export default function HeroSectionV2() {
       {/* Main Content */}
       <div className="relative z-10 flex flex-col items-center px-4 sm:px-6 md:px-8 pt-6 sm:pt-8 md:pt-10 lg:pt-[44px] space-y-6">
         {/* Headline */}
-        <h1 className="text-center max-w-full sm:max-w-sm md:max-w-md lg:max-w-lg mb-2 sm:mb-3 md:mb-2.5">
-          <span className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl leading-tight sm:leading-normal md:leading-snug text-[#0d1b2a] font-medium block text-shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
+        <h1 className="text-center max-w-full sm:max-w-[400px] md:max-w-[450px] lg:max-w-[507px] mb-2 sm:mb-3 md:mb-[10px]">
+          <span className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] leading-tight sm:leading-normal md:leading-[47px] text-[#0d1b2a] font-medium block text-shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
             Unlock Hidden Value in{" "}
             <span className="text-[#2ec096]">Surplus Inventory</span>
           </span>
         </h1>
 
         {/* Subtitle */}
-        <p className="text-xs sm:text-sm md:text-xs leading-normal sm:leading-relaxed md:leading-tight text-subtle text-center font-semibold max-w-full sm:max-w-sm md:max-w-md lg:max-w-lg px-4 sm:px-0">
+        <p className="text-xs sm:text-sm md:text-[10px] leading-normal sm:leading-relaxed md:leading-[13px] text-[#868181] text-center font-semibold max-w-full sm:max-w-[400px] md:max-w-[450px] lg:max-w-[507px] px-4 sm:px-0">
           Connect suppliers, buyers, and agents with trust, transparency, and
           speed.
         </p>
@@ -202,7 +202,7 @@ export default function HeroSectionV2() {
               onClick={() => setShowCategoryDropdown(!showCategoryDropdown)}
               className="flex items-center gap-1 hover:opacity-80 transition-opacity"
             >
-              <span className="text-xs sm:text-xs font-semibold text-gray-700 opacity-80 whitespace-nowrap">
+              <span className="text-xs sm:text-[11px] font-semibold text-gray-700 opacity-80 whitespace-nowrap">
                 {selectedCategory}
               </span>
               <ChevronDown className="w-4 h-4 text-gray-700 opacity-80" />
@@ -225,7 +225,7 @@ export default function HeroSectionV2() {
                         setSelectedCategory(category);
                         setShowCategoryDropdown(false);
                       }}
-                      className="w-full text-left px-2 py-1 hover:bg-gray-100 text-gray-700 text-xs font-medium transition-colors"
+                      className="w-full text-left px-2 py-1 hover:bg-gray-100 text-gray-700 text-[10px] sm:text-[11px] font-medium transition-colors"
                     >
                       {category}
                     </button>
@@ -254,7 +254,7 @@ export default function HeroSectionV2() {
                 }
               }}
               placeholder="Search Industrial Equipment, Electronics, etc"
-              className="text-xs font-medium text-gray-700 opacity-80 px-2 sm:px-[5px] bg-transparent border-none outline-none w-full"
+              className="text-xs sm:text-[10px] md:text-[9px] font-medium text-gray-700 opacity-80 px-2 sm:px-[5px] bg-transparent border-none outline-none w-full"
             />
 
             {/* Suggestions Dropdown */}
@@ -339,13 +339,13 @@ export default function HeroSectionV2() {
                   transition={{ duration: 0.15, ease: [0.4, 0, 0.2, 1] }}
                   className="absolute top-full right-0 mt-1.5 bg-white rounded-md shadow-lg border border-gray-200 z-50 w-40 sm:w-44 p-2 overflow-hidden"
                 >
-                  <h3 className="font-semibold text-gray-900 mb-1.5 text-xs">
+                  <h3 className="font-semibold text-gray-900 mb-1.5 text-[10px] sm:text-[11px]">
                     Filters
                   </h3>
 
                   {/* Condition */}
                   <div className="mb-2">
-                    <p className="text-xs font-medium text-gray-700 mb-1">
+                    <p className="text-[9px] sm:text-[10px] font-medium text-gray-700 mb-1">
                       Condition
                     </p>
                     <div className="space-y-1">
@@ -362,7 +362,7 @@ export default function HeroSectionV2() {
                             }
                             className="rounded w-2.5 h-2.5"
                           />
-                          <span className="text-xs text-gray-700">
+                          <span className="text-[10px] sm:text-[11px] text-gray-700">
                             {condition}
                           </span>
                         </label>
@@ -372,7 +372,7 @@ export default function HeroSectionV2() {
 
                   {/* Listing Type */}
                   <div className="mb-2">
-                    <p className="text-xs font-medium text-gray-700 mb-1">
+                    <p className="text-[9px] sm:text-[10px] font-medium text-gray-700 mb-1">
                       Listing Type
                     </p>
                     <div className="space-y-1">
@@ -387,7 +387,9 @@ export default function HeroSectionV2() {
                             onChange={() => toggleFilter("listingType", type)}
                             className="rounded w-2.5 h-2.5"
                           />
-                          <span className="text-xs text-gray-700">{type}</span>
+                          <span className="text-[10px] sm:text-[11px] text-gray-700">
+                            {type}
+                          </span>
                         </label>
                       ))}
                     </div>
@@ -395,7 +397,7 @@ export default function HeroSectionV2() {
 
                   {/* Price Range */}
                   <div className="mb-2">
-                    <p className="text-xs font-medium text-gray-700 mb-1">
+                    <p className="text-[9px] sm:text-[10px] font-medium text-gray-700 mb-1">
                       Price Range
                     </p>
                     <div className="flex items-center gap-1">
@@ -412,9 +414,9 @@ export default function HeroSectionV2() {
                             },
                           }))
                         }
-                        className="w-full px-1.5 py-0.5 border border-gray-300 rounded text-xs"
+                        className="w-full px-1.5 py-0.5 border border-gray-300 rounded text-[10px]"
                       />
-                      <span className="text-gray-500 text-xs">-</span>
+                      <span className="text-gray-500 text-[10px]">-</span>
                       <input
                         type="number"
                         placeholder="Max"
@@ -428,14 +430,14 @@ export default function HeroSectionV2() {
                             },
                           }))
                         }
-                        className="w-full px-1.5 py-0.5 border border-gray-300 rounded text-xs"
+                        className="w-full px-1.5 py-0.5 border border-gray-300 rounded text-[10px]"
                       />
                     </div>
                   </div>
 
                   <button
                     onClick={() => setShowFilters(false)}
-                    className="w-full bg-[#022778] text-white py-1 rounded-md text-xs font-medium hover:opacity-90 transition-opacity"
+                    className="w-full bg-[#022778] text-white py-1 rounded-md text-[10px] sm:text-[11px] font-medium hover:opacity-90 transition-opacity"
                   >
                     Apply Filters
                   </button>
@@ -446,7 +448,7 @@ export default function HeroSectionV2() {
             <div className="h-5 w-px bg-gray-300 shrink-0" />
             <button
               onClick={handleSearch}
-              className="text-xs sm:text-xs md:text-sm font-semibold text-gray-700 opacity-80 px-2 sm:px-3 md:px-2 hover:opacity-60 transition-opacity whitespace-nowrap"
+              className="text-xs sm:text-[11px] md:text-[12px] font-semibold text-gray-700 opacity-80 px-2 sm:px-3 md:px-2 hover:opacity-60 transition-opacity whitespace-nowrap"
             >
               Search
             </button>
@@ -457,13 +459,13 @@ export default function HeroSectionV2() {
         <div className="mt-4 sm:mt-6 md:mt-8 flex flex-col sm:flex-row gap-3 w-full sm:w-auto px-4 sm:px-0">
           <button
             onClick={() => router.push("/signup")}
-            className="bg-primary text-white text-xs font-semibold rounded-xl h-10 w-full sm:w-32 flex items-center justify-center hover:opacity-90 transition-opacity"
+            className="bg-[#022778] text-white text-xs sm:text-[11px] font-semibold rounded-xl h-10 sm:h-[35px] w-full sm:w-32 md:w-[140px] flex items-center justify-center hover:opacity-90 transition-opacity"
           >
             Get Started
           </button>
           <button
             onClick={() => router.push("/marketplace")}
-            className="bg-white text-secondary text-xs font-semibold rounded-xl h-10 w-full sm:w-32 flex items-center justify-center hover:opacity-90 transition-opacity"
+            className="bg-white text-[#2aae7a] text-xs sm:text-[11px] font-semibold rounded-xl h-10 sm:h-[35px] w-full sm:w-32 md:w-[140px] flex items-center justify-center hover:opacity-90 transition-opacity"
           >
             Explore Marketplace
           </button>
@@ -471,7 +473,7 @@ export default function HeroSectionV2() {
 
         {/* Stats Bar */}
         <div className="mt-8 sm:mt-12 md:mt-16 lg:mt-[67px] text-center px-4">
-          <p className="text-xs sm:text-xs md:text-sm font-bold text-[#c8c8c8] whitespace-normal sm:whitespace-nowrap">
+          <p className="text-[10px] sm:text-xs md:text-[12px] font-bold text-[#c8c8c8] whitespace-normal sm:whitespace-nowrap">
             10,000 Businesses Connected &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             $50M+ Inventory Traded &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 97%
             Success Rate &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 24/7 Support

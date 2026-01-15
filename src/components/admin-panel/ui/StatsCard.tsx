@@ -18,15 +18,15 @@ export default function StatsCard({
   return (
     <div className="bg-white border border-gray-200 p-4 relative">
       <div className="flex justify-between items-start mb-3">
-        <span className="text-sm font-medium text-black">{title}</span>
+        <span className="text-[12px] font-medium text-black">{title}</span>
         <Icon className="w-5 h-5 text-gray-600" />
       </div>
-      <div className="text-2xl font-bold text-black mb-1">{value}</div>
+      <div className="text-[24px] font-bold text-black mb-1">{value}</div>
       {change && (
-        <div className="text-sm text-green-600 mb-2">{change}</div>
+        <div className="text-[12px] text-green-600 mb-2">{change}</div>
       )}
       {subtitle && (
-        <div className="text-xs text-gray-500 whitespace-pre-line">
+        <div className="text-[10px] text-gray-500 whitespace-pre-line">
           {subtitle}
         </div>
       )}

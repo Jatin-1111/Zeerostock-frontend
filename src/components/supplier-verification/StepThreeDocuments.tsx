@@ -173,10 +173,10 @@ export default function StepThreeDocuments({
             )}
           </div>
           <div className="flex-1 ml-5">
-            <div className="text-sm font-medium text-black leading-tight">
+            <div className="text-[12px] font-medium text-black leading-tight">
               {doc.label}
             </div>
-            <div className="text-xs text-[#9d9d9d] mt-1.5 leading-tight">
+            <div className="text-[11px] text-[#9d9d9d] mt-1.5 leading-tight">
               {isUploaded ? (
                 <span>Uploaded on Oct 24, 2025 / {doc.key}.pdf</span>
               ) : (
@@ -193,7 +193,7 @@ export default function StepThreeDocuments({
                 className="w-4 h-4 text-secondary"
                 strokeWidth={2.5}
               />
-              <span className="text-sm font-medium text-[#2aae7a]">
+              <span className="text-[12px] font-medium text-[#2aae7a]">
                 Uploaded
               </span>
             </div>
@@ -214,7 +214,7 @@ export default function StepThreeDocuments({
               />
               <label
                 htmlFor={`file-${doc.key}`}
-                className={`px-2.5 py-1.5 text-xs font-semibold cursor-pointer flex items-center gap-1 rounded-[7px] ${
+                className={`px-2.5 py-1.5 text-[9px] font-semibold cursor-pointer flex items-center gap-1 rounded-[7px] ${
                   isUploading
                     ? "bg-gray-400 text-white cursor-not-allowed"
                     : "bg-[#1e3a8a] text-white hover:bg-[#1e3a8a]/90"
@@ -246,7 +246,7 @@ export default function StepThreeDocuments({
         {/* Mandatory Documents */}
         <div className="bg-white rounded-[13px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] overflow-hidden">
           <div className="border-b border-[#e5e5e5] px-3 py-2">
-            <h2 className="text-xs font-semibold text-black">
+            <h2 className="text-[11px] font-semibold text-black">
               Mandatory Documents
             </h2>
           </div>
@@ -258,10 +258,10 @@ export default function StepThreeDocuments({
         {/* Additional Verifications (Optional) */}
         <div className="bg-white rounded-[13px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] overflow-hidden">
           <div className="border-b border-[#e5e5e5] px-3 py-2 flex items-center gap-2">
-            <h2 className="text-xs font-semibold text-black">
+            <h2 className="text-[11px] font-semibold text-black">
               Additional Verification
             </h2>
-            <span className="text-xs font-medium text-[#7e7e7e]">
+            <span className="text-[10px] font-medium text-[#7e7e7e]">
               (Optional)
             </span>
           </div>
@@ -276,26 +276,26 @@ export default function StepThreeDocuments({
         {/* Verification Impact */}
         <div className="bg-[#f9fffd] rounded-[13px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] overflow-hidden">
           <div className="px-3 pt-3 pb-2">
-            <h3 className="text-sm font-semibold text-[#0d1b2a]">
+            <h3 className="text-[13px] font-semibold text-[#0d1b2a]">
               Verification Impact
             </h3>
           </div>
           <div className="px-2 pb-2 space-y-2">
             <div className="bg-[#eeffef] rounded-[10px] h-[60px] flex flex-col items-center justify-center text-[#2aae7a]">
-              <div className="text-xl font-semibold leading-none">3.5x</div>
-              <div className="text-xs font-semibold mt-1">
+              <div className="text-[20px] font-semibold leading-none">3.5x</div>
+              <div className="text-[10px] font-semibold mt-1">
                 Higher Response Rate
               </div>
             </div>
             <div className="bg-[#dff3ff] rounded-[10px] h-[60px] flex flex-col items-center justify-center text-[#507df0]">
-              <div className="text-xl font-semibold leading-none">2.8x</div>
-              <div className="text-xs font-semibold mt-1">
+              <div className="text-[20px] font-semibold leading-none">2.8x</div>
+              <div className="text-[10px] font-semibold mt-1">
                 Most Listing Views
               </div>
             </div>
             <div className="bg-[#ffe5e5] rounded-[10px] h-[60px] flex flex-col items-center justify-center text-[#f05050]">
-              <div className="text-xl font-semibold leading-none">65%</div>
-              <div className="text-xs font-semibold mt-1">
+              <div className="text-[20px] font-semibold leading-none">65%</div>
+              <div className="text-[10px] font-semibold mt-1">
                 Higher Conversion
               </div>
             </div>
@@ -305,14 +305,16 @@ export default function StepThreeDocuments({
         {/* Need Help Section */}
         <div className="bg-[#f9fffd] rounded-[13px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] overflow-hidden">
           <div className="px-3 pt-3 pb-2">
-            <h3 className="text-sm font-semibold text-[#0d1b2a]">Need Help?</h3>
+            <h3 className="text-[13px] font-semibold text-[#0d1b2a]">
+              Need Help?
+            </h3>
           </div>
           <div className="px-3 pb-3">
-            <p className="text-xs font-medium text-[#9c9c9c] mb-3 leading-normal">
+            <p className="text-[11px] font-medium text-[#9c9c9c] mb-3 leading-normal">
               Our verification team is here to assist you through the process
             </p>
             <Link href="/helpdesk">
-              <button className="w-full bg-[#1e3a8a] hover:bg-[#1e3a8a]/90 text-white font-semibold text-xs py-2 rounded-[7px] flex items-center justify-center gap-1.5 mb-2">
+              <button className="w-full bg-[#1e3a8a] hover:bg-[#1e3a8a]/90 text-white font-semibold text-[10px] py-2 rounded-[7px] flex items-center justify-center gap-1.5 mb-2">
                 <svg
                   className="w-3 h-3"
                   viewBox="0 0 20 20"
@@ -326,7 +328,7 @@ export default function StepThreeDocuments({
               </button>
             </Link>
             <Link href="/help-support">
-              <button className="w-full bg-white border border-[#9c9c9c] text-[#9c9c9c] font-semibold text-xs py-2 rounded-[7px] flex items-center justify-center gap-1.5">
+              <button className="w-full bg-white border border-[#9c9c9c] text-[#9c9c9c] font-semibold text-[10px] py-2 rounded-[7px] flex items-center justify-center gap-1.5">
                 <svg
                   className="w-3 h-3"
                   viewBox="0 0 20 20"

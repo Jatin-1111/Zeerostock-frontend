@@ -289,10 +289,10 @@ export default function MyQuotesPage() {
                 {/* Quote Header */}
                 <div className="px-2.5 sm:px-3 md:px-3.5 py-2 sm:py-2.5 flex items-center justify-between">
                   <div className="flex-1 min-w-0 pr-2">
-                    <h2 className="text-xs sm:text-xs md:text-xs font-medium text-black mb-0.5 sm:mb-1 truncate">
+                    <h2 className="text-[11px] sm:text-xs md:text-xs font-medium text-black mb-0.5 sm:mb-1 truncate">
                       {quote.rfq?.title || "RFQ Title"}
                     </h2>
-                    <p className="text-xs sm:text-xs font-medium text-[#9c9c9c] truncate">
+                    <p className="text-[9px] sm:text-[10px] font-medium text-[#9c9c9c] truncate">
                       Supplier: {quote.supplier?.companyName || "Unknown"}
                     </p>
                   </div>
@@ -302,7 +302,7 @@ export default function MyQuotesPage() {
                     className={`${statusBadge.bg} ${statusBadge.text} px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full flex items-center gap-1 sm:gap-1.5 flex-shrink-0`}
                   >
                     {statusBadge.icon}
-                    <span className="text-xs sm:text-xs font-normal tracking-[0.25px] whitespace-nowrap">
+                    <span className="text-[9px] sm:text-[10px] font-normal tracking-[0.25px] whitespace-nowrap">
                       {statusBadge.label}
                     </span>
                   </div>
@@ -311,15 +311,15 @@ export default function MyQuotesPage() {
                 {/* Quote Details Grid */}
                 <div className="px-2.5 sm:px-3 md:px-3.5 pt-1.5 sm:pt-2 pb-2 sm:pb-2.5 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5">
                   <div>
-                    <p className="text-xs sm:text-xs font-medium text-[#9c9c9c] mb-1 sm:mb-1.5">
+                    <p className="text-[9px] sm:text-[10px] font-medium text-[#9c9c9c] mb-1 sm:mb-1.5">
                       Quote Price
                     </p>
-                    <p className="text-sm sm:text-sm font-medium text-black">
+                    <p className="text-[12px] sm:text-[13px] font-medium text-black">
                       <span className="font-bold">₹</span>
                       {(quote.quotePrice || 0).toLocaleString("en-IN")}
                     </p>
                     {quote.rfq?.budgetMin && quote.rfq?.budgetMax && (
-                      <p className="text-xs sm:text-xs font-medium text-black mt-0.5">
+                      <p className="text-[9px] sm:text-[10px] font-medium text-black mt-0.5">
                         <span className="font-bold">₹</span>
                         {(quote.rfq.budgetMax || 0).toLocaleString("en-IN")}
                       </p>
@@ -327,28 +327,28 @@ export default function MyQuotesPage() {
                   </div>
 
                   <div>
-                    <p className="text-xs sm:text-xs font-medium text-[#9c9c9c] mb-1 sm:mb-1.5">
+                    <p className="text-[9px] sm:text-[10px] font-medium text-[#9c9c9c] mb-1 sm:mb-1.5">
                       Delivery
                     </p>
-                    <p className="text-sm sm:text-sm font-medium text-black">
+                    <p className="text-[12px] sm:text-[13px] font-medium text-black">
                       {quote.deliveryDays} Days
                     </p>
                   </div>
 
                   <div>
-                    <p className="text-xs sm:text-xs font-medium text-[#9c9c9c] mb-1 sm:mb-1.5">
+                    <p className="text-[9px] sm:text-[10px] font-medium text-[#9c9c9c] mb-1 sm:mb-1.5">
                       Validity
                     </p>
-                    <p className="text-sm sm:text-sm font-medium text-black">
+                    <p className="text-[12px] sm:text-[13px] font-medium text-black">
                       {formatDate(quote.validUntil)}
                     </p>
                   </div>
 
                   <div>
-                    <p className="text-xs sm:text-xs font-medium text-[#9c9c9c] mb-1 sm:mb-1.5">
+                    <p className="text-[9px] sm:text-[10px] font-medium text-[#9c9c9c] mb-1 sm:mb-1.5">
                       RFQ ID
                     </p>
-                    <p className="text-sm sm:text-sm font-medium text-black truncate">
+                    <p className="text-[12px] sm:text-[13px] font-medium text-black truncate">
                       {quote.quoteNumber}
                     </p>
                   </div>
@@ -363,7 +363,7 @@ export default function MyQuotesPage() {
                     <button
                       onClick={() => handleAcceptQuote(quote.id)}
                       disabled={acceptingQuoteId === quote.id}
-                      className="bg-[#1e3a8a] text-white w-full sm:w-32 h-7 sm:h-7 rounded-[7px] text-xs sm:text-xs font-semibold hover:bg-[#152d6b] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="bg-[#1e3a8a] text-white w-full sm:w-32 h-7 sm:h-7 rounded-[7px] text-[9px] sm:text-[10px] font-semibold hover:bg-[#152d6b] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {acceptingQuoteId === quote.id
                         ? "Accepting..."
@@ -371,7 +371,7 @@ export default function MyQuotesPage() {
                     </button>
                   )}
 
-                  <button className="border border-[#9c9c9c] w-full sm:w-32 h-7 sm:h-7 rounded-[7px] flex items-center justify-center gap-1 sm:gap-1.5 text-[#898989] text-xs sm:text-xs font-medium hover:bg-gray-50 transition-colors">
+                  <button className="border border-[#9c9c9c] w-full sm:w-32 h-7 sm:h-7 rounded-[7px] flex items-center justify-center gap-1 sm:gap-1.5 text-[#898989] text-[9px] sm:text-[10px] font-medium hover:bg-gray-50 transition-colors">
                     <MessageSquare className="w-3 h-3" />
                     <span>Help Desk</span>
                   </button>
@@ -390,11 +390,11 @@ export default function MyQuotesPage() {
               setFilters({ ...filters, page: pagination.page - 1 })
             }
             disabled={pagination.page === 1}
-            className="px-3 sm:px-4 py-1.5 sm:py-2 bg-[#1e3a8a] text-white rounded-[5px] text-xs sm:text-xs font-medium hover:bg-[#152d6b] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="px-3 sm:px-4 py-1.5 sm:py-2 bg-[#1e3a8a] text-white rounded-[5px] text-[8px] sm:text-[9px] font-medium hover:bg-[#152d6b] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             Previous
           </button>
-          <span className="text-xs sm:text-xs font-medium text-[#0d1b2a] whitespace-nowrap">
+          <span className="text-[7px] sm:text-[8px] font-medium text-[#0d1b2a] whitespace-nowrap">
             Page {pagination.page} of {pagination.totalPages}
           </span>
           <button
@@ -402,7 +402,7 @@ export default function MyQuotesPage() {
               setFilters({ ...filters, page: pagination.page + 1 })
             }
             disabled={pagination.page === pagination.totalPages}
-            className="px-3 sm:px-4 py-1.5 sm:py-2 bg-[#1e3a8a] text-white rounded-[5px] text-xs sm:text-xs font-medium hover:bg-[#152d6b] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="px-3 sm:px-4 py-1.5 sm:py-2 bg-[#1e3a8a] text-white rounded-[5px] text-[8px] sm:text-[9px] font-medium hover:bg-[#152d6b] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             Next
           </button>
@@ -435,22 +435,22 @@ export default function MyQuotesPage() {
               {/* Confirm Modal */}
               {modal.type === "confirm" && (
                 <>
-                  <h3 className="text-xs sm:text-xs md:text-xs font-bold text-[#0d1b2a] mb-2">
+                  <h3 className="text-[9px] sm:text-[10px] md:text-[11px] font-bold text-[#0d1b2a] mb-2">
                     {modal.title}
                   </h3>
-                  <p className="text-xs sm:text-xs md:text-xs text-[#9c9c9c] mb-3">
+                  <p className="text-[6px] sm:text-[7px] md:text-[8px] text-[#9c9c9c] mb-3">
                     {modal.message}
                   </p>
                   <div className="flex items-center gap-1.5 sm:gap-2">
                     <button
                       onClick={modal.onConfirm}
-                      className="flex-1 px-2 sm:px-3 py-1 sm:py-1.5 bg-[#1e3a8a] text-white rounded-[4px] text-xs sm:text-xs md:text-xs font-medium hover:bg-[#152d6b] transition-colors"
+                      className="flex-1 px-2 sm:px-3 py-1 sm:py-1.5 bg-[#1e3a8a] text-white rounded-[4px] text-[6px] sm:text-[7px] md:text-[8px] font-medium hover:bg-[#152d6b] transition-colors"
                     >
                       Yes, Accept
                     </button>
                     <button
                       onClick={modal.onCancel}
-                      className="flex-1 px-2 sm:px-3 py-1 sm:py-1.5 bg-white border-2 border-gray-300 text-[#0d1b2a] rounded-[4px] text-xs sm:text-xs md:text-xs font-medium hover:bg-gray-50 transition-colors"
+                      className="flex-1 px-2 sm:px-3 py-1 sm:py-1.5 bg-white border-2 border-gray-300 text-[#0d1b2a] rounded-[4px] text-[6px] sm:text-[7px] md:text-[8px] font-medium hover:bg-gray-50 transition-colors"
                     >
                       Cancel
                     </button>
@@ -465,11 +465,11 @@ export default function MyQuotesPage() {
                     <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#2aae7a] flex items-center justify-center">
                       <CheckCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-white" />
                     </div>
-                    <h3 className="text-xs sm:text-xs md:text-xs font-bold text-[#0d1b2a]">
+                    <h3 className="text-[9px] sm:text-[10px] md:text-[11px] font-bold text-[#0d1b2a]">
                       {modal.title}
                     </h3>
                   </div>
-                  <p className="text-xs sm:text-xs md:text-xs text-[#9c9c9c] mb-3 ml-7 sm:ml-8">
+                  <p className="text-[6px] sm:text-[7px] md:text-[8px] text-[#9c9c9c] mb-3 ml-7 sm:ml-8">
                     {modal.message}
                   </p>
                   <div className="flex justify-end">
@@ -477,7 +477,7 @@ export default function MyQuotesPage() {
                       onClick={() =>
                         setModal({ type: null, title: "", message: "" })
                       }
-                      className="px-4 sm:px-5 md:px-6 py-1 sm:py-1.5 bg-[#2aae7a] text-white rounded-[4px] text-xs sm:text-xs md:text-xs font-medium hover:bg-[#249866] transition-colors"
+                      className="px-4 sm:px-5 md:px-6 py-1 sm:py-1.5 bg-[#2aae7a] text-white rounded-[4px] text-[6px] sm:text-[7px] md:text-[8px] font-medium hover:bg-[#249866] transition-colors"
                     >
                       OK
                     </button>
@@ -492,11 +492,11 @@ export default function MyQuotesPage() {
                     <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-red-600 flex items-center justify-center">
                       <AlertCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-white" />
                     </div>
-                    <h3 className="text-xs sm:text-xs md:text-xs font-bold text-[#0d1b2a]">
+                    <h3 className="text-[9px] sm:text-[10px] md:text-[11px] font-bold text-[#0d1b2a]">
                       {modal.title}
                     </h3>
                   </div>
-                  <p className="text-xs sm:text-xs md:text-xs text-[#9c9c9c] mb-3 ml-7 sm:ml-8">
+                  <p className="text-[6px] sm:text-[7px] md:text-[8px] text-[#9c9c9c] mb-3 ml-7 sm:ml-8">
                     {modal.message}
                   </p>
                   <div className="flex justify-end">
@@ -504,7 +504,7 @@ export default function MyQuotesPage() {
                       onClick={() =>
                         setModal({ type: null, title: "", message: "" })
                       }
-                      className="px-4 sm:px-5 md:px-6 py-1 sm:py-1.5 bg-red-600 text-white rounded-[4px] text-xs sm:text-xs md:text-xs font-medium hover:bg-red-700 transition-colors"
+                      className="px-4 sm:px-5 md:px-6 py-1 sm:py-1.5 bg-red-600 text-white rounded-[4px] text-[6px] sm:text-[7px] md:text-[8px] font-medium hover:bg-red-700 transition-colors"
                     >
                       OK
                     </button>
@@ -520,10 +520,10 @@ export default function MyQuotesPage() {
       {showRejectModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4">
           <div className="bg-white rounded-[7px] p-3 sm:p-4 md:p-5 max-w-[90vw] sm:max-w-sm md:max-w-md w-full shadow-[0px_0px_4px_0px_rgba(0,0,0,0.3)]">
-            <h3 className="text-xs sm:text-xs md:text-xs font-bold text-[#0d1b2a] mb-2">
+            <h3 className="text-[9px] sm:text-[10px] md:text-[11px] font-bold text-[#0d1b2a] mb-2">
               Reject Quote
             </h3>
-            <p className="text-xs sm:text-xs md:text-xs text-[#9c9c9c] mb-2">
+            <p className="text-[6px] sm:text-[7px] md:text-[8px] text-[#9c9c9c] mb-2">
               Please provide a reason for rejecting this quote:
             </p>
             <textarea
@@ -531,14 +531,14 @@ export default function MyQuotesPage() {
               onChange={(e) => setRejectReason(e.target.value)}
               placeholder="Enter reason..."
               rows={4}
-              className="w-full px-1.5 sm:px-2 py-1 sm:py-1.5 border border-gray-300 rounded-[4px] text-xs sm:text-xs md:text-xs focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] resize-none mb-2"
+              className="w-full px-1.5 sm:px-2 py-1 sm:py-1.5 border border-gray-300 rounded-[4px] text-[6px] sm:text-[7px] md:text-[8px] focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] resize-none mb-2"
               disabled={!!rejectingQuoteId}
             />
             <div className="flex items-center gap-1.5 sm:gap-2">
               <button
                 onClick={handleRejectQuote}
                 disabled={!!rejectingQuoteId || !rejectReason.trim()}
-                className="flex-1 px-2 sm:px-3 py-1 sm:py-1.5 bg-red-600 text-white rounded-[4px] text-xs sm:text-xs md:text-xs font-medium hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 px-2 sm:px-3 py-1 sm:py-1.5 bg-red-600 text-white rounded-[4px] text-[6px] sm:text-[7px] md:text-[8px] font-medium hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {rejectingQuoteId ? "Rejecting..." : "Confirm Reject"}
               </button>
@@ -549,7 +549,7 @@ export default function MyQuotesPage() {
                   setSelectedQuoteForReject(null);
                 }}
                 disabled={!!rejectingQuoteId}
-                className="flex-1 px-2 sm:px-3 py-1 sm:py-1.5 bg-white border-2 border-gray-300 text-[#0d1b2a] rounded-[4px] text-xs sm:text-xs md:text-xs font-medium hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 px-2 sm:px-3 py-1 sm:py-1.5 bg-white border-2 border-gray-300 text-[#0d1b2a] rounded-[4px] text-[6px] sm:text-[7px] md:text-[8px] font-medium hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Cancel
               </button>

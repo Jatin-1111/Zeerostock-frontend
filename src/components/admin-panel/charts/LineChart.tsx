@@ -42,7 +42,7 @@ export default function LineChart({
                 className="w-3 h-3 rounded-full"
                 style={{ backgroundColor: dataset.color }}
               />
-              <span className="text-sm text-gray-600">{dataset.label}</span>
+              <span className="text-[12px] text-gray-600">{dataset.label}</span>
             </div>
           ))}
         </div>
@@ -96,7 +96,7 @@ export default function LineChart({
             x={`${getX(index)}%`}
             y={height + 15}
             textAnchor="middle"
-            className="text-xs fill-gray-500"
+            className="text-[10px] fill-gray-500"
           >
             {label}
           </text>

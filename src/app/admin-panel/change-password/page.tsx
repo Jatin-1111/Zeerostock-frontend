@@ -128,20 +128,20 @@ export default function ChangePasswordPage() {
         <div className="w-full max-w-[450px]">
           {/* Logo and Tagline */}
           <div className="mb-12">
-            <h1 className="text-3xl font-bold text-black mb-1">
+            <h1 className="text-[32px] font-bold text-black mb-1">
               Zeerostock
             </h1>
-            <p className="text-base text-[#6B7280]">
+            <p className="text-[14px] text-[#6B7280]">
               • Control • Compliance • Growth
             </p>
           </div>
 
           {/* Form Header */}
           <div className="mb-8">
-            <h2 className="text-3xl font-bold text-black mb-2">
+            <h2 className="text-[36px] font-bold text-black mb-2">
               Change Password
             </h2>
-            <p className="text-base text-[#6B7280]">
+            <p className="text-[14px] text-[#6B7280]">
               For security, you must change your password before continuing
             </p>
           </div>
@@ -159,7 +159,7 @@ export default function ChangePasswordPage() {
             <div>
               <label
                 htmlFor="currentPassword"
-                className="block text-lg font-medium text-black mb-2"
+                className="block text-[16px] font-medium text-black mb-2"
               >
                 Current Password
               </label>
@@ -170,7 +170,7 @@ export default function ChangePasswordPage() {
                   value={currentPassword}
                   onChange={(e) => setCurrentPassword(e.target.value)}
                   placeholder="Enter your temporary password"
-                  className="w-full px-4 py-3 border border-black text-base text-black placeholder:text-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent pr-12"
+                  className="w-full px-4 py-3 border border-black text-[14px] text-black placeholder:text-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent pr-12"
                   required
                 />
                 <button
@@ -191,7 +191,7 @@ export default function ChangePasswordPage() {
             <div>
               <label
                 htmlFor="newPassword"
-                className="block text-lg font-medium text-black mb-2"
+                className="block text-[16px] font-medium text-black mb-2"
               >
                 New Password
               </label>
@@ -202,7 +202,7 @@ export default function ChangePasswordPage() {
                   value={newPassword}
                   onChange={handleNewPasswordChange}
                   placeholder="Enter your new password"
-                  className="w-full px-4 py-3 border border-black text-base text-black placeholder:text-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent pr-12"
+                  className="w-full px-4 py-3 border border-black text-[14px] text-black placeholder:text-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent pr-12"
                   required
                 />
                 <button
@@ -223,7 +223,7 @@ export default function ChangePasswordPage() {
             <div>
               <label
                 htmlFor="confirmPassword"
-                className="block text-lg font-medium text-black mb-2"
+                className="block text-[16px] font-medium text-black mb-2"
               >
                 Confirm New Password
               </label>
@@ -234,7 +234,7 @@ export default function ChangePasswordPage() {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Re-enter your new password"
-                  className="w-full px-4 py-3 border border-black text-base text-black placeholder:text-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent pr-12"
+                  className="w-full px-4 py-3 border border-black text-[14px] text-black placeholder:text-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent pr-12"
                   required
                 />
                 <button
@@ -284,7 +284,7 @@ export default function ChangePasswordPage() {
             <button
               type="submit"
               disabled={loading || !isPasswordValid}
-              className="w-full bg-black text-white text-lg font-medium py-3.5 hover:bg-gray-900 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+              className="w-full bg-black text-white text-[16px] font-medium py-3.5 hover:bg-gray-900 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
             >
               {loading ? "Changing Password..." : "Change Password"}
             </button>
@@ -293,7 +293,7 @@ export default function ChangePasswordPage() {
           {/* Security Notice */}
           <div className="mt-8 flex items-center gap-2 text-[#9CA3AF]">
             <ShieldCheck className="w-5 h-5" />
-            <span className="text-base">
+            <span className="text-[14px]">
               Your password is encrypted and secure
             </span>
           </div>

@@ -37,7 +37,7 @@ export const UnitInput: React.FC<UnitInputProps> = ({
 }) => {
   return (
     <div className="custom-dropdown relative">
-      <label className="mb-[6px] block text-xs font-medium text-[#0d1b2a]">
+      <label className="mb-[6px] block text-[8px] font-medium text-[#0d1b2a]">
         {label}
         {required && "*"}
       </label>
@@ -48,12 +48,12 @@ export const UnitInput: React.FC<UnitInputProps> = ({
           value={value}
           onChange={onChange}
           placeholder={placeholder}
-          className="h-7 w-full rounded border border-border-light px-2 text-xs text-black placeholder:text-muted focus:border-secondary focus:outline-none focus:ring-1 focus:ring-secondary"
+          className="h-[28px] w-full rounded-[4px] border border-[#e5e5e5] px-[8px] text-[7.33px] text-black placeholder:text-[#9c9c9c] focus:border-[#2AAE7A] focus:outline-none focus:ring-1 focus:ring-[#2AAE7A]"
         />
         <button
           type="button"
           onClick={onToggle}
-          className="flex h-7 items-center justify-between rounded border border-border-light px-1.5 text-xs text-black hover:border-secondary focus:outline-none"
+          className="flex h-[28px] items-center justify-between rounded-[4px] border border-[#e5e5e5] px-[5.33px] text-[7.33px] text-black hover:border-[#2AAE7A] focus:outline-none"
           style={{ width: unitWidth }}
         >
           <span>{unitValue}</span>
@@ -74,7 +74,7 @@ export const UnitInput: React.FC<UnitInputProps> = ({
                 key={unit}
                 type="button"
                 onClick={() => onUnitSelect(unitName, unit)}
-                className="w-full px-[8px] py-[5.33px] text-left text-xs text-black hover:bg-[#f0fdf4]"
+                className="w-full px-[8px] py-[5.33px] text-left text-[7.33px] text-black hover:bg-[#f0fdf4]"
               >
                 {unit}
               </button>

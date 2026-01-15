@@ -36,11 +36,11 @@ export default function WhyChooseSection() {
       <div className="max-w-5xl mx-auto">
         {/* Heading Section */}
         <div className="text-center mb-[45px]">
-          <h2 className="text-2xl leading-snug font-medium text-[#0d1b2a] mb-[7px]">
+          <h2 className="text-[26px] leading-[35px] font-medium text-[#0d1b2a] mb-[7px]">
             Why Leading Suppliers Choose{" "}
             <span className="text-[#2ec096]">Zeerostock</span>
           </h2>
-          <p className="text-sm font-semibold text-[#9c9c9c]">
+          <p className="text-[12px] font-semibold text-[#9c9c9c]">
             Transform your surplus inventory challenges into revenue
             opportunities with our proven platform.
           </p>
@@ -64,12 +64,12 @@ export default function WhyChooseSection() {
               </div>
 
               {/* Title */}
-              <h3 className="text-xs leading-tight font-semibold text-[#022778] mb-[10px]">
+              <h3 className="text-[11px] leading-[13px] font-semibold text-[#022778] mb-[10px]">
                 {benefit.title}
               </h3>
 
               {/* Description */}
-              <p className="text-xs leading-normal font-semibold text-white">
+              <p className="text-[8px] leading-normal font-semibold text-white">
                 {benefit.description}
               </p>
             </div>

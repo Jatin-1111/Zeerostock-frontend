@@ -102,12 +102,12 @@ export default function TestimonialSection() {
       <div className="w-full max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative w-full flex flex-col items-center">
           {/* Title */}
-          <h2 className="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-3xl leading-tight lg:leading-snug text-center text-[#0d1b2a] mb-2 sm:mb-[8px]">
+          <h2 className="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-[40px] leading-tight lg:leading-[50px] text-center text-[#0d1b2a] mb-2 sm:mb-[8px]">
             <span className="text-[#2ec096]">Trusted</span> By Industry Leaders
           </h2>
 
           {/* Subtitle */}
-          <p className="font-semibold text-xs sm:text-sm md:text-xs leading-relaxed lg:leading-normal text-center text-[#686868] max-w-full sm:max-w-lg md:max-w-2xl lg:max-w-3xl mb-6 sm:mb-8 md:mb-[43px] px-4 sm:px-0">
+          <p className="font-semibold text-xs sm:text-sm md:text-[11px] leading-relaxed lg:leading-[24px] text-center text-[#686868] max-w-full sm:max-w-lg md:max-w-2xl lg:max-w-3xl mb-6 sm:mb-8 md:mb-[43px] px-4 sm:px-0">
             See how businesses like yours are maximizing value from surplus
             inventory
           </p>
@@ -157,7 +157,7 @@ export default function TestimonialSection() {
                 {/* Content */}
                 <div className="text-center flex flex-col items-center gap-4">
                   {/* Quote */}
-                  <p className="font-medium text-sm sm:text-base md:text-lg lg:text-base leading-relaxed lg:leading-normal text-[#686868]">
+                  <p className="font-medium text-sm sm:text-base md:text-lg lg:text-[15px] leading-relaxed lg:leading-[22px] text-[#686868]">
                     &quot;{testimonials[currentIndex].text}&quot;
                   </p>
 
@@ -176,13 +176,13 @@ export default function TestimonialSection() {
 
                   {/* Author Info */}
                   <div className="flex flex-col items-center gap-2">
-                    <p className="font-bold text-base sm:text-lg md:text-xl lg:text-xl leading-tight text-black">
+                    <p className="font-bold text-base sm:text-lg md:text-xl lg:text-[19px] leading-tight lg:leading-[28px] text-black">
                       {testimonials[currentIndex].author}
                     </p>
-                    <p className="font-semibold text-sm sm:text-base md:text-lg lg:text-base leading-tight text-black">
+                    <p className="font-semibold text-sm sm:text-base md:text-lg lg:text-[14px] leading-tight lg:leading-[17px] text-black">
                       {testimonials[currentIndex].company}
                     </p>
-                    <p className="font-medium text-xs sm:text-sm md:text-base lg:text-xs leading-relaxed lg:leading-tight text-[#3f3737]">
+                    <p className="font-medium text-xs sm:text-sm md:text-base lg:text-[10px] leading-relaxed lg:leading-[15px] text-[#3f3737]">
                       {testimonials[currentIndex].badge}
                     </p>
                   </div>

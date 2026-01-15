@@ -30,10 +30,10 @@ export default function HowItWorksSection() {
     <section className="py-[27px] px-[5px] md:py-[43px] md:px-[21px] mx-auto">
       <div className="w-full max-w-[1600px] mx-auto">
         <div className="text-center mb-[21px] md:mb-[32px]">
-          <h2 className="text-lg md:text-2xl font-bold text-gray-900 mb-[5px] md:mb-[11px] leading-tight">
+          <h2 className="text-[16px] md:text-[27px] font-bold text-gray-900 mb-[5px] md:mb-[11px] leading-tight">
             How It Works for <span className="text-[#00B67A]">Buyer</span>
           </h2>
-          <p className="text-xs md:text-sm text-gray-500 font-semibold">
+          <p className="text-[11px] md:text-[13px] text-gray-500 font-semibold">
             Simple, secure and efficient procurement in four easy steps
           </p>
         </div>
@@ -46,7 +46,7 @@ export default function HowItWorksSection() {
           <div className="relative grid grid-cols-4 gap-[11px] md:gap-[21px]">
             {steps.map((step, index) => (
               <div key={index} className="flex justify-center">
-                <div className="w-[32px] h-[32px] md:w-[43px] md:h-[43px] bg-[#EEFBF6] border-2 border-[#2AAE7A] rounded-full flex items-center justify-center text-sm md:text-xl font-bold text-gray-900 relative z-10">
+                <div className="w-[32px] h-[32px] md:w-[43px] md:h-[43px] bg-[#EEFBF6] border-2 border-[#2AAE7A] rounded-full flex items-center justify-center text-[13px] md:text-[20px] font-bold text-gray-900 relative z-10">
                   {step.number}
                 </div>
               </div>
@@ -58,10 +58,10 @@ export default function HowItWorksSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[16px] md:gap-[21px]">
           {steps.map((step, index) => (
             <div key={index} className="flex flex-col text-center">
-              <h3 className="text-xs md:text-sm font-bold text-gray-900 mb-[5px] md:mb-[11px]">
+              <h3 className="text-[11px] md:text-[12px] font-bold text-gray-900 mb-[5px] md:mb-[11px]">
                 {step.title}
               </h3>
-              <p className="text-xs md:text-xs text-gray-600">
+              <p className="text-[8px] md:text-[9px] text-gray-600">
                 {step.description}
               </p>
             </div>

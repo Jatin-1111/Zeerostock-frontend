@@ -212,7 +212,7 @@ export default function OrdersLogisticsPage() {
           title="Orders & Logistics"
           description="Monitor order lifecycle, logistics progress, delays, and exceptions across the global supply chain."
           actions={
-            <button className="bg-black text-white px-4 py-2 text-sm font-medium hover:bg-gray-900 transition-colors">
+            <button className="bg-black text-white px-4 py-2 text-[13px] font-medium hover:bg-gray-900 transition-colors">
               Export
             </button>
           }
@@ -236,7 +236,7 @@ export default function OrdersLogisticsPage() {
                   setActiveFilter(filter.value);
                   setCurrentPage(1);
                 }}
-                className={`px-4 py-1.5 text-sm font-medium transition-colors ${
+                className={`px-4 py-1.5 text-[12px] font-medium transition-colors ${
                   activeFilter === filter.value
                     ? "bg-black text-white"
                     : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
@@ -256,7 +256,7 @@ export default function OrdersLogisticsPage() {
                 placeholder="Search by order number, buyer, or tracking number..."
                 value={searchTerm}
                 onChange={(e) => handleSearch(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 text-sm text-black placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 text-[13px] text-black placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
               />
             </div>
           </div>
@@ -267,25 +267,25 @@ export default function OrdersLogisticsPage() {
           <table className="w-full">
             <thead className="bg-gray-50 border-b border-gray-200">
               <tr>
-                <th className="px-4 py-3 text-left text-xs font-bold text-black">
+                <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
                   ORDER ID
                 </th>
-                <th className="px-4 py-3 text-left text-xs font-bold text-black">
+                <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
                   BUYER
                 </th>
-                <th className="px-4 py-3 text-left text-xs font-bold text-black">
+                <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
                   AMOUNT
                 </th>
-                <th className="px-4 py-3 text-left text-xs font-bold text-black">
+                <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
                   STATUS
                 </th>
-                <th className="px-4 py-3 text-left text-xs font-bold text-black">
+                <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
                   LOGISTICS
                 </th>
-                <th className="px-4 py-3 text-left text-xs font-bold text-black">
+                <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
                   TRACKING
                 </th>
-                <th className="px-4 py-3 text-left text-xs font-bold text-black">
+                <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
                   ACTIONS
                 </th>
               </tr>
@@ -294,7 +294,7 @@ export default function OrdersLogisticsPage() {
               {orders.length === 0 ? (
                 <tr>
                   <td colSpan={7} className="px-4 py-8 text-center">
-                    <p className="text-sm text-gray-500">
+                    <p className="text-[13px] text-gray-500">
                       No orders found.{" "}
                       {searchTerm && "Try adjusting your search."}
                     </p>
@@ -304,10 +304,10 @@ export default function OrdersLogisticsPage() {
                 orders.map((order) => (
                   <tr key={order.id} className="hover:bg-gray-50">
                     <td className="px-4 py-4">
-                      <div className="text-sm font-medium text-black">
+                      <div className="text-[13px] font-medium text-black">
                         {order.order_number}
                       </div>
-                      <div className="text-xs text-gray-500">
+                      <div className="text-[11px] text-gray-500">
                         {new Date(order.created_at).toLocaleDateString(
                           "en-US",
                           {
@@ -319,21 +319,21 @@ export default function OrdersLogisticsPage() {
                       </div>
                     </td>
                     <td className="px-4 py-4">
-                      <div className="text-sm font-medium text-black">
+                      <div className="text-[12px] font-medium text-black">
                         {getBuyerName(order.shipping_address)}
                       </div>
-                      <div className="text-xs text-gray-500">
+                      <div className="text-[11px] text-gray-500">
                         {order.order_items?.length || 0} item(s)
                       </div>
                     </td>
                     <td className="px-4 py-4">
-                      <div className="text-sm font-medium text-black">
+                      <div className="text-[13px] font-medium text-black">
                         ${parseFloat(order.total_amount).toFixed(2)}
                       </div>
                     </td>
                     <td className="px-4 py-4">
                       <span
-                        className={`inline-block px-2 py-1 text-xs font-medium rounded ${getStatusColor(
+                        className={`inline-block px-2 py-1 text-[11px] font-medium rounded ${getStatusColor(
                           order.status
                         )}`}
                       >
@@ -341,11 +341,11 @@ export default function OrdersLogisticsPage() {
                       </span>
                     </td>
                     <td className="px-4 py-4">
-                      <div className="text-sm text-black">
+                      <div className="text-[12px] text-black">
                         {order.shipping_partner || "Not assigned"}
                       </div>
                       {order.delivery_eta && (
-                        <div className="text-xs text-gray-500">
+                        <div className="text-[11px] text-gray-500">
                           ETA:{" "}
                           {new Date(order.delivery_eta).toLocaleDateString(
                             "en-US",
@@ -358,7 +358,7 @@ export default function OrdersLogisticsPage() {
                       )}
                     </td>
                     <td className="px-4 py-4">
-                      <div className="text-xs text-gray-600 font-mono">
+                      <div className="text-[11px] text-gray-600 font-mono">
                         {order.tracking_number || "N/A"}
                       </div>
                     </td>
@@ -380,7 +380,7 @@ export default function OrdersLogisticsPage() {
         {/* Pagination */}
         {pagination.totalPages > 1 && (
           <div className="flex items-center justify-between bg-white border border-gray-200 px-6 py-3">
-            <p className="text-sm text-gray-600">
+            <p className="text-[13px] text-gray-600">
               Showing {orders.length} of {pagination.total} orders
             </p>
             <div className="flex items-center gap-2">
@@ -391,7 +391,7 @@ export default function OrdersLogisticsPage() {
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
-              <span className="text-sm text-gray-600">
+              <span className="text-[13px] text-gray-600">
                 Page {currentPage} of {pagination.totalPages}
               </span>
               <button

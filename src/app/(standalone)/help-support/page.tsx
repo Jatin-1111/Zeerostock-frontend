@@ -98,10 +98,10 @@ export default function HelpSupportPage() {
       {/* Header */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-[1440px] mx-auto px-20 py-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          <h1 className="text-[48px] font-bold text-gray-900 mb-2">
             Help & Support
           </h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-[18px] text-gray-600">
             We're here to help with anything you need
           </p>
         </div>
@@ -116,19 +116,19 @@ export default function HelpSupportPage() {
                 key={index}
                 className="bg-white border-2 border-gray-900 rounded-xl p-6 flex flex-col items-center text-center h-[275px]"
               >
-                <div className="text-3xl mb-4">{card.icon}</div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-1 h-[28px] flex items-center">
+                <div className="text-[48px] mb-4">{card.icon}</div>
+                <h3 className="text-[20px] font-semibold text-gray-900 mb-1 h-[28px] flex items-center">
                   {card.title}
                 </h3>
-                <p className="text-base text-gray-600 mb-2 h-[20px]">
+                <p className="text-[14px] text-gray-600 mb-2 h-[20px]">
                   {card.subtitle}
                 </p>
-                <p className="text-sm text-gray-500 mb-4 h-[20px]">
+                <p className="text-[13px] text-gray-500 mb-4 h-[20px]">
                   {card.description}
                 </p>
                 <button
                   onClick={card.action}
-                  className="w-full h-[40px] bg-gray-900 text-white text-base font-medium rounded-lg hover:bg-gray-800 transition-colors mt-auto"
+                  className="w-full h-[40px] bg-gray-900 text-white text-[14px] font-medium rounded-lg hover:bg-gray-800 transition-colors mt-auto"
                 >
                   {card.title === "Schedule Call"
                     ? "Call Now"
@@ -148,7 +148,7 @@ export default function HelpSupportPage() {
           <div className="flex items-center justify-center gap-8">
             <button
               onClick={() => setActiveTab("faqs")}
-              className={`px-6 py-2 text-base font-medium rounded-lg transition-colors ${
+              className={`px-6 py-2 text-[14px] font-medium rounded-lg transition-colors ${
                 activeTab === "faqs"
                   ? "bg-gray-900 text-white"
                   : "bg-white text-gray-700 hover:bg-gray-100"
@@ -158,7 +158,7 @@ export default function HelpSupportPage() {
             </button>
             <button
               onClick={() => setActiveTab("guide")}
-              className={`px-6 py-2 text-base font-medium rounded-lg transition-colors ${
+              className={`px-6 py-2 text-[14px] font-medium rounded-lg transition-colors ${
                 activeTab === "guide"
                   ? "bg-gray-900 text-white"
                   : "bg-white text-gray-700 hover:bg-gray-100"
@@ -168,7 +168,7 @@ export default function HelpSupportPage() {
             </button>
             <button
               onClick={() => setActiveTab("videos")}
-              className={`px-6 py-2 text-base font-medium rounded-lg transition-colors ${
+              className={`px-6 py-2 text-[14px] font-medium rounded-lg transition-colors ${
                 activeTab === "videos"
                   ? "bg-gray-900 text-white"
                   : "bg-white text-gray-700 hover:bg-gray-100"
@@ -187,10 +187,10 @@ export default function HelpSupportPage() {
           {activeTab === "faqs" && (
             <div className="grid grid-cols-2 gap-8">
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                <h2 className="text-[32px] font-bold text-gray-900 mb-2">
                   Frequently Asked Questions
                 </h2>
-                <p className="text-base text-gray-600 mb-6">
+                <p className="text-[14px] text-gray-600 mb-6">
                   Find answers to common questions about using Zeerostock
                 </p>
                 <div className="space-y-4">
@@ -199,13 +199,13 @@ export default function HelpSupportPage() {
                       key={index}
                       className="bg-white border-2 border-gray-900 rounded-lg p-6"
                     >
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                      <h3 className="text-[16px] font-semibold text-gray-900 mb-2">
                         {faq.question}
                       </h3>
-                      <p className="text-base text-gray-600 mb-4">
+                      <p className="text-[14px] text-gray-600 mb-4">
                         {faq.answer}
                       </p>
-                      <button className="w-full h-[40px] bg-gray-900 text-white text-base font-medium rounded-lg hover:bg-gray-800 transition-colors">
+                      <button className="w-full h-[40px] bg-gray-900 text-white text-[14px] font-medium rounded-lg hover:bg-gray-800 transition-colors">
                         Read More
                       </button>
                     </div>
@@ -214,7 +214,7 @@ export default function HelpSupportPage() {
               </div>
               <div className="flex items-center justify-center">
                 <div className="text-center">
-                  <p className="text-lg text-gray-600">
+                  <p className="text-[16px] text-gray-600">
                     Select a category to view questions
                   </p>
                 </div>
@@ -226,27 +226,27 @@ export default function HelpSupportPage() {
           {activeTab === "guide" && (
             <div className="max-w-[900px] mx-auto">
               <div className="bg-white border-2 border-gray-900 rounded-lg p-8">
-                <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+                <h2 className="text-[32px] font-bold text-gray-900 mb-8 text-center">
                   Getting Started Guide
                 </h2>
-                <p className="text-lg text-gray-600 text-center mb-8">
+                <p className="text-[16px] text-gray-600 text-center mb-8">
                   From a new buyer to an expert - start with tracking faster
                   here
                 </p>
 
                 <div className="text-center py-8 mb-8">
                   <div className="text-[64px] mb-4">🚀</div>
-                  <p className="text-lg text-gray-600">
+                  <p className="text-[16px] text-gray-600">
                     From a new buyer to expert - start with tracking faster here
                   </p>
                 </div>
 
                 <div className="space-y-8">
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">
+                    <h3 className="text-[20px] font-bold text-gray-900 mb-3">
                       1. What is Zeerostock?
                     </h3>
-                    <p className="text-base text-gray-700 leading-relaxed">
+                    <p className="text-[14px] text-gray-700 leading-relaxed">
                       Zeerostock is a marketplace designed to help B2B buyers
                       and suppliers of surplus inventory. Whether you're looking
                       to acquire items quickly, monetize slow-moving stock, or
@@ -256,10 +256,10 @@ export default function HelpSupportPage() {
                   </div>
 
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">
+                    <h3 className="text-[20px] font-bold text-gray-900 mb-3">
                       2. Create Your Account
                     </h3>
-                    <ul className="space-y-2 text-base text-gray-700">
+                    <ul className="space-y-2 text-[14px] text-gray-700">
                       <li className="flex gap-2">
                         <span className="font-bold">• Visit System:</span> Go to
                         zeerostock.com and register or sign up using your Google
@@ -287,14 +287,14 @@ export default function HelpSupportPage() {
                   </div>
 
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">
+                    <h3 className="text-[20px] font-bold text-gray-900 mb-3">
                       3. How to Browse Inventory
                     </h3>
-                    <p className="text-base text-gray-700 leading-relaxed mb-2">
+                    <p className="text-[14px] text-gray-700 leading-relaxed mb-2">
                       Find the items you need using powerful search and filter
                       tools:
                     </p>
-                    <ul className="space-y-2 text-base text-gray-700">
+                    <ul className="space-y-2 text-[14px] text-gray-700">
                       <li>
                         <span className="font-bold">• Search Bar:</span> Use
                         keywords—product names, categories, or manufacturers.
@@ -311,30 +311,30 @@ export default function HelpSupportPage() {
                   </div>
 
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">
+                    <h3 className="text-[20px] font-bold text-gray-900 mb-3">
                       4. Posting RFQs (for Buyers)
                     </h3>
-                    <p className="text-base text-gray-700 leading-relaxed">
+                    <p className="text-[14px] text-gray-700 leading-relaxed">
                       Can't find what you're looking for? Post a "Request for
                       Quote (RFQ)" and our suppliers will respond with offers.
                     </p>
                   </div>
 
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">
+                    <h3 className="text-[20px] font-bold text-gray-900 mb-3">
                       5. Listing Surplus Inventory (for Suppliers)
                     </h3>
-                    <p className="text-base text-gray-700 leading-relaxed">
+                    <p className="text-[14px] text-gray-700 leading-relaxed">
                       Have products to sell? List them on Zeerostock using our
                       intuitive listing tools.
                     </p>
                   </div>
 
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">
+                    <h3 className="text-[20px] font-bold text-gray-900 mb-3">
                       6. Payments & Orders
                     </h3>
-                    <p className="text-base text-gray-700 leading-relaxed">
+                    <p className="text-[14px] text-gray-700 leading-relaxed">
                       We provide an easy order and secure payment flow. Check
                       out securely with our trusted payment providers.
                     </p>
@@ -348,10 +348,10 @@ export default function HelpSupportPage() {
           {activeTab === "videos" && (
             <div className="max-w-[900px] mx-auto">
               <div className="bg-white border-2 border-gray-900 rounded-lg p-8">
-                <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                <h2 className="text-[32px] font-bold text-gray-900 mb-2">
                   Video Tutorials Library
                 </h2>
-                <p className="text-base text-gray-600 mb-6">
+                <p className="text-[14px] text-gray-600 mb-6">
                   Step-by-step video guides to help you get the most from
                   Zeerostock
                 </p>
@@ -360,7 +360,7 @@ export default function HelpSupportPage() {
                     <input
                       type="text"
                       placeholder="Search for videos..."
-                      className="w-full h-[48px] px-4 pr-10 border-2 border-gray-900 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-gray-900 text-black placeholder:text-black"
+                      className="w-full h-[48px] px-4 pr-10 border-2 border-gray-900 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 text-black placeholder:text-black"
                     />
                     <svg
                       className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
@@ -389,14 +389,14 @@ export default function HelpSupportPage() {
                         </div>
                       </div>
                       <div className="p-4">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                        <h3 className="text-[16px] font-semibold text-gray-900 mb-2">
                           {video.title}
                         </h3>
                         <div className="flex items-center justify-between">
-                          <span className="text-base text-gray-600">
+                          <span className="text-[14px] text-gray-600">
                             Duration: {video.duration}
                           </span>
-                          <button className="px-4 py-2 bg-gray-900 text-white text-base font-medium rounded-lg hover:bg-gray-800 transition-colors">
+                          <button className="px-4 py-2 bg-gray-900 text-white text-[14px] font-medium rounded-lg hover:bg-gray-800 transition-colors">
                             Watch Now
                           </button>
                         </div>

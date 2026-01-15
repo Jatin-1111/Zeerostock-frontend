@@ -61,12 +61,12 @@ export default function AwardsSection() {
         <div>
           <div className="relative w-full max-w-7xl mx-auto">
             {/* Subtitle */}
-            <p className="font-medium text-xs sm:text-sm md:text-sm text-center text-[#868181] mb-2 sm:mb-[11px]">
+            <p className="font-medium text-xs sm:text-sm md:text-[12px] text-center text-[#868181] mb-2 sm:mb-[11px]">
               Recognitions
             </p>
 
             {/* Main Title */}
-            <h2 className="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-3xl text-center text-[#0d1b2a] mb-6 sm:mb-8 md:mb-10 lg:mb-[53px]">
+            <h2 className="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-[40px] text-center text-[#0d1b2a] mb-6 sm:mb-8 md:mb-10 lg:mb-[53px]">
               Industry <span className="text-[#2ec096]">Recognitions</span> &{" "}
               <span className="text-[#2ec096]">Awards</span>
             </h2>
@@ -90,14 +90,14 @@ export default function AwardsSection() {
                     {/* Award Content */}
                     <div className="flex-grow">
                       <div className="flex justify-between items-start mb-2">
-                        <h3 className="font-bold text-xs sm:text-sm md:text-sm text-dark flex-grow pr-4">
+                        <h3 className="font-bold text-xs sm:text-sm md:text-[13px] text-[#0d1b2a] flex-grow pr-4">
                           {award.title}
                         </h3>
-                        <span className="font-bold text-xs sm:text-sm md:text-sm text-dark flex-shrink-0">
+                        <span className="font-bold text-xs sm:text-sm md:text-[13px] text-[#0d1b2a] flex-shrink-0">
                           {award.year}
                         </span>
                       </div>
-                      <p className="font-medium text-xs sm:text-xs md:text-xs text-subtle leading-relaxed">
+                      <p className="font-medium text-[10px] sm:text-xs md:text-[11px] text-[#868181] leading-relaxed">
                         {award.description}
                       </p>
                     </div>
@@ -109,7 +109,7 @@ export default function AwardsSection() {
               <div className="lg:col-span-5">
                 {/* Mobile/Tablet: 2x2 Grid */}
                 <div className="lg:hidden">
-                  <h3 className="font-bold text-lg sm:text-xl md:text-2xl text-black text-center mb-4 md:mb-6">
+                  <h3 className="font-bold text-lg sm:text-xl md:text-[21px] text-black text-center mb-4 md:mb-6">
                     Our Impact
                   </h3>
                   <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-5">
@@ -125,7 +125,7 @@ export default function AwardsSection() {
                           <p className="font-worksans font-semibold text-xl sm:text-2xl leading-normal text-black text-center mb-1 min-h-[1.75rem] sm:min-h-[2rem]">
                             {stat.unit || "\u00A0"}
                           </p>
-                          <p className="font-medium text-xs sm:text-xs leading-tight text-[#8f8f8f] text-center">
+                          <p className="font-medium text-[10px] sm:text-xs leading-tight text-[#8f8f8f] text-center">
                             {stat.label}
                           </p>
                         </div>
@@ -139,7 +139,7 @@ export default function AwardsSection() {
                   {/* Top Right Card - Our Impact (Waste & CO2) */}
                   <div className="absolute -top-8 right-7 w-52 bg-success-bg rounded-2xl shadow-lg p-4 z-20">
                     {/* Title */}
-                    <h3 className="font-bold text-2xl text-black text-center mb-4">
+                    <h3 className="font-bold text-[21px] text-black text-center mb-[16px]">
                       Our Impact
                     </h3>
 
@@ -153,13 +153,13 @@ export default function AwardsSection() {
                             strokeWidth={1.5}
                           />
                         </div>
-                        <p className="font-worksans font-semibold text-2xl leading-snug text-black text-center mb-0">
+                        <p className="font-worksans font-semibold text-[24px] leading-[30px] text-black text-center mb-0">
                           2.3M
                         </p>
-                        <p className="font-worksans font-semibold text-2xl leading-snug text-black text-center mb-[5px]">
+                        <p className="font-worksans font-semibold text-[24px] leading-[30px] text-black text-center mb-[5px]">
                           tons
                         </p>
-                        <p className="font-medium text-xs leading-normal text-muted text-center">
+                        <p className="font-medium text-[11px] leading-[20px] text-[#8f8f8f] text-center">
                           Waste Reduced
                         </p>
                       </div>
@@ -172,13 +172,13 @@ export default function AwardsSection() {
                             strokeWidth={1.5}
                           />
                         </div>
-                        <p className="font-worksans font-semibold text-2xl leading-snug text-black text-center mb-0">
+                        <p className="font-worksans font-semibold text-[24px] leading-[30px] text-black text-center mb-0">
                           890k
                         </p>
-                        <p className="font-worksans font-semibold text-2xl leading-snug text-black text-center mb-[5px]">
+                        <p className="font-worksans font-semibold text-[24px] leading-[30px] text-black text-center mb-[5px]">
                           tons
                         </p>
-                        <p className="font-medium text-xs leading-tight text-muted text-center">
+                        <p className="font-medium text-[10px] leading-[17px] text-[#8f8f8f] text-center">
                           CO2 Emissions Avoided
                         </p>
                       </div>
@@ -195,10 +195,10 @@ export default function AwardsSection() {
                           strokeWidth={1.5}
                         />
                       </div>
-                      <p className="font-worksans font-semibold text-2xl leading-normal text-black mb-[5px]">
+                      <p className="font-worksans font-semibold text-[24px] leading-normal text-black mb-[5px]">
                         8,500+
                       </p>
-                      <p className="font-medium text-sm leading-tight text-muted w-32">
+                      <p className="font-medium text-[12px] leading-[13px] text-[#8f8f8f] w-[133px]">
                         Small Businesses Supported
                       </p>
                     </div>
@@ -211,10 +211,10 @@ export default function AwardsSection() {
                           strokeWidth={1.5}
                         />
                       </div>
-                      <p className="font-worksans font-semibold text-2xl leading-normal text-black text-right mb-[5px] pt-[27px]">
+                      <p className="font-worksans font-semibold text-[24px] leading-normal text-black text-right mb-[5px] pt-[27px]">
                         15,000+
                       </p>
-                      <p className="font-medium text-sm leading-normal text-muted text-right">
+                      <p className="font-medium text-[12px] leading-[20px] text-[#8f8f8f] text-right">
                         Jobs Created
                       </p>
                     </div>

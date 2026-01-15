@@ -16,7 +16,7 @@ export default function StepOneIdentityBank({
       {/* Identity Verification Section - Left */}
       <div className="bg-white rounded-[7px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] flex-1 flex flex-col overflow-hidden">
         <div className="border-b border-[#e5e5e5] px-3 py-2 flex-shrink-0">
-          <h2 className="text-xs font-semibold text-black">
+          <h2 className="text-[11px] font-semibold text-black">
             Identity Verification
           </h2>
         </div>
@@ -24,7 +24,7 @@ export default function StepOneIdentityBank({
         <div className="px-3 py-4 space-y-4 flex-1 overflow-y-auto">
           {/* Owner/Director Name */}
           <div>
-            <label className="block text-xs font-medium text-black mb-1.5">
+            <label className="block text-[9px] font-medium text-black mb-1.5">
               Owner/Director Name
             </label>
             <input
@@ -36,13 +36,13 @@ export default function StepOneIdentityBank({
                   ownerName: e.target.value,
                 })
               }
-              className="w-full h-8 px-2.5 text-xs border border-border rounded focus:outline-none focus:ring-1 focus:ring-border text-black placeholder:text-muted"
+              className="w-full h-[33px] px-2.5 text-[11px] border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] text-black placeholder:text-[#9c9c9c]"
             />
           </div>
 
           {/* Government ID */}
           <div>
-            <label className="block text-xs font-medium text-black mb-1.5">
+            <label className="block text-[9px] font-medium text-black mb-1.5">
               Government ID
             </label>
             <div className="relative">
@@ -51,7 +51,7 @@ export default function StepOneIdentityBank({
                 onChange={(e) =>
                   updateData("identityVerification", { idCard: e.target.value })
                 }
-                className="w-full h-8 px-2.5 pr-8 text-xs border border-border rounded focus:outline-none focus:ring-1 focus:ring-border bg-white text-black appearance-none"
+                className="w-full h-[33px] px-2.5 pr-8 text-[11px] border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] bg-white text-black appearance-none"
               >
                 <option value="">Aadhar Card</option>
                 <option value="pan">PAN Card</option>
@@ -68,7 +68,7 @@ export default function StepOneIdentityBank({
 
           {/* Proof of Address */}
           <div>
-            <label className="block text-xs font-medium text-black mb-1.5">
+            <label className="block text-[9px] font-medium text-black mb-1.5">
               Proof of Address
             </label>
             <div className="relative">
@@ -79,7 +79,7 @@ export default function StepOneIdentityBank({
                     proofOfAddress: e.target.value,
                   })
                 }
-                className="w-full h-8 px-2.5 pr-8 text-xs border border-border rounded focus:outline-none focus:ring-1 focus:ring-border bg-white text-black appearance-none"
+                className="w-full h-[33px] px-2.5 pr-8 text-[11px] border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] bg-white text-black appearance-none"
               >
                 <option value="">Aadhar Card</option>
                 <option value="utility">Utility Bill</option>
@@ -99,14 +99,14 @@ export default function StepOneIdentityBank({
       {/* Bank Account Section - Right */}
       <div className="bg-white rounded-[7px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] flex-1 flex flex-col overflow-hidden">
         <div className="border-b border-[#e5e5e5] px-3 py-2 flex-shrink-0">
-          <h2 className="text-xs font-semibold text-black">Bank Account</h2>
+          <h2 className="text-[11px] font-semibold text-black">Bank Account</h2>
         </div>
 
         <div className="px-3 py-4 space-y-4 flex-1 overflow-y-auto">
           {/* Bank Name & Account Holder Name - Side by Side */}
           <div className="flex gap-2 flex-wrap">
             <div className="flex-1 min-w-[120px]">
-              <label className="block text-xs font-medium text-black mb-1.5">
+              <label className="block text-[9px] font-medium text-black mb-1.5">
                 Bank Name
               </label>
               <div className="relative">
@@ -115,7 +115,7 @@ export default function StepOneIdentityBank({
                   onChange={(e) =>
                     updateData("bankAccount", { bankName: e.target.value })
                   }
-                  className="w-full h-[33px] px-2.5 pr-8 text-xs border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] bg-white text-black appearance-none"
+                  className="w-full h-[33px] px-2.5 pr-8 text-[11px] border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] bg-white text-black appearance-none"
                 >
                   <option value="">HDFC Bank</option>
                   <option value="icici">ICICI Bank</option>
@@ -131,7 +131,7 @@ export default function StepOneIdentityBank({
             </div>
 
             <div className="flex-1 min-w-[120px]">
-              <label className="block text-xs font-medium text-black mb-1.5">
+              <label className="block text-[9px] font-medium text-black mb-1.5">
                 Account Holder Name
               </label>
               <input
@@ -143,14 +143,14 @@ export default function StepOneIdentityBank({
                     accountHolderName: e.target.value,
                   })
                 }
-                className="w-full h-[33px] px-2.5 text-xs border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] text-black placeholder:text-[#9c9c9c]"
+                className="w-full h-[33px] px-2.5 text-[11px] border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] text-black placeholder:text-[#9c9c9c]"
               />
             </div>
           </div>
 
           {/* Account Number */}
           <div>
-            <label className="block text-xs font-medium text-black mb-1.5">
+            <label className="block text-[9px] font-medium text-black mb-1.5">
               Account Number
             </label>
             <input
@@ -160,13 +160,13 @@ export default function StepOneIdentityBank({
               onChange={(e) =>
                 updateData("bankAccount", { accountNumber: e.target.value })
               }
-              className="w-full h-8 px-2.5 text-xs border border-border rounded focus:outline-none focus:ring-1 focus:ring-border text-black placeholder:text-muted"
+              className="w-full h-[33px] px-2.5 text-[11px] border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] text-black placeholder:text-[#9c9c9c]"
             />
           </div>
 
           {/* IFSC Code */}
           <div>
-            <label className="block text-xs font-medium text-black mb-1.5">
+            <label className="block text-[9px] font-medium text-black mb-1.5">
               IFSC Code
             </label>
             <input
@@ -176,7 +176,7 @@ export default function StepOneIdentityBank({
               onChange={(e) =>
                 updateData("bankAccount", { ifscCode: e.target.value })
               }
-              className="w-full h-8 px-2.5 text-xs border border-border rounded focus:outline-none focus:ring-1 focus:ring-border text-black placeholder:text-muted"
+              className="w-full h-[33px] px-2.5 text-[11px] border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] text-black placeholder:text-[#9c9c9c]"
             />
           </div>
         </div>

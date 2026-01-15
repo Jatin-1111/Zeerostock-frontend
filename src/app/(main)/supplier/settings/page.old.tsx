@@ -76,7 +76,7 @@ export default function SupplierProfile() {
   return (
     <div className="min-h-screen bg-[#F6F6F6] px-6 py-6">
       {/* Page Title */}
-      <h1 className="text-[#0d1b2a] text-2xl font-semibold mb-6">
+      <h1 className="text-[#0d1b2a] text-[27px] font-semibold mb-6">
         Company Information
       </h1>
 
@@ -85,11 +85,11 @@ export default function SupplierProfile() {
         <div className="grid grid-cols-2 gap-x-[68px] gap-y-[49px]">
           {/* Company Name */}
           <div>
-            <label className="text-[#0d1b2a] text-lg font-medium block mb-[17px]">
+            <label className="text-[#0d1b2a] text-[17px] font-medium block mb-[17px]">
               Company Name
             </label>
             <div className="border border-[#bebebe] rounded-[8px] px-3 py-[12px]">
-              <p className="text-[#0d1b2a] text-sm">
+              <p className="text-[#0d1b2a] text-[12px]">
                 {company_info.company_name}
               </p>
             </div>
@@ -97,11 +97,11 @@ export default function SupplierProfile() {
 
           {/* Website */}
           <div>
-            <label className="text-[#0d1b2a] text-lg font-medium block mb-[17px]">
+            <label className="text-[#0d1b2a] text-[17px] font-medium block mb-[17px]">
               Website
             </label>
             <div className="border border-[#bebebe] rounded-[8px] px-3 py-[12px]">
-              <p className="text-[#0d1b2a] text-sm">
+              <p className="text-[#0d1b2a] text-[12px]">
                 {company_info.website}
               </p>
             </div>
@@ -109,11 +109,11 @@ export default function SupplierProfile() {
 
           {/* Business Type */}
           <div>
-            <label className="text-[#0d1b2a] text-lg font-medium block mb-[17px]">
+            <label className="text-[#0d1b2a] text-[17px] font-medium block mb-[17px]">
               Business Type
             </label>
             <div className="border border-[#bebebe] rounded-[8px] px-3 py-[12px] flex items-center justify-between">
-              <p className="text-[#0d1b2a] text-sm">
+              <p className="text-[#0d1b2a] text-[12px]">
                 {company_info.business_type}
               </p>
               <svg
@@ -136,11 +136,11 @@ export default function SupplierProfile() {
 
           {/* Company Description */}
           <div>
-            <label className="text-[#0d1b2a] text-lg font-medium block mb-[17px]">
+            <label className="text-[#0d1b2a] text-[17px] font-medium block mb-[17px]">
               Company Description
             </label>
             <div className="border border-[#bebebe] rounded-[8px] px-3 py-[11px] h-[140px]">
-              <p className="text-[#0d1b2a] text-sm leading-[18px]">
+              <p className="text-[#0d1b2a] text-[12px] leading-[18px]">
                 {company_info.description}
               </p>
             </div>
@@ -148,17 +148,17 @@ export default function SupplierProfile() {
 
           {/* Phone */}
           <div>
-            <label className="text-[#0d1b2a] text-lg font-medium block mb-[17px]">
+            <label className="text-[#0d1b2a] text-[17px] font-medium block mb-[17px]">
               Phone
             </label>
             <div className="border border-[#bebebe] rounded-[8px] px-3 py-[12px]">
-              <p className="text-[#0d1b2a] text-sm">{company_info.phone}</p>
+              <p className="text-[#0d1b2a] text-[12px]">{company_info.phone}</p>
             </div>
           </div>
 
           {/* Primary Category */}
           <div className="col-span-2">
-            <label className="text-[#0d1b2a] text-lg font-medium block mb-[17px]">
+            <label className="text-[#0d1b2a] text-[17px] font-medium block mb-[17px]">
               Primary Category
             </label>
             <div className="flex items-center gap-[8px]">
@@ -167,7 +167,7 @@ export default function SupplierProfile() {
                   key={index}
                   className="bg-[#2aae7a] border border-[#9c9c9c] rounded-[11px] h-[34px] px-3 flex items-center justify-center min-w-[98px]"
                 >
-                  <p className="text-white text-sm font-medium">
+                  <p className="text-white text-[12px] font-medium">
                     {category}
                   </p>
                 </div>
@@ -188,7 +188,7 @@ export default function SupplierProfile() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <span className="text-[#9c9c9c] text-sm font-medium">
+                <span className="text-[#9c9c9c] text-[12px] font-medium">
                   ADD
                 </span>
               </button>
@@ -198,47 +198,47 @@ export default function SupplierProfile() {
       </div>
 
       {/* Business Metrics Section */}
-      <h2 className="text-[#0d1b2a] text-2xl font-medium mb-[54px]">
+      <h2 className="text-[#0d1b2a] text-[27px] font-medium mb-[54px]">
         Business Metrics
       </h2>
 
       <div className="grid grid-cols-4 gap-[46px]">
         {/* Surplus Rating */}
         <div className="bg-[#eeffef] border border-[#2aae7a] rounded-[15px] shadow-[0px_0px_10px_0px_rgba(24,181,34,0.25)] py-[15px] px-0 flex flex-col items-center gap-[4px]">
-          <p className="text-[#0d1b2a] text-2xl font-semibold text-center">
+          <p className="text-[#0d1b2a] text-[27px] font-semibold text-center">
             {business_metrics.rating}
           </p>
-          <p className="text-[#9c9c9c] text-base font-medium text-center">
+          <p className="text-[#9c9c9c] text-[14px] font-medium text-center">
             Surplus Rating
           </p>
         </div>
 
         {/* Response Rate */}
         <div className="bg-[#eeffef] border border-[#2aae7a] rounded-[15px] shadow-[0px_0px_10px_0px_rgba(24,181,34,0.25)] py-[15px] px-0 flex flex-col items-center gap-[4px]">
-          <p className="text-[#0d1b2a] text-2xl font-semibold text-center">
+          <p className="text-[#0d1b2a] text-[27px] font-semibold text-center">
             {business_metrics.response_rate}%
           </p>
-          <p className="text-[#9c9c9c] text-base font-medium text-center">
+          <p className="text-[#9c9c9c] text-[14px] font-medium text-center">
             Response Rate
           </p>
         </div>
 
         {/* Total Reviews */}
         <div className="bg-[#eeffef] border border-[#2aae7a] rounded-[15px] shadow-[0px_0px_10px_0px_rgba(24,181,34,0.25)] py-[15px] px-0 flex flex-col items-center gap-[4px]">
-          <p className="text-[#0d1b2a] text-2xl font-semibold text-center">
+          <p className="text-[#0d1b2a] text-[27px] font-semibold text-center">
             {business_metrics.total_reviews}
           </p>
-          <p className="text-[#9c9c9c] text-base font-medium text-center">
+          <p className="text-[#9c9c9c] text-[14px] font-medium text-center">
             Total Reviews
           </p>
         </div>
 
         {/* Member Since */}
         <div className="bg-[#eeffef] border border-[#2aae7a] rounded-[15px] shadow-[0px_0px_10px_0px_rgba(24,181,34,0.25)] py-[15px] px-0 flex flex-col items-center gap-[4px]">
-          <p className="text-[#0d1b2a] text-2xl font-semibold text-center">
+          <p className="text-[#0d1b2a] text-[27px] font-semibold text-center">
             {business_metrics.member_since}
           </p>
-          <p className="text-[#9c9c9c] text-base font-medium text-center">
+          <p className="text-[#9c9c9c] text-[14px] font-medium text-center">
             Member Since
           </p>
         </div>

@@ -44,10 +44,10 @@ export default function FAQSection() {
       <div className="max-w-4xl mx-auto">
         {/* Heading Section */}
         <div className="text-center mb-[87px]">
-          <h2 className="text-2xl leading-snug font-medium text-[#0d1b2a] mb-[7px]">
+          <h2 className="text-[26px] leading-[39px] font-medium text-[#0d1b2a] mb-[7px]">
             Frequently Asked Questions
           </h2>
-          <p className="text-sm font-semibold text-[#9c9c9c]">
+          <p className="text-[12px] font-semibold text-[#9c9c9c]">
             Quick answers to common questions
           </p>
         </div>
@@ -63,7 +63,7 @@ export default function FAQSection() {
                 onClick={() => toggleFAQ(index)}
                 className="w-full flex items-center justify-between px-[15px] py-[15px] text-left"
               >
-                <span className="text-sm leading-tight font-medium text-[#0d1b2a] tracking-[0.5px] pr-4">
+                <span className="text-[13px] leading-[14px] font-medium text-[#0d1b2a] tracking-[0.5px] pr-4">
                   {faq.question}
                 </span>
 
@@ -93,7 +93,7 @@ export default function FAQSection() {
                   >
                     {/* Inner div is needed for padding so it doesn't jerk during animation */}
                     <div className="px-[15px] pb-[15px]">
-                      <p className="text-xs leading-tight font-medium text-[#9c9c9c] tracking-[0.5px]">
+                      <p className="text-[10px] leading-[14px] font-medium text-[#9c9c9c] tracking-[0.5px]">
                         {faq.answer}
                       </p>
                     </div>

@@ -103,11 +103,11 @@ export default function GettingStartedGuide({
             {/* Content */}
             <div className="p-[15px]">
               {/* Header */}
-              <h1 className="mb-[4px] text-base font-semibold leading-none text-[#0d1b2a]">
+              <h1 className="mb-[4px] text-[14px] font-semibold leading-none text-[#0d1b2a]">
                 Getting Started Guide
               </h1>
 
-              <p className="mb-[11px] text-xs font-medium leading-normal text-[#9c9c9c]">
+              <p className="mb-[11px] text-[9px] font-medium leading-normal text-[#9c9c9c]">
                 Learn how to start using Zeerostock efficiently within minutes.
               </p>
 
@@ -117,8 +117,8 @@ export default function GettingStartedGuide({
                 style={{ height: "64px" }}
               >
                 <div className="text-center">
-                  <div className="mb-[4px] text-xl">🚀</div>
-                  <p className="text-xs font-medium leading-none text-[#2aae7a]">
+                  <div className="mb-[4px] text-[19px]">🚀</div>
+                  <p className="text-[9px] font-medium leading-none text-[#2aae7a]">
                     Your Journey to Efficient B2B Trading Starts Here
                   </p>
                 </div>
@@ -134,12 +134,12 @@ export default function GettingStartedGuide({
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search for guide...."
-                  className="flex-1 bg-transparent text-xs font-medium text-[#374151] outline-none placeholder:text-[#374151] placeholder:opacity-80"
+                  className="flex-1 bg-transparent text-[7px] font-medium text-[#374151] outline-none placeholder:text-[#374151] placeholder:opacity-80"
                 />
                 <div className="flex items-center gap-[4px]">
                   <div className="h-[17px] w-[1px] bg-gray-300"></div>
                   <Search className="h-[9px] w-[9px] text-[#374151] opacity-80" />
-                  <p className="text-xs font-medium text-[#374151] opacity-80">
+                  <p className="text-[9px] font-medium text-[#374151] opacity-80">
                     Search
                   </p>
                 </div>
@@ -148,7 +148,7 @@ export default function GettingStartedGuide({
               {/* Sections */}
               {filteredSections.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-[40px]">
-                  <p className="text-xs font-medium text-[#9c9c9c]">
+                  <p className="text-[9px] font-medium text-[#9c9c9c]">
                     No results found matching your search.
                   </p>
                 </div>
@@ -156,10 +156,10 @@ export default function GettingStartedGuide({
                 <>
                   {filteredSections.includes(sections[0]) && (
                     <div className="mb-[15px]">
-                      <h2 className="mb-[8px] text-base font-semibold leading-none text-[#0d1b2a]">
+                      <h2 className="mb-[8px] text-[14px] font-semibold leading-none text-[#0d1b2a]">
                         1. What is Zeerostock?
                       </h2>
-                      <p className="mb-[11px] text-xs font-medium leading-tight text-[#9c9c9c]">
+                      <p className="mb-[11px] text-[9px] font-medium leading-[15px] text-[#9c9c9c]">
                         Zeerostock is a premier B2B marketplace designed to
                         connect buyers and suppliers of surplus industrial
                         inventory. Our platform provides a secure, efficient,
@@ -173,14 +173,14 @@ export default function GettingStartedGuide({
 
                   {filteredSections.includes(sections[1]) && (
                     <div className="mb-[15px]">
-                      <h2 className="mb-[8px] text-base font-semibold leading-none text-[#0d1b2a]">
+                      <h2 className="mb-[8px] text-[14px] font-semibold leading-none text-[#0d1b2a]">
                         2. Create Your Account
                       </h2>
-                      <p className="mb-[8px] text-xs font-medium leading-normal text-[#9c9c9c]">
+                      <p className="mb-[8px] text-[9px] font-medium leading-normal text-[#9c9c9c]">
                         Joining Zeerostock is simple. Follow these steps to set
                         up your business profile:
                       </p>
-                      <ol className="mb-[11px] list-decimal space-y-[4px] pl-[14px] text-xs font-medium leading-tight text-[#9c9c9c]">
+                      <ol className="mb-[11px] list-decimal space-y-[4px] pl-[14px] text-[9px] font-medium leading-[17px] text-[#9c9c9c]">
                         <li>
                           <span className="text-black">Go to Signup:</span>{" "}
                           Navigate to our registration page and select whether
@@ -213,14 +213,14 @@ export default function GettingStartedGuide({
 
                   {filteredSections.includes(sections[2]) && (
                     <div className="mb-[15px]">
-                      <h2 className="mb-[8px] text-base font-semibold leading-none text-[#0d1b2a]">
+                      <h2 className="mb-[8px] text-[14px] font-semibold leading-none text-[#0d1b2a]">
                         3. How to Browse Inventory
                       </h2>
-                      <p className="mb-[8px] text-xs font-medium leading-normal text-[#9c9c9c]">
+                      <p className="mb-[8px] text-[9px] font-medium leading-normal text-[#9c9c9c]">
                         Find the products you need with our powerful search and
                         filtering tools:
                       </p>
-                      <ol className="mb-[11px] list-decimal space-y-[4px] pl-[14px] text-xs font-medium leading-tight text-black">
+                      <ol className="mb-[11px] list-decimal space-y-[4px] pl-[14px] text-[9px] font-medium leading-[17px] text-black">
                         <li>
                           Search Bar:{" "}
                           <span className="text-[#9c9c9c]">
@@ -250,15 +250,15 @@ export default function GettingStartedGuide({
 
                   {filteredSections.includes(sections[3]) && (
                     <div className="mb-[15px]">
-                      <h2 className="mb-[8px] text-base font-semibold leading-none text-[#0d1b2a]">
+                      <h2 className="mb-[8px] text-[14px] font-semibold leading-none text-[#0d1b2a]">
                         4. Posting RFQs (for Buyers)
                       </h2>
-                      <p className="mb-[8px] text-xs font-medium leading-normal text-[#9c9c9c]">
+                      <p className="mb-[8px] text-[9px] font-medium leading-normal text-[#9c9c9c]">
                         If you can&apos;t find what you&apos;re looking for,
                         submit a Request for Quote (RFQ) to our network of
                         suppliers:
                       </p>
-                      <ol className="mb-[11px] list-decimal space-y-[4px] pl-[14px] text-xs font-medium leading-tight text-black">
+                      <ol className="mb-[11px] list-decimal space-y-[4px] pl-[14px] text-[9px] font-medium leading-[17px] text-black">
                         <li>
                           How to Create an RFQ:{" "}
                           <span className="text-[#9c9c9c]">
@@ -289,14 +289,14 @@ export default function GettingStartedGuide({
 
                   {filteredSections.includes(sections[4]) && (
                     <div className="mb-[15px]">
-                      <h2 className="mb-[8px] text-base font-semibold leading-none text-[#0d1b2a]">
+                      <h2 className="mb-[8px] text-[14px] font-semibold leading-none text-[#0d1b2a]">
                         5. Listing Surplus Inventory (for Suppliers)
                       </h2>
-                      <p className="mb-[8px] text-xs font-medium leading-normal text-[#9c9c9c]">
+                      <p className="mb-[8px] text-[9px] font-medium leading-normal text-[#9c9c9c]">
                         Turn your excess stock into capital by listing it on
                         Zeerostock:
                       </p>
-                      <ol className="mb-[11px] list-decimal space-y-[4px] pl-[14px] text-xs font-medium leading-tight text-black">
+                      <ol className="mb-[11px] list-decimal space-y-[4px] pl-[14px] text-[9px] font-medium leading-[17px] text-black">
                         <li>
                           Uploading Product Details:{" "}
                           <span className="text-[#9c9c9c]">
@@ -327,14 +327,14 @@ export default function GettingStartedGuide({
 
                   {filteredSections.includes(sections[5]) && (
                     <div className="mb-[15px]">
-                      <h2 className="mb-[8px] text-base font-semibold leading-none text-[#0d1b2a]">
+                      <h2 className="mb-[8px] text-[14px] font-semibold leading-none text-[#0d1b2a]">
                         6. Payments & Orders
                       </h2>
-                      <p className="mb-[8px] text-xs font-medium leading-normal text-[#9c9c9c]">
+                      <p className="mb-[8px] text-[9px] font-medium leading-normal text-[#9c9c9c]">
                         We ensure all transactions are secure and transparent
                         from start to finish:
                       </p>
-                      <ol className="list-decimal space-y-[4px] pl-[14px] text-xs font-medium leading-tight text-black">
+                      <ol className="list-decimal space-y-[4px] pl-[14px] text-[9px] font-medium leading-[17px] text-black">
                         <li>
                           Secure Escrow:{" "}
                           <span className="text-[#9c9c9c]">

@@ -253,7 +253,7 @@ export default function UserManagementPage() {
           title="User Management"
           description="Manage all user and access activity"
           actions={
-            <button className="bg-black text-white px-4 py-2 text-sm font-medium hover:bg-gray-900 transition-colors">
+            <button className="bg-black text-white px-4 py-2 text-[13px] font-medium hover:bg-gray-900 transition-colors">
               Export
             </button>
           }
@@ -263,14 +263,14 @@ export default function UserManagementPage() {
         {error && (
           <div className="mb-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 flex items-center gap-2">
             <AlertCircle className="h-5 w-5" />
-            <span className="text-sm">{error}</span>
+            <span className="text-[13px]">{error}</span>
           </div>
         )}
 
         {success && (
           <div className="mb-4 bg-green-50 border border-green-200 text-green-700 px-4 py-3 flex items-center gap-2">
             <CheckCircle className="h-5 w-5" />
-            <span className="text-sm">{success}</span>
+            <span className="text-[13px]">{success}</span>
           </div>
         )}
 
@@ -289,7 +289,7 @@ export default function UserManagementPage() {
               <button
                 key={filter.value}
                 onClick={() => handleFilterChange(filter.value)}
-                className={`px-4 py-1.5 text-sm font-medium transition-colors ${
+                className={`px-4 py-1.5 text-[12px] font-medium transition-colors ${
                   activeFilter === filter.value
                     ? "bg-black text-white"
                     : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
@@ -309,7 +309,7 @@ export default function UserManagementPage() {
                 placeholder="Search by name, email, or ID..."
                 value={searchTerm}
                 onChange={handleSearch}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 text-sm text-black placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 text-[13px] text-black placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
               />
             </div>
           </div>
@@ -323,32 +323,32 @@ export default function UserManagementPage() {
         ) : users.length === 0 ? (
           <div className="text-center py-12 bg-white border border-gray-200">
             <Users className="h-12 w-12 mx-auto mb-4 opacity-50 text-gray-400" />
-            <p className="text-gray-500 text-sm">No users found</p>
+            <p className="text-gray-500 text-[13px]">No users found</p>
           </div>
         ) : (
           <div className="bg-white border border-gray-200 mb-4">
             <table className="w-full">
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
-                  <th className="px-4 py-3 text-left text-xs font-bold text-black">
+                  <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
                     USER ID
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-bold text-black">
+                  <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
                     NAME
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-bold text-black">
+                  <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
                     EMAIL
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-bold text-black">
+                  <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
                     ROLE
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-bold text-black">
+                  <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
                     STATUS
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-bold text-black">
+                  <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
                     Last Login
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-bold text-black">
+                  <th className="px-4 py-3 text-left text-[11px] font-bold text-black">
                     ACTIONS
                   </th>
                 </tr>
@@ -356,18 +356,18 @@ export default function UserManagementPage() {
               <tbody className="divide-y divide-gray-200">
                 {users.map((user) => (
                   <tr key={user.id} className="hover:bg-gray-50">
-                    <td className="px-4 py-3 text-sm text-black">
+                    <td className="px-4 py-3 text-[12px] text-black">
                       {user.id}
                     </td>
-                    <td className="px-4 py-3 text-sm text-black">
+                    <td className="px-4 py-3 text-[12px] text-black">
                       {user.name}
                     </td>
-                    <td className="px-4 py-3 text-sm text-black">
+                    <td className="px-4 py-3 text-[12px] text-black">
                       {user.email}
                     </td>
                     <td className="px-4 py-3">
                       <span
-                        className={`px-3 py-1 rounded-full text-xs font-medium ${getRoleBadgeColor(
+                        className={`px-3 py-1 rounded-full text-[11px] font-medium ${getRoleBadgeColor(
                           user.activeRole
                         )}`}
                       >
@@ -377,7 +377,7 @@ export default function UserManagementPage() {
                     </td>
                     <td className="px-4 py-3">
                       <span
-                        className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusBadgeColor(
+                        className={`px-3 py-1 rounded-full text-[11px] font-medium ${getStatusBadgeColor(
                           user.isActive,
                           user.isVerified
                         )}`}
@@ -385,7 +385,7 @@ export default function UserManagementPage() {
                         {getStatusText(user.isActive, user.isVerified)}
                       </span>
                     </td>
-                    <td className="px-4 py-3 text-sm text-black">
+                    <td className="px-4 py-3 text-[12px] text-black">
                       {formatLastLogin(user.lastLogin)}
                     </td>
                     <td className="px-4 py-3">
@@ -443,7 +443,7 @@ export default function UserManagementPage() {
         {/* Pagination */}
         {!loading && users.length > 0 && (
           <div className="flex justify-between items-center">
-            <p className="text-sm text-gray-600">
+            <p className="text-[12px] text-gray-600">
               Page {currentPage} of {totalPages}
             </p>
             <div className="flex items-center gap-1">
@@ -461,7 +461,7 @@ export default function UserManagementPage() {
                   <button
                     key={pageNum}
                     onClick={() => setCurrentPage(pageNum)}
-                    className={`w-8 h-8 border flex items-center justify-center text-sm font-medium transition-colors ${
+                    className={`w-8 h-8 border flex items-center justify-center text-[12px] font-medium transition-colors ${
                       currentPage === pageNum
                         ? "bg-black text-white border-black"
                         : "border-gray-300 text-gray-700 hover:bg-gray-50"

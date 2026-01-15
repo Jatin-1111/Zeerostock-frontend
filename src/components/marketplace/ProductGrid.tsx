@@ -193,7 +193,7 @@ export default function ExploreProductGrid({
             >
               <Menu className="w-5 h-5" />
               {getActiveFiltersCount() > 0 && (
-                <span className="absolute -top-1 -right-1 bg-[#2aae7a] text-white text-xs font-bold px-1 py-0.5 rounded-full min-w-[16px] text-center">
+                <span className="absolute -top-1 -right-1 bg-[#2aae7a] text-white text-[8px] font-bold px-1 py-0.5 rounded-full min-w-[16px] text-center">
                   {getActiveFiltersCount()}
                 </span>
               )}
@@ -204,7 +204,7 @@ export default function ExploreProductGrid({
               <div className="flex items-center bg-[rgba(235,235,235,0.65)] rounded-[10px] shadow-[0px_0px_2.5px_0px_rgba(24,181,34,0.5)] px-3 py-1.5">
                 {/* Category Dropdown */}
                 <div className="flex items-center gap-1.5 flex-shrink-0">
-                  <span className="text-xs font-semibold text-[#374151] opacity-80">
+                  <span className="text-[11px] font-semibold text-[#374151] opacity-80">
                     All
                   </span>
                   <ChevronDown className="w-4 h-4 text-[#374151] opacity-80" />
@@ -222,7 +222,7 @@ export default function ExploreProductGrid({
                       handleSearch(searchQuery);
                     }
                   }}
-                  className="flex-1 bg-transparent text-xs font-medium text-[#374151] opacity-80 focus:outline-none placeholder:text-[#374151] placeholder:opacity-80 min-w-0 px-2"
+                  className="flex-1 bg-transparent text-[9.5px] font-medium text-[#374151] opacity-80 focus:outline-none placeholder:text-[#374151] placeholder:opacity-80 min-w-0 px-2"
                 />
 
                 {/* Search Button */}
@@ -230,7 +230,7 @@ export default function ExploreProductGrid({
                   <div className="w-px h-5 bg-gray-300"></div>
                   <button
                     onClick={() => handleSearch(searchQuery)}
-                    className="text-sm font-medium text-[#374151] opacity-80 hover:opacity-100 transition-opacity px-2"
+                    className="text-[12px] font-medium text-[#374151] opacity-80 hover:opacity-100 transition-opacity px-2"
                   >
                     Search
                   </button>
@@ -243,13 +243,13 @@ export default function ExploreProductGrid({
           {getActiveFiltersCount() > 0 && (
             <div className="px-2.5 py-2 border-t border-gray-200 bg-gray-50">
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-xs font-medium text-[#787878]">
+                <span className="text-[10px] font-medium text-[#787878]">
                   Active Filters:
                 </span>
                 {activeFilters.categories?.map((catId: string) => (
                   <span
                     key={catId}
-                    className="px-2 py-1 bg-[#2aae7a] text-white text-xs font-medium rounded-full"
+                    className="px-2 py-1 bg-[#2aae7a] text-white text-[9px] font-medium rounded-full"
                   >
                     {activeFilters.categoryNames?.[catId] || catId}
                   </span>
@@ -257,7 +257,7 @@ export default function ExploreProductGrid({
                 {activeFilters.industries?.map((indId: string) => (
                   <span
                     key={indId}
-                    className="px-2 py-1 bg-[#1e3a8a] text-white text-xs font-medium rounded-full"
+                    className="px-2 py-1 bg-[#1e3a8a] text-white text-[9px] font-medium rounded-full"
                   >
                     {activeFilters.industryNames?.[indId] || indId}
                   </span>
@@ -265,7 +265,7 @@ export default function ExploreProductGrid({
                 {activeFilters.conditions?.map((cond: string) => (
                   <span
                     key={cond}
-                    className="px-2 py-1 bg-purple-600 text-white text-xs font-medium rounded-full"
+                    className="px-2 py-1 bg-purple-600 text-white text-[9px] font-medium rounded-full"
                   >
                     {cond}
                   </span>
@@ -273,7 +273,7 @@ export default function ExploreProductGrid({
                 {activeFilters.listingTypes?.map((type: string) => (
                   <span
                     key={type}
-                    className="px-2 py-1 bg-orange-600 text-white text-xs font-medium rounded-full"
+                    className="px-2 py-1 bg-orange-600 text-white text-[9px] font-medium rounded-full"
                   >
                     {type}
                   </span>
@@ -281,7 +281,7 @@ export default function ExploreProductGrid({
                 {activeFilters.features?.map((feat: string) => (
                   <span
                     key={feat}
-                    className="px-2 py-1 bg-pink-600 text-white text-xs font-medium rounded-full"
+                    className="px-2 py-1 bg-pink-600 text-white text-[9px] font-medium rounded-full"
                   >
                     {feat}
                   </span>
@@ -289,14 +289,14 @@ export default function ExploreProductGrid({
                 {activeFilters.priceRange &&
                   (activeFilters.priceRange.min > 0 ||
                     activeFilters.priceRange.max < 100000) && (
-                    <span className="px-2 py-1 bg-teal-600 text-white text-xs font-medium rounded-full">
+                    <span className="px-2 py-1 bg-teal-600 text-white text-[9px] font-medium rounded-full">
                       ₹{activeFilters.priceRange.min.toLocaleString()} - ₹
                       {activeFilters.priceRange.max.toLocaleString()}
                     </span>
                   )}
                 <button
                   onClick={clearAllFilters}
-                  className="ml-auto px-2 py-1 text-xs font-medium text-red-600 hover:text-red-700 hover:bg-red-50 rounded transition-colors"
+                  className="ml-auto px-2 py-1 text-[9px] font-medium text-red-600 hover:text-red-700 hover:bg-red-50 rounded transition-colors"
                 >
                   Clear All Filters
                 </button>
@@ -323,15 +323,15 @@ export default function ExploreProductGrid({
                     />
                   </svg>
                   <div>
-                    <h3 className="text-xs font-semibold text-red-800 mb-0.5">
+                    <h3 className="text-[6px] font-semibold text-red-800 mb-0.5">
                       Error Loading Products
                     </h3>
-                    <p className="text-xs text-red-600">{error}</p>
+                    <p className="text-[5px] text-red-600">{error}</p>
                   </div>
                 </div>
                 <button
                   onClick={() => fetchProducts(searchQuery)}
-                  className="ml-1.5 px-1.5 py-0.5 text-xs bg-red-600 text-white rounded hover:bg-red-700 transition-colors shrink-0"
+                  className="ml-1.5 px-1.5 py-0.5 text-[5px] bg-red-600 text-white rounded hover:bg-red-700 transition-colors shrink-0"
                 >
                   Try Again
                 </button>
@@ -361,10 +361,10 @@ export default function ExploreProductGrid({
           ) : products.length === 0 ? (
             <div className="text-center py-5">
               <div className="text-gray-400 text-2xl mb-1">🔍</div>
-              <h3 className="text-xs font-semibold text-[#0d1b2a] mb-1">
+              <h3 className="text-[7.5px] font-semibold text-[#0d1b2a] mb-1">
                 {searchQuery ? "No products found" : "No products available"}
               </h3>
-              <p className="text-[#787878] mb-1 text-xs">
+              <p className="text-[#787878] mb-1 text-[6px]">
                 {searchQuery
                   ? `Try adjusting your search or filters`
                   : "Check back later for new products"}
@@ -375,7 +375,7 @@ export default function ExploreProductGrid({
                     setSearchQuery("");
                     router.push("/marketplace");
                   }}
-                  className="px-2.5 py-1 bg-[#1e3a8a] text-white text-xs rounded hover:bg-[#1e3a8a]/90 transition-colors"
+                  className="px-2.5 py-1 bg-[#1e3a8a] text-white text-[5px] rounded hover:bg-[#1e3a8a]/90 transition-colors"
                 >
                   Clear Search
                 </button>
@@ -402,7 +402,7 @@ export default function ExploreProductGrid({
                           }}
                         />
                       ) : (
-                        <span className="text-gray-400 text-xs">
+                        <span className="text-gray-400 text-[5px]">
                           No Image
                         </span>
                       )}
@@ -412,10 +412,10 @@ export default function ExploreProductGrid({
                     <div className="px-2.5 pb-2 flex flex-col flex-1">
                       {/* Title - Fixed Height */}
                       <div className="mb-1 h-10 flex flex-col">
-                        <h3 className="text-xs font-medium text-[#0d1b2a] mb-0.5 line-clamp-2 flex-1">
+                        <h3 className="text-[10px] font-medium text-[#0d1b2a] mb-0.5 line-clamp-2 flex-1">
                           {product?.title || "Untitled Product"}
                         </h3>
-                        <span className="text-xs font-medium text-[#787878]">
+                        <span className="text-[7px] font-medium text-[#787878]">
                           {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                           ({(product as any)?.reviewCount || "1336"})
                         </span>
@@ -440,19 +440,19 @@ export default function ExploreProductGrid({
                       {/* Location - Fixed Height */}
                       <div className="flex items-center gap-1 mb-1 h-3.5">
                         <MapPin className="w-2 h-2 text-[#0d1b2a] flex-shrink-0" />
-                        <span className="text-xs font-medium text-[#0d1b2a] truncate">
+                        <span className="text-[9px] font-medium text-[#0d1b2a] truncate">
                           {product?.city || "Mumbai"}, IN
                         </span>
                       </div>
 
                       {/* Price - Fixed Height */}
                       <div className="mb-1 flex items-center gap-1.5 h-5">
-                        <span className="text-sm font-bold text-[#1e3a8a]">
+                        <span className="text-[13.5px] font-bold text-[#1e3a8a]">
                           ₹{(product?.price || 0).toLocaleString("en-IN")}
                         </span>
                         {product?.originalPrice &&
                           product.originalPrice > (product.price || 0) && (
-                            <span className="text-xs font-bold text-[#787878] relative inline-block">
+                            <span className="text-[10px] font-bold text-[#787878] relative inline-block">
                               <span className="line-through">
                                 ₹{product.originalPrice.toLocaleString("en-IN")}
                               </span>
@@ -465,7 +465,7 @@ export default function ExploreProductGrid({
                         href={`/product/${product?.slug || "unknown"}`}
                         className="mt-auto"
                       >
-                        <button className="w-full py-2 bg-[#1e3a8a] text-white text-xs font-semibold rounded-[7.5px] hover:bg-[#1e3a8a]/90 transition-colors">
+                        <button className="w-full py-2 bg-[#1e3a8a] text-white text-[10px] font-semibold rounded-[7.5px] hover:bg-[#1e3a8a]/90 transition-colors">
                           View Deal
                         </button>
                       </Link>
@@ -479,7 +479,7 @@ export default function ExploreProductGrid({
                 <div className="flex justify-center mt-4">
                   <button
                     onClick={() => setCurrentPage((prev) => prev + 1)}
-                    className="px-5 py-2.5 bg-white border-2 border-[#1e3a8a] text-[#1e3a8a] text-base font-medium rounded hover:bg-[#1e3a8a] hover:text-white transition-colors"
+                    className="px-5 py-2.5 bg-white border-2 border-[#1e3a8a] text-[#1e3a8a] text-[15px] font-medium rounded hover:bg-[#1e3a8a] hover:text-white transition-colors"
                   >
                     Load More Products
                   </button>

@@ -94,7 +94,7 @@ export default function ReviewOrder({
     <div className="flex flex-col gap-[13px]">
       {/* Order Summary Section */}
       <div className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] p-[15px] w-full">
-        <h2 className="font-semibold text-sm text-[#0d1b2a] mb-[10px]">
+        <h2 className="font-semibold text-[12px] text-[#0d1b2a] mb-[10px]">
           Order Summary
         </h2>
         <div className="flex flex-col gap-[10px]">
@@ -116,17 +116,17 @@ export default function ReviewOrder({
                   </div>
                 )}
                 <div className="flex-1 flex flex-col gap-[1px]">
-                  <div className=" font-medium text-xs text-[#0d1b2a]">
+                  <div className=" font-medium text-[9px] text-[#0d1b2a]">
                     {item.title}
                   </div>
-                  <div className="text-xs text-[#9c9c9c] leading-tight">
+                  <div className="text-[8px] text-[#9c9c9c] leading-[12px]">
                     by {item.seller?.name || item.category || "Supplier"}
                   </div>
-                  <div className="text-xs text-[#9c9c9c] leading-tight">
+                  <div className="text-[8px] text-[#9c9c9c] leading-[12px]">
                     Qty: {item.quantity} x {item.price.toFixed(2)}
                   </div>
                 </div>
-                <div className=" font-medium text-sm text-[#0d1b2a] opacity-80">
+                <div className=" font-medium text-[12px] text-[#0d1b2a] opacity-80">
                   <span className=" font-bold">₹</span>
                   {(item.quantity * item.price).toFixed(0)}
                 </div>
@@ -144,7 +144,7 @@ export default function ReviewOrder({
       <div className="flex gap-[13px]">
         {/* Payment Method */}
         <div className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] p-[15px] flex-1 h-[77px]">
-          <h3 className=" font-semibold text-sm text-[#0d1b2a] mb-[13px]">
+          <h3 className=" font-semibold text-[12px] text-[#0d1b2a] mb-[13px]">
             Payment Method
           </h3>
           <div className="flex items-center gap-[5px]">
@@ -156,10 +156,10 @@ export default function ReviewOrder({
               />
             </div>
             <div className="flex flex-col gap-[1px]">
-              <div className=" font-medium text-xs text-[#0d1b2a]">
+              <div className=" font-medium text-[9px] text-[#0d1b2a]">
                 {paymentDisplay.title}
               </div>
-              <div className="font-medium text-xs text-[#9c9c9c]">
+              <div className="font-medium text-[8px] text-[#9c9c9c]">
                 {paymentDisplay.subtitle}
               </div>
             </div>
@@ -168,7 +168,7 @@ export default function ReviewOrder({
 
         {/* Shipping Method */}
         <div className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] p-[15px] flex-1 h-[77px]">
-          <h3 className=" font-semibold text-sm text-[#0d1b2a] mb-[13px]">
+          <h3 className=" font-semibold text-[12px] text-[#0d1b2a] mb-[13px]">
             Shipping Method
           </h3>
           <div className="flex items-center gap-[5px]">
@@ -180,10 +180,10 @@ export default function ReviewOrder({
               />
             </div>
             <div className="flex flex-col gap-[1px]">
-              <div className=" font-medium text-xs text-[#0d1b2a]">
+              <div className=" font-medium text-[9px] text-[#0d1b2a]">
                 {shippingDisplay.title}
               </div>
-              <div className="font-medium text-xs text-[#9c9c9c]">
+              <div className="font-medium text-[8px] text-[#9c9c9c]">
                 {shippingDisplay.subtitle}
               </div>
             </div>
@@ -206,10 +206,10 @@ export default function ReviewOrder({
           )}
         </button>
         <div className="flex-1">
-          <div className=" font-medium text-xs text-[#0d1b2a] mb-[7px]">
+          <div className=" font-medium text-[9px] text-[#0d1b2a] mb-[7px]">
             I agree to the Terms of Service and Privacy Policy
           </div>
-          <div className=" font-medium text-xs text-[#9c9c9c] leading-tight">
+          <div className=" font-medium text-[7px] text-[#9c9c9c] leading-[11px]">
             By placing this order, you agree to our terms and acknowledge that
             you&apos;ve read our return policy.
           </div>
@@ -221,7 +221,7 @@ export default function ReviewOrder({
         <button
           onClick={onBack}
           disabled={isPlacingOrder}
-          className="h-[30px] px-[40px] py-[7px] bg-white border border-[#9c9c9c] rounded-[7px]  font-semibold text-xs text-[#9c9c9c] leading-tight hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 transition-colors"
+          className="h-[30px] px-[40px] py-[7px] bg-white border border-[#9c9c9c] rounded-[7px]  font-semibold text-[10px] text-[#9c9c9c] leading-[11px] hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 transition-colors"
         >
           Previous Step
         </button>
@@ -233,7 +233,7 @@ export default function ReviewOrder({
             cartItems.length === 0 ||
             !agreedToTerms
           }
-          className="h-[30px] px-[40px] py-[7px] bg-[#1e3a8a] border-none rounded-[7px]  font-semibold text-xs text-white leading-tight flex items-center justify-center gap-[5px] hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 transition-all"
+          className="h-[30px] px-[40px] py-[7px] bg-[#1e3a8a] border-none rounded-[7px]  font-semibold text-[10px] text-white leading-[11px] flex items-center justify-center gap-[5px] hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 transition-all"
         >
           {isPlacingOrder ? (
             <>

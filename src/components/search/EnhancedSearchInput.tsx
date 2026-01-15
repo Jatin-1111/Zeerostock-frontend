@@ -173,7 +173,7 @@ export default function EnhancedSearchInput({
           onFocus={() => setShowDropdown(true)}
           placeholder={placeholder}
           autoFocus={autoFocus}
-          className="w-full pl-[27px] pr-[27px] py-2 border text-gray-600 border-gray-300 rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5f52] focus:border-transparent text-xs"
+          className="w-full pl-[27px] pr-[27px] py-2 border text-gray-600 border-gray-300 rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-[#1a5f52] focus:border-transparent text-[9px]"
         />
         {query && (
           <button
@@ -201,7 +201,7 @@ export default function EnhancedSearchInput({
           {/* Suggestions */}
           {!isLoading && suggestions.length > 0 && (
             <div className="py-[5px]">
-              <div className="px-[11px] py-[5px] text-xs font-semibold text-gray-500 uppercase">
+              <div className="px-[11px] py-[5px] text-[8px] font-semibold text-gray-500 uppercase">
                 Suggestions
               </div>
               {suggestions.map((suggestion, index) => (
@@ -211,7 +211,7 @@ export default function EnhancedSearchInput({
                   className="w-full px-[11px] py-[7px] text-left hover:bg-gray-50 transition-colors flex items-center gap-2"
                 >
                   <Search className="w-[11px] h-[11px] text-gray-400" />
-                  <span className="text-gray-900 text-xs">{suggestion}</span>
+                  <span className="text-gray-900 text-[9px]">{suggestion}</span>
                 </button>
               ))}
             </div>
@@ -220,10 +220,10 @@ export default function EnhancedSearchInput({
           {/* Did You Mean */}
           {didYouMean && (
             <div className="px-[11px] py-2 border-t border-gray-100">
-              <span className="text-xs text-gray-600">Did you mean: </span>
+              <span className="text-[9px] text-gray-600">Did you mean: </span>
               <button
                 onClick={() => handleSuggestionClick(didYouMean)}
-                className="text-xs text-[#1a5f52] hover:underline font-medium"
+                className="text-[9px] text-[#1a5f52] hover:underline font-medium"
               >
                 {didYouMean}
               </button>
@@ -233,7 +233,7 @@ export default function EnhancedSearchInput({
           {/* Recent Searches */}
           {query.length === 0 && recentSearches.length > 0 && (
             <div className="py-[5px]">
-              <div className="px-[11px] py-[5px] text-xs font-semibold text-gray-500 uppercase flex items-center gap-[5px]">
+              <div className="px-[11px] py-[5px] text-[8px] font-semibold text-gray-500 uppercase flex items-center gap-[5px]">
                 <Clock className="w-2 h-2" />
                 Recent Searches
               </div>
@@ -244,7 +244,7 @@ export default function EnhancedSearchInput({
                   className="w-full px-[11px] py-[7px] text-left hover:bg-gray-50 transition-colors flex items-center gap-2"
                 >
                   <Clock className="w-[11px] h-[11px] text-gray-400" />
-                  <span className="text-gray-900 text-xs">{search}</span>
+                  <span className="text-gray-900 text-[9px]">{search}</span>
                 </button>
               ))}
             </div>
@@ -255,7 +255,7 @@ export default function EnhancedSearchInput({
             popularSearches.length > 0 &&
             (!isAuthenticated || recentSearches.length === 0) && (
               <div className="py-[5px] border-t border-gray-100">
-                <div className="px-[11px] py-[5px] text-xs font-semibold text-gray-500 uppercase flex items-center gap-[5px]">
+                <div className="px-[11px] py-[5px] text-[8px] font-semibold text-gray-500 uppercase flex items-center gap-[5px]">
                   <TrendingUp className="w-2 h-2" />
                   Popular Searches
                 </div>
@@ -266,7 +266,7 @@ export default function EnhancedSearchInput({
                     className="w-full px-[11px] py-[7px] text-left hover:bg-gray-50 transition-colors flex items-center gap-2"
                   >
                     <TrendingUp className="w-[11px] h-[11px] text-gray-400" />
-                    <span className="text-gray-900 text-xs">{search}</span>
+                    <span className="text-gray-900 text-[9px]">{search}</span>
                   </button>
                 ))}
               </div>
@@ -279,7 +279,7 @@ export default function EnhancedSearchInput({
             !didYouMean && (
               <div className="px-[11px] py-4 text-center text-gray-500">
                 <Search className="w-[21px] h-[21px] mx-auto mb-[5px] text-gray-300" />
-                <p className="text-xs">No suggestions found</p>
+                <p className="text-[9px]">No suggestions found</p>
               </div>
             )}
         </div>

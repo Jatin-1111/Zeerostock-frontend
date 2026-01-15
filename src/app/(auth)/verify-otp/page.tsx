@@ -312,7 +312,7 @@ function VerifyOTPContent() {
                 d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            <div className="text-xs text-blue-800">
+            <div className="text-[10px] text-blue-800">
               <p className="font-medium mb-0.5">Tips:</p>
               <ul className="space-y-0.5 list-disc list-inside">
                 <li>Check your spam folder</li>

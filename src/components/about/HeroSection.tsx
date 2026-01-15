@@ -13,8 +13,8 @@ export default function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col justify-center items-center h-full px-4 sm:px-6 md:px-7 gap-3">
-        <h1 className="font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-4xl leading-tight text-center text-gray-900 max-w-full sm:max-w-md md:max-w-lg px-4 sm:px-0">
+      <div className="relative z-10 flex flex-col justify-center items-center h-full px-4 sm:px-6 md:px-[27px] gap-2 sm:gap-3 md:gap-[13px]">
+        <h1 className="font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-[40px] leading-tight text-center text-gray-900 max-w-full sm:max-w-md md:max-w-lg px-4 sm:px-0">
           Transforming <span className="text-emerald-500">Global Surplus</span>{" "}
           Trade
         </h1>

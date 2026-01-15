@@ -288,17 +288,17 @@ export default function AdminDashboard() {
           <div className="col-span-2 bg-white border border-gray-200 p-6">
             <div className="flex justify-between items-center mb-4">
               <div>
-                <h3 className="text-lg font-bold text-black">
+                <h3 className="text-[16px] font-bold text-black">
                   User Heat Map
                 </h3>
-                <p className="text-sm text-gray-500">
+                <p className="text-[12px] text-gray-500">
                   Active user across India&apos;s elasticity
                 </p>
               </div>
               <div className="flex gap-2">
                 <button
                   onClick={() => setHeatMapTab("India")}
-                  className={`px-4 py-1.5 text-sm font-medium transition-colors ${
+                  className={`px-4 py-1.5 text-[12px] font-medium transition-colors ${
                     heatMapTab === "India"
                       ? "bg-black text-white"
                       : "bg-white text-gray-600 border border-gray-300"
@@ -308,7 +308,7 @@ export default function AdminDashboard() {
                 </button>
                 <button
                   onClick={() => setHeatMapTab("Global")}
-                  className={`px-4 py-1.5 text-sm font-medium transition-colors ${
+                  className={`px-4 py-1.5 text-[12px] font-medium transition-colors ${
                     heatMapTab === "Global"
                       ? "bg-black text-white"
                       : "bg-white text-gray-600 border border-gray-300"
@@ -330,7 +330,7 @@ export default function AdminDashboard() {
 
                   return (
                     <div key={index} className="flex items-center gap-4">
-                      <span className="text-sm text-gray-600 w-24">
+                      <span className="text-[12px] text-gray-600 w-24">
                         {item.state}
                       </span>
                       <div className="flex-1 relative">
@@ -342,11 +342,11 @@ export default function AdminDashboard() {
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-base font-medium text-black">
+                        <span className="text-[14px] font-medium text-black">
                           {item.users.toLocaleString()} users
                         </span>
                         {/* Growth percentage - commented out until historical data available */}
-                        {/* <div className="w-8 h-8 border border-gray-300 rounded flex items-center justify-center text-xs text-gray-600">
+                        {/* <div className="w-8 h-8 border border-gray-300 rounded flex items-center justify-center text-[10px] text-gray-600">
                         +{item.percentage}%
                       </div> */}
                       </div>
@@ -363,16 +363,16 @@ export default function AdminDashboard() {
 
           {/* Risk Alerts Panel */}
           <div className="bg-white border border-gray-200 p-6">
-            <h3 className="text-lg font-bold text-black mb-4">
+            <h3 className="text-[16px] font-bold text-black mb-4">
               Risk Alerts Panel
             </h3>
             <div className="space-y-4">
               {riskAlerts.map((alert, index) => (
                 <div key={index} className="border border-gray-200 p-3">
-                  <p className="text-sm text-black mb-1">{alert.text}</p>
-                  <p className="text-xs text-gray-500 mb-2">{alert.time}</p>
+                  <p className="text-[12px] text-black mb-1">{alert.text}</p>
+                  <p className="text-[10px] text-gray-500 mb-2">{alert.time}</p>
                   <button
-                    className={`text-xs font-medium ${alert.actionColor} hover:underline`}
+                    className={`text-[11px] font-medium ${alert.actionColor} hover:underline`}
                   >
                     {alert.action}
                   </button>
@@ -388,10 +388,10 @@ export default function AdminDashboard() {
           <div className="col-span-2 bg-white border border-gray-200 p-6">
             <div className="flex justify-between items-center mb-6">
               <div>
-                <h3 className="text-lg font-bold text-black">
+                <h3 className="text-[16px] font-bold text-black">
                   Listing Status
                 </h3>
-                <p className="text-sm text-gray-500">Inventory breakdown</p>
+                <p className="text-[12px] text-gray-500">Inventory breakdown</p>
               </div>
               <div className="flex gap-2">
                 {["Last 6 months", "Last 12 months", "Month-by-data"].map(
@@ -399,7 +399,7 @@ export default function AdminDashboard() {
                     <button
                       key={tab}
                       onClick={() => setListingTab(tab)}
-                      className={`px-3 py-1.5 text-xs font-medium transition-colors ${
+                      className={`px-3 py-1.5 text-[11px] font-medium transition-colors ${
                         listingTab === tab
                           ? "bg-black text-white"
                           : "bg-white text-gray-600 border border-gray-300"
@@ -414,7 +414,7 @@ export default function AdminDashboard() {
 
             {/* Bar Chart */}
             <div className="relative h-64">
-              <div className="absolute left-0 top-0 bottom-0 flex flex-col justify-between text-xs text-gray-500">
+              <div className="absolute left-0 top-0 bottom-0 flex flex-col justify-between text-[10px] text-gray-500">
                 <span>2000</span>
                 <span>1600</span>
                 <span>1000</span>
@@ -438,7 +438,7 @@ export default function AdminDashboard() {
                       }}
                     >
                       {orderStats && orderStats.delivered > 0 && (
-                        <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-100 border border-gray-300 px-2 py-1 text-xs whitespace-nowrap">
+                        <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-100 border border-gray-300 px-2 py-1 text-[10px] whitespace-nowrap">
                           Delivered
                           <br />
                           {orderStats.delivered}
@@ -446,7 +446,7 @@ export default function AdminDashboard() {
                       )}
                     </div>
                   </div>
-                  <span className="text-sm text-gray-600 mt-2">
+                  <span className="text-[12px] text-gray-600 mt-2">
                     Delivered
                   </span>
                 </div>
@@ -464,7 +464,7 @@ export default function AdminDashboard() {
                         : "0%",
                     }}
                   />
-                  <span className="text-sm text-gray-600 mt-2">
+                  <span className="text-[12px] text-gray-600 mt-2">
                     In Transit
                   </span>
                 </div>
@@ -482,7 +482,7 @@ export default function AdminDashboard() {
                         : "0%",
                     }}
                   />
-                  <span className="text-sm text-gray-600 mt-2">
+                  <span className="text-[12px] text-gray-600 mt-2">
                     Processing
                   </span>
                 </div>
@@ -497,7 +497,7 @@ export default function AdminDashboard() {
                         : "0%",
                     }}
                   />
-                  <span className="text-sm text-gray-600 mt-2">
+                  <span className="text-[12px] text-gray-600 mt-2">
                     Pending
                   </span>
                 </div>
@@ -515,7 +515,7 @@ export default function AdminDashboard() {
                         : "0%",
                     }}
                   />
-                  <span className="text-sm text-gray-600 mt-2">
+                  <span className="text-[12px] text-gray-600 mt-2">
                     Cancelled
                   </span>
                 </div>
@@ -525,14 +525,14 @@ export default function AdminDashboard() {
 
           {/* Recent Activity Feed */}
           <div className="bg-white border border-gray-200 p-6">
-            <h3 className="text-lg font-bold text-black mb-4">
+            <h3 className="text-[16px] font-bold text-black mb-4">
               Recent Activity Feed
             </h3>
             <div className="space-y-3">
               {recentActivities.map((activity, index) => (
                 <div key={index} className="border border-gray-200 p-3">
-                  <p className="text-sm text-black mb-1">{activity.text}</p>
-                  <p className="text-xs text-gray-500">{activity.time}</p>
+                  <p className="text-[12px] text-black mb-1">{activity.text}</p>
+                  <p className="text-[10px] text-gray-500">{activity.time}</p>
                 </div>
               ))}
             </div>
@@ -542,23 +542,23 @@ export default function AdminDashboard() {
         {/* Pending Supplier KYC Table */}
         <div className="bg-white border border-gray-200">
           <div className="p-6 border-b border-gray-200">
-            <h3 className="text-lg font-bold text-black">
+            <h3 className="text-[16px] font-bold text-black">
               Pending Supplier KYC
             </h3>
           </div>
           <table className="w-full">
             <thead className="bg-gray-50">
               <tr>
-                <th className="px-6 py-3 text-left text-sm font-bold text-black uppercase">
+                <th className="px-6 py-3 text-left text-[12px] font-bold text-black uppercase">
                   COMPANY
                 </th>
-                <th className="px-6 py-3 text-left text-sm font-bold text-black uppercase">
+                <th className="px-6 py-3 text-left text-[12px] font-bold text-black uppercase">
                   SUBMITTED DOC
                 </th>
-                <th className="px-6 py-3 text-left text-sm font-bold text-black uppercase">
+                <th className="px-6 py-3 text-left text-[12px] font-bold text-black uppercase">
                   TRUST SCORE
                 </th>
-                <th className="px-6 py-3 text-left text-sm font-bold text-black uppercase">
+                <th className="px-6 py-3 text-left text-[12px] font-bold text-black uppercase">
                   ACTIONS
                 </th>
               </tr>
@@ -567,13 +567,13 @@ export default function AdminDashboard() {
               {pendingVerifications.length > 0 ? (
                 pendingVerifications.map((item) => (
                   <tr key={item.id}>
-                    <td className="px-6 py-4 text-base text-black">
+                    <td className="px-6 py-4 text-[14px] text-black">
                       {item.companyName || "N/A"}
                     </td>
-                    <td className="px-6 py-4 text-base text-black">
+                    <td className="px-6 py-4 text-[14px] text-black">
                       {getSubmittedDocs(item)}
                     </td>
-                    <td className="px-6 py-4 text-base text-black">
+                    <td className="px-6 py-4 text-[14px] text-black">
                       {getTrustScore(item)}
                     </td>
                     <td className="px-6 py-4">
@@ -584,10 +584,10 @@ export default function AdminDashboard() {
                         >
                           <Eye className="w-4 h-4 text-gray-600 hover:text-black" />
                         </a>
-                        <button className="text-sm text-black hover:underline">
+                        <button className="text-[12px] text-black hover:underline">
                           Approve
                         </button>
-                        <button className="text-sm text-black hover:underline">
+                        <button className="text-[12px] text-black hover:underline">
                           Reject
                         </button>
                       </div>

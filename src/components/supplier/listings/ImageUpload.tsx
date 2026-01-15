@@ -43,7 +43,7 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
 
   return (
     <div>
-      <label className="mb-[6px] block text-xs font-medium text-[#0d1b2a]">
+      <label className="mb-[6px] block text-[8px] font-medium text-[#0d1b2a]">
         Upload Product images*
       </label>
       <div
@@ -52,8 +52,8 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
         onDragOver={handleDragOver}
         className="relative flex h-36 cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-muted hover:border-secondary hover:bg-success-bg"
       >
-        <Upload className="mb-3 h-7 w-7 text-muted" />
-        <p className="mb-[5.33px] text-xs text-[#9c9c9c]">
+        <Upload className="mb-[12.67px] h-[25.33px] w-[25.33px] text-[#9c9c9c]" />
+        <p className="mb-[5.33px] text-[8px] text-[#9c9c9c]">
           Drop & drag images here or click to select
         </p>
         <button
@@ -63,7 +63,7 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
             fileInputRef.current?.click();
           }}
           disabled={uploading}
-          className="mt-[7.33px] rounded-[5.33px] bg-[#f2f2f2] px-[20.67px] py-[5.33px] text-xs font-medium text-[#9c9c9c] hover:bg-gray-300 disabled:opacity-50"
+          className="mt-[7.33px] rounded-[5.33px] bg-[#f2f2f2] px-[20.67px] py-[5.33px] text-[8px] font-medium text-[#9c9c9c] hover:bg-gray-300 disabled:opacity-50"
         >
           {uploading ? "Uploading..." : "Choose Files"}
         </button>
@@ -107,7 +107,7 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
                   <X className="h-[7.33px] w-[7.33px]" />
                 </button>
                 {index === 0 && (
-                  <div className="absolute bottom-0 left-0 right-0 bg-[#2AAE7A] py-[1.33px] text-center text-xs font-medium text-white">
+                  <div className="absolute bottom-0 left-0 right-0 bg-[#2AAE7A] py-[1.33px] text-center text-[5.33px] font-medium text-white">
                     Main
                   </div>
                 )}
@@ -116,7 +116,9 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
           </div>
         )}
       </div>
-      {error && <p className="mt-[2.67px] text-xs text-red-500">{error}</p>}
+      {error && (
+        <p className="mt-[2.67px] text-[6.67px] text-red-500">{error}</p>
+      )}
     </div>
   );
 };

@@ -6,11 +6,11 @@ export default function CTASection() {
       <div className="w-full max-w-full mx-auto">
         <div className="bg-[#39ac7a] rounded-xl sm:rounded-2xl md:rounded-[15px] overflow-hidden relative px-4 sm:px-5 md:px-[16px] py-6 sm:py-7 md:py-[30px]">
           {/* Content Container */}
-          <div className="flex flex-col gap-2.5 items-center text-center mx-auto max-w-full sm:max-w-xl md:max-w-2xl">
-            <h2 className="font-worksans font-medium text-xl sm:text-2xl md:text-2xl leading-normal text-white w-full px-4 sm:px-0">
+          <div className="flex flex-col gap-2 sm:gap-3 md:gap-[10px] items-center text-center mx-auto max-w-full sm:max-w-xl md:max-w-[667px]">
+            <h2 className="font-worksans font-medium text-xl sm:text-2xl md:text-[22.5px] leading-normal text-white w-full px-4 sm:px-0">
               Ready to Join Our Story?
             </h2>
-            <p className="font-semibold text-xs sm:text-sm md:text-xs leading-normal text-[#374151] w-full px-4 sm:px-0">
+            <p className="font-semibold text-xs sm:text-sm md:text-[11.5px] leading-normal text-[#374151] w-full px-4 sm:px-0">
               Whether you&apos;re a business looking to optimize your surplus
               inventory or a professional wanting to make an impact, we&apos;d
               love to have you as part of our journey.
@@ -23,7 +23,7 @@ export default function CTASection() {
               href="/marketplace"
               className="bg-primary rounded-md sm:rounded-lg py-2 h-auto sm:h-8 flex items-center justify-center w-44 md:w-36"
             >
-              <span className="font-montserrat font-medium text-xs sm:text-sm md:text-xs leading-normal text-white">
+              <span className="font-montserrat font-medium text-xs sm:text-sm md:text-[11px] leading-normal text-white">
                 Explore Opportunities
               </span>
             </Link>
@@ -31,7 +31,7 @@ export default function CTASection() {
               href="/careers"
               className="bg-white rounded-md sm:rounded-lg py-2 h-auto sm:h-8 flex items-center justify-center w-44 md:w-36"
             >
-              <span className="font-montserrat font-medium text-xs sm:text-sm md:text-xs leading-tight text-[#2aae7a]">
+              <span className="font-montserrat font-medium text-xs sm:text-sm md:text-[11px] leading-tight md:leading-[11px] text-[#2aae7a]">
                 View Open Positions
               </span>
             </Link>

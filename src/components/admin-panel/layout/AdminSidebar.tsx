@@ -75,8 +75,8 @@ export default function AdminSidebar() {
     <aside className="w-[250px] bg-white border-r border-gray-200 flex flex-col">
       {/* Logo */}
       <div className="p-6 border-b border-gray-200">
-        <h1 className="text-xl font-bold text-black">Zeerostock</h1>
-        <p className="text-sm text-gray-400">Admin Portal</p>
+        <h1 className="text-[20px] font-bold text-black">Zeerostock</h1>
+        <p className="text-[12px] text-gray-400">Admin Portal</p>
       </div>
 
       {/* Navigation */}
@@ -88,7 +88,7 @@ export default function AdminSidebar() {
             <Link
               key={item.label}
               href={item.href}
-              className={`flex items-center gap-3 px-4 py-5 text-base transition-colors ${
+              className={`flex items-center gap-3 px-4 py-5 text-[14px] transition-colors ${
                 active
                   ? "bg-black text-white"
                   : "text-gray-600 hover:bg-gray-50"
@@ -106,7 +106,7 @@ export default function AdminSidebar() {
             <div className="my-2 mx-4 border-t border-gray-200"></div>
             <Link
               href="/admin-panel/admin-management"
-              className={`flex items-center gap-3 px-4 py-5 text-base transition-colors ${
+              className={`flex items-center gap-3 px-4 py-5 text-[14px] transition-colors ${
                 isActive("/admin-panel/admin-management")
                   ? "bg-black text-white"
                   : "text-gray-600 hover:bg-gray-50"
@@ -123,7 +123,7 @@ export default function AdminSidebar() {
       <div className="border-t border-gray-200">
         <Link
           href="/admin-panel/settings"
-          className={`flex items-center gap-3 px-4 py-3 text-base transition-colors ${
+          className={`flex items-center gap-3 px-4 py-3 text-[14px] transition-colors ${
             isActive("/admin-panel/settings")
               ? "bg-black text-white"
               : "text-gray-600 hover:bg-gray-50"
@@ -134,7 +134,7 @@ export default function AdminSidebar() {
         </Link>
         <button
           onClick={handleLogout}
-          className="w-full flex items-center gap-3 px-4 py-3 text-base text-gray-600 hover:bg-gray-50 transition-colors"
+          className="w-full flex items-center gap-3 px-4 py-3 text-[14px] text-gray-600 hover:bg-gray-50 transition-colors"
         >
           <LogOut className="w-4 h-4" />
           <span>Log Out</span>

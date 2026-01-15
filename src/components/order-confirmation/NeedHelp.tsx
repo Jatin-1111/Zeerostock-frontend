@@ -10,7 +10,7 @@ export default function NeedHelp() {
   return (
     <div className="bg-white rounded-[15px] p-[23px] mb-5 shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)]">
       {/* Title */}
-      <h3 className="font-medium text-[#0d1b2a] text-xl leading-normal mb-6">
+      <h3 className="font-medium text-[#0d1b2a] text-[18px] leading-normal mb-6">
         Need Help?
       </h3>
 
@@ -26,7 +26,7 @@ export default function NeedHelp() {
               <div className="p-[8px]">
                 <Icon className="w-[17px] h-[17px] text-[#9c9c9c]" />
               </div>
-              <span className="font-medium text-[#9c9c9c] text-base leading-normal">
+              <span className="font-medium text-[#9c9c9c] text-[15px] leading-[17px]">
                 {option.label}
               </span>
             </button>
@@ -36,10 +36,10 @@ export default function NeedHelp() {
 
       {/* Track Your Order Section */}
       <div className="bg-white rounded-[15px] pt-[23px]">
-        <h4 className="font-medium text-[#0d1b2a] text-xl leading-normal text-center mb-[23px]">
+        <h4 className="font-medium text-[#0d1b2a] text-[18px] leading-normal text-center mb-[23px]">
           Track Your Order
         </h4>
-        <button className="w-full bg-[#1e3a8a] text-white font-semibold text-base leading-normal py-[14px] rounded-[11px] hover:bg-[#1e3a8a]/90 transition-colors">
+        <button className="w-full bg-[#1e3a8a] text-white font-semibold text-[15px] leading-[17px] py-[14px] rounded-[11px] hover:bg-[#1e3a8a]/90 transition-colors">
           Order Tracking
         </button>
       </div>

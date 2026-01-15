@@ -276,7 +276,7 @@ export default function MarketplaceFilterSidebar({
     <div className="flex items-center justify-between py-[10px]">
       <label
         onClick={onChange}
-        className={`text-sm font-medium cursor-pointer select-none ${
+        className={`text-[12px] font-medium cursor-pointer select-none ${
           option.checked ? "text-[#2aae7a]" : "text-[#787878]"
         }`}
       >
@@ -326,11 +326,11 @@ export default function MarketplaceFilterSidebar({
           <div className="flex items-center justify-between mb-[20px]">
             <div className="flex items-center gap-[10px]">
               <Filter className="w-[12px] h-[12px] text-[#0d1b2a]" />
-              <h2 className="text-sm font-medium text-[#0d1b2a]">
+              <h2 className="text-[13px] font-medium text-[#0d1b2a]">
                 Filters
               </h2>
               {activeFiltersCount > 0 && (
-                <span className="bg-[#2aae7a] text-white text-xs font-medium px-1.5 py-0.5 rounded-full">
+                <span className="bg-[#2aae7a] text-white text-[10px] font-medium px-1.5 py-0.5 rounded-full">
                   {activeFiltersCount}
                 </span>
               )}
@@ -338,7 +338,7 @@ export default function MarketplaceFilterSidebar({
             {activeFiltersCount > 0 && (
               <button
                 onClick={clearAllFilters}
-                className="text-xs font-medium text-[#2aae7a] hover:text-[#239662] transition-colors"
+                className="text-[10px] font-medium text-[#2aae7a] hover:text-[#239662] transition-colors"
               >
                 Clear All
               </button>
@@ -347,7 +347,7 @@ export default function MarketplaceFilterSidebar({
 
           {/* Categories */}
           <div className="mb-6">
-            <h3 className="text-sm font-medium text-[#0d1b2a] mb-[20px]">
+            <h3 className="text-[12px] font-medium text-[#0d1b2a] mb-[20px]">
               Categories
             </h3>
             <div className="space-y-[4px]">
@@ -372,7 +372,7 @@ export default function MarketplaceFilterSidebar({
 
           {/* Industries */}
           <div className="mb-6">
-            <h3 className="text-sm font-medium text-[#0d1b2a] mb-[20px]">
+            <h3 className="text-[12px] font-medium text-[#0d1b2a] mb-[20px]">
               Industries
             </h3>
             <div className="space-y-[4px]">
@@ -397,16 +397,16 @@ export default function MarketplaceFilterSidebar({
 
           {/* Price Range */}
           <div className="mb-6">
-            <h3 className="text-sm font-medium text-[#0d1b2a] mb-2">
+            <h3 className="text-[12px] font-medium text-[#0d1b2a] mb-2">
               Price Range
             </h3>
-            <p className="text-sm font-medium text-[#0d1b2a] mb-3">
+            <p className="text-[12px] font-medium text-[#0d1b2a] mb-3">
               ₹{priceRange.min.toLocaleString("en-IN")}- ₹
               {priceRange.max.toLocaleString("en-IN")}
             </p>
             <div className="space-y-2">
               <div>
-                <label className="text-xs text-[#787878] mb-1 block">
+                <label className="text-[10px] text-[#787878] mb-1 block">
                   Min: ₹{priceRange.min.toLocaleString("en-IN")}
                 </label>
                 <input
@@ -422,7 +422,7 @@ export default function MarketplaceFilterSidebar({
                 />
               </div>
               <div>
-                <label className="text-xs text-[#787878] mb-1 block">
+                <label className="text-[10px] text-[#787878] mb-1 block">
                   Max: ₹{priceRange.max.toLocaleString("en-IN")}
                 </label>
                 <input
@@ -444,7 +444,7 @@ export default function MarketplaceFilterSidebar({
 
           {/* Condition */}
           <div className="mb-6">
-            <h3 className="text-sm font-medium text-[#0d1b2a] mb-[20px]">
+            <h3 className="text-[12px] font-medium text-[#0d1b2a] mb-[20px]">
               Condition
             </h3>
             <div className="space-y-[4px]">
@@ -469,7 +469,7 @@ export default function MarketplaceFilterSidebar({
 
           {/* Listing Type */}
           <div className="mb-6">
-            <h3 className="text-sm font-medium text-[#0d1b2a] mb-[20px]">
+            <h3 className="text-[12px] font-medium text-[#0d1b2a] mb-[20px]">
               Listing Type
             </h3>
             <div className="space-y-[4px]">
@@ -494,7 +494,7 @@ export default function MarketplaceFilterSidebar({
 
           {/* Features */}
           <div className="mb-6">
-            <h3 className="text-sm font-medium text-[#0d1b2a] mb-[20px]">
+            <h3 className="text-[12px] font-medium text-[#0d1b2a] mb-[20px]">
               Features
             </h3>
             <div className="space-y-[4px]">

@@ -28,14 +28,14 @@ export const FormInput: React.FC<FormInputProps> = ({
   rows = 4,
 }) => {
   const inputClasses =
-    "h-[28px] w-full rounded-[4px] border border-[#e5e5e5] px-[8px] text-xs text-black placeholder:text-[#9c9c9c] focus:border-[#2AAE7A] focus:outline-none focus:ring-1 focus:ring-[#2AAE7A]";
+    "h-[28px] w-full rounded-[4px] border border-[#e5e5e5] px-[8px] text-[7.33px] text-black placeholder:text-[#9c9c9c] focus:border-[#2AAE7A] focus:outline-none focus:ring-1 focus:ring-[#2AAE7A]";
 
   const textareaClasses =
-    "w-full resize-none rounded-[4px] border border-[#e5e5e5] px-[8px] py-[8px] text-xs text-black placeholder:text-[#9c9c9c] focus:border-[#2AAE7A] focus:outline-none focus:ring-1 focus:ring-[#2AAE7A]";
+    "w-full resize-none rounded-[4px] border border-[#e5e5e5] px-[8px] py-[8px] text-[7.33px] text-black placeholder:text-[#9c9c9c] focus:border-[#2AAE7A] focus:outline-none focus:ring-1 focus:ring-[#2AAE7A]";
 
   return (
     <div>
-      <label className="mb-[6px] block text-xs font-medium text-[#0d1b2a]">
+      <label className="mb-[6px] block text-[8px] font-medium text-[#0d1b2a]">
         {label}
         {required && "*"}
       </label>
@@ -60,7 +60,7 @@ export const FormInput: React.FC<FormInputProps> = ({
         />
       )}
       {error && (
-        <p className="mt-[2.67px] text-xs text-red-500">{error}</p>
+        <p className="mt-[2.67px] text-[6.67px] text-red-500">{error}</p>
       )}
     </div>
   );

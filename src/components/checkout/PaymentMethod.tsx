@@ -103,7 +103,7 @@ export default function PaymentMethod({
             className="w-[13px] h-[13px] text-[#0d1b2a]"
             strokeWidth={1.5}
           />
-          <h2 className="font-semibold text-sm text-[#0d1b2a] m-0">
+          <h2 className="font-semibold text-[12px] text-[#0d1b2a] m-0">
             Payment Method
           </h2>
         </div>
@@ -136,19 +136,19 @@ export default function PaymentMethod({
                 {/* Content */}
                 <div className="flex-1">
                   <div className="flex items-center gap-[6px] mb-0">
-                    <span className="font-medium text-xs text-[#0d1b2a]">
+                    <span className="font-medium text-[9px] text-[#0d1b2a]">
                       {method.name}
                     </span>
                     {method.recommended && (
-                      <div className="bg-[#eeffef] text-[#2aae7a] px-[3px] rounded-[10px] font-medium text-xs leading-tight">
+                      <div className="bg-[#eeffef] text-[#2aae7a] px-[3px] rounded-[10px] font-medium text-[7px] leading-[12px]">
                         Recommended
                       </div>
                     )}
                   </div>
-                  <p className="text-xs font-normal text-[#9c9c9c] mb-[1px] leading-tight tracking-[0.3px]">
+                  <p className="text-[8px] font-normal text-[#9c9c9c] mb-[1px] leading-[12px] tracking-[0.3px]">
                     {method.description}
                   </p>
-                  <p className="text-xs font-normal text-[#9c9c9c] m-0 leading-tight tracking-[0.3px]">
+                  <p className="text-[8px] font-normal text-[#9c9c9c] m-0 leading-[12px] tracking-[0.3px]">
                     {method.processingInfo}
                   </p>
                 </div>
@@ -226,14 +226,14 @@ export default function PaymentMethod({
       {/* Payment Details (only for card payment) */}
       {selectedMethod === "card" && (
         <div className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] p-[15px]">
-          <h3 className="font-semibold text-sm text-[#0d1b2a] mb-[17px]">
+          <h3 className="font-semibold text-[12px] text-[#0d1b2a] mb-[17px]">
             Payment Details
           </h3>
 
           <div className="flex flex-col gap-[28px]">
             {/* Card Number */}
             <div>
-              <label className="block font-medium text-xs text-[#0d1b2a] mb-[5px]">
+              <label className="block font-medium text-[9px] text-[#0d1b2a] mb-[5px]">
                 Card Number<span className="text-red-500">*</span>
               </label>
               <input
@@ -244,14 +244,14 @@ export default function PaymentMethod({
                 }
                 placeholder="XXXX XXXX XXXX XXXX"
                 maxLength={19}
-                className="w-full h-[28px] px-[8px] border border-[#9c9c9c] rounded-[5px] text-xs font-normal text-[#9c9c9c] tracking-[0.3px]"
+                className="w-full h-[28px] px-[8px] border border-[#9c9c9c] rounded-[5px] text-[8px] font-normal text-[#9c9c9c] tracking-[0.3px]"
               />
             </div>
 
             {/* Expiry Date & CVV */}
             <div className="flex gap-[23px]">
               <div className="w-[180px]">
-                <label className="block font-medium text-xs text-[#0d1b2a] mb-[5px]">
+                <label className="block font-medium text-[9px] text-[#0d1b2a] mb-[5px]">
                   Expiry Date<span className="text-red-500">*</span>
                 </label>
                 <input
@@ -262,11 +262,11 @@ export default function PaymentMethod({
                   }
                   placeholder="MM/YY"
                   maxLength={5}
-                  className="w-full h-[28px] px-[8px] border border-[#9c9c9c] rounded-[5px] text-xs font-normal text-[#9c9c9c] tracking-[0.3px]"
+                  className="w-full h-[28px] px-[8px] border border-[#9c9c9c] rounded-[5px] text-[8px] font-normal text-[#9c9c9c] tracking-[0.3px]"
                 />
               </div>
               <div className="w-[180px]">
-                <label className="block font-medium text-xs text-[#0d1b2a] mb-[5px]">
+                <label className="block font-medium text-[9px] text-[#0d1b2a] mb-[5px]">
                   CVV<span className="text-red-500">*</span>
                 </label>
                 <input
@@ -275,14 +275,14 @@ export default function PaymentMethod({
                   onChange={(e) => handleDetailsChange("cvv", e.target.value)}
                   placeholder="XXX"
                   maxLength={4}
-                  className="w-full h-[28px] px-[8px] border border-[#9c9c9c] rounded-[5px] text-xs font-normal text-[#9c9c9c] tracking-[0.3px]"
+                  className="w-full h-[28px] px-[8px] border border-[#9c9c9c] rounded-[5px] text-[8px] font-normal text-[#9c9c9c] tracking-[0.3px]"
                 />
               </div>
             </div>
 
             {/* Name on Card */}
             <div>
-              <label className="block font-medium text-xs text-[#0d1b2a] mb-[5px]">
+              <label className="block font-medium text-[9px] text-[#0d1b2a] mb-[5px]">
                 Name on Card<span className="text-red-500">*</span>
               </label>
               <input
@@ -292,7 +292,7 @@ export default function PaymentMethod({
                   handleDetailsChange("cardName", e.target.value)
                 }
                 placeholder="John Doe"
-                className="w-full h-[28px] px-[8px] border border-[#9c9c9c] rounded-[5px] text-xs font-normal text-[#9c9c9c] tracking-[0.3px]"
+                className="w-full h-[28px] px-[8px] border border-[#9c9c9c] rounded-[5px] text-[8px] font-normal text-[#9c9c9c] tracking-[0.3px]"
               />
             </div>
           </div>
@@ -306,7 +306,7 @@ export default function PaymentMethod({
             className="w-[17px] h-[17px] text-[#0d1b2a]"
             strokeWidth={1.5}
           />
-          <h3 className="font-semibold text-lg text-[#0d1b2a] m-0">
+          <h3 className="font-semibold text-[16px] text-[#0d1b2a] m-0">
             Billing Address
           </h3>
         </div>
@@ -325,7 +325,7 @@ export default function PaymentMethod({
               strokeWidth={3}
             />
           </div>
-          <span className="font-medium text-xs text-[#0d1b2a] transition-colors">
+          <span className="font-medium text-[11px] text-[#0d1b2a] transition-colors">
             Same as Shipping Address
           </span>
         </label>
@@ -336,7 +336,7 @@ export default function PaymentMethod({
             {/* First Name & Last Name */}
             <div className="flex gap-[23px]">
               <div className="w-[180px]">
-                <label className="block font-medium text-xs text-[#0d1b2a] mb-[5px]">
+                <label className="block font-medium text-[9px] text-[#0d1b2a] mb-[5px]">
                   First Name
                 </label>
                 <input
@@ -346,11 +346,11 @@ export default function PaymentMethod({
                     handleBillingChange("firstName", e.target.value)
                   }
                   placeholder="John"
-                  className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-xs font-normal text-[#0d1b2a] tracking-[0.3px]"
+                  className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[8px] font-normal text-[#0d1b2a] tracking-[0.3px]"
                 />
               </div>
               <div className="w-[180px]">
-                <label className="block font-medium text-xs text-[#0d1b2a] mb-[5px]">
+                <label className="block font-medium text-[9px] text-[#0d1b2a] mb-[5px]">
                   Last Name
                 </label>
                 <input
@@ -360,14 +360,14 @@ export default function PaymentMethod({
                     handleBillingChange("lastName", e.target.value)
                   }
                   placeholder="Smith"
-                  className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-xs font-normal text-[#0d1b2a] tracking-[0.3px]"
+                  className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[8px] font-normal text-[#0d1b2a] tracking-[0.3px]"
                 />
               </div>
             </div>
 
             {/* Company Name */}
             <div>
-              <label className="block font-medium text-xs text-[#0d1b2a] mb-[5px]">
+              <label className="block font-medium text-[9px] text-[#0d1b2a] mb-[5px]">
                 Company Name
               </label>
               <input
@@ -377,13 +377,13 @@ export default function PaymentMethod({
                   handleBillingChange("companyName", e.target.value)
                 }
                 placeholder="MetelCorp Ltd"
-                className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-xs font-normal text-[#0d1b2a] tracking-[0.3px]"
+                className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[8px] font-normal text-[#0d1b2a] tracking-[0.3px]"
               />
             </div>
 
             {/* Street Address */}
             <div>
-              <label className="block font-medium text-xs text-[#0d1b2a] mb-[5px]">
+              <label className="block font-medium text-[9px] text-[#0d1b2a] mb-[5px]">
                 Street Address
               </label>
               <input
@@ -393,14 +393,14 @@ export default function PaymentMethod({
                   handleBillingChange("streetAddress", e.target.value)
                 }
                 placeholder="123 Business Ave"
-                className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-xs font-normal text-[#0d1b2a] tracking-[0.3px]"
+                className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[8px] font-normal text-[#0d1b2a] tracking-[0.3px]"
               />
             </div>
 
             {/* City, State, ZIP */}
             <div className="flex gap-[13px]">
               <div className="w-[127px]">
-                <label className="block font-medium text-xs text-[#0d1b2a] mb-[5px]">
+                <label className="block font-medium text-[9px] text-[#0d1b2a] mb-[5px]">
                   City
                 </label>
                 <input
@@ -408,11 +408,11 @@ export default function PaymentMethod({
                   value={billingAddress.city}
                   onChange={(e) => handleBillingChange("city", e.target.value)}
                   placeholder="Metropolis"
-                  className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-xs font-normal text-[#0d1b2a] tracking-[0.3px]"
+                  className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[8px] font-normal text-[#0d1b2a] tracking-[0.3px]"
                 />
               </div>
               <div className="w-[130px]">
-                <label className="block font-medium text-xs text-[#0d1b2a] mb-[5px]">
+                <label className="block font-medium text-[9px] text-[#0d1b2a] mb-[5px]">
                   State
                 </label>
                 <input
@@ -420,11 +420,11 @@ export default function PaymentMethod({
                   value={billingAddress.state}
                   onChange={(e) => handleBillingChange("state", e.target.value)}
                   placeholder="Karnataka"
-                  className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-xs font-normal text-[#0d1b2a] tracking-[0.3px]"
+                  className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[8px] font-normal text-[#0d1b2a] tracking-[0.3px]"
                 />
               </div>
               <div className="w-[100px]">
-                <label className="block font-medium text-xs text-[#0d1b2a] mb-[5px]">
+                <label className="block font-medium text-[9px] text-[#0d1b2a] mb-[5px]">
                   ZIP Code
                 </label>
                 <input
@@ -434,7 +434,7 @@ export default function PaymentMethod({
                     handleBillingChange("zipCode", e.target.value)
                   }
                   placeholder="90210"
-                  className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-xs font-normal text-[#0d1b2a] tracking-[0.3px]"
+                  className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[8px] font-normal text-[#0d1b2a] tracking-[0.3px]"
                 />
               </div>
             </div>
@@ -446,7 +446,7 @@ export default function PaymentMethod({
       <div className="flex justify-between gap-[7px] mt-0">
         <button
           onClick={onBack}
-          className="h-[30px] px-8 bg-white border border-[#9c9c9c] rounded-[7px] text-xs font-semibold text-[#9c9c9c] hover:bg-gray-50 transition-colors cursor-pointer"
+          className="h-[30px] px-8 bg-white border border-[#9c9c9c] rounded-[7px] text-[10px] font-semibold text-[#9c9c9c] hover:bg-gray-50 transition-colors cursor-pointer"
         >
           Previous Step
         </button>
@@ -459,7 +459,7 @@ export default function PaymentMethod({
               !paymentDetails.expiryDate ||
               !paymentDetails.cvv)
           }
-          className="h-[30px] px-8 bg-[#1e3a8a] rounded-[7px] text-xs font-semibold text-white hover:bg-[#2d4a99] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="h-[30px] px-8 bg-[#1e3a8a] rounded-[7px] text-[10px] font-semibold text-white hover:bg-[#2d4a99] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           Continue
         </button>

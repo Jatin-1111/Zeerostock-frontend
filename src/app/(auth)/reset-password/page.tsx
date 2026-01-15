@@ -167,7 +167,7 @@ function ResetPasswordForm() {
                   </svg>
                 </button>
               </div>
-              <p className="text-xs text-gray-500 mt-0.5">
+              <p className="text-[10px] text-gray-500 mt-0.5">
                 Must be at least 8 characters with uppercase, lowercase, and a
                 number
               </p>

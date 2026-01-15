@@ -41,19 +41,19 @@ export default function Header() {
         <nav className="hidden md:flex items-center gap-3 lg:gap-5">
           <Link
             href="/home"
-            className="text-white text-xs md:text-sm lg:text-sm font-medium hover:text-white/90 transition-colors"
+            className="text-white text-[11px] md:text-[12px] lg:text-[13px] font-medium hover:text-white/90 transition-colors"
           >
             Home
           </Link>
           <Link
             href="/about"
-            className="text-white text-xs md:text-sm lg:text-sm font-medium hover:text-white/90 transition-colors"
+            className="text-white text-[11px] md:text-[12px] lg:text-[13px] font-medium hover:text-white/90 transition-colors"
           >
             About Us
           </Link>
           <Link
             href="/helpdesk"
-            className="text-white text-xs md:text-sm lg:text-sm font-medium hover:text-white/90 transition-colors"
+            className="text-white text-[11px] md:text-[12px] lg:text-[13px] font-medium hover:text-white/90 transition-colors"
           >
             Contact Us
           </Link>
@@ -78,7 +78,7 @@ export default function Header() {
                 strokeWidth="2"
               />
             </svg>
-            <span className="text-white text-xs font-medium">EN</span>
+            <span className="text-white text-[9px] font-medium">EN</span>
           </button>
 
           {/* WhatsApp Icon - Hidden on mobile */}
@@ -193,10 +193,10 @@ export default function Header() {
                   <div className="py-[5px]">
                     {/* User Info */}
                     <div className="px-[11px] py-2 border-b border-gray-200">
-                      <p className="text-xs font-semibold text-gray-900">
+                      <p className="text-[9px] font-semibold text-gray-900">
                         {user.firstName} {user.lastName}
                       </p>
-                      <p className="text-xs text-gray-600 truncate">
+                      <p className="text-[8px] text-gray-600 truncate">
                         {user.email}
                       </p>
                     </div>
@@ -205,7 +205,7 @@ export default function Header() {
                     <div className="py-[3px]">
                       <Link
                         href="/buyer/dashboard"
-                        className="flex items-center gap-2 px-[11px] py-[7px] text-xs text-gray-900 hover:bg-gray-100 transition-colors"
+                        className="flex items-center gap-2 px-[11px] py-[7px] text-[9px] text-gray-900 hover:bg-gray-100 transition-colors"
                         onClick={() => setIsUserMenuOpen(false)}
                       >
                         <svg
@@ -225,7 +225,7 @@ export default function Header() {
                       </Link>
                       <Link
                         href="/buyer/settings"
-                        className="flex items-center gap-2 px-[11px] py-[7px] text-xs text-gray-900 hover:bg-gray-100 transition-colors"
+                        className="flex items-center gap-2 px-[11px] py-[7px] text-[9px] text-gray-900 hover:bg-gray-100 transition-colors"
                         onClick={() => setIsUserMenuOpen(false)}
                       >
                         <svg
@@ -256,7 +256,7 @@ export default function Header() {
                     {/* Logout */}
                     <button
                       onClick={handleLogout}
-                      className="w-full flex items-center gap-2 px-[11px] py-[7px] text-xs text-red-600 hover:bg-red-50 transition-colors"
+                      className="w-full flex items-center gap-2 px-[11px] py-[7px] text-[9px] text-red-600 hover:bg-red-50 transition-colors"
                     >
                       <svg
                         className="w-[11px] h-[11px]"
@@ -278,10 +278,10 @@ export default function Header() {
                   // Logged Out User Menu
                   <div className="py-[5px]">
                     <div className="px-[11px] py-2 border-b border-gray-200">
-                      <p className="text-xs font-semibold text-gray-900">
+                      <p className="text-[9px] font-semibold text-gray-900">
                         Welcome to Zeerostock
                       </p>
-                      <p className="text-xs text-gray-600">
+                      <p className="text-[8px] text-gray-600">
                         Sign in to access your account
                       </p>
                     </div>
@@ -290,14 +290,14 @@ export default function Header() {
                       <Link
                         href="/login"
                         onClick={() => setIsUserMenuOpen(false)}
-                        className="block w-full px-[11px] py-[5px] text-xs font-medium text-white bg-[#1a5f52] hover:bg-[#164b42] rounded-[5px] transition-colors text-center"
+                        className="block w-full px-[11px] py-[5px] text-[9px] font-medium text-white bg-[#1a5f52] hover:bg-[#164b42] rounded-[5px] transition-colors text-center"
                       >
                         Login
                       </Link>
                       <Link
                         href="/signup"
                         onClick={() => setIsUserMenuOpen(false)}
-                        className="block w-full px-[11px] py-[5px] text-xs font-medium text-[#1a5f52] bg-white border border-[#1a5f52] hover:bg-gray-50 rounded-[5px] transition-colors text-center"
+                        className="block w-full px-[11px] py-[5px] text-[9px] font-medium text-[#1a5f52] bg-white border border-[#1a5f52] hover:bg-gray-50 rounded-[5px] transition-colors text-center"
                       >
                         Sign Up
                       </Link>
@@ -306,7 +306,7 @@ export default function Header() {
                     <hr className="my-[3px] border-gray-200" />
 
                     <div className="px-[11px] py-[5px]">
-                      <p className="text-xs text-gray-500 text-center">
+                      <p className="text-[8px] text-gray-500 text-center">
                         New to Zeerostock?{" "}
                         <Link
                           href="/about"

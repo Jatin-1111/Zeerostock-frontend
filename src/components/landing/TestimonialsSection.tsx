@@ -123,11 +123,11 @@ export default function TestimonialsSection() {
       <div className="max-w-[412px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[960px] mx-auto px-3 sm:px-4 md:px-5">
         {/* Section Header */}
         <div className="text-center mb-6 sm:mb-7 md:mb-8">
-          <h2 className="text-2xl sm:text-2xl md:text-2xl leading-snug sm:leading-tight font-medium text-[#0d1b2a] mb-1">
+          <h2 className="text-[25px] sm:text-[26px] md:text-[25px] leading-[34px] sm:leading-tight font-medium text-[#0d1b2a] mb-1">
             Real Results from{" "}
             <span className="text-[#2aae7a]">Real Businesses</span>
           </h2>
-          <p className="text-sm sm:text-sm font-semibold text-[#868181]">
+          <p className="text-[12px] sm:text-[12px] font-semibold text-[#868181]">
             See how companies like yours are maximizing value from surplus
             inventory
           </p>
@@ -218,17 +218,17 @@ export default function TestimonialsSection() {
                       {/* Text Content */}
                       <div className="mb-3 sm:mb-4 max-w-[260px] sm:max-w-[280px] md:max-w-[300px] md:ml-5 ml-4">
                         <div className="bg-[rgba(55,95,69,0.77)] border border-[#338352] inline-flex items-center justify-center px-[10px] py-[5px] rounded-[57px] mb-3">
-                          <p className="text-sm font-semibold text-[#36e17b]">
+                          <p className="text-[12px] font-semibold text-[#36e17b]">
                             {item.savings}
                           </p>
                         </div>
-                        <h3 className="text-xl sm:text-xl leading-tight text-left font-extrabold text-white mb-2 sm:mb-3">
+                        <h3 className="text-[20px] sm:text-[20px] leading-tight text-left font-extrabold text-white mb-2 sm:mb-3">
                           {item.impact}
                         </h3>
-                        <p className="text-lg sm:text-lg leading-normal text-left font-medium text-white mb-1">
+                        <p className="text-[16px] sm:text-[16px] leading-normal text-left font-medium text-white mb-1">
                           {item.company}
                         </p>
-                        <p className="text-base sm:text-base font-medium text-left text-white">
+                        <p className="text-[14px] sm:text-[14px] font-medium text-left text-white">
                           {item.industry}
                         </p>
                       </div>
@@ -236,7 +236,7 @@ export default function TestimonialsSection() {
                       {/* CTA Button */}
                       <Link
                         href="/for-supplier"
-                        className="w-[280px] sm:w-[240px] md:w-[200px] h-[35px] bg-[#2aae7a] rounded-[10px] text-base font-bold text-white hover:bg-[#2aae7a]/90 transition-colors flex items-center justify-center"
+                        className="w-[280px] sm:w-[240px] md:w-[200px] h-[35px] bg-[#2aae7a] rounded-[10px] text-[14px] font-bold text-white hover:bg-[#2aae7a]/90 transition-colors flex items-center justify-center"
                       >
                         Read Case Study
                       </Link>

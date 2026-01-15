@@ -18,11 +18,11 @@ export default function TrendingIndustriesSection() {
       {/* Header with icon and title */}
       <div className="mb-[29px] flex items-center gap-[15px]">
         <img src={iconChart} alt="Chart" className="h-[29px] w-[29px]" />
-        <h2 className="m-0 text-2xl font-semibold text-[#0d1b2a]">
+        <h2 className="m-0 text-[26px] font-semibold text-[#0d1b2a]">
           Trending Industries
         </h2>
         <div className="ml-[15px] rounded-[4px] bg-[#FFF1C2] px-[11px] py-[2px]">
-          <span className="text-base font-medium text-[#0d1b2a]">
+          <span className="text-[15px] font-medium text-[#0d1b2a]">
             Hot Markets
           </span>
         </div>

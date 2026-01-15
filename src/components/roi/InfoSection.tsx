@@ -45,11 +45,11 @@ export default function InfoSection() {
                   strokeLinejoin="round"
                 />
               </svg>
-              <h3 className="text-xs font-semibold text-[#0d1b2a]">
+              <h3 className="text-[11px] font-semibold text-[#0d1b2a]">
                 For Buyers
               </h3>
             </div>
-            <p className="text-xs font-medium text-[#9c9c9c] mb-[15px]">
+            <p className="text-[9px] font-medium text-[#9c9c9c] mb-[15px]">
               Our buyer calculator helps you evaluate the profitability of
               purchasing surplus inventory by considering:
             </p>
@@ -76,7 +76,7 @@ export default function InfoSection() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <span className="text-xs font-medium text-[#0d1b2a]">
+                <span className="text-[9px] font-medium text-[#0d1b2a]">
                   Purchase price and expected retail value
                 </span>
               </li>
@@ -102,7 +102,7 @@ export default function InfoSection() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <span className="text-xs font-medium text-[#0d1b2a]">
+                <span className="text-[9px] font-medium text-[#0d1b2a]">
                   Shipping and processing costs
                 </span>
               </li>
@@ -128,7 +128,7 @@ export default function InfoSection() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <span className="text-xs font-medium text-[#0d1b2a]">
+                <span className="text-[9px] font-medium text-[#0d1b2a]">
                   Volume discounts and break-even analysis
                 </span>
               </li>
@@ -154,7 +154,7 @@ export default function InfoSection() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <span className="text-xs font-medium text-[#0d1b2a]">
+                <span className="text-[9px] font-medium text-[#0d1b2a]">
                   ROI percentage and profit margins
                 </span>
               </li>
@@ -164,12 +164,12 @@ export default function InfoSection() {
           {/* For Sellers */}
           <div className="bg-white rounded-[10px] shadow-[0px_2px_6px_0px_rgba(0,0,0,0.25)] p-[15px] h-[183px]">
             <div className="flex items-center gap-[7px] mb-[7px]">
-              <span className="text-xl font-normal text-[#2aae7a]">₹</span>
-              <h3 className="text-xs font-semibold text-[#0d1b2a]">
+              <span className="text-[18px] font-normal text-[#2aae7a]">₹</span>
+              <h3 className="text-[11px] font-semibold text-[#0d1b2a]">
                 For Sellers
               </h3>
             </div>
-            <p className="text-xs font-medium text-[#9c9c9c] mb-[15px]">
+            <p className="text-[9px] font-medium text-[#9c9c9c] mb-[15px]">
               Our seller calculator shows the financial benefits of liquidating
               excess inventory through:
             </p>
@@ -196,7 +196,7 @@ export default function InfoSection() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <span className="text-xs font-medium text-[#0d1b2a]">
+                <span className="text-[9px] font-medium text-[#0d1b2a]">
                   Holding cost savings from faster liquidation
                 </span>
               </li>
@@ -222,7 +222,7 @@ export default function InfoSection() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <span className="text-xs font-medium text-[#0d1b2a]">
+                <span className="text-[9px] font-medium text-[#0d1b2a]">
                   Marketplace fees and commission structure
                 </span>
               </li>
@@ -248,7 +248,7 @@ export default function InfoSection() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <span className="text-xs font-medium text-[#0d1b2a]">
+                <span className="text-[9px] font-medium text-[#0d1b2a]">
                   Time-to-sell optimization benefits
                 </span>
               </li>
@@ -274,7 +274,7 @@ export default function InfoSection() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <span className="text-xs font-medium text-[#0d1b2a]">
+                <span className="text-[9px] font-medium text-[#0d1b2a]">
                   Net proceeds and cash flow improvement
                 </span>
               </li>
@@ -284,10 +284,10 @@ export default function InfoSection() {
 
         {/* Important Note */}
         <div className="bg-[#c0daff] rounded-[10px] p-[20px] h-[105px]">
-          <h4 className="text-xs font-semibold text-[#085396] mb-[8px]">
+          <h4 className="text-[11px] font-semibold text-[#085396] mb-[8px]">
             Important Note
           </h4>
-          <p className="text-xs font-normal text-[#085396] leading-tight">
+          <p className="text-[9px] font-normal text-[#085396] leading-[15px]">
             These calculations are estimates based on the inputs provided and
             industry averages. Actual results may vary depending on market
             conditions, product specifics, and execution. Always conduct your

@@ -14,7 +14,7 @@ interface WhatsNextProps {
 export default function WhatsNext({ steps }: WhatsNextProps) {
   return (
     <div className="bg-white rounded-[15px] p-[23px] mb-5 shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)]">
-      <h3 className="font-medium text-[#0d1b2a] text-xl leading-normal mb-[34px]">
+      <h3 className="font-medium text-[#0d1b2a] text-[18px] leading-normal mb-[34px]">
         What&apos;s Next?
       </h3>
 
@@ -37,10 +37,10 @@ export default function WhatsNext({ steps }: WhatsNextProps) {
 
             {/* Content */}
             <div className="flex-1 pt-[4px]">
-              <h4 className="font-medium text-[#0d1b2a] text-base leading-normal tracking-[0.4px] mb-[4px]">
+              <h4 className="font-medium text-[#0d1b2a] text-[15px] leading-[21px] tracking-[0.4px] mb-[4px]">
                 {step.title}
               </h4>
-              <p className="font-medium text-[#9c9c9c] text-base leading-normal max-w-[232px]">
+              <p className="font-medium text-[#9c9c9c] text-[14px] leading-normal max-w-[232px]">
                 {step.description}
               </p>
             </div>
@@ -49,7 +49,7 @@ export default function WhatsNext({ steps }: WhatsNextProps) {
       </div>
 
       <button className="w-full max-w-[269px] mx-auto block bg-[#1e3a8a] text-white h-[45px] rounded-[11px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center justify-center gap-[15px]">
-        <span className="font-semibold text-base leading-normal">
+        <span className="font-semibold text-[15px] leading-[17px]">
           Go to Dashboard
         </span>
         <ArrowRight className="w-[18px] h-[18px]" strokeWidth={2} />

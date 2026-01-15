@@ -56,10 +56,10 @@ export default function SecuritySettings() {
     <div className="flex flex-col gap-[23.63px] w-full">
       {/* Title Section */}
       <div>
-        <h1 className="text-xl font-semibold text-[#0d1b2a] mb-[4.5px] leading-normal">
+        <h1 className="text-[19.69px] font-semibold text-[#0d1b2a] mb-[4.5px] leading-normal">
           Security
         </h1>
-        <p className="text-xs text-[#9c9c9c] leading-normal font-normal">
+        <p className="text-[9.56px] text-[#9c9c9c] leading-normal font-normal">
           Manage your account security settings
         </p>
       </div>
@@ -69,7 +69,7 @@ export default function SecuritySettings() {
         {/* Card Header */}
         <div className="flex items-center gap-[11.25px] p-[11.25px_14.06px]">
           <ShieldCheck className="w-[14.63px] h-[14.63px] text-[#0d1b2a]" />
-          <h2 className="text-sm font-semibold text-[#0d1b2a] leading-normal">
+          <h2 className="text-[13.5px] font-semibold text-[#0d1b2a] leading-normal">
             Security Settings
           </h2>
         </div>
@@ -81,17 +81,17 @@ export default function SecuritySettings() {
         <div className="p-[19.69px]">
           {/* Authentication Section */}
           <div className="mb-[28.13px]">
-            <h3 className="text-xs font-medium text-[#0d1b2a] mb-[19.69px] leading-normal">
+            <h3 className="text-[11.25px] font-medium text-[#0d1b2a] mb-[19.69px] leading-normal">
               Authentication
             </h3>
 
             {/* Two-Factor Authentication Toggle */}
             <div className="flex items-center justify-between mb-[19.69px]">
               <div>
-                <div className="text-xs font-medium text-[#0d1b2a] mb-[4.5px] leading-normal">
+                <div className="text-[9.56px] font-medium text-[#0d1b2a] mb-[4.5px] leading-normal">
                   Two-Factor Authentication
                 </div>
-                <div className="text-xs text-[#747474] font-normal leading-normal">
+                <div className="text-[8.44px] text-[#747474] font-normal leading-normal">
                   Add an extra layer of security to your account
                 </div>
               </div>
@@ -103,7 +103,7 @@ export default function SecuritySettings() {
 
             {/* Session Timeout Input */}
             <div>
-              <label className="block text-xs font-medium text-[#0d1b2a] mb-[7.88px] leading-normal">
+              <label className="block text-[9.56px] font-medium text-[#0d1b2a] mb-[7.88px] leading-normal">
                 Session Timeout
               </label>
               <div className="relative w-[182.25px]">
@@ -116,7 +116,7 @@ export default function SecuritySettings() {
                       sessionTimeout: e.target.value,
                     })
                   }
-                  className="w-full h-[29.25px] px-[9px] text-xs text-[#9c9c9c] border border-[#bebebe] rounded-[5.63px] outline-none"
+                  className="w-full h-[29.25px] px-[9px] text-[9px] text-[#9c9c9c] border border-[#bebebe] rounded-[5.63px] outline-none"
                 />
                 <ChevronDown className="absolute right-[9px] top-1/2 -translate-y-1/2 w-[13.5px] h-[13.5px] text-[#0d1b2a] pointer-events-none" />
               </div>
@@ -125,17 +125,17 @@ export default function SecuritySettings() {
 
           {/* Security Alerts Section */}
           <div className="mb-[28.13px]">
-            <h3 className="text-xs font-medium text-[#0d1b2a] mb-[19.69px] leading-normal">
+            <h3 className="text-[11.25px] font-medium text-[#0d1b2a] mb-[19.69px] leading-normal">
               Security Alerts
             </h3>
 
             {/* Login Alerts Toggle */}
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-xs font-medium text-[#0d1b2a] mb-[4.5px] leading-normal">
+                <div className="text-[9.56px] font-medium text-[#0d1b2a] mb-[4.5px] leading-normal">
                   Login Alerts
                 </div>
-                <div className="text-xs text-[#747474] font-normal leading-normal">
+                <div className="text-[8.44px] text-[#747474] font-normal leading-normal">
                   Get notified on new login attempts
                 </div>
               </div>
@@ -148,12 +148,12 @@ export default function SecuritySettings() {
 
           {/* Password Section */}
           <div>
-            <h3 className="text-xs font-medium text-[#0d1b2a] mb-[19.69px] leading-normal">
+            <h3 className="text-[11.25px] font-medium text-[#0d1b2a] mb-[19.69px] leading-normal">
               Password
             </h3>
             <button
               onClick={handleChangePassword}
-              className="flex items-center justify-center gap-[5.63px] bg-[#2aae7a] text-white border-none rounded-[6.75px] py-[8.44px] px-[45px] cursor-pointer text-xs font-semibold hover:bg-[#239668] transition-colors"
+              className="flex items-center justify-center gap-[5.63px] bg-[#2aae7a] text-white border-none rounded-[6.75px] py-[8.44px] px-[45px] cursor-pointer text-[11.25px] font-semibold hover:bg-[#239668] transition-colors"
             >
               <Lock className="w-[15.19px] h-[15.19px]" />
               Change Password
@@ -165,7 +165,7 @@ export default function SecuritySettings() {
       {/* Account Secure Notice */}
       <div className="bg-[#c0daff] rounded-[11.25px] p-[11.25px] flex items-center gap-[9px] w-full">
         <Info className="w-[12.38px] h-[12.38px] flex-shrink-0 text-[#085396]" />
-        <p className="text-xs leading-tight text-[#085396] m-0 font-normal">
+        <p className="text-[10.13px] leading-[16.88px] text-[#085396] m-0 font-normal">
           Your Account is secure. Last login was today at 2:30 PM from Atlanta,
           GA.
         </p>
@@ -175,7 +175,7 @@ export default function SecuritySettings() {
       <div className="flex justify-end">
         <button
           onClick={handleSaveChanges}
-          className="flex items-center justify-center gap-[5.63px] bg-[#1e3a8a] text-white border-none rounded-[6.75px] py-[8.44px] px-[61.88px] cursor-pointer text-xs font-semibold hover:opacity-90 transition-opacity"
+          className="flex items-center justify-center gap-[5.63px] bg-[#1e3a8a] text-white border-none rounded-[6.75px] py-[8.44px] px-[61.88px] cursor-pointer text-[11.25px] font-semibold hover:opacity-90 transition-opacity"
         >
           <Save className="w-[15.75px] h-[15.75px]" />
           Save Changes

@@ -12,12 +12,12 @@ export default function CTASection() {
         */}
         <div className="w-full max-w-[638px] h-auto bg-[#39ac7a] rounded-[15px] overflow-hidden flex flex-col items-center justify-center text-center p-6 md:py-10">
           {/* Headline: Responsive text size */}
-          <h2 className="text-xl md:text-2xl leading-normal font-semibold text-white mb-3">
+          <h2 className="text-xl md:text-[23px] leading-normal font-semibold text-white mb-3">
             Ready to Transform Your Business
           </h2>
 
           {/* Subtitle: Bumped text size for readability on mobile */}
-          <p className="text-xs md:text-xs font-semibold text-[#374151] mb-6 max-w-sm md:max-w-none">
+          <p className="text-xs md:text-[11px] font-semibold text-[#374151] mb-6 max-w-sm md:max-w-none">
             Join thousands of businesses already maximizing their surplus
             inventory value
           </p>
@@ -26,13 +26,13 @@ export default function CTASection() {
           <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-[45px] w-full sm:w-auto">
             <Link
               href="/signup"
-              className="w-full sm:w-[140px] py-3 sm:py-0 sm:h-[35px] bg-[#1e3a8a] text-white text-xs md:text-xs font-semibold rounded-[6px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center justify-center"
+              className="w-full sm:w-[140px] py-3 sm:py-0 sm:h-[35px] bg-[#1e3a8a] text-white text-xs md:text-[11px] font-semibold rounded-[6px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center justify-center"
             >
               Sign Up Free
             </Link>
             <Link
               href="/helpdesk"
-              className="w-full sm:w-[140px] py-3 sm:py-0 sm:h-[35px] bg-white text-[#2aae7a] text-xs md:text-xs font-semibold rounded-[6px] hover:bg-white/90 transition-colors flex items-center justify-center"
+              className="w-full sm:w-[140px] py-3 sm:py-0 sm:h-[35px] bg-white text-[#2aae7a] text-xs md:text-[11px] font-semibold rounded-[6px] hover:bg-white/90 transition-colors flex items-center justify-center"
             >
               Schedule Demo
             </Link>

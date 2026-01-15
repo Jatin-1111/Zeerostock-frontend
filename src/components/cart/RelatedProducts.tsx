@@ -21,7 +21,7 @@ export default function RelatedProducts() {
 
   return (
     <div className="w-full bg-white rounded-xl sm:rounded-2xl shadow-md p-2 sm:p-3 md:p-4">
-      <h3 className="text-xs sm:text-xs md:text-sm font-medium text-[#0d1b2a] mb-2 sm:mb-3">
+      <h3 className="text-[10px] sm:text-xs md:text-sm font-medium text-[#0d1b2a] mb-2 sm:mb-3">
         You might also like
       </h3>
 
@@ -39,7 +39,7 @@ export default function RelatedProducts() {
                     className="object-cover"
                   />
                 ) : (
-                  <span className="absolute inset-0 flex items-center justify-center text-xs text-gray-400">
+                  <span className="absolute inset-0 flex items-center justify-center text-[8px] text-gray-400">
                     No Image
                   </span>
                 )}
@@ -47,10 +47,10 @@ export default function RelatedProducts() {
 
               {/* Product Info */}
               <div className="flex-1 min-w-0">
-                <h4 className="text-xs sm:text-xs md:text-xs font-medium text-[#0d1b2a] mb-0.5 sm:mb-1 truncate">
+                <h4 className="text-[9px] sm:text-[10px] md:text-xs font-medium text-[#0d1b2a] mb-0.5 sm:mb-1 truncate">
                   {product.title}
                 </h4>
-                <p className="text-xs sm:text-xs md:text-xs font-semibold text-[#2aae7a] tracking-wide">
+                <p className="text-[8px] sm:text-[9px] md:text-[10px] font-semibold text-[#2aae7a] tracking-wide">
                   {product.price}
                 </p>
               </div>

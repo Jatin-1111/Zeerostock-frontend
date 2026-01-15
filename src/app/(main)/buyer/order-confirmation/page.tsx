@@ -368,10 +368,10 @@ function OrderConfirmationContent() {
           </div>
 
           {/* Order Confirmed Heading */}
-          <h1 className="text-3xl font-semibold text-[#0D1B2A] mb-2">
+          <h1 className="text-[30px] font-semibold text-[#0D1B2A] mb-2">
             Order Confirmed!
           </h1>
-          <p className="text-xl text-[#9C9C9C] font-medium">
+          <p className="text-[18px] text-[#9C9C9C] font-medium">
             Thank you for your order. We&apos;ve received your order and will
             process it shortly
           </p>
@@ -394,7 +394,7 @@ function OrderConfirmationContent() {
                 strokeWidth="1.5"
               />
             </svg>
-            <span className="text-base text-[#0D1B2A]">
+            <span className="text-[14px] text-[#0D1B2A]">
               Order #{orderData.orderNumber}
             </span>
           </div>
@@ -421,7 +421,7 @@ function OrderConfirmationContent() {
                 strokeWidth="1.5"
               />
             </svg>
-            <span className="text-base text-[#0D1B2A]">
+            <span className="text-[14px] text-[#0D1B2A]">
               Placed on {orderData.placedDate}
             </span>
           </div>

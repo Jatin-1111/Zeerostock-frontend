@@ -82,10 +82,10 @@ export default function FeedbackTab() {
     <div className="w-full">
       {/* Title Section */}
       <div className="mb-[16px]">
-        <h2 className="mb-[4px] text-base font-semibold leading-none text-[#0d1b2a] ">
+        <h2 className="mb-[4px] text-[15px] font-semibold leading-none text-[#0d1b2a] ">
           Share Your Feedback
         </h2>
-        <p className="text-xs font-medium leading-none text-[#9c9c9c] ">
+        <p className="text-[11px] font-medium leading-none text-[#9c9c9c] ">
           Help us improve your experience on Zeerostock
         </p>
       </div>
@@ -94,7 +94,7 @@ export default function FeedbackTab() {
       {submitSuccess && (
         <div className="mb-[12px] flex items-center gap-[6px] rounded-[5px] border border-green-200 bg-green-50 p-[8px]">
           <CheckCircle className="h-[12px] w-[12px] text-green-600" />
-          <p className="text-xs leading-normal text-green-800 ">
+          <p className="text-[8px] leading-normal text-green-800 ">
             Thank you for your feedback! We appreciate your input.
           </p>
         </div>
@@ -103,7 +103,9 @@ export default function FeedbackTab() {
       {/* Error Message */}
       {submitError && (
         <div className="mb-[12px] rounded-[5px] border border-red-200 bg-red-50 p-[8px]">
-          <p className="text-xs leading-normal text-red-800 ">{submitError}</p>
+          <p className="text-[8px] leading-normal text-red-800 ">
+            {submitError}
+          </p>
         </div>
       )}
 
@@ -112,7 +114,7 @@ export default function FeedbackTab() {
         <form onSubmit={handleFeedbackSubmit}>
           {/* Rating Section */}
           <div className="mb-[22px]">
-            <label className="mb-[10px] block text-sm font-medium leading-none text-[#0d1b2a] ">
+            <label className="mb-[10px] block text-[13px] font-medium leading-none text-[#0d1b2a] ">
               How would you rate your overall experience?
             </label>
             <div className="flex gap-[8px]">
@@ -139,14 +141,14 @@ export default function FeedbackTab() {
 
           {/* Comments Section */}
           <div className="mb-[16px]">
-            <label className="mb-[6px] block text-sm font-medium leading-none text-[#0d1b2a] ">
+            <label className="mb-[6px] block text-[13px] font-medium leading-none text-[#0d1b2a] ">
               Comments (Optional)
             </label>
             <textarea
               value={feedbackComments}
               onChange={(e) => setFeedbackComments(e.target.value)}
               placeholder="Tell u what you love about Zeerostock or what we could improve "
-              className="h-[75px] w-full resize-none rounded-[5px] border border-[#bebebe] bg-white p-[8px] text-xs leading-tight tracking-[0.375px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:border-[#1e3a8a] focus:outline-none focus:ring-1 focus:ring-[#1e3a8a] "
+              className="h-[75px] w-full resize-none rounded-[5px] border border-[#bebebe] bg-white p-[8px] text-[8px] leading-[12px] tracking-[0.375px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:border-[#1e3a8a] focus:outline-none focus:ring-1 focus:ring-[#1e3a8a] "
             />
           </div>
 
@@ -155,7 +157,7 @@ export default function FeedbackTab() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex h-[30px] w-[160px] items-center justify-center rounded-[8px] bg-[#1e3a8a] text-xs font-semibold leading-tight text-white transition-colors hover:bg-[#1e3a8a]/90 disabled:cursor-not-allowed disabled:opacity-50 "
+              className="flex h-[30px] w-[160px] items-center justify-center rounded-[8px] bg-[#1e3a8a] text-[10px] font-semibold leading-[11px] text-white transition-colors hover:bg-[#1e3a8a]/90 disabled:cursor-not-allowed disabled:opacity-50 "
             >
               {isSubmitting ? "Submitting..." : "Submit Feedback"}
             </button>

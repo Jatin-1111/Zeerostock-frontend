@@ -335,7 +335,7 @@ export default function TrackOrderDetailPage() {
       {/* Header Section */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0 mb-4 sm:mb-6">
         <div>
-          <h1 className="font-semibold text-xl sm:text-2xl md:text-3xl lg:text-3xl text-dark m-0 leading-normal">
+          <h1 className="font-semibold text-xl sm:text-2xl md:text-[28px] lg:text-[30px] text-[#0d1b2a] m-0 leading-normal">
             Order #{order.orderNumber}
           </h1>
           <p className="font-normal text-sm sm:text-base text-muted mt-2 sm:mt-3 mb-0">
@@ -595,7 +595,7 @@ export default function TrackOrderDetailPage() {
 
                   {/* Price & Delivery */}
                   <div className="text-left sm:text-right mt-2 sm:mt-0">
-                    <p className="font-semibold text-lg sm:text-xl md:text-xl text-black mt-0 sm:mt-3 md:mt-5 mb-0">
+                    <p className="font-semibold text-lg sm:text-xl md:text-[22px] text-black mt-0 sm:mt-3 md:mt-5 mb-0">
                       ₹{item.subtotal.toLocaleString()}
                     </p>
                     <p className="font-medium text-sm sm:text-base text-[#9c9c9c] mt-1.5 sm:mt-2 mb-0">
@@ -630,7 +630,7 @@ export default function TrackOrderDetailPage() {
             <h2 className="font-medium text-base sm:text-lg text-[#0d1b2a] mt-0 mb-3 sm:mb-4">
               Shipping Address
             </h2>
-            <div className="font-normal text-sm sm:text-base text-[#9c9c9c] leading-normal">
+            <div className="font-normal text-sm sm:text-base text-[#9c9c9c] leading-[20px] sm:leading-[22px]">
               <p className="m-0">{order.shippingAddress?.name}</p>
               <p className="m-0">
                 {order.shippingAddress?.addressLine1}
@@ -850,7 +850,7 @@ export default function TrackOrderDetailPage() {
                   />
                 </svg>
               </div>
-              <p className="font-normal text-xs sm:text-sm text-[#9c9c9c] leading-tight m-0">
+              <p className="font-normal text-xs sm:text-sm text-[#9c9c9c] leading-[16px] sm:leading-[18px] m-0">
                 Please ensure someone is available to receive and inspect the
                 shipment upon delivery.
               </p>

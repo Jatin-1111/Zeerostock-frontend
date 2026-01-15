@@ -26,9 +26,9 @@ export default function BarChart({
         {data.map((item, index) => (
           <div key={index}>
             <div className="flex justify-between mb-1">
-              <span className="text-sm text-gray-900">{item.label}</span>
+              <span className="text-[12px] text-gray-900">{item.label}</span>
               {showValues && (
-                <span className="text-sm text-gray-500">{item.value}</span>
+                <span className="text-[12px] text-gray-500">{item.value}</span>
               )}
             </div>
             <div className="w-full bg-gray-200 h-6">
@@ -59,11 +59,11 @@ export default function BarChart({
               }}
             />
           </div>
-          <span className="text-xs text-gray-500 mt-2 text-center">
+          <span className="text-[10px] text-gray-500 mt-2 text-center">
             {item.label}
           </span>
           {showValues && (
-            <span className="text-xs text-gray-900 mt-1">{item.value}</span>
+            <span className="text-[10px] text-gray-900 mt-1">{item.value}</span>
           )}
         </div>
       ))}

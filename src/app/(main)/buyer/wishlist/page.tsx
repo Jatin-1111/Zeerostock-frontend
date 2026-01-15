@@ -145,7 +145,7 @@ export default function WishlistPage() {
       <div className="w-full mx-auto">
         {/* Page Title */}
         <div className="px-4 sm:px-6 md:px-8 lg:px-10 pt-3 sm:pt-3.5 md:pt-4 pb-2.5 sm:pb-2.75 md:pb-3">
-          <h1 className="text-base sm:text-lg md:text-lg font-semibold text-[#0d1b2a] m-0">
+          <h1 className="text-base sm:text-[17px] md:text-lg font-semibold text-[#0d1b2a] m-0">
             My Wishlist
           </h1>
         </div>
@@ -182,16 +182,16 @@ export default function WishlistPage() {
             <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mb-4 sm:mb-4.5 md:mb-5">
               <Heart className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 text-gray-400" />
             </div>
-            <h2 className="text-sm sm:text-base md:text-base font-semibold text-[#0d1b2a] mb-1.5 sm:mb-1.75 md:mb-2">
+            <h2 className="text-sm sm:text-[15px] md:text-base font-semibold text-[#0d1b2a] mb-1.5 sm:mb-1.75 md:mb-2">
               Your wishlist is empty
             </h2>
-            <p className="text-xs sm:text-sm md:text-sm text-gray-500 mb-5 sm:mb-5.5 md:mb-6">
+            <p className="text-xs sm:text-[13px] md:text-sm text-gray-500 mb-5 sm:mb-5.5 md:mb-6">
               Start adding products to your wishlist to keep track of items you
               love
             </p>
             <Link
               href="/marketplace"
-              className="inline-flex items-center justify-center bg-[#1e3a8a] text-white px-6 sm:px-7 md:px-8 py-2 sm:py-2.25 md:py-2.5 rounded-lg text-xs sm:text-sm md:text-sm font-medium no-underline transition-colors hover:bg-[#152d6b]"
+              className="inline-flex items-center justify-center bg-[#1e3a8a] text-white px-6 sm:px-7 md:px-8 py-2 sm:py-2.25 md:py-2.5 rounded-lg text-xs sm:text-[13px] md:text-sm font-medium no-underline transition-colors hover:bg-[#152d6b]"
             >
               Browse Products
             </Link>
@@ -273,14 +273,14 @@ export default function WishlistPage() {
                       href={`/product/${item.product?.slug || ""}`}
                       className="no-underline mb-1.25 sm:mb-1.375 md:mb-1.5"
                     >
-                      <h3 className="text-xs sm:text-xs md:text-xs font-medium text-[#0d1b2a] m-0 leading-tight hover:text-[#1e3a8a]">
+                      <h3 className="text-[9px] sm:text-[9.5px] md:text-[10px] font-medium text-[#0d1b2a] m-0 leading-tight hover:text-[#1e3a8a]">
                         {item.product?.title || "Unknown Product"}
                       </h3>
                     </Link>
 
                     {/* Location */}
                     {item.product?.city || item.product?.state ? (
-                      <p className="text-xs sm:text-xs md:text-xs text-[#9c9c9c] m-0 mb-1.5 sm:mb-1.75 md:mb-2">
+                      <p className="text-[6.5px] sm:text-[6.75px] md:text-[7px] text-[#9c9c9c] m-0 mb-1.5 sm:mb-1.75 md:mb-2">
                         {[item.product?.city, item.product?.state]
                           .filter(Boolean)
                           .join(", ")}
@@ -290,7 +290,7 @@ export default function WishlistPage() {
                     {/* Price Section */}
                     <div className="mb-1.5 sm:mb-1.75 md:mb-2">
                       <div className="flex items-center gap-0.75 sm:gap-0.875 md:gap-1 mb-0.5 flex-wrap">
-                        <span className="text-xs sm:text-sm md:text-sm font-bold text-[#1e3a8a]">
+                        <span className="text-[11px] sm:text-[12px] md:text-[13px] font-bold text-[#1e3a8a]">
                           ₹{item.product.priceAfter?.toLocaleString()}
                         </span>
                       </div>
@@ -298,7 +298,7 @@ export default function WishlistPage() {
                       {/* Active Badge */}
                       {isAvailable && (
                         <div className="inline-flex items-center justify-center bg-[#eeffef] rounded-full px-1.25 sm:px-1.375 md:px-1.5 py-0.5 mb-1.25 sm:mb-1.375 md:mb-1.5">
-                          <span className="text-xs sm:text-xs md:text-xs text-[#2aae7a] font-medium">
+                          <span className="text-[7px] sm:text-[7.25px] md:text-[7.5px] text-[#2aae7a] font-medium">
                             Active
                           </span>
                         </div>
@@ -308,7 +308,7 @@ export default function WishlistPage() {
                     {/* Price Alerts */}
                     <div className="flex justify-between items-center">
                       {item.priceAtAdd && (
-                        <p className="text-xs sm:text-xs md:text-xs text-[#9c9c9c] m-0 mb-0.75 sm:mb-0.875 md:mb-1">
+                        <p className="text-[6.5px] sm:text-[6.75px] md:text-[7px] text-[#9c9c9c] m-0 mb-0.75 sm:mb-0.875 md:mb-1">
                           <span>Price alerts </span>
                           <span className="font-bold">₹</span>
                           {item.priceAtAdd.toLocaleString()}
@@ -317,7 +317,7 @@ export default function WishlistPage() {
                       {/* Time Remaining */}
                       <div className="flex items-center gap-0.75 sm:gap-0.875 md:gap-1 mb-1.25 sm:mb-1.375 md:mb-1.5">
                         <Clock className="w-2 sm:w-2.25 md:w-2.5 h-2 sm:h-2.25 md:h-2.5 text-[#9c9c9c]" />
-                        <span className="text-xs sm:text-xs md:text-xs text-[#9c9c9c]">
+                        <span className="text-[5.5px] sm:text-[5.75px] md:text-[6px] text-[#9c9c9c]">
                           {getTimeRemaining(item.product?.expiresAt)}
                         </span>
                       </div>
@@ -336,7 +336,7 @@ export default function WishlistPage() {
                         disabled={
                           !isAvailable || addingToCartId === item.product?.id
                         }
-                        className="border border-[#9c9c9c] bg-white text-[#9c9c9c] rounded-[6.5px] sm:rounded-[7px] md:rounded-[7.5px] px-2 sm:px-2.25 md:px-2.5 py-1.25 sm:py-1.375 md:py-1.5 text-xs sm:text-xs md:text-xs font-medium hover:border-gray-400 hover:text-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="border border-[#9c9c9c] bg-white text-[#9c9c9c] rounded-[6.5px] sm:rounded-[7px] md:rounded-[7.5px] px-2 sm:px-2.25 md:px-2.5 py-1.25 sm:py-1.375 md:py-1.5 text-[7.5px] sm:text-[7.75px] md:text-[8px] font-medium hover:border-gray-400 hover:text-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {addingToCartId === item.product?.id
                           ? "Adding..."
@@ -351,7 +351,7 @@ export default function WishlistPage() {
                         disabled={
                           !isAvailable || addingToCartId === item.product?.id
                         }
-                        className="bg-[#1e3a8a] text-white rounded-[6.5px] sm:rounded-[7px] md:rounded-[7.5px] px-2 sm:px-2.25 md:px-2.5 py-1.25 sm:py-1.375 md:py-1.5 text-xs sm:text-xs md:text-xs font-medium hover:bg-[#152d6b] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="bg-[#1e3a8a] text-white rounded-[6.5px] sm:rounded-[7px] md:rounded-[7.5px] px-2 sm:px-2.25 md:px-2.5 py-1.25 sm:py-1.375 md:py-1.5 text-[7.5px] sm:text-[7.75px] md:text-[8px] font-medium hover:bg-[#152d6b] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {addingToCartId === item.product?.id
                           ? "Processing..."
@@ -361,7 +361,7 @@ export default function WishlistPage() {
                       {/* Alert - Non-functional as requested */}
                       <button
                         disabled
-                        className="border border-[#9c9c9c] bg-white text-[#9c9c9c] rounded-[6.5px] sm:rounded-[7px] md:rounded-[7.5px] px-2 sm:px-2.25 md:px-2.5 py-1.25 sm:py-1.375 md:py-1.5 text-xs sm:text-xs md:text-xs font-medium opacity-50 cursor-not-allowed flex items-center justify-center gap-0.75 sm:gap-0.875 md:gap-1"
+                        className="border border-[#9c9c9c] bg-white text-[#9c9c9c] rounded-[6.5px] sm:rounded-[7px] md:rounded-[7.5px] px-2 sm:px-2.25 md:px-2.5 py-1.25 sm:py-1.375 md:py-1.5 text-[7.5px] sm:text-[7.75px] md:text-[8px] font-medium opacity-50 cursor-not-allowed flex items-center justify-center gap-0.75 sm:gap-0.875 md:gap-1"
                         title="Price alerts coming soon"
                       >
                         <Bell className="w-2 sm:w-2.25 md:w-2.5 h-2 sm:h-2.25 md:h-2.5" />
@@ -371,7 +371,7 @@ export default function WishlistPage() {
                       {/* View Details */}
                       <Link
                         href={`/product/${item.product?.slug || ""}`}
-                        className="bg-[#1e3a8a] text-white rounded-[6.5px] sm:rounded-[7px] md:rounded-[7.5px] px-2 sm:px-2.25 md:px-2.5 py-1.25 sm:py-1.375 md:py-1.5 text-xs sm:text-xs md:text-xs font-medium hover:bg-[#152d6b] transition-colors flex items-center justify-center no-underline"
+                        className="bg-[#1e3a8a] text-white rounded-[6.5px] sm:rounded-[7px] md:rounded-[7.5px] px-2 sm:px-2.25 md:px-2.5 py-1.25 sm:py-1.375 md:py-1.5 text-[7.5px] sm:text-[7.75px] md:text-[8px] font-medium hover:bg-[#152d6b] transition-colors flex items-center justify-center no-underline"
                       >
                         View Details
                       </Link>

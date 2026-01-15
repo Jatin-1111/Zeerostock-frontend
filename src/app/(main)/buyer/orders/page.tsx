@@ -116,10 +116,10 @@ export default function MyOrdersPage() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Page Title and Export Button */}
         <div className="mb-[40px] sm:mb-[50px] md:mb-[60px] flex flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
-          <h1 className="m-0 text-lg sm:text-xl md:text-xl font-semibold text-[#0d1b2a]">
+          <h1 className="m-0 text-[16px] sm:text-[18px] md:text-[20px] font-semibold text-[#0d1b2a]">
             My Orders
           </h1>
-          <button className="flex h-9 cursor-pointer items-center gap-1 rounded-lg border-none bg-primary px-6 text-xs font-semibold text-white transition-colors hover:bg-primary-hover">
+          <button className="flex h-[32px] sm:h-[34px] md:h-[36px] cursor-pointer items-center gap-[4px] sm:gap-[5px] md:gap-[5.5px] rounded-[7px] sm:rounded-[8px] md:rounded-[8.5px] border-none bg-[#1e3a8a] px-[20px] sm:px-[25px] md:px-[31px] text-[9px] sm:text-[9.5px] md:text-[10px] font-semibold text-white transition-colors hover:bg-[#1e40af]">
             <Download size={14} className="stroke-[2.5]" />
             Export Orders
           </button>
@@ -134,44 +134,44 @@ export default function MyOrdersPage() {
         {/* Orders Table/Cards */}
         <div className="min-h-64 w-full overflow-hidden rounded-xl bg-white shadow-md">
           {/* Table Headers - Hidden on mobile */}
-          <div className="hidden lg:grid h-13 w-full grid-cols-[105px_150px_1fr_105px_90px_105px_105px_90px] items-center border-b border-border-lighter">
-            <div className="pl-[17px] text-xs font-medium tracking-[0.4px] text-center text-[#0d1b2a]">
+          <div className="hidden lg:grid h-[52px] w-full grid-cols-[105px_150px_1fr_105px_90px_105px_105px_90px] items-center border-b border-[#e5e5e5]">
+            <div className="pl-[17px] text-[11px] font-medium tracking-[0.4px] text-center text-[#0d1b2a]">
               ORDER ID
             </div>
-            <div className="text-xs font-medium tracking-[0.4px] text-center text-[#0d1b2a]">
+            <div className="text-[11px] font-medium tracking-[0.4px] text-center text-[#0d1b2a]">
               SUPPLIER
             </div>
-            <div className="text-xs font-medium tracking-[0.4px] text-center text-[#0d1b2a]">
+            <div className="text-[11px] font-medium tracking-[0.4px] text-center text-[#0d1b2a]">
               ITEMS
             </div>
-            <div className="text-xs font-medium tracking-[0.4px] text-center text-[#0d1b2a]">
+            <div className="text-[11px] font-medium tracking-[0.4px] text-center text-[#0d1b2a]">
               AMOUNT
             </div>
-            <div className="text-xs font-medium tracking-[0.4px] text-center text-[#0d1b2a]">
+            <div className="text-[11px] font-medium tracking-[0.4px] text-center text-[#0d1b2a]">
               STATUS
             </div>
-            <div className="text-xs font-medium leading-tight tracking-[0.4px] text-center text-[#0d1b2a]">
+            <div className="text-[11px] font-medium leading-[13.5px] tracking-[0.4px] text-center text-[#0d1b2a]">
               ORDER
               <br />
               DATE
             </div>
-            <div className="text-xs font-medium leading-tight tracking-[0.4px] text-center text-[#0d1b2a]">
+            <div className="text-[11px] font-medium leading-[13.5px] tracking-[0.4px] text-center text-[#0d1b2a]">
               EXPECTED
               <br />
               DATE
             </div>
-            <div className="text-xs font-medium tracking-[0.4px] text-center text-[#0d1b2a]">
+            <div className="text-[11px] font-medium tracking-[0.4px] text-center text-[#0d1b2a]">
               ACTIONS
             </div>
           </div>
 
           {/* Table Rows / Mobile Cards */}
           {isLoading ? (
-            <div className="py-[28px] sm:py-[31px] lg:py-[34px] text-center text-xs sm:text-xs lg:text-xs text-[#9c9c9c]">
+            <div className="py-[28px] sm:py-[31px] lg:py-[34px] text-center text-[10px] sm:text-[10.5px] lg:text-[11px] text-[#9c9c9c]">
               <div className="animate-pulse">Loading orders...</div>
             </div>
           ) : orders.length === 0 ? (
-            <div className="py-[28px] sm:py-[31px] lg:py-[34px] text-center text-xs sm:text-xs lg:text-xs text-[#9c9c9c]">
+            <div className="py-[28px] sm:py-[31px] lg:py-[34px] text-center text-[10px] sm:text-[10.5px] lg:text-[11px] text-[#9c9c9c]">
               No orders found
             </div>
           ) : (
@@ -184,11 +184,11 @@ export default function MyOrdersPage() {
                 <div className="lg:hidden space-y-3">
                   {/* Order ID and Status */}
                   <div className="flex items-center justify-between">
-                    <div className="text-xs font-medium tracking-[0.4px] text-[#9c9c9c]">
+                    <div className="text-[11px] font-medium tracking-[0.4px] text-[#9c9c9c]">
                       {order.orderNumber}
                     </div>
                     <div
-                      className="text-xs font-medium tracking-[0.4px] capitalize px-3 py-1 rounded-full"
+                      className="text-[11px] font-medium tracking-[0.4px] capitalize px-3 py-1 rounded-full"
                       style={{
                         color: getStatusColor(order.status),
                         backgroundColor:
@@ -202,12 +202,12 @@ export default function MyOrdersPage() {
                   </div>
 
                   {/* Items */}
-                  <div className="text-sm font-medium text-black">
+                  <div className="text-[12px] font-medium text-black">
                     {order.items}
                   </div>
 
                   {/* Supplier */}
-                  <div className="text-xs text-[#6b7280]">
+                  <div className="text-[11px] text-[#6b7280]">
                     Supplier:{" "}
                     <span className="text-black font-medium">
                       {order.supplierName}
@@ -217,8 +217,8 @@ export default function MyOrdersPage() {
                   {/* Gray Section - Amount, Dates */}
                   <div className="bg-[#f6f6f6] -mx-4 -mb-4 p-4 rounded-b-lg space-y-2">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs text-[#6b7280]">Amount</span>
-                      <span className="text-sm font-medium text-black">
+                      <span className="text-[10px] text-[#6b7280]">Amount</span>
+                      <span className="text-[12px] font-medium text-black">
                         ₹
                         {parseFloat(
                           String(order.totalAmount || 0)
@@ -228,8 +228,10 @@ export default function MyOrdersPage() {
                       </span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-xs text-[#6b7280]">Order Date</span>
-                      <span className="text-xs text-black">
+                      <span className="text-[10px] text-[#6b7280]">
+                        Order Date
+                      </span>
+                      <span className="text-[11px] text-black">
                         {new Date(order.orderDate).toLocaleDateString("en-IN", {
                           year: "numeric",
                           month: "2-digit",
@@ -238,10 +240,10 @@ export default function MyOrdersPage() {
                       </span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-xs text-[#6b7280]">
+                      <span className="text-[10px] text-[#6b7280]">
                         Est. Delivery
                       </span>
-                      <span className="text-xs text-black">
+                      <span className="text-[11px] text-black">
                         {order.estimatedDelivery
                           ? new Date(
                               order.estimatedDelivery
@@ -256,7 +258,7 @@ export default function MyOrdersPage() {
                     <div className="pt-2">
                       <Link
                         href={`/buyer/track-order/${order.orderId}`}
-                        className="flex items-center justify-center gap-1.5 rounded-md bg-[#1e3a8a] px-4 py-2 text-xs font-medium text-white hover:bg-[#1e40af] transition-colors"
+                        className="flex items-center justify-center gap-1.5 rounded-md bg-[#1e3a8a] px-4 py-2 text-[10px] font-medium text-white hover:bg-[#1e40af] transition-colors"
                       >
                         <Eye size={14} />
                         View Details
@@ -267,27 +269,27 @@ export default function MyOrdersPage() {
 
                 {/* Desktop Table Row */}
                 {/* Order ID */}
-                <div className="hidden lg:block pl-[17px] text-center text-xs font-medium leading-normal tracking-[0.4px] text-[#9c9c9c]">
+                <div className="hidden lg:block pl-[17px] text-center text-[11px] font-medium leading-[16px] tracking-[0.4px] text-[#9c9c9c]">
                   {order.orderNumber}
                 </div>
 
                 {/* Supplier */}
                 <div className="hidden lg:flex text-center flex-col">
-                  <div className="inline-block cursor-pointer border-b-2 border-transparent p-1.5 text-xs font-normal leading-normal tracking-wide text-black transition-all duration-200 hover:border-secondary">
+                  <div className="inline-block cursor-pointer border-b-2 border-transparent p-[5.5px] text-[11px] font-normal leading-[16px] tracking-[0.4px] text-black transition-all duration-200 hover:border-[#18b522]">
                     {order.supplierName}
                   </div>
                 </div>
 
                 {/* Items */}
                 <div
-                  className="hidden lg:block text-center overflow-hidden text-ellipsis whitespace-nowrap text-xs font-normal leading-normal tracking-[0.4px] text-black pr-2"
+                  className="hidden lg:block text-center overflow-hidden text-ellipsis whitespace-nowrap text-[11px] font-normal leading-[16px] tracking-[0.4px] text-black pr-2"
                   title={order.items}
                 >
                   {order.items}
                 </div>
 
                 {/* Amount */}
-                <div className="hidden lg:block text-center text-xs font-normal leading-normal tracking-[0.4px] text-black">
+                <div className="hidden lg:block text-center text-[11px] font-normal leading-[16px] tracking-[0.4px] text-black">
                   ₹
                   {parseFloat(String(order.totalAmount || 0)).toLocaleString(
                     "en-IN",
@@ -297,14 +299,14 @@ export default function MyOrdersPage() {
 
                 {/* Status */}
                 <div
-                  className="hidden lg:block text-center text-xs font-normal leading-normal tracking-[0.4px] capitalize"
+                  className="hidden lg:block text-center text-[11px] font-normal leading-[16px] tracking-[0.4px] capitalize"
                   style={{ color: getStatusColor(order.status) }}
                 >
                   {order.status}
                 </div>
 
                 {/* Order Date */}
-                <div className="hidden lg:block text-center text-xs font-normal leading-normal tracking-[0.4px] text-black">
+                <div className="hidden lg:block text-center text-[11px] font-normal leading-[16px] tracking-[0.4px] text-black">
                   {new Date(order.orderDate).toLocaleDateString("en-IN", {
                     year: "numeric",
                     month: "2-digit",
@@ -313,7 +315,7 @@ export default function MyOrdersPage() {
                 </div>
 
                 {/* Expected Date */}
-                <div className="hidden lg:block text-center text-xs font-normal leading-normal tracking-[0.4px] text-black">
+                <div className="hidden lg:block text-center text-[11px] font-normal leading-[16px] tracking-[0.4px] text-black">
                   {order.estimatedDelivery
                     ? new Date(order.estimatedDelivery).toLocaleDateString(
                         "en-IN",
@@ -341,17 +343,17 @@ export default function MyOrdersPage() {
             <button
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="cursor-pointer rounded-[4px] sm:rounded-[4.2px] lg:rounded-[4.5px] border-2 border-[#0d1b2a] bg-white px-[11px] sm:px-[12px] lg:px-[13.5px] py-[5.5px] sm:py-[6px] lg:py-[6.75px] text-xs sm:text-xs lg:text-xs disabled:cursor-not-allowed disabled:opacity-50 hover:bg-gray-50"
+              className="cursor-pointer rounded-[4px] sm:rounded-[4.2px] lg:rounded-[4.5px] border-2 border-[#0d1b2a] bg-white px-[11px] sm:px-[12px] lg:px-[13.5px] py-[5.5px] sm:py-[6px] lg:py-[6.75px] text-[8.5px] sm:text-[8.7px] lg:text-[9px] disabled:cursor-not-allowed disabled:opacity-50 hover:bg-gray-50"
             >
               Previous
             </button>
-            <span className="text-xs sm:text-xs lg:text-xs text-[#0d1b2a]">
+            <span className="text-[8.5px] sm:text-[8.7px] lg:text-[9px] text-[#0d1b2a]">
               Page {currentPage} of {totalPages}
             </span>
             <button
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
-              className="cursor-pointer rounded-[4px] sm:rounded-[4.2px] lg:rounded-[4.5px] border-2 border-[#0d1b2a] bg-white px-[11px] sm:px-[12px] lg:px-[13.5px] py-[5.5px] sm:py-[6px] lg:py-[6.75px] text-xs sm:text-xs lg:text-xs disabled:cursor-not-allowed disabled:opacity-50 hover:bg-gray-50"
+              className="cursor-pointer rounded-[4px] sm:rounded-[4.2px] lg:rounded-[4.5px] border-2 border-[#0d1b2a] bg-white px-[11px] sm:px-[12px] lg:px-[13.5px] py-[5.5px] sm:py-[6px] lg:py-[6.75px] text-[8.5px] sm:text-[8.7px] lg:text-[9px] disabled:cursor-not-allowed disabled:opacity-50 hover:bg-gray-50"
             >
               Next
             </button>

@@ -224,10 +224,10 @@ export default function BuyerPaymentMethodsPage() {
 
               {/* Text Content */}
               <div className="flex flex-col">
-                <h1 className="m-0 text-xl font-semibold leading-normal text-[#0D1B2A]">
+                <h1 className="m-0 text-[20px] font-semibold leading-normal text-[#0D1B2A]">
                   Payment Method
                 </h1>
-                <p className="m-0 text-base font-medium leading-normal text-[#9C9C9C]">
+                <p className="m-0 text-[14px] font-medium leading-normal text-[#9C9C9C]">
                   Manage payment method and transaction history
                 </p>
               </div>
@@ -257,7 +257,7 @@ export default function BuyerPaymentMethodsPage() {
                         | "invoices"
                     )
                   }
-                  className={`relative cursor-pointer border-none bg-transparent py-[5px] text-xs font-medium leading-tight tracking-[0.3px] transition-colors duration-200 ${
+                  className={`relative cursor-pointer border-none bg-transparent py-[5px] text-[11px] font-medium leading-[14px] tracking-[0.3px] transition-colors duration-200 ${
                     activeTab === tab.id ? "text-[#2AAE7A]" : "text-[#0D1B2A]"
                   }`}
                 >

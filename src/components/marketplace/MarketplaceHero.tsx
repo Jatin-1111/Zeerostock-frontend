@@ -74,12 +74,12 @@ export default function MarketplaceHero() {
       style={{ overflow: "visible" }}
     >
       {/* Main heading */}
-      <h1 className="absolute left-1/2 top-[58px] -translate-x-1/2 -translate-y-1/2 font-normal text-5xl text-[#0d1b2a] drop-shadow-[0_3px_3px_rgba(0,0,0,0.25)] whitespace-nowrap m-0">
+      <h1 className="absolute left-1/2 top-[58px] -translate-x-1/2 -translate-y-1/2 font-normal text-[54px] text-[#0d1b2a] drop-shadow-[0_3px_3px_rgba(0,0,0,0.25)] whitespace-nowrap m-0">
         B2B Surplus Marketplace
       </h1>
 
       {/* Subheading */}
-      <p className="absolute left-1/2 top-[117px] -translate-x-1/2 -translate-y-1/2 font-medium text-xl text-[#787878] whitespace-nowrap m-0">
+      <p className="absolute left-1/2 top-[117px] -translate-x-1/2 -translate-y-1/2 font-medium text-[18px] text-[#787878] whitespace-nowrap m-0">
         Millions of products. Thousands of suppliers. One marketplace
       </p>
 
@@ -97,7 +97,7 @@ export default function MarketplaceHero() {
               if (!isDropdownOpen) setIsFilterOpen(false);
             }}
           >
-            <span className="font-medium text-xs text-gray-700 whitespace-nowrap">
+            <span className="font-medium text-[10.5px] text-gray-700 whitespace-nowrap">
               {selectedCategory}
             </span>
             <motion.svg
@@ -132,7 +132,7 @@ export default function MarketplaceHero() {
                   <motion.div
                     key={category}
                     whileHover={{ backgroundColor: "#d3d1d1" }}
-                    className="px-3 py-1.5 cursor-pointer text-xs text-gray-700"
+                    className="px-3 py-1.5 cursor-pointer text-[10.5px] text-gray-700"
                     onClick={() => {
                       setSelectedCategory(category);
                       setIsDropdownOpen(false);
@@ -155,7 +155,7 @@ export default function MarketplaceHero() {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Search for products, categories, etc"
-          className="flex-1 border-none bg-transparent outline-none font-normal text-xs text-gray-700 px-3"
+          className="flex-1 border-none bg-transparent outline-none font-normal text-[10.5px] text-gray-700 px-3"
         />
 
         {/* Divider */}
@@ -198,33 +198,33 @@ export default function MarketplaceHero() {
                 transition={{ duration: 0.2 }}
                 className="absolute top-full right-0 mt-1.5 bg-[#EBEBEB] border border-gray-200 rounded-lg shadow-lg space-y-[0.5px] z-[9999] w-48 p-3"
               >
-                <div className="text-xs font-medium text-gray-700 mb-2">
+                <div className="text-[10.5px] font-medium text-gray-700 mb-2">
                   Quick Filters
                 </div>
                 <motion.div
                   whileHover={{ backgroundColor: "#d3d1d1" }}
-                  className="px-2 py-1.5 cursor-pointer text-xs text-gray-600 rounded"
+                  className="px-2 py-1.5 cursor-pointer text-[10.5px] text-gray-600 rounded"
                   onClick={() => setIsFilterOpen(false)}
                 >
                   Price: Low to High
                 </motion.div>
                 <motion.div
                   whileHover={{ backgroundColor: "#d3d1d1" }}
-                  className="px-2 py-1.5 cursor-pointer text-xs text-gray-600 rounded"
+                  className="px-2 py-1.5 cursor-pointer text-[10.5px] text-gray-600 rounded"
                   onClick={() => setIsFilterOpen(false)}
                 >
                   Price: High to Low
                 </motion.div>
                 <motion.div
                   whileHover={{ backgroundColor: "#d3d1d1" }}
-                  className="px-2 py-1.5 cursor-pointer text-xs text-gray-600 rounded"
+                  className="px-2 py-1.5 cursor-pointer text-[10.5px] text-gray-600 rounded"
                   onClick={() => setIsFilterOpen(false)}
                 >
                   Newest First
                 </motion.div>
                 <motion.div
                   whileHover={{ backgroundColor: "#d3d1d1" }}
-                  className="px-2 py-1.5 cursor-pointer text-xs text-gray-600 rounded"
+                  className="px-2 py-1.5 cursor-pointer text-[10.5px] text-gray-600 rounded"
                   onClick={() => setIsFilterOpen(false)}
                 >
                   Most Popular
@@ -240,7 +240,7 @@ export default function MarketplaceHero() {
         {/* Search button */}
         <button
           type="submit"
-          className="font-medium text-xs text-gray-700 bg-transparent border-none cursor-pointer px-4 h-full"
+          className="font-medium text-[10.5px] text-gray-700 bg-transparent border-none cursor-pointer px-4 h-full"
         >
           Search
         </button>

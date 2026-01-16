@@ -295,17 +295,17 @@ export default function VerificationStatusView({
   const documents = getDocuments();
 
   return (
-    <div className="min-h-screen bg-page px-20 py-6">
+    <div className="min-h-screen bg-[#eefbf6] px-20 py-6">
       {/* Header Section */}
-      <div className="mb-8 bg-white shadow-sm rounded-2xl px-16 py-5 flex items-center gap-6">
-        <div className="bg-success-bg p-3 rounded-lg shadow-sm">
-          <Shield className="w-9 h-9 text-secondary" />
+      <div className="mb-[34px] bg-white shadow-[0px_0px_5px_0px_rgba(24,181,34,0.25)] rounded-[15px] px-[61px] py-5 flex items-center gap-[26px]">
+        <div className="bg-[#eeffef] p-[11px] rounded-[8px] shadow-[0px_0px_10px_0px_rgba(24,181,34,0.25)]">
+          <Shield className="w-[34px] h-[34px] text-[#2aae7a]" />
         </div>
         <div>
-          <h1 className="font-semibold text-[27px] text-[#0d1b2a] mb-0 leading-normal">
+          <h1 className="font-semibold text-2xl text-[#0d1b2a] mb-0 leading-normal">
             Supplier Verification
           </h1>
-          <p className="font-medium text-[18px] text-[#9c9c9c] leading-normal">
+          <p className="font-medium text-xl text-[#9c9c9c] leading-normal">
             Complete verification to unlock premium features and build buyer
             trust
           </p>
@@ -314,40 +314,40 @@ export default function VerificationStatusView({
 
       {/* Progress Section */}
       <div className="mb-[23px] bg-white shadow-[0px_3px_5px_0px_rgba(24,181,34,0.25)] rounded-[15px] px-8 py-[23px] relative">
-        <h2 className="font-semibold text-[21px] text-[#0d1b2a] mb-4 leading-normal">
+        <h2 className="font-semibold text-2xl text-[#0d1b2a] mb-4 leading-normal">
           Verification Progress
         </h2>
-        <p className="font-medium text-[18px] text-[#9c9c9c] mb-[35px] leading-normal">
+        <p className="font-medium text-xl text-[#9c9c9c] mb-[35px] leading-normal">
           {progress}% Complete - {completedSteps} of 5 sections verified
         </p>
 
         {/* Progress Bar */}
-        <div className="relative w-full h-3 bg-border-light rounded-md mb-5">
+        <div className="relative w-full h-[11px] bg-[#eee] rounded-[6px] mb-5">
           <div
-            className="absolute top-0 left-0 h-full bg-secondary rounded-md"
+            className="absolute top-0 left-0 h-full bg-[#2aae7a] rounded-[6px]"
             style={{ width: `${progress}%` }}
           ></div>
         </div>
 
         {/* Percentage Badge */}
         <div className="absolute right-[27px] top-[54px]">
-          <span className="font-semibold text-[30px] text-[#0d1b2a]">
+          <span className="font-semibold text-3xl text-[#0d1b2a]">
             {progress}%
           </span>
         </div>
 
         {/* Status Badge */}
         <div
-          className={`absolute right-10 top-6 px-4 pr-5 py-1 rounded-full flex items-center gap-2 ${
+          className={`absolute right-[42px] top-[23px] px-4 pr-[19px] py-[5px] rounded-[100px] flex items-center gap-[8px] ${
             status.status === "approved"
-              ? "bg-success-bg"
+              ? "bg-[#eeffef]"
               : status.status === "under_review"
-              ? "bg-info-bg"
-              : "bg-warning"
+              ? "bg-[#dff3ff]"
+              : "bg-[#fc3]"
           }`}
         >
           <Clock className="w-[17px] h-[17px] text-black" />
-          <span className="font-medium text-[15px] text-black">
+          <span className="font-medium text-base text-black">
             {status.status === "approved"
               ? "Verified"
               : status.status === "under_review"
@@ -358,31 +358,31 @@ export default function VerificationStatusView({
       </div>
 
       {/* Warning/Status Banner - FIXED HEIGHT ISSUE HERE */}
-      <div className="mb-6 relative">
+      <div className="mb-[23px] relative">
         <div
-          className={`absolute left-0 top-0.5 bottom-0.5 w-2 rounded-br rounded-tr ${
+          className={`absolute left-0 top-[2px] bottom-[2px] w-[7px] rounded-br-[4px] rounded-tr-[4px] ${
             status.status === "approved"
-              ? "bg-secondary"
+              ? "bg-[#2aae7a]"
               : status.status === "rejected"
-              ? "bg-error"
+              ? "bg-[#f05050]"
               : status.status === "under_review"
-              ? "bg-info"
-              : "bg-warning"
+              ? "bg-[#507df0]"
+              : "bg-[#efd700]"
           }`}
         ></div>
         <div
-          className={`shadow-sm rounded-xl px-12 py-6 flex items-center ${
+          className={`shadow-[0px_1px_4px_0px_rgba(229,206,0,0.25)] rounded-tl-[9px] rounded-tr-[15px] rounded-bl-[9px] rounded-br-[15px] px-[50px] py-[22px] flex items-center ${
             status.status === "approved"
-              ? "bg-success-bg"
+              ? "bg-[#eeffef]"
               : status.status === "rejected"
-              ? "bg-error-bg"
+              ? "bg-[#ffe5e5]"
               : status.status === "under_review"
-              ? "bg-info-bg"
-              : "bg-warning-bg"
+              ? "bg-[#dff3ff]"
+              : "bg-[#fff3cf]"
           }`}
         >
           <svg
-            className="w-5 h-5 mr-8 shrink-0"
+            className="w-[20px] h-[20px] mr-[30px] shrink-0"
             viewBox="0 0 27 27"
             fill="none"
           >
@@ -392,12 +392,12 @@ export default function VerificationStatusView({
               r="13"
               stroke={
                 status.status === "approved"
-                  ? "var(--color-secondary)"
+                  ? "#2AAE7A"
                   : status.status === "rejected"
-                  ? "var(--color-error)"
+                  ? "#F05050"
                   : status.status === "under_review"
-                  ? "var(--color-info)"
-                  : "var(--color-warning)"
+                  ? "#507DF0"
+                  : "#FFCC33"
               }
               strokeWidth="1"
             />
@@ -405,12 +405,12 @@ export default function VerificationStatusView({
               d="M13.5 8v6M13.5 18h.01"
               stroke={
                 status.status === "approved"
-                  ? "var(--color-secondary)"
+                  ? "#2AAE7A"
                   : status.status === "rejected"
-                  ? "var(--color-error)"
+                  ? "#F05050"
                   : status.status === "under_review"
-                  ? "var(--color-info)"
-                  : "var(--color-warning)"
+                  ? "#507DF0"
+                  : "#FFCC33"
               }
               strokeWidth="2"
               strokeLinecap="round"
@@ -419,12 +419,12 @@ export default function VerificationStatusView({
           <p
             className={`font-medium text-[17px] leading-normal ${
               status.status === "approved"
-                ? "text-secondary"
+                ? "text-[#2aae7a]"
                 : status.status === "rejected"
-                ? "text-error"
+                ? "text-[#f05050]"
                 : status.status === "under_review"
-                ? "text-info"
-                : "text-warning"
+                ? "text-[#507df0]"
+                : "text-[#fc3]"
             }`}
           >
             {statusConfig.message}
@@ -459,7 +459,7 @@ export default function VerificationStatusView({
 
       <div className="flex gap-5">
         {/* Left Column - Verification Cards */}
-        <div className="flex-1 space-y-6">
+        <div className="flex-1 space-y-[23px]">
           {verification && (
             <>
               {/* Business Information Card */}

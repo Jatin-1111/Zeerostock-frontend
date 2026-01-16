@@ -112,7 +112,7 @@ export default function SupplierListings() {
 
   return (
     <div className="min-h-screen bg-[#EEFBF6]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div className="max-w-[1440px] mx-auto px-10 py-4">
         {/* Page Title */}
         <h1 className="text-[18px] font-semibold text-[#0d1b2a] mb-4">
           Active Listing

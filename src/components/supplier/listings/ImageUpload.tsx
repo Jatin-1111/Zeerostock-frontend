@@ -50,10 +50,10 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
         onClick={() => fileInputRef.current?.click()}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
-        className="relative flex h-36 cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-muted hover:border-secondary hover:bg-success-bg"
+        className="relative flex h-[140px] cursor-pointer flex-col items-center justify-center rounded-[7.33px] border-2 border-dashed border-[#9c9c9c] hover:border-[#2AAE7A] hover:bg-[#f0fdf4]"
       >
         <Upload className="mb-[12.67px] h-[25.33px] w-[25.33px] text-[#9c9c9c]" />
-        <p className="mb-[5.33px] text-[8px] text-[#9c9c9c]">
+        <p className="mb-[5.33px] text-xs text-[#9c9c9c]">
           Drop & drag images here or click to select
         </p>
         <button
@@ -117,7 +117,7 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
         )}
       </div>
       {error && (
-        <p className="mt-[2.67px] text-[6.67px] text-red-500">{error}</p>
+        <p className="mt-[2.67px] text-xs text-red-500">{error}</p>
       )}
     </div>
   );

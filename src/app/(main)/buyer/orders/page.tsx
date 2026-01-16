@@ -113,29 +113,29 @@ export default function MyOrdersPage() {
 
   return (
     <div className="relative min-h-screen pb-[20px] sm:pb-[28px] md:pb-[34px] pt-[60px] sm:pt-[68px] md:pt-[75px]">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 md:px-7.5">
         {/* Page Title and Export Button */}
         <div className="mb-[40px] sm:mb-[50px] md:mb-[60px] flex flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
           <h1 className="m-0 text-[16px] sm:text-[18px] md:text-[20px] font-semibold text-[#0d1b2a]">
             My Orders
           </h1>
-          <button className="flex h-[32px] sm:h-[34px] md:h-[36px] cursor-pointer items-center gap-[4px] sm:gap-[5px] md:gap-[5.5px] rounded-[7px] sm:rounded-[8px] md:rounded-[8.5px] border-none bg-[#1e3a8a] px-[20px] sm:px-[25px] md:px-[31px] text-[9px] sm:text-[9.5px] md:text-[10px] font-semibold text-white transition-colors hover:bg-[#1e40af]">
+          <button className="flex h-[32px] sm:h-[34px] md:h-[36px] cursor-pointer items-center gap-[4px] sm:gap-[5px] md:gap-[5.5px] rounded-[7px] sm:rounded-[8px] md:rounded-[8.5px] border-none bg-[#1e3a8a] px-[20px] sm:px-[25px] md:px-[31px] text-xs sm:text-xs md:text-xs font-semibold text-white transition-colors hover:bg-[#1e40af]">
             <Download size={14} className="stroke-[2.5]" />
             Export Orders
           </button>
         </div>
 
         {error && (
-          <div className="mb-3 rounded border border-red-300 bg-red-50 p-2 text-red-600 text-xs">
+          <div className="mb-[11px] rounded-[4.5px] border border-[#fcc] bg-[#fee] p-[9px] text-[#c00] text-xs">
             {error}
           </div>
         )}
 
         {/* Orders Table/Cards */}
-        <div className="min-h-64 w-full overflow-hidden rounded-xl bg-white shadow-md">
+        <div className="min-h-[200px] sm:min-h-[240px] lg:min-h-[278px] w-full overflow-hidden rounded-[10px] sm:rounded-[10.5px] lg:rounded-[11px] bg-white shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)] sm:shadow-[0px_0px_4.2px_0px_rgba(0,0,0,0.25)] lg:shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)]">
           {/* Table Headers - Hidden on mobile */}
           <div className="hidden lg:grid h-[52px] w-full grid-cols-[105px_150px_1fr_105px_90px_105px_105px_90px] items-center border-b border-[#e5e5e5]">
-            <div className="pl-[17px] text-[11px] font-medium tracking-[0.4px] text-center text-[#0d1b2a]">
+            <div className="pl-[17px] text-xs font-medium tracking-[0.4px] text-center text-[#0d1b2a]">
               ORDER ID
             </div>
             <div className="text-[11px] font-medium tracking-[0.4px] text-center text-[#0d1b2a]">
@@ -178,7 +178,7 @@ export default function MyOrdersPage() {
             orders.map((order) => (
               <div
                 key={order.orderId || order.orderNumber}
-                className="lg:grid lg:h-14 lg:grid-cols-[105px_150px_1fr_105px_90px_105px_105px_90px] lg:items-center bg-white shadow-md my-5 lg:my-0 mx-3 lg:mx-0 rounded-lg lg:rounded-none p-4 lg:p-0 hover:bg-slate-50 transition-colors"
+                className="lg:grid lg:h-[56px] lg:grid-cols-[105px_150px_1fr_105px_90px_105px_105px_90px] lg:items-center bg-white shadow-[0px_1.5px_3px_0px_rgba(0,0,0,0.25)] my-5 lg:my-0 mx-3 lg:mx-0 rounded-lg lg:rounded-none p-4 lg:p-0 hover:bg-slate-50 transition-colors"
               >
                 {/* Mobile Card Layout */}
                 <div className="lg:hidden space-y-3">
@@ -275,7 +275,7 @@ export default function MyOrdersPage() {
 
                 {/* Supplier */}
                 <div className="hidden lg:flex text-center flex-col">
-                  <div className="inline-block cursor-pointer border-b-2 border-transparent p-[5.5px] text-[11px] font-normal leading-[16px] tracking-[0.4px] text-black transition-all duration-200 hover:border-[#18b522]">
+                  <div className="inline-block cursor-pointer border-b-2 border-transparent p-[5.5px] text-xs font-normal leading-normal tracking-[0.4px] text-black transition-all duration-200 hover:border-[#18b522]">
                     {order.supplierName}
                   </div>
                 </div>
@@ -339,7 +339,7 @@ export default function MyOrdersPage() {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="mt-5 flex justify-center gap-2 items-center">
+          <div className="mt-[18px] sm:mt-[20px] lg:mt-[22.5px] flex justify-center gap-[7px] sm:gap-[8px] lg:gap-[9px] items-center">
             <button
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={currentPage === 1}

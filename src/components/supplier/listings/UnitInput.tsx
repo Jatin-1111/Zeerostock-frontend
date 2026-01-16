@@ -41,23 +41,23 @@ export const UnitInput: React.FC<UnitInputProps> = ({
         {label}
         {required && "*"}
       </label>
-      <div className="flex gap-1">
+      <div className="flex gap-[2.67px]">
         <input
           type="number"
           name={name}
           value={value}
           onChange={onChange}
           placeholder={placeholder}
-          className="h-[28px] w-full rounded-[4px] border border-[#e5e5e5] px-[8px] text-[7.33px] text-black placeholder:text-[#9c9c9c] focus:border-[#2AAE7A] focus:outline-none focus:ring-1 focus:ring-[#2AAE7A]"
+          className="h-[28px] w-full rounded-[4px] border border-[#e5e5e5] px-[8px] text-xs text-black placeholder:text-[#9c9c9c] focus:border-[#2AAE7A] focus:outline-none focus:ring-1 focus:ring-[#2AAE7A]"
         />
         <button
           type="button"
           onClick={onToggle}
-          className="flex h-[28px] items-center justify-between rounded-[4px] border border-[#e5e5e5] px-[5.33px] text-[7.33px] text-black hover:border-[#2AAE7A] focus:outline-none"
+          className="flex h-[28px] items-center justify-between rounded-[4px] border border-[#e5e5e5] px-[5.33px] text-xs text-black hover:border-[#2AAE7A] focus:outline-none"
           style={{ width: unitWidth }}
         >
           <span>{unitValue}</span>
-          <ChevronDown className="h-2.5 w-2.5 text-muted" />
+          <ChevronDown className="h-[9.33px] w-[9.33px] text-[#9c9c9c]" />
         </button>
       </div>
       <AnimatePresence>

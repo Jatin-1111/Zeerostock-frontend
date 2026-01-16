@@ -222,7 +222,7 @@ export default function CartItems() {
                     {item.seller?.name && (
                       <div className="flex items-center gap-0.5 sm:gap-1">
                         <MapPin className="w-3 h-3 sm:w-2.5 sm:h-2.5" />
-                        <span className="text-[8px] sm:text-[9px] md:text-[10px] font-medium truncate max-w-[100px] sm:max-w-none">
+                        <span className="text-xs sm:text-xs md:text-xs font-medium truncate max-w-[100px] sm:max-w-none">
                           {item.seller.name}
                         </span>
                       </div>

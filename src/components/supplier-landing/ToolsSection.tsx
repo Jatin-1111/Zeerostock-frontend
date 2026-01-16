@@ -51,7 +51,7 @@ export default function ToolsSection() {
 
   return (
     <div className="w-full bg-[#eeffef] px-[40px] py-[50px]">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-[880px] mx-auto">
         {/* Heading Section */}
         <div className="text-center mb-[45px]">
           <h2 className="text-[26px] leading-[35px] font-medium text-[#0d1b2a] mb-[7px]">
@@ -69,11 +69,14 @@ export default function ToolsSection() {
           {tools.map((tool, index) => (
             <div
               key={index}
-              className="bg-secondary rounded-2xl overflow-hidden min-h-36 flex flex-col items-center text-center px-3 pt-4 pb-4"
+              className="bg-[#2aae7a] rounded-[20px] overflow-hidden min-h-[143px] flex flex-col items-center text-center px-[13px] pt-[15px] pb-[15px]"
             >
               {/* Icon Container */}
-              <div className="bg-success-bg rounded-full p-2 flex items-center justify-center mb-4">
-                <tool.icon className="w-5 h-5 text-secondary" strokeWidth={2} />
+              <div className="bg-[#eeffef] rounded-[30px] p-[7px] flex items-center justify-center mb-[15px]">
+                <tool.icon
+                  className="w-[20px] h-[20px] text-[#2aae7a]"
+                  strokeWidth={2}
+                />
               </div>
 
               {/* Title */}

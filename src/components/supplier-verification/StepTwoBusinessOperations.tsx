@@ -16,7 +16,7 @@ export default function StepTwoBusinessOperations({
       {/* Business Details Section - Left */}
       <div className="bg-white rounded-[13px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] flex-1 flex flex-col overflow-hidden">
         <div className="border-b border-[#e5e5e5] px-3 py-2 flex-shrink-0">
-          <h2 className="text-[11px] font-semibold text-black">
+          <h2 className="text-xs font-semibold text-black">
             Business details
           </h2>
         </div>
@@ -71,7 +71,7 @@ export default function StepTwoBusinessOperations({
                     businessType: e.target.value,
                   })
                 }
-                className="w-full h-[33px] px-2.5 pr-8 text-[11px] border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] bg-white text-black appearance-none"
+                className="w-full h-[33px] px-2.5 pr-8 text-xs border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] bg-white text-black appearance-none"
               >
                 <option value="">Limited Liability Company</option>
                 <option value="sole_proprietorship">Sole Proprietorship</option>
@@ -154,7 +154,7 @@ export default function StepTwoBusinessOperations({
                 })
               }
               rows={2}
-              className="w-full h-[53px] px-2.5 py-2 text-[11px] border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] text-black placeholder:text-[#9c9c9c] resize-none"
+              className="w-full h-[53px] px-2.5 py-2 text-xs border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] text-black placeholder:text-[#9c9c9c] resize-none"
             />
           </div>
 
@@ -164,7 +164,7 @@ export default function StepTwoBusinessOperations({
               <label className="block text-[9px] font-medium text-black">
                 Warehouse Location
               </label>
-              <button className="text-[9px] font-medium text-black">
+              <button className="text-xs font-medium text-black">
                 + Add
               </button>
             </div>

@@ -27,7 +27,7 @@ export function InfoCard({
       <p className="font-medium text-[11px] text-[#0d1b2a]">{value}</p>
       {verified && (
         <div className="absolute right-[11px] top-1/2 -translate-y-1/2">
-          <CheckCircle2 className="w-5 h-5 text-secondary" />
+          <CheckCircle2 className="w-[20px] h-[20px] text-[#2aae7a]" />
         </div>
       )}
     </div>
@@ -78,7 +78,7 @@ export function DocumentRowNew({
       ) : (
         <button
           onClick={onUpload}
-          className="bg-[#1e3a8a] hover:bg-[#152e6b] text-white font-semibold text-[16px] px-5 py-[10px] rounded-[8px] flex items-center gap-[8px]"
+          className="bg-[#1e3a8a] hover:bg-[#152e6b] text-white font-semibold text-lg px-5 py-[10px] rounded-[8px] flex items-center gap-[8px]"
         >
           <Upload className="w-5 h-5" />
           Upload
@@ -98,13 +98,13 @@ function BenefitItem({
   description: string;
 }) {
   return (
-    <div className="flex items-start gap-0 h-16">
-      <div className="shrink-0 w-5 h-5 mt-5">{icon}</div>
+    <div className="flex items-start gap-0 h-[61px]">
+      <div className="shrink-0 w-[19px] h-[19px] mt-[21px]">{icon}</div>
       <div className="ml-8">
         <h4 className="font-semibold text-[15px] text-black mb-1.5 leading-tight">
           {title}
         </h4>
-        <p className="font-medium text-[9px] text-[#9c9c9c] leading-[14px] max-w-[206px]">
+        <p className="font-medium text-xs text-[#9c9c9c] leading-tight max-w-[206px]">
           {description}
         </p>
       </div>
@@ -125,7 +125,7 @@ function ImpactCard({
 }) {
   return (
     <div
-      className={`${bgColor} rounded-2xl h-20 flex flex-col items-center justify-center`}
+      className={`${bgColor} rounded-[15px] h-[80px] flex flex-col items-center justify-center`}
     >
       <p className={`font-semibold text-[26px] ${textColor} mb-[5px]`}>
         {value}

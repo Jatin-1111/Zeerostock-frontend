@@ -30,7 +30,7 @@ export default function TestimonialsSection() {
   return (
     <div className="w-full bg-[#eeffef] px-[40px] py-[50px]">
       {/* Content Container */}
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-[880px] mx-auto">
         {/* Heading Section */}
         <div className="text-center mb-[84px]">
           <h2 className="text-[26px] leading-[35px] font-medium text-[#0d1b2a] mb-[7px]">
@@ -44,20 +44,20 @@ export default function TestimonialsSection() {
         </div>
 
         {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-[53px]">
           {testimonials.map((testimonial, index) => (
             <div key={index} className="flex flex-col">
               {/* Quote - Fixed Height */}
-              <p className="text-[7px] leading-normal font-medium text-[#727272] text-center mb-[32px] h-[29px]">
+              <p className="text-xs leading-normal font-medium text-[#727272] text-center mb-[32px] h-[29px]">
                 {testimonial.quote}
               </p>
 
               {/* Stars */}
-              <div className="flex gap-1 justify-center mb-2">
+              <div className="flex gap-[5px] justify-center mb-[10px]">
                 {[...Array(testimonial.rating)].map((_, i) => (
                   <Star
                     key={i}
-                    className="w-3 h-3 fill-secondary text-secondary"
+                    className="w-[12px] h-[12px] fill-[#2aae7a] text-[#2aae7a]"
                   />
                 ))}
               </div>
@@ -68,7 +68,7 @@ export default function TestimonialsSection() {
               </p>
 
               {/* Divider Line */}
-              <div className="h-px bg-border mb-2" />
+              <div className="h-[1px] bg-[#d1d1d1] mb-[7px]" />
 
               {/* Author */}
               <p className="text-[9px] leading-normal font-medium text-[#0d1b2a] text-center">

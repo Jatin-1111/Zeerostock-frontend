@@ -120,7 +120,7 @@ export default function TestimonialSection() {
               className="hidden md:block absolute left-[-20px] sm:left-[-27px] md:left-[-33px] top-1/2 -translate-y-1/2 z-10 hover:opacity-80 transition-opacity bg-white rounded-full p-1.5 sm:p-2 shadow-md"
               aria-label="Previous testimonial"
             >
-              <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 text-secondary-light" />
+              <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 md:w-[16px] md:h-[16px] text-[#2ec096]" />
             </button>
 
             <AnimatePresence
@@ -152,27 +152,27 @@ export default function TestimonialSection() {
                 onDragEnd={handleDragEnd}
                 whileDrag={{ scale: 1.02, cursor: "grabbing" }}
                 whileTap={{ cursor: "grabbing" }}
-                className="relative bg-success-bg rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-5 lg:p-8 min-h-52 sm:min-h-56 md:min-h-60 flex flex-col justify-center shadow-sm touch-pan-y cursor-grab select-none"
+                className="relative bg-[#eeffef] rounded-xl sm:rounded-2xl md:rounded-[20px] p-4 sm:p-6 md:p-[21px] lg:p-[32px] min-h-52 sm:min-h-56 md:min-h-[240px] flex flex-col justify-center shadow-sm touch-pan-y cursor-grab select-none"
               >
                 {/* Content */}
-                <div className="text-center flex flex-col items-center gap-4">
+                <div className="text-center flex flex-col items-center gap-3 sm:gap-4 md:gap-[16px]">
                   {/* Quote */}
                   <p className="font-medium text-sm sm:text-base md:text-lg lg:text-[15px] leading-relaxed lg:leading-[22px] text-[#686868]">
                     &quot;{testimonials[currentIndex].text}&quot;
                   </p>
 
                   {/* Stars */}
-                  <div className="flex justify-center gap-5">
+                  <div className="flex justify-center gap-3 sm:gap-4 md:gap-6 lg:gap-[21px]">
                     {[...Array(5)].map((_, i) => (
                       <Star
                         key={i}
-                        className="w-4 h-4 fill-secondary-light text-secondary-light"
+                        className="w-3 h-3 sm:w-4 sm:h-4 md:w-[16px] md:h-[16px] fill-[#2ec096] text-[#2ec096]"
                       />
                     ))}
                   </div>
 
                   {/* Divider Line */}
-                  <div className="w-full h-px bg-gray-300 my-2" />
+                  <div className="w-full h-[1px] bg-gray-300 my-2" />
 
                   {/* Author Info */}
                   <div className="flex flex-col items-center gap-2">
@@ -196,16 +196,16 @@ export default function TestimonialSection() {
               className="hidden md:block absolute right-[-20px] sm:right-[-27px] md:right-[-33px] top-1/2 -translate-y-1/2 z-10 hover:opacity-80 transition-opacity bg-white rounded-full p-1.5 sm:p-2 shadow-md"
               aria-label="Next testimonial"
             >
-              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-secondary-light" />
+              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-[16px] md:h-[16px] text-[#2ec096]" />
             </button>
 
             {/* Dots Navigation */}
-            <div className="flex justify-center gap-3 mt-5">
+            <div className="flex justify-center gap-2 sm:gap-3 md:gap-[11px] mt-4 sm:mt-5 md:mt-[21px]">
               {testimonials.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentIndex(index)}
-                  className={`w-2 h-2 rounded-full transition-colors ${
+                  className={`w-[7px] h-[7px] rounded-full transition-colors ${
                     index === currentIndex
                       ? "bg-[#2ec096]"
                       : "bg-[#d9d9d9] hover:bg-[#2ec096]"

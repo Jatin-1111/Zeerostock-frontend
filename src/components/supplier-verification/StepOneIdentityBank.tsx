@@ -36,7 +36,7 @@ export default function StepOneIdentityBank({
                   ownerName: e.target.value,
                 })
               }
-              className="w-full h-[33px] px-2.5 text-[11px] border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] text-black placeholder:text-[#9c9c9c]"
+              className="w-full h-[33px] px-2.5 text-xs border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] text-black placeholder:text-[#9c9c9c]"
             />
           </div>
 
@@ -51,7 +51,7 @@ export default function StepOneIdentityBank({
                 onChange={(e) =>
                   updateData("identityVerification", { idCard: e.target.value })
                 }
-                className="w-full h-[33px] px-2.5 pr-8 text-[11px] border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] bg-white text-black appearance-none"
+                className="w-full h-[33px] px-2.5 pr-8 text-xs border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] bg-white text-black appearance-none"
               >
                 <option value="">Aadhar Card</option>
                 <option value="pan">PAN Card</option>
@@ -79,7 +79,7 @@ export default function StepOneIdentityBank({
                     proofOfAddress: e.target.value,
                   })
                 }
-                className="w-full h-[33px] px-2.5 pr-8 text-[11px] border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] bg-white text-black appearance-none"
+                className="w-full h-[33px] px-2.5 pr-8 text-xs border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] bg-white text-black appearance-none"
               >
                 <option value="">Aadhar Card</option>
                 <option value="utility">Utility Bill</option>
@@ -160,7 +160,7 @@ export default function StepOneIdentityBank({
               onChange={(e) =>
                 updateData("bankAccount", { accountNumber: e.target.value })
               }
-              className="w-full h-[33px] px-2.5 text-[11px] border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] text-black placeholder:text-[#9c9c9c]"
+              className="w-full h-[33px] px-2.5 text-xs border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] text-black placeholder:text-[#9c9c9c]"
             />
           </div>
 
@@ -176,7 +176,7 @@ export default function StepOneIdentityBank({
               onChange={(e) =>
                 updateData("bankAccount", { ifscCode: e.target.value })
               }
-              className="w-full h-[33px] px-2.5 text-[11px] border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] text-black placeholder:text-[#9c9c9c]"
+              className="w-full h-[33px] px-2.5 text-xs border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] text-black placeholder:text-[#9c9c9c]"
             />
           </div>
         </div>

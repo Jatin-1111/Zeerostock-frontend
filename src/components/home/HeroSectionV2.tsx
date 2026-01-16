@@ -168,7 +168,7 @@ export default function HeroSectionV2() {
   };
 
   return (
-    <section className="relative w-full shadow-sm py-2 sm:py-3 md:py-3">
+    <section className="relative w-full shadow-[0px_1px_4px_0px_rgba(24,181,34,0.25)] py-2 sm:py-3 md:py-[13px]">
       {/* Background Image */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <img
@@ -182,30 +182,30 @@ export default function HeroSectionV2() {
       <div className="relative z-10 flex flex-col items-center px-4 sm:px-6 md:px-8 pt-6 sm:pt-8 md:pt-10 lg:pt-[44px] space-y-6">
         {/* Headline */}
         <h1 className="text-center max-w-full sm:max-w-[400px] md:max-w-[450px] lg:max-w-[507px] mb-2 sm:mb-3 md:mb-[10px]">
-          <span className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] leading-tight sm:leading-normal md:leading-[47px] text-[#0d1b2a] font-medium block text-shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
+          <span className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl leading-tight sm:leading-normal md:leading-snug text-[#0d1b2a] font-medium block text-shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
             Unlock Hidden Value in{" "}
             <span className="text-[#2ec096]">Surplus Inventory</span>
           </span>
         </h1>
 
         {/* Subtitle */}
-        <p className="text-xs sm:text-sm md:text-[10px] leading-normal sm:leading-relaxed md:leading-[13px] text-[#868181] text-center font-semibold max-w-full sm:max-w-[400px] md:max-w-[450px] lg:max-w-[507px] px-4 sm:px-0">
+        <p className="text-xs sm:text-sm md:text-xs leading-normal sm:leading-relaxed md:leading-tight text-[#868181] text-center font-semibold max-w-full sm:max-w-[400px] md:max-w-[450px] lg:max-w-[507px] px-4 sm:px-0">
           Connect suppliers, buyers, and agents with trust, transparency, and
           speed.
         </p>
 
         {/* Search Bar */}
-        <div className="mt-4 sm:mt-6 md:mt-8 bg-white bg-opacity-65 rounded-2xl sm:rounded-3xl shadow-lg px-3 sm:px-4 md:px-3 py-2 sm:py-3 md:py-1.5 flex flex-row items-center gap-2 sm:gap-0 w-full max-w-[90%] sm:max-w-[80%] md:max-w-[70%] lg:max-w-[60%] xl:max-w-[40%]">
+        <div className="mt-4 sm:mt-6 md:mt-[29px] bg-[rgba(251,251,251,0.65)] rounded-2xl sm:rounded-3xl md:rounded-[33px] shadow-[0px_0px_27px_0px_rgba(0,0,0,0.25)] px-3 sm:px-4 md:px-[13px] py-2 sm:py-3 md:py-[5px] flex flex-row items-center gap-2 sm:gap-0 w-full max-w-[90%] sm:max-w-[80%] md:max-w-[70%] lg:max-w-[60%] xl:max-w-[40%]">
           {/* Category Dropdown */}
           <div className="relative shrink-0">
             <button
               onClick={() => setShowCategoryDropdown(!showCategoryDropdown)}
-              className="flex items-center gap-1 hover:opacity-80 transition-opacity"
+              className="flex items-center gap-1 sm:gap-[5px] hover:opacity-80 transition-opacity"
             >
               <span className="text-xs sm:text-[11px] font-semibold text-gray-700 opacity-80 whitespace-nowrap">
                 {selectedCategory}
               </span>
-              <ChevronDown className="w-4 h-4 text-gray-700 opacity-80" />
+              <ChevronDown className="w-4 h-4 sm:w-[17px] sm:h-[17px] text-gray-700 opacity-80" />
             </button>
 
             {/* Category Dropdown */}
@@ -216,7 +216,7 @@ export default function HeroSectionV2() {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -10, scale: 0.95 }}
                   transition={{ duration: 0.15, ease: [0.4, 0, 0.2, 1] }}
-                  className="absolute top-full left-0 mt-1.5 bg-white rounded-md shadow-lg border border-gray-200 z-50 min-w-32 overflow-hidden"
+                  className="absolute top-full left-0 mt-1.5 bg-white rounded-md shadow-lg border border-gray-200 z-50 min-w-[120px] overflow-hidden"
                 >
                   {categories.map((category) => (
                     <button
@@ -236,7 +236,7 @@ export default function HeroSectionV2() {
           </div>
 
           {/* Divider */}
-          <div className="hidden sm:block h-6 w-px bg-gray-300 mx-2 md:mx-2"></div>
+          <div className="hidden sm:block h-[23px] w-px bg-gray-300 mx-2 md:mx-[7px]" />
 
           {/* Search Input */}
           <div className="relative flex-1 w-full">
@@ -259,7 +259,7 @@ export default function HeroSectionV2() {
 
             {/* Suggestions Dropdown */}
             {showSuggestions && (
-              <div className="absolute top-full left-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 z-50 w-full min-w-52 max-w-xs max-h-60 overflow-y-auto">
+              <div className="absolute top-full left-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 z-50 w-full min-w-[200px] max-w-[300px] max-h-60 overflow-y-auto">
                 {/* Suggestions */}
                 {suggestions.length > 0 && (
                   <div className="py-1.5">
@@ -318,15 +318,15 @@ export default function HeroSectionV2() {
           </div>
 
           {/* Divider */}
-          <div className="h-5 sm:h-6 w-px bg-gray-300 mx-1 sm:mx-2 shrink-0" />
+          <div className="h-[20px] sm:h-[23px] w-px bg-gray-300 mx-1 sm:mx-2 md:mx-[7px] shrink-0" />
 
           {/* Actions - Filter and Search */}
-          <div className="flex items-center gap-2 relative shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3 md:gap-[7px] relative shrink-0">
             <button
               onClick={() => setShowFilters(!showFilters)}
               className="hover:opacity-80 transition-opacity"
             >
-              <SlidersHorizontal className="w-4 h-4 text-gray-700 opacity-80" />
+              <SlidersHorizontal className="w-4 h-4 sm:w-[17px] sm:h-[17px] text-gray-700 opacity-80" />
             </button>
 
             {/* Filter Dropdown */}
@@ -337,7 +337,7 @@ export default function HeroSectionV2() {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -10, scale: 0.95 }}
                   transition={{ duration: 0.15, ease: [0.4, 0, 0.2, 1] }}
-                  className="absolute top-full right-0 mt-1.5 bg-white rounded-md shadow-lg border border-gray-200 z-50 w-40 sm:w-44 p-2 overflow-hidden"
+                  className="absolute top-full right-0 mt-1.5 bg-white rounded-md shadow-lg border border-gray-200 z-50 w-[160px] sm:w-[180px] p-2 overflow-hidden"
                 >
                   <h3 className="font-semibold text-gray-900 mb-1.5 text-[10px] sm:text-[11px]">
                     Filters
@@ -456,16 +456,16 @@ export default function HeroSectionV2() {
         </div>
 
         {/* CTA Buttons */}
-        <div className="mt-4 sm:mt-6 md:mt-8 flex flex-col sm:flex-row gap-3 w-full sm:w-auto px-4 sm:px-0">
+        <div className="mt-4 sm:mt-6 md:mt-[30px] flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-[11px] w-full sm:w-auto px-4 sm:px-0">
           <button
             onClick={() => router.push("/signup")}
-            className="bg-[#022778] text-white text-xs sm:text-[11px] font-semibold rounded-xl h-10 sm:h-[35px] w-full sm:w-32 md:w-[140px] flex items-center justify-center hover:opacity-90 transition-opacity"
+            className="bg-[#022778] text-white text-xs font-semibold rounded-xl h-10 sm:h-[35px] w-full sm:w-32 md:w-[140px] flex items-center justify-center hover:opacity-90 transition-opacity"
           >
             Get Started
           </button>
           <button
             onClick={() => router.push("/marketplace")}
-            className="bg-white text-[#2aae7a] text-xs sm:text-[11px] font-semibold rounded-xl h-10 sm:h-[35px] w-full sm:w-32 md:w-[140px] flex items-center justify-center hover:opacity-90 transition-opacity"
+            className="bg-white text-[#2aae7a] text-xs font-semibold rounded-xl h-10 sm:h-[35px] w-full sm:w-32 md:w-[140px] flex items-center justify-center hover:opacity-90 transition-opacity"
           >
             Explore Marketplace
           </button>

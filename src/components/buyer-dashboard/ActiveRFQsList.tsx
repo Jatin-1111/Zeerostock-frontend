@@ -110,7 +110,7 @@ export default function ActiveRFQsList() {
           Active RFQs
         </h2>
         <Link
-          href="/buyer/rfq"
+          href="/buyer/rfq/my-rfqs"
           className="text-[12px] sm:text-[13px] font-medium text-[#9c9c9c] hover:text-[#0d1b2a] transition-colors"
         >
           See All

@@ -69,6 +69,21 @@ export default function SupplierVerificationPage() {
   const checkVerificationStatus = async () => {
     try {
       const response = await supplierVerificationService.getStatus();
+      console.log("=== Verification Status Response ===");
+      console.log("Success:", response.success);
+      console.log("Status:", response.data?.status);
+      console.log("Has verification data:", !!response.data?.verification);
+
+      if (response.data?.verification) {
+        console.log("Verification fields:", {
+          legal_business_name: response.data.verification.legal_business_name,
+          business_registration_number:
+            response.data.verification.business_registration_number,
+          bank_name: response.data.verification.bank_name,
+          owner_full_name: response.data.verification.owner_full_name,
+        });
+      }
+
       if (response.success && response.data) {
         setVerificationStatus(response.data);
 
@@ -306,19 +321,32 @@ export default function SupplierVerificationPage() {
         auditReportsUrl: formData.documents.auditReports,
       };
 
+      console.log("=== Submitting Verification ===");
+      console.log("Submission data keys:", Object.keys(submissionData));
+      console.log("Sample values:", {
+        legalBusinessName: submissionData.legalBusinessName,
+        businessRegistrationNumber: submissionData.businessRegistrationNumber,
+        bankName: submissionData.bankName,
+        ownerFullName: submissionData.ownerFullName,
+      });
+
       const response = await supplierVerificationService.submitVerification(
         submissionData
       );
 
+      console.log("Submission response:", response);
+
       if (response.success) {
+        console.log("✅ Verification submitted successfully");
         // Refresh status to show submitted state
         setIsEditing(false);
         await checkVerificationStatus();
       } else {
+        console.error("❌ Submission failed:", response.message);
         alert(response.message || "Failed to submit verification");
       }
     } catch (error: any) {
-      console.error("Submission error:", error);
+      console.error("❌ Submission error:", error);
       alert(error.message || "Failed to submit verification");
     } finally {
       setSubmitting(false);

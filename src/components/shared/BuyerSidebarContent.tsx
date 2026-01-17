@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { useRouter, usePathname } from "next/navigation"; // 👈 Add usePathname
+import { useRouter, usePathname } from "next/navigation";
+import { useAuth } from "@/contexts/AuthContext";
+import { getLogoutRedirectUrl } from "@/utils/route.utils";
 import {
   FileDown,
   Box,
@@ -22,23 +24,18 @@ import {
 
 export default function BuyerSidebarContent() {
   const router = useRouter();
-  const pathname = usePathname(); // 👈 Get current path
+  const pathname = usePathname();
+  const { logout } = useAuth();
   const [dashboardOpen, setDashboardOpen] = useState(false);
 
   const handleSignOut = async () => {
     try {
-      await fetch("/api/auth/logout", {
-        method: "POST",
-        credentials: "include",
-      });
-
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-
-      router.push("/login");
+      await logout();
+      const redirectUrl = getLogoutRedirectUrl(pathname);
+      router.push(redirectUrl);
     } catch (error) {
       console.error("Logout error:", error);
-      router.push("/login");
+      router.push("/");
     }
   };
 

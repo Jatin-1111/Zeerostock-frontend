@@ -1,11 +1,15 @@
 "use client";
 
-import { Shield, CheckCircle2, Clock } from "lucide-react";
-import {
-  InfoCard,
-  DocumentRowNew,
-  VerificationBenefitsSidebar,
-} from "./VerificationBenefitsSidebar";
+import { VerificationBenefitsSidebar } from "./VerificationBenefitsSidebar";
+import VerificationHeader from "./VerificationHeader";
+import VerificationProgressBar from "./VerificationProgressBar";
+import VerificationBanner from "./VerificationBanner";
+import BusinessInfoCard from "./BusinessInfoCard";
+import IdentityCard from "./IdentityCard";
+import BusinessDocumentsCard from "./BusinessDocumentsCard";
+import BankAccountCard from "./BankAccountCard";
+import OperationalInfoCard from "./OperationalInfoCard";
+import AdditionalVerificationCard from "./AdditionalVerificationCard";
 
 interface VerificationData {
   legal_business_name?: string;
@@ -70,68 +74,36 @@ export default function VerificationStatusView({
 }: VerificationStatusViewProps) {
   const { verification, role } = status;
 
+  // Debug logging
+  console.log("=== VerificationStatusView Render ===");
+  console.log("Status:", status.status);
+  console.log("Has verification:", !!verification);
+  if (verification) {
+    console.log("Verification data sample:", {
+      legal_business_name: verification.legal_business_name,
+      business_registration_number: verification.business_registration_number,
+      business_type: verification.business_type,
+      bank_name: verification.bank_name,
+      owner_full_name: verification.owner_full_name,
+      primary_business_address: verification.primary_business_address,
+    });
+  }
+
   // Calculate progress dynamically based on actual data completeness
   const calculateProgress = () => {
     if (!verification) return { progress: 0, completedSteps: 0 };
 
-    // If verification is approved or verified, show 100% progress
-    if (status.status === "approved" || status.status === "verified") {
+    // Only count steps as completed if status is approved or verified
+    const isVerified =
+      status.status === "approved" || status.status === "verified";
+
+    if (isVerified) {
       return { progress: 100, completedSteps: 5 };
     }
 
-    let completedSteps = 0;
-    const totalSteps = 5; // Business Info, Identity, Operational, Documents, Bank
-
-    // Step 1: Business Information (check all required fields)
-    if (
-      verification.legal_business_name &&
-      verification.business_type &&
-      verification.business_registration_number &&
-      verification.establishment_year
-    ) {
-      completedSteps++;
-    }
-
-    // Step 2: Identity Verification (check all required identity fields)
-    if (
-      verification.owner_full_name &&
-      verification.government_id_type &&
-      verification.government_id_number &&
-      verification.government_id_document_url
-    ) {
-      completedSteps++;
-    }
-
-    // Step 3: Operational Information (check contact and address)
-    if (
-      verification.primary_business_address &&
-      verification.business_phone &&
-      verification.business_email
-    ) {
-      completedSteps++;
-    }
-
-    // Step 4: Business Documents (at least 2 required documents)
-    const documentCount = [
-      verification.business_license_url,
-      verification.certificate_of_incorporation_url,
-      verification.tax_registration_certificate_url,
-    ].filter(Boolean).length;
-    if (documentCount >= 2) {
-      completedSteps++;
-    }
-
-    // Step 5: Bank Account (check all bank fields)
-    if (
-      verification.bank_name &&
-      verification.account_holder_name &&
-      verification.account_number
-    ) {
-      completedSteps++;
-    }
-
-    const progress = Math.round((completedSteps / totalSteps) * 100);
-    return { progress, completedSteps };
+    // For pending/under_review status, show 0% progress and 0 verified steps
+    // Nothing is verified until admin approves
+    return { progress: 0, completedSteps: 0 };
   };
 
   const { progress, completedSteps } = calculateProgress();
@@ -139,7 +111,7 @@ export default function VerificationStatusView({
   // Get status configuration
   const getStatusConfig = () => {
     switch (status.status) {
-      case "approved":
+      case "verified":
         return {
           color: "green",
           bgClass: "bg-green-50 border-green-300",
@@ -295,152 +267,29 @@ export default function VerificationStatusView({
   const documents = getDocuments();
 
   return (
-    <div className="min-h-screen bg-[#eefbf6] px-20 py-6">
-      {/* Header Section */}
-      <div className="mb-[34px] bg-white shadow-[0px_0px_5px_0px_rgba(24,181,34,0.25)] rounded-[15px] px-[61px] py-5 flex items-center gap-[26px]">
-        <div className="bg-[#eeffef] p-[11px] rounded-[8px] shadow-[0px_0px_10px_0px_rgba(24,181,34,0.25)]">
-          <Shield className="w-[34px] h-[34px] text-[#2aae7a]" />
-        </div>
-        <div>
-          <h1 className="font-semibold text-2xl text-[#0d1b2a] mb-0 leading-normal">
-            Supplier Verification
-          </h1>
-          <p className="font-medium text-xl text-[#9c9c9c] leading-normal">
-            Complete verification to unlock premium features and build buyer
-            trust
-          </p>
-        </div>
-      </div>
+    <div className="min-h-screen bg-[#eefbf6] px-[53px] py-4">
+      <VerificationHeader />
 
-      {/* Progress Section */}
-      <div className="mb-[23px] bg-white shadow-[0px_3px_5px_0px_rgba(24,181,34,0.25)] rounded-[15px] px-8 py-[23px] relative">
-        <h2 className="font-semibold text-2xl text-[#0d1b2a] mb-4 leading-normal">
-          Verification Progress
-        </h2>
-        <p className="font-medium text-xl text-[#9c9c9c] mb-[35px] leading-normal">
-          {progress}% Complete - {completedSteps} of 5 sections verified
-        </p>
+      <VerificationProgressBar
+        progress={progress}
+        completedSteps={completedSteps}
+        status={status.status}
+      />
 
-        {/* Progress Bar */}
-        <div className="relative w-full h-[11px] bg-[#eee] rounded-[6px] mb-5">
-          <div
-            className="absolute top-0 left-0 h-full bg-[#2aae7a] rounded-[6px]"
-            style={{ width: `${progress}%` }}
-          ></div>
-        </div>
-
-        {/* Percentage Badge */}
-        <div className="absolute right-[27px] top-[54px]">
-          <span className="font-semibold text-3xl text-[#0d1b2a]">
-            {progress}%
-          </span>
-        </div>
-
-        {/* Status Badge */}
-        <div
-          className={`absolute right-[42px] top-[23px] px-4 pr-[19px] py-[5px] rounded-[100px] flex items-center gap-[8px] ${
-            status.status === "approved"
-              ? "bg-[#eeffef]"
-              : status.status === "under_review"
-              ? "bg-[#dff3ff]"
-              : "bg-[#fc3]"
-          }`}
-        >
-          <Clock className="w-[17px] h-[17px] text-black" />
-          <span className="font-medium text-base text-black">
-            {status.status === "approved"
-              ? "Verified"
-              : status.status === "under_review"
-              ? "Under Review"
-              : "In Progress"}
-          </span>
-        </div>
-      </div>
-
-      {/* Warning/Status Banner - FIXED HEIGHT ISSUE HERE */}
-      <div className="mb-[23px] relative">
-        <div
-          className={`absolute left-0 top-[2px] bottom-[2px] w-[7px] rounded-br-[4px] rounded-tr-[4px] ${
-            status.status === "approved"
-              ? "bg-[#2aae7a]"
-              : status.status === "rejected"
-              ? "bg-[#f05050]"
-              : status.status === "under_review"
-              ? "bg-[#507df0]"
-              : "bg-[#efd700]"
-          }`}
-        ></div>
-        <div
-          className={`shadow-[0px_1px_4px_0px_rgba(229,206,0,0.25)] rounded-tl-[9px] rounded-tr-[15px] rounded-bl-[9px] rounded-br-[15px] px-[50px] py-[22px] flex items-center ${
-            status.status === "approved"
-              ? "bg-[#eeffef]"
-              : status.status === "rejected"
-              ? "bg-[#ffe5e5]"
-              : status.status === "under_review"
-              ? "bg-[#dff3ff]"
-              : "bg-[#fff3cf]"
-          }`}
-        >
-          <svg
-            className="w-[20px] h-[20px] mr-[30px] shrink-0"
-            viewBox="0 0 27 27"
-            fill="none"
-          >
-            <circle
-              cx="13.5"
-              cy="13.5"
-              r="13"
-              stroke={
-                status.status === "approved"
-                  ? "#2AAE7A"
-                  : status.status === "rejected"
-                  ? "#F05050"
-                  : status.status === "under_review"
-                  ? "#507DF0"
-                  : "#FFCC33"
-              }
-              strokeWidth="1"
-            />
-            <path
-              d="M13.5 8v6M13.5 18h.01"
-              stroke={
-                status.status === "approved"
-                  ? "#2AAE7A"
-                  : status.status === "rejected"
-                  ? "#F05050"
-                  : status.status === "under_review"
-                  ? "#507DF0"
-                  : "#FFCC33"
-              }
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-          </svg>
-          <p
-            className={`font-medium text-[17px] leading-normal ${
-              status.status === "approved"
-                ? "text-[#2aae7a]"
-                : status.status === "rejected"
-                ? "text-[#f05050]"
-                : status.status === "under_review"
-                ? "text-[#507df0]"
-                : "text-[#fc3]"
-            }`}
-          >
-            {statusConfig.message}
-          </p>
-        </div>
-      </div>
+      <VerificationBanner
+        status={status.status}
+        message={statusConfig.message}
+      />
 
       {/* Edit & Reapply Button for Rejected Status */}
       {status.status === "rejected" && onEditReapply && (
-        <div className="mb-[23px]">
+        <div className="mb-[15px]">
           <button
             onClick={onEditReapply}
-            className="w-full bg-gray-900 text-white font-semibold text-[16px] px-8 py-4 rounded-[10px] hover:bg-gray-800 transition-colors flex items-center justify-center gap-3 shadow-md"
+            className="w-full bg-gray-900 text-white font-semibold text-[11px] px-[21px] py-[11px] rounded-[7px] hover:bg-gray-800 transition-colors flex items-center justify-center gap-2 shadow-md"
           >
             <svg
-              className="w-5 h-5"
+              className="w-[13px] h-[13px]"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -457,366 +306,45 @@ export default function VerificationStatusView({
         </div>
       )}
 
-      <div className="flex gap-5">
+      <div className="flex gap-[13px]">
         {/* Left Column - Verification Cards */}
-        <div className="flex-1 space-y-[23px]">
+        <div
+          className="space-y-[15px]"
+          style={{ width: "calc((100vw - 119px) * 0.75)" }}
+        >
           {verification && (
             <>
-              {/* Business Information Card */}
-              {verification.legal_business_name && (
-                <div className="bg-white shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] rounded-[15px] p-[30px]">
-                  <div className="flex items-center justify-between mb-[23px]">
-                    <div className="flex items-center gap-5">
-                      <svg className="w-7 h-7" viewBox="0 0 28 28" fill="none">
-                        <rect
-                          width="28"
-                          height="28"
-                          rx="4"
-                          fill="#2AAE7A"
-                          fillOpacity="0.1"
-                        />
-                        <path
-                          d="M14 7v14M7 14h14"
-                          stroke="#2AAE7A"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                      <h3 className="font-semibold text-[18px] text-[#0d1b2a]">
-                        Business Information
-                      </h3>
-                    </div>
-                    <div className="bg-[#eeffef] px-[15px] py-[5px] rounded-[15px] shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)] flex items-center gap-[8px]">
-                      <CheckCircle2 className="w-[17px] h-[17px] text-[#2aae7a]" />
-                      <span className="font-medium text-[18px] text-[#2aae7a]">
-                        Verified
-                      </span>
-                    </div>
-                  </div>
+              <BusinessInfoCard
+                verification={verification}
+                status={status.status}
+              />
 
-                  <div className="border-t border-gray-200 mb-[23px]"></div>
+              <IdentityCard
+                verification={verification}
+                status={status.status}
+              />
 
-                  <div className="grid grid-cols-2 gap-x-[50px] gap-y-[15px]">
-                    <InfoCard
-                      label="Legal Business Name"
-                      value={verification.legal_business_name}
-                      verified
-                    />
-                    <InfoCard
-                      label="Business Registration Number"
-                      value={verification.business_registration_number || "N/A"}
-                      verified
-                    />
-                    <InfoCard
-                      label="Tax ID (EIN)"
-                      value={verification.business_tax_id || "N/A"}
-                      verified
-                    />
-                    <InfoCard
-                      label="Business Type"
-                      value={verification.business_type || "N/A"}
-                      verified
-                    />
-                    <InfoCard
-                      label="Year Established"
-                      value={verification.establishment_year || "N/A"}
-                      verified
-                    />
-                  </div>
-                </div>
-              )}
-
-              {/* Identity Verification Card */}
-              {verification.owner_full_name && (
-                <div className="bg-white shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] rounded-[15px] p-[30px]">
-                  <div className="flex items-center justify-between mb-[23px]">
-                    <div className="flex items-center gap-5">
-                      <svg className="w-7 h-7" viewBox="0 0 28 28" fill="none">
-                        <rect
-                          width="28"
-                          height="28"
-                          rx="4"
-                          fill="#2AAE7A"
-                          fillOpacity="0.1"
-                        />
-                        <path
-                          d="M14 7v14M7 14h14"
-                          stroke="#2AAE7A"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                      <h3 className="font-semibold text-[18px] text-[#0d1b2a]">
-                        Identity Verification
-                      </h3>
-                    </div>
-                    <div className="bg-[#eeffef] px-[15px] py-[5px] rounded-[15px] shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)] flex items-center gap-[8px]">
-                      <CheckCircle2 className="w-[17px] h-[17px] text-[#2aae7a]" />
-                      <span className="font-medium text-[18px] text-[#2aae7a]">
-                        Verified
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="border-t border-gray-200 mb-[23px]"></div>
-
-                  <div className="grid grid-cols-2 gap-x-[50px] gap-y-[15px]">
-                    <InfoCard
-                      label="Owner/Director Name"
-                      value={verification.owner_full_name}
-                      verified
-                    />
-                    <InfoCard
-                      label="Government ID"
-                      value={
-                        verification.government_id_document_url
-                          ? "Uploaded - Verified"
-                          : "Not Uploaded"
-                      }
-                      verified={!!verification.government_id_document_url}
-                    />
-                    <InfoCard
-                      label="Proof of Address"
-                      value={
-                        verification.proof_of_address_document_url
-                          ? "Uploaded - Verified"
-                          : "Not Uploaded"
-                      }
-                      verified={!!verification.proof_of_address_document_url}
-                    />
-                  </div>
-                </div>
-              )}
-
-              {/* Business Documents Card */}
               {documents.length > 0 && (
-                <div className="bg-white shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] rounded-[15px] p-[30px]">
-                  <div className="flex items-center justify-between mb-[23px]">
-                    <div className="flex items-center gap-5">
-                      <svg className="w-7 h-7" viewBox="0 0 28 28" fill="none">
-                        <circle
-                          cx="14"
-                          cy="14"
-                          r="11"
-                          stroke={
-                            status.status === "approved" ? "#2AAE7A" : "#FC3"
-                          }
-                          strokeWidth="2"
-                        />
-                        <path
-                          d="M14 10v4M14 18h.01"
-                          stroke={
-                            status.status === "approved" ? "#2AAE7A" : "#FC3"
-                          }
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                      <h3 className="font-semibold text-[18px] text-[#0d1b2a]">
-                        Business Documents
-                      </h3>
-                    </div>
-                    <div
-                      className={`px-[15px] py-[5px] rounded-[15px] shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)] flex items-center gap-[8px] ${
-                        status.status === "approved"
-                          ? "bg-[#eeffef]"
-                          : "bg-[#fff3cf]"
-                      }`}
-                    >
-                      {status.status === "approved" ? (
-                        <CheckCircle2 className="w-[17px] h-[17px] text-[#2aae7a]" />
-                      ) : (
-                        <Clock className="w-[17px] h-[17px] text-[#fc3]" />
-                      )}
-                      <span
-                        className={`font-medium text-[18px] ${
-                          status.status === "approved"
-                            ? "text-[#2aae7a]"
-                            : "text-[#fc3]"
-                        }`}
-                      >
-                        {status.status === "approved" ? "Verified" : "Pending"}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="border-t border-gray-200 mb-[23px]"></div>
-
-                  <div className="space-y-[15px]">
-                    {documents.map((doc, index) => (
-                      <DocumentRowNew
-                        key={index}
-                        label={doc.label}
-                        date={
-                          doc.uploadedDate
-                            ? `Uploaded: ${formatDate(doc.uploadedDate)}`
-                            : "Not uploaded"
-                        }
-                        status={doc.status}
-                        optional={!doc.required}
-                      />
-                    ))}
-                  </div>
-                </div>
+                <BusinessDocumentsCard
+                  documents={documents}
+                  status={status.status}
+                  formatDate={formatDate}
+                />
               )}
 
-              {/* Bank Account Verification Card */}
-              {verification.bank_name && verification.account_number && (
-                <div className="bg-white shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] rounded-[15px] p-[30px]">
-                  <div className="flex items-center justify-between mb-[23px]">
-                    <div className="flex items-center gap-5">
-                      <svg className="w-7 h-7" viewBox="0 0 28 28" fill="none">
-                        <rect
-                          width="28"
-                          height="28"
-                          rx="4"
-                          fill="#2AAE7A"
-                          fillOpacity="0.1"
-                        />
-                        <path
-                          d="M14 7v14M7 14h14"
-                          stroke="#2AAE7A"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                      <h3 className="font-semibold text-[18px] text-[#0d1b2a]">
-                        Bank Account Verification
-                      </h3>
-                    </div>
-                    <div className="bg-[#eeffef] px-[15px] py-[5px] rounded-[15px] shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)] flex items-center gap-[8px]">
-                      <CheckCircle2 className="w-[17px] h-[17px] text-[#2aae7a]" />
-                      <span className="font-medium text-[18px] text-[#2aae7a]">
-                        Verified
-                      </span>
-                    </div>
-                  </div>
+              <BankAccountCard
+                verification={verification}
+                maskAccountNumber={maskAccountNumber}
+                status={status.status}
+              />
 
-                  <div className="border-t border-gray-200 mb-[23px]"></div>
+              <OperationalInfoCard
+                verification={verification}
+                status={status.status}
+              />
 
-                  <div className="grid grid-cols-2 gap-x-[50px] gap-y-[15px]">
-                    <InfoCard
-                      label="Bank Name"
-                      value={verification.bank_name}
-                      verified
-                    />
-                    <InfoCard
-                      label="Account Number"
-                      value={maskAccountNumber(verification.account_number)}
-                      verified
-                    />
-                    <InfoCard
-                      label="Account Holder"
-                      value={verification.account_holder_name || "N/A"}
-                      verified
-                    />
-                  </div>
-                </div>
-              )}
-
-              {/* Operational Information Card */}
-              {verification.primary_business_address && (
-                <div className="bg-white shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] rounded-[15px] p-[30px]">
-                  <div className="flex items-center justify-between mb-[23px]">
-                    <div className="flex items-center gap-5">
-                      <svg className="w-7 h-7" viewBox="0 0 28 28" fill="none">
-                        <rect
-                          width="28"
-                          height="28"
-                          rx="4"
-                          fill="#2AAE7A"
-                          fillOpacity="0.1"
-                        />
-                        <path
-                          d="M14 7v14M7 14h14"
-                          stroke="#2AAE7A"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                      <h3 className="font-semibold text-[18px] text-[#0d1b2a]">
-                        Operational Information
-                      </h3>
-                    </div>
-                    <div className="bg-[#eeffef] px-[15px] py-[5px] rounded-[15px] shadow-[0px_0px_4px_0px_rgba(24,181,34,0.25)] flex items-center gap-[8px]">
-                      <CheckCircle2 className="w-[17px] h-[17px] text-[#2aae7a]" />
-                      <span className="font-medium text-[18px] text-[#2aae7a]">
-                        Verified
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="border-t border-gray-200 mb-[23px]"></div>
-
-                  <div className="grid grid-cols-2 gap-x-[50px] gap-y-[15px]">
-                    <div className="col-span-1">
-                      <InfoCard
-                        label="Primary Business Address"
-                        value={verification.primary_business_address}
-                        verified
-                      />
-                    </div>
-                    <InfoCard
-                      label="Warehouse Location"
-                      value={
-                        verification.warehouse_locations &&
-                        verification.warehouse_locations.length > 0
-                          ? `${verification.warehouse_locations.length} verified Locations`
-                          : "Not specified"
-                      }
-                      verified
-                    />
-                    <InfoCard
-                      label="Business Phone"
-                      value={verification.business_phone || "N/A"}
-                      verified
-                    />
-                    <InfoCard
-                      label="Business Email"
-                      value={verification.business_email || "N/A"}
-                      verified
-                    />
-                  </div>
-                </div>
-              )}
-
-              {/* Additional Verification Card - Only shown if NOT verified */}
               {status.status !== "approved" && status.status !== "verified" && (
-                <div className="bg-white shadow-[0px_0px_6px_0px_rgba(0,0,0,0.25)] rounded-[15px] p-[30px]">
-                  <div className="flex items-center mb-[23px]">
-                    <h3 className="font-semibold text-[18px] text-[#0d1b2a]">
-                      Additional Verification (Optional)
-                    </h3>
-                  </div>
-
-                  <div className="border-t border-gray-200 mb-[23px]"></div>
-
-                  <div className="space-y-[15px]">
-                    <DocumentRowNew
-                      label="ISO 9001 Certification"
-                      date="Adds credibility to quality management"
-                      status={
-                        verification.iso_certificate_url ? "verified" : "upload"
-                      }
-                    />
-                    <DocumentRowNew
-                      label="Industry - Specific Licenses"
-                      date="Relevant to your products categories"
-                      status={
-                        verification.quality_assurance_license_url
-                          ? "verified"
-                          : "upload"
-                      }
-                    />
-                    <DocumentRowNew
-                      label="Third-Party Audit Reports"
-                      date="Strengthen buyer confidence"
-                      status={
-                        verification.audit_reports_url ? "verified" : "upload"
-                      }
-                    />
-                  </div>
-                </div>
+                <AdditionalVerificationCard verification={verification} />
               )}
             </>
           )}

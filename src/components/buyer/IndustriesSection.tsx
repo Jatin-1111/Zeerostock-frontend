@@ -53,8 +53,8 @@ export default function IndustriesSection() {
   const duration = totalWidth / 50; // 50px per second speed
 
   return (
-    <section className="bg-[#EEFBF6] py-[21px] md:py-[32px] mx-auto overflow-hidden">
-      <div className="w-full max-w-[1200px] mx-auto">
+    <section className="bg-[#EEFBF6] py-[21px] md:py-[32px] px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 mx-auto overflow-hidden">
+      <div className="w-full max-w-[1080px] mx-auto">
         <div className="text-center mb-[16px] md:mb-[32px]">
           <h2 className="text-[13px] md:text-[20px] font-bold text-gray-900 mb-[5px] md:mb-[8px] leading-tight">
             Perfect for Every Industry

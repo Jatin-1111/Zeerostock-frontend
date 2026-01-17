@@ -6,18 +6,18 @@ import { useRouter } from "next/navigation";
 export default function HeroSection() {
   const router = useRouter();
   return (
-    <div className="w-full px-[40px] py-[70px] relative">
+    <div className="w-full px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-[70px] relative">
       {/* Background Image - positioned absolutely */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <img
           alt=""
-          className="absolute h-full left-0 max-w-none top-0 w-full object-cover"
+          className="absolute h-full left-0 top-0 w-full object-cover object-center"
           src="/Supplier.jpg"
         />
       </div>
 
       {/* Content Container */}
-      <div className="relative z-10 max-w-[880px] mx-auto">
+      <div className="relative z-10 max-w-[1080px] mx-auto">
         {/* Top Label */}
         <p className="text-[15px] text-[#0d1b2a] mb-[15px] font-medium">
           For Smart Suppliers

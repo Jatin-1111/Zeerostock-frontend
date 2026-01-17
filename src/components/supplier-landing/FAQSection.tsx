@@ -40,8 +40,8 @@ export default function FAQSection() {
   };
 
   return (
-    <div className="w-full bg-[#EEFBF6] px-[40px] py-[50px]">
-      <div className="max-w-[880px] mx-auto">
+    <div className="w-full bg-[#EEFBF6] px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-[50px]">
+      <div className="max-w-[1080px] mx-auto">
         {/* Heading Section */}
         <div className="text-center mb-[87px]">
           <h2 className="text-[26px] leading-[39px] font-medium text-[#0d1b2a] mb-[7px]">

@@ -3,28 +3,28 @@ import { Check } from "lucide-react";
 
 export default function HeroSection() {
   return (
-    <section className="relative h-[400px] shadow-[0px_1px_4px_0px_rgba(24,181,34,0.25)] py-[27px]">
+    <section className="relative h-[500px] shadow-[0px_1px_4px_0px_rgba(24,181,34,0.25)] py-[27px] px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
       {/* Background Image */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <img
           alt="Hero Background"
-          className="absolute h-full w-full object-cover"
-          src={"/buyer.jpg"}
+          className="absolute object-cover object-center"
+          src={"/Buyer.png"}
         />
       </div>
 
-      <div className="w-full max-w-3xl bg-transparent rounded-2xl p-[21px] md:p-[32px] flex flex-col items-start text-left z-10 relative">
+      <div className="w-full max-w-[50vw] mr-auto h-full bg-transparent rounded-2xl p-[21px] md:p-[32px] flex flex-col justify-center items-start text-left z-10 relative">
         {/* Subtitle */}
         <p className="font-medium text-[11px] text-black mb-[11px]">
           For Smart Buyers
         </p>
         {/* Title */}
-        <h1 className="font-semibold text-[26px] leading-[39px] text-[#0d1b2a] mb-[10px]">
+        <h1 className="font-semibold text-[35px] leading-[39px] text-[#0d1b2a] mb-[10px]">
           Source Surplus Inventory at{" "}
           <span className="text-[#2ec096]">30-60%</span> Below Market Price
         </h1>
         {/* Description */}
-        <p className="text-[9px] leading-[13px] text-[#868181] mb-[16px]">
+        <p className="text-[12px] leading-[13px] text-[#868181] mb-[16px]">
           <span className="font-medium">
             Connect with verified suppliers worldwide and access high-quality
             surplus inventory through our

@@ -35,6 +35,7 @@ export default function AdminTopBar() {
   const handleLogout = () => {
     setIsUserMenuOpen(false);
     logout();
+    // Admin panel is always protected, logout() already redirects to admin login
   };
 
   const getInitials = () => {

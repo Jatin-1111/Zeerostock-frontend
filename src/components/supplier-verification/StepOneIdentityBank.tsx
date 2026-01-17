@@ -1,27 +1,68 @@
 "use client";
 
 import { VerificationFormData } from "@/types/verification";
+import AnimatedDropdown from "@/components/ui/AnimatedDropdown";
 
 interface StepOneProps {
   data: VerificationFormData;
   updateData: (section: string, data: Record<string, string>) => void;
 }
 
+// Dropdown options
+const governmentIdOptions = [
+  { value: "aadhar", label: "Aadhar Card" },
+  { value: "pan", label: "PAN Card" },
+  { value: "passport", label: "Passport" },
+  { value: "driving", label: "Driving License" },
+];
+
+const proofOfAddressOptions = [
+  { value: "aadhar", label: "Aadhar Card" },
+  { value: "utility", label: "Utility Bill" },
+  { value: "bank", label: "Bank Statement" },
+  { value: "lease", label: "Lease Agreement" },
+];
+
+const bankNameOptions = [
+  { value: "hdfc", label: "HDFC Bank" },
+  { value: "icici", label: "ICICI Bank" },
+  { value: "sbi", label: "State Bank of India" },
+  { value: "axis", label: "Axis Bank" },
+  { value: "kotak", label: "Kotak Mahindra Bank" },
+  { value: "yes", label: "YES Bank" },
+  { value: "idbi", label: "IDBI Bank" },
+  { value: "pnb", label: "Punjab National Bank" },
+];
+
 export default function StepOneIdentityBank({
   data,
   updateData,
 }: StepOneProps) {
+  // Log data changes for debugging
+  console.log("=== StepOneIdentityBank Data ===");
+  console.log("Identity Verification:", {
+    ownerName: data.identityVerification.ownerName,
+    idCard: data.identityVerification.idCard,
+    proofOfAddress: data.identityVerification.proofOfAddress,
+  });
+  console.log("Bank Account:", {
+    bankName: data.bankAccount.bankName,
+    accountHolderName: data.bankAccount.accountHolderName,
+    accountNumber: data.bankAccount.accountNumber,
+    ifscCode: data.bankAccount.ifscCode,
+  });
+
   return (
     <div className="flex gap-3 w-full">
       {/* Identity Verification Section - Left */}
-      <div className="bg-white rounded-[7px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] flex-1 flex flex-col overflow-hidden">
-        <div className="border-b border-[#e5e5e5] px-3 py-2 flex-shrink-0">
+      <div className="bg-white rounded-[7px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] flex-1 flex flex-col">
+        <div className="border-b border-[#e5e5e5] px-3 py-2 shrink-0">
           <h2 className="text-[11px] font-semibold text-black">
             Identity Verification
           </h2>
         </div>
 
-        <div className="px-3 py-4 space-y-4 flex-1 overflow-y-auto">
+        <div className="px-3 py-4 space-y-4 flex-1">
           {/* Owner/Director Name */}
           <div>
             <label className="block text-[9px] font-medium text-black mb-1.5">
@@ -45,25 +86,14 @@ export default function StepOneIdentityBank({
             <label className="block text-[9px] font-medium text-black mb-1.5">
               Government ID
             </label>
-            <div className="relative">
-              <select
-                value={data.identityVerification.idCard}
-                onChange={(e) =>
-                  updateData("identityVerification", { idCard: e.target.value })
-                }
-                className="w-full h-[33px] px-2.5 pr-8 text-xs border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] bg-white text-black appearance-none"
-              >
-                <option value="">Aadhar Card</option>
-                <option value="pan">PAN Card</option>
-                <option value="passport">Passport</option>
-                <option value="driving">Driving License</option>
-              </select>
-              <div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none">
-                <svg width="10" height="5" viewBox="0 0 10 5" fill="none">
-                  <path d="M5 5L0 0H10L5 5Z" fill="#9c9c9c" />
-                </svg>
-              </div>
-            </div>
+            <AnimatedDropdown
+              options={governmentIdOptions}
+              value={data.identityVerification.idCard}
+              onChange={(value) =>
+                updateData("identityVerification", { idCard: value })
+              }
+              placeholder="Select ID Type"
+            />
           </div>
 
           {/* Proof of Address */}
@@ -71,63 +101,41 @@ export default function StepOneIdentityBank({
             <label className="block text-[9px] font-medium text-black mb-1.5">
               Proof of Address
             </label>
-            <div className="relative">
-              <select
-                value={data.identityVerification.proofOfAddress}
-                onChange={(e) =>
-                  updateData("identityVerification", {
-                    proofOfAddress: e.target.value,
-                  })
-                }
-                className="w-full h-[33px] px-2.5 pr-8 text-xs border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] bg-white text-black appearance-none"
-              >
-                <option value="">Aadhar Card</option>
-                <option value="utility">Utility Bill</option>
-                <option value="bank">Bank Statement</option>
-                <option value="lease">Lease Agreement</option>
-              </select>
-              <div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none">
-                <svg width="10" height="5" viewBox="0 0 10 5" fill="none">
-                  <path d="M5 5L0 0H10L5 5Z" fill="#9c9c9c" />
-                </svg>
-              </div>
-            </div>
+            <AnimatedDropdown
+              options={proofOfAddressOptions}
+              value={data.identityVerification.proofOfAddress}
+              onChange={(value) =>
+                updateData("identityVerification", {
+                  proofOfAddress: value,
+                })
+              }
+              placeholder="Select Proof Type"
+            />
           </div>
         </div>
       </div>
 
       {/* Bank Account Section - Right */}
-      <div className="bg-white rounded-[7px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] flex-1 flex flex-col overflow-hidden">
+      <div className="bg-white rounded-[7px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] flex-1 flex flex-col">
         <div className="border-b border-[#e5e5e5] px-3 py-2 flex-shrink-0">
           <h2 className="text-[11px] font-semibold text-black">Bank Account</h2>
         </div>
 
-        <div className="px-3 py-4 space-y-4 flex-1 overflow-y-auto">
+        <div className="px-3 py-4 space-y-4 flex-1">
           {/* Bank Name & Account Holder Name - Side by Side */}
           <div className="flex gap-2 flex-wrap">
             <div className="flex-1 min-w-[120px]">
               <label className="block text-[9px] font-medium text-black mb-1.5">
                 Bank Name
               </label>
-              <div className="relative">
-                <select
-                  value={data.bankAccount.bankName}
-                  onChange={(e) =>
-                    updateData("bankAccount", { bankName: e.target.value })
-                  }
-                  className="w-full h-[33px] px-2.5 pr-8 text-[11px] border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] bg-white text-black appearance-none"
-                >
-                  <option value="">HDFC Bank</option>
-                  <option value="icici">ICICI Bank</option>
-                  <option value="sbi">State Bank of India</option>
-                  <option value="axis">Axis Bank</option>
-                </select>
-                <div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none">
-                  <svg width="10" height="5" viewBox="0 0 10 5" fill="none">
-                    <path d="M5 5L0 0H10L5 5Z" fill="#9c9c9c" />
-                  </svg>
-                </div>
-              </div>
+              <AnimatedDropdown
+                options={bankNameOptions}
+                value={data.bankAccount.bankName}
+                onChange={(value) =>
+                  updateData("bankAccount", { bankName: value })
+                }
+                placeholder="Select Bank"
+              />
             </div>
 
             <div className="flex-1 min-w-[120px]">

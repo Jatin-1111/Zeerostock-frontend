@@ -2,8 +2,8 @@ import { Star } from "lucide-react";
 
 export default function TestimonialsSection() {
   return (
-    <section className="bg-[#EEFFEF] py-[27px] px-[5px] md:py-[43px] md:px-[21px] mx-auto">
-      <div className="w-full max-w-[1600px] mx-auto">
+    <section className="bg-[#EEFFEF] py-[27px] md:py-[43px] px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 mx-auto">
+      <div className="w-full max-w-[1080px] mx-auto">
         <div className="text-center mb-[21px] md:mb-[43px]">
           <p className="text-[8px] md:text-[9px] font-semibold text-[#0D1B2A] mb-[3px] tracking-wide uppercase">
             Success Stories

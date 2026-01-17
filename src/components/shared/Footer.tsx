@@ -37,12 +37,12 @@ export default function Footer() {
                 >
                   About Us
                 </Link>
-                <Link
+                {/* <Link
                   href="/careers"
                   className="hover:text-white transition-colors"
                 >
                   Careers
-                </Link>
+                </Link> */}
               </div>
             </div>
 

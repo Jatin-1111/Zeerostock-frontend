@@ -86,7 +86,7 @@ export default function StepThreeDocuments({
   data,
   updateData,
 }: StepThreeProps) {
-  const [uploading, setUploading] = useState<string | null>(null);
+  const [uploadingDocs, setUploadingDocs] = useState<Set<string>>(new Set());
   const fileInputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({});
 
   const handleFileSelect = async (docKey: DocumentKey, file: File) => {
@@ -110,7 +110,7 @@ export default function StepThreeDocuments({
       return;
     }
 
-    setUploading(docKey);
+    setUploadingDocs((prev) => new Set(prev).add(docKey));
     try {
       console.log(`Uploading ${docKey}:`, {
         name: file.name,
@@ -126,7 +126,11 @@ export default function StepThreeDocuments({
       console.log("Upload response:", response);
 
       if (response.success && response.data?.url) {
-        updateData("documents", { [docKey]: response.data.url });
+        // Store both URL and filename
+        updateData("documents", {
+          [docKey]: response.data.url,
+          [`${docKey}Filename`]: file.name,
+        });
         console.log(`Successfully uploaded ${docKey}:`, response.data.url);
       } else {
         const errorMsg = response.message || "Failed to upload document";
@@ -141,12 +145,19 @@ export default function StepThreeDocuments({
         "Failed to upload document. Please try again.";
       alert(errorMsg);
     } finally {
-      setUploading(null);
+      setUploadingDocs((prev) => {
+        const next = new Set(prev);
+        next.delete(docKey);
+        return next;
+      });
     }
   };
 
   const handleRemoveDocument = (docKey: DocumentKey) => {
-    updateData("documents", { [docKey]: null });
+    updateData("documents", {
+      [docKey]: null,
+      [`${docKey}Filename`]: null,
+    });
     if (fileInputRefs.current[docKey]) {
       fileInputRefs.current[docKey]!.value = "";
     }
@@ -154,7 +165,14 @@ export default function StepThreeDocuments({
 
   const renderDocumentRow = (doc: DocumentConfig) => {
     const isUploaded = !!data.documents[doc.key];
-    const isUploading = uploading === doc.key;
+    const isUploading = uploadingDocs.has(doc.key);
+    const filename =
+      data.documents[`${doc.key}Filename` as DocumentKey] || `${doc.key}.pdf`;
+    const uploadDate = new Date().toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
 
     return (
       <div
@@ -178,7 +196,9 @@ export default function StepThreeDocuments({
             </div>
             <div className="text-[11px] text-[#9d9d9d] mt-1.5 leading-tight">
               {isUploaded ? (
-                <span>Uploaded on Oct 24, 2025 / {doc.key}.pdf</span>
+                <span>
+                  Uploaded on {uploadDate} / {filename}
+                </span>
               ) : (
                 <span>Please upload your {doc.label.toLowerCase()}</span>
               )}
@@ -305,9 +325,7 @@ export default function StepThreeDocuments({
         {/* Need Help Section */}
         <div className="bg-[#f9fffd] rounded-[13px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] overflow-hidden">
           <div className="px-3 pt-3 pb-2">
-            <h3 className="text-sm font-semibold text-[#0d1b2a]">
-              Need Help?
-            </h3>
+            <h3 className="text-sm font-semibold text-[#0d1b2a]">Need Help?</h3>
           </div>
           <div className="px-3 pb-3">
             <p className="text-[11px] font-medium text-[#9c9c9c] mb-3 leading-normal">

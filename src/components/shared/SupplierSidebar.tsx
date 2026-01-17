@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
+import { getLogoutRedirectUrl } from "@/utils/route.utils";
 import {
   LayoutDashboard,
   Package,
@@ -32,6 +34,8 @@ export default function SupplierSidebar({
 }: SupplierSidebarProps = {}) {
   const [internalIsOpen, setInternalIsOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
+  const { logout } = useAuth();
 
   // Use external state if provided, otherwise use internal state
   const isOpen = externalIsOpen !== undefined ? externalIsOpen : internalIsOpen;
@@ -46,6 +50,17 @@ export default function SupplierSidebar({
   };
 
   const isActive = (path: string) => pathname === path;
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      const redirectUrl = getLogoutRedirectUrl(pathname);
+      router.push(redirectUrl);
+    } catch (error) {
+      console.error("Logout error:", error);
+      router.push("/");
+    }
+  };
 
   return (
     <>
@@ -353,9 +368,9 @@ export default function SupplierSidebar({
                   Settings
                 </span>
               </Link>
-              <Link
-                href="/login"
-                className="flex items-center gap-[10px] rounded-[6px] py-[10px] pl-[15px] pr-4 hover:bg-red-50"
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-[10px] rounded-[6px] py-[10px] pl-[15px] pr-4 hover:bg-red-50 w-full text-left"
               >
                 <div className="w-[13px] h-[13px] shrink-0">
                   <LogOut className="w-[13px] h-[13px] text-[#ff0001]" />
@@ -363,7 +378,7 @@ export default function SupplierSidebar({
                 <span className="font-medium text-[11.2px] text-[#ff0001] leading-normal">
                   Sign Out
                 </span>
-              </Link>
+              </button>
             </nav>
           </div>
           {/* Help & Support Card */}

@@ -92,23 +92,6 @@ export default function Sidebar({
                     >
                       Browse Categories
                     </span>
-                    <div
-                      className={`absolute right-[6px] rounded-[53px] px-[3px] py-0 ${
-                        activeItem === "browse-categories"
-                          ? "bg-[#2aae7a]"
-                          : "bg-[#8b8b8b]"
-                      }`}
-                    >
-                      <span
-                        className={`font-medium text-[8px] leading-normal ${
-                          activeItem === "browse-categories"
-                            ? "text-[#eeffef]"
-                            : "text-white"
-                        }`}
-                      >
-                        45 Active
-                      </span>
-                    </div>
                   </div>
                 </Link>
               </div>

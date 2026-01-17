@@ -5,6 +5,7 @@ import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
+import { getLogoutRedirectUrl } from "@/utils/route.utils";
 import {
   Globe,
   User,
@@ -39,7 +40,8 @@ export default function Header({ onSidebarToggle }: HeaderProps) {
     try {
       await logout();
       setIsUserMenuOpen(false);
-      router.push("/");
+      const redirectUrl = getLogoutRedirectUrl(pathname);
+      router.push(redirectUrl);
     } catch {
       toast.error("Failed to logout");
     }

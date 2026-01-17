@@ -320,14 +320,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       setUser(null);
       cartService.clearGuestSession();
       toast.success("You have been logged out successfully");
-      router.push("/");
+      // Don't redirect here - let the calling component handle the redirect
     } catch (error: unknown) {
       console.error("Logout error:", error);
       // Clear state anyway
       setUser(null);
-      router.push("/");
+      // Don't redirect here - let the calling component handle the redirect
     }
-  }, [router]);
+  }, []);
 
   const value: AuthContextType = {
     user,

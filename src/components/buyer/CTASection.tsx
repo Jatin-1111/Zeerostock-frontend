@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export default function CTASection() {
   return (
-    <section className="py-[27px] px-[5px] md:py-[43px] md:px-[21px] mx-auto">
-      <div className="w-full max-w-[1600px] mx-auto">
+    <section className="py-[27px] md:py-[43px] px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 mx-auto">
+      <div className="w-full max-w-[1080px] mx-auto">
         <div className="bg-[#00B67A] rounded-[20px] px-[16px] py-[27px] md:px-[32px] md:py-[43px] text-center">
           <h2 className="text-[16px] md:text-[27px] font-bold text-white mb-[11px] md:mb-[16px] leading-tight">
             Ready to Transform Your Procurement?

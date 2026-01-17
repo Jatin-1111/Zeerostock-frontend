@@ -14,7 +14,7 @@ import {
   MessageSquare,
 } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAdminAuth } from "@/contexts/AdminAuthContext";
 
@@ -46,6 +46,7 @@ const menuItems = [
 
 export default function AdminSidebar() {
   const pathname = usePathname();
+  const router = useRouter();
   const { admin, logout } = useAdminAuth();
   const [isSuperAdmin, setIsSuperAdmin] = useState(false);
 
@@ -69,6 +70,8 @@ export default function AdminSidebar() {
 
   const handleLogout = () => {
     logout();
+    // Admin panel is always protected, so always redirect to admin login
+    router.push("/admin-panel/login");
   };
 
   return (

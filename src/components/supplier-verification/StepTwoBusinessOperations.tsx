@@ -1,11 +1,21 @@
 "use client";
 
 import { VerificationFormData } from "@/types/verification";
+import AnimatedDropdown from "@/components/ui/AnimatedDropdown";
 
 interface StepTwoProps {
   data: VerificationFormData;
   updateData: (section: string, data: Record<string, string>) => void;
 }
+
+// Business type options
+const businessTypeOptions = [
+  { value: "sole_proprietorship", label: "Sole Proprietorship" },
+  { value: "partnership", label: "Partnership" },
+  { value: "llc", label: "Limited Liability Company" },
+  { value: "corporation", label: "Corporation" },
+  { value: "private_limited", label: "Private Limited" },
+];
 
 export default function StepTwoBusinessOperations({
   data,
@@ -14,14 +24,12 @@ export default function StepTwoBusinessOperations({
   return (
     <div className="flex gap-3 w-full">
       {/* Business Details Section - Left */}
-      <div className="bg-white rounded-[13px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] flex-1 flex flex-col overflow-hidden">
+      <div className="bg-white rounded-[13px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] flex-1 flex flex-col">
         <div className="border-b border-[#e5e5e5] px-3 py-2 flex-shrink-0">
-          <h2 className="text-xs font-semibold text-black">
-            Business details
-          </h2>
+          <h2 className="text-xs font-semibold text-black">Business details</h2>
         </div>
 
-        <div className="px-3 py-4 space-y-4 flex-1 overflow-y-auto">
+        <div className="px-3 py-4 space-y-4 flex-1">
           {/* Legal Business Name */}
           <div>
             <label className="block text-[9px] font-medium text-black mb-1.5">
@@ -63,29 +71,16 @@ export default function StepTwoBusinessOperations({
             <label className="block text-[9px] font-medium text-black mb-1.5">
               Business Type
             </label>
-            <div className="relative">
-              <select
-                value={data.businessDetails.businessType}
-                onChange={(e) =>
-                  updateData("businessDetails", {
-                    businessType: e.target.value,
-                  })
-                }
-                className="w-full h-[33px] px-2.5 pr-8 text-xs border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] bg-white text-black appearance-none"
-              >
-                <option value="">Limited Liability Company</option>
-                <option value="sole_proprietorship">Sole Proprietorship</option>
-                <option value="partnership">Partnership</option>
-                <option value="llc">Limited Liability Company</option>
-                <option value="corporation">Corporation</option>
-                <option value="private_limited">Private Limited</option>
-              </select>
-              <div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none">
-                <svg width="10" height="5" viewBox="0 0 10 5" fill="none">
-                  <path d="M5 5L0 0H10L5 5Z" fill="#9c9c9c" />
-                </svg>
-              </div>
-            </div>
+            <AnimatedDropdown
+              options={businessTypeOptions}
+              value={data.businessDetails.businessType}
+              onChange={(value) =>
+                updateData("businessDetails", {
+                  businessType: value,
+                })
+              }
+              placeholder="Select Business Type"
+            />
           </div>
 
           {/* Tax ID (EIN) and Est. Year in two columns */}
@@ -120,11 +115,6 @@ export default function StepTwoBusinessOperations({
                   }
                   className="w-full h-[33px] px-2.5 pr-8 text-[11px] border border-[#bebebe] rounded-[4px] focus:outline-none focus:ring-1 focus:ring-[#bebebe] text-black placeholder:text-[#9c9c9c]"
                 />
-                <div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none">
-                  <svg width="10" height="5" viewBox="0 0 10 5" fill="none">
-                    <path d="M5 5L0 0H10L5 5Z" fill="#9c9c9c" />
-                  </svg>
-                </div>
               </div>
             </div>
           </div>
@@ -132,14 +122,14 @@ export default function StepTwoBusinessOperations({
       </div>
 
       {/* Operational Information Section - Right */}
-      <div className="bg-white rounded-[13px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] flex-1 flex flex-col overflow-hidden">
+      <div className="bg-white rounded-[13px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] flex-1 flex flex-col">
         <div className="border-b border-[#e5e5e5] px-3 py-2 flex-shrink-0">
           <h2 className="text-[11px] font-semibold text-black">
             Operational Information
           </h2>
         </div>
 
-        <div className="px-3 py-4 space-y-4 flex-1 overflow-y-auto">
+        <div className="px-3 py-4 space-y-4 flex-1">
           {/* Primary Business Address */}
           <div>
             <label className="block text-[9px] font-medium text-black mb-1.5">
@@ -164,9 +154,7 @@ export default function StepTwoBusinessOperations({
               <label className="block text-[9px] font-medium text-black">
                 Warehouse Location
               </label>
-              <button className="text-xs font-medium text-black">
-                + Add
-              </button>
+              <button className="text-xs font-medium text-black">+ Add</button>
             </div>
             <input
               type="text"

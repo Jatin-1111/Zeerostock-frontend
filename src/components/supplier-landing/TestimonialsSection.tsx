@@ -28,9 +28,9 @@ export default function TestimonialsSection() {
   ];
 
   return (
-    <div className="w-full bg-[#eeffef] px-[40px] py-[50px]">
+    <div className="w-full bg-[#eeffef] px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-[50px]">
       {/* Content Container */}
-      <div className="max-w-[880px] mx-auto">
+      <div className="max-w-[1080px] mx-auto">
         {/* Heading Section */}
         <div className="text-center mb-[84px]">
           <h2 className="text-[26px] leading-[35px] font-medium text-[#0d1b2a] mb-[7px]">

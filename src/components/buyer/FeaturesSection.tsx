@@ -8,8 +8,8 @@ import {
 
 export default function FeaturesSection() {
   return (
-    <section className="bg-[#EEFFEF] py-[27px] px-[5px] md:py-[43px] md:px-[21px] mx-auto">
-      <div className="w-full max-w-[1600px] mx-auto">
+    <section className="bg-[#EEFFEF] py-[27px] md:py-[43px] px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 mx-auto">
+      <div className="w-full max-w-[1080px] mx-auto">
         <div className="text-center mb-[21px] md:mb-[43px]">
           <h2 className="text-[16px] md:text-[27px] font-bold text-gray-900 mb-[5px] md:mb-[11px] leading-tight">
             Powerful Features for{" "}

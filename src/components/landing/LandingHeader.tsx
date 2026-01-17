@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
+import { getLogoutRedirectUrl } from "@/utils/route.utils";
 
 const imgUpscaleRe2 =
   "https://www.figma.com/api/mcp/asset/81fa2263-b943-4cba-b6b4-86e7e69d9a8e";
@@ -13,13 +14,15 @@ export default function Header() {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
   const { user, isAuthenticated, logout } = useAuth();
 
   const handleLogout = async () => {
     try {
       await logout();
       setIsUserMenuOpen(false);
-      router.push("/");
+      const redirectUrl = getLogoutRedirectUrl(pathname);
+      router.push(redirectUrl);
     } catch {
       toast.error("Failed to logout");
     }

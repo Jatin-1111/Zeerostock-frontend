@@ -2,8 +2,8 @@ import { BadgePercent, Cpu, Send, ShieldCheck } from "lucide-react";
 
 export default function WhyChooseSection() {
   return (
-    <section className="py-[40px] px-4 sm:px-6 lg:px-8">
-      <div className="w-full max-w-full mx-auto">
+    <section className="py-[40px] px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
+      <div className="w-full max-w-[1080px] mx-auto">
         <div className="text-center mb-[24px]">
           <h2 className="font-medium text-[26px] leading-[35px] text-[#0d1b2a] mb-[8px]">
             Why Smart Buyer Choose{" "}

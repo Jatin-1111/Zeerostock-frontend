@@ -16,7 +16,7 @@ export default function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col justify-center items-start h-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 gap-2 sm:gap-3 md:gap-4 lg:gap-5 ml-4 sm:ml-8 md:ml-12 lg:ml-16">
+      <div className="relative z-10 flex flex-col justify-center items-start h-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 gap-2 sm:gap-3 md:gap-4 lg:gap-5 ml-4 sm:ml-8 md:ml-12 lg:ml-16 max-w-[1080px]">
         <h1 className="font-semibold text-[32px] sm:text-[36px] md:text-[42px] lg:text-[40px] leading-[28px] sm:leading-[32px] md:leading-[37px] lg:leading-[44px] xl:leading-[51px] text-center text-[#0d1b2a] max-w-[270px] sm:max-w-[320px] md:max-w-[390px] lg:max-w-[450px]">
           Transforming <span className="text-[#2ec096]">Global Surplus</span>{" "}
           Trade
@@ -35,10 +35,10 @@ export default function HeroSection() {
             Join Our Mission
           </Link>
           <Link
-            href="/careers"
+            href="/contact"
             className="bg-white text-[#1e3a8a] font-medium text-[10px] sm:text-[11px] md:text-[12px] lg:text-[13px] xl:text-[14px] px-3 sm:px-3.5 md:px-4 lg:px-5 xl:px-6 py-1.5 sm:py-2 lg:py-2.5 rounded-lg border-2 border-[#1e3a8a] hover:bg-gray-50 transition-colors"
           >
-            View Careers
+            Contact Us
           </Link>
         </div>
       </div>

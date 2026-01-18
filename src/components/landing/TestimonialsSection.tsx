@@ -13,7 +13,8 @@ export default function TestimonialsSection() {
       industry: "Electronics",
       savings: "$2.3M Recovered",
       impact: "45% reduction in holding costs",
-      image: "electronic_industries-1440x780.webp", // Ensure this path is correct in your project
+      image:
+        "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/electronic_industries-1440x780.webp",
     },
     {
       id: 2,
@@ -22,7 +23,7 @@ export default function TestimonialsSection() {
       savings: "$1.8M Recovered",
       impact: "60% faster inventory turnover",
       image:
-        "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=900&h=515&fit=crop&q=80",
+        "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/force-automotive-parts-1616649764-5766618.jpeg",
     },
     {
       id: 3,
@@ -31,7 +32,7 @@ export default function TestimonialsSection() {
       savings: "$3.1M Recovered",
       impact: "35% cost reduction achieved",
       image:
-        "https://images.unsplash.com/photo-1552664730-d307ca884978?w=900&h=515&fit=crop&q=80",
+        "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/Futuristic+Finance+Dashboard.png",
     },
   ];
 
@@ -48,7 +49,7 @@ export default function TestimonialsSection() {
   const prevTestimonial = () => {
     setDirection(-1);
     setCurrentIndex(
-      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length,
     );
   };
 

@@ -27,7 +27,7 @@ export default function HowItWorksSection() {
   ];
 
   return (
-    <section className="py-[27px] md:py-[43px] px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 mx-auto">
+    <section className="py-[27px] md:py-[43px] px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 max-w-[1080px] mx-auto">
       <div className="w-full max-w-[1080px] mx-auto">
         <div className="text-center mb-[21px] md:mb-[32px]">
           <h2 className="text-[16px] md:text-[27px] font-bold text-gray-900 mb-[5px] md:mb-[11px] leading-tight">

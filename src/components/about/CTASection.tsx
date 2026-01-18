@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function CTASection() {
   return (
-    <section className="w-full bg-[#EEFBF6] py-3 sm:py-4 md:py-[16px] px-4 sm:px-6 md:px-[27px] lg:px-[43px]">
+    <section className="max-w-[1080px] mx-auto bg-[#EEFBF6] py-3 sm:py-4 md:py-[16px] px-4 sm:px-6 md:px-[27px] lg:px-[43px]">
       <div className="w-full max-w-full mx-auto">
         <div className="bg-[#39ac7a] rounded-xl sm:rounded-2xl md:rounded-[15px] overflow-hidden relative px-4 sm:px-5 md:px-[16px] py-6 sm:py-7 md:py-[30px]">
           {/* Content Container */}
@@ -28,11 +28,11 @@ export default function CTASection() {
               </span>
             </Link>
             <Link
-              href="/careers"
+              href="/contact"
               className="bg-white rounded-md sm:rounded-lg md:rounded-[6px] py-2 sm:py-[7.5px] h-auto sm:h-[30px] flex items-center justify-center w-44 md:w-[145px]"
             >
               <span className="font-montserrat font-medium text-xs sm:text-sm md:text-[11px] leading-tight md:leading-[11px] text-[#2aae7a]">
-                View Open Positions
+                Contact Us
               </span>
             </Link>
           </div>

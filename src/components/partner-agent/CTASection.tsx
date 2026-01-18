@@ -36,7 +36,7 @@ export default function CTASection() {
           </p>
 
           <Link
-            href="/helpdesk"
+            href="/contact"
             className="px-8 py-3 bg-gray-900 text-white text-[15px] font-semibold rounded-lg hover:bg-gray-800 transition-colors inline-block"
           >
             Submit Application

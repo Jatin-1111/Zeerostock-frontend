@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 
 export default function BlogDetailPage() {
@@ -313,16 +314,20 @@ export default function BlogDetailPage() {
             efficiency with Zeerostock. Start sourcing surplus inventory today.
           </p>
           <div className="mt-[37.33px] flex items-center justify-center gap-[60px]">
-            <button className="flex h-[46.67px] w-[193.33px] items-center justify-center rounded-[8px] bg-[#1E3A8A] px-[73.33px] py-[10px]">
-              <span className="text-[14.67px] font-medium leading-normal text-white">
-                Explore
-              </span>
-            </button>
-            <button className="flex h-[46.67px] w-[193.33px] items-center justify-center rounded-[8px] bg-white px-[73.33px] py-[10px]">
-              <span className="text-[14.67px] font-medium leading-[14.67px] text-[#2AAE7A]">
-                Become Supplier
-              </span>
-            </button>
+            <Link href={"/marketplace"}>
+              <button className="flex h-[46.67px] w-[193.33px] items-center justify-center rounded-[8px] bg-[#1E3A8A] px-[73.33px] py-[10px]">
+                <span className="text-[14.67px] font-medium leading-normal text-white">
+                  Explore
+                </span>
+              </button>
+            </Link>
+            <Link href={"/signup"}>
+              <button className="flex h-[46.67px] w-[193.33px] items-center justify-center rounded-[8px] bg-white px-[73.33px] py-[10px]">
+                <span className="text-[14.67px] font-medium leading-[14.67px] text-[#2AAE7A]">
+                  Become Supplier
+                </span>
+              </button>
+            </Link>
           </div>
           <p className="mt-[24px] text-[13.33px] font-medium leading-normal text-center text-white">
             • No startup fees • Free to join • Start sourcing immediately

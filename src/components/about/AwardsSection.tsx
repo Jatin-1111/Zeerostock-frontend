@@ -56,7 +56,7 @@ export default function AwardsSection() {
   ];
 
   return (
-    <section className="w-full py-6 sm:py-8 md:py-10 lg:py-[53px]">
+    <section className="max-w-[1080px] mx-auto py-6 sm:py-8 md:py-10 lg:py-[53px]">
       <div className="w-full max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div>
           <div className="relative w-full max-w-7xl mx-auto">
@@ -137,7 +137,7 @@ export default function AwardsSection() {
                 {/* Desktop: Overlapping Cards Layout */}
                 <div className="hidden lg:block relative h-[280px]">
                   {/* Top Right Card - Our Impact (Waste & CO2) */}
-                  <div className="absolute top-[-33px] right-[28px] w-[213px] bg-[#eeffef] rounded-[20px] shadow-[0px_-1px_30px_0px_rgba(24,181,34,0.25)] p-[16px] z-20">
+                  <div className="absolute top-[-33px] right-[20px] w-[213px] bg-[#eeffef] rounded-[20px] shadow-[0px_-1px_30px_0px_rgba(24,181,34,0.25)] p-[16px] z-20">
                     {/* Title */}
                     <h3 className="font-bold text-2xl text-black text-center mb-[16px]">
                       Our Impact

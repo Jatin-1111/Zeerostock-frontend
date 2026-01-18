@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 export default function Contact() {
@@ -124,7 +125,7 @@ export default function Contact() {
   );
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
       {/* Main Content - Scaled to 50% */}
       <div className="w-[720px] mx-auto px-[40px] py-[6px]">
         {/* Header */}
@@ -327,10 +328,12 @@ export default function Contact() {
           <p className="absolute left-[12.5px] top-[44px] -translate-y-1/2 font-medium text-[9px] text-[#9C9C9C] leading-normal w-[243.5px]">
             Be a verified Zeerstock agent and unlock exclusive commissions.
           </p>
-          <button className="absolute right-[17.5px] top-1/2 -translate-y-1/2 w-[120px] h-[32.5px] bg-[#1E3A8A] text-white font-semibold text-[10px] leading-[11px] rounded-[6px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center justify-center gap-[5px]">
-            Join as a Agent
-            <ArrowRightIcon />
-          </button>
+          <Link href={"/partner-agent"}>
+            <button className="absolute right-[17.5px] top-1/2 -translate-y-1/2 w-[120px] h-[32.5px] bg-[#1E3A8A] text-white font-semibold text-[10px] leading-[11px] rounded-[6px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center justify-center gap-[5px]">
+              Join as a Agent
+              <ArrowRightIcon />
+            </button>
+          </Link>
         </div>
 
         {/* FAQ Section */}
@@ -372,12 +375,16 @@ export default function Contact() {
               Zeerostock.
             </p>
             <div className="flex items-center justify-center gap-[45px]">
-              <button className="w-[145px] h-[35px] bg-[#1E3A8A] text-white font-medium text-[11px] leading-normal rounded-[6px] hover:bg-[#1e3a8a]/90 transition-colors">
-                Chat with support
-              </button>
-              <button className="w-[145px] h-[35px] bg-white text-[#2AAE7A] font-medium text-[11px] leading-[11px] rounded-[6px] hover:bg-gray-50 transition-colors">
-                Schedule call
-              </button>
+              <Link href="/helpdesk">
+                <button className="w-[145px] h-[35px] bg-[#1E3A8A] text-white font-medium text-[11px] leading-normal rounded-[6px] hover:bg-[#1e3a8a]/90 transition-colors">
+                  Chat with support
+                </button>
+              </Link>
+              <Link href="/helpdesk">
+                <button className="w-[145px] h-[35px] bg-white text-[#2AAE7A] font-medium text-[11px] leading-[11px] rounded-[6px] hover:bg-gray-50 transition-colors">
+                  Schedule call
+                </button>
+              </Link>
             </div>
           </div>
         </div>

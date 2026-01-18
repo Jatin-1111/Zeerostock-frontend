@@ -108,7 +108,7 @@ export default function Header({ onSidebarToggle }: HeaderProps) {
 
             {(!isAuthenticated || user?.activeRole !== "supplier") && (
               <Link
-                href="/buyer/dashboard"
+                href={isAuthenticated ? "/buyer/dashboard" : "/for-buyer"}
                 className={`font-semibold text-[15px] leading-normal whitespace-nowrap transition-colors ${
                   isActive("/buyer")
                     ? "text-[#58ea50]"
@@ -121,7 +121,7 @@ export default function Header({ onSidebarToggle }: HeaderProps) {
 
             {(!isAuthenticated || user?.activeRole !== "buyer") && (
               <Link
-                href="/supplier/dashboard"
+                href={isAuthenticated ? "/supplier/dashboard" : "/for-supplier"}
                 className={`font-semibold text-[15px] leading-normal whitespace-nowrap transition-colors ${
                   isActive("/supplier")
                     ? "text-[#58ea50]"
@@ -213,7 +213,9 @@ export default function Header({ onSidebarToggle }: HeaderProps) {
                     </Link>
                     {(!isAuthenticated || user?.activeRole !== "supplier") && (
                       <Link
-                        href="/buyer/dashboard"
+                        href={
+                          isAuthenticated ? "/buyer/dashboard" : "/for-buyers"
+                        }
                         className={`block px-4 py-2.5 text-sm font-semibold transition-colors ${
                           isActive("/buyer")
                             ? "text-[#58ea50] bg-gray-50"
@@ -226,7 +228,11 @@ export default function Header({ onSidebarToggle }: HeaderProps) {
                     )}
                     {(!isAuthenticated || user?.activeRole !== "buyer") && (
                       <Link
-                        href="/supplier/dashboard"
+                        href={
+                          isAuthenticated
+                            ? "/supplier/dashboard"
+                            : "/for-supplier"
+                        }
                         className={`block px-4 py-2.5 text-sm font-semibold transition-colors ${
                           isActive("/supplier")
                             ? "text-[#58ea50] bg-gray-50"

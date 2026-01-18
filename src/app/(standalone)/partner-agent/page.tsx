@@ -8,7 +8,7 @@ import CTASection from "@/components/partner-agent/CTASection";
 
 export default function PartnerAgentPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
       <HeroSection />
       <WhyPartnerSection />
       <CommissionSection />

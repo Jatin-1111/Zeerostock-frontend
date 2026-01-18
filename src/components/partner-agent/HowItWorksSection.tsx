@@ -2,61 +2,69 @@ export default function HowItWorksSection() {
   const steps = [
     {
       number: 1,
-      title: "Sign & Be Approved",
+      title: "Apply & Get Approved",
       description:
-        "Submit your application and get reviewed by our verification team.",
+        "Submit your application and complete our quick verification process",
     },
     {
       number: 2,
-      title: "Ready Setup",
+      title: "Access Training",
       description:
-        "Get access to the dashboard, tools, and documents to start collaborating.",
+        "Get trained on the platform, tools, and best practices for supplier onboarding",
     },
     {
       number: 3,
-      title: "Prospecting",
+      title: "Find Suppliers",
       description:
-        "Generate requests, track opportunities, send out RFQs via partner support.",
+        "Use your network and our lead generation tools to identify potential suppliers",
     },
     {
       number: 4,
-      title: "Close & Earn",
+      title: "Onboard & Earn",
       description:
-        "Help suppliers finalize deals and start earning commissions from deal value.",
+        "Help suppliers list their stock and earn ongoing commissions from their sales",
     },
   ];
 
   return (
-    <section className="bg-white py-16 border-t border-gray-200">
-      <div className="max-w-[1200px] mx-auto px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-[36px] font-bold text-gray-900 mb-3">
-            How the Agent Program Works
+    <section className="bg-white py-16">
+      <div className="max-w-[960px] mx-auto px-8">
+        <div className="text-center mb-10">
+          <h2 className="text-[34.67px] font-medium leading-normal text-[#0d1b2a] mb-2.5">
+            How the Agent <span className="text-[#2ec096]">Program Works</span>
           </h2>
-          <p className="text-[15px] text-gray-600">
-            Ready. A step-by-step look at what partnering means
+          <p className="text-[16px] font-semibold leading-normal text-[#9c9c9c]">
+            Simple 4-step process to start earning commissions
           </p>
         </div>
 
-        {/* Steps */}
-        <div className="space-y-6">
-          {steps.map((step) => (
-            <div key={step.number} className="flex gap-4 items-start">
-              <div className="w-10 h-10 shrink-0 rounded-full border-2 border-gray-900 flex items-center justify-center">
-                <span className="text-[16px] font-bold text-gray-900">
-                  {step.number}
-                </span>
+        {/* Steps Grid */}
+        <div className="relative mt-[35.33px]">
+          {/* Horizontal line separator */}
+          <div className="absolute top-[20.67px] left-[31.5px] right-[31.5px] h-[1.33px] bg-[#2aae7a]" />
+
+          <div className="grid grid-cols-4 gap-[74px] relative">
+            {steps.map((step) => (
+              <div key={step.number} className="flex flex-col items-center">
+                {/* Step Number Circle */}
+                <div className="bg-[#eeffef] border-[1.33px] border-[#2aae7a] rounded-full w-[42px] h-[41.33px] flex items-center justify-center py-[6.67px] mb-[20px] relative z-10">
+                  <span className="text-[20px] font-semibold text-black">
+                    {step.number}
+                  </span>
+                </div>
+
+                {/* Step Content */}
+                <div className="text-center">
+                  <h3 className="text-[13.33px] font-medium text-[#0d1b2a] mb-[10.67px]">
+                    {step.title}
+                  </h3>
+                  <p className="text-[10px] font-medium leading-normal text-[#9c9c9c]">
+                    {step.description}
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-[18px] font-semibold text-gray-900 mb-1">
-                  {step.title}
-                </h3>
-                <p className="text-[14px] text-gray-600">
-                  {step.description}
-                </p>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

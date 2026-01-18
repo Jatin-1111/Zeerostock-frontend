@@ -1,106 +1,117 @@
 export default function CommissionSection() {
+  const tiers = [
+    {
+      name: "Starter Agent",
+      rate: "3%",
+      suppliers: "1-5 supplier",
+      description: "Commission on every transaction from your supplier.",
+    },
+    {
+      name: "Growth Agent",
+      rate: "4%",
+      suppliers: "6-15 suppliers",
+      description: "Commission on every transaction from your supplier.",
+    },
+    {
+      name: "Elite Agent",
+      rate: "5%",
+      suppliers: "16+ suppliers",
+      description: "Commission on every transaction from your supplier.",
+    },
+  ];
+
+  const examples = [
+    {
+      amount: "$2,500+",
+      description: "5 suppliers doing $15K/month each @ 3% commission rate",
+    },
+    {
+      amount: "$8,000+",
+      description: "10 suppliers doing $20K/month each @ 4% commission rate",
+    },
+    {
+      amount: "$20,000",
+      description: "20 suppliers doing $20K/month each @ 5% commission rate",
+    },
+  ];
+
   return (
-    <section className="bg-gray-50 py-16 border-t border-gray-200">
-      <div className="max-w-[1200px] mx-auto px-8">
-        <div className="text-center mb-12">
-          <p className="text-[13px] text-gray-600 mb-2 uppercase tracking-wide">
-            COMPENSATION
-          </p>
-          <h2 className="text-[36px] font-bold text-gray-900 mb-3">
-            Transparent Commission Structure
-          </h2>
-          <p className="text-[15px] text-gray-600 max-w-[700px] mx-auto">
-            Earn from leading suppliers through our tiered pay model with no
-            hassle or account fees from suppliers
-          </p>
-        </div>
-
-        {/* Commission Tiers */}
-        <div className="grid grid-cols-3 gap-6 mb-12">
-          {/* Starter Agent */}
-          <div className="bg-blue-100 border border-blue-200 rounded-lg p-8 text-center">
-            <p className="text-[14px] text-gray-700 mb-2">
-              Starter Agent
+    <div>
+      {/* Commission Structure Section */}
+      <section
+        className="bg-[#eeffef] py-10 relative"
+        style={{ boxShadow: "0px 1px 4px 0px rgba(24,181,34,0.25)" }}
+      >
+        <div className="max-w-[960px] mx-auto px-8">
+          {/* Header */}
+          <div className="text-center mb-10">
+            <p className="text-[14px] font-medium text-black mb-4">
+              Commission Tiers
             </p>
-            <div className="text-[48px] font-bold text-gray-900 mb-2">
-              3%
-            </div>
-            <p className="text-[13px] text-gray-600">
-              Commission Rate
+            <h2 className="text-[34.67px] font-medium leading-[46.67px] text-[#0d1b2a] mb-2.5">
+              Transparent <span className="text-[#2ec096]">Commission</span>{" "}
+              Structure
+            </h2>
+            <p className="text-[16px] font-semibold leading-normal text-[#9c9c9c] max-w-[728px] mx-auto">
+              Earn recurring commissions on all sales made by suppliers you
+              onboard. The more suppliers you bring, the higher your commission
+              rate grows.
             </p>
           </div>
 
-          {/* Growth Agent */}
-          <div className="bg-gray-100 border border-gray-300 rounded-lg p-8 text-center">
-            <p className="text-[14px] text-gray-700 mb-2">
-              Growth Agent
-            </p>
-            <div className="text-[48px] font-bold text-gray-900 mb-2">
-              4%
-            </div>
-            <p className="text-[13px] text-gray-600">
-              Commission Rate
-            </p>
-          </div>
-
-          {/* Elite Agent */}
-          <div className="bg-green-100 border border-green-200 rounded-lg p-8 text-center">
-            <p className="text-[14px] text-gray-700 mb-2">
-              Elite Agent
-            </p>
-            <div className="text-[48px] font-bold text-gray-900 mb-2">
-              5%
-            </div>
-            <p className="text-[13px] text-gray-600">
-              Commission Rate
-            </p>
+          {/* Commission Tiers Grid */}
+          <div className="grid grid-cols-3 gap-[80px] mt-[43px]">
+            {tiers.map((tier, index) => (
+              <div
+                key={index}
+                className="bg-[#fbfbfb] border-[1.33px] border-[#1e3a8a] rounded-[13.33px] h-[180px] w-[275px] relative overflow-hidden"
+              >
+                <p className="absolute left-[26px] top-[16px] text-[14.67px] font-medium text-black text-left">
+                  {tier.name}
+                </p>
+                <p className="absolute left-[26px] top-[38px] text-[33.33px] font-semibold text-[#1e3a8a] text-left">
+                  {tier.rate}
+                </p>
+                <p className="absolute left-[26px] top-[86.67px] text-[13.33px] font-semibold text-[#7d7d7d] text-left">
+                  {tier.suppliers}
+                </p>
+                <p className="absolute left-[26px] top-[112.67px] text-[12px] font-medium text-[#9c9c9c] w-[182px]">
+                  {tier.description}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
+      </section>
 
-        {/* Earnings Examples */}
-        <div className="bg-white border border-gray-300 rounded-lg p-8">
-          <h3 className="text-[18px] font-semibold text-gray-900 mb-6 text-center">
-            Example Income Earnings
+      {/* Example Monthly Earnings Section */}
+      <section
+        className="bg-[#fbfbfb] py-[28.67px] relative"
+        style={{ boxShadow: "0px 2px 4.5px 0px rgba(0,0,0,0.25)" }}
+      >
+        <div className="max-w-[960px] mx-auto px-8">
+          <h3 className="text-[20px] font-medium leading-[23.33px] text-[#0d1b2a] text-center mb-[56.67px]">
+            Example Monthly Earnings
           </h3>
-          <div className="grid grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="text-[28px] font-bold text-gray-900 mb-1">
-                $2,500+
-              </div>
-              <p className="text-[13px] text-gray-600 mb-1">
-                If deal size 50K+
-              </p>
-              <p className="text-[12px] text-gray-500">
-                If you close 50K per order
-              </p>
-            </div>
 
-            <div className="text-center">
-              <div className="text-[28px] font-bold text-gray-900 mb-1">
-                $8,000+
+          <div className="grid grid-cols-3 gap-[125.33px]">
+            {examples.map((example, index) => (
+              <div key={index} className="text-center">
+                <p className="text-[26.67px] font-semibold leading-[26.67px] text-black mb-[10px]">
+                  {example.amount}
+                </p>
+                <p className="text-[12px] font-medium leading-[19.22px] text-[#9c9c9c]">
+                  <span className="font-semibold">
+                    {example.description.split("@")[0]}
+                  </span>
+                  {example.description.includes("@") &&
+                    `@ ${example.description.split("@")[1]}`}
+                </p>
               </div>
-              <p className="text-[13px] text-gray-600 mb-1">
-                If you close $200K per order
-              </p>
-              <p className="text-[12px] text-gray-500">
-                If you close 200K per order
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="text-[28px] font-bold text-gray-900 mb-1">
-                $20,000+
-              </div>
-              <p className="text-[13px] text-gray-600 mb-1">
-                If you close $500K per order
-              </p>
-              <p className="text-[12px] text-gray-500">
-                If you close 500K per order
-              </p>
-            </div>
+            ))}
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }

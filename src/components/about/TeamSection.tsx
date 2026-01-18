@@ -43,7 +43,7 @@ export default function TeamSection() {
   ];
 
   return (
-    <section className="w-full bg-[#EEFBF6] py-6 sm:py-8 md:py-12 lg:py-20">
+    <section className="max-w-[1080px] mx-auto bg-[#EEFBF6] py-6 sm:py-8 md:py-12 lg:py-20">
       <div className="w-full max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div>
           <div className="relative w-full flex flex-col items-center">

@@ -1,5 +1,6 @@
 import { Check } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function BenefitsSection() {
   const features = [
@@ -15,10 +16,12 @@ export default function BenefitsSection() {
     <section className="relative h-[500px] sm:h-[550px] md:h-[600px] bg-[#fefefe]">
       {/* Background Graphic */}
       <div className="absolute inset-0 pointer-events-none">
-        <img
-          src="Landing Page (Explore features).png"
+        <Image
+          src="https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/Landing Page (Explore features).png"
           alt="Background"
-          className="h-full w-full object-cover"
+          fill
+          className="object-cover"
+          priority
         />
       </div>
 

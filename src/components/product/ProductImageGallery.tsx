@@ -19,7 +19,11 @@ export default function ProductImageGallery({
   console.log("ProductImageGallery received images:", images);
 
   const productImages =
-    images.length > 0 ? images : ["/placeholder-product.svg"];
+    images.length > 0
+      ? images
+      : [
+          "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/placeholder-product.svg",
+        ];
 
   return (
     <div className="rounded-[2.5px]">
@@ -30,9 +34,11 @@ export default function ProductImageGallery({
           alt={`${title} - Image ${activeImage + 1}`}
           fill
           className="object-contain"
+          unoptimized
           onError={(e) => {
             const target = e.target as HTMLImageElement;
-            target.src = "/placeholder-product.svg";
+            target.src =
+              "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/placeholder-product.svg";
           }}
         />
       </div>
@@ -55,9 +61,11 @@ export default function ProductImageGallery({
                 alt={`${title} - Thumbnail ${index + 1}`}
                 fill
                 className="object-contain p-1"
+                unoptimized
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
-                  target.src = "/placeholder-product.svg";
+                  target.src =
+                    "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/placeholder-product.svg";
                 }}
               />
             </button>

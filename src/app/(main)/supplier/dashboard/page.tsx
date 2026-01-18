@@ -395,22 +395,37 @@ export default function SupplierDashboard() {
             <h3 className="text-[15px] font-medium text-[#0d1b2a] mb-3.5">
               Top RFQ Match
             </h3>
-            <p className="text-[12px] font-medium text-[#0d1b2a] mb-[2px]">
-              Industrial Electronic
-            </p>
-            <p className="text-[11px] font-medium text-[#9c9c9c] mb-2">
-              95% Match
-            </p>
-            <p className="text-[15px] font-semibold text-black mb-3.5 flex-grow">
-              ₹180,000
-            </p>
-            <Link
-              href="/supplier/rfq"
-              className="flex items-center justify-center gap-1.5 w-full h-[34px] bg-[#1e3a8a] text-white text-[10px] font-semibold rounded-[8px] hover:bg-[#1e40af] transition-colors"
-            >
-              <Send className="w-3.5 h-3.5" />
-              Submit Quote
-            </Link>
+            {stats.rfqMatches && stats.rfqMatches.topMatch ? (
+              <>
+                <p className="text-[12px] font-medium text-[#0d1b2a] mb-[2px]">
+                  {stats.rfqMatches.topMatch.title}
+                </p>
+                <p className="text-[11px] font-medium text-[#9c9c9c] mb-2">
+                  {stats.rfqMatches.topMatch.matchPercentage}% Match
+                </p>
+                <p className="text-[15px] font-semibold text-black mb-3.5 flex-grow">
+                  {formatCurrency(stats.rfqMatches.topMatch.estimatedValue)}
+                </p>
+                <Link
+                  href="/supplier/rfq"
+                  className="flex items-center justify-center gap-1.5 w-full h-[34px] bg-[#1e3a8a] text-white text-[10px] font-semibold rounded-[8px] hover:bg-[#1e40af] transition-colors"
+                >
+                  <Send className="w-3.5 h-3.5" />
+                  Submit Quote
+                </Link>
+              </>
+            ) : (
+              <div className="text-center py-6 flex-grow flex flex-col items-center justify-center">
+                <MessageSquarePlus className="w-7 h-7 text-gray-400 mx-auto mb-2" />
+                <p className="text-sm text-gray-600 mb-2">No RFQ matches yet</p>
+                <Link
+                  href="/supplier/rfq"
+                  className="inline-block px-2.5 py-1 bg-gray-900 text-white text-[10px] hover:bg-gray-800 rounded"
+                >
+                  Browse RFQs
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>

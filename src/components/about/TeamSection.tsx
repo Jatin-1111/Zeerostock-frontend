@@ -7,13 +7,13 @@ export default function TeamSection() {
   const [isHovered, setIsHovered] = useState(false);
 
   const imgFrame427322271 =
-    "https://www.figma.com/api/mcp/asset/2507b949-3987-4204-b11c-b01a85d58f06";
+    "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/Team+img+7.png";
   const imgFrame427322272 =
-    "https://www.figma.com/api/mcp/asset/fb7b7f6a-dd99-49b9-b17b-8e0960a77f9b";
+    "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/Team+img+5.png";
   const imgFrame427322274 =
-    "https://www.figma.com/api/mcp/asset/2076ffb0-421a-4e61-8411-3f9f6186b9a3";
+    "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/Team+img+4.png";
   const imgFrame427322273 =
-    "https://www.figma.com/api/mcp/asset/419586ba-ed7e-42df-92e7-67feccf18cdb";
+    "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/Team+img+6.png";
 
   const team = [
     {

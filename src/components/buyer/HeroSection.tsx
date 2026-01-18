@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Check } from "lucide-react";
 
 export default function HeroSection() {
@@ -6,10 +7,12 @@ export default function HeroSection() {
     <section className="relative h-[500px] shadow-[0px_1px_4px_0px_rgba(24,181,34,0.25)] py-[27px] px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
       {/* Background Image */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <img
+        <Image
           alt="Hero Background"
-          className="absolute object-cover object-center"
-          src={"/Buyer.png"}
+          fill
+          className="object-cover object-center"
+          src="https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/Buyer.png"
+          priority
         />
       </div>
 

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
@@ -34,10 +35,14 @@ export default function Header() {
       <div className="relative h-full max-w-[412px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[960px] mx-auto px-4 sm:px-6 md:px-8 lg:px-13 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="shrink-0">
-          <img
-            src={"/Zeerostock Logo-1.svg"}
+          <Image
+            src="https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/Zeerostock Logo-1.svg"
             alt="Zeerostock"
+            width={90}
+            height={90}
             className="w-auto h-[80px] sm:h-[85px] md:h-[90px]"
+            unoptimized
+            priority
           />
         </Link>
         {/* Navigation - Hidden on mobile */}

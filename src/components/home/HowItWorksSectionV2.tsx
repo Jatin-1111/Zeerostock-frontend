@@ -1,7 +1,7 @@
+import Image from "next/image";
+
 const imgRectangle87 =
-  "https://www.figma.com/api/mcp/asset/8972b95b-591c-4538-9412-e75fba85500e";
-const imgRectangle88 =
-  "https://www.figma.com/api/mcp/asset/7a4e6c4a-939a-4c90-a5e5-99aa2a21d0d7";
+  "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/Rectangle.svg";
 
 export default function HowItWorksSectionV2() {
   const buyerSteps = [
@@ -70,7 +70,7 @@ export default function HowItWorksSectionV2() {
         </h2>
 
         {/* Subtitle */}
-        <p className="text-center text-xs sm:text-sm md:text-[12px] font-semibold leading-normal text-[#6b7280] mb-6 sm:mb-8 md:mb-[38.5px] max-w-full sm:max-w-md md:max-w-[495px] mx-auto px-4 sm:px-0">
+        <p className="text-center text-xs sm:text-sm md:text-[12px] font-semibold leading-normal text-[#6b7280] mb-6 sm:mb-8 md:mb-[38.5px]">
           Simple, streamlined processes designed for each type of user in the
           surplus inventory ecosystem
         </p>
@@ -99,10 +99,12 @@ export default function HowItWorksSectionV2() {
                     {/* Step Content */}
                     <div className="relative flex-1 min-h-[65px] sm:min-h-[70px] md:min-h-[73px] flex flex-col justify-center rounded-lg sm:rounded-xl md:rounded-[10px] overflow-hidden">
                       {/* Background Image */}
-                      <img
+                      <Image
                         src={imgRectangle87}
                         alt=""
-                        className="absolute inset-0 w-full h-full object-cover"
+                        fill
+                        className="object-cover"
+                        unoptimized
                       />
                       {/* Content */}
                       <div className="relative px-3 sm:px-3.5 md:px-4 py-2.5 sm:py-2.5 md:py-3">
@@ -154,10 +156,12 @@ export default function HowItWorksSectionV2() {
                     {/* Step Content */}
                     <div className="relative flex-1 min-h-[65px] sm:min-h-[70px] md:min-h-[73px] flex flex-col justify-center rounded-lg sm:rounded-xl md:rounded-[10px] overflow-hidden">
                       {/* Background Image */}
-                      <img
-                        src={imgRectangle88}
+                      <Image
+                        src={imgRectangle87}
                         alt=""
-                        className="absolute inset-0 w-full h-full object-cover"
+                        fill
+                        className="object-cover"
+                        unoptimized
                       />
                       {/* Content */}
                       <div className="relative px-3 sm:px-3.5 md:px-4 py-2.5 sm:py-2.5 md:py-3">

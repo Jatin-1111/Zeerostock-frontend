@@ -127,7 +127,7 @@ export default function ActiveRFQsList() {
         <div className="text-center py-7 text-gray-600">
           <p className="mb-2">No active RFQs found</p>
           <Link
-            href="/buyer/rfq"
+            href="/buyer/rfq/post"
             className="px-4 py-1.5 bg-[#1e3a8a] text-white rounded-[8px] font-semibold hover:bg-[#1e3a8a]/90 transition-colors inline-block"
           >
             Post Your First RFQ
@@ -138,10 +138,12 @@ export default function ActiveRFQsList() {
           {rfqs.map((rfq) => {
             const budgetRange =
               rfq.budgetMin && rfq.budgetMax
-                ? `₹${rfq.budgetMin.toLocaleString("en-IN")}`
-                : rfq.budgetMax
-                ? `₹${rfq.budgetMax.toLocaleString("en-IN")}`
-                : "Budget not specified";
+                ? `₹${rfq.budgetMin.toLocaleString("en-IN")} - ₹${rfq.budgetMax.toLocaleString("en-IN")}`
+                : rfq.budgetMin
+                  ? `₹${rfq.budgetMin.toLocaleString("en-IN")}+`
+                  : rfq.budgetMax
+                    ? `Up to ₹${rfq.budgetMax.toLocaleString("en-IN")}`
+                    : "Budget not specified";
 
             return (
               <div
@@ -214,8 +216,13 @@ export default function ActiveRFQsList() {
                     <span className="xs:hidden">View</span>
                   </Link>
                   <Link
-                    href={`/buyer/rfq?edit=${rfq.id}`}
+                    href={`/buyer/rfq/edit/${rfq.id}`}
                     className="h-[30px] sm:h-[34px] px-[24px] sm:px-[34px] bg-white border border-[#9c9c9c] text-[#9c9c9c] rounded-[7px] sm:rounded-[8px] font-semibold text-[10px] sm:text-[11px] hover:bg-gray-50 transition-colors flex items-center gap-[5px] sm:gap-[6px]"
+                    title={
+                      rfq.quotesCount && rfq.quotesCount > 0
+                        ? `Editing will mark ${rfq.quotesCount} pending quote(s) as outdated`
+                        : "Edit RFQ"
+                    }
                   >
                     <Edit2
                       className="w-[12px] sm:w-[13px] h-[12px] sm:h-[13px]"

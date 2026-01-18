@@ -135,7 +135,16 @@ export default function PostRFQPage() {
     setLoading(true);
 
     try {
-      const response = await rfqService.createRFQ(formData);
+      // Prepare data with proper null handling for empty fields
+      const submitData = {
+        ...formData,
+        requiredByDate: formData.requiredByDate || null,
+        budgetMin: formData.budgetMin || null,
+        budgetMax: formData.budgetMax || null,
+        preferredLocation: formData.preferredLocation || null,
+      };
+
+      const response = await rfqService.createRFQ(submitData);
 
       if (response.success) {
         setSuccess(true);
@@ -425,25 +434,47 @@ export default function PostRFQPage() {
           </div>
 
           {/* Budget Range */}
-          <div className="mb-3 sm:mb-4 md:mb-4.5">
-            <label className="block text-[12px] sm:text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
-              Budget Range
-            </label>
-            <input
-              type="number"
-              placeholder="eg., 20,000 - 50,000"
-              value={formData.budgetMax || ""}
-              onChange={(e) => {
-                const value = e.target.value;
-                setFormData({
-                  ...formData,
-                  budgetMax: value ? Number(value) : undefined,
-                });
-              }}
-              className="w-full h-[30px] sm:h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
-              disabled={loading}
-              min="0"
-            />
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-[22.5px] mb-3 sm:mb-4 md:mb-4.5">
+            <div>
+              <label className="block text-[12px] sm:text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
+                Min Budget
+              </label>
+              <input
+                type="number"
+                placeholder="eg., 20,000"
+                value={formData.budgetMin || ""}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  setFormData({
+                    ...formData,
+                    budgetMin: value ? Number(value) : undefined,
+                  });
+                }}
+                className="w-full h-[30px] sm:h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+                disabled={loading}
+                min="0"
+              />
+            </div>
+            <div>
+              <label className="block text-[12px] sm:text-[13px] font-medium text-[#0d1b2a] mb-[4px]">
+                Max Budget
+              </label>
+              <input
+                type="number"
+                placeholder="eg., 50,000"
+                value={formData.budgetMax || ""}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  setFormData({
+                    ...formData,
+                    budgetMax: value ? Number(value) : undefined,
+                  });
+                }}
+                className="w-full h-[30px] sm:h-[32px] px-2 border border-[#bebebe] rounded-[6px] text-[9px] text-gray-900 placeholder:text-[#9c9c9c] focus:outline-none focus:ring-1 focus:ring-[#bebebe]"
+                disabled={loading}
+                min="0"
+              />
+            </div>
           </div>
 
           {/* Required by Date */}

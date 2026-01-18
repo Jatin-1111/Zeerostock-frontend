@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 
 export default function Footer() {
@@ -14,10 +15,13 @@ export default function Footer() {
             {/* Logo and Tagline */}
             <div className="flex flex-col gap-3 items-start">
               <Link href="/home" className="shrink-0">
-                <img
-                  src={"/Zeerostock Logo-1.svg"}
+                <Image
+                  src="https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/Zeerostock Logo-1.svg"
                   alt="Zeerostock"
+                  width={200}
+                  height={200}
                   className="h-[87px] sm:h-[60px] md:h-[85px] lg:h-[105px]"
+                  unoptimized
                 />
               </Link>
               <p className="text-[10.5px] sm:text-[10.5px] leading-normal text-[#d0d0d0] text-center sm:text-left hidden sm:block">
@@ -117,7 +121,7 @@ export default function Footer() {
                   onClick={() => {
                     if (email) {
                       alert(
-                        "Thank you for subscribing! We will keep you updated."
+                        "Thank you for subscribing! We will keep you updated.",
                       );
                       setEmail("");
                     }

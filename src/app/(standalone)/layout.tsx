@@ -8,7 +8,7 @@ export default function MiscLayout({
 }>) {
   return (
     <>
-      <div className="min-h-screen">
+      <div className="min-h-screen bg-[#EEFBF6]">
         <Header />
         {children}
       </div>

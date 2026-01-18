@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Filter, Check } from "lucide-react";
 import { marketplaceService } from "@/services/marketplace.service";
 import type { Category, Industry } from "@/types/api.types";
@@ -26,12 +26,14 @@ interface MarketplaceFilterSidebarProps {
   onFilterChange?: (filters: Filters) => void;
   isOpen: boolean;
   onClose?: () => void;
+  initialFilters?: Partial<Filters>;
 }
 
 export default function MarketplaceFilterSidebar({
   onFilterChange,
   isOpen,
   onClose,
+  initialFilters,
 }: MarketplaceFilterSidebarProps) {
   const [priceRange, setPriceRange] = useState({ min: 0, max: 100000 });
   const [categories, setCategories] = useState<FilterOption[]>([
@@ -44,15 +46,20 @@ export default function MarketplaceFilterSidebar({
 
   const [isLoadingCategories, setIsLoadingCategories] = useState(true);
   const [isLoadingIndustries, setIsLoadingIndustries] = useState(true);
+  const hasAppliedInitialFilters = useRef(false);
 
-  // Fetch categories from backend
+  // Fetch categories from backend (only once on mount)
   useEffect(() => {
     const fetchCategories = async () => {
       try {
         const response = await marketplaceService.getCategories();
         if (response.success && response.data?.categories) {
           const categoryOptions: FilterOption[] = [
-            { id: "all", label: "All categories", checked: true },
+            {
+              id: "all",
+              label: "All categories",
+              checked: true,
+            },
             ...response.data.categories.map((cat: Category) => ({
               id: cat.id,
               label: cat.name,
@@ -70,6 +77,39 @@ export default function MarketplaceFilterSidebar({
 
     fetchCategories();
   }, []);
+
+  // Apply initial filters when categories are loaded
+  useEffect(() => {
+    console.log("[Sidebar] Initial filters effect:", {
+      hasApplied: hasAppliedInitialFilters.current,
+      initialFilters: initialFilters?.categories,
+      categoriesLength: categories.length,
+    });
+
+    if (
+      !hasAppliedInitialFilters.current &&
+      initialFilters?.categories &&
+      initialFilters.categories.length > 0 &&
+      categories.length > 1
+    ) {
+      const initialCategoryIds = initialFilters.categories;
+      console.log(
+        "[Sidebar] Applying initial category filters:",
+        initialCategoryIds
+      );
+
+      setCategories((prev) =>
+        prev.map((cat) => ({
+          ...cat,
+          checked:
+            cat.id === "all" ? false : initialCategoryIds.includes(cat.id),
+        }))
+      );
+      hasAppliedInitialFilters.current = true;
+      console.log("[Sidebar] Initial filters applied");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categories.length]);
 
   // Fetch industries from backend
   useEffect(() => {
@@ -121,6 +161,17 @@ export default function MarketplaceFilterSidebar({
 
   // Trigger filter change whenever any filter state changes
   useEffect(() => {
+    console.log("[Sidebar] Filter change effect:", {
+      isLoadingCategories,
+      isLoadingIndustries,
+    });
+
+    // Don't trigger filter change until categories are fully loaded
+    if (isLoadingCategories || isLoadingIndustries) {
+      console.log("[Sidebar] Skipping - still loading");
+      return;
+    }
+
     if (onFilterChange) {
       const selectedCategories = categories
         .filter((c) => c.checked && c.id !== "all")
@@ -148,6 +199,11 @@ export default function MarketplaceFilterSidebar({
       industries.forEach((i) => {
         industryNames[i.id] = i.label;
       });
+
+      console.log(
+        "[Sidebar] onFilterChange called with categories:",
+        selectedCategories
+      );
 
       onFilterChange({
         categories: selectedCategories,

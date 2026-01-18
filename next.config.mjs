@@ -35,7 +35,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "zeerostock-documents.s3.ap-south-1.amazonaws.com",
+        hostname: "zeerostock-assets.s3.ap-south-1.amazonaws.com",
         port: "",
         pathname: "/**",
       },

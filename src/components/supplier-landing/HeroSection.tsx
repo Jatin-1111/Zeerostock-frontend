@@ -1,7 +1,8 @@
 "use client";
 
-import { Check } from "lucide-react";
+import { BadgeCheck } from "lucide-react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function HeroSection() {
   const router = useRouter();
@@ -9,10 +10,12 @@ export default function HeroSection() {
     <div className="w-full px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-[70px] relative">
       {/* Background Image - positioned absolutely */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <img
+        <Image
           alt=""
-          className="absolute h-full left-0 top-0 w-full object-cover object-center"
-          src="/Supplier.jpg"
+          fill
+          className="object-cover object-center"
+          src="/Supplier_New.png"
+          priority
         />
       </div>
 
@@ -61,8 +64,8 @@ export default function HeroSection() {
             <div className="flex flex-wrap gap-[10px]">
               <div className="flex items-center gap-[3px]">
                 <div className="w-[25px] h-[20px] flex items-center justify-center">
-                  <Check
-                    className="w-[15px] h-[15px] text-black"
+                  <BadgeCheck
+                    className="w-[15px] h-[15px] text-[#00B14F]"
                     strokeWidth={2.5}
                   />
                 </div>
@@ -72,8 +75,8 @@ export default function HeroSection() {
               </div>
               <div className="flex items-center gap-[3px]">
                 <div className="w-[25px] h-[20px] flex items-center justify-center">
-                  <Check
-                    className="w-[15px] h-[15px] text-black"
+                  <BadgeCheck
+                    className="w-[15px] h-[15px] text-[#00B14F]"
                     strokeWidth={2.5}
                   />
                 </div>
@@ -83,8 +86,8 @@ export default function HeroSection() {
               </div>
               <div className="flex items-center gap-[3px]">
                 <div className="w-[25px] h-[20px] flex items-center justify-center">
-                  <Check
-                    className="w-[15px] h-[15px] text-black"
+                  <BadgeCheck
+                    className="w-[15px] h-[15px] text-[#00B14F]"
                     strokeWidth={2.5}
                   />
                 </div>

@@ -6,14 +6,16 @@ import Link from "next/link";
 import { Menu, ChevronDown, MapPin } from "lucide-react";
 import MarketplaceFilterSidebar from "@/components/marketplace/MarketplaceFilterSidebar";
 import { marketplaceService } from "@/services/marketplace.service";
-import type { Product } from "@/types/api.types";
+import type { Product, Category } from "@/types/api.types";
 
 interface ProductGridProps {
   initialQuery?: string;
+  initialCategory?: string;
 }
 
 export default function ExploreProductGrid({
   initialQuery = "",
+  initialCategory,
 }: ProductGridProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -29,6 +31,53 @@ export default function ExploreProductGrid({
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [activeFilters, setActiveFilters] = useState<Record<string, any>>({});
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  // Fetch categories on mount
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await marketplaceService.getCategories();
+        if (response.success && response.data?.categories) {
+          setCategories(response.data.categories);
+        }
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+    fetchCategories();
+  }, []);
+
+  // Initialize filters from URL parameters
+  useEffect(() => {
+    const categoryName = searchParams.get("category") || initialCategory;
+    console.log("[ProductGrid] URL category param:", categoryName);
+    console.log("[ProductGrid] Categories loaded:", categories.length);
+
+    if (categoryName && categories.length > 0) {
+      // Find the category ID by name
+      const category = categories.find(
+        (cat) => cat.name.toLowerCase() === categoryName.toLowerCase()
+      );
+      console.log("[ProductGrid] Found category:", category);
+
+      if (category) {
+        console.log(
+          "[ProductGrid] Setting activeFilters with category ID:",
+          category.id
+        );
+        setActiveFilters((prev) => ({
+          ...prev,
+          categories: [category.id],
+        }));
+      } else {
+        console.warn(
+          "[ProductGrid] Category not found for name:",
+          categoryName
+        );
+      }
+    }
+  }, [initialCategory, searchParams, categories]);
 
   const fetchProducts = async (query?: string) => {
     try {
@@ -178,6 +227,7 @@ export default function ExploreProductGrid({
         isOpen={isFilterOpen}
         onClose={() => setIsFilterOpen(false)}
         onFilterChange={handleFilterChange}
+        initialFilters={activeFilters}
       />
 
       {/* Main Content */}

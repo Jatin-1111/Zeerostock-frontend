@@ -564,4 +564,26 @@ export const supplierService = {
   > {
     return apiRequest("post", `/supplier/rfqs/${rfqId}/quotes`, quoteData);
   },
+
+  /**
+   * Get all quotes submitted by the supplier
+   */
+  async getQuotes(): Promise<
+    ApiResponse<{
+      quotes: Array<{
+        id: string;
+        quote_number: string;
+        rfq_number: string;
+        buyer_company_name: string;
+        product_title: string;
+        quote_price: number;
+        status: string;
+        created_at: string;
+        valid_until: string;
+      }>;
+      count: number;
+    }>
+  > {
+    return apiRequest("get", "/supplier/quotes");
+  },
 };

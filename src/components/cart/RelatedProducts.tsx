@@ -5,17 +5,20 @@ export default function RelatedProducts() {
     {
       title: "Microcontroller",
       price: "₹45,000",
-      image: "/placeholder-product.jpg", // Replace with actual product images
+      image:
+        "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/placeholder-product.svg",
     },
     {
       title: "Fashion clothes",
       price: "₹30,500",
-      image: "/placeholder-product.jpg",
+      image:
+        "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/placeholder-product.svg",
     },
     {
       title: "Spare Parts",
       price: "₹110,000",
-      image: "/placeholder-product.jpg",
+      image:
+        "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/placeholder-product.svg",
     },
   ];
 
@@ -37,6 +40,7 @@ export default function RelatedProducts() {
                     alt={product.title}
                     fill
                     className="object-cover"
+                    unoptimized
                   />
                 ) : (
                   <span className="absolute inset-0 flex items-center justify-center text-[8px] text-gray-400">

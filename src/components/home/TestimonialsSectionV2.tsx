@@ -1,20 +1,20 @@
 const imgLogo1 =
-  "https://www.figma.com/api/mcp/asset/5319ae99-4ad2-4126-b596-c117e94da6cc";
+  "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/Logo 1.png";
 const imgLogo2 =
-  "https://www.figma.com/api/mcp/asset/115e5d88-23f4-47d5-ba51-96eebb312bde";
+  "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/Logo 2.png";
 const imgLogo3 =
-  "https://www.figma.com/api/mcp/asset/1d99c889-3af4-41cb-a874-ca4b0c93e7de";
+  "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/Logo 3.png";
 const imgLogo4 =
-  "https://www.figma.com/api/mcp/asset/de98641d-7456-400f-a65a-40e062f13499";
+  "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/Logo 4.png";
 const imgLogo5 =
-  "https://www.figma.com/api/mcp/asset/0e0c689d-91d0-45f3-beb6-65b8726e822c";
+  "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/Logo 5.png";
 
 const imgTestimonial1 =
-  "https://www.figma.com/api/mcp/asset/13bb304d-983f-41fc-8346-be8051c0cd31";
+  "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/Team img 3.png";
 const imgTestimonial2 =
-  "https://www.figma.com/api/mcp/asset/0af2817d-4603-4093-9428-f261ea1d5d66";
+  "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/Team img 2.png";
 const imgTestimonial3 =
-  "https://www.figma.com/api/mcp/asset/f180d6e2-94cc-49f1-8289-508ac1d16a5f";
+  "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/Team img 1.png";
 
 export default function TestimonialsSectionV2() {
   const testimonials = [
@@ -58,7 +58,7 @@ export default function TestimonialsSectionV2() {
         </h2>
 
         {/* Subtitle */}
-        <p className="text-center text-xs sm:text-sm md:text-[12px] font-semibold leading-normal text-[#6b7280] mb-6 sm:mb-8 md:mb-[39px] max-w-full sm:max-w-md md:max-w-[515px] mx-auto px-4 sm:px-0">
+        <p className="text-center text-xs sm:text-sm md:text-[12px] font-semibold leading-normal text-[#6b7280] mb-6 sm:mb-8 md:mb-[39px]">
           See how businesses like yours are maximizing value from surplus
           inventory
         </p>

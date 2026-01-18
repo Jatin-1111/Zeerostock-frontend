@@ -1,14 +1,17 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function HeroSection() {
   return (
     <section className="relative w-full h-[350px] sm:h-[400px] md:h-[450px] lg:h-[500px] shadow-md overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
-        <img
+        <Image
           alt=""
-          className="absolute h-full w-full object-cover"
-          src={"/About us.jpg"}
+          fill
+          className="object-cover"
+          src="https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/About us.jpg"
+          priority
         />
       </div>
 

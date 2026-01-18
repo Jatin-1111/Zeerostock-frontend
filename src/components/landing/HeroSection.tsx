@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
+import Image from "next/image";
 
 export default function HeroSection() {
   const { isAuthenticated, user } = useAuth();
@@ -10,10 +11,12 @@ export default function HeroSection() {
     <section className="relative shadow-[0px_1px_4px_0px_rgba(24,181,34,0.25)]">
       {/* Background Image */}
       <div className="absolute inset-0 h-[450px] sm:h-[500px] md:h-[550px] lg:h-[600px]">
-        <img
-          src="/landing-hero.png"
+        <Image
+          src="https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/landing-hero.png"
           alt="Industrial warehouse background"
-          className="w-full h-full object-cover"
+          fill
+          className="object-cover"
+          priority
         />
       </div>
 

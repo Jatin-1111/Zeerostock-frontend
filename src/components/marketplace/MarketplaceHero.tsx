@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function MarketplaceHero() {
@@ -70,11 +71,19 @@ export default function MarketplaceHero() {
 
   return (
     <div
-      className="relative w-full max-w-[900px] mx-auto rounded-2xl shadow-[0px_0px_8px_0px_rgba(0,0,0,0.25)] h-[300px] bg-[#eefbf6] bg-[url('/hero-marketplace.jpg')] bg-cover bg-center bg-no-repeat"
+      className="relative w-full max-w-[900px] mx-auto rounded-2xl shadow-[0px_0px_8px_0px_rgba(0,0,0,0.25)] h-[300px] bg-[#eefbf6] overflow-hidden"
       style={{ overflow: "visible" }}
     >
+      {/* Background Image */}
+      <Image
+        src="https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/hero-marketplace.jpg"
+        alt="Marketplace Hero Background"
+        fill
+        className="object-cover"
+        priority
+      />
       {/* Main heading */}
-      <h1 className="absolute left-1/2 top-[58px] -translate-x-1/2 -translate-y-1/2 font-normal text-[54px] text-[#0d1b2a] drop-shadow-[0_3px_3px_rgba(0,0,0,0.25)] whitespace-nowrap m-0">
+      <h1 className="absolute left-1/2 top-[58px] -translate-x-1/2 -translate-y-1/2 font-normal text-[54px] text-[#0d1b2a] drop-shadow-[0_3px_3px_rgba(0,0,0,0.25)] whitespace-nowrap m-0 z-10">
         B2B Surplus Marketplace
       </h1>
 

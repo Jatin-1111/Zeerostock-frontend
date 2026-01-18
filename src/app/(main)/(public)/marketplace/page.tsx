@@ -15,12 +15,16 @@ import ExploreProductGrid from "@/components/marketplace/ProductGrid";
 function MarketplaceContent() {
   const searchParams = useSearchParams();
   const searchQuery = searchParams.get("q");
+  const categoryParam = searchParams.get("category");
 
-  // If there's a search query, show the ProductGrid with search results
-  if (searchQuery) {
+  // If there's a search query or category filter, show the ProductGrid
+  if (searchQuery || categoryParam) {
     return (
       <div className="max-w-full">
-        <ExploreProductGrid initialQuery={searchQuery} />
+        <ExploreProductGrid
+          initialQuery={searchQuery || ""}
+          initialCategory={categoryParam || undefined}
+        />
       </div>
     );
   }

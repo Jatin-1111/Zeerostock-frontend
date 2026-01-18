@@ -14,6 +14,13 @@ export interface ApiResponse<T = any> {
   errorCode?: string;
   errors?: ValidationError[];
   details?: string;
+  error?: {
+    message?: string;
+    code?: string;
+    quoteCount?: number;
+    acceptedQuoteCount?: number;
+    details?: string;
+  };
 }
 
 export interface ValidationError {

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { Edit2 } from "lucide-react";
 import rfqService from "@/services/rfq.service";
 import type { RFQ, RFQFilters } from "@/types/buyer.types";
 
@@ -139,6 +140,9 @@ export default function MyRFQsPage() {
                     <th className="px-3 py-3 text-center font-medium text-xs text-[#0d1b2a] tracking-wide">
                       QUOTES
                     </th>
+                    <th className="px-3 py-3 text-center font-medium text-xs text-[#0d1b2a] tracking-wide">
+                      ACTIONS
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
@@ -170,10 +174,20 @@ export default function MyRFQsPage() {
 
                       {/* Budget */}
                       <td className="px-3 py-3 text-xs text-gray-900 whitespace-nowrap">
-                        {rfq.budgetMax ? (
-                          `₹${parseFloat(String(rfq.budgetMax)).toLocaleString(
+                        {rfq.budgetMin && rfq.budgetMax ? (
+                          `₹${parseFloat(String(rfq.budgetMin)).toLocaleString(
                             "en-IN"
-                          )}`
+                          )} - ₹${parseFloat(
+                            String(rfq.budgetMax)
+                          ).toLocaleString("en-IN")}`
+                        ) : rfq.budgetMin ? (
+                          `₹${parseFloat(String(rfq.budgetMin)).toLocaleString(
+                            "en-IN"
+                          )}+`
+                        ) : rfq.budgetMax ? (
+                          `Up to ₹${parseFloat(
+                            String(rfq.budgetMax)
+                          ).toLocaleString("en-IN")}`
                         ) : (
                           <span className="text-gray-400">N/A</span>
                         )}
@@ -205,6 +219,22 @@ export default function MyRFQsPage() {
                         <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-blue-100 font-semibold text-xs text-blue-700">
                           {rfq.quoteCount || 0}
                         </span>
+                      </td>
+
+                      {/* Actions */}
+                      <td className="px-3 py-3 text-center">
+                        <Link
+                          href={`/buyer/rfq/edit/${rfq.id}`}
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-xs font-medium transition-colors"
+                          title={
+                            rfq.quoteCount && rfq.quoteCount > 0
+                              ? `Edit RFQ (${rfq.quoteCount} pending quote(s) will be marked as outdated)`
+                              : "Edit RFQ"
+                          }
+                        >
+                          <Edit2 className="w-3.5 h-3.5" />
+                          Edit
+                        </Link>
                       </td>
                     </tr>
                   ))}

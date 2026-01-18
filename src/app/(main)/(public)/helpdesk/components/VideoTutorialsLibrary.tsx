@@ -27,39 +27,45 @@ export default function VideoTutorialsLibrary({
       title: "Getting Started with Zeerostock",
       description: "Covers sign-up, account setup and navigation.",
       duration: "4:30 mins",
-      thumbnail: "/placeholder-video.jpg",
+      thumbnail:
+        "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/placeholder-product.svg",
     },
     {
       title: "How to create an RFQ (Buyer Tutorial)",
       description: "Shows posting RFQs and reviewing quotes.",
       duration: "6:45 mins",
-      thumbnail: "/placeholder-video.jpg",
+      thumbnail:
+        "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/placeholder-product.svg",
     },
     {
       title: "Using the ROI Calculator",
       description:
         "Learn how to calculate your potential return on investment.",
       duration: "4:30 mins",
-      thumbnail: "/placeholder-video.jpg",
+      thumbnail:
+        "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/placeholder-product.svg",
     },
     {
       title: "Responding to Quotes (Supplier Guide)",
       description: "Includes Accept/Decline/Counter-Offer options.",
       duration: "5:15 mins",
-      thumbnail: "/placeholder-video.jpg",
+      thumbnail:
+        "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/placeholder-product.svg",
     },
     {
       title: "Managing Orders & Shipments",
       description: "Learn to manage your sales orders and track shipments.",
       duration: "4:30 mins",
-      thumbnail: "/placeholder-video.jpg",
+      thumbnail:
+        "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/placeholder-product.svg",
     },
     {
       title: "How to Verify Your Supplier Account",
       description:
         "A step-by-step guide to completing your supplier verification.",
       duration: "6:45 mins",
-      thumbnail: "/placeholder-video.jpg",
+      thumbnail:
+        "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/placeholder-product.svg",
     },
   ];
 
@@ -71,7 +77,7 @@ export default function VideoTutorialsLibrary({
     return videos.filter(
       (video) =>
         video.title.toLowerCase().includes(query) ||
-        video.description.toLowerCase().includes(query)
+        video.description.toLowerCase().includes(query),
     );
   }, [searchQuery]);
 

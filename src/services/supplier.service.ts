@@ -76,6 +76,13 @@ export interface SupplierDashboardStats {
     watchers_count: number;
     created_at: string;
   }>;
+  rfqMatches?: {
+    topMatch?: {
+      title: string;
+      matchPercentage: number;
+      estimatedValue: number;
+    };
+  };
 }
 
 export interface SupplierProfileData {
@@ -209,7 +216,7 @@ export const supplierService = {
    * Create a new listing
    */
   async createListing(
-    data: CreateListingData
+    data: CreateListingData,
   ): Promise<ApiResponse<SupplierListing>> {
     return apiRequest("post", "/supplier/listings", data);
   },
@@ -219,7 +226,7 @@ export const supplierService = {
    */
   async updateListing(
     id: string,
-    data: UpdateListingData
+    data: UpdateListingData,
   ): Promise<ApiResponse<SupplierListing>> {
     return apiRequest("put", `/supplier/listings/${id}`, data);
   },
@@ -273,12 +280,12 @@ export const supplierService = {
   async updateOrderItemStatus(
     orderId: string,
     itemId: string,
-    status: string
+    status: string,
   ): Promise<ApiResponse<any>> {
     return apiRequest(
       "put",
       `/supplier/orders/${orderId}/items/${itemId}/status`,
-      { status }
+      { status },
     );
   },
 
@@ -547,7 +554,7 @@ export const supplierService = {
       deliveryDays: number;
       validUntil: string;
       notes?: string;
-    }
+    },
   ): Promise<
     ApiResponse<{
       quote: {

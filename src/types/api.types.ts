@@ -3,8 +3,21 @@ export interface ApiResponse<T = unknown> {
   success: boolean;
   message?: string;
   data?: T;
-  error?: string;
   errorCode?: string;
+  errors?: ValidationError[];
+  details?: string;
+  error?: {
+    message?: string;
+    code?: string;
+    quoteCount?: number;
+    acceptedQuoteCount?: number;
+    details?: string;
+  };
+}
+
+export interface ValidationError {
+  field: string;
+  message: string;
 }
 
 export interface PaginationMeta {

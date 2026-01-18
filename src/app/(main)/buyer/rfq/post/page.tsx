@@ -138,10 +138,10 @@ export default function PostRFQPage() {
       // Prepare data with proper null handling for empty fields
       const submitData = {
         ...formData,
-        requiredByDate: formData.requiredByDate || null,
-        budgetMin: formData.budgetMin || null,
-        budgetMax: formData.budgetMax || null,
-        preferredLocation: formData.preferredLocation || null,
+        requiredByDate: formData.requiredByDate || undefined,
+        budgetMin: formData.budgetMin || undefined,
+        budgetMax: formData.budgetMax || undefined,
+        preferredLocation: formData.preferredLocation || undefined,
       };
 
       const response = await rfqService.createRFQ(submitData);
@@ -170,7 +170,7 @@ export default function PostRFQPage() {
       }
     } catch (err: unknown) {
       setError(
-        (err as Error).message || "An error occurred while creating the RFQ"
+        (err as Error).message || "An error occurred while creating the RFQ",
       );
     } finally {
       setLoading(false);

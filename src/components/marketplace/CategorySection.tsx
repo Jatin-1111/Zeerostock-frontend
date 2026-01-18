@@ -140,7 +140,7 @@ export default function CategorySection() {
       y: 0,
       scale: 1,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 260,
         damping: 20,
       },
@@ -150,7 +150,7 @@ export default function CategorySection() {
       y: -15,
       scale: 0.9,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 400,
         damping: 25,
         duration: 0.25,

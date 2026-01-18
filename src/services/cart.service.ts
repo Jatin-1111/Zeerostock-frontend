@@ -26,7 +26,7 @@ const getSessionId = (): string => {
   let sessionId = localStorage.getItem(SESSION_KEY);
   console.log(
     `getSessionId: Retrieved from localStorage['${SESSION_KEY}']:`,
-    sessionId
+    sessionId,
   );
 
   if (!sessionId) {
@@ -49,7 +49,7 @@ export const cartService = {
    */
   async addToCart(
     productId: string,
-    quantity: number
+    quantity: number,
   ): Promise<ApiResponse<{ cartItem: CartItem }>> {
     // Validate inputs
     if (!productId) {
@@ -82,7 +82,7 @@ export const cartService = {
           productId,
           quantity,
           sessionId,
-        }
+        },
       );
       console.log("cartService.addToCart: received response", result);
       return result;
@@ -91,7 +91,9 @@ export const cartService = {
       return {
         success: false,
         message: "Failed to add item to cart",
-        error: error instanceof Error ? error.message : "Unknown error",
+        error: {
+          message: error instanceof Error ? error.message : "Unknown error",
+        },
       };
     }
   },
@@ -102,7 +104,7 @@ export const cartService = {
   async getCart(
     state?: string,
     city?: string,
-    pincode?: string
+    pincode?: string,
   ): Promise<ApiResponse<Cart>> {
     const sessionId = getSessionId();
     console.log("cartService.getCart: sessionId =", sessionId);
@@ -133,7 +135,7 @@ export const cartService = {
    */
   async updateCartItem(
     itemId: string,
-    quantity: number
+    quantity: number,
   ): Promise<ApiResponse<{ cartItem: CartItem }>> {
     // Validate inputs
     if (!itemId) {
@@ -155,7 +157,7 @@ export const cartService = {
       "cartService.updateCartItem: sessionId =",
       sessionId,
       "itemId =",
-      itemId
+      itemId,
     );
 
     try {
@@ -168,7 +170,9 @@ export const cartService = {
       return {
         success: false,
         message: "Failed to update cart item",
-        error: error instanceof Error ? error.message : "Unknown error",
+        error: {
+          message: error instanceof Error ? error.message : "Unknown error",
+        },
       };
     }
   },
@@ -190,7 +194,7 @@ export const cartService = {
       "cartService.removeFromCart: sessionId =",
       sessionId,
       "itemId =",
-      itemId
+      itemId,
     );
 
     try {
@@ -202,7 +206,9 @@ export const cartService = {
       return {
         success: false,
         message: "Failed to remove item from cart",
-        error: error instanceof Error ? error.message : "Unknown error",
+        error: {
+          message: error instanceof Error ? error.message : "Unknown error",
+        },
       };
     }
   },
@@ -219,7 +225,7 @@ export const cartService = {
    * Apply coupon code
    */
   async applyCoupon(
-    couponCode: string
+    couponCode: string,
   ): Promise<ApiResponse<{ discount: number; newTotal: number }>> {
     const sessionId = getSessionId();
     return apiRequest("post", "/cart/apply-coupon", { couponCode, sessionId });
@@ -259,7 +265,7 @@ export const cartService = {
     state: string,
     city?: string,
     pincode?: string,
-    orderValue?: number
+    orderValue?: number,
   ): Promise<
     ApiResponse<{
       shippingCost: number;
@@ -296,7 +302,7 @@ export const cartService = {
     const response = await apiRequest<{ mergedCart: Cart }>(
       "post",
       "/cart/merge",
-      { guestSessionId }
+      { guestSessionId },
     );
 
     // Clear guest session after merge

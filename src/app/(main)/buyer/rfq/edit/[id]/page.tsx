@@ -96,7 +96,7 @@ export default function EditRFQPage() {
 
         // Handle RFQ data
         if (rfqRes.success && rfqRes.data) {
-          const rfq = rfqRes.data.rfq || rfqRes.data;
+          const rfq = rfqRes.data;
           setFormData({
             title: rfq.title || "",
             categoryId: rfq.categoryId || "",
@@ -174,10 +174,10 @@ export default function EditRFQPage() {
       // Prepare data with proper null handling for empty fields
       const submitData = {
         ...formData,
-        requiredByDate: formData.requiredByDate || null,
-        budgetMin: formData.budgetMin || null,
-        budgetMax: formData.budgetMax || null,
-        preferredLocation: formData.preferredLocation || null,
+        requiredByDate: formData.requiredByDate || undefined,
+        budgetMin: formData.budgetMin || undefined,
+        budgetMax: formData.budgetMax || undefined,
+        preferredLocation: formData.preferredLocation || undefined,
       };
 
       const response = await rfqService.updateRFQ(rfqId, submitData);
@@ -195,7 +195,7 @@ export default function EditRFQPage() {
         if (response.error?.code === "RFQ_HAS_ACCEPTED_QUOTES") {
           const quoteCount = response.error.acceptedQuoteCount || "some";
           setError(
-            `This RFQ has ${quoteCount} accepted quote(s) and cannot be edited. The agreement is already in progress.`
+            `This RFQ has ${quoteCount} accepted quote(s) and cannot be edited. The agreement is already in progress.`,
           );
           toast.error(`Cannot edit RFQ with accepted quote(s)`);
         } else {

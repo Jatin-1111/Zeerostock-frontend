@@ -10,7 +10,7 @@ export default function HeroSection() {
   return (
     <section className="relative shadow-[0px_1px_4px_0px_rgba(24,181,34,0.25)]">
       {/* Background Image */}
-      <div className="absolute inset-0 h-[450px] sm:h-[500px] md:h-[550px] lg:h-[600px]">
+      <div className="absolute inset-0 min-h-screen">
         <Image
           src="https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/landing-hero.png"
           alt="Industrial warehouse background"
@@ -21,7 +21,7 @@ export default function HeroSection() {
       </div>
 
       {/* Content - Full width container */}
-      <div className="relative h-[450px] sm:h-[500px] md:h-[550px] lg:h-[600px] w-full max-w-[412px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[960px] mx-auto px-4 sm:px-6 md:px-8 flex flex-col items-center justify-center">
+      <div className="relative min-h-screen w-full max-w-[412px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[960px] mx-auto px-4 sm:px-6 md:px-8 flex flex-col items-center justify-center">
         {/* Main Headline */}
         <h1 className="text-center mb-3 sm:mb-4 md:mb-5 max-w-[380px] sm:max-w-[445px] mt-[35px] sm:mt-[40px] md:mt-[45px]">
           <span className="text-[30px] sm:text-[35px] md:text-[40px] leading-[39px] sm:leading-[40px] font-extrabold">

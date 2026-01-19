@@ -13,7 +13,7 @@ export default function BenefitsSection() {
   ];
 
   return (
-    <section className="relative h-[500px] sm:h-[550px] md:h-[600px] bg-[#fefefe]">
+    <section className="relative min-h-screen bg-[#fefefe]">
       {/* Background Graphic */}
       <div className="absolute inset-0 pointer-events-none">
         <Image
@@ -25,7 +25,7 @@ export default function BenefitsSection() {
         />
       </div>
 
-      <div className="relative h-full max-w-[412px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[960px] mx-auto px-4 sm:px-6 md:px-8 flex flex-col items-center justify-center">
+      <div className="relative h-full max-w-[412px] sm:max-w-[640px] md:max-w-[768px] lg:max-w-[960px] min-h-screen m-auto px-4 sm:px-6 md:px-8 flex flex-col items-center justify-center">
         {/* Headline */}
         <div className="text-center mb-6 sm:mb-7 md:mb-8 max-w-[380px] sm:max-w-[450px] md:max-w-[483px]">
           <h2 className="text-[25px] sm:text-[30px] md:text-[35px] leading-[34px] sm:leading-[35px] font-medium text-[#0a2540]">

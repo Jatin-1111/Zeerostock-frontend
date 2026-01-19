@@ -13,7 +13,7 @@ export default function MarketplaceCTASection() {
             List your surplus inventory and reach thousands of buyers worldwide
           </p>
           <Link
-            href="/become-supplier"
+            href="/signup"
             className="bg-[#2D4A9A] hover:bg-[#3d5aaa] rounded-xl px-9 py-2 border-none cursor-pointer font-semibold text-[12px] text-white transition-colors inline-block"
           >
             Start Selling

@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { AdminLayout } from "@/components/admin-panel";
 import { useRouter, useParams } from "next/navigation";
+import apiClient from "@/lib/api-client";
 
 interface VerificationData {
   id: string;
@@ -72,27 +73,16 @@ export default function SupplierDetailPage() {
   const fetchVerificationDetails = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem("admin_token");
-
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/supplier-verifications/${verificationId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+      const { data } = await apiClient.get<any>(
+        `/admin/supplier-verifications/${verificationId}`
       );
 
-      if (!response.ok) throw new Error("Failed to fetch verification details");
-
-      const result = await response.json();
-      console.log("Verification data:", result.data.verification);
-      console.log("Documents:", result.data.verification?.documents);
-      setVerification(result.data.verification);
-      setHistory(result.data.history || []);
-    } catch (err) {
-      const error = err as Error;
-      setError(error.message || "Failed to fetch verification details");
+      console.log("Verification data:", data.data.verification);
+      console.log("Documents:", data.data.verification?.documents);
+      setVerification(data.data.verification);
+      setHistory(data.data.history || []);
+    } catch (err: any) {
+      setError(err.message || "Failed to fetch verification details");
     } finally {
       setLoading(false);
     }
@@ -121,33 +111,21 @@ export default function SupplierDetailPage() {
       }
 
       setActionLoading(true);
-      const token = localStorage.getItem("admin_token");
 
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/supplier-verifications/${verificationId}/${action}`,
+      const { data } = await apiClient.post(
+        `/admin/supplier-verifications/${verificationId}/${action}`,
         {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            notes: notes || `Verification ${action}d by admin`,
-            reason: action === "reject" ? notes : undefined,
-          }),
+          notes: notes || `Verification ${action}d by admin`,
+          reason: action === "reject" ? notes : undefined,
         }
       );
 
-      if (!response.ok) throw new Error(`Failed to ${action} verification`);
-
-      const result = await response.json();
-      setSuccess(result.message);
+      setSuccess(data.message);
       fetchVerificationDetails();
 
       setTimeout(() => setSuccess(""), 3000);
-    } catch (err) {
-      const error = err as Error;
-      setError(error.message || `Failed to ${action} verification`);
+    } catch (err: any) {
+      setError(err.message || `Failed to ${action} verification`);
       setTimeout(() => setError(""), 3000);
     } finally {
       setActionLoading(false);
@@ -164,27 +142,17 @@ export default function SupplierDetailPage() {
         documentUrl,
       });
 
-      // Fetch document with auth token first, then open as blob
-      const token = localStorage.getItem("admin_token");
-      const proxyUrl = `${
-        process.env.NEXT_PUBLIC_API_BASE_URL
-      }/admin/verification-document?url=${encodeURIComponent(documentUrl)}`;
+      // Use apiClient to fetch blob (handles auth & refresh token automatically)
+      const response = await apiClient.get(
+        `/admin/verification-document`,
+        {
+          params: { url: documentUrl },
+          responseType: "blob",
+        }
+      );
 
-      console.log("Fetching document via proxy:", proxyUrl);
-
-      const response = await fetch(proxyUrl, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      // Get the blob and create object URL
-      const blob = await response.blob();
-      const blobUrl = window.URL.createObjectURL(blob);
+      // Create object URL from blob
+      const blobUrl = window.URL.createObjectURL(new Blob([response.data]));
 
       // Open in new tab
       window.open(blobUrl, "_blank", "noopener,noreferrer");
@@ -211,24 +179,16 @@ export default function SupplierDetailPage() {
     try {
       console.log("Attempting to download:", { documentName, documentUrl });
 
-      // Use backend proxy to download the document
-      const token = localStorage.getItem("admin_token");
-      const proxyUrl = `${
-        process.env.NEXT_PUBLIC_API_BASE_URL
-      }/admin/verification-document?url=${encodeURIComponent(documentUrl)}`;
+      // Use apiClient to fetch blob
+      const response = await apiClient.get(
+        `/admin/verification-document`,
+        {
+          params: { url: documentUrl },
+          responseType: "blob",
+        }
+      );
 
-      const response = await fetch(proxyUrl, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const blob = await response.blob();
-      const blobUrl = window.URL.createObjectURL(blob);
+      const blobUrl = window.URL.createObjectURL(new Blob([response.data]));
       const a = document.createElement("a");
       a.href = blobUrl;
       a.download = documentName;

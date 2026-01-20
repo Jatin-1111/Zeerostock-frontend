@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Search, Eye, AlertCircle } from "lucide-react";
 import { AdminLayout, PageHeader } from "@/components/admin-panel";
 import { useRouter } from "next/navigation";
+import apiClient from "@/lib/api-client";
 
 interface Verification {
   id: string;
@@ -40,27 +41,19 @@ export default function SupplierVerificationPage() {
   const fetchVerifications = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem("admin_token");
 
-      const params = new URLSearchParams({
-        page: "1",
-        limit: "50",
-        ...(statusFilter !== "all" && { status: statusFilter }),
-      });
-
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/supplier-verifications/all?${params}`,
+      const response = await apiClient.get<any>(
+        "/admin/supplier-verifications/all",
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
+          params: {
+            page: "1",
+            limit: "50",
+            ...(statusFilter !== "all" && { status: statusFilter }),
           },
         }
       );
 
-      if (!response.ok) throw new Error("Failed to fetch verifications");
-
-      const result = await response.json();
-      setVerifications(result.data.verifications || []);
+      setVerifications(response.data.data.verifications || []);
     } catch (err: any) {
       setError(err.message || "Failed to fetch verifications");
     } finally {
@@ -70,20 +63,11 @@ export default function SupplierVerificationPage() {
 
   const fetchStats = async () => {
     try {
-      const token = localStorage.getItem("admin_token");
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/supplier-verifications/stats`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+      const response = await apiClient.get<any>(
+        "/admin/supplier-verifications/stats"
       );
 
-      if (!response.ok) throw new Error("Failed to fetch stats");
-
-      const result = await response.json();
-      setStats(result.data);
+      setStats(response.data.data);
     } catch (err: any) {
       console.error("Failed to fetch stats:", err);
     }

@@ -49,7 +49,19 @@ apiClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     // Only add token if we're in the browser
     if (typeof window !== "undefined") {
-      const token = localStorage.getItem(TOKEN_KEY);
+      let token = localStorage.getItem(TOKEN_KEY);
+      
+      // Check if we are in admin panel or making admin API request
+      const isAdminRequest = config.url?.includes("/admin/") && !config.url?.includes("/auth/");
+      const isAdminPage = window.location.pathname.startsWith("/admin-panel");
+      
+      if (isAdminRequest || isAdminPage) {
+        const adminToken = localStorage.getItem("admin_token");
+        if (adminToken) {
+          token = adminToken;
+        }
+      }
+
       if (token && config.headers) {
         config.headers.Authorization = `Bearer ${token}`;
       }
@@ -214,7 +226,11 @@ apiClient.interceptors.response.use(
 
         // Redirect to login (only in browser)
         if (typeof window !== "undefined") {
-          window.location.href = "/login?session=expired";
+          if (window.location.pathname.startsWith("/admin-panel")) {
+            window.location.href = "/admin-panel/login?session=expired";
+          } else {
+            window.location.href = "/login?session=expired";
+          }
         }
 
         return Promise.reject({

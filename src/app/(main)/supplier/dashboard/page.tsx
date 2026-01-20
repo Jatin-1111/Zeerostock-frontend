@@ -153,7 +153,7 @@ export default function SupplierDashboard() {
         {/* Add Product Button */}
         <div className="mb-4">
           <Link
-            href="/supplier/inventory"
+            href="/supplier/listings/new"
             className="inline-flex items-center justify-center gap-[6px] h-[34px] px-[34px] bg-[#2aae7a] text-white text-[11px] font-semibold rounded-[8px] hover:bg-[#25996b] transition-colors"
           >
             <Plus className="w-4 h-4" />

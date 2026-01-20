@@ -268,7 +268,7 @@ export default function SupplierDashboard() {
                 <Package className="w-7 h-7 text-gray-400 mx-auto mb-2" />
                 <p className="text-sm text-gray-600 mb-2">No listings yet</p>
                 <Link
-                  href="/supplier/inventory"
+                  href="/supplier/listings/new"
                   className="inline-block px-2.5 py-1 bg-gray-900 text-white text-[10px] hover:bg-gray-800 rounded"
                 >
                   Create Your First Listing

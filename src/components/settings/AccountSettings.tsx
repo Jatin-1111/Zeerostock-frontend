@@ -269,62 +269,68 @@ export default function AccountSettings() {
         </div>
       )}
 
-      {/* Select Profile Section - Only show if user has multiple roles */}
-      {hasMultipleRoles && (
-        <div className="bg-white rounded-[11.25px] shadow-[0px_1.13px_3.38px_0px_rgba(0,0,0,0.25)] p-[13.5px] relative">
-          {/* Section Header */}
-          <div className="flex items-center gap-[11.25px] mb-[22.5px]">
-            <h2 className="text-[13.5px] font-semibold text-[#0d1b2a]">
-              Select Profile
-            </h2>
-          </div>
-
-          {/* Divider Line */}
-          <div className="absolute left-0 top-[50.63px] w-full h-[0.75px] bg-[#e5e7eb]" />
-
-          {/* Role Buttons */}
-          <div className="flex gap-[16.88px] mt-[16.88px]">
-            {/* Buyer Button */}
-            {hasBuyerRole && (
-              <button
-                onClick={() => handleRoleSwitch("buyer")}
-                disabled={switchingRole || currentRole === "buyer"}
-                className={`flex-1 h-[36.56px] px-[5.63px] py-[8.44px] rounded-[6.75px] text-[11.25px] font-semibold transition-all ${
-                  currentRole === "buyer"
-                    ? "bg-[#eeffef] border border-[#2aae7a] text-[#2aae7a] shadow-[0px_0px_5.63px_0px_rgba(24,181,34,0.25)]"
-                    : "border border-[#9c9c9c] text-[#9c9c9c] hover:border-[#2aae7a] hover:text-[#2aae7a]"
-                }`}
-              >
-                {switchingRole && currentRole !== "buyer"
-                  ? "Switching..."
-                  : "Buyer"}
-              </button>
-            )}
-
-            {/* Supplier Button */}
-            {hasSupplierRole && (
-              <button
-                onClick={() => handleRoleSwitch("supplier")}
-                disabled={switchingRole || currentRole === "supplier"}
-                className={`flex-1 h-[36.56px] px-[5.63px] py-[8.44px] rounded-[6.75px] text-[11.25px] font-semibold transition-all ${
-                  currentRole === "supplier"
-                    ? "bg-[#eeffef] border border-[#2aae7a] text-[#2aae7a] shadow-[0px_0px_5.63px_0px_rgba(24,181,34,0.25)]"
-                    : "border border-[#9c9c9c] text-[#9c9c9c] hover:border-[#2aae7a] hover:text-[#2aae7a]"
-                }`}
-              >
-                {switchingRole && currentRole !== "supplier"
-                  ? "Switching..."
-                  : "Supplier"}
-              </button>
-            )}
-          </div>
-
-          {/* Helper Text */}
-          <p className="text-[9.56px] text-[#9c9c9c] text-center mt-[13.5px]">
-            Switch between your buyer and supplier profile instantly
-          </p>
+      {/* Select Profile Section - Always show */}
+      <div className="bg-white rounded-[11.25px] shadow-[0px_1.13px_3.38px_0px_rgba(0,0,0,0.25)] p-[13.5px] relative">
+        {/* Section Header */}
+        <div className="flex items-center gap-[11.25px] mb-[22.5px]">
+          <h2 className="text-[13.5px] font-semibold text-[#0d1b2a]">
+            Select Profile
+          </h2>
         </div>
-      )}
+
+        {/* Divider Line */}
+        <div className="absolute left-0 top-[50.63px] w-full h-[0.75px] bg-[#e5e7eb]" />
+
+        {/* Role Buttons */}
+        <div className="flex gap-[16.88px] mt-[16.88px]">
+          {/* Buyer Button */}
+          <button
+            onClick={() => hasBuyerRole && handleRoleSwitch("buyer")}
+            disabled={switchingRole || currentRole === "buyer" || !hasBuyerRole}
+            className={`flex-1 h-[36.56px] px-[5.63px] py-[8.44px] rounded-[6.75px] text-[11.25px] font-semibold transition-all ${
+              currentRole === "buyer"
+                ? "bg-[#eeffef] border border-[#2aae7a] text-[#2aae7a] shadow-[0px_0px_5.63px_0px_rgba(24,181,34,0.25)]"
+                : !hasBuyerRole
+                ? "border border-[#e5e5e5] text-[#d1d5db] bg-[#f9fafb] cursor-not-allowed"
+                : "border border-[#9c9c9c] text-[#9c9c9c] hover:border-[#2aae7a] hover:text-[#2aae7a]"
+            }`}
+            title={!hasBuyerRole ? "Buyer role not available. Contact support to get access." : ""}
+          >
+            {switchingRole && currentRole !== "buyer"
+              ? "Switching..."
+              : !hasBuyerRole
+              ? "Buyer (Unavailable)"
+              : "Buyer"}
+          </button>
+
+          {/* Supplier Button */}
+          <button
+            onClick={() => hasSupplierRole && handleRoleSwitch("supplier")}
+            disabled={switchingRole || currentRole === "supplier" || !hasSupplierRole}
+            className={`flex-1 h-[36.56px] px-[5.63px] py-[8.44px] rounded-[6.75px] text-[11.25px] font-semibold transition-all ${
+              currentRole === "supplier"
+                ? "bg-[#eeffef] border border-[#2aae7a] text-[#2aae7a] shadow-[0px_0px_5.63px_0px_rgba(24,181,34,0.25)]"
+                : !hasSupplierRole
+                ? "border border-[#e5e5e5] text-[#d1d5db] bg-[#f9fafb] cursor-not-allowed"
+                : "border border-[#9c9c9c] text-[#9c9c9c] hover:border-[#2aae7a] hover:text-[#2aae7a]"
+            }`}
+            title={!hasSupplierRole ? "Supplier role not available. Contact support to get access." : ""}
+          >
+            {switchingRole && currentRole !== "supplier"
+              ? "Switching..."
+              : !hasSupplierRole
+              ? "Supplier (Unavailable)"
+              : "Supplier"}
+          </button>
+        </div>
+
+        {/* Helper Text */}
+        <p className="text-[9.56px] text-[#9c9c9c] text-center mt-[13.5px]">
+          {hasMultipleRoles 
+            ? "Switch between your buyer and supplier profile instantly"
+            : "Contact support to unlock additional roles"}
+        </p>
+      </div>
 
       {/* Personal Information Section */}
       <div className="bg-white rounded-[11.25px] shadow-[0px_1.13px_3.38px_0px_rgba(0,0,0,0.25)] p-[13.5px] relative">

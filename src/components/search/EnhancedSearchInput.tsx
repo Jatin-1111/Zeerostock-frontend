@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Search, Clock, TrendingUp, X } from "lucide-react";
 import { searchService } from "@/services/search.service";
 import { useAuth } from "@/contexts/AuthContext";
@@ -22,6 +22,7 @@ export default function EnhancedSearchInput({
   autoFocus = false,
 }: EnhancedSearchInputProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { isAuthenticated } = useAuth();
   const [query, setQuery] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
@@ -32,6 +33,14 @@ export default function EnhancedSearchInput({
   const [isLoading, setIsLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Sync query state with URL parameter
+  useEffect(() => {
+    const urlQuery = searchParams.get("q");
+    if (urlQuery && urlQuery !== query) {
+      setQuery(urlQuery);
+    }
+  }, [searchParams]);
 
   // Load popular and recent searches on mount
   useEffect(() => {

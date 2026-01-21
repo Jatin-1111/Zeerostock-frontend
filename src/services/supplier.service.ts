@@ -74,14 +74,23 @@ export interface SupplierDashboardStats {
     price_after: number;
     views_count: number;
     watchers_count: number;
+    quantity: number;
+    category_name: string;
     created_at: string;
   }>;
   rfqMatches?: {
+    totalMatches?: number;
     topMatch?: {
       title: string;
       matchPercentage: number;
       estimatedValue: number;
     };
+  };
+  performance?: {
+    rating?: number;
+    responseRate?: number;
+    onTimeDelivery?: number;
+    quoteWinRate?: number;
   };
 }
 

@@ -202,7 +202,7 @@ export default function SupplierDashboard() {
                 RFQ Matches
               </p>
               <p className="text-[18px] font-semibold text-[#0d1b2a] leading-normal">
-                5
+                {stats.rfqMatches?.totalMatches || 0}
               </p>
             </div>
           </div>
@@ -302,9 +302,11 @@ export default function SupplierDashboard() {
                         {listing.title}
                       </h3>
                       <div className="flex items-center gap-1 mb-1.5">
-                        <span className="bg-[#eeffef] px-[7px] py-[2px] rounded-full text-[9px] font-medium text-[#2aae7a]">
-                          Electronics
-                        </span>
+                        {listing.category_name && (
+                          <span className="bg-[#eeffef] px-[7px] py-[2px] rounded-full text-[9px] font-medium text-[#2aae7a]">
+                            {listing.category_name}
+                          </span>
+                        )}
                         <span className="bg-[#eeffef] px-[7px] py-[2px] rounded-full text-[9px] font-medium text-[#2aae7a]">
                           Active
                         </span>
@@ -316,7 +318,6 @@ export default function SupplierDashboard() {
                         <span className="font-medium">
                           {listing.watchers_count} Watching
                         </span>
-                        <span className="font-medium">12 Bids</span>
                       </div>
                     </div>
                     <div className="text-right self-start pt-1">
@@ -324,7 +325,7 @@ export default function SupplierDashboard() {
                         {formatCurrency(listing.price_after)}
                       </p>
                       <p className="text-[12px] font-medium text-[#9c9c9c] mb-4">
-                        600 units
+                        {listing.quantity} units
                       </p>
                       <div className="flex items-center gap-1 text-[13px] text-[#0d1b2a]">
                         <Clock className="w-3.5 h-3.5" />
@@ -351,8 +352,12 @@ export default function SupplierDashboard() {
 
             {/* Rating Display */}
             <div className="flex items-center justify-center mb-3">
-              <p className="text-[22px] font-medium text-[#2aae7a]">4.8</p>
-              <Star className="w-5 h-5 text-[#2aae7a] fill-[#2aae7a] ml-1" />
+              <p className="text-[22px] font-medium text-[#2aae7a]">
+                {stats.performance?.rating?.toFixed(1) || "N/A"}
+              </p>
+              {stats.performance?.rating && (
+                <Star className="w-5 h-5 text-[#2aae7a] fill-[#2aae7a] ml-1" />
+              )}
             </div>
             <p className="text-[12px] font-medium text-[#9c9c9c] text-center mb-4">
               Supplier Rating
@@ -365,7 +370,9 @@ export default function SupplierDashboard() {
                   Response Rate
                 </span>
                 <span className="text-[12px] font-medium text-[#2aae7a]">
-                  98%
+                  {stats.performance?.responseRate
+                    ? `${stats.performance.responseRate}%`
+                    : "N/A"}
                 </span>
               </div>
               <div className="flex justify-between items-center">
@@ -373,7 +380,9 @@ export default function SupplierDashboard() {
                   On-Time Delivery
                 </span>
                 <span className="text-[12px] font-medium text-[#2aae7a]">
-                  96%
+                  {stats.performance?.onTimeDelivery
+                    ? `${stats.performance.onTimeDelivery}%`
+                    : "N/A"}
                 </span>
               </div>
               <div className="flex justify-between items-center">
@@ -381,7 +390,9 @@ export default function SupplierDashboard() {
                   Quote Win Rate
                 </span>
                 <span className="text-[12px] font-medium text-[#2aae7a]">
-                  36%
+                  {stats.performance?.quoteWinRate
+                    ? `${stats.performance.quoteWinRate}%`
+                    : "N/A"}
                 </span>
               </div>
             </div>

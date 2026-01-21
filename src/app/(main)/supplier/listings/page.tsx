@@ -155,7 +155,7 @@ export default function SupplierListings() {
                   className="bg-white rounded-[10px] overflow-hidden relative flex flex-col"
                   style={{
                     boxShadow: "0px 0px 3px 0px rgba(0, 0, 0, 0.25)",
-                    height: "275px",
+                    height: "375px",
                   }}
                 >
                   {/* Status Badge */}
@@ -179,7 +179,7 @@ export default function SupplierListings() {
 
                   {/* Product Image */}
                   <div
-                    className="w-full h-[99px] bg-gray-200 rounded-[10px] m-[7.5px] overflow-hidden"
+                    className="w-full bg-gray-200 rounded-[10px] m-[7.5px] overflow-hidden"
                     style={{ width: "calc(100% - 15px)" }}
                   >
                     {listing.image_url ? (

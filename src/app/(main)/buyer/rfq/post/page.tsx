@@ -112,7 +112,7 @@ export default function PostRFQPage() {
       category: "General Units",
       items: ["pieces", "boxes", "pallets"],
     },
-    { category: "Weight", items: ["kg", "lbs", "tons"] },
+    { category: "Weight", items: ["Kg", "lbs", "tons"] },
     { category: "Length", items: ["meters", "feet"] },
     { category: "Volume", items: ["liters", "gallons"] },
   ];

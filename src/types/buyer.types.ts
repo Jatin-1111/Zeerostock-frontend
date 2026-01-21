@@ -569,7 +569,7 @@ export type RFQStatus = "active" | "closed" | "expired" | "fulfilled";
 export type QuoteStatus = "pending" | "accepted" | "rejected" | "expired";
 export type RFQUnit =
   | "pieces"
-  | "kg"
+  | "Kg"
   | "lbs"
   | "tons"
   | "liters"

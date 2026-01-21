@@ -114,7 +114,7 @@ export default function NewListing() {
     lengthMax: "",
     lengthUnit: "mm",
     weightPerUnit: "",
-    weightUnit: "kg",
+    weightUnit: "Kg",
     manufacturingProcess: "",
     // Compliance & Certification
     certifications: [],

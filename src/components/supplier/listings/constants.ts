@@ -14,7 +14,7 @@ export const CONDITION_OPTIONS = [
 
 export const UNIT_OPTIONS = [
   { value: "pieces", label: "Pieces" },
-  { value: "kg", label: "Kilograms" },
+  { value: "Kg", label: "Kilograms" },
   { value: "tons", label: "Tons" },
   { value: "liters", label: "Liters" },
   { value: "meters", label: "Meters" },

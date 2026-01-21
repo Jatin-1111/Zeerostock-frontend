@@ -172,7 +172,7 @@ export default function SupplierListings() {
                           : "#fee2e2",
                     }}
                   >
-                    <p className="text-[7.5px] font-medium leading-normal capitalize">
+                    <p className="text-[7.5px] text-[#0d1b2a] font-medium leading-normal capitalize">
                       {listing.status}
                     </p>
                   </div>
@@ -285,7 +285,7 @@ export default function SupplierListings() {
                           Edit
                         </span>
                       </Link>
-                      <Link
+                      {/* <Link
                         href={`/supplier/analytics?product=${listing.id}`}
                         className="flex-1 h-[25px] flex items-center justify-center gap-1 px-2.5 py-2 bg-[#1e3a8a] rounded-[7.5px] hover:bg-[#1e40af] transition-colors"
                       >
@@ -293,7 +293,7 @@ export default function SupplierListings() {
                         <span className="text-[8px] font-medium text-white">
                           Analytics
                         </span>
-                      </Link>
+                      </Link> */}
                     </div>
                   </div>
                 </div>

@@ -55,7 +55,7 @@ export default function GettingStartedGuide({
           "We ensure all transactions are secure and transparent from start to finish: Secure Escrow All payments are held in a secure escrow account and are released to the supplier only after the buyer confirms successful delivery. Order Tracking Monitor the status of your order from payment to shipment and delivery directly from your dashboard. Invoices & Download Options Access and download all transaction invoices and order-related documents for your records.",
       },
     ],
-    []
+    [],
   );
 
   // Filter sections based on search query
@@ -66,52 +66,41 @@ export default function GettingStartedGuide({
     return sections.filter(
       (section) =>
         section.title.toLowerCase().includes(query) ||
-        section.content.toLowerCase().includes(query)
+        section.content.toLowerCase().includes(query),
     );
   }, [searchQuery, sections]);
   return (
     <AnimatePresence>
       {isOpen && (
-        <>
-          {/* Backdrop */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-black/50"
-            onClick={onClose}
-          />
+        <motion.div
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: "auto", opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
+          transition={{ duration: 0.4, ease: "easeInOut" }}
+          className="mt-[16px] overflow-hidden"
+        >
+          <div className="rounded-[10px] bg-white p-[15px]">
+            {/* Header */}
+            <div className="mb-[15px] flex items-center justify-between px-5 py-3">
+              <div>
+                <h1 className="mb-[4px] text-[14px] font-semibold leading-none text-[#0d1b2a]">
+                  Getting Started Guide
+                </h1>
+                <p className="text-[9px] font-medium leading-normal text-[#9c9c9c]">
+                  Learn how to start using Zeerostock efficiently within
+                  minutes.
+                </p>
+              </div>
+              <button
+                onClick={onClose}
+                className="flex h-[24px] w-[24px] items-center justify-center rounded-full bg-gray-100 transition-colors hover:bg-gray-200"
+              >
+                <X className="h-[12px] w-[12px] text-[#0d1b2a]" />
+              </button>
+            </div>
 
-          {/* Slide-in Panel */}
-          <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed right-0 top-0 z-50 h-full overflow-y-auto bg-white shadow-2xl"
-            style={{ width: "465px", maxWidth: "90vw" }}
-          >
-            {/* Close Button */}
-            <button
-              onClick={onClose}
-              className="absolute right-[11px] top-[11px] z-10 flex h-[17px] w-[17px] items-center justify-center rounded-full bg-white shadow-md transition-colors hover:bg-gray-100"
-            >
-              <X className="h-[9px] w-[9px] text-[#0d1b2a]" />
-            </button>
-
-            {/* Content */}
-            <div className="p-[15px]">
-              {/* Header */}
-              <h1 className="mb-[4px] text-[14px] font-semibold leading-none text-[#0d1b2a]">
-                Getting Started Guide
-              </h1>
-
-              <p className="mb-[11px] text-[9px] font-medium leading-normal text-[#9c9c9c]">
-                Learn how to start using Zeerostock efficiently within minutes.
-              </p>
-
-              {/* Green Info Box */}
+            {/* Green Info Box */}
+            <div className="px-5">
               <div
                 className="mb-[15px] flex items-center justify-center rounded-[8px] bg-[#eeffef]"
                 style={{ height: "64px" }}
@@ -123,8 +112,10 @@ export default function GettingStartedGuide({
                   </p>
                 </div>
               </div>
+            </div>
 
-              {/* Search Bar */}
+            {/* Search Bar */}
+            <div className="px-5">
               <div
                 className="mb-[15px] flex items-center justify-between rounded-[8px] bg-[rgba(235,235,235,0.65)] px-[9px] shadow-[0px_0px_1.6875px_0px_rgba(0,0,0,0.4)]"
                 style={{ height: "24px" }}
@@ -144,8 +135,10 @@ export default function GettingStartedGuide({
                   </p>
                 </div>
               </div>
+            </div>
 
-              {/* Sections */}
+            {/* Sections */}
+            <div className="px-5 py-3">
               {filteredSections.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-[40px]">
                   <p className="text-[9px] font-medium text-[#9c9c9c]">
@@ -363,8 +356,8 @@ export default function GettingStartedGuide({
                 </>
               )}
             </div>
-          </motion.div>
-        </>
+          </div>
+        </motion.div>
       )}
     </AnimatePresence>
   );

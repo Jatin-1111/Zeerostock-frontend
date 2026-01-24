@@ -4,11 +4,11 @@ import { useEffect, useState, useCallback } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { buyerService } from "@/services/buyer.service";
 import { CreditCard } from "lucide-react";
-import BuyerPaymentMethodsStats from "@/components/buyer-payment-methods/BuyerPaymentMethodsStats";
-import BuyerSavedPaymentMethods from "@/components/buyer-payment-methods/BuyerSavedPaymentMethods";
-import BuyerSecurityProtection from "@/components/buyer-payment-methods/BuyerSecurityProtection";
-import BuyerTransactionHistoryTable from "@/components/buyer-payment-methods/BuyerTransactionHistoryTable";
-import BuyerInvoicesList from "@/components/buyer-payment-methods/BuyerInvoicesList";
+import PaymentMethodsStats from "@/components/shared-payment-methods/PaymentMethodsStats";
+import SavedPaymentMethods from "@/components/shared-payment-methods/SavedPaymentMethods";
+import SecurityProtection from "@/components/shared-payment-methods/SecurityProtection";
+import TransactionHistoryTable from "@/components/shared-payment-methods/TransactionHistoryTable";
+import InvoicesList from "@/components/shared-payment-methods/InvoicesList";
 
 interface PaymentSummary {
   total_transactions: number;
@@ -56,7 +56,7 @@ export default function BuyerPaymentMethodsPage() {
     "payment-methods" | "transaction-history" | "invoices"
   >("payment-methods");
   const [paymentSummary, setPaymentSummary] = useState<PaymentSummary | null>(
-    null
+    null,
   );
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [invoices, setInvoices] = useState<Invoice[]>([]);
@@ -236,7 +236,7 @@ export default function BuyerPaymentMethodsPage() {
         </div>
 
         {/* Stats Cards */}
-        <BuyerPaymentMethodsStats summary={paymentSummary} />
+        <PaymentMethodsStats summary={paymentSummary} />
 
         {/* Tabs Navigation */}
         <div className="mb-[14px] mt-[14px]">
@@ -254,7 +254,7 @@ export default function BuyerPaymentMethodsPage() {
                       tab.id as
                         | "payment-methods"
                         | "transaction-history"
-                        | "invoices"
+                        | "invoices",
                     )
                   }
                   className={`relative cursor-pointer border-none bg-transparent py-[5px] text-[11px] font-medium leading-[14px] tracking-[0.3px] transition-colors duration-200 ${
@@ -275,25 +275,13 @@ export default function BuyerPaymentMethodsPage() {
         {/* Tab Content */}
         {activeTab === "payment-methods" && (
           <div className="flex flex-col gap-[17px]">
-            <BuyerSavedPaymentMethods
-              methods={[]}
-              loading={false}
-              onAdd={() =>
-                alert("Add payment method functionality coming soon")
-              }
-              onEdit={(id: string) =>
-                alert(`Edit payment method ${id} coming soon`)
-              }
-              onDelete={(id: string) =>
-                alert(`Delete payment method ${id} coming soon`)
-              }
-            />
-            <BuyerSecurityProtection />
+            <SavedPaymentMethods methods={[]} loading={false} />
+            <SecurityProtection />
           </div>
         )}
 
         {activeTab === "transaction-history" && (
-          <BuyerTransactionHistoryTable
+          <TransactionHistoryTable
             transactions={transactions}
             loading={loading}
             error={error}
@@ -304,7 +292,7 @@ export default function BuyerPaymentMethodsPage() {
         )}
 
         {activeTab === "invoices" && (
-          <BuyerInvoicesList
+          <InvoicesList
             invoices={invoices}
             loading={loading}
             error={error}

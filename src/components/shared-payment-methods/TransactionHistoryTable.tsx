@@ -3,15 +3,23 @@
 interface Transaction {
   id: string;
   transaction_id: string;
+  order_id: string;
   order_number: string;
   amount: number;
   payment_method: string;
+  payment_gateway: string;
   status: string;
   created_at: string;
-  supplier_name: string;
+  updated_at: string;
+  // Supplier view fields
+  buyer_name?: string;
+  buyer_company?: string;
+  // Buyer view fields
+  supplier_name?: string;
+  supplier_company?: string;
 }
 
-interface BuyerTransactionHistoryTableProps {
+interface TransactionHistoryTableProps {
   transactions: Transaction[];
   loading: boolean;
   error: string | null;
@@ -20,19 +28,21 @@ interface BuyerTransactionHistoryTableProps {
   onPageChange: (page: number) => void;
 }
 
-export default function BuyerTransactionHistoryTable({
+export default function TransactionHistoryTable({
   transactions,
   loading,
   error,
   currentPage,
   totalPages,
   onPageChange,
-}: BuyerTransactionHistoryTableProps) {
+}: TransactionHistoryTableProps) {
   const getStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
       case "completed":
+      case "success":
         return "bg-green-100 text-green-700 border-green-200";
       case "pending":
+      case "processing":
         return "bg-yellow-100 text-yellow-700 border-yellow-200";
       case "failed":
         return "bg-red-100 text-red-700 border-red-200";
@@ -48,6 +58,11 @@ export default function BuyerTransactionHistoryTable({
       </div>
     );
   }
+
+  // Determine if this is buyer or supplier view
+  const isBuyerView =
+    transactions.length > 0 && transactions[0].supplier_name !== undefined;
+  const counterpartyLabel = isBuyerView ? "SUPPLIER" : "BUYER";
 
   return (
     <div className="bg-white rounded-[15px] shadow-md overflow-hidden">
@@ -73,7 +88,7 @@ export default function BuyerTransactionHistoryTable({
                     ORDER
                   </th>
                   <th className="px-3 py-2 text-left font-medium text-[8px] text-[#0d1b2a]">
-                    SUPPLIER
+                    {counterpartyLabel}
                   </th>
                   <th className="px-3 py-2 text-left font-medium text-[8px] text-[#0d1b2a]">
                     AMOUNT
@@ -99,7 +114,9 @@ export default function BuyerTransactionHistoryTable({
                       {txn.order_number}
                     </td>
                     <td className="px-4.5 py-3 text-[10px] text-gray-900">
-                      {txn.supplier_name}
+                      {isBuyerView
+                        ? txn.supplier_name || txn.supplier_company
+                        : txn.buyer_name || txn.buyer_company}
                     </td>
                     <td className="px-4.5 py-3 text-[10px] text-gray-900 font-semibold">
                       ₹{txn.amount.toLocaleString("en-IN")}
@@ -110,7 +127,7 @@ export default function BuyerTransactionHistoryTable({
                     <td className="px-4.5 py-3">
                       <span
                         className={`inline-flex px-2 py-0.5 rounded-full text-[9px] font-medium border ${getStatusColor(
-                          txn.status
+                          txn.status,
                         )}`}
                       >
                         {txn.status}

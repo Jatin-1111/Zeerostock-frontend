@@ -19,7 +19,7 @@ export default function TestimonialSection() {
   const opacity = useTransform(
     x,
     [-200, -100, 0, 100, 200],
-    [0.5, 0.8, 1, 0.8, 0.5]
+    [0.5, 0.8, 1, 0.8, 0.5],
   );
   const scale = useTransform(x, [-200, 0, 200], [0.95, 1, 0.95]);
 
@@ -58,13 +58,13 @@ export default function TestimonialSection() {
   const prevTestimonial = useCallback(() => {
     setDirection(-1);
     setCurrentIndex(
-      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length,
     );
   }, [testimonials.length]);
 
   const handleDragEnd = (
     e: MouseEvent | TouchEvent | PointerEvent,
-    info: PanInfo
+    info: PanInfo,
   ) => {
     const threshold = 50;
     const velocity = info.velocity.x;
@@ -140,7 +140,13 @@ export default function TestimonialSection() {
                   duration: 0.25,
                   ease: [0.4, 0, 0.2, 1],
                 }}
-                style={{ x, rotate, scale }}
+                style={{
+                  x,
+                  rotate,
+                  scale,
+                  boxShadow:
+                    "0 4px 6px -1px #18B52280, 0 2px 4px -2px #18B52280",
+                }}
                 drag="x"
                 dragConstraints={{ left: 0, right: 0 }}
                 dragElastic={0.15}
@@ -152,7 +158,7 @@ export default function TestimonialSection() {
                 onDragEnd={handleDragEnd}
                 whileDrag={{ scale: 1.02, cursor: "grabbing" }}
                 whileTap={{ cursor: "grabbing" }}
-                className="relative bg-[#eeffef] rounded-xl sm:rounded-2xl md:rounded-[20px] p-4 sm:p-6 md:p-[21px] lg:p-[32px] min-h-52 sm:min-h-56 md:min-h-[240px] flex flex-col justify-center shadow-sm touch-pan-y cursor-grab select-none"
+                className="relative bg-[#eeffef] rounded-xl sm:rounded-2xl md:rounded-[20px] p-4 sm:p-6 md:p-[21px] lg:p-[32px] min-h-52 sm:min-h-56 md:min-h-[240px] flex flex-col justify-center touch-pan-y cursor-grab select-none"
               >
                 {/* Content */}
                 <div className="text-center flex flex-col items-center gap-3 sm:gap-4 md:gap-[16px]">

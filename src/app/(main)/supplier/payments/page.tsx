@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react";
 import { supplierService } from "@/services/supplier.service";
 import { useAuth } from "@/contexts/AuthContext";
-import PaymentMethodsStats from "@/components/payment-methods/PaymentMethodsStats";
-import SavedPaymentMethods from "@/components/payment-methods/SavedPaymentMethods";
-import SecurityProtection from "@/components/payment-methods/SecurityProtection";
-import TransactionHistoryTable from "@/components/payment-methods/TransactionHistoryTable";
-import InvoicesList from "@/components/payment-methods/InvoicesList";
+import PaymentMethodsStats from "@/components/shared-payment-methods/PaymentMethodsStats";
+import SavedPaymentMethods from "@/components/shared-payment-methods/SavedPaymentMethods";
+import SecurityProtection from "@/components/shared-payment-methods/SecurityProtection";
+import TransactionHistoryTable from "@/components/shared-payment-methods/TransactionHistoryTable";
+import InvoicesList from "@/components/shared-payment-methods/InvoicesList";
 
 interface PaymentSummary {
   total_transactions: number;
@@ -55,11 +55,13 @@ export default function PaymentMethodsPage() {
     "payment-methods" | "transaction-history" | "invoices"
   >("payment-methods");
   const [paymentSummary, setPaymentSummary] = useState<PaymentSummary | null>(
-    null
+    null,
   );
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [invoices, setInvoices] = useState<Invoice[]>([]);
+  const [paymentMethods, setPaymentMethods] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [paymentMethodsLoading, setPaymentMethodsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [transactionPage, setTransactionPage] = useState(1);
   const [invoicePage, setInvoicePage] = useState(1);
@@ -73,6 +75,27 @@ export default function PaymentMethodsPage() {
   useEffect(() => {
     fetchInvoiceData();
   }, [invoicePage]);
+
+  useEffect(() => {
+    if (activeTab === "payment-methods") {
+      fetchPaymentMethods();
+    }
+  }, [activeTab]);
+
+  const fetchPaymentMethods = async () => {
+    try {
+      setPaymentMethodsLoading(true);
+      const response = await supplierService.getPaymentMethods();
+
+      if (response.success && response.data) {
+        setPaymentMethods(response.data);
+      }
+    } catch (err: any) {
+      console.error("Error fetching payment methods:", err);
+    } finally {
+      setPaymentMethodsLoading(false);
+    }
+  };
 
   const fetchPaymentData = async () => {
     try {
@@ -249,7 +272,7 @@ export default function PaymentMethodsPage() {
                       tab.id as
                         | "payment-methods"
                         | "transaction-history"
-                        | "invoices"
+                        | "invoices",
                     )
                   }
                   className={`relative cursor-pointer border-none bg-transparent py-[5px] text-[11px] font-medium leading-[14px] tracking-[0.3px] transition-colors duration-200 ${
@@ -271,11 +294,9 @@ export default function PaymentMethodsPage() {
         {activeTab === "payment-methods" && (
           <div className="flex flex-col gap-[17px]">
             <SavedPaymentMethods
-              methods={[]}
-              loading={false}
-              onAdd={() => alert("Add payout method functionality coming soon")}
-              onEdit={(id) => alert(`Edit payout method ${id} coming soon`)}
-              onDelete={(id) => alert(`Delete payout method ${id} coming soon`)}
+              methods={paymentMethods}
+              loading={paymentMethodsLoading}
+              onRefresh={fetchPaymentMethods}
             />
             <SecurityProtection />
           </div>

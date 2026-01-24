@@ -602,4 +602,76 @@ export const supplierService = {
   > {
     return apiRequest("get", "/supplier/quotes");
   },
+
+  /**
+   * Get all payment methods
+   */
+  async getPaymentMethods(): Promise<
+    ApiResponse<
+      Array<{
+        id: string;
+        type: "card" | "bank" | "upi";
+        is_primary: boolean;
+        is_verified: boolean;
+        status: string;
+        card_last_four?: string;
+        card_brand?: string;
+        card_holder_name?: string;
+        card_expiry_month?: number;
+        card_expiry_year?: number;
+        bank_account_holder_name?: string;
+        bank_account_number_last_four?: string;
+        bank_name?: string;
+        paypal_email?: string;
+        upi_id?: string;
+        upi_provider?: string;
+        nickname?: string;
+        processing_fee_percent?: number;
+        processing_time?: string;
+        created_at: string;
+        last_used_at?: string;
+        verified_at?: string;
+      }>
+    >
+  > {
+    return apiRequest("get", "/supplier/payment-methods");
+  },
+
+  /**
+   * Add a new payment method
+   */
+  async addPaymentMethod(data: {
+    type: "card" | "bank" | "escrow" | "upi";
+    cardNumber?: string;
+    expiryDate?: string;
+    cvv?: string;
+    cardName?: string;
+    emailId?: string;
+    password?: string;
+    upiId?: string;
+    nickname?: string;
+  }): Promise<ApiResponse<any>> {
+    return apiRequest("post", "/supplier/payment-methods", data);
+  },
+
+  /**
+   * Set a payment method as primary
+   */
+  async setPrimaryPaymentMethod(id: string): Promise<ApiResponse<any>> {
+    return apiRequest("put", `/supplier/payment-methods/${id}/set-primary`);
+  },
+
+  /**
+   * Delete a payment method
+   */
+  async deletePaymentMethod(id: string): Promise<ApiResponse<void>> {
+    return apiRequest("delete", `/supplier/payment-methods/${id}`);
+  },
+
+  /**
+   * Verify a payment method
+   */
+  async verifyPaymentMethod(id: string): Promise<ApiResponse<any>> {
+    return apiRequest("post", `/supplier/payment-methods/${id}/verify`);
+  },
 };

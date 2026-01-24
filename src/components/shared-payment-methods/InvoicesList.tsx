@@ -1,22 +1,32 @@
 "use client";
 
-interface Transaction {
+import { Download } from "lucide-react";
+
+interface Invoice {
   id: string;
-  transaction_id: string;
+  invoice_number: string;
   order_id: string;
   order_number: string;
   amount: number;
-  payment_method: string;
-  payment_gateway: string;
+  tax_amount: number;
+  total_amount: number;
   status: string;
+  issue_date: string;
+  due_date: string;
+  paid_date: string | null;
   created_at: string;
-  updated_at: string;
-  buyer_name: string;
-  buyer_company: string;
+  // Supplier view fields
+  buyer_name?: string;
+  buyer_company?: string;
+  buyer_email?: string;
+  // Buyer view fields
+  supplier_name?: string;
+  supplier_company?: string;
+  supplier_email?: string;
 }
 
-interface TransactionHistoryTableProps {
-  transactions: Transaction[];
+interface InvoicesListProps {
+  invoices: Invoice[];
   loading: boolean;
   error: string | null;
   currentPage: number;
@@ -24,23 +34,23 @@ interface TransactionHistoryTableProps {
   onPageChange: (page: number) => void;
 }
 
-export default function TransactionHistoryTable({
-  transactions,
+export default function InvoicesList({
+  invoices,
   loading,
   error,
   currentPage,
   totalPages,
   onPageChange,
-}: TransactionHistoryTableProps) {
+}: InvoicesListProps) {
   const getStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
+      case "paid":
       case "completed":
-      case "success":
         return "bg-green-100 text-green-700 border-green-200";
       case "pending":
       case "processing":
         return "bg-yellow-100 text-yellow-700 border-yellow-200";
-      case "failed":
+      case "overdue":
         return "bg-red-100 text-red-700 border-red-200";
       default:
         return "bg-gray-100 text-gray-700 border-gray-200";
@@ -55,16 +65,21 @@ export default function TransactionHistoryTable({
     );
   }
 
+  // Determine if this is buyer or supplier view
+  const isBuyerView =
+    invoices.length > 0 && invoices[0].supplier_name !== undefined;
+  const counterpartyLabel = isBuyerView ? "SUPPLIER" : "BUYER";
+
   return (
     <div className="bg-white rounded-[15px] shadow-md overflow-hidden">
       {loading ? (
         <div className="py-11 text-center">
           <div className="animate-spin h-6 w-6 border-[2px] border-[#2aae7a] border-t-transparent rounded-full mx-auto mb-2"></div>
-          <p className="text-gray-500 text-[9px]">Loading transactions...</p>
+          <p className="text-gray-500 text-[9px]">Loading invoices...</p>
         </div>
-      ) : transactions.length === 0 ? (
+      ) : invoices.length === 0 ? (
         <div className="py-11 text-center">
-          <p className="text-gray-500 text-[9px]">No transactions found</p>
+          <p className="text-gray-500 text-[9px]">No invoices found</p>
         </div>
       ) : (
         <>
@@ -73,61 +88,80 @@ export default function TransactionHistoryTable({
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
                   <th className="px-3 py-2 text-left font-medium text-[8px] text-[#0d1b2a]">
-                    TRANSACTION ID
+                    INVOICE #
                   </th>
                   <th className="px-3 py-2 text-left font-medium text-[8px] text-[#0d1b2a]">
-                    ORDER
+                    ORDER #
                   </th>
                   <th className="px-3 py-2 text-left font-medium text-[8px] text-[#0d1b2a]">
-                    BUYER
+                    {counterpartyLabel}
                   </th>
                   <th className="px-3 py-2 text-left font-medium text-[8px] text-[#0d1b2a]">
                     AMOUNT
                   </th>
                   <th className="px-3 py-2 text-left font-medium text-[8px] text-[#0d1b2a]">
-                    METHOD
+                    ISSUE DATE
+                  </th>
+                  <th className="px-3 py-2 text-left font-medium text-[8px] text-[#0d1b2a]">
+                    DUE DATE
                   </th>
                   <th className="px-3 py-2 text-left font-medium text-[8px] text-[#0d1b2a]">
                     STATUS
                   </th>
-                  <th className="px-3 py-2 text-left font-medium text-[8px] text-[#0d1b2a]">
-                    DATE
+                  <th className="px-3 py-2 text-center font-medium text-[8px] text-[#0d1b2a]">
+                    ACTIONS
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
-                {transactions.map((txn) => (
-                  <tr key={txn.id} className="hover:bg-gray-50">
-                    <td className="px-3 py-2 text-[8px] text-gray-600">
-                      {txn.transaction_id}
+                {invoices.map((invoice) => (
+                  <tr key={invoice.id} className="hover:bg-gray-50">
+                    <td className="px-3 py-2 text-[8px] text-gray-900 font-medium">
+                      {invoice.invoice_number}
+                    </td>
+                    <td className="px-4.5 py-3 text-[10px] text-gray-600">
+                      {invoice.order_number}
                     </td>
                     <td className="px-4.5 py-3 text-[10px] text-gray-900">
-                      {txn.order_number}
-                    </td>
-                    <td className="px-4.5 py-3 text-[10px] text-gray-900">
-                      {txn.buyer_name || txn.buyer_company}
+                      {isBuyerView
+                        ? invoice.supplier_name || invoice.supplier_company
+                        : invoice.buyer_name || invoice.buyer_company}
                     </td>
                     <td className="px-4.5 py-3 text-[10px] text-gray-900 font-semibold">
-                      ₹{txn.amount.toLocaleString("en-IN")}
+                      ₹{invoice.total_amount.toLocaleString("en-IN")}
                     </td>
                     <td className="px-4.5 py-3 text-[10px] text-gray-700">
-                      {txn.payment_method}
-                    </td>
-                    <td className="px-4.5 py-3">
-                      <span
-                        className={`inline-flex px-2 py-0.5 rounded-full text-[9px] font-medium border ${getStatusColor(
-                          txn.status
-                        )}`}
-                      >
-                        {txn.status}
-                      </span>
+                      {new Date(invoice.issue_date).toLocaleDateString(
+                        "en-IN",
+                        { year: "numeric", month: "short", day: "numeric" },
+                      )}
                     </td>
                     <td className="px-4.5 py-3 text-[10px] text-gray-700">
-                      {new Date(txn.created_at).toLocaleDateString("en-IN", {
+                      {new Date(invoice.due_date).toLocaleDateString("en-IN", {
                         year: "numeric",
                         month: "short",
                         day: "numeric",
                       })}
+                    </td>
+                    <td className="px-4.5 py-3">
+                      <span
+                        className={`inline-flex px-2 py-0.5 rounded-full text-[9px] font-medium border ${getStatusColor(
+                          invoice.status,
+                        )}`}
+                      >
+                        {invoice.status}
+                      </span>
+                    </td>
+                    <td className="px-4.5 py-3 text-center">
+                      <button
+                        onClick={() =>
+                          alert("Download functionality coming soon")
+                        }
+                        className="inline-flex items-center gap-1.5 px-2 py-1.5 text-[10px] font-medium text-[#1e3a8a] hover:bg-blue-50 rounded-lg transition-colors"
+                      >
+                        <Download className="w-3 h-3" />
+                        Download
+                      </button>
                     </td>
                   </tr>
                 ))}

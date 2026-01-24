@@ -157,9 +157,13 @@ const ReceiptIcon = () => (
 
 interface PaymentSummary {
   total_transactions: number;
-  total_received: number;
+  // Supplier fields
+  total_received?: number;
+  received_this_month?: number;
+  // Buyer fields
+  total_spent?: number;
+  spent_this_month?: number;
   pending_amount: number;
-  received_this_month: number;
 }
 
 interface PaymentMethodsStatsProps {
@@ -190,11 +194,18 @@ export default function PaymentMethodsStats({
     );
   }
 
+  // Determine if this is buyer or supplier based on available fields
+  const isBuyer = summary.total_spent !== undefined;
+  const totalAmount = isBuyer ? summary.total_spent : summary.total_received;
+  const monthAmount = isBuyer
+    ? summary.spent_this_month
+    : summary.received_this_month;
+
   const stats = [
     {
       icon: EmptyWalletIcon,
-      label: "Total Received",
-      value: `₹${(summary.total_received || 0).toLocaleString("en-IN")}`,
+      label: isBuyer ? "Total Spent" : "Total Received",
+      value: `₹${(totalAmount || 0).toLocaleString("en-IN")}`,
       subtitle: "All time",
       subtitleColor: "#9C9C9C",
       iconBgColor: "#DBEAFE",
@@ -210,7 +221,7 @@ export default function PaymentMethodsStats({
     {
       icon: DiagramIcon,
       label: "This Month",
-      value: `₹${(summary.received_this_month || 0).toLocaleString("en-IN")}`,
+      value: `₹${(monthAmount || 0).toLocaleString("en-IN")}`,
       subtitle: "+12% from last month",
       subtitleColor: "#2AAE7A",
       iconBgColor: "#EEFFEF",

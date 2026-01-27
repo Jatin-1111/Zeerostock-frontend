@@ -47,7 +47,7 @@ export default function AdminManagementPage() {
       const token = localStorage.getItem("admin_token");
       console.log(
         "Fetching admins from:",
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/admins`
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/admins`,
       );
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/admins`,
@@ -55,7 +55,7 @@ export default function AdminManagementPage() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       console.log("Fetch response status:", response.status);
@@ -84,7 +84,7 @@ export default function AdminManagementPage() {
     (admin) =>
       admin.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       admin.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      admin.adminId.toLowerCase().includes(searchTerm.toLowerCase())
+      admin.adminId.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   return (
@@ -238,15 +238,17 @@ function AdminRow({
     setShowMenu(false);
     try {
       const token = localStorage.getItem("admin_token");
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/admins/${id}/${action}`,
-        {
-          method: action === "delete" ? "DELETE" : "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const url =
+        action === "delete"
+          ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/admins/${id}`
+          : `${process.env.NEXT_PUBLIC_API_BASE_URL}/admins/${id}/${action}`;
+
+      const response = await fetch(url, {
+        method: action === "delete" ? "DELETE" : "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (!response.ok) throw new Error(`Failed to ${action} admin`);
 
@@ -322,10 +324,10 @@ function AdminRow({
           {showMenu && (
             <>
               <div
-                className="fixed inset-0 z-10"
+                className="fixed inset-0 z-9999"
                 onClick={() => setShowMenu(false)}
               />
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-20">
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-9999">
                 {admin.isFirstLogin && (
                   <button
                     onClick={() => handleAction("resend-credentials", admin.id)}
@@ -346,7 +348,7 @@ function AdminRow({
                   onClick={() =>
                     handleAction(
                       admin.isActive ? "deactivate" : "activate",
-                      admin.id
+                      admin.id,
                     )
                   }
                   className="w-full px-4 py-2 text-left text-sm hover:bg-gray-50 flex items-center gap-2"
@@ -411,7 +413,7 @@ function CreateAdminModal({
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(formData),
-        }
+        },
       );
 
       if (!response.ok) {

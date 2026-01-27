@@ -31,7 +31,7 @@ interface AdminAuthContextType {
 }
 
 const AdminAuthContext = createContext<AdminAuthContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export function AdminAuthProvider({ children }: { children: ReactNode }) {
@@ -43,7 +43,7 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
   const login = (
     accessToken: string,
     refreshToken: string,
-    user: AdminUser
+    user: AdminUser,
   ) => {
     localStorage.setItem("admin_token", accessToken);
     localStorage.setItem("admin_refresh_token", refreshToken);
@@ -76,7 +76,7 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       if (!response.ok) {
@@ -125,8 +125,12 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
     const initAuth = async () => {
       setLoading(true);
 
-      // Allow access to login page without auth check
-      if (pathname === "/admin-panel/login") {
+      // Allow access to public admin pages without auth check
+      const publicPaths = [
+        "/admin-panel/login",
+        "/admin-panel/change-password",
+      ];
+      if (publicPaths.includes(pathname || "")) {
         setLoading(false);
         return;
       }
@@ -136,7 +140,7 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
       if (
         !isAuthenticated &&
         pathname?.startsWith("/admin-panel") &&
-        pathname !== "/admin-panel/login"
+        !publicPaths.includes(pathname)
       ) {
         router.push("/admin-panel/login");
       }

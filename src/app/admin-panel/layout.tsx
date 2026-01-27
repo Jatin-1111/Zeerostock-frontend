@@ -10,11 +10,13 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const isLoginPage = pathname === "/admin-panel/login";
+  const isPublicPage =
+    pathname === "/admin-panel/login" ||
+    pathname === "/admin-panel/change-password";
 
   return (
     <AdminAuthProvider>
-      {isLoginPage ? (
+      {isPublicPage ? (
         children
       ) : (
         <AdminProtectedRoute>{children}</AdminProtectedRoute>

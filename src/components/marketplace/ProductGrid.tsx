@@ -20,7 +20,7 @@ export default function ExploreProductGrid({
   const router = useRouter();
   const searchParams = useSearchParams();
   const [searchQuery, setSearchQuery] = useState(
-    initialQuery || searchParams.get("q") || ""
+    initialQuery || searchParams.get("q") || "",
   );
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -32,6 +32,13 @@ export default function ExploreProductGrid({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [activeFilters, setActiveFilters] = useState<Record<string, any>>({});
   const [categories, setCategories] = useState<Category[]>([]);
+
+  // Determine if we need to initialize filters from URL (Category)
+  const categoryParam = searchParams.get("category") || initialCategory;
+  const shouldInitializeCategory = !!categoryParam;
+  const [isInitializing, setIsInitializing] = useState(
+    shouldInitializeCategory,
+  );
 
   // Fetch categories on mount
   useEffect(() => {
@@ -50,21 +57,22 @@ export default function ExploreProductGrid({
 
   // Initialize filters from URL parameters
   useEffect(() => {
-    const categoryName = searchParams.get("category") || initialCategory;
-    console.log("[ProductGrid] URL category param:", categoryName);
-    console.log("[ProductGrid] Categories loaded:", categories.length);
+    if (!shouldInitializeCategory) {
+      setIsInitializing(false);
+      return;
+    }
 
-    if (categoryName && categories.length > 0) {
-      // Find the category ID by name
+    if (categories.length > 0) {
+      console.log("[ProductGrid] URL category param:", categoryParam);
+
       const category = categories.find(
-        (cat) => cat.name.toLowerCase() === categoryName.toLowerCase()
+        (cat) => cat.name.toLowerCase() === categoryParam.toLowerCase(),
       );
-      console.log("[ProductGrid] Found category:", category);
 
       if (category) {
         console.log(
           "[ProductGrid] Setting activeFilters with category ID:",
-          category.id
+          category.id,
         );
         setActiveFilters((prev) => ({
           ...prev,
@@ -73,13 +81,16 @@ export default function ExploreProductGrid({
       } else {
         console.warn(
           "[ProductGrid] Category not found for name:",
-          categoryName
+          categoryParam,
         );
       }
+      setIsInitializing(false);
     }
-  }, [initialCategory, searchParams, categories]);
+  }, [shouldInitializeCategory, categoryParam, categories]);
 
   const fetchProducts = async (query?: string) => {
+    if (isInitializing) return; // Prevent double-fetch if initializing filters
+
     try {
       setIsLoading(true);
       setError(null);
@@ -139,7 +150,7 @@ export default function ExploreProductGrid({
       }
 
       if (query) {
-        apiFilters.search = query;
+        apiFilters.q = query;
       }
 
       const response = await marketplaceService.getProducts(apiFilters);
@@ -178,7 +189,7 @@ export default function ExploreProductGrid({
     const query = searchParams.get("q");
     fetchProducts(query || undefined);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage, sortBy, activeFilters, searchParams]);
+  }, [currentPage, sortBy, activeFilters, searchParams, isInitializing]);
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);

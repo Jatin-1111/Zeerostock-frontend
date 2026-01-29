@@ -28,7 +28,7 @@ export default function OrderSummary() {
       const itemCount = items.length;
       const subtotal = items.reduce(
         (sum, item) => sum + item.price * item.quantity,
-        0
+        0,
       );
       const savings = items.reduce((sum, item) => {
         if (item.originalPrice && item.originalPrice > item.price) {
@@ -43,7 +43,7 @@ export default function OrderSummary() {
       // Free shipping for orders > 25000
       const shipping = subtotal > 25000 ? 0 : 500;
 
-      const total = subtotal + shipping - summary.couponDiscount;
+      const total = subtotal + tax + shipping - summary.couponDiscount;
 
       setSummary({
         itemCount,
@@ -104,13 +104,13 @@ export default function OrderSummary() {
   return (
     <div className="w-full space-y-2 sm:space-y-2.5 md:space-y-3">
       {/* Order Summary */}
-      <div className="w-full bg-white rounded-xl sm:rounded-2xl shadow-md p-2 sm:p-3 md:p-4">
-        <h3 className="text-[10px] sm:text-xs md:text-sm font-medium text-[#0d1b2a] mb-2 sm:mb-2.5 md:mb-3">
+      <div className="w-full bg-white rounded-xl sm:rounded-2xl shadow-md p-2 sm:p-3 md:p-2.5">
+        <h3 className="text-[10px] sm:text-xs md:text-[10px] font-medium text-[#0d1b2a] mb-2 sm:mb-2.5 md:mb-2">
           Order Summary
         </h3>
 
-        <div className="space-y-2 sm:space-y-2.5 mb-2.5 sm:mb-3 md:mb-3.5">
-          <div className="flex justify-between items-center text-[10px] sm:text-xs md:text-sm">
+        <div className="space-y-2 sm:space-y-2.5 mb-2.5 sm:mb-3 md:mb-2.5">
+          <div className="flex justify-between items-center text-[10px] sm:text-xs md:text-[10px]">
             <span className="font-medium text-[#9c9c9c]">
               Subtotal ({summary.itemCount} items)
             </span>
@@ -119,7 +119,7 @@ export default function OrderSummary() {
             </span>
           </div>
           {summary.savings > 0 && (
-            <div className="flex justify-between items-center text-[10px] sm:text-xs md:text-sm">
+            <div className="flex justify-between items-center text-[10px] sm:text-xs md:text-[10px]">
               <span className="font-medium text-[#2aae7a]">Total Saving</span>
               <span className="font-semibold text-[#2aae7a] tracking-wide">
                 -₹{summary.savings.toLocaleString("en-IN")}
@@ -127,7 +127,7 @@ export default function OrderSummary() {
             </div>
           )}
           {summary.couponDiscount > 0 && (
-            <div className="flex justify-between items-center text-[10px] sm:text-xs md:text-sm">
+            <div className="flex justify-between items-center text-[10px] sm:text-xs md:text-[10px]">
               <span className="font-medium text-[#2aae7a]">
                 Coupon Discount
               </span>
@@ -136,13 +136,13 @@ export default function OrderSummary() {
               </span>
             </div>
           )}
-          <div className="flex justify-between items-center text-[10px] sm:text-xs md:text-sm">
+          <div className="flex justify-between items-center text-[10px] sm:text-xs md:text-[10px]">
             <span className="font-medium text-[#9c9c9c]">Estimated Tax</span>
             <span className="font-semibold text-[#bebebe] tracking-wide">
               ₹{summary.tax.toLocaleString("en-IN")}
             </span>
           </div>
-          <div className="flex justify-between items-center text-[10px] sm:text-xs md:text-sm">
+          <div className="flex justify-between items-center text-[10px] sm:text-xs md:text-[10px]">
             <span className="font-medium text-[#9c9c9c]">Shipping</span>
             <span className="font-semibold text-[#2aae7a] tracking-wide">
               {summary.shipping === 0
@@ -152,12 +152,12 @@ export default function OrderSummary() {
           </div>
         </div>
 
-        <div className="border-t border-gray-300 pt-2 sm:pt-2.5 md:pt-3 mb-3 sm:mb-4">
+        <div className="border-t border-gray-300 pt-2 sm:pt-2.5 md:pt-2 mb-3 sm:mb-4">
           <div className="flex justify-between items-center">
-            <span className="text-sm sm:text-base md:text-lg font-semibold text-[#0d1b2a]">
+            <span className="text-sm sm:text-base md:text-xs font-semibold text-[#0d1b2a]">
               Total :
             </span>
-            <span className="text-sm sm:text-base md:text-lg font-semibold text-[#1e3a8a] tracking-wide">
+            <span className="text-sm sm:text-base md:text-xs font-semibold text-[#1e3a8a] tracking-wide">
               ₹{summary.total.toLocaleString("en-IN")}
             </span>
           </div>
@@ -166,21 +166,21 @@ export default function OrderSummary() {
         <button
           onClick={handleCheckout}
           disabled={!items || items.length === 0}
-          className="w-full h-8 sm:h-9 md:h-10 bg-[#1e3a8a] text-white text-xs sm:text-sm md:text-base font-semibold rounded-lg sm:rounded-xl hover:bg-[#152d6b] transition-colors mb-2.5 sm:mb-3 md:mb-3.5 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full h-8 sm:h-9 md:h-7 bg-[#1e3a8a] text-white text-xs sm:text-sm md:text-[10px] font-semibold rounded-lg sm:rounded-xl hover:bg-[#152d6b] transition-colors mb-2.5 sm:mb-3 md:mb-2 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Proceed to Checkout
         </button>
 
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
           <div className="flex items-center gap-1 sm:gap-1.5">
-            <Shield className="w-3.5 h-3.5 sm:w-3 sm:h-3 md:w-3.5 md:h-3.5 text-[#bebebe]" />
-            <span className="text-[8px] sm:text-[9px] md:text-[10px] font-medium text-[#bebebe] tracking-wide">
+            <Shield className="w-3.5 h-3.5 sm:w-3 sm:h-3 md:w-2.5 md:h-2.5 text-[#bebebe]" />
+            <span className="text-[8px] sm:text-[9px] md:text-[8px] font-medium text-[#bebebe] tracking-wide">
               SSL Secure Checkout
             </span>
           </div>
           <div className="flex items-center gap-1 sm:gap-1.5">
-            <Truck className="w-3.5 h-3.5 sm:w-3 sm:h-3 md:w-3.5 md:h-3.5 text-[#bebebe]" />
-            <span className="text-[8px] sm:text-[9px] md:text-[10px] font-medium text-[#bebebe] tracking-wide">
+            <Truck className="w-3.5 h-3.5 sm:w-3 sm:h-3 md:w-2.5 md:h-2.5 text-[#bebebe]" />
+            <span className="text-[8px] sm:text-[9px] md:text-[8px] font-medium text-[#bebebe] tracking-wide">
               Fast Shipping Options
             </span>
           </div>
@@ -188,8 +188,8 @@ export default function OrderSummary() {
       </div>
 
       {/* Promo Code */}
-      <div className="w-full bg-white rounded-xl sm:rounded-2xl shadow-md p-2 sm:p-3 md:p-4">
-        <h3 className="text-[10px] sm:text-xs md:text-sm font-medium text-[#0d1b2a] mb-2 sm:mb-2.5">
+      <div className="w-full bg-white rounded-xl sm:rounded-2xl shadow-md p-2 sm:p-3 md:p-2.5">
+        <h3 className="text-[10px] sm:text-xs md:text-[10px] font-medium text-[#0d1b2a] mb-2 sm:mb-2.5">
           Have a promo code?
         </h3>
         <div className="flex gap-2 flex-row sm:gap-2.5">
@@ -198,12 +198,12 @@ export default function OrderSummary() {
             value={promoCode}
             onChange={(e) => setPromoCode(e.target.value)}
             placeholder="Enter Code"
-            className="h-8 sm:h-9 md:h-10 flex-1 min-w-0 px-2 sm:px-2.5 md:px-3 text-[10px] sm:text-xs md:text-sm font-medium text-[#0d1b2a] placeholder:text-[#9ca3af] border border-[#bebebe] rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-transparent transition-all"
+            className="h-8 sm:h-9 md:h-7 flex-1 min-w-0 px-2 sm:px-2.5 md:px-2 text-[10px] sm:text-xs md:text-[10px] font-medium text-[#0d1b2a] placeholder:text-[#9ca3af] border border-[#bebebe] rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-transparent transition-all"
           />
           <button
             onClick={handleApplyCoupon}
             disabled={isApplyingCoupon}
-            className="h-8 sm:h-9 md:h-10 sm:w-auto px-4 sm:px-5 md:px-6 bg-[#1e3a8a] text-white text-[10px] sm:text-xs md:text-sm font-semibold rounded-lg sm:rounded-xl hover:bg-[#152d6b] transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+            className="h-8 sm:h-9 md:h-7 sm:w-auto px-4 sm:px-5 md:px-4 bg-[#1e3a8a] text-white text-[10px] sm:text-xs md:text-[10px] font-semibold rounded-lg sm:rounded-xl hover:bg-[#152d6b] transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
           >
             {isApplyingCoupon ? "Applying..." : "Apply"}
           </button>

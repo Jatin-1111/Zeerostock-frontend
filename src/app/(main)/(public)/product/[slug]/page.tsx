@@ -1,8 +1,14 @@
 import { notFound } from "next/navigation";
+import { cache } from "react";
 import ProductImageGallery from "@/components/product/ProductImageGallery";
 import ProductInfo from "@/components/product/ProductInfo";
 import ProductDescription from "@/components/product/ProductDescription";
 import { productService } from "@/services/product.service";
+
+// Cache the product fetch to prevent duplicate API calls in generateMetadata and page
+const getProduct = cache(async (slug: string) => {
+  return await productService.getProductDetail(slug);
+});
 
 interface ProductPageProps {
   params: Promise<{
@@ -14,8 +20,8 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   const { slug } = await params;
 
   try {
-    // Fetch product details from API
-    const response = await productService.getProductDetail(slug);
+    // Fetch product details from API (deduplicated)
+    const response = await getProduct(slug);
 
     if (!response.success || !response.data?.product) {
       notFound();
@@ -25,14 +31,14 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
     // Filter out empty strings from images
     const productImages = (product.images || [product.image]).filter(
-      (img) => img && img.trim() !== ""
+      (img) => img && img.trim() !== "",
     );
 
     return (
       <div className="min-h-screen bg-[#eefbf6]">
-        <div className="max-w-200 mx-auto px-5 py-6">
+        <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-6 md:px-5 py-4 sm:py-6">
           {/* Image Gallery and Product Info Grid */}
-          <div className="grid grid-cols-2 gap-5 mb-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 mb-5">
             <div>
               <ProductImageGallery
                 images={productImages}
@@ -51,7 +57,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           </div>
 
           {/* Return Policy Section */}
-          <div className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] px-4 py-6">
+          <div className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] p-4 sm:p-6">
             <h2 className="text-[15px] font-medium text-[#0d1b2a] mb-4">
               Return Policy
             </h2>
@@ -70,11 +76,12 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 }
 
 // Generate metadata for SEO
+// Generate metadata for SEO
 export async function generateMetadata({ params }: ProductPageProps) {
   const { slug } = await params;
 
   try {
-    const response = await productService.getProductDetail(slug);
+    const response = await getProduct(slug);
 
     if (!response.success || !response.data?.product) {
       return {

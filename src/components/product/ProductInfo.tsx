@@ -31,10 +31,10 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
   const auction = data.auction;
 
   const [bidAmount, setBidAmount] = useState(
-    (auction?.current_bid as number) || (product.price as number)
+    (auction?.current_bid as number) || (product.price as number),
   );
   const [quantity, setQuantity] = useState(
-    (product.minimum_order_quantity as number) || 1
+    (product.minimum_order_quantity as number) || 1,
   );
   const [message, setMessage] = useState("");
   const [isAddingToCart, setIsAddingToCart] = useState(false);
@@ -74,7 +74,7 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
       if (isWatchlisted) {
         // Remove from wishlist
         const response = await buyerService.removeFromWatchlist(
-          product.id as string
+          product.id as string,
         );
 
         if (response.success) {
@@ -121,6 +121,12 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
       return;
     }
 
+    // Check if product is out of stock
+    if (productStock === 0) {
+      setMessage("This product is currently out of stock");
+      return;
+    }
+
     if (productStock > 0 && quantity > productStock) {
       setMessage(`Only ${productStock} units available`);
       return;
@@ -162,6 +168,12 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
       return;
     }
 
+    // Check if product is out of stock
+    if (productStock === 0) {
+      setMessage("This product is currently out of stock");
+      return;
+    }
+
     if (productStock > 0 && quantity > productStock) {
       setMessage(`Only ${productStock} units available`);
       return;
@@ -171,7 +183,8 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
     setMessage("");
 
     try {
-      const result = await addToCart(product.id as string, quantity);
+      // Pass true to skip refresh for faster redirection
+      const result = await addToCart(product.id as string, quantity, true);
       console.log("Buy now add to cart result:", result);
 
       if (result) {
@@ -191,7 +204,7 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
     <div className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] p-4 h-fit">
       {/* Title with Wishlist Button */}
       <div className="flex items-start justify-between gap-2 mb-2">
-        <h1 className="text-[17px] font-semibold text-[#1e3a8a] leading-normal flex-1">
+        <h1 className="text-base sm:text-[17px] font-semibold text-[#1e3a8a] leading-normal flex-1">
           {product.title as string}
         </h1>
         <button
@@ -213,7 +226,7 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
       </div>
 
       {/* Badges */}
-      <div className="flex items-center gap-1.5 mb-3">
+      <div className="flex flex-wrap items-center gap-1.5 mb-3">
         <span className="px-1.5 py-0.5 bg-[#eeffef] text-[#2aae7a] text-[7.5px] font-medium rounded-[60px]">
           {(product.category as { name?: string })?.name || "Materials"}
         </span>
@@ -230,7 +243,7 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
       {/* Price */}
       <div className="mb-3">
         <div className="flex items-baseline gap-2 mb-1">
-          <span className="text-[20px] font-semibold text-[#0d1b2a]">
+          <span className="text-xl sm:text-[20px] font-semibold text-[#0d1b2a]">
             {formatPrice(product.price as number)}
           </span>
           {(() => {
@@ -263,7 +276,7 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
         <p className="text-[10px] font-medium text-[#bebebe] tracking-[0.25px] mb-3">
           minimum bid{" "}
           {formatPrice(
-            (auction?.current_bid as number) || (product.price as number)
+            (auction?.current_bid as number) || (product.price as number),
           )}
         </p>
       )}
@@ -282,20 +295,28 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
       {/* Action Buttons */}
       {!isAuction && (
         <div className="space-y-1.5">
-          <button
-            onClick={handleBuyNow}
-            disabled={isAddingToCart}
-            className="w-full bg-[#1e3a8a] text-white text-[10px] font-semibold py-2 rounded-[5px] hover:bg-[#1e3a8a]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {isAddingToCart ? "Adding..." : "Buy Now"}
-          </button>
-          <button
-            onClick={handleAddToCart}
-            disabled={isAddingToCart}
-            className="w-full bg-white border-2 border-[#1e3a8a] text-[#1e3a8a] text-[10px] font-semibold py-2 rounded-[5px] hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {isAddingToCart ? "Adding..." : "Add to Cart"}
-          </button>
+          {productStock === 0 ? (
+            <div className="w-full bg-gray-100 text-gray-500 text-xs sm:text-[10px] font-semibold py-3 sm:py-2 rounded-[5px] text-center">
+              Out of Stock
+            </div>
+          ) : (
+            <>
+              <button
+                onClick={handleBuyNow}
+                disabled={isAddingToCart || productStock === 0}
+                className="w-full bg-[#1e3a8a] text-white text-xs sm:text-[10px] font-semibold py-3 sm:py-2 rounded-[5px] hover:bg-[#1e3a8a]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isAddingToCart ? "Adding..." : "Buy Now"}
+              </button>
+              <button
+                onClick={handleAddToCart}
+                disabled={isAddingToCart || productStock === 0}
+                className="w-full bg-white border-2 border-[#1e3a8a] text-[#1e3a8a] text-xs sm:text-[10px] font-semibold py-3 sm:py-2 rounded-[5px] hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isAddingToCart ? "Adding..." : "Add to Cart"}
+              </button>
+            </>
+          )}
         </div>
       )}
 

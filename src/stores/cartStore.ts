@@ -15,7 +15,11 @@ interface CartState {
 
   // Actions
   fetchCart: () => Promise<void>;
-  addToCart: (productId: string, quantity: number) => Promise<boolean>;
+  addToCart: (
+    productId: string,
+    quantity: number,
+    skipRefresh?: boolean,
+  ) => Promise<boolean>;
   updateQuantity: (itemId: string, quantity: number) => Promise<boolean>;
   removeItem: (itemId: string) => Promise<boolean>;
   clearCart: () => Promise<boolean>;
@@ -69,7 +73,11 @@ export const useCartStore = create<CartState>((set, get) => ({
   },
 
   // Add to cart
-  addToCart: async (productId: string, quantity: number) => {
+  addToCart: async (
+    productId: string,
+    quantity: number,
+    skipRefresh = false,
+  ) => {
     console.log("=== cartStore.addToCart called ===");
     console.log("Product ID:", productId);
     console.log("Quantity:", quantity);
@@ -80,9 +88,11 @@ export const useCartStore = create<CartState>((set, get) => ({
       console.log("cartService response:", response);
 
       if (response.success) {
-        // Refresh cart after adding
-        console.log("Fetching updated cart...");
-        await get().fetchCart();
+        // Refresh cart after adding unless skipped
+        if (!skipRefresh) {
+          console.log("Fetching updated cart...");
+          await get().fetchCart();
+        }
         toast.success("Item added to cart successfully");
         return true;
       }
@@ -98,15 +108,32 @@ export const useCartStore = create<CartState>((set, get) => ({
 
   // Update quantity
   updateQuantity: async (itemId: string, quantity: number) => {
+    const previousItems = get().items;
+
+    // Optimistic update
+    set((state) => ({
+      items: state.items.map((item) =>
+        item.itemId === itemId ? { ...item, quantity } : item,
+      ),
+      // Optionally update summary/totals locally if needed, but for now just quantity
+    }));
+
     try {
       const response = await cartService.updateCartItem(itemId, quantity);
       if (response.success) {
-        await get().fetchCart();
+        // We can fetch cart to align fully, but silent background fetch is better
+        // await get().fetchCart();
+        // Actually, let's fetch in background to make sure pricing/stock is correct
+        get().fetchCart();
         return true;
       }
+      // Revert on failure
+      set({ items: previousItems });
       toast.error(response.message || "Failed to update quantity");
       return false;
     } catch (error: unknown) {
+      // Revert on error
+      set({ items: previousItems });
       const message =
         error instanceof Error ? error.message : "Failed to update quantity";
       toast.error(message);

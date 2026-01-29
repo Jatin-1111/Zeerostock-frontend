@@ -23,8 +23,8 @@ export default function RelatedProducts() {
   ];
 
   return (
-    <div className="w-full bg-white rounded-xl sm:rounded-2xl shadow-md p-2 sm:p-3 md:p-4">
-      <h3 className="text-[10px] sm:text-xs md:text-sm font-medium text-[#0d1b2a] mb-2 sm:mb-3">
+    <div className="w-full bg-white rounded-xl sm:rounded-2xl shadow-md p-2 sm:p-3 md:p-2.5">
+      <h3 className="text-[10px] sm:text-xs md:text-[10px] font-medium text-[#0d1b2a] mb-2 sm:mb-2.5">
         You might also like
       </h3>
 
@@ -33,7 +33,7 @@ export default function RelatedProducts() {
           <div key={index}>
             <div className="flex items-center gap-2 sm:gap-3 py-1.5 sm:py-2">
               {/* Product Image */}
-              <div className="w-[40px] h-[40px] sm:w-[45px] sm:h-[45px] md:w-[50px] md:h-[50px] bg-gray-100 rounded-lg shrink-0 relative overflow-hidden">
+              <div className="w-[40px] h-[40px] sm:w-[45px] sm:h-[45px] md:w-[33px] md:h-[33px] bg-gray-100 rounded-lg shrink-0 relative overflow-hidden">
                 {product.image ? (
                   <Image
                     src={product.image}
@@ -51,10 +51,10 @@ export default function RelatedProducts() {
 
               {/* Product Info */}
               <div className="flex-1 min-w-0">
-                <h4 className="text-[9px] sm:text-[10px] md:text-xs font-medium text-[#0d1b2a] mb-0.5 sm:mb-1 truncate">
+                <h4 className="text-[9px] sm:text-[10px] md:text-[8px] font-medium text-[#0d1b2a] mb-0.5 sm:mb-1 truncate">
                   {product.title}
                 </h4>
-                <p className="text-[8px] sm:text-[9px] md:text-[10px] font-semibold text-[#2aae7a] tracking-wide">
+                <p className="text-[8px] sm:text-[9px] md:text-[8px] font-semibold text-[#2aae7a] tracking-wide">
                   {product.price}
                 </p>
               </div>

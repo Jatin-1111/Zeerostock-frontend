@@ -114,12 +114,12 @@ export default function Calculator({ type }: CalculatorProps) {
   const results = type === "buyer" ? calculateBuyerROI() : calculateSellerROI();
 
   return (
-    <div className="flex gap-[11px] w-full">
+    <div className="flex flex-col md:flex-row gap-4 md:gap-[11px] w-full">
       {/* Left Side - Input Form */}
       <motion.div
         initial={{ opacity: 1 }}
         animate={{ opacity: 1 }}
-        className="flex-1 bg-white rounded-[10px] shadow-[0px_2px_5px_0px_rgba(0,0,0,0.25)] p-[15px] flex flex-col"
+        className="flex-1 bg-white rounded-[10px] shadow-[0px_2px_5px_0px_rgba(0,0,0,0.25)] p-4 md:p-[15px] flex flex-col"
       >
         <div className="flex-1">
           <h3 className="text-[13px] font-semibold text-[#0d1b2a] mb-[10px]">
@@ -134,9 +134,9 @@ export default function Calculator({ type }: CalculatorProps) {
             Basic Information
           </h4>
 
-          <div className="grid grid-cols-2 gap-[11px] mb-[16px]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-[11px] mb-[16px]">
             <div>
-              <label className="block text-[10px] font-medium text-[#9c9c9c] mb-[5px]">
+              <label className="block text-xs md:text-[10px] font-medium text-[#9c9c9c] mb-[5px]">
                 Purchase Price (per unit)
               </label>
               <input
@@ -149,12 +149,12 @@ export default function Calculator({ type }: CalculatorProps) {
                   })
                 }
                 placeholder="e.g., 50"
-                className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[9px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#2aae7a] focus:border-transparent"
+                className="w-full h-10 md:h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[13px] md:text-[9px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#2aae7a] focus:border-transparent"
               />
             </div>
 
             <div>
-              <label className="block text-[10px] font-medium text-[#9c9c9c] mb-[5px]">
+              <label className="block text-xs md:text-[10px] font-medium text-[#9c9c9c] mb-[5px]">
                 Expected Retail Price
               </label>
               <input
@@ -167,7 +167,7 @@ export default function Calculator({ type }: CalculatorProps) {
                   })
                 }
                 placeholder="e.g., 80"
-                className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[9px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#2aae7a] focus:border-transparent"
+                className="w-full h-10 md:h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[13px] md:text-[9px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#2aae7a] focus:border-transparent"
               />
             </div>
           </div>
@@ -183,7 +183,7 @@ export default function Calculator({ type }: CalculatorProps) {
                 setBuyerInputs({ ...buyerInputs, quantity: e.target.value })
               }
               placeholder="e.g., 1000"
-              className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[9px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#2aae7a] focus:border-transparent"
+              className="w-full h-10 md:h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[13px] md:text-[9px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#2aae7a] focus:border-transparent"
             />
           </div>
 
@@ -191,7 +191,7 @@ export default function Calculator({ type }: CalculatorProps) {
           <div className="mb-[13px]">
             <button
               onClick={() => setAdvancedOpen(!advancedOpen)}
-              className="flex items-center justify-between w-full py-[5px] text-[11px] font-semibold text-[#0d1b2a] hover:text-[#1e3a8a] transition-colors"
+              className="flex items-center justify-between w-full py-2 md:py-[5px] text-sm md:text-[11px] font-semibold text-[#0d1b2a] hover:text-[#1e3a8a] transition-colors"
             >
               <span>Advance Options</span>
               <motion.svg
@@ -226,7 +226,7 @@ export default function Calculator({ type }: CalculatorProps) {
                     <div className="bg-[rgba(229,231,235,1)] rounded-[7px] p-[1px] mb-[13px] flex gap-[1px]">
                       <button
                         onClick={() => setAdvancedTab("buyer")}
-                        className={`flex-1 py-[5px] rounded-[6px] text-[9px] font-semibold transition-all ${
+                        className={`flex-1 py-2 md:py-[5px] rounded-[6px] text-xs md:text-[9px] font-semibold transition-all ${
                           advancedTab === "buyer"
                             ? "bg-[#2aae7a] text-white shadow-[0px_3px_8px_0px_rgba(0,0,0,0.12)]"
                             : "text-[#9c9c9c] hover:text-[#0d1b2a]"
@@ -236,7 +236,7 @@ export default function Calculator({ type }: CalculatorProps) {
                       </button>
                       <button
                         onClick={() => setAdvancedTab("seller")}
-                        className={`flex-1 py-[5px] rounded-[6px] text-[9px] font-semibold transition-all ${
+                        className={`flex-1 py-2 md:py-[5px] rounded-[6px] text-xs md:text-[9px] font-semibold transition-all ${
                           advancedTab === "seller"
                             ? "bg-[#2aae7a] text-white shadow-[0px_3px_8px_0px_rgba(0,0,0,0.12)]"
                             : "text-[#9c9c9c] hover:text-[#0d1b2a]"
@@ -253,7 +253,7 @@ export default function Calculator({ type }: CalculatorProps) {
                           Advance Buyer Analysis
                         </h5>
                         <div className="space-y-[10px]">
-                          <div className="grid grid-cols-2 gap-[11px]">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-[11px]">
                             <div>
                               <label className="block text-[10px] font-medium text-[#9c9c9c] mb-[5px]">
                                 Logistics Saving
@@ -268,7 +268,7 @@ export default function Calculator({ type }: CalculatorProps) {
                                   })
                                 }
                                 placeholder="e.g., 1500"
-                                className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[9px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#2aae7a] focus:border-transparent"
+                                className="w-full h-10 md:h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[13px] md:text-[9px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#2aae7a] focus:border-transparent"
                               />
                             </div>
 
@@ -286,7 +286,7 @@ export default function Calculator({ type }: CalculatorProps) {
                                   })
                                 }
                                 placeholder="e.g., 2-5%"
-                                className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[9px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#2aae7a] focus:border-transparent"
+                                className="w-full h-10 md:h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[13px] md:text-[9px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#2aae7a] focus:border-transparent"
                               />
                             </div>
                           </div>
@@ -305,7 +305,7 @@ export default function Calculator({ type }: CalculatorProps) {
                                 })
                               }
                               placeholder="e.g., 500"
-                              className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[9px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#2aae7a] focus:border-transparent"
+                              className="w-full h-10 md:h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[13px] md:text-[9px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#2aae7a] focus:border-transparent"
                             />
                           </div>
                         </div>
@@ -319,7 +319,7 @@ export default function Calculator({ type }: CalculatorProps) {
                           Advance Seller Analysis
                         </h5>
                         <div className="space-y-[10px]">
-                          <div className="grid grid-cols-2 gap-[11px]">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-[11px]">
                             <div>
                               <label className="block text-[10px] font-medium text-[#9c9c9c] mb-[5px]">
                                 Monthly Holding Cost (per unit)
@@ -334,7 +334,7 @@ export default function Calculator({ type }: CalculatorProps) {
                                   })
                                 }
                                 placeholder="e.g., 200"
-                                className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[9px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#2aae7a] focus:border-transparent"
+                                className="w-full h-10 md:h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[13px] md:text-[9px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#2aae7a] focus:border-transparent"
                               />
                             </div>
 
@@ -352,12 +352,12 @@ export default function Calculator({ type }: CalculatorProps) {
                                   })
                                 }
                                 placeholder="e.g., 1500"
-                                className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[9px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#2aae7a] focus:border-transparent"
+                                className="w-full h-10 md:h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[13px] md:text-[9px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#2aae7a] focus:border-transparent"
                               />
                             </div>
                           </div>
 
-                          <div className="grid grid-cols-2 gap-[11px]">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-[11px]">
                             <div>
                               <label className="block text-[10px] font-medium text-[#9c9c9c] mb-[5px]">
                                 Marketplace min value added
@@ -372,7 +372,7 @@ export default function Calculator({ type }: CalculatorProps) {
                                   })
                                 }
                                 placeholder="e.g., 10%"
-                                className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[9px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#2aae7a] focus:border-transparent"
+                                className="w-full h-10 md:h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[13px] md:text-[9px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#2aae7a] focus:border-transparent"
                               />
                             </div>
 
@@ -390,7 +390,7 @@ export default function Calculator({ type }: CalculatorProps) {
                                   })
                                 }
                                 placeholder="e.g., 500"
-                                className="w-full h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[9px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#2aae7a] focus:border-transparent"
+                                className="w-full h-10 md:h-[28px] px-[8px] border border-[#bebebe] rounded-[5px] text-[13px] md:text-[9px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#2aae7a] focus:border-transparent"
                               />
                             </div>
                           </div>
@@ -409,13 +409,13 @@ export default function Calculator({ type }: CalculatorProps) {
           <div className="flex gap-[13px]">
             <button
               onClick={handleCalculate}
-              className="flex-1 h-[30px] bg-[#1e3a8a] rounded-[7px] text-white text-[10px] font-semibold hover:bg-[#152e6e] transition-colors"
+              className="flex-1 h-10 md:h-[30px] bg-[#1e3a8a] rounded-[7px] text-white text-xs md:text-[10px] font-semibold hover:bg-[#152e6e] transition-colors"
             >
               Calculate ROI
             </button>
             <button
               onClick={handleReset}
-              className="w-[100px] h-[30px] bg-white border border-[#9c9c9c] rounded-[5px] text-[#9c9c9c] text-[10px] font-semibold hover:bg-gray-50 transition-colors"
+              className="w-[100px] h-10 md:h-[30px] bg-white border border-[#9c9c9c] rounded-[5px] text-[#9c9c9c] text-xs md:text-[10px] font-semibold hover:bg-gray-50 transition-colors"
             >
               Reset
             </button>
@@ -462,10 +462,10 @@ export default function Calculator({ type }: CalculatorProps) {
                   />
                 </svg>
               </div>
-              <h3 className="text-[11px] font-semibold text-[#9c9c9c] mb-[6px]">
+              <h3 className="text-sm md:text-[11px] font-semibold text-[#9c9c9c] mb-[6px]">
                 Ready to calculate
               </h3>
-              <p className="text-[9px] font-normal text-[#9c9c9c] text-center max-w-[187px]">
+              <p className="text-xs md:text-[9px] font-normal text-[#9c9c9c] text-center max-w-[187px]">
                 Enter your purchase details to see detailed ROI projections and
                 profitability analysis
               </p>
@@ -473,19 +473,19 @@ export default function Calculator({ type }: CalculatorProps) {
 
             <div className="px-[13px] pb-[13px]">
               <div className="border-t border-[#bebebe] pt-[13px]">
-                <h3 className="text-[11px] font-normal text-[#9c9c9c] text-center mb-[13px]">
+                <h3 className="text-sm md:text-[11px] font-normal text-[#9c9c9c] text-center mb-[13px]">
                   Ready to get started?
                 </h3>
                 <div className="flex gap-[9px]">
                   <button
                     onClick={() => (window.location.href = "/marketplace")}
-                    className="flex-1 h-[30px] bg-[#2aae7a] rounded-[7px] text-white text-[10px] font-semibold hover:bg-[#259b6c] transition-colors"
+                    className="flex-1 h-10 md:h-[30px] bg-[#2aae7a] rounded-[7px] text-white text-xs md:text-[10px] font-semibold hover:bg-[#259b6c] transition-colors"
                   >
                     Browse Inventory
                   </button>
                   <button
                     onClick={() => (window.location.href = "/become-supplier")}
-                    className="flex-1 h-[30px] border border-[#1e3a8a] rounded-[5px] text-[#1e3a8a] text-[10px] font-semibold hover:bg-blue-50 transition-colors"
+                    className="flex-1 h-10 md:h-[30px] border border-[#1e3a8a] rounded-[5px] text-[#1e3a8a] text-xs md:text-[10px] font-semibold hover:bg-blue-50 transition-colors"
                   >
                     List Your Inventory
                   </button>
@@ -501,14 +501,14 @@ export default function Calculator({ type }: CalculatorProps) {
 
             {/* ROI Percentage Display */}
             <div className="bg-gradient-to-r from-[#37c3dc] to-[#0d9e9c] rounded-[10px] p-[16px] mb-[13px]">
-              <p className="text-[9px] font-normal text-white mb-[5px]">
+              <p className="text-[11px] md:text-[9px] font-normal text-white mb-[5px]">
                 Return on Investment
               </p>
               <div className="flex items-baseline gap-[5px]">
                 <span className="text-[28px] font-bold text-white leading-none">
                   {results.roi}%
                 </span>
-                <span className="text-[11px] font-normal text-white/90">
+                <span className="text-sm md:text-[11px] font-normal text-white/90">
                   ROI
                 </span>
               </div>
@@ -527,8 +527,8 @@ export default function Calculator({ type }: CalculatorProps) {
                       ? results.totalBuyerCost.toLocaleString("en-IN")
                       : "0"
                     : "totalSupplierCost" in results
-                    ? results.totalSupplierCost.toLocaleString("en-IN")
-                    : "0"}
+                      ? results.totalSupplierCost.toLocaleString("en-IN")
+                      : "0"}
                 </p>
               </div>
 
@@ -543,8 +543,8 @@ export default function Calculator({ type }: CalculatorProps) {
                       ? results.totalExpectedRevenue.toLocaleString("en-IN")
                       : "0"
                     : "totalSaleValue" in results
-                    ? results.totalSaleValue.toLocaleString("en-IN")
-                    : "0"}
+                      ? results.totalSaleValue.toLocaleString("en-IN")
+                      : "0"}
                 </p>
               </div>
 
@@ -559,8 +559,8 @@ export default function Calculator({ type }: CalculatorProps) {
                       ? results.netProfit.toLocaleString("en-IN")
                       : "0"
                     : "netValueGained" in results
-                    ? results.netValueGained.toLocaleString("en-IN")
-                    : "0"}
+                      ? results.netValueGained.toLocaleString("en-IN")
+                      : "0"}
                 </p>
               </div>
             </div>

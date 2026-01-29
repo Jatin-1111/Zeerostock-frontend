@@ -45,7 +45,7 @@ export default function ProductImageGallery({
 
       {/* Thumbnail Images */}
       {productImages.length > 1 && (
-        <div className="grid grid-cols-4 gap-[7.5px] p-3">
+        <div className="grid grid-cols-4 gap-2 sm:gap-[7.5px] p-2 sm:p-3">
           {productImages.slice(0, 4).map((img, index) => (
             <button
               key={index}

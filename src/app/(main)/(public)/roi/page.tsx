@@ -8,11 +8,11 @@ export default function ROIPage() {
 
   return (
     <div className="min-h-screen">
-      <div className="max-w-full mx-auto px-[40px] py-[16px]">
+      <div className="max-w-full mx-auto px-4 sm:px-6 md:px-[40px] py-4 md:py-[16px]">
         {/* Header */}
-        <div className="relative bg-white rounded-[10px] shadow-[0px_1px_5px_0px_rgba(24,181,34,0.25)] mb-[16px] py-[15px] px-[25px] h-[109px]">
+        <div className="relative bg-white rounded-[10px] shadow-[0px_1px_5px_0px_rgba(24,181,34,0.25)] mb-4 md:mb-[16px] py-4 px-4 md:py-[15px] md:px-[25px] h-auto md:h-[109px] grid grid-cols-[auto_1fr] md:block gap-x-3 md:gap-0">
           <div
-            className="absolute left-[25px] top-[15px] w-[37px] h-[37px] rounded-[5px] p-[7px] flex items-center justify-center"
+            className="md:absolute md:left-[25px] md:top-[15px] w-[37px] h-[37px] rounded-[5px] p-[7px] flex items-center justify-center flex-shrink-0"
             style={{
               backgroundImage:
                 "linear-gradient(-49.04957794666714deg, rgba(55, 195, 220, 1) 1.0683%, rgba(13, 158, 156, 1) 80.051%)",
@@ -47,26 +47,26 @@ export default function ROIPage() {
               />
             </svg>
           </div>
-          <h1 className="absolute left-[75px] top-[21px] text-[18px] font-semibold text-[#0d1b2a]">
+          <h1 className="md:absolute md:left-[75px] md:top-[21px] text-[18px] font-semibold text-[#0d1b2a] self-center md:self-auto">
             ROI Calculator
           </h1>
-          <p className="absolute left-[25px] top-[65px] text-[12px] font-medium text-[#9c9c9c] w-[453px]">
+          <p className="md:absolute md:left-[25px] md:top-[65px] text-[12px] font-medium text-[#9c9c9c] w-full md:w-[453px] col-span-2 md:col-auto mt-2 md:mt-0">
             Calculate your return on investment for buying or selling surplus
             inventory on Zeerostocks
           </p>
         </div>
 
         {/* Calculator */}
-        <div className="mb-[24px]">
+        <div className="mb-6 md:mb-[24px]">
           <Calculator type={activeTab} />
         </div>
 
         {/* Info Section Title */}
-        <div className="text-center mb-[16px]">
+        <div className="text-center mb-4 md:mb-[16px]">
           <h2 className="text-[18px] font-semibold text-[#0d1b2a] mb-[7px]">
             Understanding ROI Calculations
           </h2>
-          <p className="text-[10px] font-medium text-[#9c9c9c]">
+          <p className="text-[10px] font-medium text-[#9c9c9c] px-2 md:px-0">
             Learn how our calculator helps you make informed decisions
           </p>
         </div>

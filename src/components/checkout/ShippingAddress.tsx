@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { buyerService } from "@/services/buyer.service";
 import type { Address } from "@/types/buyer.types";
 import ShippingMethod from "./ShippingMethod";
@@ -34,9 +34,14 @@ export default function ShippingAddress({
   const [zipCode, setZipCode] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [specialInstructions, setSpecialInstructions] = useState("");
+  const hasFetchedRef = useRef(false);
 
   useEffect(() => {
-    fetchAddresses();
+    // Prevent duplicate calls in React strict mode
+    if (!hasFetchedRef.current) {
+      hasFetchedRef.current = true;
+      fetchAddresses();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

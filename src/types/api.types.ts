@@ -197,6 +197,8 @@ export interface CartItem {
   listingType?: string;
   condition?: string;
   unit?: string;
+  minimumOrderQuantity?: number;
+  stockQuantity?: number;
   category?: string | null; // Category name as string
   seller?: {
     id: string | null;

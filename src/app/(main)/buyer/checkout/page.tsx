@@ -30,7 +30,7 @@ function CheckoutContent() {
 
   // Checkout data
   const [checkoutSessionId, setCheckoutSessionId] = useState<string | null>(
-    null
+    null,
   );
   const [selectedShippingAddress, setSelectedShippingAddress] =
     useState<Address | null>(null);
@@ -41,7 +41,7 @@ function CheckoutContent() {
     "card" | "escrow" | "wire" | "net-terms"
   >("card");
   const [paymentDetails, setPaymentDetails] = useState<PaymentDetails | null>(
-    null
+    null,
   );
   const [orderNotes, setOrderNotes] = useState<string>("");
 
@@ -87,8 +87,8 @@ function CheckoutContent() {
             shippingMethod === "express"
               ? 100
               : shippingMethod === "overnight"
-              ? 250
-              : 0;
+                ? 250
+                : 0;
           setCartSummary({
             subtotal: response.data.pricingSummary.itemSubtotal || 0,
             savings:
@@ -141,7 +141,7 @@ function CheckoutContent() {
       setError(
         error.response?.data?.message ||
           error.message ||
-          "Failed to initialize checkout. Please ensure you have items in your cart and are logged in."
+          "Failed to initialize checkout. Please ensure you have items in your cart and are logged in.",
       );
     }
   };
@@ -195,7 +195,7 @@ function CheckoutContent() {
       if (response.success && response.data) {
         // Redirect to order confirmation page with order ID
         router.push(
-          `/buyer/order-confirmation?orderId=${response.data.orderId}`
+          `/buyer/order-confirmation?orderId=${response.data.orderId}`,
         );
       } else {
         console.error("Order creation failed:", response);
@@ -230,21 +230,19 @@ function CheckoutContent() {
 
   return (
     <div className="min-h-screen bg-[#EEFBF6] py-3.5">
-      <div className="max-w-[480px] mx-auto px-5">
+      <div className="max-w-[1080px] mx-auto px-5">
         {/* Header */}
-        <div className="mb-2.5">
+        <div className="mb-8">
           <div className="text-center">
-            <h1 className="text-[9px] font-semibold text-[#0d1b2a]">
-              Checkout
-            </h1>
-            <p className="text-[6px] font-medium text-[#9c9c9c]">
+            <h1 className="text-2xl font-bold text-[#0d1b2a] mb-2">Checkout</h1>
+            <p className="text-xs font-medium text-[#9c9c9c]">
               Secure payment and shipping information
             </p>
           </div>
         </div>
 
         {error && (
-          <div className="mb-1.5 p-1 bg-red-50 border border-red-200 rounded-lg text-red-600 text-[8px]">
+          <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
             {error}
           </div>
         )}
@@ -255,9 +253,9 @@ function CheckoutContent() {
         </div>
 
         {/* Main Content Flexbox */}
-        <div className="flex flex-col lg:flex-row gap-2 w-full max-w-[480px]">
+        <div className="flex flex-col lg:flex-row gap-6 w-full">
           {/* Left Side - Step Content */}
-          <div className="w-full lg:w-3/4">
+          <div className="w-full lg:w-2/3">
             {currentStep === 1 && (
               <ShippingAddress
                 selectedAddress={selectedShippingAddress}
@@ -270,8 +268,8 @@ function CheckoutContent() {
                     method === "express"
                       ? 100
                       : method === "overnight"
-                      ? 250
-                      : 0;
+                        ? 250
+                        : 0;
                   setCartSummary((prev) => ({
                     ...prev,
                     shipping: shippingCost,
@@ -320,13 +318,15 @@ function CheckoutContent() {
           </div>
 
           {/* Right Side - Order Summary */}
-          <div className="w-full lg:w-1/4">
-            <OrderSummary
-              subtotal={cartSummary.subtotal}
-              savings={cartSummary.savings}
-              tax={cartSummary.tax}
-              shipping={cartSummary.shipping}
-            />
+          <div className="w-full lg:w-1/3">
+            <div className="sticky top-4">
+              <OrderSummary
+                subtotal={cartSummary.subtotal}
+                savings={cartSummary.savings}
+                tax={cartSummary.tax}
+                shipping={cartSummary.shipping}
+              />
+            </div>
           </div>
         </div>
       </div>

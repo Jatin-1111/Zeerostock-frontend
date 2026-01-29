@@ -175,17 +175,17 @@ export default function PaymentMethodsStats({
 }: PaymentMethodsStatsProps) {
   if (!summary) {
     return (
-      <div className="mb-3">
-        <div className="grid grid-cols-4 gap-[17px]">
+      <div className="mb-2 sm:mb-3">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-[17px]">
           {[1, 2, 3, 4].map((i) => (
             <div
               key={i}
-              className="relative h-[76px] animate-pulse rounded-[11px] bg-white shadow-[0px_0px_3px_0px_rgba(24,181,34,0.25)]"
+              className="relative h-[70px] sm:h-[76px] md:h-20 lg:h-[76px] animate-pulse rounded-[11px] bg-white shadow-[0px_0px_3px_0px_rgba(24,181,34,0.25)]"
             >
-              <div className="p-[10px]">
-                <div className="mb-[11px] h-[11px] w-[40%] rounded-[2px] bg-[#E5E7EB]"></div>
-                <div className="mb-[6px] h-[18px] w-[60%] rounded-[2px] bg-[#E5E7EB]"></div>
-                <div className="h-[8px] w-[50%] rounded-[2px] bg-[#E5E7EB]"></div>
+              <div className="p-2 sm:p-[10px]">
+                <div className="mb-2 sm:mb-[11px] h-2 sm:h-[11px] w-[40%] rounded-[2px] bg-[#E5E7EB]"></div>
+                <div className="mb-1.5 sm:mb-[6px] h-4 sm:h-[18px] w-[60%] rounded-[2px] bg-[#E5E7EB]"></div>
+                <div className="h-2 sm:h-[8px] w-[50%] rounded-[2px] bg-[#E5E7EB]"></div>
               </div>
             </div>
           ))}
@@ -237,26 +237,26 @@ export default function PaymentMethodsStats({
   ];
 
   return (
-    <div className="mb-3">
-      <div className="grid grid-cols-4 gap-[17px]">
+    <div className="mb-2 sm:mb-3">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-[17px]">
         {stats.map((stat, index) => (
           <div
             key={index}
-            className="relative h-[76px] overflow-hidden rounded-[11px] bg-white shadow-[0px_0px_3px_0px_rgba(24,181,34,0.25)]"
+            className="relative h-[70px] sm:h-[76px] md:h-20 lg:h-[76px] overflow-hidden rounded-[11px] bg-white shadow-[0px_0px_3px_0px_rgba(24,181,34,0.25)]"
           >
             {/* Label */}
-            <div className="absolute left-[10px] top-[15px] -translate-y-1/2 text-[11px] font-medium leading-normal text-[#9C9C9C]">
+            <div className="absolute left-2 sm:left-[10px] top-3 sm:top-[15px] -translate-y-1/2 text-[10px] sm:text-[11px] md:text-xs font-medium leading-normal text-[#9C9C9C]">
               {stat.label}
             </div>
 
             {/* Value */}
-            <div className="absolute left-[10px] top-[39px] -translate-y-1/2 text-[18px] font-semibold leading-normal text-[#0D1B2A]">
+            <div className="absolute left-2 sm:left-[10px] top-[30px] sm:top-[39px] -translate-y-1/2 text-base sm:text-[18px] md:text-xl lg:text-[18px] font-semibold leading-normal text-[#0D1B2A]">
               {stat.value}
             </div>
 
             {/* Subtitle */}
             <div
-              className="absolute left-[10px] top-[58px] -translate-y-1/2 text-[8px] font-medium leading-normal"
+              className="absolute left-2 sm:left-[10px] top-[52px] sm:top-[58px] -translate-y-1/2 text-[7px] sm:text-[8px] md:text-[9px] lg:text-[8px] font-medium leading-normal"
               style={{ color: stat.subtitleColor }}
             >
               {stat.subtitle}
@@ -264,7 +264,7 @@ export default function PaymentMethodsStats({
 
             {/* Icon */}
             <div
-              className="absolute right-[11px] top-[11px] flex h-[25px] w-[25px] items-center justify-center rounded-[100px] p-[6px]"
+              className="absolute right-2 sm:right-[11px] top-2 sm:top-[11px] flex h-5 w-5 sm:h-[25px] sm:w-[25px] md:h-7 md:w-7 lg:h-[25px] lg:w-[25px] items-center justify-center rounded-[100px] p-1 sm:p-[6px]"
               style={{ background: stat.iconBgColor }}
             >
               <stat.icon />

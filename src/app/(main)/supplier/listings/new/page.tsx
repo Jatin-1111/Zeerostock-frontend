@@ -178,7 +178,7 @@ export default function NewListing() {
   const handleInputChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    >,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -188,10 +188,10 @@ export default function NewListing() {
 
     if (name === "priceBefore" || name === "priceAfter") {
       const before = parseFloat(
-        name === "priceBefore" ? value : formData.priceBefore
+        name === "priceBefore" ? value : formData.priceBefore,
       );
       const after = parseFloat(
-        name === "priceAfter" ? value : formData.priceAfter
+        name === "priceAfter" ? value : formData.priceAfter,
       );
       if (before > 0 && after > 0) {
         const discount = ((before - after) / before) * 100;
@@ -243,7 +243,7 @@ export default function NewListing() {
 
     if (totalImages > 10) {
       toast.error(
-        `You can only upload a maximum of 10 images. You currently have ${currentImageCount} image(s). You tried to add ${newImageCount} more.`
+        `You can only upload a maximum of 10 images. You currently have ${currentImageCount} image(s). You tried to add ${newImageCount} more.`,
       );
       return;
     }
@@ -260,7 +260,7 @@ export default function NewListing() {
 
     if (invalidFiles.length > 0) {
       const errorMsg = `The following file(s) exceed the 10MB size limit:\n${invalidFiles.join(
-        ", "
+        ", ",
       )}`;
       setImageUploadError(errorMsg);
       toast.error(errorMsg);
@@ -294,7 +294,7 @@ export default function NewListing() {
             Authorization: `Bearer ${token}`,
           },
           body: formDataToSend,
-        }
+        },
       );
 
       if (!response.ok) {
@@ -338,7 +338,7 @@ export default function NewListing() {
         toast.success(
           `${images.length} ${
             images.length === 1 ? "image" : "images"
-          } uploaded successfully`
+          } uploaded successfully`,
         );
       }
     } catch (error) {
@@ -380,7 +380,7 @@ export default function NewListing() {
               Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify({ fileKey: imageToRemove.fileKey }),
-          }
+          },
         );
 
         if (!response.ok) {
@@ -389,13 +389,13 @@ export default function NewListing() {
       }
 
       setUploadedImages((prev) =>
-        prev.filter((_, index) => index !== indexToRemove)
+        prev.filter((_, index) => index !== indexToRemove),
       );
 
       setFormData((prev) => {
         if (prev.imageUrl === imageToRemove.url) {
           const remaining = uploadedImages.filter(
-            (_, idx) => idx !== indexToRemove
+            (_, idx) => idx !== indexToRemove,
           );
           return {
             ...prev,
@@ -406,7 +406,7 @@ export default function NewListing() {
           return {
             ...prev,
             galleryImages: prev.galleryImages.filter(
-              (url) => url !== imageToRemove.url
+              (url) => url !== imageToRemove.url,
             ),
           };
         }
@@ -418,7 +418,7 @@ export default function NewListing() {
       toast.error(
         `Failed to remove image: ${
           error instanceof Error ? error.message : "Unknown error"
-        }`
+        }`,
       );
     }
   };
@@ -550,13 +550,13 @@ export default function NewListing() {
         setValidationErrors(backendErrors);
         toast.error(
           err.response.data.message ||
-            "Validation failed. Please check your inputs."
+            "Validation failed. Please check your inputs.",
         );
       } else if (err?.response?.data?.message) {
         toast.error(err.response.data.message);
       } else {
         toast.error(
-          err?.message || "Failed to create listing. Please try again."
+          err?.message || "Failed to create listing. Please try again.",
         );
       }
     } finally {
@@ -600,18 +600,21 @@ export default function NewListing() {
       </AnimatePresence>
 
       {/* Main Container - 75% scale via smaller max-width and padding */}
-      <div className="mx-auto max-w-[1080px] px-[60px] py-[22px]">
+      <div className="mx-auto max-w-[1080px] px-3 sm:px-8 md:px-12 lg:px-[60px] py-4 sm:py-5 md:py-[22px]">
         {/* Page Title - 75% of original */}
-        <h1 className="mb-[11px] text-[20px] font-semibold leading-[40px] text-[#0d1b2a]">
+        <h1 className="mb-2 sm:mb-[11px] text-lg sm:text-[20px] md:text-2xl font-semibold leading-normal sm:leading-[40px] text-[#0d1b2a]">
           My Inventory
         </h1>
 
-        <form onSubmit={handleSubmit} className="space-y-[30px]">
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-5 sm:space-y-6 md:space-y-[30px]"
+        >
           {/* Basic Information Section */}
           <FormSection title="Basic Information">
-            <div className="space-y-[20px]">
+            <div className="space-y-4 sm:space-y-5 md:space-y-[20px]">
               {/* Row 1: Product Title & Listing Type */}
-              <div className="grid grid-cols-2 gap-[11px]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-[11px]">
                 <FormInput
                   label="Product Title"
                   name="title"
@@ -636,7 +639,7 @@ export default function NewListing() {
               </div>
 
               {/* Row 2: Category & Condition */}
-              <div className="grid grid-cols-2 gap-[11px]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-[11px]">
                 <CustomDropdown
                   label="Category"
                   name="categoryId"
@@ -670,7 +673,7 @@ export default function NewListing() {
               </div>
 
               {/* Row 3: Location, Quantity, Units */}
-              <div className="grid grid-cols-3 gap-[11px]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-[11px]">
                 <FormInput
                   label="Location"
                   name="city"
@@ -706,7 +709,7 @@ export default function NewListing() {
               </div>
 
               {/* Row 4: Price & Listing Duration */}
-              <div className="grid grid-cols-2 gap-[11px]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-[11px]">
                 <FormInput
                   label="Price"
                   name="priceAfter"
@@ -744,9 +747,9 @@ export default function NewListing() {
 
           {/* Technical Specification Section */}
           <FormSection title="Technical Specification">
-            <div className="space-y-[20px]">
+            <div className="space-y-4 sm:space-y-5 md:space-y-[20px]">
               {/* Row 1: Material Type & Material Grade/Standard */}
-              <div className="grid grid-cols-2 gap-[11px]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-[11px]">
                 <CustomDropdown
                   label="Material Type"
                   name="materialType"
@@ -769,7 +772,7 @@ export default function NewListing() {
               </div>
 
               {/* Row 2: Diameter Range & Wall Thickness */}
-              <div className="grid grid-cols-2 gap-[11px]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-[11px]">
                 <FormInput
                   label="Diameter Range (Min-Max) (in mm)"
                   name="diameterMin"
@@ -790,7 +793,7 @@ export default function NewListing() {
               </div>
 
               {/* Row 3: Length/Size Range, Weight per unit, Manufacturing Process */}
-              <div className="grid grid-cols-3 gap-[11px]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-[11px]">
                 <UnitInput
                   label="Length / Size Range"
                   name="lengthMin"
@@ -839,14 +842,14 @@ export default function NewListing() {
 
           {/* Compliance & Certification Section */}
           <FormSection title="Compliance & Certification">
-            <div className="space-y-[20px]">
+            <div className="space-y-4 sm:space-y-5 md:space-y-[20px]">
               <div>
                 <label className="mb-[9px] block text-[12px] font-medium text-[#0d1b2a]">
                   Available Certification
                 </label>
                 <div className="space-y-[12px]">
                   {/* Row 1 */}
-                  <div className="grid grid-cols-4 gap-[20px]">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 md:gap-[20px]">
                     {CERTIFICATION_OPTIONS.slice(0, 4).map((cert) => (
                       <CertificationCheckbox
                         key={cert}
@@ -859,7 +862,7 @@ export default function NewListing() {
                   </div>
 
                   {/* Row 2 */}
-                  <div className="grid grid-cols-4 gap-[20px]">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 md:gap-[20px]">
                     {CERTIFICATION_OPTIONS.slice(4).map((cert) => (
                       <CertificationCheckbox
                         key={cert}
@@ -903,7 +906,7 @@ export default function NewListing() {
             <button
               type="submit"
               disabled={loading || uploadingImages}
-              className="h-[40px] w-[150px] rounded-[8px] bg-[#1e3a8a] text-[10px] font-semibold text-white hover:bg-[#1e40af] disabled:cursor-not-allowed disabled:opacity-50"
+              className="h-9 sm:h-10 md:h-[40px] w-32 sm:w-36 md:w-[150px] rounded-[8px] bg-[#1e3a8a] text-[9px] sm:text-[10px] font-semibold text-white hover:bg-[#1e40af] disabled:cursor-not-allowed disabled:opacity-50"
             >
               {loading ? "Creating..." : "List Product"}
             </button>

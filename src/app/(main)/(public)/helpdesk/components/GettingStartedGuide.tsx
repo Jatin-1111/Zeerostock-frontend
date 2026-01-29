@@ -77,37 +77,39 @@ export default function GettingStartedGuide({
           animate={{ height: "auto", opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}
           transition={{ duration: 0.4, ease: "easeInOut" }}
-          className="mt-[16px] overflow-hidden"
+          className="mt-3 sm:mt-4 md:mt-[16px] overflow-hidden"
         >
-          <div className="rounded-[10px] bg-white p-[15px]">
+          <div className="rounded-[10px] bg-white p-3 sm:p-4 md:p-[15px]">
             {/* Header */}
-            <div className="mb-[15px] flex items-center justify-between px-5 py-3">
+            <div className="mb-3 sm:mb-4 md:mb-[15px] flex items-center justify-between px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 md:py-3">
               <div>
-                <h1 className="mb-[4px] text-[14px] font-semibold leading-none text-[#0d1b2a]">
+                <h1 className="mb-1 sm:mb-1.5 md:mb-[4px] text-sm sm:text-base md:text-[14px] font-semibold leading-none text-[#0d1b2a]">
                   Getting Started Guide
                 </h1>
-                <p className="text-[9px] font-medium leading-normal text-[#9c9c9c]">
+                <p className="text-[8px] sm:text-[9px] md:text-[9px] font-medium leading-normal text-[#9c9c9c]">
                   Learn how to start using Zeerostock efficiently within
                   minutes.
                 </p>
               </div>
               <button
                 onClick={onClose}
-                className="flex h-[24px] w-[24px] items-center justify-center rounded-full bg-gray-100 transition-colors hover:bg-gray-200"
+                className="flex h-6 w-6 sm:h-6 sm:w-6 md:h-[24px] md:w-[24px] items-center justify-center rounded-full bg-gray-100 transition-colors hover:bg-gray-200 flex-shrink-0"
               >
-                <X className="h-[12px] w-[12px] text-[#0d1b2a]" />
+                <X className="h-3 w-3 sm:h-3 sm:w-3 md:h-[12px] md:w-[12px] text-[#0d1b2a]" />
               </button>
             </div>
 
             {/* Green Info Box */}
-            <div className="px-5">
+            <div className="px-3 sm:px-4 md:px-5">
               <div
-                className="mb-[15px] flex items-center justify-center rounded-[8px] bg-[#eeffef]"
+                className="mb-3 sm:mb-4 md:mb-[15px] flex items-center justify-center rounded-[8px] bg-[#eeffef]"
                 style={{ height: "64px" }}
               >
-                <div className="text-center">
-                  <div className="mb-[4px] text-[19px]">🚀</div>
-                  <p className="text-[9px] font-medium leading-none text-[#2aae7a]">
+                <div className="text-center px-2">
+                  <div className="mb-1 sm:mb-1.5 md:mb-[4px] text-lg sm:text-xl md:text-[19px]">
+                    🚀
+                  </div>
+                  <p className="text-[7px] sm:text-[8px] md:text-[9px] font-medium leading-tight sm:leading-normal md:leading-none text-[#2aae7a]">
                     Your Journey to Efficient B2B Trading Starts Here
                   </p>
                 </div>
@@ -115,9 +117,9 @@ export default function GettingStartedGuide({
             </div>
 
             {/* Search Bar */}
-            <div className="px-5">
+            <div className="px-3 sm:px-4 md:px-5">
               <div
-                className="mb-[15px] flex items-center justify-between rounded-[8px] bg-[rgba(235,235,235,0.65)] px-[9px] shadow-[0px_0px_1.6875px_0px_rgba(0,0,0,0.4)]"
+                className="mb-3 sm:mb-4 md:mb-[15px] flex items-center justify-between rounded-[8px] bg-[rgba(235,235,235,0.65)] px-2 sm:px-2.5 md:px-[9px] shadow-[0px_0px_1.6875px_0px_rgba(0,0,0,0.4)]"
                 style={{ height: "24px" }}
               >
                 <input
@@ -125,12 +127,12 @@ export default function GettingStartedGuide({
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search for guide...."
-                  className="flex-1 bg-transparent text-[7px] font-medium text-[#374151] outline-none placeholder:text-[#374151] placeholder:opacity-80"
+                  className="flex-1 bg-transparent text-[6px] sm:text-[7px] md:text-[7px] font-medium text-[#374151] outline-none placeholder:text-[#374151] placeholder:opacity-80"
                 />
-                <div className="flex items-center gap-[4px]">
-                  <div className="h-[17px] w-[1px] bg-gray-300"></div>
-                  <Search className="h-[9px] w-[9px] text-[#374151] opacity-80" />
-                  <p className="text-[9px] font-medium text-[#374151] opacity-80">
+                <div className="flex items-center gap-1 sm:gap-1 md:gap-[4px]">
+                  <div className="h-4 w-0.5 bg-gray-300"></div>
+                  <Search className="h-2.5 w-2.5 sm:h-2.5 sm:w-2.5 md:h-[9px] md:w-[9px] text-[#374151] opacity-80" />
+                  <p className="text-[6px] sm:text-[7px] md:text-[9px] font-medium text-[#374151] opacity-80">
                     Search
                   </p>
                 </div>
@@ -138,10 +140,10 @@ export default function GettingStartedGuide({
             </div>
 
             {/* Sections */}
-            <div className="px-5 py-3">
+            <div className="px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 md:py-3">
               {filteredSections.length === 0 ? (
-                <div className="flex flex-col items-center justify-center py-[40px]">
-                  <p className="text-[9px] font-medium text-[#9c9c9c]">
+                <div className="flex flex-col items-center justify-center py-8 sm:py-10 md:py-[40px]">
+                  <p className="text-[8px] sm:text-[9px] md:text-[9px] font-medium text-[#9c9c9c]">
                     No results found matching your search.
                   </p>
                 </div>

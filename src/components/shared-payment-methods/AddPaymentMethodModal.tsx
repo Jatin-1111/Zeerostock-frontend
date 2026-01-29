@@ -65,13 +65,13 @@ export default function AddPaymentMethodModal({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-2">
-      <div className="bg-white rounded-lg w-full max-w-[340px] max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-2 sm:p-4">
+      <div className="bg-white rounded-lg w-full max-w-[340px] sm:max-w-md md:max-w-lg lg:max-w-xl max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="flex items-center justify-between px-[20px] py-[13px] border-b border-gray-200">
-          <div className="flex items-center gap-[8px]">
-            <CreditCard className="w-[12px] h-[12px] text-black" />
-            <h2 className="text-[11px] font-semibold text-black">
+        <div className="flex items-center justify-between px-4 sm:px-5 md:px-[20px] py-3 sm:py-[13px] border-b border-gray-200">
+          <div className="flex items-center gap-2 sm:gap-[8px]">
+            <CreditCard className="w-3 h-3 sm:w-[12px] sm:h-[12px] md:w-4 md:h-4 text-black" />
+            <h2 className="text-[10px] sm:text-[11px] md:text-xs lg:text-sm font-semibold text-black">
               Add New Payment Method
             </h2>
           </div>
@@ -79,43 +79,43 @@ export default function AddPaymentMethodModal({
             onClick={onClose}
             className="text-gray-400 hover:text-gray-600 transition-colors"
           >
-            <X className="w-[13px] h-[13px]" />
+            <X className="w-4 h-4 sm:w-[13px] sm:h-[13px] md:w-5 md:h-5" />
           </button>
         </div>
 
         {/* Content */}
-        <div className="p-[17px] space-y-[13px]">
+        <div className="p-4 sm:p-[17px] md:p-5 lg:p-6 space-y-3 sm:space-y-[13px] md:space-y-4">
           {/* Credit/Debit Card Section */}
           <div
-            className={`border-2 rounded-lg p-[13px] transition-colors ${
+            className={`border-2 rounded-lg p-3 sm:p-[13px] md:p-4 transition-colors ${
               selectedMethod === "card"
                 ? "border-[#2AE7A] bg-[#EEFFEF]"
                 : "border-gray-200 bg-white"
             }`}
           >
-            <div className="flex items-start gap-[8px] mb-[11px]">
+            <div className="flex items-start gap-2 sm:gap-[8px] mb-2 sm:mb-[11px] md:mb-3">
               <input
                 type="radio"
                 name="paymentMethod"
                 checked={selectedMethod === "card"}
                 onChange={() => setSelectedMethod("card")}
-                className="mt-[3px] w-[11px] h-[11px] accent-[#2AE7A]"
+                className="mt-[3px] w-3 h-3 sm:w-[11px] sm:h-[11px] md:w-4 md:h-4 accent-[#2AE7A]"
               />
               <div className="flex-1">
-                <h3 className="text-[9px] font-semibold text-black">
+                <h3 className="text-[9px] sm:text-[9px] md:text-[10px] lg:text-xs font-semibold text-black">
                   Credit/Debit Card
                 </h3>
-                <p className="text-[8px] text-gray-400">
+                <p className="text-[8px] sm:text-[8px] md:text-[9px] lg:text-[10px] text-gray-400">
                   Visa, Mastercard, American Express
                 </p>
               </div>
             </div>
 
             {selectedMethod === "card" && (
-              <div className="space-y-[11px] mt-[13px]">
+              <div className="space-y-2 sm:space-y-[11px] md:space-y-3 mt-3 sm:mt-[13px]">
                 {/* Card Number */}
                 <div>
-                  <label className="block text-[8px] font-medium text-black mb-[4px]">
+                  <label className="block text-[8px] sm:text-[8px] md:text-[9px] lg:text-[10px] font-medium text-black mb-1 sm:mb-[4px]">
                     Card Number<span className="text-red-500">*</span>
                   </label>
                   <input
@@ -123,14 +123,14 @@ export default function AddPaymentMethodModal({
                     placeholder="XXXX XXXX XXXX XXXX"
                     value={cardNumber}
                     onChange={(e) => setCardNumber(e.target.value)}
-                    className="w-full px-[11px] py-[7px] border border-gray-300 rounded text-[8px] text-[#9c9c9c] placeholder:text-gray-400 focus:outline-none focus:border-[#2AE7A] focus:ring-1 focus:ring-[#2AE7A]"
+                    className="w-full px-2 sm:px-[11px] md:px-3 py-1.5 sm:py-[7px] md:py-2 border border-gray-300 rounded text-[8px] sm:text-[8px] md:text-[9px] lg:text-[10px] text-[#9c9c9c] placeholder:text-gray-400 focus:outline-none focus:border-[#2AE7A] focus:ring-1 focus:ring-[#2AE7A]"
                   />
                 </div>
 
                 {/* Expiry Date and CVV */}
-                <div className="grid grid-cols-2 gap-[11px]">
+                <div className="grid grid-cols-2 gap-2 sm:gap-[11px] md:gap-3">
                   <div>
-                    <label className="block text-[8px] font-medium text-black mb-[4px]">
+                    <label className="block text-[8px] sm:text-[8px] md:text-[9px] lg:text-[10px] font-medium text-black mb-1 sm:mb-[4px]">
                       Expiry Date<span className="text-red-500">*</span>
                     </label>
                     <input
@@ -138,11 +138,11 @@ export default function AddPaymentMethodModal({
                       placeholder="MM/YY"
                       value={expiryDate}
                       onChange={(e) => setExpiryDate(e.target.value)}
-                      className="w-full px-[11px] py-[7px] border border-gray-300 rounded text-[8px] text-[#9c9c9c] placeholder:text-gray-400 focus:outline-none focus:border-[#2AE7A] focus:ring-1 focus:ring-[#2AE7A]"
+                      className="w-full px-2 sm:px-[11px] md:px-3 py-1.5 sm:py-[7px] md:py-2 border border-gray-300 rounded text-[8px] sm:text-[8px] md:text-[9px] lg:text-[10px] text-[#9c9c9c] placeholder:text-gray-400 focus:outline-none focus:border-[#2AE7A] focus:ring-1 focus:ring-[#2AE7A]"
                     />
                   </div>
                   <div>
-                    <label className="block text-[8px] font-medium text-black mb-[4px]">
+                    <label className="block text-[8px] sm:text-[8px] md:text-[9px] lg:text-[10px] font-medium text-black mb-1 sm:mb-[4px]">
                       CVV<span className="text-red-500">*</span>
                     </label>
                     <input
@@ -151,14 +151,14 @@ export default function AddPaymentMethodModal({
                       value={cvv}
                       onChange={(e) => setCvv(e.target.value)}
                       maxLength={3}
-                      className="w-full px-[11px] py-[7px] border border-gray-300 rounded text-[8px] text-[#9c9c9c] placeholder:text-gray-400 focus:outline-none focus:border-[#2AE7A] focus:ring-1 focus:ring-[#2AE7A]"
+                      className="w-full px-2 sm:px-[11px] md:px-3 py-1.5 sm:py-[7px] md:py-2 border border-gray-300 rounded text-[8px] sm:text-[8px] md:text-[9px] lg:text-[10px] text-[#9c9c9c] placeholder:text-gray-400 focus:outline-none focus:border-[#2AE7A] focus:ring-1 focus:ring-[#2AE7A]"
                     />
                   </div>
                 </div>
 
                 {/* Name on Card */}
                 <div>
-                  <label className="block text-[8px] font-medium text-black mb-[4px]">
+                  <label className="block text-[8px] sm:text-[8px] md:text-[9px] lg:text-[10px] font-medium text-black mb-1 sm:mb-[4px]">
                     Name on Card<span className="text-red-500">*</span>
                   </label>
                   <input
@@ -166,21 +166,23 @@ export default function AddPaymentMethodModal({
                     placeholder="John Doe"
                     value={cardName}
                     onChange={(e) => setCardName(e.target.value)}
-                    className="w-full px-[11px] py-[7px] border border-gray-300 rounded text-[8px] text-[#9c9c9c] placeholder:text-gray-400 focus:outline-none focus:border-[#2AE7A] focus:ring-1 focus:ring-[#2AE7A]"
+                    className="w-full px-2 sm:px-[11px] md:px-3 py-1.5 sm:py-[7px] md:py-2 border border-gray-300 rounded text-[8px] sm:text-[8px] md:text-[9px] lg:text-[10px] text-[#9c9c9c] placeholder:text-gray-400 focus:outline-none focus:border-[#2AE7A] focus:ring-1 focus:ring-[#2AE7A]"
                   />
                 </div>
 
                 {/* Processing Fee Info */}
-                <p className="text-[7px] text-gray-400">
+                <p className="text-[7px] sm:text-[7px] md:text-[8px] lg:text-[9px] text-gray-400">
                   Processing: Instant | Fee: 2.9% + $0.30
                 </p>
 
                 {/* Add Card Button */}
                 <button
                   onClick={handleAddCard}
-                  className="w-full bg-[#0D1B2A] text-white rounded py-[5px] text-[6px] font-semibold hover:bg-[#0D1B2A]/90 transition-colors flex items-center justify-center gap-[4px]"
+                  className="w-full bg-[#0D1B2A] text-white rounded py-1.5 sm:py-[5px] md:py-2 text-[6px] sm:text-[6px] md:text-[7px] lg:text-[8px] font-semibold hover:bg-[#0D1B2A]/90 transition-colors flex items-center justify-center gap-1 sm:gap-[4px]"
                 >
-                  <span className="text-[8px]">+</span>
+                  <span className="text-[8px] sm:text-[8px] md:text-[9px] lg:text-[10px]">
+                    +
+                  </span>
                   Add Card
                 </button>
               </div>
@@ -189,35 +191,35 @@ export default function AddPaymentMethodModal({
 
           {/* Escrow Payment / PayPal Section */}
           <div
-            className={`border-2 rounded-lg p-[13px] transition-colors ${
+            className={`border-2 rounded-lg p-3 sm:p-[13px] md:p-4 transition-colors ${
               selectedMethod === "escrow"
                 ? "border-[#2AE7A] bg-[#EEFFEF]"
                 : "border-gray-200 bg-white"
             }`}
           >
-            <div className="flex items-start gap-[8px] mb-[11px]">
+            <div className="flex items-start gap-2 sm:gap-[8px] mb-2 sm:mb-[11px] md:mb-3">
               <input
                 type="radio"
                 name="paymentMethod"
                 checked={selectedMethod === "escrow"}
                 onChange={() => setSelectedMethod("escrow")}
-                className="mt-[3px] w-[11px] h-[11px] accent-[#2AE7A]"
+                className="mt-[3px] w-3 h-3 sm:w-[11px] sm:h-[11px] md:w-4 md:h-4 accent-[#2AE7A]"
               />
               <div className="flex-1">
-                <h3 className="text-[9px] font-semibold text-black">
+                <h3 className="text-[9px] sm:text-[9px] md:text-[10px] lg:text-xs font-semibold text-black">
                   Escrow Payment / PayPal
                 </h3>
-                <p className="text-[8px] text-gray-400">
+                <p className="text-[8px] sm:text-[8px] md:text-[9px] lg:text-[10px] text-gray-400">
                   Secure payment held until delivery confirmation
                 </p>
               </div>
             </div>
 
             {selectedMethod === "escrow" && (
-              <div className="space-y-[11px] mt-[13px]">
+              <div className="space-y-2 sm:space-y-[11px] md:space-y-3 mt-3 sm:mt-[13px]">
                 {/* Email ID */}
                 <div>
-                  <label className="block text-[8px] font-medium text-black mb-[4px]">
+                  <label className="block text-[8px] sm:text-[8px] md:text-[9px] lg:text-[10px] font-medium text-black mb-1 sm:mb-[4px]">
                     Email ID
                   </label>
                   <input
@@ -225,13 +227,13 @@ export default function AddPaymentMethodModal({
                     placeholder="xyz@mail.com"
                     value={emailId}
                     onChange={(e) => setEmailId(e.target.value)}
-                    className="w-full px-[11px] py-[7px] border border-gray-300 rounded text-[8px] text-[#9c9c9c] placeholder:text-gray-400 focus:outline-none focus:border-[#2AE7A] focus:ring-1 focus:ring-[#2AE7A]"
+                    className="w-full px-2 sm:px-[11px] md:px-3 py-1.5 sm:py-[7px] md:py-2 border border-gray-300 rounded text-[8px] sm:text-[8px] md:text-[9px] lg:text-[10px] text-[#9c9c9c] placeholder:text-gray-400 focus:outline-none focus:border-[#2AE7A] focus:ring-1 focus:ring-[#2AE7A]"
                   />
                 </div>
 
                 {/* Password */}
                 <div>
-                  <label className="block text-[8px] font-medium text-black mb-[4px]">
+                  <label className="block text-[8px] sm:text-[8px] md:text-[9px] lg:text-[10px] font-medium text-black mb-1 sm:mb-[4px]">
                     Password
                   </label>
                   <input
@@ -239,21 +241,23 @@ export default function AddPaymentMethodModal({
                     placeholder="•••"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-[11px] py-[7px] border border-gray-300 rounded text-[8px] text-[#9c9c9c] placeholder:text-gray-400 focus:outline-none focus:border-[#2AE7A] focus:ring-1 focus:ring-[#2AE7A]"
+                    className="w-full px-2 sm:px-[11px] md:px-3 py-1.5 sm:py-[7px] md:py-2 border border-gray-300 rounded text-[8px] sm:text-[8px] md:text-[9px] lg:text-[10px] text-[#9c9c9c] placeholder:text-gray-400 focus:outline-none focus:border-[#2AE7A] focus:ring-1 focus:ring-[#2AE7A]"
                   />
                 </div>
 
                 {/* Processing Fee Info */}
-                <p className="text-[7px] text-gray-400">
+                <p className="text-[7px] sm:text-[7px] md:text-[8px] lg:text-[9px] text-gray-400">
                   Processing: 2-14 days | Fee: 2.5% of order value
                 </p>
 
                 {/* Add Account Button */}
                 <button
                   onClick={handleAddEscrow}
-                  className="w-full bg-[#0D1B2A] text-white rounded py-[5px] text-[6px] font-semibold hover:bg-[#0D1B2A]/90 transition-colors flex items-center justify-center gap-[4px]"
+                  className="w-full bg-[#0D1B2A] text-white rounded py-1.5 sm:py-[5px] md:py-2 text-[6px] sm:text-[6px] md:text-[7px] lg:text-[8px] font-semibold hover:bg-[#0D1B2A]/90 transition-colors flex items-center justify-center gap-1 sm:gap-[4px]"
                 >
-                  <span className="text-[8px]">+</span>
+                  <span className="text-[8px] sm:text-[8px] md:text-[9px] lg:text-[10px]">
+                    +
+                  </span>
                   Add Account
                 </button>
               </div>
@@ -262,47 +266,51 @@ export default function AddPaymentMethodModal({
 
           {/* UPI Section */}
           <div
-            className={`border-2 rounded-lg p-[13px] transition-colors ${
+            className={`border-2 rounded-lg p-3 sm:p-[13px] md:p-4 transition-colors ${
               selectedMethod === "upi"
                 ? "border-[#2AE7A] bg-[#EEFFEF]"
                 : "border-gray-200 bg-white"
             }`}
           >
-            <div className="flex items-start gap-[8px] mb-[11px]">
+            <div className="flex items-start gap-2 sm:gap-[8px] mb-2 sm:mb-[11px] md:mb-3">
               <input
                 type="radio"
                 name="paymentMethod"
                 checked={selectedMethod === "upi"}
                 onChange={() => setSelectedMethod("upi")}
-                className="mt-[3px] w-[11px] h-[11px] accent-[#2AE7A]"
+                className="mt-[3px] w-3 h-3 sm:w-[11px] sm:h-[11px] md:w-4 md:h-4 accent-[#2AE7A]"
               />
               <div className="flex-1">
-                <h3 className="text-[9px] font-semibold text-black">UPI</h3>
-                <p className="text-[8px] text-gray-400">Pay via any UPI App</p>
-                <p className="text-[7px] text-gray-400 mt-[3px]">
+                <h3 className="text-[9px] sm:text-[9px] md:text-[10px] lg:text-xs font-semibold text-black">
+                  UPI
+                </h3>
+                <p className="text-[8px] sm:text-[8px] md:text-[9px] lg:text-[10px] text-gray-400">
+                  Pay via any UPI App
+                </p>
+                <p className="text-[7px] sm:text-[7px] md:text-[8px] lg:text-[9px] text-gray-400 mt-[3px]">
                   Processing: Instant| Fee: $0
                 </p>
               </div>
             </div>
 
             {selectedMethod === "upi" && (
-              <div className="space-y-[11px] mt-[13px]">
+              <div className="space-y-2 sm:space-y-[11px] md:space-y-3 mt-3 sm:mt-[13px]">
                 {/* UPI ID Input */}
                 <div>
-                  <label className="block text-[8px] font-medium text-black mb-[4px]">
+                  <label className="block text-[8px] sm:text-[8px] md:text-[9px] lg:text-[10px] font-medium text-black mb-1 sm:mb-[4px]">
                     Enter UPI ID
                   </label>
-                  <div className="flex gap-[8px]">
+                  <div className="flex gap-2 sm:gap-[8px]">
                     <input
                       type="text"
                       placeholder="xyz@upi"
                       value={upiId}
                       onChange={(e) => setUpiId(e.target.value)}
-                      className="flex-1 px-[11px] py-[7px] border border-gray-300 rounded text-[8px] text-[#9c9c9c] placeholder:text-gray-400 focus:outline-none focus:border-[#2AE7A] focus:ring-1 focus:ring-[#2AE7A]"
+                      className="flex-1 px-2 sm:px-[11px] md:px-3 py-1.5 sm:py-[7px] md:py-2 border border-gray-300 rounded text-[8px] sm:text-[8px] md:text-[9px] lg:text-[10px] text-[#9c9c9c] placeholder:text-gray-400 focus:outline-none focus:border-[#2AE7A] focus:ring-1 focus:ring-[#2AE7A]"
                     />
                     <button
                       onClick={handleVerifyUPI}
-                      className="bg-[#F4CE00] text-black rounded px-[16px] py-[7px] text-[8px] font-semibold hover:bg-[#F4CE00]/90 transition-colors"
+                      className="bg-[#F4CE00] text-black rounded px-3 sm:px-[16px] md:px-4 py-1.5 sm:py-[7px] md:py-2 text-[8px] sm:text-[8px] md:text-[9px] lg:text-[10px] font-semibold hover:bg-[#F4CE00]/90 transition-colors"
                     >
                       Verify
                     </button>
@@ -310,53 +318,54 @@ export default function AddPaymentMethodModal({
                 </div>
 
                 {/* OR Divider */}
-                <div className="flex items-center gap-[11px]">
+                <div className="flex items-center gap-2 sm:gap-[11px] md:gap-3">
                   <div className="flex-1 h-[1px] bg-gray-300"></div>
-                  <span className="text-[8px] text-gray-400">OR</span>
+                  <span className="text-[8px] sm:text-[8px] md:text-[9px] lg:text-[10px] text-gray-400">
+                    OR
+                  </span>
                   <div className="flex-1 h-[1px] bg-gray-300"></div>
                 </div>
 
                 {/* Pay using app */}
                 <div>
-                  <p className="text-[8px] font-medium text-black mb-[8px]">
+                  <p className="text-[8px] sm:text-[8px] md:text-[9px] lg:text-[10px] font-medium text-black mb-2 sm:mb-[8px]">
                     Pay using app
                   </p>
-                  <div className="flex items-center gap-[11px]">
+                  <div className="flex items-center gap-2 sm:gap-[11px] md:gap-3">
                     {/* Google Pay */}
-                    <button className="flex-1 border-2 border-gray-300 rounded-lg p-[8px] hover:border-[#2AE7A] transition-colors">
+                    <button className="flex-1 border-2 border-gray-300 rounded-lg p-2 sm:p-[8px] md:p-3 hover:border-[#2AE7A] transition-colors">
                       <div className="flex items-center justify-center">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 48 48"
-                          width="32px"
-                          height="13px"
+                          className="w-6 h-3 sm:w-8 sm:h-[13px] md:w-10 md:h-4"
                           baseProfile="basic"
                         >
                           <path
                             fill="#e64a19"
-                            d="M42.858,11.975c-4.546-2.624-10.359-1.065-12.985,3.481L23.25,26.927	c-1.916,3.312,0.551,4.47,3.301,6.119l6.372,3.678c2.158,1.245,4.914,0.506,6.158-1.649l6.807-11.789	C48.176,19.325,46.819,14.262,42.858,11.975z"
+                            d="M42.858,11.975c-4.546-2.624-10.359-1.065-12.985,3.481L23.25,26.927c-1.916,3.312,0.551,4.47,3.301,6.119l6.372,3.678c2.158,1.245,4.914,0.506,6.158-1.649l6.807-11.789	C48.176,19.325,46.819,14.262,42.858,11.975z"
                           />
                           <path
                             fill="#fbc02d"
-                            d="M35.365,16.723l-6.372-3.678c-3.517-1.953-5.509-2.082-6.954,0.214l-9.398,16.275	c-2.624,4.543-1.062,10.353,3.481,12.971c3.961,2.287,9.024,0.93,11.311-3.031l9.578-16.59	C38.261,20.727,37.523,17.968,35.365,16.723z"
+                            d="M35.365,16.723l-6.372-3.678c-3.517-1.953-5.509-2.082-6.954,0.214l-9.398,16.275c-2.624,4.543-1.062,10.353,3.481,12.971c3.961,2.287,9.024,0.93,11.311-3.031l9.578-16.59	C38.261,20.727,37.523,17.968,35.365,16.723z"
                           />
                           <path
                             fill="#43a047"
-                            d="M36.591,8.356l-4.476-2.585c-4.95-2.857-11.28-1.163-14.137,3.787L9.457,24.317	c-1.259,2.177-0.511,4.964,1.666,6.22l5.012,2.894c2.475,1.43,5.639,0.582,7.069-1.894l9.735-16.86	c2.017-3.492,6.481-4.689,9.974-2.672L36.591,8.356z"
+                            d="M36.591,8.356l-4.476-2.585c-4.95-2.857-11.28-1.163-14.137,3.787L9.457,24.317c-1.259,2.177-0.511,4.964,1.666,6.22l5.012,2.894c2.475,1.43,5.639,0.582,7.069-1.894l9.735-16.86c2.017-3.492,6.481-4.689,9.974-2.672L36.591,8.356z"
                           />
                           <path
                             fill="#1e88e5"
-                            d="M19.189,13.781l-4.838-2.787c-2.158-1.242-4.914-0.506-6.158,1.646l-5.804,10.03	c-2.857,4.936-1.163,11.252,3.787,14.101l3.683,2.121l4.467,2.573l1.939,1.115c-3.442-2.304-4.535-6.92-2.43-10.555l1.503-2.596	l5.504-9.51C22.083,17.774,21.344,15.023,19.189,13.781z"
+                            d="M19.189,13.781l-4.838-2.787c-2.158-1.242-4.914-0.506-6.158,1.646l-5.804,10.03c-2.857,4.936-1.163,11.252,3.787,14.101l3.683,2.121l4.467,2.573l1.939,1.115c-3.442-2.304-4.535-6.92-2.43-10.555l1.503-2.596	l5.504-9.51C22.083,17.774,21.344,15.023,19.189,13.781z"
                           />
                         </svg>
                       </div>
                     </button>
 
                     {/* PhonePe */}
-                    <button className="flex-1 border-2 border-gray-300 rounded-lg p-[8px] hover:border-[#2AE7A] transition-colors">
+                    <button className="flex-1 border-2 border-gray-300 rounded-lg p-2 sm:p-[8px] md:p-3 hover:border-[#2AE7A] transition-colors">
                       <div className="flex items-center justify-center">
                         <svg
-                          className="w-[32px] h-[13px]"
+                          className="w-6 h-3 sm:w-8 sm:h-[13px] md:w-10 md:h-4"
                           viewBox="0 0 512 512"
                           xmlns="http://www.w3.org/2000/svg"
                         >
@@ -370,10 +379,10 @@ export default function AddPaymentMethodModal({
                     </button>
 
                     {/* Paytm */}
-                    <button className="flex-1 border-2 border-gray-300 rounded-lg p-[8px] hover:border-[#2AE7A] transition-colors">
+                    <button className="flex-1 border-2 border-gray-300 rounded-lg p-2 sm:p-[8px] md:p-3 hover:border-[#2AE7A] transition-colors">
                       <div className="flex items-center justify-center">
                         <svg
-                          className="w-[32px] h-[13px]"
+                          className="w-6 h-3 sm:w-8 sm:h-[13px] md:w-10 md:h-4"
                           viewBox="0 0 122.88 38.52"
                           xmlns="http://www.w3.org/2000/svg"
                         >

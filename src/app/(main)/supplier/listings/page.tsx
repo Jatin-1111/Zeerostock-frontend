@@ -72,35 +72,35 @@ export default function SupplierListings() {
   if (roleError) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center max-w-md p-6">
-          <Package className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">
+        <div className="text-center max-w-md p-4 sm:p-6">
+          <Package className="w-12 h-12 sm:w-16 sm:h-16 text-gray-400 mx-auto mb-3 sm:mb-4" />
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
             Supplier Access Required
           </h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6">
             You are currently in{" "}
             <span className="font-semibold">{user?.activeRole}</span> mode.
             Please switch to supplier mode to access this page.
           </p>
-          <div className="space-y-3">
+          <div className="space-y-2 sm:space-y-3">
             {user?.roles?.includes("supplier") ? (
               <Link
                 href="/profile?switchRole=supplier"
-                className="block px-6 py-3 bg-gray-900 text-white text-sm font-medium hover:bg-gray-800"
+                className="block px-4 sm:px-6 py-2 sm:py-3 bg-gray-900 text-white text-xs sm:text-sm font-medium hover:bg-gray-800"
               >
                 Switch to Supplier Mode
               </Link>
             ) : (
               <Link
                 href="/supplier/register"
-                className="block px-6 py-3 bg-gray-900 text-white text-sm font-medium hover:bg-gray-800"
+                className="block px-4 sm:px-6 py-2 sm:py-3 bg-gray-900 text-white text-xs sm:text-sm font-medium hover:bg-gray-800"
               >
                 Register as Supplier
               </Link>
             )}
             <Link
               href="/"
-              className="block px-6 py-3 border-2 border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-50"
+              className="block px-4 sm:px-6 py-2 sm:py-3 border-2 border-gray-900 text-gray-900 text-xs sm:text-sm font-medium hover:bg-gray-50"
             >
               Go to Homepage
             </Link>
@@ -112,35 +112,37 @@ export default function SupplierListings() {
 
   return (
     <div className="min-h-screen bg-[#EEFBF6]">
-      <div className="max-w-[1440px] mx-auto px-10 py-4">
+      <div className="max-w-[1440px] mx-auto px-3 sm:px-6 md:px-10 py-3 sm:py-4">
         {/* Page Title */}
-        <h1 className="text-[18px] font-semibold text-[#0d1b2a] mb-4">
+        <h1 className="text-base sm:text-[18px] md:text-xl font-semibold text-[#0d1b2a] mb-3 sm:mb-4">
           Active Listing
         </h1>
 
         {/* Loading State */}
         {loading ? (
-          <div className="flex items-center justify-center py-20">
+          <div className="flex items-center justify-center py-16 sm:py-20">
             <div className="text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto mb-4"></div>
-              <p className="text-gray-600">Loading listings...</p>
+              <div className="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-b-2 border-gray-900 mx-auto mb-3 sm:mb-4"></div>
+              <p className="text-sm sm:text-base text-gray-600">
+                Loading listings...
+              </p>
             </div>
           </div>
         ) : listings.length === 0 ? (
           /* Empty State */
-          <div className="flex flex-col items-center justify-center py-20">
-            <Package className="w-16 h-16 text-gray-400 mb-4" />
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">
+          <div className="flex flex-col items-center justify-center py-16 sm:py-20">
+            <Package className="w-12 h-12 sm:w-16 sm:h-16 text-gray-400 mb-3 sm:mb-4" />
+            <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">
               No listings found
             </h3>
-            <p className="text-gray-600 mb-6">
+            <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6">
               {filter === "all"
                 ? "Start by creating your first product listing"
                 : `No ${filter} listings found`}
             </p>
             <Link
               href="/supplier/listings/new"
-              className="px-6 py-3 bg-gray-900 text-white text-sm font-medium hover:bg-gray-800 transition-colors"
+              className="px-4 sm:px-6 py-2 sm:py-3 bg-gray-900 text-white text-xs sm:text-sm font-medium hover:bg-gray-800 transition-colors"
             >
               Add New Product
             </Link>
@@ -148,7 +150,7 @@ export default function SupplierListings() {
         ) : (
           <>
             {/* Listings Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3">
               {listings.map((listing) => (
                 <div
                   key={listing.id}
@@ -166,10 +168,10 @@ export default function SupplierListings() {
                         listing.status === "active"
                           ? "#eeffef"
                           : listing.status === "draft"
-                          ? "#f2f2f2"
-                          : listing.status === "sold"
-                          ? "#dbeafe"
-                          : "#fee2e2",
+                            ? "#f2f2f2"
+                            : listing.status === "sold"
+                              ? "#dbeafe"
+                              : "#fee2e2",
                     }}
                   >
                     <p className="text-[7.5px] text-[#0d1b2a] font-medium leading-normal capitalize">
@@ -190,14 +192,16 @@ export default function SupplierListings() {
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
-                        <span className="text-gray-400 text-sm">No Image</span>
+                        <span className="text-gray-400 text-xs sm:text-sm">
+                          No Image
+                        </span>
                       </div>
                     )}
                   </div>
 
                   {/* Product Details */}
                   <div
-                    className="px-[10px] pb-[10px] flex flex-col"
+                    className="px-2 sm:px-[10px] pb-2 sm:pb-[10px] flex flex-col"
                     style={{ height: "calc(300px - 114px)" }}
                   >
                     {/* Title - Fixed height */}
@@ -214,7 +218,7 @@ export default function SupplierListings() {
 
                     {/* Pricing */}
                     <div className="mb-2 flex items-center gap-1.5 h-[18px]">
-                      <span className="text-[13px] font-bold text-[#1e3a8a] leading-none">
+                      <span className="text-xs sm:text-[13px] font-bold text-[#1e3a8a] leading-none">
                         {formatCurrency(listing.price_after)}
                       </span>
                       {listing.price_before && listing.price_before > 0 && (
@@ -245,14 +249,14 @@ export default function SupplierListings() {
                     </div>
 
                     {/* Stats Row */}
-                    <div className="flex items-center gap-2 pb-2 border-b border-[#e5e5e5] mb-2 h-[25px]">
-                      <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-1.5 sm:gap-2 pb-2 border-b border-[#e5e5e5] mb-2 h-[25px]">
+                      <div className="flex items-center gap-0.5 sm:gap-1">
                         <Eye className="w-[11px] h-[11px] text-[#9c9c9c]" />
                         <span className="text-[6px] font-medium text-[#9c9c9c]">
                           {listing.views_count || 0}
                         </span>
                       </div>
-                      <div className="flex items-center gap-1">
+                      <div className="flex items-center gap-0.5 sm:gap-1">
                         <Star className="w-[11px] h-[11px] text-[#9c9c9c]" />
                         <span className="text-[6px] font-medium text-[#9c9c9c]">
                           {listing.rating
@@ -260,13 +264,13 @@ export default function SupplierListings() {
                             : "0.0"}
                         </span>
                       </div>
-                      <div className="flex items-center gap-1">
+                      <div className="flex items-center gap-0.5 sm:gap-1">
                         <MessageCircle className="w-[11px] h-[11px] text-[#9c9c9c]" />
                         <span className="text-[6px] font-medium text-[#9c9c9c]">
                           {listing.inquiries_count || 0}
                         </span>
                       </div>
-                      <div className="flex items-center gap-1">
+                      <div className="flex items-center gap-0.5 sm:gap-1">
                         <Clock className="w-[11px] h-[11px] text-[#9c9c9c]" />
                         <span className="text-[6px] font-medium text-[#9c9c9c]">
                           {getTimeRemaining(listing.expires_at)}
@@ -278,7 +282,7 @@ export default function SupplierListings() {
                     <div className="flex gap-1 h-[25px]">
                       <Link
                         href={`/supplier/listings/${listing.id}/edit`}
-                        className="flex-1 h-[25px] flex items-center justify-center gap-1 px-2.5 py-2 border border-[#9c9c9c] rounded-[7.5px] hover:bg-gray-50 transition-colors"
+                        className="flex-1 h-[25px] flex items-center justify-center gap-1 px-2 sm:px-2.5 py-2 border border-[#9c9c9c] rounded-[7.5px] hover:bg-gray-50 transition-colors"
                       >
                         <Edit className="w-2.5 h-2.5 text-[#9c9c9c]" />
                         <span className="text-[8px] font-medium text-[#9c9c9c]">
@@ -302,21 +306,21 @@ export default function SupplierListings() {
 
             {/* Pagination */}
             {totalPages > 1 && (
-              <div className="flex items-center justify-center gap-1 mt-4">
+              <div className="flex items-center justify-center gap-1 sm:gap-2 mt-3 sm:mt-4">
                 <button
                   onClick={() => setPage((p) => Math.max(1, p - 1))}
                   disabled={page === 1}
-                  className="px-2 py-1 border border-gray-300 text-[7px] font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-2 sm:px-3 py-1 sm:py-1.5 border border-gray-300 text-[7px] sm:text-[8px] font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Previous
                 </button>
-                <span className="px-2 py-1 text-[7px] text-gray-700">
+                <span className="px-2 py-1 text-[7px] sm:text-[8px] text-gray-700">
                   Page {page} of {totalPages}
                 </span>
                 <button
                   onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                   disabled={page === totalPages}
-                  className="px-2 py-1 border border-gray-300 text-[7px] font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-2 sm:px-3 py-1 sm:py-1.5 border border-gray-300 text-[7px] sm:text-[8px] font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Next
                 </button>

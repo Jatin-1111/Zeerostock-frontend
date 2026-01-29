@@ -105,24 +105,24 @@ export default function FAQTab() {
   };
 
   return (
-    <div className="overflow-hidden p-2">
+    <div className="overflow-hidden p-2 sm:p-3 md:p-4 lg:p-5">
       {/* FAQ Header */}
-      <div className="mb-[11px]">
-        <h2 className="mb-[4px] text-[15px] font-semibold text-[#0d1b2a]">
+      <div className="mb-3 sm:mb-4 md:mb-[16px]">
+        <h2 className="mb-1 sm:mb-2 md:mb-[4px] text-base sm:text-lg md:text-[15px] font-semibold text-[#0d1b2a]">
           Frequently Asked Questions
         </h2>
-        <p className="text-[11px] font-medium text-[#9c9c9c]">
+        <p className="text-xs sm:text-sm md:text-[11px] font-medium text-[#9c9c9c]">
           Find answers to common questions about using Zeerotock
         </p>
       </div>
 
       {/* Filter Buttons */}
-      <div className="mb-[16px] flex flex-wrap gap-[4px]">
+      <div className="mb-4 sm:mb-5 md:mb-[16px] flex flex-wrap gap-2 sm:gap-2.5 md:gap-[4px]">
         {filterButtons.map((button) => (
           <button
             key={button.id}
             onClick={() => handleFilterChange(button.id)}
-            className={`rounded-[7px] px-[8px] py-[4px] text-[8px] font-medium transition-colors ${
+            className={`rounded-[7px] px-2 sm:px-3 md:px-[8px] py-1 sm:py-1.5 md:py-[4px] text-[7px] sm:text-[8px] md:text-[8px] font-medium transition-colors ${
               activeFilter === button.id
                 ? "border border-[#2aae7a] bg-[#eeffef] text-[#2aae7a]"
                 : "border border-gray-300 bg-white text-gray-600 hover:border-[#2aae7a] hover:text-[#2aae7a]"
@@ -134,7 +134,7 @@ export default function FAQTab() {
       </div>
 
       {/* FAQ Accordion List */}
-      <motion.div layout className="space-y-[8px]">
+      <motion.div layout className="space-y-2 sm:space-y-3 md:space-y-[8px]">
         <AnimatePresence mode="popLayout">
           {filteredFaqs.length > 0 ? (
             filteredFaqs.map((faq, index) => (
@@ -144,22 +144,22 @@ export default function FAQTab() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.2 }}
-                key={faq.question} // Using question as key is better than index for filtering animations
+                key={faq.question}
                 className="overflow-hidden rounded-[10px] bg-[#fbfbfb] shadow-[0px_0px_4.5px_0px_rgba(0,0,0,0.25)]"
               >
                 <button
                   onClick={() =>
                     setOpenFaqIndex(openFaqIndex === index ? null : index)
                   }
-                  className="flex w-full items-center justify-between px-[16px] py-[13px] text-left"
+                  className="flex w-full items-center justify-between px-3 sm:px-4 md:px-[16px] py-2 sm:py-3 md:py-[13px] text-left"
                 >
-                  <span className="text-[13px] font-medium tracking-tight text-black">
+                  <span className="text-xs sm:text-sm md:text-[13px] font-medium tracking-tight text-black pr-2">
                     {faq.question}
                   </span>
                   {openFaqIndex === index ? (
-                    <ChevronUp className="h-[13px] w-[13px] shrink-0 text-gray-600" />
+                    <ChevronUp className="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-[13px] md:w-[13px] shrink-0 text-gray-600" />
                   ) : (
-                    <ChevronDown className="h-[13px] w-[13px] shrink-0 text-gray-600" />
+                    <ChevronDown className="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-[13px] md:w-[13px] shrink-0 text-gray-600" />
                   )}
                 </button>
 
@@ -172,8 +172,8 @@ export default function FAQTab() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                     >
-                      <div className="px-[16px] pb-[13px]">
-                        <p className="text-[10px] font-medium leading-[13px] tracking-tight text-[#9c9c9c]">
+                      <div className="px-3 sm:px-4 md:px-[16px] pb-2 sm:pb-3 md:pb-[13px]">
+                        <p className="text-[9px] sm:text-[10px] md:text-[10px] font-medium leading-[12px] sm:leading-[13px] md:leading-[13px] tracking-tight text-[#9c9c9c]">
                           {faq.answer}
                         </p>
                       </div>
@@ -186,7 +186,7 @@ export default function FAQTab() {
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-[#9c9c9c]"
+              className="text-[9px] sm:text-[10px] md:text-[10px] text-[#9c9c9c]"
             >
               No FAQs found for this category.
             </motion.p>

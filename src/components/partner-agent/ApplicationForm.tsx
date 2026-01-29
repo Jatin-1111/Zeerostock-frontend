@@ -24,7 +24,7 @@ export default function ApplicationForm() {
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value, type } = e.target;
     setFormData((prev) => ({
@@ -40,24 +40,27 @@ export default function ApplicationForm() {
   };
 
   return (
-    <section className="bg-white py-16 border-t border-gray-200">
-      <div className="max-w-[1200px] mx-auto px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-[36px] font-bold text-gray-900 mb-3">
+    <section className="bg-white py-8 sm:py-12 md:py-14 lg:py-16 border-t border-gray-200">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
+        <div className="text-center mb-6 sm:mb-8 md:mb-10 lg:mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[36px] font-bold text-gray-900 mb-2 sm:mb-3">
             Apply to Become an Agent
           </h2>
-          <p className="text-[15px] text-gray-600">
+          <p className="text-sm sm:text-base md:text-[15px] text-gray-600 px-4 sm:px-0">
             Fill out the form below with all of your profile info to reach an
             agent later stage
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-8">
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-4 sm:space-y-6 md:space-y-8"
+        >
           {/* Personal Information */}
-          <div className="border border-gray-300 rounded-lg p-6">
-            <div className="flex items-center gap-2 mb-4">
+          <div className="border border-gray-300 rounded-lg p-4 sm:p-5 md:p-6">
+            <div className="flex items-center gap-2 mb-3 sm:mb-4">
               <svg
-                className="w-5 h-5 text-gray-700"
+                className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -69,14 +72,14 @@ export default function ApplicationForm() {
                   d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                 />
               </svg>
-              <h3 className="text-[18px] font-semibold text-gray-900">
+              <h3 className="text-base sm:text-lg md:text-[18px] font-semibold text-gray-900">
                 Personal Information
               </h3>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div>
-                <label className="block text-[13px] text-gray-700 mb-1">
+                <label className="block text-xs sm:text-sm md:text-[13px] text-gray-700 mb-1">
                   First name
                 </label>
                 <input
@@ -85,7 +88,7 @@ export default function ApplicationForm() {
                   value={formData.firstName}
                   onChange={handleChange}
                   placeholder="John"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 text-black placeholder:text-black"
+                  className="w-full px-2.5 sm:px-3 py-1.5 sm:py-2 border border-gray-300 rounded-lg text-sm sm:text-base md:text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 text-black placeholder:text-black"
                 />
               </div>
               <div>
@@ -105,8 +108,8 @@ export default function ApplicationForm() {
           </div>
 
           {/* Contact Details */}
-          <div className="border border-gray-300 rounded-lg p-6">
-            <div className="flex items-center gap-2 mb-4">
+          <div className="border border-gray-300 rounded-lg p-4 sm:p-5 md:p-6">
+            <div className="flex items-center gap-2 mb-3 sm:mb-4">
               <svg
                 className="w-5 h-5 text-gray-700"
                 fill="none"
@@ -156,8 +159,8 @@ export default function ApplicationForm() {
           </div>
 
           {/* Location */}
-          <div className="border border-gray-300 rounded-lg p-6">
-            <div className="flex items-center gap-2 mb-4">
+          <div className="border border-gray-300 rounded-lg p-4 sm:p-5 md:p-6">
+            <div className="flex items-center gap-2 mb-3 sm:mb-4">
               <svg
                 className="w-5 h-5 text-gray-700"
                 fill="none"
@@ -213,8 +216,8 @@ export default function ApplicationForm() {
           </div>
 
           {/* Professional Background */}
-          <div className="border border-gray-300 rounded-lg p-6">
-            <div className="flex items-center gap-2 mb-4">
+          <div className="border border-gray-300 rounded-lg p-4 sm:p-5 md:p-6">
+            <div className="flex items-center gap-2 mb-3 sm:mb-4">
               <svg
                 className="w-5 h-5 text-gray-700"
                 fill="none"
@@ -233,8 +236,8 @@ export default function ApplicationForm() {
               </h3>
             </div>
 
-            <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-3 sm:space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div>
                   <label className="block text-[13px] text-gray-700 mb-1">
                     Current Company (Optional)
@@ -294,8 +297,8 @@ export default function ApplicationForm() {
           </div>
 
           {/* License & Details */}
-          <div className="border border-gray-300 rounded-lg p-6">
-            <div className="flex items-center gap-2 mb-4">
+          <div className="border border-gray-300 rounded-lg p-4 sm:p-5 md:p-6">
+            <div className="flex items-center gap-2 mb-3 sm:mb-4">
               <svg
                 className="w-5 h-5 text-gray-700"
                 fill="none"
@@ -353,7 +356,7 @@ export default function ApplicationForm() {
                   onChange={handleChange}
                   placeholder="Describe any relevant experience or provide testimonials"
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 resize-none text-black placeholder:text-black"
+                  className="w-full px-2.5 sm:px-3 py-1.5 sm:py-2 border border-gray-300 rounded-lg text-sm sm:text-base md:text-[14px] focus:outline-none focus:ring-2 focus:ring-gray-900 resize-none text-black placeholder:text-black"
                 />
               </div>
 
@@ -388,16 +391,16 @@ export default function ApplicationForm() {
           </div>
 
           {/* Terms & Submit */}
-          <div className="space-y-4">
-            <div className="flex items-start gap-3">
+          <div className="space-y-3 sm:space-y-4">
+            <div className="flex items-start gap-2 sm:gap-3">
               <input
                 type="checkbox"
                 name="agreeTerms"
                 checked={formData.agreeTerms}
                 onChange={handleChange}
-                className="mt-1 w-4 h-4 border-gray-300 rounded text-black"
+                className="mt-1 w-4 h-4 border-gray-300 rounded text-black flex-shrink-0"
               />
-              <label className="text-[13px] text-gray-700">
+              <label className="text-xs sm:text-sm md:text-[13px] text-gray-700">
                 I agree to the agent terms and conditions, and understand that
                 all submitted information and materials will be subject to the
                 agent agreement that will be provided upon approval.
@@ -406,7 +409,7 @@ export default function ApplicationForm() {
 
             <button
               type="submit"
-              className="w-full py-3 bg-gray-900 text-white text-[15px] font-semibold rounded-lg hover:bg-gray-800 transition-colors"
+              className="w-full py-2.5 sm:py-3 bg-gray-900 text-white text-sm sm:text-base md:text-[15px] font-semibold rounded-lg hover:bg-gray-800 transition-colors"
             >
               Submit Application
             </button>

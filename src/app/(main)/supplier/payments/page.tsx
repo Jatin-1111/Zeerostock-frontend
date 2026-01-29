@@ -145,29 +145,29 @@ export default function PaymentMethodsPage() {
   if (user && user.activeRole !== "supplier") {
     return (
       <div className="flex min-h-screen items-center justify-center bg-[#EEFBF6]">
-        <div className="mx-auto max-w-md p-8 text-center">
-          <div className="mb-6">
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center border-2 border-red-600 bg-red-100">
-              <span className="text-3xl">⚠️</span>
+        <div className="mx-auto max-w-md p-4 sm:p-8 text-center">
+          <div className="mb-4 sm:mb-6">
+            <div className="mx-auto mb-3 sm:mb-4 flex h-12 w-12 sm:h-16 sm:w-16 items-center justify-center border-2 border-red-600 bg-red-100">
+              <span className="text-2xl sm:text-3xl">⚠️</span>
             </div>
-            <h2 className="mb-2 text-2xl font-bold text-gray-900">
+            <h2 className="mb-2 text-xl sm:text-2xl font-bold text-gray-900">
               Access Restricted
             </h2>
-            <p className="mb-6 text-gray-600">
+            <p className="mb-4 sm:mb-6 text-sm sm:text-base text-gray-600">
               You need to be in supplier mode to view payments. Your current
               role is: <strong>{user.activeRole}</strong>
             </p>
           </div>
-          <div className="space-y-3">
+          <div className="space-y-2 sm:space-y-3">
             <button
               onClick={() => (window.location.href = "/supplier")}
-              className="w-full border-2 border-gray-900 bg-gray-900 px-6 py-3 font-semibold text-white transition-colors hover:bg-gray-800"
+              className="w-full border-2 border-gray-900 bg-gray-900 px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base font-semibold text-white transition-colors hover:bg-gray-800"
             >
               Switch to Supplier Mode
             </button>
             <button
               onClick={() => (window.location.href = "/")}
-              className="w-full border-2 border-gray-900 bg-white px-6 py-3 font-semibold text-gray-900 transition-colors hover:bg-gray-50"
+              className="w-full border-2 border-gray-900 bg-white px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base font-semibold text-gray-900 transition-colors hover:bg-gray-50"
             >
               Go to Homepage
             </button>
@@ -181,8 +181,10 @@ export default function PaymentMethodsPage() {
     return (
       <div className="flex min-h-screen items-center justify-center bg-white">
         <div className="text-center">
-          <div className="mx-auto mb-4 h-16 w-16 animate-spin rounded-full border-4 border-gray-300 border-t-gray-900"></div>
-          <p className="text-gray-600">Loading payment data...</p>
+          <div className="mx-auto mb-3 sm:mb-4 h-12 w-12 sm:h-16 sm:w-16 animate-spin rounded-full border-4 border-gray-300 border-t-gray-900"></div>
+          <p className="text-sm sm:text-base text-gray-600">
+            Loading payment data...
+          </p>
         </div>
       </div>
     );
@@ -230,22 +232,22 @@ export default function PaymentMethodsPage() {
 
   return (
     <div className="min-h-screen">
-      <div className="mx-auto w-full max-w-[1440px] px-[45px] py-[23px]">
+      <div className="mx-auto w-full max-w-[1440px] px-3 sm:px-4 md:px-[23px] py-4 sm:py-5 md:py-[23px]">
         {/* Page Header */}
-        <div className="mb-[8px]">
-          <div className="flex items-center rounded-[11px] bg-white px-[46px] py-[11px] shadow-[0px_0px_8px_0px_rgba(24,181,34,0.25)]">
-            <div className="flex items-center gap-[20px]">
+        <div className="mb-2 sm:mb-[8px]">
+          <div className="flex items-center rounded-[11px] bg-white px-4 sm:px-6 md:px-[46px] py-3 sm:py-[11px] shadow-[0px_0px_8px_0px_rgba(24,181,34,0.25)]">
+            <div className="flex items-center gap-3 sm:gap-4 md:gap-[20px]">
               {/* Icon Box */}
-              <div className="flex items-center justify-center rounded-[6px] bg-[#EEFFEF] p-[8px] shadow-[0px_0px_8px_0px_rgba(24,181,34,0.25)]">
+              <div className="flex items-center justify-center rounded-[6px] bg-[#EEFFEF] p-2 sm:p-[8px] shadow-[0px_0px_8px_0px_rgba(24,181,34,0.25)]">
                 <CardIcon />
               </div>
 
               {/* Text Content */}
               <div className="flex flex-col">
-                <h1 className="m-0 text-[20px] font-semibold leading-normal text-[#0D1B2A]">
+                <h1 className="m-0 text-lg sm:text-[20px] font-semibold leading-normal text-[#0D1B2A]">
                   Payment Method
                 </h1>
-                <p className="m-0 text-[14px] font-medium leading-normal text-[#9C9C9C]">
+                <p className="m-0 text-xs sm:text-sm md:text-[14px] font-medium leading-normal text-[#9C9C9C]">
                   Manage payment method and transaction history
                 </p>
               </div>
@@ -257,13 +259,13 @@ export default function PaymentMethodsPage() {
         <PaymentMethodsStats summary={paymentSummary} />
 
         {/* Tabs Navigation */}
-        <div className="mb-[14px] mt-[14px]">
+        <div className="mb-3 sm:mb-[14px] mt-3 sm:mt-[14px]">
           <div className="relative">
             {/* Horizontal line under all tabs */}
             <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-[#E5E7EB]" />
 
             {/* Tabs */}
-            <div className="relative flex gap-[37px] pl-[23px]">
+            <div className="relative flex gap-4 sm:gap-6 md:gap-[37px] pl-3 sm:pl-4 md:pl-[23px] overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
@@ -275,7 +277,7 @@ export default function PaymentMethodsPage() {
                         | "invoices",
                     )
                   }
-                  className={`relative cursor-pointer border-none bg-transparent py-[5px] text-[11px] font-medium leading-[14px] tracking-[0.3px] transition-colors duration-200 ${
+                  className={`relative cursor-pointer border-none bg-transparent py-[5px] text-[10px] sm:text-[11px] font-medium leading-[14px] tracking-[0.3px] transition-colors duration-200 whitespace-nowrap ${
                     activeTab === tab.id ? "text-[#2AAE7A]" : "text-[#0D1B2A]"
                   }`}
                 >
@@ -292,7 +294,7 @@ export default function PaymentMethodsPage() {
 
         {/* Tab Content */}
         {activeTab === "payment-methods" && (
-          <div className="flex flex-col gap-[17px]">
+          <div className="flex flex-col gap-3 sm:gap-4 md:gap-[17px]">
             <SavedPaymentMethods
               methods={paymentMethods}
               loading={paymentMethodsLoading}

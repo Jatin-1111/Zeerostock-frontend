@@ -92,7 +92,7 @@ export default function ReportBugTab() {
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(bugForm),
-        }
+        },
       );
 
       const data = await response.json();
@@ -100,11 +100,11 @@ export default function ReportBugTab() {
       if (!response.ok) {
         if (response.status === 401) {
           setSubmitError(
-            "Your session has expired. Please log out and log back in."
+            "Your session has expired. Please log out and log back in.",
           );
         } else {
           setSubmitError(
-            data.message || "Failed to submit bug report. Please try again."
+            data.message || "Failed to submit bug report. Please try again.",
           );
         }
         return;
@@ -131,32 +131,37 @@ export default function ReportBugTab() {
   };
 
   return (
-    <div>
-      <h2 className="text-[15px] font-semibold text-[#0d1b2a] mb-[16px] ">
+    <div className="px-2 sm:px-3 md:px-4 lg:px-5">
+      <h2 className="text-base sm:text-lg md:text-[15px] font-semibold text-[#0d1b2a] mb-4 sm:mb-5 md:mb-[16px] ">
         Report a Bug
       </h2>
 
       {submitSuccess && (
-        <div className="max-w-4xl mb-[11px] p-[11px] bg-green-50 border border-green-200 rounded-[7px] flex items-center gap-[5px]">
-          <CheckCircle className="w-[13px] h-[13px] text-green-600" />
-          <p className="text-[9px] text-green-800 ">
+        <div className="w-full mb-2 sm:mb-3 md:mb-[11px] p-2 sm:p-2.5 md:p-[11px] bg-green-50 border border-green-200 rounded-[7px] flex items-center gap-1 sm:gap-1.5 md:gap-[5px]">
+          <CheckCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-[13px] md:h-[13px] text-green-600 flex-shrink-0" />
+          <p className="text-[7px] sm:text-[8px] md:text-[9px] text-green-800 ">
             Bug report submitted successfully! We&apos;ll look into it.
           </p>
         </div>
       )}
 
       {submitError && (
-        <div className="max-w-4xl mb-[11px] p-[11px] bg-red-50 border border-red-200 rounded-[7px]">
-          <p className="text-[9px] text-red-800 ">{submitError}</p>
+        <div className="w-full mb-2 sm:mb-3 md:mb-[11px] p-2 sm:p-2.5 md:p-[11px] bg-red-50 border border-red-200 rounded-[7px]">
+          <p className="text-[7px] sm:text-[8px] md:text-[9px] text-red-800 ">
+            {submitError}
+          </p>
         </div>
       )}
 
-      <form onSubmit={handleBugSubmit} className="max-w-[590px]">
-        <div className="bg-[#fbfbfb] rounded-[10px] shadow-[0px_0px_4.5px_0px_rgba(24,181,34,0.25)] p-[16px]">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-[11px] mb-[11px]">
+      <form
+        onSubmit={handleBugSubmit}
+        className="w-full sm:w-full md:max-w-[590px] lg:w-[590px]"
+      >
+        <div className="bg-[#fbfbfb] rounded-[10px] shadow-[0px_0px_4.5px_0px_rgba(24,181,34,0.25)] p-3 sm:p-4 md:p-[16px]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3 md:gap-[11px] mb-2 sm:mb-3 md:mb-[11px]">
             {/* Bug Title */}
             <div>
-              <label className="block text-[11px] font-medium text-[#0d1b2a] mb-[5px] ">
+              <label className="block text-xs sm:text-sm md:text-[11px] font-medium text-[#0d1b2a] mb-1 sm:mb-1.5 md:mb-[5px] ">
                 Bug Title
               </label>
               <input
@@ -167,19 +172,19 @@ export default function ReportBugTab() {
                   setBugForm({ ...bugForm, title: e.target.value })
                 }
                 required
-                className="w-full px-[11px] py-[8px] border border-[#bebebe] rounded-[7px] text-[11px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] "
+                className="w-full px-2 sm:px-3 md:px-[11px] py-1.5 sm:py-2 md:py-[8px] border border-[#bebebe] rounded-[7px] text-xs sm:text-sm md:text-[11px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] "
               />
             </div>
 
             {/* Severity */}
             <div ref={severityRef} className="relative">
-              <label className="block text-[11px] font-medium text-[#0d1b2a] mb-[5px] ">
+              <label className="block text-xs sm:text-sm md:text-[11px] font-medium text-[#0d1b2a] mb-1 sm:mb-1.5 md:mb-[5px] ">
                 Severity
               </label>
               <button
                 type="button"
                 onClick={() => setSeverityOpen(!severityOpen)}
-                className="w-full px-[11px] py-[8px] border border-[#bebebe] rounded-[7px] text-[11px] text-left focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] bg-white flex items-center justify-between"
+                className="w-full px-2 sm:px-3 md:px-[11px] py-1.5 sm:py-2 md:py-[8px] border border-[#bebebe] rounded-[7px] text-xs sm:text-sm md:text-[11px] text-left focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] bg-white flex items-center justify-between"
               >
                 <span
                   className={
@@ -192,7 +197,7 @@ export default function ReportBugTab() {
                     : "Select severity"}
                 </span>
                 <ChevronDown
-                  className={`w-[13px] h-[13px] text-[#9c9c9c] transition-transform duration-300 ${
+                  className={`w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-[13px] md:h-[13px] text-[#9c9c9c] transition-transform duration-300 ${
                     severityOpen ? "rotate-180" : ""
                   }`}
                 />
@@ -204,7 +209,7 @@ export default function ReportBugTab() {
                     : "max-h-0 opacity-0"
                 }`}
               >
-                <div className="py-[3px]">
+                <div className="py-0.5 sm:py-1 md:py-[3px]">
                   {severityLevels.map((level) => (
                     <button
                       key={level.value}
@@ -213,7 +218,7 @@ export default function ReportBugTab() {
                         setBugForm({ ...bugForm, severity: level.value });
                         setSeverityOpen(false);
                       }}
-                      className="w-full px-[11px] py-[7px] text-left text-[11px] text-[#0d1b2a] hover:bg-[#eeffef] transition-colors"
+                      className="w-full px-2 sm:px-3 md:px-[11px] py-1 sm:py-1.5 md:py-[7px] text-left text-xs sm:text-sm md:text-[11px] text-[#0d1b2a] hover:bg-[#eeffef] transition-colors"
                     >
                       {level.label}
                     </button>
@@ -224,14 +229,14 @@ export default function ReportBugTab() {
           </div>
 
           {/* Category */}
-          <div ref={categoryRef} className="mb-[11px] relative">
-            <label className="block text-[11px] font-medium text-[#0d1b2a] mb-[5px] ">
+          <div ref={categoryRef} className="mb-2 sm:mb-3 md:mb-[11px] relative">
+            <label className="block text-xs sm:text-sm md:text-[11px] font-medium text-[#0d1b2a] mb-1 sm:mb-1.5 md:mb-[5px] ">
               Category
             </label>
             <button
               type="button"
               onClick={() => setCategoryOpen(!categoryOpen)}
-              className="w-full px-[11px] py-[8px] border border-[#bebebe] rounded-[7px] text-[11px] text-left focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] bg-white flex items-center justify-between"
+              className="w-full px-2 sm:px-3 md:px-[11px] py-1.5 sm:py-2 md:py-[8px] border border-[#bebebe] rounded-[7px] text-xs sm:text-sm md:text-[11px] text-left focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] bg-white flex items-center justify-between"
             >
               <span
                 className={
@@ -241,7 +246,7 @@ export default function ReportBugTab() {
                 {bugForm.category || "Select Category"}
               </span>
               <ChevronDown
-                className={`w-[13px] h-[13px] text-[#9c9c9c] transition-transform duration-300 ${
+                className={`w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-[13px] md:h-[13px] text-[#9c9c9c] transition-transform duration-300 ${
                   categoryOpen ? "rotate-180" : ""
                 }`}
               />
@@ -251,7 +256,7 @@ export default function ReportBugTab() {
                 categoryOpen ? "max-h-[200px] opacity-100" : "max-h-0 opacity-0"
               }`}
             >
-              <div className="py-[3px] max-h-[167px] overflow-y-auto">
+              <div className="py-0.5 sm:py-1 md:py-[3px] max-h-[167px] overflow-y-auto">
                 {categories.map((cat) => (
                   <button
                     key={cat}
@@ -260,7 +265,7 @@ export default function ReportBugTab() {
                       setBugForm({ ...bugForm, category: cat });
                       setCategoryOpen(false);
                     }}
-                    className="w-full px-[11px] py-[7px] text-left text-[11px] text-[#0d1b2a] hover:bg-[#eeffef] transition-colors"
+                    className="w-full px-2 sm:px-3 md:px-[11px] py-1 sm:py-1.5 md:py-[7px] text-left text-xs sm:text-sm md:text-[11px] text-[#0d1b2a] hover:bg-[#eeffef] transition-colors"
                   >
                     {cat}
                   </button>
@@ -270,29 +275,29 @@ export default function ReportBugTab() {
           </div>
 
           {/* Detailed Requirements */}
-          <div className="mb-[11px]">
-            <label className="block text-[11px] font-medium text-[#0d1b2a] mb-[5px] ">
+          <div className="mb-2 sm:mb-3 md:mb-[11px]">
+            <label className="block text-xs sm:text-sm md:text-[11px] font-medium text-[#0d1b2a] mb-1 sm:mb-1.5 md:mb-[5px] ">
               Detailed Requirements
             </label>
             <textarea
-              rows={5}
+              rows={4}
               placeholder="Provide a detailed description of the bug..."
               value={bugForm.description}
               onChange={(e) =>
                 setBugForm({ ...bugForm, description: e.target.value })
               }
               required
-              className="w-full px-[11px] py-[8px] border border-[#bebebe] rounded-[7px] text-[11px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] resize-none "
+              className="w-full px-2 sm:px-3 md:px-[11px] py-1.5 sm:py-2 md:py-[8px] border border-[#bebebe] rounded-[7px] text-xs sm:text-sm md:text-[11px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] resize-none "
             />
           </div>
 
           {/* Steps to Reproduce */}
-          <div className="mb-[16px]">
-            <label className="block text-[11px] font-medium text-[#0d1b2a] mb-[5px] ">
+          <div className="mb-4 sm:mb-5 md:mb-[16px]">
+            <label className="block text-xs sm:text-sm md:text-[11px] font-medium text-[#0d1b2a] mb-1 sm:mb-1.5 md:mb-[5px] ">
               Steps to Reproduce
             </label>
             <textarea
-              rows={5}
+              rows={4}
               placeholder="List the steps to reproduce the bug..."
               value={bugForm.steps_to_reproduce}
               onChange={(e) =>
@@ -301,16 +306,16 @@ export default function ReportBugTab() {
                   steps_to_reproduce: e.target.value,
                 })
               }
-              className="w-full px-[11px] py-[8px] border border-[#bebebe] rounded-[7px] text-[11px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] resize-none "
+              className="w-full px-2 sm:px-3 md:px-[11px] py-1.5 sm:py-2 md:py-[8px] border border-[#bebebe] rounded-[7px] text-xs sm:text-sm md:text-[11px] text-[#0d1b2a] placeholder:text-[#9c9c9c] focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:border-[#1e3a8a] resize-none "
             />
           </div>
 
           {/* Submit Button */}
-          <div className="flex justify-baseline">
+          <div className="flex justify-start">
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-[160px] h-[30px] bg-[#1e3a8a] text-white text-[10px] font-semibold rounded-[7px] hover:bg-[#1e3a8a]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-[5px] "
+              className="w-32 sm:w-40 md:w-[160px] h-8 sm:h-9 md:h-[30px] bg-[#1e3a8a] text-white text-[7px] sm:text-[8px] md:text-[10px] font-semibold rounded-[7px] hover:bg-[#1e3a8a]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-1 sm:gap-1.5 md:gap-[5px] "
             >
               {isSubmitting ? "Submitting..." : "Submit Bug Report"}
             </button>

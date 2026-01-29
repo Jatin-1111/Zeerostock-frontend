@@ -126,8 +126,8 @@ function OrderConfirmationContent() {
               order.status === "processing"
                 ? ("current" as const)
                 : order.status === "shipped" || order.status === "delivered"
-                ? ("completed" as const)
-                : ("pending" as const),
+                  ? ("completed" as const)
+                  : ("pending" as const),
           },
           {
             title: "Shipped",
@@ -135,15 +135,15 @@ function OrderConfirmationContent() {
             timestamp:
               order.status === "shipped" || order.status === "delivered"
                 ? new Date(order.updatedAt || order.createdAt).toLocaleString(
-                    "en-US"
+                    "en-US",
                   )
                 : "Expected soon",
             status:
               order.status === "shipped"
                 ? ("current" as const)
                 : order.status === "delivered"
-                ? ("completed" as const)
-                : ("pending" as const),
+                  ? ("completed" as const)
+                  : ("pending" as const),
           },
           {
             title: "Delivered",
@@ -151,10 +151,10 @@ function OrderConfirmationContent() {
             timestamp: order.deliveryEta
               ? new Date(order.deliveryEta).toLocaleDateString("en-US")
               : order.status === "delivered"
-              ? new Date(order.updatedAt || order.createdAt).toLocaleString(
-                  "en-US"
-                )
-              : "TBD",
+                ? new Date(order.updatedAt || order.createdAt).toLocaleString(
+                    "en-US",
+                  )
+                : "TBD",
             status:
               order.status === "delivered"
                 ? ("completed" as const)
@@ -172,6 +172,7 @@ function OrderConfirmationContent() {
             rating: 4.5,
             status: item.itemStatus || "Processing",
             trackingId: order.trackingNumber,
+            image: item.productImage,
           })) || [],
         shippingAddress: order.shippingAddress
           ? {
@@ -199,14 +200,14 @@ function OrderConfirmationContent() {
             order.paymentMethod === "cod"
               ? "Cash on Delivery"
               : order.paymentMethod === "online"
-              ? "Online Payment"
-              : "UPI",
+                ? "Online Payment"
+                : "UPI",
           status:
             order.paymentStatus === "paid"
               ? "Payment Complete"
               : order.paymentStatus === "pending"
-              ? "Payment Pending"
-              : "Payment Secured",
+                ? "Payment Pending"
+                : "Payment Secured",
         },
         shippingInfo: {
           method: order.shippingPartner || "Standard Shipping",
@@ -343,15 +344,15 @@ function OrderConfirmationContent() {
       };
 
   return (
-    <div className="min-h-screen py-8">
-      <div className="max-w-[1440px] mx-auto px-20">
+    <div className="min-h-screen py-4 sm:py-6 md:py-8 lg:py-5">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-11 xl:px-13">
         {/* Success Icon and Header */}
-        <div className="flex flex-col items-center mb-5">
+        <div className="flex flex-col items-center mb-4 sm:mb-5 lg:mb-3">
           {/* Large Success Checkmark Icon */}
-          <div className="w-[98px] h-[98px] mb-3 flex items-center justify-center">
+          <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-[98px] md:h-[98px] lg:w-[65px] lg:h-[65px] mb-2 sm:mb-3 lg:mb-2 flex items-center justify-center">
             <svg
-              width="98"
-              height="98"
+              width="100%"
+              height="100%"
               viewBox="0 0 130 130"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -368,24 +369,25 @@ function OrderConfirmationContent() {
           </div>
 
           {/* Order Confirmed Heading */}
-          <h1 className="text-[30px] font-semibold text-[#0D1B2A] mb-2">
+          <h1 className="text-xl sm:text-2xl md:text-[30px] lg:text-[20px] font-semibold text-[#0D1B2A] mb-1 sm:mb-2 lg:mb-1 text-center">
             Order Confirmed!
           </h1>
-          <p className="text-[18px] text-[#9C9C9C] font-medium">
+          <p className="text-sm sm:text-base md:text-[18px] lg:text-[12px] text-[#9C9C9C] font-medium text-center px-4 lg:px-3">
             Thank you for your order. We&apos;ve received your order and will
             process it shortly
           </p>
         </div>
 
         {/* Order Metadata */}
-        <div className="flex justify-center gap-6 mb-5">
-          <div className="flex items-center gap-2">
+        <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 md:gap-6 lg:gap-4 mb-4 sm:mb-5 lg:mb-3 items-center">
+          <div className="flex items-center gap-2 lg:gap-1">
             <svg
               width="11"
               height="14"
               viewBox="0 0 15 18"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              className="flex-shrink-0 lg:w-[7px] lg:h-[9px]"
             >
               <path d="M1 4h13v12H1z" stroke="#0D1B2A" strokeWidth="1.5" />
               <path
@@ -394,17 +396,18 @@ function OrderConfirmationContent() {
                 strokeWidth="1.5"
               />
             </svg>
-            <span className="text-[14px] text-[#0D1B2A]">
+            <span className="text-xs sm:text-sm md:text-[14px] lg:text-[9px] text-[#0D1B2A]">
               Order #{orderData.orderNumber}
             </span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 lg:gap-1">
             <svg
               width="17"
               height="17"
               viewBox="0 0 22 22"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              className="flex-shrink-0 lg:w-[11px] lg:h-[11px]"
             >
               <rect
                 x="2"
@@ -421,16 +424,16 @@ function OrderConfirmationContent() {
                 strokeWidth="1.5"
               />
             </svg>
-            <span className="text-[14px] text-[#0D1B2A]">
+            <span className="text-xs sm:text-sm md:text-[14px] lg:text-[9px] text-[#0D1B2A]">
               Placed on {orderData.placedDate}
             </span>
           </div>
         </div>
 
         {/* Two Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_418px] gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_279px] gap-4 sm:gap-5 lg:gap-3">
           {/* Left Column - Main Content */}
-          <div className="space-y-5">
+          <div className="space-y-4 sm:space-y-5 lg:space-y-3">
             <OrderStatusTracker steps={orderData.statusSteps} />
             <OrderItems items={orderData.items} />
             <ShippingPaymentInfo
@@ -446,7 +449,7 @@ function OrderConfirmationContent() {
           </div>
 
           {/* Right Column - Sidebar */}
-          <div className="space-y-5">
+          <div className="space-y-4 sm:space-y-5 lg:space-y-3">
             <OrderSummaryConfirm
               subtotal={orderData.orderSummary.subtotal}
               itemCount={orderData.orderSummary.itemCount}

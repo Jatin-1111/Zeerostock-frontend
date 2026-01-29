@@ -38,18 +38,18 @@ function HelpDeskContent() {
     {
       id: 2,
       icon: Phone,
-      title: "Schedule Call", // Reverted to original
-      description: "Book a call with our expert", // Reverted to original
+      title: "Schedule Call",
+      description: "Book a call with our expert",
       buttonText: "Book Call",
-      href: "tel:+918956835375", // Updated contact detail here only
+      href: "tel:+918956835375",
     },
     {
       id: 3,
       icon: Mail,
-      title: "Email Support", // Reverted to original
-      description: "Send us detailed questions", // Reverted to original
+      title: "Email Support",
+      description: "Send us detailed questions",
       buttonText: "Send Email",
-      href: "mailto:contact@zeerostock.com", // Updated contact detail here only
+      href: "mailto:contact@zeerostock.com",
     },
     {
       id: 4,
@@ -64,37 +64,37 @@ function HelpDeskContent() {
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <div className="px-[40px] py-[16px]">
-        <div className="flex flex-col gap-[8px]">
-          <h1 className="text-[20px] font-semibold text-[#0d1b2a]">
+      <div className="px-4 sm:px-6 md:px-8 lg:px-[40px] py-3 sm:py-4 md:py-[16px]">
+        <div className="flex flex-col gap-2 sm:gap-[8px]">
+          <h1 className="text-lg sm:text-xl md:text-[20px] font-semibold text-[#0d1b2a]">
             Help & Support
           </h1>
-          <p className="text-[12px] font-medium text-[#9c9c9c]">
+          <p className="text-xs sm:text-[12px] font-medium text-[#9c9c9c]">
             Get the help you need to succeed on Zeerostock
           </p>
         </div>
       </div>
 
       {/* Contact Cards */}
-      <div className="px-[40px] pb-[24px]">
-        <div className="grid grid-cols-1 gap-[11px] md:grid-cols-4">
+      <div className="px-4 sm:px-6 md:px-8 lg:px-[40px] pb-4 sm:pb-5 md:pb-6 lg:pb-[24px]">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-[11px]">
           {supportCards.map((card) => {
             const IconComponent = card.icon;
             return (
               <div
                 key={card.id}
-                className="flex min-h-[143px] flex-col items-center rounded-[10px] border border-gray-200 bg-white p-[16px] shadow-sm"
+                className="flex min-h-[130px] sm:min-h-[140px] md:min-h-[143px] flex-col items-center rounded-[10px] border border-gray-200 bg-white p-3 sm:p-4 md:p-[16px] shadow-sm"
               >
-                <div className="mb-[11px] flex h-[24px] w-[24px] items-center justify-center">
+                <div className="mb-2 sm:mb-[11px] flex h-[22px] w-[22px] sm:h-[24px] sm:w-[24px] items-center justify-center">
                   <IconComponent
-                    className="h-[24px] w-[24px] text-[#18b522]"
+                    className="h-[22px] w-[22px] sm:h-[24px] sm:w-[24px] text-[#18b522]"
                     strokeWidth={1.5}
                   />
                 </div>
-                <p className="mb-[5px] text-center text-[11px] font-semibold text-[#0d1b2a]">
+                <p className="mb-1 sm:mb-[5px] text-center text-[10px] sm:text-[11px] font-semibold text-[#0d1b2a]">
                   {card.title}
                 </p>
-                <p className="mb-[16px] text-center text-[9px] font-medium leading-relaxed text-[#9c9c9c]">
+                <p className="mb-3 sm:mb-4 md:mb-[16px] text-center text-[8px] sm:text-[9px] font-medium leading-relaxed text-[#9c9c9c]">
                   {card.description}
                 </p>
 
@@ -102,12 +102,12 @@ function HelpDeskContent() {
                 {card.href !== "#" ? (
                   <a
                     href={card.href}
-                    className="mt-auto flex w-[100px] items-center justify-center rounded-[10px] bg-[#1e3a8a] px-[5px] py-[5px] text-[9px] font-medium text-white transition-colors hover:bg-[#1e3a8a]/90"
+                    className="mt-auto flex w-[90px] sm:w-[100px] items-center justify-center rounded-[10px] bg-[#1e3a8a] px-[5px] py-[5px] text-[8px] sm:text-[9px] font-medium text-white transition-colors hover:bg-[#1e3a8a]/90"
                   >
                     {card.buttonText}
                   </a>
                 ) : (
-                  <button className="mt-auto w-[100px] rounded-[10px] bg-[#1e3a8a] px-[5px] py-[5px] text-[9px] font-medium text-white transition-colors hover:bg-[#1e3a8a]/90">
+                  <button className="mt-auto w-[90px] sm:w-[100px] rounded-[10px] bg-[#1e3a8a] px-[5px] py-[5px] text-[8px] sm:text-[9px] font-medium text-white transition-colors hover:bg-[#1e3a8a]/90">
                     {card.buttonText}
                   </button>
                 )}
@@ -118,14 +118,14 @@ function HelpDeskContent() {
       </div>
 
       {/* Tabs */}
-      <div className="px-[40px]">
+      <div className="px-4 sm:px-6 md:px-8 lg:px-[40px]">
         <div className="border-b border-gray-300">
-          <div className="flex gap-[21px]">
+          <div className="flex gap-3 sm:gap-4 md:gap-[21px] overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`pb-[8px] text-[9px] font-medium border-b-[1px] transition-colors ${
+                className={`pb-2 sm:pb-2.5 md:pb-[8px] text-xs sm:text-sm md:text-[11px] font-medium border-b-[1px] transition-colors whitespace-nowrap ${
                   activeTab === tab.id
                     ? "border-gray-900 text-gray-900"
                     : "border-transparent text-gray-600 hover:text-gray-900"
@@ -139,7 +139,7 @@ function HelpDeskContent() {
       </div>
 
       {/* Tab Content */}
-      <div className="px-[40px] py-[24px]">
+      <div className="px-4 sm:px-6 md:px-8 lg:px-[40px] py-4 sm:py-5 md:py-6 lg:py-[24px]">
         {activeTab === "faq" && <FAQTab />}
         {activeTab === "guides" && <GuidesTab />}
         {activeTab === "report" && <ReportBugTab />}

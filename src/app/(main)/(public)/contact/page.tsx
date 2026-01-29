@@ -127,35 +127,35 @@ export default function Contact() {
   return (
     <div className="min-h-screen">
       {/* Main Content - Scaled to 50% */}
-      <div className="w-[720px] mx-auto px-[40px] py-[6px]">
+      <div className="w-full max-w-[720px] mx-auto px-4 sm:px-6 md:px-8 lg:px-[40px] py-2 sm:py-3 md:py-[6px]">
         {/* Header */}
-        <div className="text-center mb-[44.5px] mt-[27.5px]">
-          <h1 className="font-semibold text-[20px] text-[#0D1B2A] leading-[30px] mb-[7px]">
+        <div className="text-center mb-8 sm:mb-10 md:mb-[44.5px] mt-6 sm:mt-8 md:mt-[27.5px]">
+          <h1 className="font-semibold text-lg sm:text-xl md:text-[20px] text-[#0D1B2A] leading-[30px] mb-2 sm:mb-2.5 md:mb-[7px]">
             Get in Touch
           </h1>
-          <p className="font-medium text-[12px] text-[#9C9C9C] leading-[14.5px]">
+          <p className="font-medium text-xs sm:text-sm md:text-[12px] text-[#9C9C9C] leading-[14.5px]">
             Have questions? We&apos;re here to help. Choose your preferred way
             to reach us.
           </p>
         </div>
 
         {/* Two Column Layout */}
-        <div className="flex gap-[17.5px] mb-[12.5px]">
+        <div className="flex flex-col lg:flex-row gap-4 sm:gap-5 md:gap-[17.5px] mb-3 sm:mb-4 md:mb-[12.5px]">
           {/* Left Column - Contact Form */}
-          <div className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] p-[15px] min-h-[460px] w-[413px]">
-            <h2 className="font-semibold text-[12px] text-[#0D1B2A] leading-normal mb-[5.5px]">
+          <div className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] p-3 sm:p-4 md:p-[15px] min-h-[460px] w-full lg:w-[413px]">
+            <h2 className="font-semibold text-sm sm:text-base md:text-[12px] text-[#0D1B2A] leading-normal mb-1.5 sm:mb-2 md:mb-[5.5px]">
               Send us a message
             </h2>
-            <p className="font-medium text-[9px] text-[#9C9C9C] leading-normal mb-[30px]">
+            <p className="font-medium text-xs sm:text-sm md:text-[9px] text-[#9C9C9C] leading-normal mb-6 sm:mb-8 md:mb-[30px]">
               Fill out the form below and we&apos;ll get back to you within 24
               hours.
             </p>
 
             <form className="space-y-0" onSubmit={(e) => e.preventDefault()}>
               {/* Name Row */}
-              <div className="flex gap-[22.5px] mb-[16px]">
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 md:gap-[22.5px] mb-3 sm:mb-4 md:mb-[16px]">
                 <div className="flex-1">
-                  <label className="block font-medium text-[8.5px] text-[#0D1B2A] leading-normal mb-[8px]">
+                  <label className="block font-medium text-xs sm:text-sm md:text-[8.5px] text-[#0D1B2A] leading-normal mb-2 sm:mb-2 md:mb-[8px]">
                     First Name<span className="text-red-600">*</span>
                   </label>
                   <input
@@ -165,11 +165,11 @@ export default function Contact() {
                     onChange={(e) =>
                       setFormData({ ...formData, firstName: e.target.value })
                     }
-                    className="w-full h-[28px] px-[8px] border border-[#BEBEBE] rounded-[5px] text-[8px] text-[#9C9C9C] placeholder:text-[#9C9C9C] focus:outline-none focus:ring-1 focus:ring-[#0D1B2A] focus:border-[#0D1B2A]"
+                    className="w-full h-8 sm:h-9 md:h-[28px] px-2 sm:px-2.5 md:px-[8px] border border-[#BEBEBE] rounded-[5px] text-xs sm:text-sm md:text-[8px] text-[#9C9C9C] placeholder:text-[#9C9C9C] focus:outline-none focus:ring-1 focus:ring-[#0D1B2A] focus:border-[#0D1B2A]"
                   />
                 </div>
                 <div className="flex-1">
-                  <label className="block font-medium text-[8.5px] text-[#0D1B2A] leading-normal mb-[8px]">
+                  <label className="block font-medium text-xs sm:text-sm md:text-[8.5px] text-[#0D1B2A] leading-normal mb-2 sm:mb-2 md:mb-[8px]">
                     Last Name<span className="text-red-600">*</span>
                   </label>
                   <input
@@ -179,15 +179,15 @@ export default function Contact() {
                     onChange={(e) =>
                       setFormData({ ...formData, lastName: e.target.value })
                     }
-                    className="w-full h-[28px] px-[8px] border border-[#BEBEBE] rounded-[5px] text-[8px] text-[#9C9C9C] placeholder:text-[#9C9C9C] focus:outline-none focus:ring-1 focus:ring-[#0D1B2A] focus:border-[#0D1B2A]"
+                    className="w-full h-8 sm:h-9 md:h-[28px] px-2 sm:px-2.5 md:px-[8px] border border-[#BEBEBE] rounded-[5px] text-xs sm:text-sm md:text-[8px] text-[#9C9C9C] placeholder:text-[#9C9C9C] focus:outline-none focus:ring-1 focus:ring-[#0D1B2A] focus:border-[#0D1B2A]"
                   />
                 </div>
               </div>
 
               {/* Email and Phone Row */}
-              <div className="flex gap-[22.5px] mb-[16px]">
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 md:gap-[22.5px] mb-3 sm:mb-4 md:mb-[16px]">
                 <div className="flex-1">
-                  <label className="block font-medium text-[8.5px] text-[#0D1B2A] leading-normal mb-[8px]">
+                  <label className="block font-medium text-xs sm:text-sm md:text-[8.5px] text-[#0D1B2A] leading-normal mb-2 sm:mb-2 md:mb-[8px]">
                     Email Address<span className="text-red-600">*</span>
                   </label>
                   <input
@@ -197,11 +197,11 @@ export default function Contact() {
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
                     }
-                    className="w-full h-[28px] px-[8px] border border-[#BEBEBE] rounded-[5px] text-[8px] text-[#9C9C9C] placeholder:text-[#9C9C9C] focus:outline-none focus:ring-1 focus:ring-[#0D1B2A] focus:border-[#0D1B2A]"
+                    className="w-full h-8 sm:h-9 md:h-[28px] px-2 sm:px-2.5 md:px-[8px] border border-[#BEBEBE] rounded-[5px] text-xs sm:text-sm md:text-[8px] text-[#9C9C9C] placeholder:text-[#9C9C9C] focus:outline-none focus:ring-1 focus:ring-[#0D1B2A] focus:border-[#0D1B2A]"
                   />
                 </div>
                 <div className="flex-1">
-                  <label className="block font-medium text-[8.5px] text-[#0D1B2A] leading-normal mb-[8px]">
+                  <label className="block font-medium text-xs sm:text-sm md:text-[8.5px] text-[#0D1B2A] leading-normal mb-2 sm:mb-2 md:mb-[8px]">
                     Phone Number<span className="text-red-600">*</span>
                   </label>
                   <input
@@ -211,14 +211,14 @@ export default function Contact() {
                     onChange={(e) =>
                       setFormData({ ...formData, phone: e.target.value })
                     }
-                    className="w-full h-[28px] px-[8px] border border-[#BEBEBE] rounded-[5px] text-[8px] text-[#9C9C9C] placeholder:text-[#9C9C9C] focus:outline-none focus:ring-1 focus:ring-[#0D1B2A] focus:border-[#0D1B2A]"
+                    className="w-full h-8 sm:h-9 md:h-[28px] px-2 sm:px-2.5 md:px-[8px] border border-[#BEBEBE] rounded-[5px] text-xs sm:text-sm md:text-[8px] text-[#9C9C9C] placeholder:text-[#9C9C9C] focus:outline-none focus:ring-1 focus:ring-[#0D1B2A] focus:border-[#0D1B2A]"
                   />
                 </div>
               </div>
 
               {/* Company Name */}
-              <div className="mb-[16px]">
-                <label className="block font-medium text-[8.5px] text-[#0D1B2A] leading-normal mb-[8px]">
+              <div className="mb-3 sm:mb-4 md:mb-[16px]">
+                <label className="block font-medium text-xs sm:text-sm md:text-[8.5px] text-[#0D1B2A] leading-normal mb-2 sm:mb-2 md:mb-[8px]">
                   Company Name<span className="text-red-600">*</span>
                 </label>
                 <input
@@ -228,13 +228,13 @@ export default function Contact() {
                   onChange={(e) =>
                     setFormData({ ...formData, company: e.target.value })
                   }
-                  className="w-full h-[28px] px-[8px] border border-[#BEBEBE] rounded-[5px] text-[8px] text-[#9C9C9C] placeholder:text-[#9C9C9C] focus:outline-none focus:ring-1 focus:ring-[#0D1B2A] focus:border-[#0D1B2A]"
+                  className="w-full h-8 sm:h-9 md:h-[28px] px-2 sm:px-2.5 md:px-[8px] border border-[#BEBEBE] rounded-[5px] text-xs sm:text-sm md:text-[8px] text-[#9C9C9C] placeholder:text-[#9C9C9C] focus:outline-none focus:ring-1 focus:ring-[#0D1B2A] focus:border-[#0D1B2A]"
                 />
               </div>
 
               {/* Message */}
-              <div className="mb-[30px]">
-                <label className="block font-medium text-[8.5px] text-[#0D1B2A] leading-normal mb-[8px]">
+              <div className="mb-6 sm:mb-8 md:mb-[30px]">
+                <label className="block font-medium text-xs sm:text-sm md:text-[8.5px] text-[#0D1B2A] leading-normal mb-2 sm:mb-2 md:mb-[8px]">
                   Message<span className="text-red-600">*</span>
                 </label>
                 <textarea
@@ -244,14 +244,14 @@ export default function Contact() {
                   onChange={(e) =>
                     setFormData({ ...formData, message: e.target.value })
                   }
-                  className="w-full h-[65px] px-[8px] py-[6px] border border-[#BEBEBE] rounded-[5px] text-[8px] text-[#9C9C9C] placeholder:text-[#9C9C9C] focus:outline-none focus:ring-1 focus:ring-[#0D1B2A] focus:border-[#0D1B2A] resize-none"
+                  className="w-full h-20 sm:h-24 md:h-[65px] px-2 sm:px-2.5 md:px-[8px] py-2 sm:py-2 md:py-[6px] border border-[#BEBEBE] rounded-[5px] text-xs sm:text-sm md:text-[8px] text-[#9C9C9C] placeholder:text-[#9C9C9C] focus:outline-none focus:ring-1 focus:ring-[#0D1B2A] focus:border-[#0D1B2A] resize-none"
                 />
               </div>
 
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-[120px] h-[32.5px] bg-[#1E3A8A] text-white font-semibold text-[10px] leading-[11px] rounded-[6px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center justify-center gap-[5px]"
+                className="w-28 sm:w-32 md:w-[120px] h-9 sm:h-10 md:h-[32.5px] bg-[#1E3A8A] text-white font-semibold text-xs sm:text-sm md:text-[10px] leading-[11px] rounded-[6px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center justify-center gap-1 sm:gap-1.5 md:gap-[5px]"
               >
                 Send Message
                 <ArrowRightIcon />
@@ -260,60 +260,66 @@ export default function Contact() {
           </div>
 
           {/* Right Column - Quick Contact */}
-          <div className="flex flex-col gap-[12.5px]">
+          <div className="flex flex-col gap-3 sm:gap-4 md:gap-[12.5px]">
             {/* WhatsApp Business */}
-            <div className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] p-[15px] h-[147.5px] w-[208.5px] relative">
-              <div className="absolute left-[15px] top-[15px] bg-[#F4F2ED] p-[5px] rounded-[6px]">
-                <WhatsAppIcon />
+            <div className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] p-3 sm:p-4 md:p-[15px] w-full lg:w-[208.5px]">
+              <div className="flex items-center gap-2 sm:gap-2.5 md:gap-[6.5px] mb-3 sm:mb-4 md:mb-[13px]">
+                <div className="bg-[#F4F2ED] p-1 sm:p-1.5 md:p-[5px] rounded-[6px] flex-shrink-0">
+                  <WhatsAppIcon />
+                </div>
+                <h3 className="font-semibold text-sm sm:text-base md:text-[11px] text-[#0D1B2A] leading-normal">
+                  WhatsApp Business
+                </h3>
               </div>
-              <h3 className="absolute left-[46.5px] top-[26.75px] -translate-y-1/2 font-semibold text-[11px] text-[#0D1B2A] leading-normal">
-                WhatsApp Business
-              </h3>
-              <p className="absolute left-[15px] top-[58px] -translate-y-1/2 font-medium text-[9px] text-[#9C9C9C] leading-normal w-[172px]">
+              <p className="font-medium text-xs sm:text-sm md:text-[9px] text-[#9C9C9C] leading-normal mb-2 sm:mb-2.5 md:mb-[8.5px]">
                 Get instant responses via WhatsApp
               </p>
-              <p className="absolute left-[15px] top-[79.25px] -translate-y-1/2 font-medium text-[11px] text-[#0D1B2A] leading-normal">
+              <p className="font-medium text-sm sm:text-base md:text-[11px] text-[#0D1B2A] leading-normal mb-3 sm:mb-4 md:mb-[12.5px]">
                 +91 89568 35375
               </p>
-              <button className="absolute left-[15px] top-[105px] w-[178.5px] h-[27.5px] bg-[#128C7E] text-white font-semibold text-[10px] leading-[11px] rounded-[6px] hover:bg-[#128C7E]/90 transition-colors">
+              <button className="w-full h-8 sm:h-9 md:h-[27.5px] bg-[#128C7E] text-white font-semibold text-xs sm:text-sm md:text-[10px] leading-[11px] rounded-[6px] hover:bg-[#128C7E]/90 transition-colors">
                 Chat on WhatsApp
               </button>
             </div>
 
             {/* Email Support */}
-            <div className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] p-[15px] h-[147.5px] w-[208.5px] relative">
-              <div className="absolute left-[15px] top-[15px]">
-                <GmailIcon />
+            <div className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] p-3 sm:p-4 md:p-[15px] w-full lg:w-[208.5px]">
+              <div className="flex items-center gap-2 sm:gap-2.5 md:gap-[6.5px] mb-3 sm:mb-4 md:mb-[13px]">
+                <div className="flex-shrink-0">
+                  <GmailIcon />
+                </div>
+                <h3 className="font-semibold text-sm sm:text-base md:text-[11px] text-[#0D1B2A] leading-normal">
+                  Email Support
+                </h3>
               </div>
-              <h3 className="absolute left-[46.5px] top-[26.75px] -translate-y-1/2 font-semibold text-[11px] text-[#0D1B2A] leading-normal">
-                Email Support
-              </h3>
-              <p className="absolute left-[15px] top-[58px] -translate-y-1/2 font-medium text-[9px] text-[#9C9C9C] leading-normal w-[172px]">
+              <p className="font-medium text-xs sm:text-sm md:text-[9px] text-[#9C9C9C] leading-normal mb-2 sm:mb-2.5 md:mb-[8.5px]">
                 Send us a detailed mesage
               </p>
-              <p className="absolute left-[15px] top-[79.25px] -translate-y-1/2 font-medium text-[11px] text-[#0D1B2A] leading-normal">
+              <p className="font-medium text-sm sm:text-base md:text-[11px] text-[#0D1B2A] leading-normal mb-3 sm:mb-4 md:mb-[12.5px]">
                 contact@zeerostock.com
               </p>
-              <button className="absolute left-[15px] top-[105px] w-[178.5px] h-[27.5px] bg-white border border-[#9C9C9C] text-[#9C9C9C] font-semibold text-[10px] leading-[11px] rounded-[6px] hover:bg-gray-50 transition-colors">
+              <button className="w-full h-8 sm:h-9 md:h-[27.5px] bg-white border border-[#9C9C9C] text-[#9C9C9C] font-semibold text-xs sm:text-sm md:text-[10px] leading-[11px] rounded-[6px] hover:bg-gray-50 transition-colors">
                 Send Email
               </button>
             </div>
 
             {/* Phone Support */}
-            <div className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] p-[15px] h-[147.5px] w-[208.5px] relative">
-              <div className="absolute left-[15px] top-[15px] bg-[#F4F2ED] p-[5px] rounded-[6px]">
-                <PhoneIcon />
+            <div className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] p-3 sm:p-4 md:p-[15px] w-full lg:w-[208.5px]">
+              <div className="flex items-center gap-2 sm:gap-2.5 md:gap-[6.5px] mb-3 sm:mb-4 md:mb-[13px]">
+                <div className="bg-[#F4F2ED] p-1 sm:p-1.5 md:p-[5px] rounded-[6px] flex-shrink-0">
+                  <PhoneIcon />
+                </div>
+                <h3 className="font-semibold text-sm sm:text-base md:text-[11px] text-[#0D1B2A] leading-normal">
+                  Phone Support
+                </h3>
               </div>
-              <h3 className="absolute left-[46.5px] top-[26.75px] -translate-y-1/2 font-semibold text-[11px] text-[#0D1B2A] leading-normal">
-                Phone Support
-              </h3>
-              <p className="absolute left-[15px] top-[58px] -translate-y-1/2 font-medium text-[9px] text-[#9C9C9C] leading-normal w-[172px]">
+              <p className="font-medium text-xs sm:text-sm md:text-[9px] text-[#9C9C9C] leading-normal mb-2 sm:mb-2.5 md:mb-[8.5px]">
                 Speak with our team directly
               </p>
-              <p className="absolute left-[15px] top-[79.25px] -translate-y-1/2 font-medium text-[11px] text-[#0D1B2A] leading-normal">
+              <p className="font-medium text-sm sm:text-base md:text-[11px] text-[#0D1B2A] leading-normal mb-3 sm:mb-4 md:mb-[12.5px]">
                 +91 89568 35375
               </p>
-              <button className="absolute left-[15px] top-[105px] w-[178.5px] h-[27.5px] bg-white border border-[#9C9C9C] text-[#9C9C9C] font-semibold text-[10px] leading-[11px] rounded-[6px] hover:bg-gray-50 transition-colors">
+              <button className="w-full h-8 sm:h-9 md:h-[27.5px] bg-white border border-[#9C9C9C] text-[#9C9C9C] font-semibold text-xs sm:text-sm md:text-[10px] leading-[11px] rounded-[6px] hover:bg-gray-50 transition-colors">
                 Call Now
               </button>
             </div>
@@ -321,15 +327,17 @@ export default function Contact() {
         </div>
 
         {/* Become an Agent Banner */}
-        <div className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] h-[64px] mb-[46.5px] relative">
-          <h3 className="absolute left-[12.5px] top-[19px] -translate-y-1/2 font-medium text-[12px] text-[#0D1B2A] leading-normal">
-            Become an Agent
-          </h3>
-          <p className="absolute left-[12.5px] top-[44px] -translate-y-1/2 font-medium text-[9px] text-[#9C9C9C] leading-normal w-[243.5px]">
-            Be a verified Zeerstock agent and unlock exclusive commissions.
-          </p>
-          <Link href={"/partner-agent"}>
-            <button className="absolute right-[17.5px] top-1/2 -translate-y-1/2 w-[120px] h-[32.5px] bg-[#1E3A8A] text-white font-semibold text-[10px] leading-[11px] rounded-[6px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center justify-center gap-[5px]">
+        <div className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] mb-10 sm:mb-12 md:mb-[46.5px] p-3 sm:p-4 md:p-[15px] md:flex md:items-center md:justify-between">
+          <div className="mb-3 md:mb-0">
+            <h3 className="font-medium text-sm sm:text-base md:text-[12px] text-[#0D1B2A] leading-normal mb-1.5 md:mb-[4px]">
+              Become an Agent
+            </h3>
+            <p className="font-medium text-xs sm:text-sm md:text-[9px] text-[#9C9C9C] leading-normal">
+              Be a verified Zeerstock agent and unlock exclusive commissions.
+            </p>
+          </div>
+          <Link href="/partner-agent">
+            <button className="w-full md:w-[120px] h-9 sm:h-10 md:h-[32.5px] bg-[#1E3A8A] text-white font-semibold text-xs sm:text-sm md:text-[10px] leading-[11px] rounded-[6px] hover:bg-[#1e3a8a]/90 transition-colors flex items-center justify-center gap-1 sm:gap-1.5 md:gap-[5px]">
               Join as a Agent
               <ArrowRightIcon />
             </button>
@@ -337,26 +345,26 @@ export default function Contact() {
         </div>
 
         {/* FAQ Section */}
-        <div className="mt-[64.5px] mb-[34.5px]">
-          <div className="text-center mb-[37.5px]">
-            <h2 className="font-semibold text-[26px] text-[#0D1B2A] leading-[39px] mb-[7.5px] tracking-[0.25px]">
+        <div className="mt-12 sm:mt-16 md:mt-[64.5px] mb-8 sm:mb-10 md:mb-[34.5px]">
+          <div className="text-center mb-8 sm:mb-10 md:mb-[37.5px]">
+            <h2 className="font-semibold text-xl sm:text-2xl md:text-[26px] text-[#0D1B2A] leading-[39px] mb-2 sm:mb-2.5 md:mb-[7.5px] tracking-[0.25px]">
               Frequently Asked Questions
             </h2>
-            <p className="font-medium text-[10.5px] text-[#9C9C9C] leading-[12.5px]">
+            <p className="font-medium text-xs sm:text-sm md:text-[10.5px] text-[#9C9C9C] leading-[12.5px]">
               Quick answers to common questions
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-x-[19px] gap-y-[11.5px]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-x-[19px] md:gap-y-[11.5px]">
             {faqs.map((faq, index) => (
               <div
                 key={index}
-                className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] p-[15px] min-h-[98px]"
+                className="bg-white rounded-[10px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] p-3 sm:p-4 md:p-[15px] min-h-[98px]"
               >
-                <h3 className="font-medium text-[13px] text-[#0D1B2A] leading-[14px] tracking-[0.25px] mb-[11px]">
+                <h3 className="font-medium text-sm sm:text-base md:text-[13px] text-[#0D1B2A] leading-[14px] tracking-[0.25px] mb-2 sm:mb-3 md:mb-[11px]">
                   {faq.question}
                 </h3>
-                <p className="font-medium text-[10px] text-[#9C9C9C] leading-[14px]">
+                <p className="font-medium text-xs sm:text-sm md:text-[10px] text-[#9C9C9C] leading-[14px]">
                   {faq.answer}
                 </p>
               </div>
@@ -365,23 +373,23 @@ export default function Contact() {
         </div>
 
         {/* CTA Section */}
-        <div className="bg-[#2AAE7A] rounded-[15px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] h-[170px] relative px-[79.5px] py-[25px]">
+        <div className="bg-[#2AAE7A] rounded-[15px] shadow-[0px_0px_3px_0px_rgba(0,0,0,0.25)] min-h-[170px] relative px-4 sm:px-8 md:px-[79.5px] py-6 sm:py-8 md:py-[25px]">
           <div className="text-center">
-            <h2 className="font-semibold text-[22.5px] text-white leading-normal mb-[10px]">
+            <h2 className="font-semibold text-lg sm:text-xl md:text-[22.5px] text-white leading-normal mb-2 sm:mb-3 md:mb-[10px]">
               Need Immediate Assistance?
             </h2>
-            <p className="font-semibold text-[11px] text-[#374151] leading-normal mb-[27.5px]">
+            <p className="font-semibold text-xs sm:text-sm md:text-[11px] text-[#374151] leading-normal mb-6 sm:mb-8 md:mb-[27.5px]">
               Our support team is standing by to help you succeed with
               Zeerostock.
             </p>
-            <div className="flex items-center justify-center gap-[45px]">
-              <Link href="/helpdesk">
-                <button className="w-[145px] h-[35px] bg-[#1E3A8A] text-white font-medium text-[11px] leading-normal rounded-[6px] hover:bg-[#1e3a8a]/90 transition-colors">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-8 md:gap-[45px]">
+              <Link href="/helpdesk" className="w-full sm:w-auto">
+                <button className="w-full sm:w-36 md:w-[145px] h-10 sm:h-10 md:h-[35px] bg-[#1E3A8A] text-white font-medium text-xs sm:text-sm md:text-[11px] leading-normal rounded-[6px] hover:bg-[#1e3a8a]/90 transition-colors">
                   Chat with support
                 </button>
               </Link>
-              <Link href="/helpdesk">
-                <button className="w-[145px] h-[35px] bg-white text-[#2AAE7A] font-medium text-[11px] leading-[11px] rounded-[6px] hover:bg-gray-50 transition-colors">
+              <Link href="/helpdesk" className="w-full sm:w-auto">
+                <button className="w-full sm:w-36 md:w-[145px] h-10 sm:h-10 md:h-[35px] bg-white text-[#2AAE7A] font-medium text-xs sm:text-sm md:text-[11px] leading-[11px] rounded-[6px] hover:bg-gray-50 transition-colors">
                   Schedule call
                 </button>
               </Link>

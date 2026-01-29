@@ -39,19 +39,19 @@ export default function FAQSection() {
   ];
 
   return (
-    <section className="bg-gray-50 py-16 border-t border-gray-200">
-      <div className="max-w-[1200px] mx-auto px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-[36px] font-bold text-gray-900 mb-3">
+    <section className="bg-gray-50 py-8 sm:py-12 md:py-14 lg:py-16 border-t border-gray-200">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
+        <div className="text-center mb-6 sm:mb-8 md:mb-10 lg:mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[36px] font-bold text-gray-900 mb-2 sm:mb-3">
             Frequently Asked Questions
           </h2>
-          <p className="text-[15px] text-gray-600">
+          <p className="text-sm sm:text-base md:text-[15px] text-gray-600 px-4 sm:px-0">
             Everything you need to know about becoming an agent
           </p>
         </div>
 
         {/* FAQ Items */}
-        <div className="space-y-4 max-w-[900px] mx-auto">
+        <div className="space-y-3 sm:space-y-4 max-w-[900px] mx-auto">
           {faqs.map((faq, index) => (
             <div
               key={index}
@@ -61,13 +61,13 @@ export default function FAQSection() {
                 onClick={() =>
                   setExpandedIndex(expandedIndex === index ? null : index)
                 }
-                className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+                className="w-full px-4 sm:px-5 md:px-6 py-3 sm:py-3.5 md:py-4 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
               >
-                <span className="text-[15px] font-semibold text-gray-900">
+                <span className="text-sm sm:text-base md:text-[15px] font-semibold text-gray-900 pr-2">
                   {faq.question}
                 </span>
                 <svg
-                  className={`w-5 h-5 text-gray-600 transition-transform ${
+                  className={`w-4 h-4 sm:w-5 sm:h-5 text-gray-600 transition-transform flex-shrink-0 ${
                     expandedIndex === index ? "rotate-180" : ""
                   }`}
                   fill="none"
@@ -83,8 +83,8 @@ export default function FAQSection() {
                 </svg>
               </button>
               {expandedIndex === index && (
-                <div className="px-6 pb-4">
-                  <p className="text-[14px] text-gray-600">
+                <div className="px-4 sm:px-5 md:px-6 pb-3 sm:pb-3.5 md:pb-4">
+                  <p className="text-sm sm:text-base md:text-[14px] text-gray-600">
                     {faq.answer}
                   </p>
                 </div>

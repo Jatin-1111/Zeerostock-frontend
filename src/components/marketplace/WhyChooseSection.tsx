@@ -84,9 +84,12 @@ export default function WhyChooseSection() {
 
   return (
     <div className="max-w-[900px] mx-auto py-9 px-3">
-      <div className="flex justify-center gap-12">
+      <div className="grid grid-cols-2 md:flex md:justify-center gap-6 md:gap-12">
         {reasons.map((reason, index) => (
-          <div key={index} className="flex flex-col items-center w-42 gap-3">
+          <div
+            key={index}
+            className="flex flex-col items-center w-full md:w-42 gap-3 p-2 md:p-0"
+          >
             <div className="mb-1.5">{reason.icon}</div>
             <div className="flex flex-col gap-1.5 text-center">
               <h3 className="font-medium text-[14px] text-[#1a1a1a] m-0">

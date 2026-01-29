@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function MarketplaceCTASection() {
   return (
     <div className="max-w-[900px] mx-auto py-9 px-3">
-      <div className="grid grid-cols-2 gap-[18px]">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-[18px]">
         {/* Become a Supplier */}
         <div className="bg-[#f0fdf4] border-2 border-[#10b981] rounded-2xl p-6 flex flex-col items-center justify-center">
           <h3 className="font-medium text-xl text-[#1a1a1a] mb-2 text-center">

@@ -65,9 +65,19 @@ export default function IndustriesSection() {
           </p>
         </div>
 
-        {/* Carousel Container */}
+        {/* Mobile View: 2x2 Grid */}
+        <div className="md:hidden grid grid-cols-2 gap-[11px] justify-items-center">
+          {industries.map((industry, index) => (
+            <IndustryCard
+              key={`${industry.title}-${index}-mobile`}
+              industry={industry}
+            />
+          ))}
+        </div>
+
+        {/* Desktop View: Carousel Container */}
         <div
-          className="relative w-full overflow-hidden cursor-grab active:cursor-grabbing"
+          className="hidden md:block relative w-full overflow-hidden cursor-grab active:cursor-grabbing"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
@@ -88,50 +98,51 @@ export default function IndustriesSection() {
               willChange: "transform",
             }}
           >
-            {duplicatedIndustries.map((industry, index) => {
-              const Icon = industry.icon;
-              return (
-                <div
-                  key={`${industry.title}-${index}`}
-                  className="bg-[#EEFFEF] rounded-[20px] shadow-[0px_0px_5px_0px_rgba(24,181,34,0.5)] shrink-0 w-[174px] h-[143px] relative overflow-hidden"
-                >
-                  {/* Icon - Top Left */}
-                  <div className="absolute left-[15px] top-[14px] w-[20px] h-[20px]">
-                    <Icon
-                      className="w-full h-full text-[#2AAE7A]"
-                      strokeWidth={1.5}
-                    />
-                  </div>
-
-                  {/* Savings Badge - Top Right Area */}
-                  <div className="absolute left-[calc(50%+26px)] top-[13px] -translate-x-1/2">
-                    <div className="bg-[#2AAE7A] px-[6px] py-[1px] rounded-full">
-                      <p className="text-white text-[7px] font-medium whitespace-nowrap leading-normal">
-                        {industry.savings}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="absolute left-[15px] top-[50px] text-[#022778] text-[13px] font-semibold leading-normal drop-shadow-[0px_3px_3px_rgba(0,0,0,0.25)]">
-                    {industry.title}
-                  </h3>
-
-                  {/* Subtitle */}
-                  <p className="absolute left-[15px] top-[77px] text-[#2AAE7A] text-[9px] font-medium leading-normal">
-                    {industry.subtitle}
-                  </p>
-
-                  {/* Description */}
-                  <p className="absolute left-[15px] top-[95px] w-[144px] text-[#727272] text-[7px] font-medium leading-normal">
-                    {industry.description}
-                  </p>
-                </div>
-              );
-            })}
+            {duplicatedIndustries.map((industry, index) => (
+              <IndustryCard
+                key={`${industry.title}-${index}-desktop`}
+                industry={industry}
+              />
+            ))}
           </motion.div>
         </div>
       </div>
     </section>
+  );
+}
+
+function IndustryCard({ industry }: { industry: any }) {
+  const Icon = industry.icon;
+  return (
+    <div className="bg-[#EEFFEF] rounded-[20px] shadow-[0px_0px_5px_0px_rgba(24,181,34,0.5)] shrink-0 w-[174px] h-[143px] relative overflow-hidden">
+      {/* Icon - Top Left */}
+      <div className="absolute left-[15px] top-[14px] w-[20px] h-[20px]">
+        <Icon className="w-full h-full text-[#2AAE7A]" strokeWidth={1.5} />
+      </div>
+
+      {/* Savings Badge - Top Right Area */}
+      <div className="absolute left-[calc(50%+26px)] top-[13px] -translate-x-1/2">
+        <div className="bg-[#2AAE7A] px-[6px] py-[1px] rounded-full">
+          <p className="text-white text-[7px] font-medium whitespace-nowrap leading-normal">
+            {industry.savings}
+          </p>
+        </div>
+      </div>
+
+      {/* Title */}
+      <h3 className="absolute left-[15px] top-[50px] text-[#022778] text-[13px] font-semibold leading-normal drop-shadow-[0px_3px_3px_rgba(0,0,0,0.25)]">
+        {industry.title}
+      </h3>
+
+      {/* Subtitle */}
+      <p className="absolute left-[15px] top-[77px] text-[#2AAE7A] text-[9px] font-medium leading-normal">
+        {industry.subtitle}
+      </p>
+
+      {/* Description */}
+      <p className="absolute left-[15px] top-[95px] w-[144px] text-[#727272] text-[7px] font-medium leading-normal">
+        {industry.description}
+      </p>
+    </div>
   );
 }

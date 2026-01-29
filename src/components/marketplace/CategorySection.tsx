@@ -180,7 +180,7 @@ export default function CategorySection() {
       </div>
 
       <motion.div
-        className="grid grid-cols-6 gap-3 overflow-hidden py-5"
+        className="grid grid-cols-4 lg:grid-cols-6 gap-2 md:gap-3 overflow-hidden py-5"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -203,7 +203,7 @@ export default function CategorySection() {
                 layout
                 variants={itemVariants}
                 onClick={() => handleCategoryClick(category.name)}
-                className="bg-white rounded-xl shadow-md p-[18px] flex flex-col items-center gap-3 border-none cursor-pointer relative overflow-hidden"
+                className="bg-white rounded-xl shadow-md p-2 md:p-[18px] flex flex-col items-center gap-2 md:gap-3 border-none cursor-pointer relative overflow-hidden h-full justify-start"
                 whileHover={{
                   y: -4,
                   boxShadow:

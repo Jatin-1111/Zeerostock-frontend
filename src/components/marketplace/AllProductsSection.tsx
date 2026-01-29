@@ -87,7 +87,7 @@ export default function AllProductsSection() {
       if (selectedCategory) {
         // Find the category ID from the selected category name
         const category = categories.find(
-          (cat) => cat.name === selectedCategory
+          (cat) => cat.name === selectedCategory,
         );
         if (category) {
           filters.categoryId = category.id;
@@ -141,26 +141,26 @@ export default function AllProductsSection() {
       {/* Header with title and filters */}
       <div className="mb-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="font-semibold text-[24px] text-[#1a1a1a] m-0">
+          <h2 className="font-semibold text-[18px] md:text-[24px] text-[#1a1a1a] m-0 whitespace-nowrap">
             All products
           </h2>
 
           {/* Filters */}
-          <div className="flex items-center gap-[19px]">
+          <div className="flex items-center gap-2 md:gap-[19px]">
             {/* Category dropdown */}
             <motion.div
               ref={categoryRef}
-              className="relative w-48"
+              className="relative shrink-0"
               transition={{ duration: 0.2 }}
             >
               <div
-                className="flex items-center justify-between gap-[19px] border-b border-[#787878] pb-[4px] cursor-pointer"
+                className="flex items-center gap-1 md:gap-[19px] border-b border-[#787878] pb-[4px] cursor-pointer"
                 onClick={() => {
                   setIsCategoryOpen(!isCategoryOpen);
                   if (!isCategoryOpen) setIsSortOpen(false);
                 }}
               >
-                <span className="text-[11px] text-[#787878] font-medium whitespace-nowrap">
+                <span className="text-[11px] text-[#787878] font-medium whitespace-nowrap max-w-[80px] md:max-w-[150px] overflow-hidden text-ellipsis">
                   {selectedCategory
                     ? selectedCategory
                     : `All Categories (${categories.length || 0})`}
@@ -185,7 +185,7 @@ export default function AllProductsSection() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute top-full left-0 mt-1.5 bg-white border border-gray-200 rounded-lg shadow-lg z-[9999] w-48 max-h-60 overflow-y-auto"
+                    className="absolute top-full right-0 md:left-0 mt-1.5 bg-white border border-gray-200 rounded-lg shadow-lg z-[9999] w-full min-w-full max-h-60 overflow-y-auto"
                   >
                     <motion.div
                       whileHover={{ backgroundColor: "#f3f4f6" }}
@@ -218,11 +218,11 @@ export default function AllProductsSection() {
             {/* Sort dropdown */}
             <motion.div
               ref={sortRef}
-              className="relative w-36"
+              className="relative shrink-0 hidden md:block"
               transition={{ duration: 0.2 }}
             >
               <div
-                className="flex items-center justify-between gap-[19px] border-b border-[#787878] pb-[4px] cursor-pointer"
+                className="flex items-center gap-1 md:gap-[19px] border-b border-[#787878] pb-[4px] cursor-pointer"
                 onClick={() => {
                   setIsSortOpen(!isSortOpen);
                   if (!isSortOpen) setIsCategoryOpen(false);
@@ -252,7 +252,7 @@ export default function AllProductsSection() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute top-full left-0 mt-1.5 bg-white border border-gray-200 rounded-lg shadow-lg z-[9999] w-36 max-h-60 overflow-y-auto"
+                    className="absolute top-full right-0 md:left-0 mt-1.5 bg-white border border-gray-200 rounded-lg shadow-lg z-[9999] w-full min-w-full max-h-60 overflow-y-auto"
                   >
                     {sortOptions.map((option) => (
                       <motion.div
@@ -285,7 +285,7 @@ export default function AllProductsSection() {
                 strokeWidth={1.5}
               />
               <span
-                className={`text-[11px] font-medium ${
+                className={`text-[11px] font-medium hidden sm:inline ${
                   showFilters ? "text-[#1e3a8a]" : "text-[#787878]"
                 }`}
               >
@@ -319,7 +319,7 @@ export default function AllProductsSection() {
                 transition={{ duration: 0.3 }}
                 className="bg-white border border-[#e5e7eb] rounded-[10px] p-5 shadow-lg mb-4"
               >
-                <div className="grid grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                   {/* Category Filter */}
                   <div>
                     <label className="block text-[11px] font-semibold text-[#374151] mb-2">
@@ -488,7 +488,7 @@ export default function AllProductsSection() {
       </div>
 
       {isLoading ? (
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
           {[1, 2, 3, 4].map((i) => (
             <div
               key={i}
@@ -520,7 +520,7 @@ export default function AllProductsSection() {
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
             {products.map((product, index) => (
               <motion.div
                 key={product?.productId || index}
@@ -536,9 +536,9 @@ export default function AllProductsSection() {
                   href={`/product/${product?.slug || "unknown"}`}
                   className="no-underline"
                 >
-                  <div className="bg-white rounded-xl shadow-md overflow-hidden hover:-translate-y-1 transition-transform duration-200 cursor-pointer">
+                  <div className="bg-white rounded-xl shadow-md overflow-hidden hover:-translate-y-1 transition-transform duration-200 cursor-pointer h-full flex flex-col">
                     {/* Product image */}
-                    <div className="w-full h-30 bg-gray-100">
+                    <div className="w-full h-32 sm:h-40 bg-gray-100 relative">
                       {product?.image ? (
                         <img
                           src={product.image}
@@ -552,8 +552,8 @@ export default function AllProductsSection() {
                     </div>
 
                     {/* Product details */}
-                    <div className="p-3">
-                      <h3 className="font-medium text-[12px] text-[#1a1a1a] m-0 mb-1.5 truncate">
+                    <div className="p-3 flex flex-col flex-1">
+                      <h3 className="font-medium text-[12px] text-[#1a1a1a] m-0 mb-1.5 line-clamp-2 min-h-[32px]">
                         {product?.title || "Product"}
                       </h3>
 
@@ -591,28 +591,30 @@ export default function AllProductsSection() {
                             fill="#666"
                           />
                         </svg>
-                        <span className="text-[9px] text-gray-600">
+                        <span className="text-[9px] text-gray-600 truncate max-w-[100px]">
                           {product?.city || "Mumbai"},IN
                         </span>
                       </div>
 
-                      {/* Price */}
-                      <div className="flex items-center gap-1.5 mb-2">
-                        <span className="font-bold text-xl text-[#2D4A9A]">
-                          ₹{(product?.price || 0).toLocaleString("en-IN")}
-                        </span>
-                        {product?.originalPrice &&
-                          product.originalPrice > (product.price || 0) && (
-                            <span className="text-[10.5px] text-gray-400 line-through">
-                              ₹{product.originalPrice.toLocaleString("en-IN")}
-                            </span>
-                          )}
-                      </div>
+                      <div className="mt-auto">
+                        {/* Price */}
+                        <div className="flex items-center gap-1.5 mb-2 flex-wrap">
+                          <span className="font-bold text-lg sm:text-xl text-[#2D4A9A]">
+                            ₹{(product?.price || 0).toLocaleString("en-IN")}
+                          </span>
+                          {product?.originalPrice &&
+                            product.originalPrice > (product.price || 0) && (
+                              <span className="text-[10.5px] text-gray-400 line-through">
+                                ₹{product.originalPrice.toLocaleString("en-IN")}
+                              </span>
+                            )}
+                        </div>
 
-                      {/* View Deal button */}
-                      <button className="w-full h-[30px] bg-[#2D4A9A] rounded-lg border-none cursor-pointer font-semibold text-[10.5px] text-white hover:bg-[#3d5aaa] transition-colors">
-                        View Deal
-                      </button>
+                        {/* View Deal button */}
+                        <button className="w-full h-[30px] bg-[#2D4A9A] rounded-lg border-none cursor-pointer font-semibold text-[10.5px] text-white hover:bg-[#3d5aaa] transition-colors">
+                          View Deal
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </Link>

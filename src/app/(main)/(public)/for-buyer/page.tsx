@@ -14,7 +14,7 @@ export default function BuyerLandingPage() {
         <WhyChooseSection />
         <TestimonialsSection />
         <IndustriesSection />
-        <FeaturesSection />
+        {/* <FeaturesSection /> */}
         <HowItWorksSection />
         <CTASection />
       </div>

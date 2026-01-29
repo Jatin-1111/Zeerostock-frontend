@@ -40,7 +40,7 @@ export default function TermsConditionsPage() {
         });
       },
       // rootMargin adjusts the "trigger zone" to the top 30% of the screen
-      { rootMargin: "-10% 0px -70% 0px" }
+      { rootMargin: "-10% 0px -70% 0px" },
     );
 
     sections.forEach((section) => {
@@ -52,14 +52,20 @@ export default function TermsConditionsPage() {
   }, [sections]);
 
   return (
-    <div className="min-h-screen">
-      {/* Header Section */}
-      <div className="bg-linear-to-b from-[#D0FFED] to-[#FFFFFF] border-b border-gray-200 py-[30px]">
-        <div className="max-w-[960px] mx-auto px-[13px]">
-          <h1 className="text-[40px] font-semibold text-[#0d1b2a] mb-[7px] leading-[51px]">
+    <div className="min-h-screen bg-[#eefbf6]">
+      {/* Hero Section with Gradient */}
+      <div
+        className="h-[100px] sm:h-[115px] md:h-[130px] overflow-hidden"
+        style={{
+          background:
+            "linear-gradient(179.81deg, rgb(208, 255, 237) 0.93%, rgb(255, 255, 255) 99.09%)",
+        }}
+      >
+        <div className="max-w-[1080px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 pt-6 sm:pt-9 md:pt-12">
+          <h1 className="text-[20px] sm:text-[25px] md:text-[30px] font-semibold leading-normal mb-1 sm:mb-1.5 md:mb-2 text-[#0d1b2a]">
             Terms & Conditions
           </h1>
-          <p className="text-[13px] font-medium text-[#9c9c9c] leading-normal">
+          <p className="text-[8px] sm:text-[9px] md:text-[10px] font-medium text-[#9c9c9c]">
             Understand the rules, policies, and legal terms governing the use of
             Zeerostock.
           </p>
@@ -67,26 +73,29 @@ export default function TermsConditionsPage() {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-[960px] mx-auto px-[13px] py-[21px]">
-        <div className="flex gap-[21px] relative">
+      <div className="max-w-[1080px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 mt-4 sm:mt-6 md:mt-8 pb-6 sm:pb-8 md:pb-10">
+        <div className="flex flex-col lg:flex-row gap-4 sm:gap-5 relative">
           {/* Left Content Area */}
-          <div className="flex-1 space-y-[40px] pb-[100px]">
+          <div className="flex-1 space-y-4 sm:space-y-5 md:space-y-6">
             {/* 1. Introduction */}
-            <section id="introduction" className="scroll-mt-6">
-              <h2 className="text-[19px] font-semibold text-[#0d1b2a] mb-[7px]">
+            <section
+              id="introduction"
+              className="scroll-mt-6 space-y-1.5 sm:space-y-2"
+            >
+              <h2 className="text-[10px] sm:text-[11px] md:text-[12px] font-semibold text-[#1e3a8a]">
                 1. Introduction
               </h2>
-              <p className="text-[10px] font-medium text-[#666666] leading-relaxed mb-[7px]">
+              <p className="text-[8px] sm:text-[9px] md:text-[10px] font-medium text-[#7c7c7c] leading-[12px] sm:leading-[13px] md:leading-[14px]">
                 Welcome to Zeerostock. These Terms and Conditions ("Terms")
                 govern your use of the Zeerostock website, mobile applications,
                 and services (collectively, the "Platform"). By accessing or
                 using our Platform, you agree to be bound by these Terms and our
                 Privacy Policy.
               </p>
-              <div className="bg-[#EEFFEF] border border-gray-200 p-[7px] rounded-lg mb-[7px] flex gap-[5px] max-w-[450px]">
+              <div className="bg-[#EEFFEF] border border-[#2aae7a] rounded-[5px] p-2 sm:p-2.5 flex gap-2 sm:gap-2.5">
                 <div className="flex-shrink-0 mt-[1px]">
                   <svg
-                    className="w-[12px] h-[12px] text-[#2AAE7A]"
+                    className="w-3 h-3 text-[#2AAE7A]"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -97,7 +106,7 @@ export default function TermsConditionsPage() {
                     />
                   </svg>
                 </div>
-                <p className="text-[9px] font-medium text-[#2AAE7A]">
+                <p className="text-[8px] sm:text-[9px] md:text-[10px] font-medium text-[#2AAE7A]">
                   This document constitutes a legally binding agreement between
                   you and Zeerostock, Inc.
                 </p>
@@ -105,19 +114,22 @@ export default function TermsConditionsPage() {
             </section>
 
             {/* 2. User Accounts */}
-            <section id="user-accounts" className="scroll-mt-6">
-              <h2 className="text-[19px] font-semibold text-[#0d1b2a] mb-[7px]">
+            <section
+              id="user-accounts"
+              className="scroll-mt-6 space-y-1.5 sm:space-y-2"
+            >
+              <h2 className="text-[10px] sm:text-[11px] md:text-[12px] font-semibold text-[#1e3a8a]">
                 2. User Accounts & Eligibility
               </h2>
-              <p className="text-[10px] font-medium text-[#666666] leading-relaxed mb-[7px]">
+              <p className="text-[8px] sm:text-[9px] md:text-[10px] font-medium text-[#7c7c7c] leading-[12px] sm:leading-[13px] md:leading-[14px]">
                 To access certain features of the Platform, you must register
                 for an account. You must be at least 18 years old and represent
                 a legitimate business entity to create an account.
               </p>
-              <div className="bg-[#FFF3CF] border border-gray-200 rounded-lg p-[7px] flex gap-[5px] max-w-[450px]">
+              <div className="bg-[#FFF3CF] border border-[#FFCC33] rounded-[5px] p-2 sm:p-2.5 flex gap-2 sm:gap-2.5">
                 <div className="flex-shrink-0 mt-[1px]">
                   <svg
-                    className="w-[12px] h-[12px] text-[#FFCC33]"
+                    className="w-3 h-3 text-[#FFCC33]"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -128,7 +140,7 @@ export default function TermsConditionsPage() {
                     />
                   </svg>
                 </div>
-                <p className="text-[9px] font-medium text-[#FFCC33]">
+                <p className="text-[8px] sm:text-[9px] md:text-[10px] font-medium text-[#FFCC33]">
                   You are responsible for safeguarding your password. Notify
                   Zeerostock immediately of any unauthorized use.
                 </p>
@@ -136,23 +148,26 @@ export default function TermsConditionsPage() {
             </section>
 
             {/* 3. Marketplace Policies */}
-            <section id="marketplace" className="scroll-mt-6">
-              <h2 className="text-[19px] font-semibold text-[#0d1b2a] mb-[7px]">
+            <section
+              id="marketplace"
+              className="scroll-mt-6 space-y-1.5 sm:space-y-2"
+            >
+              <h2 className="text-[10px] sm:text-[11px] md:text-[12px] font-semibold text-[#1e3a8a]">
                 3. Marketplace Policies
               </h2>
-              <p className="text-[10px] font-medium text-[#666666] leading-relaxed mb-[5px]">
+              <p className="text-[8px] sm:text-[9px] md:text-[10px] font-medium text-[#7c7c7c] leading-[12px] sm:leading-[13px] md:leading-[14px]">
                 Prohibited activities include, but are not limited to:
               </p>
-              <ul className="space-y-[4px] text-[10px] font-medium text-[#666666]">
-                <li className="flex gap-[5px]">
+              <ul className="space-y-1 text-[8px] sm:text-[9px] md:text-[10px] font-medium text-[#7c7c7c]">
+                <li className="flex gap-2">
                   <span className="font-bold">•</span> Listing illegal or
                   counterfeit materials.
                 </li>
-                <li className="flex gap-[5px]">
+                <li className="flex gap-2">
                   <span className="font-bold">•</span> Engaging in fraudulent
                   practices.
                 </li>
-                <li className="flex gap-[5px]">
+                <li className="flex gap-2">
                   <span className="font-bold">•</span> Infringing on
                   intellectual property rights.
                 </li>
@@ -160,23 +175,26 @@ export default function TermsConditionsPage() {
             </section>
 
             {/* 4. Buying Rules */}
-            <section id="buying-rules" className="scroll-mt-6">
-              <h2 className="text-[19px] font-semibold text-[#0d1b2a] mb-[7px]">
+            <section
+              id="buying-rules"
+              className="scroll-mt-6 space-y-1.5 sm:space-y-2"
+            >
+              <h2 className="text-[10px] sm:text-[11px] md:text-[12px] font-semibold text-[#1e3a8a]">
                 4. Buying Rules
               </h2>
-              <p className="text-[10px] font-medium text-[#666666] leading-relaxed mb-[7px]">
+              <p className="text-[8px] sm:text-[9px] md:text-[10px] font-medium text-[#7c7c7c] leading-[12px] sm:leading-[13px] md:leading-[14px]">
                 When purchasing goods on Zeerostock, you agree that:
               </p>
-              <ul className="space-y-[4px] text-[10px] font-medium text-[#666666]">
-                <li className="flex gap-[5px]">
+              <ul className="space-y-1 text-[8px] sm:text-[9px] md:text-[10px] font-medium text-[#7c7c7c]">
+                <li className="flex gap-2">
                   <span className="font-bold">•</span> You have read the full
                   item listing before committing to buy.
                 </li>
-                <li className="flex gap-[5px]">
+                <li className="flex gap-2">
                   <span className="font-bold">•</span> You enter into a legally
                   binding contract to purchase an item when you commit to buy.
                 </li>
-                <li className="flex gap-[5px]">
+                <li className="flex gap-2">
                   <span className="font-bold">•</span> You do not submit any
                   false transaction claims.
                 </li>
@@ -184,11 +202,14 @@ export default function TermsConditionsPage() {
             </section>
 
             {/* 5. Selling Rules */}
-            <section id="selling-rules" className="scroll-mt-6">
-              <h2 className="text-[19px] font-semibold text-[#0d1b2a] mb-[7px]">
+            <section
+              id="selling-rules"
+              className="scroll-mt-6 space-y-1.5 sm:space-y-2"
+            >
+              <h2 className="text-[10px] sm:text-[11px] md:text-[12px] font-semibold text-[#1e3a8a]">
                 5. Selling Rules
               </h2>
-              <p className="text-[10px] font-medium text-[#666666] leading-relaxed">
+              <p className="text-[8px] sm:text-[9px] md:text-[10px] font-medium text-[#7c7c7c] leading-[12px] sm:leading-[13px] md:leading-[14px]">
                 Suppliers must accurately describe their items. All listings
                 must only contain text, graphics, and pictures that describe the
                 item for sale. You may not list any item on our site that could
@@ -198,20 +219,23 @@ export default function TermsConditionsPage() {
             </section>
 
             {/* 6. Payment & Fees */}
-            <section id="payment-fees" className="scroll-mt-6">
-              <h2 className="text-[19px] font-semibold text-[#0d1b2a] mb-[7px]">
+            <section
+              id="payment-fees"
+              className="scroll-mt-6 space-y-1.5 sm:space-y-2"
+            >
+              <h2 className="text-[10px] sm:text-[11px] md:text-[12px] font-semibold text-[#1e3a8a]">
                 6. Payment & Fees
               </h2>
-              <p className="text-[10px] font-medium text-[#666666] leading-relaxed mb-[7px]">
+              <p className="text-[8px] sm:text-[9px] md:text-[10px] font-medium text-[#7c7c7c] leading-[12px] sm:leading-[13px] md:leading-[14px]">
                 Zeerostock charges fees for certain services, such as listing
                 items or completing transactions. You are responsible for paying
                 all fees and applicable taxes associated with your use of the
                 Platform.
               </p>
-              <div className="bg-[#EEFFEF] border border-gray-200 p-[7px] rounded-lg flex gap-[5px] max-w-[450px]">
+              <div className="bg-[#EEFFEF] border border-[#2aae7a] p-2 sm:p-2.5 rounded-[5px] flex gap-2 sm:gap-2.5">
                 <div className="flex-shrink-0 mt-[1px]">
                   <svg
-                    className="w-[12px] h-[12px] text-[#2AAE7A]"
+                    className="w-3 h-3 text-[#2AAE7A]"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -222,7 +246,7 @@ export default function TermsConditionsPage() {
                     />
                   </svg>
                 </div>
-                <p className="text-[9px] font-medium text-[#2AAE7A]">
+                <p className="text-[8px] sm:text-[9px] md:text-[10px] font-medium text-[#2AAE7A]">
                   All payments are processed securely. Zeerostock does not store
                   your full credit card information.
                 </p>
@@ -230,11 +254,14 @@ export default function TermsConditionsPage() {
             </section>
 
             {/* 7. Shipping & Logistics */}
-            <section id="shipping" className="scroll-mt-6">
-              <h2 className="text-[19px] font-semibold text-[#0d1b2a] mb-[7px]">
+            <section
+              id="shipping"
+              className="scroll-mt-6 space-y-1.5 sm:space-y-2"
+            >
+              <h2 className="text-[10px] sm:text-[11px] md:text-[12px] font-semibold text-[#1e3a8a]">
                 7. Shipping & Logistics
               </h2>
-              <p className="text-[10px] font-medium text-[#666666] leading-relaxed">
+              <p className="text-[8px] sm:text-[9px] md:text-[10px] font-medium text-[#7c7c7c] leading-[12px] sm:leading-[13px] md:leading-[14px]">
                 Unless otherwise agreed upon, shipping costs are the
                 responsibility of the Buyer. Sellers are responsible for
                 packaging goods securely and providing tracking information
@@ -244,11 +271,14 @@ export default function TermsConditionsPage() {
             </section>
 
             {/* 8. Intellectual Property */}
-            <section id="intellectual" className="scroll-mt-6">
-              <h2 className="text-[19px] font-semibold text-[#0d1b2a] mb-[7px]">
+            <section
+              id="intellectual"
+              className="scroll-mt-6 space-y-1.5 sm:space-y-2"
+            >
+              <h2 className="text-[10px] sm:text-[11px] md:text-[12px] font-semibold text-[#1e3a8a]">
                 8. Intellectual Property
               </h2>
-              <p className="text-[10px] font-medium text-[#666666] leading-relaxed">
+              <p className="text-[8px] sm:text-[9px] md:text-[10px] font-medium text-[#7c7c7c] leading-[12px] sm:leading-[13px] md:leading-[14px]">
                 The Zeerostock name, logo, and all related names, logos, product
                 and service names, designs, and slogans are trademarks of
                 Zeerostock or its affiliates. You must not use such marks
@@ -258,11 +288,14 @@ export default function TermsConditionsPage() {
             </section>
 
             {/* 9. Liabilities */}
-            <section id="liabilities" className="scroll-mt-6">
-              <h2 className="text-[19px] font-semibold text-[#0d1b2a] mb-[7px]">
+            <section
+              id="liabilities"
+              className="scroll-mt-6 space-y-1.5 sm:space-y-2"
+            >
+              <h2 className="text-[10px] sm:text-[11px] md:text-[12px] font-semibold text-[#1e3a8a]">
                 9. Liabilities & Limitations
               </h2>
-              <p className="text-[10px] font-medium text-[#666666] leading-relaxed">
+              <p className="text-[8px] sm:text-[9px] md:text-[10px] font-medium text-[#7c7c7c] leading-[12px] sm:leading-[13px] md:leading-[14px]">
                 To the fullest extent provided by law, in no event will
                 Zeerostock, its affiliates, or their licensors be liable for
                 damages of any kind, under any legal theory, arising out of or
@@ -271,11 +304,14 @@ export default function TermsConditionsPage() {
             </section>
 
             {/* 10. Termination */}
-            <section id="termination" className="scroll-mt-6">
-              <h2 className="text-[19px] font-semibold text-[#0d1b2a] mb-[7px]">
+            <section
+              id="termination"
+              className="scroll-mt-6 space-y-1.5 sm:space-y-2"
+            >
+              <h2 className="text-[10px] sm:text-[11px] md:text-[12px] font-semibold text-[#1e3a8a]">
                 10. Termination of Service
               </h2>
-              <p className="text-[10px] font-medium text-[#666666] leading-relaxed">
+              <p className="text-[8px] sm:text-[9px] md:text-[10px] font-medium text-[#7c7c7c] leading-[12px] sm:leading-[13px] md:leading-[14px]">
                 We may terminate or suspend your account and bar access to the
                 Service immediately, without prior notice or liability, under
                 our sole discretion, for any reason whatsoever and without
@@ -284,11 +320,14 @@ export default function TermsConditionsPage() {
             </section>
 
             {/* 11. Governing Law */}
-            <section id="governing-law" className="scroll-mt-6">
-              <h2 className="text-[19px] font-semibold text-[#0d1b2a] mb-[7px]">
+            <section
+              id="governing-law"
+              className="scroll-mt-6 space-y-1.5 sm:space-y-2"
+            >
+              <h2 className="text-[10px] sm:text-[11px] md:text-[12px] font-semibold text-[#1e3a8a]">
                 11. Governing Law
               </h2>
-              <p className="text-[10px] font-medium text-[#666666] leading-relaxed">
+              <p className="text-[8px] sm:text-[9px] md:text-[10px] font-medium text-[#7c7c7c] leading-[12px] sm:leading-[13px] md:leading-[14px]">
                 These Terms shall be governed and construed in accordance with
                 the laws of the jurisdiction in which Zeerostock is established,
                 without regard to its conflict of law provisions.
@@ -296,60 +335,64 @@ export default function TermsConditionsPage() {
             </section>
 
             {/* 12. Contact */}
-            <section id="contact" className="scroll-mt-6">
-              <h2 className="text-[19px] font-semibold text-[#0d1b2a] mb-[7px]">
+            <section
+              id="contact"
+              className="scroll-mt-6 space-y-1.5 sm:space-y-2"
+            >
+              <h2 className="text-[10px] sm:text-[11px] md:text-[12px] font-semibold text-[#1e3a8a]">
                 12. Contact Information
               </h2>
-              <p className="text-[10px] font-medium text-[#666666] leading-relaxed mb-[7px]">
+              <p className="text-[8px] sm:text-[9px] md:text-[10px] font-medium text-[#7c7c7c] leading-[12px] sm:leading-[13px] md:leading-[14px]">
                 If you have any questions about these Terms, please contact us
                 at:
               </p>
-              <div className="bg-[#EEFFEF] border border-gray-200 p-[11px] rounded-lg">
-                <p className="text-[10px] font-semibold text-[#0d1b2a]">
+              <div className="bg-white rounded-[10px] p-2.5 sm:p-3 space-y-1">
+                <p className="text-[8px] sm:text-[9px] md:text-[10px] font-semibold text-[#0d1b2a]">
                   Zeerostock Support Team
                 </p>
-                <p className="text-[10px] font-medium text-[#666666]">
+                <p className="text-[8px] sm:text-[9px] md:text-[10px] font-medium text-[#7c7c7c]">
                   contact@zeerostock.com
                 </p>
-                <p className="text-[10px] font-medium text-[#666666] mt-[2px]">
+                <p className="text-[8px] sm:text-[9px] md:text-[10px] font-medium text-[#7c7c7c]">
                   +91 89568 35375
                 </p>
               </div>
             </section>
 
-            {/* Need Clarification Box */}
-            <div className="border border-gray-200 rounded-lg p-[11px] mt-[40px] bg-[#EEFFEF]">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="text-[13px] font-semibold text-[#0d1b2a] mb-[2px]">
-                    Need Clarification?
-                  </h3>
-                  <p className="text-[9px] font-medium text-[#9c9c9c]">
-                    Our team is available to help you understand our policies
-                  </p>
-                </div>
-                <button className="px-[11px] py-[5px] bg-[#1E3A8A] text-white text-[10px] font-semibold rounded-lg hover:bg-[#1a3379] transition-colors whitespace-nowrap ml-[11px] cursor-pointer">
+            {/* CTA Box */}
+            <div className="bg-[#2aae7a] rounded-[15px] p-4 sm:p-5 md:p-6 text-center">
+              <h3 className="text-[16px] sm:text-[19px] md:text-[22.5px] font-semibold text-white mb-2 sm:mb-2.5">
+                Need Clarification?
+              </h3>
+              <p className="text-[9px] sm:text-[10px] md:text-[11px] font-semibold text-[#374151] mb-4 sm:mb-5 md:mb-6">
+                Our team is available to help you understand our policies
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 md:gap-11 justify-center">
+                <button className="bg-[#1e3a8a] text-white px-8 sm:px-11 md:px-14 py-1.5 sm:py-2 rounded-md text-[9px] sm:text-[10px] md:text-[11px] font-medium hover:bg-[#1a3379] transition-colors cursor-pointer">
                   Contact Legal Support
+                </button>
+                <button className="bg-white text-[#2aae7a] px-8 sm:px-11 md:px-14 py-1.5 sm:py-2 rounded-md text-[9px] sm:text-[10px] md:text-[11px] font-medium hover:bg-gray-50 transition-colors cursor-pointer">
+                  View Guide
                 </button>
               </div>
             </div>
           </div>
 
           {/* Right Sidebar - Sticky Navigation */}
-          <div className="w-[150px] shrink-0 hidden md:block">
-            <div className="sticky top-[20px] bg-white border border-gray-200 rounded-lg p-[11px] shadow-sm">
-              <h3 className="text-[12px] font-semibold text-[#0d1b2a] mb-[7px] pb-[5px] border-b border-gray-200">
+          <div className="w-full lg:w-[159px] shrink-0 hidden lg:block">
+            <div className="bg-white rounded-[10px] shadow-[0px_0px_2px_0px_rgba(0,0,0,0.25)] p-2.5 sticky top-[20px]">
+              <h3 className="text-[11px] font-semibold text-black pb-1.5 mb-2 border-b border-[#e5e7eb]">
                 Page Contents
               </h3>
-              <nav className="space-y-[2px]">
+              <nav className="space-y-1">
                 {sections.map((section) => (
                   <button
                     key={section.id}
                     onClick={() => scrollToSection(section.id)}
-                    className={`w-full text-left px-[8px] py-[6px] text-[10px] font-medium rounded-md transition-all duration-200 cursor-pointer ${
+                    className={`w-full text-left px-2.5 py-1.5 text-[10px] font-medium rounded-[5px] transition-colors cursor-pointer ${
                       activeSection === section.id
-                        ? "bg-[#EEFFEF] text-[#2AAE7A] font-semibold shadow-sm"
-                        : "text-[#666666] hover:bg-gray-50 hover:text-[#0d1b2a]"
+                        ? "bg-[#EEFFEF] text-[#2AAE7A]"
+                        : "text-black hover:bg-gray-50"
                     }`}
                   >
                     {section.label}

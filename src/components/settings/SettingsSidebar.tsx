@@ -43,49 +43,48 @@ export default function SettingsSidebar({
 
   return (
     <div
-      className={`w-full lg:w-[208px] bg-white relative ${classname}`}
+      className={`w-full lg:w-[208px] bg-white lg:rounded-lg lg:shadow-sm ${classname}`}
     >
       {/* Header */}
-      <div className="px-[14px] mb-[30px]">
-        <h2 className="text-[17px] font-semibold text-[#0d1b2a] mb-[4px]">
+      <div className="px-4 sm:px-5 md:px-[14px] mb-6 sm:mb-7 md:mb-[30px] pt-14 lg:pt-0">
+        <h2 className="text-lg sm:text-xl md:text-[17px] font-semibold text-[#0d1b2a] mb-1.5 sm:mb-2 md:mb-[4px]">
           Settings
         </h2>
-        <p className="text-[10px] font-medium text-[#9c9c9c] leading-normal">
+        <p className="text-sm sm:text-base md:text-[10px] font-medium text-[#9c9c9c] leading-normal">
           Manage your account and preferences
         </p>
       </div>
 
       {/* Menu Items */}
-      <div className="space-y-[11px] px-[14px]">
+      <div className="flex flex-col gap-1 sm:gap-1.5 md:gap-[11px] px-2 sm:px-3 md:px-[14px] pb-4">
         {menuItems.map((item) => (
           <button
             key={item.id}
             onClick={() => onTabChange(item.id)}
-            className={`w-full flex items-center gap-[11px] pl-[17px] pr-[34px] py-[11px] rounded-[7px] text-left transition-colors relative ${
+            className={`w-full flex items-center gap-3 sm:gap-3.5 md:gap-[11px] pl-4 sm:pl-5 md:pl-[17px] pr-4 sm:pr-6 md:pr-[34px] py-3 sm:py-3.5 md:py-[11px] rounded-lg text-left transition-all duration-200 relative ${
               activeTab === item.id
-                ? "bg-[#eeffef]"
-                : "bg-transparent hover:bg-gray-50"
+                ? "bg-[#eeffef] shadow-sm"
+                : "bg-transparent hover:bg-gray-50 active:bg-gray-100"
             }`}
           >
             {/* Left Border Indicator for Active Tab */}
             {activeTab === item.id && (
-              <div className="absolute -left-2 top-0 w-[3px] h-full bg-[#2aae7a] rounded-r-[3px]" />
+              <div className="absolute left-0 top-0 w-1 h-full bg-[#2aae7a] rounded-r-md" />
             )}
 
-            {/* Icon - Now changes color when active */}
+            {/* Icon */}
             <item.icon
-              size={13.5}
-              className={
+              className={`w-5 h-5 sm:w-5.5 sm:h-5.5 md:w-[13.5px] md:h-[13.5px] flex-shrink-0 ${
                 activeTab === item.id ? "text-[#2aae7a]" : "text-[#8b8b8b]"
-              }
+              }`}
             />
 
             {/* Label */}
             <span
-              className={`text-[10.5px] ${
+              className={`text-sm sm:text-base md:text-[10.5px] ${
                 activeTab === item.id
                   ? "text-[#2aae7a] font-semibold"
-                  : "text-[#8b8b8b] font-medium"
+                  : "text-[#6b7280] font-medium"
               }`}
             >
               {item.label}

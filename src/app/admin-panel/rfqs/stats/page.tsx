@@ -174,10 +174,10 @@ export default function AdminRFQStatsPage() {
                       return (
                         <tr key={index} className="hover:bg-gray-50">
                           <td className="px-6 py-4 text-sm font-medium text-gray-900">
-                            {item.industry?.name || "Unknown"}
+                            {item.industryName || "Unknown"}
                           </td>
                           <td className="px-6 py-4 text-sm text-gray-900">
-                            {item.category?.name || "Unknown"}
+                            {item.categoryName || "Unknown"}
                           </td>
                           <td className="px-6 py-4 text-sm text-right font-semibold text-gray-900">
                             {totalRFQs}
@@ -221,8 +221,8 @@ export default function AdminRFQStatsPage() {
             </li>
             <li>
               • <strong>Expired RFQs:</strong> {stats.overall.expired} expired
-              RFQs suggest buyers couldn't find suitable suppliers - opportunity
-              to expand supplier network.
+              RFQs suggest buyers couldn&apos;t find suitable suppliers -
+              opportunity to expand supplier network.
             </li>
             <li>
               • <strong>Active RFQs:</strong> {stats.overall.active} active

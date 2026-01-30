@@ -1,6 +1,6 @@
 /**
  * Admin Service - API integration for admin operations
- * Includes RFQ management for market demand analysis
+ * Optimized for lightweight data transfer and quick page loads
  */
 
 import apiClient from "@/lib/api-client";
@@ -12,14 +12,8 @@ export interface RFQStats {
     totalRFQs: number;
     avgQuantity: number;
     totalQuantity: number;
-    industry: {
-      id: string;
-      name: string;
-    };
-    category: {
-      id: string;
-      name: string;
-    };
+    industryName: string;
+    categoryName: string;
   }>;
   overall: {
     total: number;
@@ -34,32 +28,29 @@ export interface RFQ {
   rfqNumber: string;
   buyerId: string;
   title: string;
-  description: string;
   categoryId: string;
   industryId: string;
   quantity: number;
   unit: string;
-  budgetMin?: number;
-  budgetMax?: number;
-  deliveryLocation: string;
-  deliveryDate: string;
   status: "active" | "closed" | "expired" | "fulfilled";
   createdAt: string;
-  updatedAt: string;
-  buyer: {
+  // List view only - minimal data
+  industryName?: string;
+  categoryName?: string;
+  // Detail view only - full data
+  description?: string;
+  budgetMin?: number;
+  budgetMax?: number;
+  deliveryLocation?: string;
+  deliveryDate?: string;
+  updatedAt?: string;
+  buyer?: {
     id: string;
     firstName: string;
     lastName: string;
     businessEmail: string;
     companyName: string;
-  };
-  industry: {
-    id: string;
-    name: string;
-  };
-  category: {
-    id: string;
-    name: string;
+    mobile?: string;
   };
 }
 
@@ -76,6 +67,7 @@ export interface RFQListResponse {
 export const adminService = {
   /**
    * Get RFQ statistics for market demand analysis
+   * Lightweight: only aggregated counts and names
    */
   async getRFQStats(): Promise<{ success: boolean; data: RFQStats }> {
     const response = await apiClient.get("/admin/rfqs/stats");
@@ -83,7 +75,9 @@ export const adminService = {
   },
 
   /**
-   * Get all RFQs with filters
+   * Get all RFQs with filters - OPTIMIZED for list view
+   * Returns minimal data: title, quantity, status, industry/category names only
+   * No descriptions, budgets, or buyer details to reduce payload
    */
   async getRFQs(params?: {
     page?: number;

@@ -37,6 +37,7 @@ const AdminAuthContext = createContext<AdminAuthContextType | undefined>(
 export function AdminAuthProvider({ children }: { children: ReactNode }) {
   const [admin, setAdmin] = useState<AdminUser | null>(null);
   const [loading, setLoading] = useState(true);
+  const [authInitialized, setAuthInitialized] = useState(false); // Track if we've done initial auth check
   const router = useRouter();
   const pathname = usePathname();
 
@@ -121,40 +122,55 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  // Initial auth check - runs only ONCE on app mount
   useEffect(() => {
     const initAuth = async () => {
-      setLoading(true);
-
-      // Allow access to public admin pages without auth check
-      const publicPaths = [
-        "/admin-panel/login",
-        "/admin-panel/change-password",
-      ];
-      if (publicPaths.includes(pathname || "")) {
-        setLoading(false);
-        return;
+      // Try to load cached user first
+      const cachedUser = localStorage.getItem("admin_user");
+      if (cachedUser) {
+        try {
+          setAdmin(JSON.parse(cachedUser));
+        } catch (e) {
+          console.error("Failed to parse cached user");
+        }
       }
 
-      const isAuthenticated = await checkAuth();
-
-      if (
-        !isAuthenticated &&
-        pathname?.startsWith("/admin-panel") &&
-        !publicPaths.includes(pathname)
-      ) {
-        router.push("/admin-panel/login");
+      // Verify token is still valid (quick check, no page blocking)
+      const token = localStorage.getItem("admin_token");
+      if (token) {
+        // Verify in background without blocking UI
+        checkAuth().catch(console.error);
       }
 
       setLoading(false);
+      setAuthInitialized(true);
     };
 
-    initAuth();
-  }, [pathname]);
+    if (!authInitialized) {
+      initAuth();
+    }
+  }, []);
+
+  // Handle navigation with cached auth state
+  useEffect(() => {
+    if (!authInitialized) return;
+
+    const publicPaths = ["/admin-panel/login", "/admin-panel/change-password"];
+
+    // Redirect to login if not authenticated and trying to access protected page
+    if (
+      !admin &&
+      pathname?.startsWith("/admin-panel") &&
+      !publicPaths.includes(pathname)
+    ) {
+      router.push("/admin-panel/login");
+    }
+  }, [pathname, authInitialized, admin]);
 
   const value = {
     admin,
     isAuthenticated: !!admin,
-    loading,
+    loading: !authInitialized, // Only show loading during initial mount
     login,
     logout,
     checkAuth,

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import {
   ArrowLeft,
   User,
@@ -46,19 +46,36 @@ export default function AdminRFQDetailPage() {
     }
   };
 
+  // Memoize expensive calculations
+  const formattedData = useMemo(() => {
+    if (!rfq) return null;
+
+    const createdDate = new Date(rfq.createdAt);
+    const updatedDate = new Date(rfq.updatedAt || rfq.createdAt);
+    const deliveryDate = new Date(rfq.deliveryDate || Date.now());
+
+    const daysActive = Math.floor(
+      (Date.now() - createdDate.getTime()) / (1000 * 60 * 60 * 24),
+    );
+
+    return {
+      createdFormatted: createdDate.toLocaleDateString(),
+      updatedFormatted: updatedDate.toLocaleDateString(),
+      deliveryFormatted: deliveryDate.toLocaleDateString(),
+      daysActive,
+      budgetMinFormatted: rfq.budgetMin?.toLocaleString(),
+      budgetMaxFormatted: rfq.budgetMax?.toLocaleString(),
+    };
+  }, [rfq]);
+
   const getStatusColor = (status: string) => {
-    switch (status) {
-      case "active":
-        return "bg-green-100 text-green-800";
-      case "closed":
-        return "bg-gray-100 text-gray-800";
-      case "expired":
-        return "bg-red-100 text-red-800";
-      case "fulfilled":
-        return "bg-blue-100 text-blue-800";
-      default:
-        return "bg-gray-100 text-gray-800";
-    }
+    const colors: Record<string, string> = {
+      active: "bg-green-100 text-green-800",
+      closed: "bg-gray-100 text-gray-800",
+      expired: "bg-red-100 text-red-800",
+      fulfilled: "bg-blue-100 text-blue-800",
+    };
+    return colors[status] || "bg-gray-100 text-gray-800";
   };
 
   if (loading) {
@@ -119,7 +136,7 @@ export default function AdminRFQDetailPage() {
                     {rfq.title}
                   </h2>
                   <p className="text-sm text-gray-500 mt-1">
-                    Posted on {new Date(rfq.createdAt).toLocaleDateString()}
+                    Posted on {formattedData?.createdFormatted}
                   </p>
                 </div>
                 <span
@@ -161,7 +178,7 @@ export default function AdminRFQDetailPage() {
                   <div>
                     <div className="text-sm text-gray-500">Delivery Date</div>
                     <div className="font-medium text-gray-900">
-                      {new Date(rfq.deliveryDate).toLocaleDateString()}
+                      {formattedData?.deliveryFormatted}
                     </div>
                   </div>
                 </div>
@@ -182,8 +199,8 @@ export default function AdminRFQDetailPage() {
                     <div>
                       <div className="text-sm text-gray-500">Budget Range</div>
                       <div className="font-medium text-gray-900">
-                        ₹{rfq.budgetMin.toLocaleString()} - ₹
-                        {rfq.budgetMax.toLocaleString()}
+                        ₹{formattedData?.budgetMinFormatted} - ₹
+                        {formattedData?.budgetMaxFormatted}
                       </div>
                     </div>
                   </div>
@@ -199,15 +216,15 @@ export default function AdminRFQDetailPage() {
               <div className="space-y-2 text-sm">
                 <p className="text-gray-700">
                   <strong>Industry:</strong>{" "}
-                  {rfq.industry?.name || "Not specified"}
+                  {rfq.industryName || "Not specified"}
                 </p>
                 <p className="text-gray-700">
                   <strong>Category:</strong>{" "}
-                  {rfq.category?.name || "Not specified"}
+                  {rfq.categoryName || "Not specified"}
                 </p>
                 <p className="text-gray-700 mt-4">
                   💡 <strong>Analysis:</strong> This RFQ indicates buyer demand
-                  in the {rfq.industry?.name} sector. Consider onboarding more
+                  in the {rfq.industryName} sector. Consider onboarding more
                   suppliers in this category to meet market needs.
                 </p>
               </div>
@@ -228,19 +245,19 @@ export default function AdminRFQDetailPage() {
                 <div>
                   <div className="text-sm text-gray-500">Company</div>
                   <div className="font-medium text-gray-900">
-                    {rfq.buyer.companyName || "Not provided"}
+                    {rfq.buyer?.companyName || "Not provided"}
                   </div>
                 </div>
                 <div>
                   <div className="text-sm text-gray-500">Contact Person</div>
                   <div className="font-medium text-gray-900">
-                    {rfq.buyer.firstName} {rfq.buyer.lastName}
+                    {rfq.buyer?.firstName} {rfq.buyer?.lastName}
                   </div>
                 </div>
                 <div>
                   <div className="text-sm text-gray-500">Email</div>
                   <div className="font-medium text-gray-900 break-all">
-                    {rfq.buyer.businessEmail}
+                    {rfq.buyer?.businessEmail}
                   </div>
                 </div>
               </div>
@@ -255,17 +272,13 @@ export default function AdminRFQDetailPage() {
                 <div className="flex justify-between">
                   <span className="text-sm text-gray-500">Days Active</span>
                   <span className="font-medium text-gray-900">
-                    {Math.floor(
-                      (new Date().getTime() -
-                        new Date(rfq.createdAt).getTime()) /
-                        (1000 * 60 * 60 * 24),
-                    )}
+                    {formattedData?.daysActive}
                   </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm text-gray-500">Last Updated</span>
                   <span className="font-medium text-gray-900">
-                    {new Date(rfq.updatedAt).toLocaleDateString()}
+                    {formattedData?.updatedFormatted}
                   </span>
                 </div>
               </div>

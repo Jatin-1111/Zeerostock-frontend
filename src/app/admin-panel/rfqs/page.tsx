@@ -56,8 +56,7 @@ export default function AdminRFQsPage() {
     const matchesSearch =
       searchTerm === "" ||
       rfq.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      rfq.rfqNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      rfq.buyer.companyName?.toLowerCase().includes(searchTerm.toLowerCase());
+      rfq.rfqNumber.toLowerCase().includes(searchTerm.toLowerCase());
 
     return matchesSearch;
   });
@@ -171,7 +170,7 @@ export default function AdminRFQsPage() {
                         Title
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Buyer
+                        Buyer Info
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Industry / Category
@@ -200,15 +199,14 @@ export default function AdminRFQsPage() {
                           {rfq.title}
                         </td>
                         <td className="px-6 py-4 text-sm text-gray-900">
-                          <div>{rfq.buyer.companyName || "N/A"}</div>
-                          <div className="text-xs text-gray-500">
-                            {rfq.buyer.firstName} {rfq.buyer.lastName}
+                          <div className="text-gray-500 italic">
+                            View detail page
                           </div>
                         </td>
                         <td className="px-6 py-4 text-sm text-gray-900">
-                          <div>{rfq.industry?.name || "N/A"}</div>
+                          <div>{rfq.industryName || "N/A"}</div>
                           <div className="text-xs text-gray-500">
-                            {rfq.category?.name || "N/A"}
+                            {rfq.categoryName || "N/A"}
                           </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">

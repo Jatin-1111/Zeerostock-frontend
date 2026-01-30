@@ -420,27 +420,58 @@ export default function ExploreProductGrid({
               ))}
             </div>
           ) : products.length === 0 ? (
-            <div className="text-center py-5">
-              <div className="text-gray-400 text-2xl mb-1">🔍</div>
-              <h3 className="text-[7.5px] font-semibold text-[#0d1b2a] mb-1">
-                {searchQuery ? "No products found" : "No products available"}
-              </h3>
-              <p className="text-[#787878] mb-1 text-[6px]">
-                {searchQuery
-                  ? `Try adjusting your search or filters`
-                  : "Check back later for new products"}
-              </p>
-              {searchQuery && (
-                <button
-                  onClick={() => {
-                    setSearchQuery("");
-                    router.push("/marketplace");
-                  }}
-                  className="px-2.5 py-1 bg-[#1e3a8a] text-white text-[5px] rounded hover:bg-[#1e3a8a]/90 transition-colors"
-                >
-                  Clear Search
-                </button>
-              )}
+            <div className="flex items-center justify-center py-16 px-4">
+              <div className="text-center max-w-sm">
+                {/* Icon Container */}
+                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-[#e0f2fe] to-[#bae6fd] mb-6 shadow-lg">
+                  <svg
+                    className="w-10 h-10 text-[#0369a1]"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
+                  </svg>
+                </div>
+
+                {/* Heading */}
+                <h3 className="text-xl font-bold text-[#0d1b2a] mb-3">
+                  {searchQuery ? "No products found" : "No products available"}
+                </h3>
+
+                {/* Description */}
+                <p className="text-[13px] text-[#64748b] mb-6 leading-relaxed">
+                  {searchQuery
+                    ? `We couldn't find any products matching your criteria. Try adjusting your search terms or filters.`
+                    : "We're adding new products to our marketplace regularly. Check back soon!"}
+                </p>
+
+                {/* Actions */}
+                <div className="flex flex-col gap-2">
+                  {searchQuery && (
+                    <button
+                      onClick={() => {
+                        setSearchQuery("");
+                        router.push("/marketplace");
+                      }}
+                      className="px-6 py-2.5 bg-gradient-to-r from-[#1e3a8a] to-[#1e40af] text-white text-[13px] font-semibold rounded-lg hover:shadow-md hover:from-[#1e40af] hover:to-[#1e3a8a] transition-all duration-200"
+                    >
+                      Clear Search
+                    </button>
+                  )}
+                  <button
+                    onClick={() => router.push("/marketplace")}
+                    className="px-6 py-2.5 bg-[#f1f5f9] text-[#0d1b2a] text-[13px] font-semibold rounded-lg hover:bg-[#e2e8f0] transition-colors duration-200 border border-[#e2e8f0]"
+                  >
+                    Browse All Products
+                  </button>
+                </div>
+              </div>
             </div>
           ) : (
             <>

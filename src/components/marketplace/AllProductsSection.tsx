@@ -136,6 +136,22 @@ export default function AllProductsSection() {
     setShowFilters(false);
   };
 
+  // Filter out expired products
+  const isProductExpired = (product: Product): boolean => {
+    if (!product.expiryDate && !product.expiration && !product.expiresAt) {
+      return false; // No expiry date = not expired
+    }
+
+    const expiryDate = new Date(
+      product.expiryDate || product.expiration || product.expiresAt,
+    );
+    return expiryDate < new Date();
+  };
+
+  const activeProducts = products.filter(
+    (product) => !isProductExpired(product),
+  );
+
   return (
     <div className="max-w-[900px] mx-auto py-9 px-3">
       {/* Header with title and filters */}
@@ -518,10 +534,25 @@ export default function AllProductsSection() {
             Refresh
           </button>
         </div>
+      ) : activeProducts.length === 0 ? (
+        <div className="text-center py-12">
+          <div className="text-4xl mb-4">⏰</div>
+          <h3 className="text-xl text-[#0d1b2a] mb-2">All products expired</h3>
+          <p className="text-sm text-gray-600 mb-4 max-w-lg mx-auto">
+            The available products have expired. Please check back later for
+            fresh inventory.
+          </p>
+          <button
+            onClick={() => clearFilters()}
+            className="px-[18px] py-2 bg-[#1e3a8a] text-white border-none rounded-lg cursor-pointer text-[12px] hover:bg-[#2d4a9a] transition-colors"
+          >
+            Clear Filters
+          </button>
+        </div>
       ) : (
         <>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
-            {products.map((product, index) => (
+            {activeProducts.map((product, index) => (
               <motion.div
                 key={product?.productId || index}
                 initial={{ opacity: 0, y: 20 }}

@@ -23,18 +23,18 @@ export default function HeroSection() {
         />
       </div>
 
-      <div className="w-full max-w-[50vw] mr-auto h-full bg-transparent rounded-2xl p-[21px] md:p-[32px] flex flex-col justify-center items-start text-left z-10 relative">
+      <div className="max-w-[1080px] m-auto bg-transparent rounded-2xl flex flex-col justify-center items-start text-left z-10 relative h-full">
         {/* Subtitle */}
-        <p className="font-medium text-[11px] text-black mb-[11px]">
+        <p className="font-medium text-[11px] md:text-black mb-[11px]">
           For Smart Buyers
         </p>
         {/* Title */}
-        <h1 className="font-semibold text-[35px] leading-[39px] text-[#0d1b2a] mb-[10px]">
+        <h1 className="font-semibold text-[35px] leading-[39px] md:text-[#0d1b2a] mb-[10px] max-w-lg">
           Source Surplus Inventory at{" "}
           <span className="text-[#2ec096]">30-60%</span> Below Market Price
         </h1>
         {/* Description */}
-        <p className="text-[12px] leading-[13px] text-[#868181] mb-[16px]">
+        <p className="text-[12px] leading-[13px] md:text-[#868181] mb-[16px] max-w-md">
           <span className="font-medium">
             Connect with verified suppliers worldwide and access high-quality
             surplus inventory through our
@@ -45,26 +45,26 @@ export default function HeroSection() {
           </span>
         </p>
         {/* Buttons */}
-        <div className="flex flex-col sm:flex-row items-start justify-start gap-[11px] mb-[16px] w-full">
+        <div className="flex flex-col sm:flex-row items-center justify-center mx-auto gap-[11px] mb-[16px] ">
           <Link
             href="/signup"
             className="bg-[#1e3a8a] rounded-[6px] px-[32px] py-[8px] h-[35px] flex items-center justify-center w-full sm:w-auto"
           >
-            <span className="font-montserrat font-medium text-[11px] leading-normal text-white text-left">
-              Start Buying Now
+            <span className="font-montserrat font-medium text-[11px] leading-normal text-white text-center">
+              Get Started
             </span>
           </Link>
           <Link
-            href="/helpdesk"
-            className="bg-white rounded-[6px] px-[32px] py-[8px] h-[35px] flex items-center justify-center w-full sm:w-auto border-2 border-[#1e3a8a]"
+            href="/marketplace"
+            className="bg-white rounded-[6px] px-[32px] py-[8px] h-[35px] flex items-center justify-center w-full sm:w-auto"
           >
-            <span className="font-montserrat font-medium text-[11px] leading-[11px] text-[#2aae7a] text-left">
-              Request Demo
+            <span className="font-montserrat font-medium text-[11px] leading-[11px] text-[#1e3a8a] text-center">
+              Explore Marketplace
             </span>
           </Link>
         </div>
         {/* Features */}
-        <div className="flex flex-col sm:flex-row items-start justify-start gap-[11px]">
+        <div className="flex flex-row items-center justify-center mx-auto mt-14 gap-[11px]">
           <div className="flex items-center gap-[5px]">
             <Check
               className="w-[15px] h-[15px] text-[#2ec096]"

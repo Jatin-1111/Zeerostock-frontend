@@ -31,7 +31,7 @@ function MarketplaceContent() {
 
   // Otherwise, show the default marketplace page
   return (
-    <div className="max-w-full bg-[#EEFBF6] py-12 px-3">
+    <div className="max-w-[1080px] mx-auto bg-[#EEFBF6] py-12">
       <MarketplaceHero />
       <CategorySection />
       {/* <TodayDealsSection /> */}

@@ -127,6 +127,9 @@ export interface Product {
   isFeatured?: boolean;
   isSponsored?: boolean;
   createdAt: string;
+  expiryDate?: string;
+  expiration?: string;
+  expiresAt?: string;
 }
 
 export interface ProductDetail extends Product {

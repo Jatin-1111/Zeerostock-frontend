@@ -10,7 +10,14 @@ export default function HeroSection() {
         <Image
           alt="Hero Background"
           fill
-          className="object-cover object-center"
+          className="object-cover object-center sm:hidden"
+          src="https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/Mobile/mobile-buyer.png"
+          priority
+        />
+        <Image
+          alt="Hero Background"
+          fill
+          className="object-cover object-center hidden sm:block"
           src="https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/Buyer.png"
           priority
         />

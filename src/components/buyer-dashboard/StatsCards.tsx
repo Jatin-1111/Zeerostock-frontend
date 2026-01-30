@@ -1,38 +1,45 @@
 "use client";
 
 import { Wallet, Clock as ClockIcon, DollarSign, Package } from "lucide-react";
-import type { OrderStats } from "@/types/buyer.types";
+import type { OrderStats, RFQStats, QuoteStats } from "@/types/buyer.types";
 
 interface StatsCardsProps {
-  stats: OrderStats | null;
+  orderStats: OrderStats | null;
+  rfqStats: RFQStats | null;
+  quoteStats: QuoteStats | null;
   isLoading: boolean;
 }
 
-export default function StatsCards({ stats, isLoading }: StatsCardsProps) {
+export default function StatsCards({
+  orderStats,
+  rfqStats,
+  quoteStats,
+  isLoading,
+}: StatsCardsProps) {
   const statsData = [
     {
       label: "Active RFQs",
-      value: isLoading ? "-" : (stats?.activeOrders || 0).toString(),
+      value: isLoading ? "-" : (rfqStats?.activeRFQs ?? 0).toString(),
       icon: Wallet,
       bgColor: "#dbeafe",
     },
     {
       label: "Pending Quotes",
-      value: isLoading ? "-" : (stats?.activeOrders || 0).toString(),
+      value: isLoading ? "-" : (quoteStats?.pendingQuotes ?? 0).toString(),
       icon: ClockIcon,
       bgColor: "#dbeafe",
     },
     {
-      label: "Total Saving",
+      label: "Total Savings",
       value: isLoading
         ? "-"
-        : `₹${(stats?.totalSpent || 0).toLocaleString("en-IN")}`,
+        : `₹${(orderStats?.totalSpent ?? 0).toLocaleString("en-IN")}`,
       icon: DollarSign,
       bgColor: "#dbeafe",
     },
     {
       label: "Active Orders",
-      value: isLoading ? "-" : (stats?.activeOrders || 0).toString(),
+      value: isLoading ? "-" : (orderStats?.activeOrders ?? 0).toString(),
       icon: Package,
       bgColor: "#dbeafe",
     },

@@ -191,7 +191,7 @@ export default function SupplierDashboard() {
           </div>
 
           {/* RFQ Matches */}
-          <div
+          {/* <div
             className="bg-white rounded-[11px] h-[70px] sm:h-[76px] px-2 sm:px-[8px] py-3 sm:py-[18px] relative overflow-hidden"
             style={{ boxShadow: "0px 0px 4px 0px rgba(24, 181, 34, 0.25)" }}
           >
@@ -209,7 +209,7 @@ export default function SupplierDashboard() {
                 {stats.rfqMatches?.totalMatches || 0}
               </p>
             </div>
-          </div>
+          </div> */}
 
           {/* Monthly Revenue */}
           <div
@@ -423,26 +423,31 @@ export default function SupplierDashboard() {
                 <p className="text-sm sm:text-[15px] font-semibold text-black mb-3 sm:mb-3.5 flex-grow">
                   {formatCurrency(stats.rfqMatches.topMatch.estimatedValue)}
                 </p>
-                <Link
+                {/* RFQ FLOW DISABLED - Admins review RFQs for market demand analysis */}
+                {/* <Link
                   href="/supplier/rfq"
                   className="flex items-center justify-center gap-1 sm:gap-1.5 w-full h-8 sm:h-[34px] bg-[#1e3a8a] text-white text-[9px] sm:text-[10px] font-semibold rounded-[8px] hover:bg-[#1e40af] transition-colors"
                 >
                   <Send className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                   Submit Quote
-                </Link>
+                </Link> */}
+                <div className="text-center text-[9px] sm:text-[10px] text-gray-500 italic">
+                  RFQ matching coming soon
+                </div>
               </>
             ) : (
               <div className="text-center py-5 sm:py-6 flex-grow flex flex-col items-center justify-center">
                 <MessageSquarePlus className="w-6 h-6 sm:w-7 sm:h-7 text-gray-400 mx-auto mb-2" />
                 <p className="text-xs sm:text-sm text-gray-600 mb-2">
-                  No RFQ matches yet
+                  RFQ matching coming soon
                 </p>
-                <Link
+                {/* RFQ FLOW DISABLED - Admins review RFQs for market demand analysis */}
+                {/* <Link
                   href="/supplier/rfq"
                   className="inline-block px-2 sm:px-2.5 py-1 bg-gray-900 text-white text-[9px] sm:text-[10px] hover:bg-gray-800 rounded"
                 >
                   Browse RFQs
-                </Link>
+                </Link> */}
               </div>
             )}
           </div>

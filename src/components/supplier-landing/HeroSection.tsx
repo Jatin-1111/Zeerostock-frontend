@@ -13,7 +13,14 @@ export default function HeroSection() {
         <Image
           alt=""
           fill
-          className="object-cover object-center"
+          className="object-cover object-center sm:hidden"
+          src="https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/Mobile/mobile-supplier.png"
+          priority
+        />
+        <Image
+          alt=""
+          fill
+          className="object-cover object-center hidden sm:block"
           src="/Supplier_New.png"
           priority
         />

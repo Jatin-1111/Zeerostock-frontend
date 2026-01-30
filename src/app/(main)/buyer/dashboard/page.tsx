@@ -6,10 +6,14 @@ import StatsCards from "@/components/buyer-dashboard/StatsCards";
 import ActiveRFQsList from "@/components/buyer-dashboard/ActiveRFQsList";
 import CostSavings from "@/components/buyer-dashboard/CostSavings";
 import { buyerService } from "@/services/buyer.service";
-import type { OrderStats } from "@/types/buyer.types";
+import { getRFQStats } from "@/services/rfq.service";
+import { getQuoteStats } from "@/services/quote.service";
+import type { OrderStats, RFQStats, QuoteStats } from "@/types/buyer.types";
 
 export default function BuyerDashboardPage() {
   const [orderStats, setOrderStats] = useState<OrderStats | null>(null);
+  const [rfqStats, setRfqStats] = useState<RFQStats | null>(null);
+  const [quoteStats, setQuoteStats] = useState<QuoteStats | null>(null);
   const [userName, setUserName] = useState<string>("");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -75,6 +79,18 @@ export default function BuyerDashboardPage() {
         if (statsResponse.success && statsResponse.data) {
           setOrderStats(statsResponse.data);
         }
+
+        // Fetch RFQ statistics
+        const rfqResponse = await getRFQStats();
+        if (rfqResponse.success && rfqResponse.data) {
+          setRfqStats(rfqResponse.data);
+        }
+
+        // Fetch Quote statistics
+        const quoteResponse = await getQuoteStats();
+        if (quoteResponse.success && quoteResponse.data) {
+          setQuoteStats(quoteResponse.data);
+        }
       } catch (err) {
         console.error("Error fetching dashboard data:", err);
         setError("Failed to load dashboard data");
@@ -97,7 +113,12 @@ export default function BuyerDashboardPage() {
       <DashboardHeader userName={userName} />
 
       <div className="mt-3 sm:mt-4 md:mt-4.5">
-        <StatsCards stats={orderStats} isLoading={isLoading} />
+        <StatsCards
+          orderStats={orderStats}
+          rfqStats={rfqStats}
+          quoteStats={quoteStats}
+          isLoading={isLoading}
+        />
       </div>
 
       <div className="flex flex-col lg:flex-row gap-3 sm:gap-4 md:gap-4.5 mt-3 sm:mt-4 md:mt-4.5">

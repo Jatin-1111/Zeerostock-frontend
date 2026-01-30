@@ -175,7 +175,14 @@ export default function HeroSectionV2() {
         <Image
           alt="Hero Background"
           fill
-          className="object-cover"
+          className="object-cover sm:hidden"
+          src="https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/Mobile/mobile-home.png"
+          priority
+        />
+        <Image
+          alt="Hero Background"
+          fill
+          className="object-cover hidden sm:block"
           src="https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/Home.jpg"
           priority
         />

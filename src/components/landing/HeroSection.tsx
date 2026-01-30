@@ -12,10 +12,17 @@ export default function HeroSection() {
       {/* Background Image */}
       <div className="absolute inset-0 min-h-screen">
         <Image
+          src="https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/Mobile/mobile-landing-page.png"
+          alt="Industrial warehouse background"
+          fill
+          className="object-cover sm:hidden"
+          priority
+        />
+        <Image
           src="https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/landing-hero.png"
           alt="Industrial warehouse background"
           fill
-          className="object-cover"
+          className="object-cover hidden sm:block"
           priority
         />
       </div>

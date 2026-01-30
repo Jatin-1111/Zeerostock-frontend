@@ -12,6 +12,7 @@ import {
   UserCog,
   KeyRound,
   MessageSquare,
+  FileText,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -29,6 +30,11 @@ const menuItems = [
     icon: ShieldCheck,
     label: "Supplier Verification",
     href: "/admin-panel/verification",
+  },
+  {
+    icon: FileText,
+    label: "RFQs (Market Demand)",
+    href: "/admin-panel/rfqs",
   },
   { icon: CreditCard, label: "Payments", href: "/admin-panel/payments" },
   { icon: Package, label: "Orders & Logistics", href: "/admin-panel/orders" },

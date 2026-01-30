@@ -138,13 +138,14 @@ export default function AllProductsSection() {
 
   // Filter out expired products
   const isProductExpired = (product: Product): boolean => {
-    if (!product.expiryDate && !product.expiration && !product.expiresAt) {
+    const dateString =
+      product.expiryDate || product.expiration || product.expiresAt;
+
+    if (!dateString) {
       return false; // No expiry date = not expired
     }
 
-    const expiryDate = new Date(
-      product.expiryDate || product.expiration || product.expiresAt,
-    );
+    const expiryDate = new Date(dateString);
     return expiryDate < new Date();
   };
 

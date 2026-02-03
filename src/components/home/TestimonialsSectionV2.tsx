@@ -91,7 +91,7 @@ export default function TestimonialsSectionV2() {
               className="bg-[#eeffef] rounded-xl sm:rounded-2xl md:rounded-[15px] shadow-[0px_0px_5px_0px_rgba(24,181,34,0.5)] w-full max-w-sm sm:max-w-xs md:max-w-[200px] overflow-hidden mx-auto"
             >
               {/* Image */}
-              <div className="relative h-28 sm:h-32 md:h-[110px] w-full overflow-hidden rounded-t-xl sm:rounded-t-2xl md:rounded-t-[15px]">
+              <div className="relative h-full sm:h-32 md:h-[110px] w-full overflow-hidden rounded-t-xl sm:rounded-t-2xl md:rounded-t-[15px]">
                 <img
                   src={testimonial.image}
                   alt={testimonial.name}

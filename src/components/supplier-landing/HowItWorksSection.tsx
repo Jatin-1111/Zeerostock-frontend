@@ -41,29 +41,30 @@ export default function HowItWorksSection() {
           </p>
         </div>
 
-        {/* Steps Grid with Line */}
         <div className="relative">
-          {/* Horizontal Line positioned absolutely above circles */}
-          <div className="absolute top-[15px] left-0 right-0 h-[2px] bg-[#d1d1d1]" />
+          {/* Horizontal Line (Desktop) */}
+          <div className="hidden md:block absolute top-[15px] left-0 right-0 h-[2px] bg-[#d1d1d1]" />
+          {/* Horizontal Line (Desktop) */}
+          <div className="hidden md:block absolute top-[15px] left-0 right-0 h-[2px] bg-[#d1d1d1]" />
 
           {/* Steps Grid */}
-          <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[30px]">
+          <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-[30px]">
             {steps.map((step) => (
               <div
                 key={step.number}
-                className="flex flex-col items-center text-center"
+                className="relative flex flex-row md:flex-col items-start md:items-center text-left md:text-center gap-4 md:gap-0 after:content-[''] after:absolute after:left-[14.5px] after:top-[15px] after:h-[calc(100%+32px)] after:w-[2px] after:bg-[#d1d1d1] after:md:hidden after:-z-0 last:after:hidden"
               >
                 {/* Number Circle */}
-                <div className="w-[31px] h-[31px] bg-[#eeffef] border-2 border-[#2aae7a] rounded-[50px] flex items-center justify-center font-semibold text-base text-black mb-[41px] relative z-10">
+                <div className="w-[31px] h-[31px] bg-[#eeffef] border-2 border-[#2aae7a] rounded-[50px] flex items-center justify-center font-semibold text-base text-black md:mb-[41px] shrink-0 relative z-10">
                   {step.number}
                 </div>
 
                 {/* Content */}
                 <div>
-                  <h3 className="text-[10px] leading-normal font-medium text-[#0d1b2a] mb-[8px]">
+                  <h3 className="text-[16px] md:text-[10px] leading-normal font-bold md:font-medium text-[#2ec096] md:text-[#0d1b2a] mb-1 md:mb-[8px]">
                     {step.title}
                   </h3>
-                  <p className="text-[7px] leading-normal text-[#9c9c9c]">
+                  <p className="text-[13px] md:text-[7px] leading-normal text-[#585858] md:text-[#9c9c9c]">
                     {step.description}
                   </p>
                 </div>

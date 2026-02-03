@@ -214,7 +214,7 @@ export default function Header({ onSidebarToggle }: HeaderProps) {
                     {(!isAuthenticated || user?.activeRole !== "supplier") && (
                       <Link
                         href={
-                          isAuthenticated ? "/buyer/dashboard" : "/for-buyers"
+                          isAuthenticated ? "/buyer/dashboard" : "/for-buyer"
                         }
                         className={`block px-4 py-2.5 text-sm font-semibold transition-colors ${
                           isActive("/buyer")

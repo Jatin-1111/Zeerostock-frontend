@@ -23,7 +23,7 @@ export default function HeroSection() {
         />
       </div>
 
-      <div className="max-w-[1080px] m-auto bg-transparent rounded-2xl flex flex-col justify-center items-start text-left z-10 relative h-full">
+      <div className="max-w-[1080px] mx-auto bg-transparent rounded-2xl flex flex-col justify-center items-start text-left z-10 relative h-full gap-[10px]">
         {/* Subtitle */}
         <p className="font-medium text-[11px] md:text-black mb-[11px]">
           For Smart Buyers
@@ -34,7 +34,7 @@ export default function HeroSection() {
           <span className="text-[#2ec096]">30-60%</span> Below Market Price
         </h1>
         {/* Description */}
-        <p className="text-[12px] leading-[13px] md:text-[#868181] mb-[16px] max-w-md">
+        <p className="text-[12px] leading-[13px] md:text-[#868181] mb-[16px] max-w-xs">
           <span className="font-medium">
             Connect with verified suppliers worldwide and access high-quality
             surplus inventory through our
@@ -45,12 +45,12 @@ export default function HeroSection() {
           </span>
         </p>
         {/* Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center mx-auto gap-[11px] mb-[16px] ">
+        <div className="flex flex-col sm:flex-row mx-auto md:mx-0 gap-3 mb-4">
           <Link
             href="/signup"
             className="bg-[#1e3a8a] rounded-[6px] px-[32px] py-[8px] h-[35px] flex items-center justify-center w-full sm:w-auto"
           >
-            <span className="font-montserrat font-medium text-[11px] leading-normal text-white text-center">
+            <span className="font-medium text-[11px] leading-normal text-white text-center">
               Get Started
             </span>
           </Link>
@@ -58,19 +58,19 @@ export default function HeroSection() {
             href="/marketplace"
             className="bg-white rounded-[6px] px-[32px] py-[8px] h-[35px] flex items-center justify-center w-full sm:w-auto"
           >
-            <span className="font-montserrat font-medium text-[11px] leading-[11px] text-[#1e3a8a] text-center">
+            <span className="font-medium text-[11px] leading-[11px] text-[#1e3a8a] text-center">
               Explore Marketplace
             </span>
           </Link>
         </div>
         {/* Features */}
-        <div className="flex flex-row items-center justify-center mx-auto mt-14 gap-[11px]">
+        <div className="flex flex-row mx-auto md:mx-0 items-center gap-3 sm:gap-6">
           <div className="flex items-center gap-[5px]">
             <Check
               className="w-[15px] h-[15px] text-[#2ec096]"
               strokeWidth={2.5}
             />
-            <span className="leading-normal text-[13px] text-black">
+            <span className="leading-normal text-[13px] md:text-black">
               Free to join
             </span>
           </div>
@@ -79,7 +79,7 @@ export default function HeroSection() {
               className="w-[15px] h-[15px] text-[#2ec096]"
               strokeWidth={2.5}
             />
-            <span className="leading-normal text-[13px] text-black">
+            <span className="leading-normal text-[13px] md:text-black">
               No hidden fees
             </span>
           </div>
@@ -88,7 +88,7 @@ export default function HeroSection() {
               className="w-[15px] h-[15px] text-[#2ec096]"
               strokeWidth={2.5}
             />
-            <span className="leading-normal text-[13px] text-black">
+            <span className="leading-normal text-[13px] md:text-black">
               Instant access
             </span>
           </div>

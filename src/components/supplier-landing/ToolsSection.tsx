@@ -85,7 +85,7 @@ export default function ToolsSection() {
               </h3>
 
               {/* Description */}
-              <p className="text-[8px] leading-[11px] font-semibold text-white">
+              <p className="text-[9px] leading-[11px] font-semibold text-white px-5">
                 {tool.description}
               </p>
             </div>

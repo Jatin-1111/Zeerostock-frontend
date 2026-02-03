@@ -24,6 +24,7 @@ export interface UserAccountInfo {
   email: string;
   phone: string;
   companyName?: string;
+  gstNumber?: string;
   bio?: string;
   street?: string;
   city?: string;

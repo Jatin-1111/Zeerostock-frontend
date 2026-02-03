@@ -7,6 +7,8 @@ import { Menu, ChevronDown, MapPin } from "lucide-react";
 import MarketplaceFilterSidebar from "@/components/marketplace/MarketplaceFilterSidebar";
 import { marketplaceService } from "@/services/marketplace.service";
 import type { Product, Category } from "@/types/api.types";
+import { useAuth } from "@/contexts/AuthContext";
+import { formatPrice } from "@/utils/currency.utils";
 
 interface ProductGridProps {
   initialQuery?: string;
@@ -19,6 +21,7 @@ export default function ExploreProductGrid({
 }: ProductGridProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { currency } = useAuth();
   const [searchQuery, setSearchQuery] = useState(
     initialQuery || searchParams.get("q") || "",
   );
@@ -351,8 +354,8 @@ export default function ExploreProductGrid({
                   (activeFilters.priceRange.min > 0 ||
                     activeFilters.priceRange.max < 100000) && (
                     <span className="px-2 py-1 bg-teal-600 text-white text-[9px] font-medium rounded-full">
-                      ₹{activeFilters.priceRange.min.toLocaleString()} - ₹
-                      {activeFilters.priceRange.max.toLocaleString()}
+                      {formatPrice(activeFilters.priceRange.min, currency)} -{" "}
+                      {formatPrice(activeFilters.priceRange.max, currency)}
                     </span>
                   )}
                 <button
@@ -540,13 +543,13 @@ export default function ExploreProductGrid({
                       {/* Price - Fixed Height */}
                       <div className="mb-1 flex items-center gap-1.5 h-5">
                         <span className="text-[13.5px] font-bold text-[#1e3a8a]">
-                          ₹{(product?.price || 0).toLocaleString("en-IN")}
+                          {formatPrice(product?.price || 0, currency)}
                         </span>
                         {product?.originalPrice &&
                           product.originalPrice > (product.price || 0) && (
                             <span className="text-[10px] font-bold text-[#787878] relative inline-block">
                               <span className="line-through">
-                                ₹{product.originalPrice.toLocaleString("en-IN")}
+                                {formatPrice(product.originalPrice, currency)}
                               </span>
                             </span>
                           )}

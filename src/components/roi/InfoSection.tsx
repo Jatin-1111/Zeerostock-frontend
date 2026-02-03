@@ -1,4 +1,8 @@
+import { useAuth } from "@/contexts/AuthContext";
+import { getCurrencySymbol } from "@/utils/currency.utils";
+
 export default function InfoSection() {
+  const { currency } = useAuth();
   return (
     <section>
       <div className="max-w-full mx-auto">
@@ -164,7 +168,9 @@ export default function InfoSection() {
           {/* For Sellers */}
           <div className="bg-white rounded-[10px] shadow-[0px_2px_6px_0px_rgba(0,0,0,0.25)] p-4 sm:p-5 md:p-[15px] h-auto md:h-[183px]">
             <div className="flex items-center gap-[7px] mb-[7px]">
-              <span className="text-[18px] font-normal text-[#2aae7a]">₹</span>
+              <span className="text-[18px] font-normal text-[#2aae7a]">
+                {getCurrencySymbol(currency)}
+              </span>
               <h3 className="text-sm md:text-[11px] font-semibold text-[#0d1b2a]">
                 For Sellers
               </h3>

@@ -7,6 +7,7 @@ import { useCartStore } from "@/stores/cartStore";
 import { buyerService } from "@/services/buyer.service";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
+import { formatPrice, getCurrencySymbol } from "@/utils/currency.utils";
 
 interface ProductInfoProps {
   product: {
@@ -26,7 +27,7 @@ interface ProductInfoProps {
 export default function ProductInfo({ product: data }: ProductInfoProps) {
   const router = useRouter();
   const { addToCart } = useCartStore();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, currency } = useAuth();
   const product = data.product;
   const auction = data.auction;
 
@@ -40,14 +41,6 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [isWatchlisted, setIsWatchlisted] = useState(data.isWatching || false);
   const [isTogglingWishlist, setIsTogglingWishlist] = useState(false);
-
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat("en-IN", {
-      style: "currency",
-      currency: "INR",
-      maximumFractionDigits: 0,
-    }).format(price);
-  };
 
   const isAuction = product.listing_type === "auction";
   const estimatedTotal = bidAmount * quantity;
@@ -334,7 +327,7 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
             </label>
             <div className="relative">
               <span className="absolute left-2 top-1/2 -translate-y-1/2 text-gray-600">
-                ₹
+                {getCurrencySymbol(currency)}
               </span>
               <input
                 type="number"
@@ -348,7 +341,7 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
               />
             </div>
             <p className="text-[8px] text-gray-500 mt-0.67">
-              Minimum increment: ₹{minimumIncrement.toLocaleString()}
+              Minimum increment: {formatPrice(minimumIncrement, currency)}
             </p>
           </div>
 
@@ -386,17 +379,17 @@ export default function ProductInfo({ product: data }: ProductInfoProps) {
                 Estimated Total:
               </span>
               <span className="text-[16px] font-bold text-gray-900">
-                {formatPrice(estimatedTotal)}
+                {formatPrice(estimatedTotal, currency)}
               </span>
             </div>
             <p className="text-[8px] text-gray-600">
-              {quantity} tona x {formatPrice(bidAmount)}
+              {quantity} tona x {formatPrice(bidAmount, currency)}
             </p>
           </div>
 
           {/* Place Bid Button */}
           <button className="w-full bg-white border-2 border-gray-900 text-gray-900 font-medium py-2 rounded-lg hover:bg-gray-50 transition-colors mb-2 flex items-center justify-center gap-1.33">
-            <span>₹</span>
+            <span>{getCurrencySymbol(currency)}</span>
             <span>Place Bid</span>
           </button>
         </div>

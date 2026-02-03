@@ -6,10 +6,13 @@ import { useCartStore } from "@/stores/cartStore";
 import { cartService } from "@/services/cart.service";
 import { toast } from "sonner";
 import { Shield, Truck } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { formatPrice } from "@/utils/currency.utils";
 
 export default function OrderSummary() {
   const router = useRouter();
   const { items } = useCartStore();
+  const { currency } = useAuth();
   const [promoCode, setPromoCode] = useState("");
   const [isApplyingCoupon, setIsApplyingCoupon] = useState(false);
   const [summary, setSummary] = useState({
@@ -115,14 +118,14 @@ export default function OrderSummary() {
               Subtotal ({summary.itemCount} items)
             </span>
             <span className="font-semibold text-[#bebebe] tracking-wide">
-              ₹{summary.subtotal.toLocaleString("en-IN")}
+              {formatPrice(summary.subtotal, currency)}
             </span>
           </div>
           {summary.savings > 0 && (
             <div className="flex justify-between items-center text-[10px] sm:text-xs md:text-[10px]">
               <span className="font-medium text-[#2aae7a]">Total Saving</span>
               <span className="font-semibold text-[#2aae7a] tracking-wide">
-                -₹{summary.savings.toLocaleString("en-IN")}
+                -{formatPrice(summary.savings, currency)}
               </span>
             </div>
           )}
@@ -132,14 +135,14 @@ export default function OrderSummary() {
                 Coupon Discount
               </span>
               <span className="font-semibold text-[#2aae7a] tracking-wide">
-                -₹{summary.couponDiscount.toLocaleString("en-IN")}
+                -{formatPrice(summary.couponDiscount, currency)}
               </span>
             </div>
           )}
           <div className="flex justify-between items-center text-[10px] sm:text-xs md:text-[10px]">
             <span className="font-medium text-[#9c9c9c]">Estimated Tax</span>
             <span className="font-semibold text-[#bebebe] tracking-wide">
-              ₹{summary.tax.toLocaleString("en-IN")}
+              {formatPrice(summary.tax, currency)}
             </span>
           </div>
           <div className="flex justify-between items-center text-[10px] sm:text-xs md:text-[10px]">
@@ -147,7 +150,7 @@ export default function OrderSummary() {
             <span className="font-semibold text-[#2aae7a] tracking-wide">
               {summary.shipping === 0
                 ? "Free"
-                : `₹${summary.shipping.toLocaleString("en-IN")}`}
+                : formatPrice(summary.shipping, currency)}
             </span>
           </div>
         </div>
@@ -158,7 +161,7 @@ export default function OrderSummary() {
               Total :
             </span>
             <span className="text-sm sm:text-base md:text-xs font-semibold text-[#1e3a8a] tracking-wide">
-              ₹{summary.total.toLocaleString("en-IN")}
+              {formatPrice(summary.total, currency)}
             </span>
           </div>
         </div>

@@ -5,12 +5,16 @@ interface OrderSummaryProps {
   shipping: number;
 }
 
+import { useAuth } from "@/contexts/AuthContext";
+import { formatPrice } from "@/utils/currency.utils";
+
 export default function OrderSummary({
   subtotal,
   savings,
   tax,
   shipping,
 }: OrderSummaryProps) {
+  const { currency } = useAuth();
   const total = subtotal - savings + tax + shipping;
 
   return (
@@ -25,7 +29,7 @@ export default function OrderSummary({
             Subtotal (2 items)
           </span>
           <span className="text-[10px] font-semibold text-[#bebebe]">
-            ₹{subtotal.toLocaleString()}
+            {formatPrice(subtotal, currency)}
           </span>
         </div>
 
@@ -34,7 +38,7 @@ export default function OrderSummary({
             Total Saving
           </span>
           <span className="text-[10px] font-semibold text-[#2aae7a]">
-            -₹{savings.toLocaleString()}
+            -{formatPrice(savings, currency)}
           </span>
         </div>
 
@@ -43,7 +47,7 @@ export default function OrderSummary({
             Estimated Tax
           </span>
           <span className="text-[10px] font-semibold text-[#bebebe]">
-            ₹{tax.toLocaleString()}
+            {formatPrice(tax, currency)}
           </span>
         </div>
 
@@ -52,7 +56,7 @@ export default function OrderSummary({
             Shipping
           </span>
           <span className="text-[10px] font-semibold text-[#2aae7a]">
-            {shipping === 0 ? "Free" : `₹${shipping.toLocaleString()}`}
+            {shipping === 0 ? "Free" : formatPrice(shipping, currency)}
           </span>
         </div>
       </div>
@@ -68,7 +72,7 @@ export default function OrderSummary({
         </span>
         <div className="px-[5px] py-[5px]">
           <span className="text-[17px] font-semibold text-[#1e3a8a]">
-            ₹{total.toLocaleString()}
+            {formatPrice(total, currency)}
           </span>
         </div>
       </div>

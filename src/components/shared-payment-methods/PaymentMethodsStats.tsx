@@ -1,5 +1,8 @@
 "use client";
 
+import { useAuth } from "@/contexts/AuthContext";
+import { formatPrice } from "@/utils/currency.utils";
+
 // Custom SVG Icons
 const EmptyWalletIcon = () => (
   <svg
@@ -173,6 +176,7 @@ interface PaymentMethodsStatsProps {
 export default function PaymentMethodsStats({
   summary,
 }: PaymentMethodsStatsProps) {
+  const { currency } = useAuth();
   if (!summary) {
     return (
       <div className="mb-2 sm:mb-3">
@@ -205,7 +209,7 @@ export default function PaymentMethodsStats({
     {
       icon: EmptyWalletIcon,
       label: isBuyer ? "Total Spent" : "Total Received",
-      value: `₹${(totalAmount || 0).toLocaleString("en-IN")}`,
+      value: formatPrice(totalAmount || 0, currency),
       subtitle: "All time",
       subtitleColor: "#9C9C9C",
       iconBgColor: "#DBEAFE",
@@ -213,7 +217,7 @@ export default function PaymentMethodsStats({
     {
       icon: TimerIcon,
       label: "Pending",
-      value: `₹${(summary.pending_amount || 0).toLocaleString("en-IN")}`,
+      value: formatPrice(summary.pending_amount || 0, currency),
       subtitle: "Processing",
       subtitleColor: "#EAB308",
       iconBgColor: "#FEF9C3",
@@ -221,7 +225,7 @@ export default function PaymentMethodsStats({
     {
       icon: DiagramIcon,
       label: "This Month",
-      value: `₹${(monthAmount || 0).toLocaleString("en-IN")}`,
+      value: formatPrice(monthAmount || 0, currency),
       subtitle: "+12% from last month",
       subtitleColor: "#2AAE7A",
       iconBgColor: "#EEFFEF",

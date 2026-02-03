@@ -13,10 +13,13 @@ import {
   Plus,
   Check,
 } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { formatPrice } from "@/utils/currency.utils";
 
 export default function CartItems() {
   const { items, loading, fetchCart, updateQuantity, removeItem } =
     useCartStore();
+  const { currency } = useAuth();
   const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
 
   useEffect(() => {
@@ -346,7 +349,7 @@ export default function CartItems() {
                         Item Total:
                       </span>
                       <span className="text-[10px] sm:text-xs md:text-xs font-medium text-[#1e3a8a] ml-1 sm:ml-2">
-                        ₹{(item.price * item.quantity).toLocaleString()}
+                        {formatPrice(item.price * item.quantity, currency)}
                       </span>
                     </div>
                   </div>
@@ -356,13 +359,13 @@ export default function CartItems() {
                 <div className="flex flex-col items-end gap-1 sm:gap-1.5 shrink-0">
                   {/* Current Price */}
                   <div className="text-base font-semibold text-[#1e3a8a]">
-                    ₹{item.price.toLocaleString()}
+                    {formatPrice(item.price, currency)}
                   </div>
 
                   {/* Original Price */}
                   {item.originalPrice && item.originalPrice > item.price && (
                     <div className="relative text-sm font-semibold text-[#bebebe]">
-                      <span>₹{item.originalPrice.toLocaleString()}</span>
+                      <span>{formatPrice(item.originalPrice, currency)}</span>
                       <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-[#bebebe] transform -translate-y-1/2"></div>
                     </div>
                   )}
@@ -378,11 +381,11 @@ export default function CartItems() {
                   {item.originalPrice && item.originalPrice > item.price && (
                     <div className="bg-[#eeffef] px-2 py-0.5 rounded-2xl mt-auto">
                       <span className="text-xs font-semibold text-[#2aae7a]">
-                        You Saved: ₹
-                        {(
-                          (item.originalPrice - item.price) *
-                          item.quantity
-                        ).toLocaleString()}
+                        You Saved:{" "}
+                        {formatPrice(
+                          (item.originalPrice - item.price) * item.quantity,
+                          currency,
+                        )}
                       </span>
                     </div>
                   )}

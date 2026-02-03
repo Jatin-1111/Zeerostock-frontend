@@ -4,6 +4,8 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { Filter, Check } from "lucide-react";
 import { marketplaceService } from "@/services/marketplace.service";
 import type { Category, Industry } from "@/types/api.types";
+import { useAuth } from "@/contexts/AuthContext";
+import { formatPrice } from "@/utils/currency.utils";
 
 interface FilterOption {
   id: string;
@@ -35,6 +37,7 @@ export default function MarketplaceFilterSidebar({
   onClose,
   initialFilters,
 }: MarketplaceFilterSidebarProps) {
+  const { currency } = useAuth();
   const [priceRange, setPriceRange] = useState({ min: 0, max: 100000 });
   const [categories, setCategories] = useState<FilterOption[]>([
     { id: "all", label: "All categories", checked: true },
@@ -95,7 +98,7 @@ export default function MarketplaceFilterSidebar({
       const initialCategoryIds = initialFilters.categories;
       console.log(
         "[Sidebar] Applying initial category filters:",
-        initialCategoryIds
+        initialCategoryIds,
       );
 
       setCategories((prev) =>
@@ -103,7 +106,7 @@ export default function MarketplaceFilterSidebar({
           ...cat,
           checked:
             cat.id === "all" ? false : initialCategoryIds.includes(cat.id),
-        }))
+        })),
       );
       hasAppliedInitialFilters.current = true;
       console.log("[Sidebar] Initial filters applied");
@@ -202,7 +205,7 @@ export default function MarketplaceFilterSidebar({
 
       console.log(
         "[Sidebar] onFilterChange called with categories:",
-        selectedCategories
+        selectedCategories,
       );
 
       onFilterChange({
@@ -226,7 +229,7 @@ export default function MarketplaceFilterSidebar({
         onClose();
       }
     },
-    [isOpen, onClose]
+    [isOpen, onClose],
   );
 
   useEffect(() => {
@@ -240,7 +243,7 @@ export default function MarketplaceFilterSidebar({
     section: string,
     optionId: string,
     setState: React.Dispatch<React.SetStateAction<FilterOption[]>>,
-    currentState: FilterOption[]
+    currentState: FilterOption[],
   ) => {
     // Handle "All" logic for categories and industries
     if (optionId === "all") {
@@ -248,7 +251,7 @@ export default function MarketplaceFilterSidebar({
         prev.map((option) => ({
           ...option,
           checked: option.id === "all",
-        }))
+        })),
       );
     } else {
       setState((prev) =>
@@ -261,7 +264,7 @@ export default function MarketplaceFilterSidebar({
             return { ...option, checked: false };
           }
           return option;
-        })
+        }),
       );
     }
   };
@@ -284,31 +287,31 @@ export default function MarketplaceFilterSidebar({
       prev.map((option) => ({
         ...option,
         checked: option.id === "all",
-      }))
+      })),
     );
     setIndustries((prev) =>
       prev.map((option) => ({
         ...option,
         checked: false,
-      }))
+      })),
     );
     setConditions((prev) =>
       prev.map((option) => ({
         ...option,
         checked: false,
-      }))
+      })),
     );
     setListingTypes((prev) =>
       prev.map((option) => ({
         ...option,
         checked: false,
-      }))
+      })),
     );
     setFeatures((prev) =>
       prev.map((option) => ({
         ...option,
         checked: false,
-      }))
+      })),
     );
     setPriceRange({ min: 0, max: 100000 });
   };
@@ -416,7 +419,7 @@ export default function MarketplaceFilterSidebar({
                       "categories",
                       option.id,
                       setCategories,
-                      categories
+                      categories,
                     )
                   }
                 />
@@ -441,7 +444,7 @@ export default function MarketplaceFilterSidebar({
                       "industries",
                       option.id,
                       setIndustries,
-                      industries
+                      industries,
                     )
                   }
                 />
@@ -457,13 +460,13 @@ export default function MarketplaceFilterSidebar({
               Price Range
             </h3>
             <p className="text-[12px] font-medium text-[#0d1b2a] mb-3">
-              ₹{priceRange.min.toLocaleString("en-IN")}- ₹
-              {priceRange.max.toLocaleString("en-IN")}
+              {formatPrice(priceRange.min, currency)}-{" "}
+              {formatPrice(priceRange.max, currency)}
             </p>
             <div className="space-y-2">
               <div>
                 <label className="text-[10px] text-[#787878] mb-1 block">
-                  Min: ₹{priceRange.min.toLocaleString("en-IN")}
+                  Min: {formatPrice(priceRange.min, currency)}
                 </label>
                 <input
                   type="range"
@@ -479,7 +482,7 @@ export default function MarketplaceFilterSidebar({
               </div>
               <div>
                 <label className="text-[10px] text-[#787878] mb-1 block">
-                  Max: ₹{priceRange.max.toLocaleString("en-IN")}
+                  Max: {formatPrice(priceRange.max, currency)}
                 </label>
                 <input
                   type="range"
@@ -513,7 +516,7 @@ export default function MarketplaceFilterSidebar({
                       "conditions",
                       option.id,
                       setConditions,
-                      conditions
+                      conditions,
                     )
                   }
                 />
@@ -538,7 +541,7 @@ export default function MarketplaceFilterSidebar({
                       "listingTypes",
                       option.id,
                       setListingTypes,
-                      listingTypes
+                      listingTypes,
                     )
                   }
                 />
@@ -563,7 +566,7 @@ export default function MarketplaceFilterSidebar({
                       "features",
                       option.id,
                       setFeatures,
-                      features
+                      features,
                     )
                   }
                 />

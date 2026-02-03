@@ -4,8 +4,11 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { marketplaceService } from "@/services/marketplace.service";
 import type { Product } from "@/types/api.types";
+import { useAuth } from "@/contexts/AuthContext";
+import { formatPrice } from "@/utils/currency.utils";
 
 export default function TodayDealsSection() {
+  const { currency } = useAuth();
   const [deals, setDeals] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -160,12 +163,12 @@ export default function TodayDealsSection() {
                 {/* Price */}
                 <div className="mb-[23px]">
                   <span className="mr-[12px] text-[29px] font-bold text-[#1e3a8a]">
-                    ₹{(deal?.price || 15000).toLocaleString("en-IN")}
+                    {formatPrice(deal?.price || 15000, currency)}
                   </span>
                   {deal?.originalPrice &&
                     deal.originalPrice > (deal.price || 0) && (
                       <span className="relative text-[21px] font-bold text-[#787878] line-through">
-                        ₹{deal.originalPrice.toLocaleString("en-IN")}
+                        {formatPrice(deal.originalPrice, currency)}
                       </span>
                     )}
                 </div>

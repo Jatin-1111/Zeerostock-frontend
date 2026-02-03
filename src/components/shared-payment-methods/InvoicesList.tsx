@@ -1,6 +1,8 @@
 "use client";
 
 import { Download } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { formatPrice } from "@/utils/currency.utils";
 
 interface Invoice {
   id: string;
@@ -42,6 +44,7 @@ export default function InvoicesList({
   totalPages,
   onPageChange,
 }: InvoicesListProps) {
+  const { currency } = useAuth();
   const getStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
       case "paid":
@@ -132,7 +135,7 @@ export default function InvoicesList({
                         : invoice.buyer_name || invoice.buyer_company}
                     </td>
                     <td className="px-2 sm:px-3 md:px-4.5 py-2 sm:py-3 text-[9px] sm:text-[10px] md:text-[11px] text-gray-900 font-semibold">
-                      ₹{invoice.total_amount.toLocaleString("en-IN")}
+                      {formatPrice(invoice.total_amount, currency)}
                     </td>
                     <td className="px-2 sm:px-3 md:px-4.5 py-2 sm:py-3 text-[9px] sm:text-[10px] md:text-[11px] text-gray-700">
                       {new Date(invoice.issue_date).toLocaleDateString(

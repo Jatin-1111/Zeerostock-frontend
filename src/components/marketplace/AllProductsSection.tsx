@@ -6,8 +6,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Filter } from "lucide-react";
 import { marketplaceService } from "@/services/marketplace.service";
 import type { Product } from "@/types/api.types";
+import { useAuth } from "@/contexts/AuthContext";
+import { formatPrice } from "@/utils/currency.utils";
 
 export default function AllProductsSection() {
+  const { currency } = useAuth();
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [sortBy, setSortBy] = useState("relevance");
@@ -444,7 +447,13 @@ export default function AllProductsSection() {
                           animate={{ scale: 1 }}
                           className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#eff6ff] text-[#1e3a8a] rounded-full text-[10px] font-medium"
                         >
-                          ₹{minPrice || "0"} - ₹{maxPrice || "∞"}
+                          {minPrice
+                            ? formatPrice(parseFloat(minPrice), currency)
+                            : formatPrice(0, currency)}{" "}
+                          -{" "}
+                          {maxPrice
+                            ? formatPrice(parseFloat(maxPrice), currency)
+                            : "∞"}
                           <button
                             onClick={() => {
                               setMinPrice("");
@@ -632,12 +641,12 @@ export default function AllProductsSection() {
                         {/* Price */}
                         <div className="flex items-center gap-1.5 mb-2 flex-wrap">
                           <span className="font-bold text-lg sm:text-xl text-[#2D4A9A]">
-                            ₹{(product?.price || 0).toLocaleString("en-IN")}
+                            {formatPrice(product?.price || 0, currency)}
                           </span>
                           {product?.originalPrice &&
                             product.originalPrice > (product.price || 0) && (
                               <span className="text-[10.5px] text-gray-400 line-through">
-                                ₹{product.originalPrice.toLocaleString("en-IN")}
+                                {formatPrice(product.originalPrice, currency)}
                               </span>
                             )}
                         </div>

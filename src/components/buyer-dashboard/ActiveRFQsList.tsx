@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { Edit2, Clock, Loader2, Eye } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
+import { formatPrice } from "@/utils/currency.utils";
 
 interface RFQ {
   id: string;
@@ -20,6 +22,7 @@ interface RFQ {
 }
 
 export default function ActiveRFQsList() {
+  const { currency } = useAuth();
   const [rfqs, setRfqs] = useState<RFQ[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -47,7 +50,7 @@ export default function ActiveRFQsList() {
           {
             credentials: "include",
             headers,
-          }
+          },
         );
 
         if (!response.ok) {
@@ -138,11 +141,11 @@ export default function ActiveRFQsList() {
           {rfqs.map((rfq) => {
             const budgetRange =
               rfq.budgetMin && rfq.budgetMax
-                ? `₹${rfq.budgetMin.toLocaleString("en-IN")} - ₹${rfq.budgetMax.toLocaleString("en-IN")}`
+                ? `${formatPrice(rfq.budgetMin, currency)} - ${formatPrice(rfq.budgetMax, currency)}`
                 : rfq.budgetMin
-                  ? `₹${rfq.budgetMin.toLocaleString("en-IN")}+`
+                  ? `${formatPrice(rfq.budgetMin, currency)}+`
                   : rfq.budgetMax
-                    ? `Up to ₹${rfq.budgetMax.toLocaleString("en-IN")}`
+                    ? `Up to ${formatPrice(rfq.budgetMax, currency)}`
                     : "Budget not specified";
 
             return (
@@ -158,7 +161,7 @@ export default function ActiveRFQsList() {
                     </p>
                     <span
                       className={`px-[6px] sm:px-[8px] py-0 h-[12px] sm:h-[13px] rounded-[10px] sm:rounded-[11px] text-[8px] sm:text-[9px] font-medium leading-[12px] sm:leading-[13px] inline-flex items-center ${getStatusColor(
-                        rfq.status
+                        rfq.status,
                       )}`}
                     >
                       {rfq.status.charAt(0).toUpperCase() + rfq.status.slice(1)}

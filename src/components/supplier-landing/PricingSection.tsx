@@ -2,12 +2,16 @@
 
 import { Check } from "lucide-react";
 import Link from "next/link";
+import { useAuth } from "@/contexts/AuthContext";
+import { formatPrice } from "@/utils/currency.utils";
 
 export default function PricingSection() {
+  const { currency } = useAuth();
   const plans = [
     {
       name: "Basic",
-      price: "Free",
+      price: 0,
+      priceLabel: "Free",
       subtitle: "List for free",
       features: [
         "Up to 10 listings",
@@ -20,7 +24,7 @@ export default function PricingSection() {
     },
     {
       name: "Professional",
-      price: "₹19,999 / Year",
+      price: 19999,
       subtitle: "Suitable for businesses",
       badge: "Most Popular",
       features: [
@@ -35,7 +39,8 @@ export default function PricingSection() {
     },
     {
       name: "Enterprise",
-      price: "Custom",
+      price: -1,
+      priceLabel: "Custom",
       subtitle: "Volume pricing available",
       features: [
         "White-label solutions",
@@ -79,7 +84,9 @@ export default function PricingSection() {
                 {plan.name}
               </h3>
               <div className="text-2xl font-bold text-gray-900 mb-1">
-                {plan.price}
+                {plan.priceLabel
+                  ? plan.priceLabel
+                  : `${formatPrice(plan.price as number, currency)} / Year`}
               </div>
               <p className="text-sm text-gray-600">{plan.subtitle}</p>
             </div>
@@ -100,8 +107,8 @@ export default function PricingSection() {
                 plan.name === "Basic"
                   ? "/signup"
                   : plan.name === "Enterprise"
-                  ? "/helpdesk"
-                  : "/become-supplier"
+                    ? "/helpdesk"
+                    : "/become-supplier"
               }
               className="w-full py-2 bg-white border-2 border-gray-900 text-gray-900 font-medium hover:bg-gray-50 transition-colors inline-block text-center"
             >

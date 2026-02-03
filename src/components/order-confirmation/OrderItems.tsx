@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { useAuth } from "@/contexts/AuthContext";
+import { formatPrice } from "@/utils/currency.utils";
 
 interface OrderItem {
   id: number;
@@ -18,6 +20,7 @@ interface OrderItemsProps {
 }
 
 export default function OrderItems({ items }: OrderItemsProps) {
+  const { currency } = useAuth();
   // Handle case where items might be empty or have missing data
   if (!items || items.length === 0) {
     return (
@@ -101,8 +104,7 @@ export default function OrderItems({ items }: OrderItemsProps) {
                 {/* Quantity and Price */}
                 <p className="font-medium text-sm sm:text-[15px] lg:text-[10px] leading-normal text-[#9c9c9c]">
                   Qty: {item.quantity || 1} / Price:{" "}
-                  <span className="font-bold">₹</span>
-                  {(item.price || 0).toFixed(2)}
+                  {formatPrice(item.price || 0, currency)}
                 </p>
               </div>
 
@@ -110,7 +112,10 @@ export default function OrderItems({ items }: OrderItemsProps) {
               <div className="flex sm:flex-col items-start sm:items-end justify-between sm:justify-start pt-0 sm:pt-[11px] lg:pt-[7px] gap-2 sm:gap-0">
                 {/* Total Price */}
                 <p className="font-semibold text-lg sm:text-xl md:text-[23px] lg:text-[15px] leading-normal text-black mb-0 sm:mb-2 md:mb-[13px] lg:mb-[9px]">
-                  ₹{((item.quantity || 1) * (item.price || 0)).toLocaleString()}
+                  {formatPrice(
+                    (item.quantity || 1) * (item.price || 0),
+                    currency,
+                  )}
                 </p>
 
                 {/* Estimated Date */}

@@ -2,12 +2,15 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAuth } from "@/contexts/AuthContext";
+import { formatPrice } from "@/utils/currency.utils";
 
 interface CalculatorProps {
   type: "buyer" | "seller";
 }
 
 export default function Calculator({ type }: CalculatorProps) {
+  const { currency } = useAuth();
   const [advancedOpen, setAdvancedOpen] = useState(false);
   const [advancedTab, setAdvancedTab] = useState<"buyer" | "seller">("buyer");
 
@@ -521,14 +524,13 @@ export default function Calculator({ type }: CalculatorProps) {
                   {type === "buyer" ? "Total Investment" : "Total Cost"}
                 </p>
                 <p className="text-[13px] font-semibold text-[#0d1b2a]">
-                  ₹
                   {type === "buyer"
                     ? "totalBuyerCost" in results
-                      ? results.totalBuyerCost.toLocaleString("en-IN")
-                      : "0"
+                      ? formatPrice(results.totalBuyerCost, currency)
+                      : formatPrice(0, currency)
                     : "totalSupplierCost" in results
-                      ? results.totalSupplierCost.toLocaleString("en-IN")
-                      : "0"}
+                      ? formatPrice(results.totalSupplierCost, currency)
+                      : formatPrice(0, currency)}
                 </p>
               </div>
 
@@ -537,14 +539,13 @@ export default function Calculator({ type }: CalculatorProps) {
                   {type === "buyer" ? "Expected Revenue" : "Total Sale Value"}
                 </p>
                 <p className="text-[13px] font-semibold text-[#0d1b2a]">
-                  ₹
                   {type === "buyer"
                     ? "totalExpectedRevenue" in results
-                      ? results.totalExpectedRevenue.toLocaleString("en-IN")
-                      : "0"
+                      ? formatPrice(results.totalExpectedRevenue, currency)
+                      : formatPrice(0, currency)
                     : "totalSaleValue" in results
-                      ? results.totalSaleValue.toLocaleString("en-IN")
-                      : "0"}
+                      ? formatPrice(results.totalSaleValue, currency)
+                      : formatPrice(0, currency)}
                 </p>
               </div>
 
@@ -553,14 +554,13 @@ export default function Calculator({ type }: CalculatorProps) {
                   {type === "buyer" ? "Net Profit" : "Net Value Gained"}
                 </p>
                 <p className="text-[13px] font-semibold text-[#2aae7a]">
-                  ₹
                   {type === "buyer"
                     ? "netProfit" in results
-                      ? results.netProfit.toLocaleString("en-IN")
-                      : "0"
+                      ? formatPrice(results.netProfit, currency)
+                      : formatPrice(0, currency)
                     : "netValueGained" in results
-                      ? results.netValueGained.toLocaleString("en-IN")
-                      : "0"}
+                      ? formatPrice(results.netValueGained, currency)
+                      : formatPrice(0, currency)}
                 </p>
               </div>
             </div>

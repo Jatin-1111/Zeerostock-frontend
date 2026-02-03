@@ -1,4 +1,6 @@
 import { Phone, Truck } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { formatPrice } from "@/utils/currency.utils";
 
 interface OrderSummaryConfirmProps {
   subtotal: number;
@@ -17,6 +19,7 @@ export default function OrderSummaryConfirm({
   shipping,
   total,
 }: OrderSummaryConfirmProps) {
+  const { currency } = useAuth();
   const isFreeShipping =
     typeof shipping === "string" && shipping.toLowerCase() === "free";
 
@@ -35,7 +38,7 @@ export default function OrderSummaryConfirm({
             Subtotal ({itemCount} items)
           </span>
           <span className="font-semibold text-[#bebebe] text-sm sm:text-[15px] lg:text-[10px] leading-[18px] tracking-[0.5px]">
-            ₹{subtotal.toLocaleString()}
+            {formatPrice(subtotal, currency)}
           </span>
         </div>
 
@@ -45,7 +48,7 @@ export default function OrderSummaryConfirm({
             Total Saving
           </span>
           <span className="font-semibold text-[#2aae7a] text-sm sm:text-[15px] lg:text-[10px] leading-[18px] tracking-[0.5px]">
-            -₹{savings.toLocaleString()}
+            -{formatPrice(savings, currency)}
           </span>
         </div>
 
@@ -55,7 +58,7 @@ export default function OrderSummaryConfirm({
             Estimated Tax
           </span>
           <span className="font-semibold text-[#bebebe] text-sm sm:text-[15px] lg:text-[10px] leading-[18px] tracking-[0.5px]">
-            ₹{tax.toLocaleString()}
+            {formatPrice(tax, currency)}
           </span>
         </div>
 
@@ -69,7 +72,9 @@ export default function OrderSummaryConfirm({
               isFreeShipping ? "text-[#2aae7a]" : "text-[#bebebe]"
             }`}
           >
-            {isFreeShipping ? "Free" : `₹${shipping}`}
+            {isFreeShipping
+              ? "Free"
+              : formatPrice(parseFloat(shipping) || 0, currency)}
           </span>
         </div>
       </div>
@@ -83,11 +88,7 @@ export default function OrderSummaryConfirm({
           Total :
         </span>
         <span className="font-semibold text-[#2aae7a] text-lg sm:text-[23px] lg:text-[15px] leading-[18px] tracking-[0.5px]">
-          ₹
-          {total.toLocaleString(undefined, {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          })}
+          {formatPrice(total, currency)}
         </span>
       </div>
 

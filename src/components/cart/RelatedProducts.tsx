@@ -1,22 +1,25 @@
 import Image from "next/image";
+import { useAuth } from "@/contexts/AuthContext";
+import { formatPrice } from "@/utils/currency.utils";
 
 export default function RelatedProducts() {
+  const { currency } = useAuth();
   const products = [
     {
       title: "Microcontroller",
-      price: "₹45,000",
+      price: 45000,
       image:
         "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/placeholder-product.svg",
     },
     {
       title: "Fashion clothes",
-      price: "₹30,500",
+      price: 30500,
       image:
         "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/placeholder-product.svg",
     },
     {
       title: "Spare Parts",
-      price: "₹110,000",
+      price: 110000,
       image:
         "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/placeholder-product.svg",
     },
@@ -55,7 +58,7 @@ export default function RelatedProducts() {
                   {product.title}
                 </h4>
                 <p className="text-[8px] sm:text-[9px] md:text-[8px] font-semibold text-[#2aae7a] tracking-wide">
-                  {product.price}
+                  {formatPrice(product.price, currency)}
                 </p>
               </div>
             </div>

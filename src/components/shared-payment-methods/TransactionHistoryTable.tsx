@@ -1,5 +1,8 @@
 "use client";
 
+import { useAuth } from "@/contexts/AuthContext";
+import { formatPrice } from "@/utils/currency.utils";
+
 interface Transaction {
   id: string;
   transaction_id: string;
@@ -36,6 +39,7 @@ export default function TransactionHistoryTable({
   totalPages,
   onPageChange,
 }: TransactionHistoryTableProps) {
+  const { currency } = useAuth();
   const getStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
       case "completed":
@@ -123,7 +127,7 @@ export default function TransactionHistoryTable({
                         : txn.buyer_name || txn.buyer_company}
                     </td>
                     <td className="px-2 sm:px-3 md:px-4.5 py-2 sm:py-3 text-[9px] sm:text-[10px] md:text-[11px] text-gray-900 font-semibold">
-                      ₹{txn.amount.toLocaleString("en-IN")}
+                      {formatPrice(txn.amount, currency)}
                     </td>
                     <td className="px-2 sm:px-3 md:px-4.5 py-2 sm:py-3 text-[9px] sm:text-[10px] md:text-[11px] text-gray-700">
                       {txn.payment_method}

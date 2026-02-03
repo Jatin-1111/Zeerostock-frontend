@@ -5,6 +5,8 @@ import Image from "next/image";
 import { Check, CreditCard, Truck, Loader2 } from "lucide-react";
 import type { Address } from "@/types/buyer.types";
 import type { CartItem } from "@/types/api.types";
+import { useAuth } from "@/contexts/AuthContext";
+import { formatPrice } from "@/utils/currency.utils";
 
 interface ReviewOrderProps {
   cartItems: CartItem[];
@@ -31,6 +33,7 @@ export default function ReviewOrder({
   onPlaceOrder,
   isPlacingOrder = false,
 }: ReviewOrderProps) {
+  const { currency } = useAuth();
   const [agreedToTerms, setAgreedToTerms] = useState(false);
 
   const getPaymentMethodDisplay = () => {
@@ -123,12 +126,11 @@ export default function ReviewOrder({
                     by {item.seller?.name || item.category || "Supplier"}
                   </div>
                   <div className="text-[8px] text-[#9c9c9c] leading-[12px]">
-                    Qty: {item.quantity} x {item.price.toFixed(2)}
+                    Qty: {item.quantity} x {formatPrice(item.price, currency)}
                   </div>
                 </div>
                 <div className=" font-medium text-[12px] text-[#0d1b2a] opacity-80">
-                  <span className=" font-bold">₹</span>
-                  {(item.quantity * item.price).toFixed(0)}
+                  {formatPrice(item.quantity * item.price, currency)}
                 </div>
               </div>
             ))

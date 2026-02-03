@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { Truck, ShieldCheck, Lock, BadgeCheck } from "lucide-react";
 import { productService } from "@/services/product.service";
+import { useAuth } from "@/contexts/AuthContext";
+import { formatPrice } from "@/utils/currency.utils";
 
 interface Spec {
   key: string;
@@ -40,6 +42,7 @@ interface ProductDescriptionProps {
 export default function ProductDescription({
   product,
 }: ProductDescriptionProps) {
+  const { currency } = useAuth();
   const [activeTab, setActiveTab] = useState("description");
   const productData = product.product;
 
@@ -353,7 +356,7 @@ export default function ProductDescription({
                         </p>
                       </div>
                       <div className="text-[13px] font-semibold text-[#0d1b2a]">
-                        ₹{option.baseRate}
+                        {formatPrice(option.baseRate, currency)}
                       </div>
                     </div>
                     {option.features && (

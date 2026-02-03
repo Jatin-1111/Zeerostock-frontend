@@ -17,7 +17,7 @@ export default function LanguageSettings() {
     region: "United States",
     dateFormat: "MM/DD/YYYY",
     timeFormat: "12-hour",
-    currency: "USD",
+    currency: "INR",
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -226,14 +226,16 @@ export default function LanguageSettings() {
                 Currency
               </label>
               <div className="relative">
-                <input
-                  type="text"
+                <select
                   value={formData.currency}
                   onChange={(e) =>
                     setFormData({ ...formData, currency: e.target.value })
                   }
-                  className="w-full h-[31.5px] pl-[9px] pr-[27px] border border-[#bebebe] rounded-[5.63px] text-[9px] text-[#0d1b2a] outline-none"
-                />
+                  className="w-full h-[31.5px] pl-[9px] pr-[27px] border border-[#bebebe] rounded-[5.63px] text-[9px] text-[#0d1b2a] outline-none appearance-none bg-white"
+                >
+                  <option value="INR">INR (₹)</option>
+                  <option value="USD">USD ($)</option>
+                </select>
                 <ChevronDown className="absolute right-[9px] top-1/2 -translate-y-1/2 w-[13.5px] h-[13.5px] text-[#0d1b2a] pointer-events-none" />
               </div>
             </div>

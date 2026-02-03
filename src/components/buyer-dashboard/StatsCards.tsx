@@ -2,6 +2,8 @@
 
 import { Wallet, Clock as ClockIcon, DollarSign, Package } from "lucide-react";
 import type { OrderStats, RFQStats, QuoteStats } from "@/types/buyer.types";
+import { useAuth } from "@/contexts/AuthContext";
+import { formatPrice } from "@/utils/currency.utils";
 
 interface StatsCardsProps {
   orderStats: OrderStats | null;
@@ -16,6 +18,7 @@ export default function StatsCards({
   quoteStats,
   isLoading,
 }: StatsCardsProps) {
+  const { currency } = useAuth();
   const statsData = [
     {
       label: "Active RFQs",
@@ -33,7 +36,7 @@ export default function StatsCards({
       label: "Total Savings",
       value: isLoading
         ? "-"
-        : `₹${(orderStats?.totalSpent ?? 0).toLocaleString("en-IN")}`,
+        : formatPrice(orderStats?.totalSpent ?? 0, currency),
       icon: DollarSign,
       bgColor: "#dbeafe",
     },

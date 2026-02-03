@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { ArrowUp, ArrowDown } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { formatPrice } from "@/utils/currency.utils";
 
 const imgProduct1 =
   "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/22.jpg";
@@ -13,28 +15,29 @@ const imgMarketChart =
   "https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/Live+Market.png";
 
 export default function TrendingListsSectionV2() {
+  const { currency } = useAuth();
   const products = [
     {
       title: "HR Steel Coils",
       category: "Raw Materials",
-      currentPrice: "₹20,00,000",
-      originalPrice: "₹25,00,000",
+      currentPrice: 2000000,
+      originalPrice: 2500000,
       discount: "Save 15%",
       image: imgProduct1,
     },
     {
       title: "Semiconductor Chips",
       category: "Electronics",
-      currentPrice: "₹12,00,000",
-      originalPrice: "₹16,00,000",
+      currentPrice: 1200000,
+      originalPrice: 1600000,
       discount: "Save 22%",
       image: imgProduct2,
     },
     {
       title: "Kraft Machines",
       category: "Machinery",
-      currentPrice: "₹31,00,000",
-      originalPrice: "₹35,00,000",
+      currentPrice: 3100000,
+      originalPrice: 3500000,
       discount: "Save 18%",
       image: imgProduct3,
     },
@@ -84,10 +87,10 @@ export default function TrendingListsSectionV2() {
                   </p>
                   <div className="flex flex-col mt-auto">
                     <span className="text-sm sm:text-base md:text-[15px] font-bold text-[#0bd600] leading-tight">
-                      {product.currentPrice}
+                      {formatPrice(product.currentPrice, currency)}
                     </span>
                     <span className="text-xs sm:text-sm md:text-[12px] font-bold text-[#9dce98] line-through leading-tight">
-                      {product.originalPrice}
+                      {formatPrice(product.originalPrice, currency)}
                     </span>
                   </div>
                 </div>

@@ -59,7 +59,7 @@ export default function PrivacySettingsComponent() {
     try {
       const response = await updateUserPrivacySettings(
         { [key]: newValue },
-        activeRole
+        activeRole,
       );
 
       if (response.success) {
@@ -90,7 +90,7 @@ export default function PrivacySettingsComponent() {
     // TODO: Implement account deletion with confirmation
     if (
       window.confirm(
-        "Are you sure you want to delete your account? This action cannot be undone."
+        "Are you sure you want to delete your account? This action cannot be undone.",
       )
     ) {
       console.log("Delete account confirmed");
@@ -215,7 +215,7 @@ export default function PrivacySettingsComponent() {
           {/* Export My Data Button */}
           <button
             onClick={handleExportData}
-            className="flex items-center justify-center gap-[5.63px] px-[61.88px] py-[8.44px] bg-white border border-[#007bff] rounded-[6.75px] h-[30.94px] flex-shrink-0 hover:bg-gray-50 transition-colors"
+            className="flex-1 flex items-center justify-center gap-[5.63px] py-[8.44px] bg-white border border-[#007bff] rounded-[6.75px] h-[30.94px] hover:bg-gray-50 transition-colors"
           >
             <Download size={16.31} strokeWidth={2} color="#007bff" />
             <span className="text-[11.25px] font-medium text-[#007bff] leading-[12.38px]">
@@ -226,7 +226,7 @@ export default function PrivacySettingsComponent() {
           {/* Delete Account Button */}
           <button
             onClick={handleDeleteAccount}
-            className="flex items-center justify-center gap-[5.63px] px-[61.88px] py-[8.44px] bg-[#e53935] rounded-[6.75px] h-[30.94px] flex-shrink-0 hover:bg-[#d32f2f] transition-colors"
+            className="flex-1 flex items-center justify-center gap-[5.63px] py-[8.44px] bg-[#e53935] rounded-[6.75px] h-[30.94px] hover:bg-[#d32f2f] transition-colors"
           >
             <Trash2 size={14.63} strokeWidth={2} color="white" />
             <span className="text-[11.25px] font-medium text-white leading-[12.38px]">
@@ -245,12 +245,7 @@ export default function PrivacySettingsComponent() {
           }}
           className="flex items-center justify-center gap-[5.63px] px-[61.88px] py-[8.44px] bg-[#1e3a8a] rounded-[6.75px] h-[36.56px] hover:opacity-90 transition-opacity"
         >
-          <Download
-            size={15.75}
-            strokeWidth={2}
-            color="white"
-            className="rotate-180"
-          />
+          <Download size={15.75} strokeWidth={2} color="white" />
           <span className="text-[11.25px] font-semibold text-white leading-[12.38px]">
             Save Changes
           </span>

@@ -10,6 +10,7 @@ import React, {
 import { useRouter } from "next/navigation";
 import { authService } from "@/services/auth.service";
 import { cartService } from "@/services/cart.service";
+import { fetchExchangeRates } from "@/utils/currency.utils";
 import {
   User,
   LoginFormData,
@@ -17,14 +18,16 @@ import {
   OTPVerifyData,
 } from "@/types/api.types";
 import { toast } from "sonner";
+import { getUserSettings } from "@/services/user-settings.service";
 
 interface AuthContextType {
   user: User | null;
+  currency: string;
   loading: boolean;
   isAuthenticated: boolean;
   login: (data: LoginFormData) => Promise<boolean>;
   signup: (
-    data: SignupFormData
+    data: SignupFormData,
   ) => Promise<{ success: boolean; identifier?: string }>;
   verifyOTP: (data: OTPVerifyData) => Promise<boolean>;
   logout: () => Promise<void>;
@@ -39,6 +42,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [currency, setCurrency] = useState<string>("INR");
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
@@ -48,6 +52,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       const response = await authService.getCurrentUser();
       if (response.success && response.data) {
         setUser(response.data);
+
+        // Also fetch settings to get currency
+        const settingsResponse = await getUserSettings(
+          response.data.activeRole,
+        );
+        if (
+          settingsResponse.success &&
+          settingsResponse.data?.language?.currency
+        ) {
+          setCurrency(settingsResponse.data.language.currency);
+        }
         return;
       }
       setUser(null);
@@ -60,6 +75,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   // Initialize auth state from localStorage
   useEffect(() => {
     const initAuth = async () => {
+      // 1. Start fetching exchange rates in background
+      fetchExchangeRates().catch(console.error);
+
       const storedUser = authService.getStoredUser();
       const isAuth = authService.isAuthenticated();
 
@@ -115,7 +133,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         setUser(response.data.user);
         console.log(
           "✅ AuthContext: User set successfully",
-          response.data.user.email
+          response.data.user.email,
         );
         toast.success("Welcome back! Login successful");
 
@@ -125,8 +143,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         } catch (cartError) {
           console.log(
             "ℹ️ No guest cart to merge or cart merge failed:",
-            cartError
+            cartError,
           );
+        }
+
+        // Fetch currency settings
+        try {
+          const settingsResponse = await getUserSettings(
+            response.data.user.activeRole,
+          );
+          if (
+            settingsResponse.success &&
+            settingsResponse.data?.language?.currency
+          ) {
+            setCurrency(settingsResponse.data.language.currency);
+          }
+        } catch (settingsError) {
+          console.error("Failed to load settings on login:", settingsError);
         }
 
         return true;
@@ -158,7 +191,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   // Signup
   const signup = useCallback(
     async (
-      data: SignupFormData
+      data: SignupFormData,
     ): Promise<{ success: boolean; identifier?: string }> => {
       console.log("📝 AuthContext: Starting signup for", data.businessEmail);
       try {
@@ -206,7 +239,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         return { success: false };
       }
     },
-    []
+    [],
   );
 
   // Verify OTP
@@ -214,7 +247,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     async (data: OTPVerifyData): Promise<boolean> => {
       console.log(
         "🔢 AuthContext: Starting OTP verification for",
-        data.identifier
+        data.identifier,
       );
       try {
         const response = await authService.verifyOTP(data);
@@ -227,8 +260,27 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
           setUser(response.data.user);
           console.log(
             "✅ AuthContext: OTP verified, user set successfully",
-            response.data.user.email
+            response.data.user.email,
           );
+
+          // Fetch currency settings
+          try {
+            const settingsResponse = await getUserSettings(
+              response.data.user.activeRole,
+            );
+            if (
+              settingsResponse.success &&
+              settingsResponse.data?.language?.currency
+            ) {
+              setCurrency(settingsResponse.data.language.currency);
+            }
+          } catch (settingsError) {
+            console.error(
+              "Failed to load settings on verifyOTP:",
+              settingsError,
+            );
+          }
+
           toast.success("Your account has been verified successfully");
           return true;
         }
@@ -237,7 +289,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         console.error(
           "❌ AuthContext: OTP verification failed:",
           errorMsg,
-          response
+          response,
         );
         toast.error(errorMsg);
         return false;
@@ -254,7 +306,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         return false;
       }
     },
-    []
+    [],
   );
 
   // Login with OTP - Send OTP
@@ -296,6 +348,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
             console.log("No guest cart to merge");
           }
 
+          // Fetch currency settings
+          try {
+            const settingsResponse = await getUserSettings(
+              response.data.user.activeRole,
+            );
+            if (
+              settingsResponse.success &&
+              settingsResponse.data?.language?.currency
+            ) {
+              setCurrency(settingsResponse.data.language.currency);
+            }
+          } catch (settingsError) {
+            console.error(
+              "Failed to load settings on verifyLoginOTP:",
+              settingsError,
+            );
+          }
+
           return true;
         }
 
@@ -305,12 +375,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         toast.error(
           error instanceof Error
             ? error.message
-            : "OTP verification failed. Please try again."
+            : "OTP verification failed. Please try again.",
         );
         return false;
       }
     },
-    []
+    [],
   );
 
   // Logout
@@ -331,6 +401,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const value: AuthContextType = {
     user,
+    currency,
     loading,
     isAuthenticated: !!user,
     login,

@@ -16,6 +16,7 @@ import {
   SupplierDashboardStats,
 } from "@/services/supplier.service";
 import { useAuth } from "@/contexts/AuthContext";
+import { formatPrice } from "@/utils/currency.utils";
 import { toast } from "sonner";
 
 // Force this page to be dynamically rendered
@@ -23,7 +24,7 @@ export const dynamic = "force-dynamic";
 export const fetchCache = "force-no-store";
 
 export default function SupplierDashboard() {
-  const { user } = useAuth();
+  const { user, currency } = useAuth();
   const [stats, setStats] = useState<SupplierDashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [roleError, setRoleError] = useState(false);
@@ -57,11 +58,7 @@ export default function SupplierDashboard() {
   };
 
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat("en-IN", {
-      style: "currency",
-      currency: "INR",
-      maximumFractionDigits: 0,
-    }).format(amount);
+    return formatPrice(amount, currency);
   };
 
   const formatNumber = (num: number) => {

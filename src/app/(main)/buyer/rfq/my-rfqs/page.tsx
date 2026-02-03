@@ -5,8 +5,11 @@ import Link from "next/link";
 import { Edit2 } from "lucide-react";
 import rfqService from "@/services/rfq.service";
 import type { RFQ, RFQFilters } from "@/types/buyer.types";
+import { useAuth } from "@/contexts/AuthContext";
+import { formatPrice } from "@/utils/currency.utils";
 
 export default function MyRFQsPage() {
+  const { currency } = useAuth();
   const [rfqs, setRFQs] = useState<RFQ[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -175,19 +178,11 @@ export default function MyRFQsPage() {
                       {/* Budget */}
                       <td className="px-3 py-3 text-xs text-gray-900 whitespace-nowrap">
                         {rfq.budgetMin && rfq.budgetMax ? (
-                          `₹${parseFloat(String(rfq.budgetMin)).toLocaleString(
-                            "en-IN"
-                          )} - ₹${parseFloat(
-                            String(rfq.budgetMax)
-                          ).toLocaleString("en-IN")}`
+                          `${formatPrice(rfq.budgetMin, currency)} - ${formatPrice(rfq.budgetMax, currency)}`
                         ) : rfq.budgetMin ? (
-                          `₹${parseFloat(String(rfq.budgetMin)).toLocaleString(
-                            "en-IN"
-                          )}+`
+                          `${formatPrice(rfq.budgetMin, currency)}+`
                         ) : rfq.budgetMax ? (
-                          `Up to ₹${parseFloat(
-                            String(rfq.budgetMax)
-                          ).toLocaleString("en-IN")}`
+                          `Up to ${formatPrice(rfq.budgetMax, currency)}`
                         ) : (
                           <span className="text-gray-400">N/A</span>
                         )}
@@ -197,7 +192,7 @@ export default function MyRFQsPage() {
                       <td className="px-3 py-3">
                         <span
                           className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border ${getStatusBadge(
-                            rfq.status
+                            rfq.status,
                           )}`}
                         >
                           {rfq.status}

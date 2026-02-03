@@ -52,7 +52,10 @@ export interface SupplierSettings {
 export async function getSupplierSettings(): Promise<
   ApiResponse<SupplierSettings>
 > {
-  const response = await apiRequest("get", "/supplier/profile");
+  const response = await apiRequest(
+    "get",
+    "/supplier/profile?includeMetrics=false",
+  );
 
   if (response.success && response.data) {
     // Transform supplier profile data to match our settings format
@@ -110,7 +113,7 @@ export async function getSupplierSettings(): Promise<
  * Update supplier account information
  */
 export async function updateSupplierAccountInfo(
-  info: Partial<SupplierAccountInfo>
+  info: Partial<SupplierAccountInfo>,
 ): Promise<ApiResponse<SupplierAccountInfo>> {
   // For suppliers, we use the role service to update profile
   return apiRequest("put", "/roles/supplier-profile", {
@@ -125,7 +128,7 @@ export async function updateSupplierAccountInfo(
  * Update supplier business information
  */
 export async function updateSupplierBusinessInfo(
-  info: Partial<SupplierBusinessInfo>
+  info: Partial<SupplierBusinessInfo>,
 ): Promise<ApiResponse<SupplierBusinessInfo>> {
   return apiRequest("put", "/roles/supplier-profile", {
     businessName: info.businessLegalName,
@@ -140,7 +143,7 @@ export async function updateSupplierBusinessInfo(
  * This should work as language preferences are user-level, not role-specific
  */
 export async function updateSupplierLanguagePreferences(
-  preferences: Partial<SupplierLanguagePreferences>
+  preferences: Partial<SupplierLanguagePreferences>,
 ): Promise<ApiResponse<SupplierLanguagePreferences>> {
   return apiRequest("put", "/buyer/settings/language", preferences);
 }

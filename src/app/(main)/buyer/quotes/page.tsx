@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import quoteService from "@/services/quote.service";
 import type { Quote, QuoteStatus, QuoteFilters } from "@/types/buyer.types";
+import { useAuth } from "@/contexts/AuthContext";
+import { formatPrice } from "@/utils/currency.utils";
 
 type ModalType = "confirm" | "success" | "error" | null;
 
@@ -17,6 +19,7 @@ interface ModalState {
 }
 
 export default function MyQuotesPage() {
+  const { currency } = useAuth();
   const [quotes, setQuotes] = useState<Quote[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -67,7 +70,7 @@ export default function MyQuotesPage() {
       }
     } catch (err: unknown) {
       setError(
-        (err as Error).message || "An error occurred while loading quotes"
+        (err as Error).message || "An error occurred while loading quotes",
       );
     } finally {
       setLoading(false);
@@ -178,11 +181,7 @@ export default function MyQuotesPage() {
 
   // Format currency
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat("en-IN", {
-      style: "currency",
-      currency: "INR",
-      maximumFractionDigits: 0,
-    }).format(amount);
+    return formatPrice(amount, currency);
   };
 
   // Format date
@@ -315,13 +314,11 @@ export default function MyQuotesPage() {
                       Quote Price
                     </p>
                     <p className="text-[12px] sm:text-[13px] font-medium text-black">
-                      <span className="font-bold">₹</span>
-                      {(quote.quotePrice || 0).toLocaleString("en-IN")}
+                      {formatCurrency(quote.quotePrice || 0)}
                     </p>
                     {quote.rfq?.budgetMin && quote.rfq?.budgetMax && (
                       <p className="text-[9px] sm:text-[10px] font-medium text-black mt-0.5">
-                        <span className="font-bold">₹</span>
-                        {(quote.rfq.budgetMax || 0).toLocaleString("en-IN")}
+                        {formatCurrency(quote.rfq.budgetMax || 0)}
                       </p>
                     )}
                   </div>

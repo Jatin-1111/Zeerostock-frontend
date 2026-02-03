@@ -54,7 +54,10 @@ export async function getUserSettings(activeRole: string): Promise<
   // Use supplier endpoint if user is active as supplier
   if (activeRole === "supplier") {
     console.log("[getUserSettings] Using supplier endpoint");
-    const profileResponse = await apiRequest("get", "/supplier/profile");
+    const profileResponse = await apiRequest(
+      "get",
+      "/supplier/profile?includeMetrics=false",
+    );
 
     if (profileResponse.success && profileResponse.data) {
       const profileData = profileResponse.data as any;
@@ -116,7 +119,7 @@ export async function getUserSettings(activeRole: string): Promise<
  */
 export async function updateUserLanguagePreferences(
   preferences: Partial<UserLanguagePreferences>,
-  activeRole: string
+  activeRole: string,
 ): Promise<ApiResponse<UserLanguagePreferences>> {
   // Use buyer endpoint if user is active as buyer
   if (activeRole === "buyer") {
@@ -145,7 +148,7 @@ export async function updateUserLanguagePreferences(
  */
 export async function updateUserAccountInfo(
   info: Partial<UserAccountInfo>,
-  activeRole: string
+  activeRole: string,
 ): Promise<ApiResponse<UserAccountInfo>> {
   // Use buyer endpoint if user is active as buyer
   if (activeRole === "buyer") {
@@ -172,7 +175,7 @@ export async function updateUserAccountInfo(
  */
 export async function updateUserNotificationPreferences(
   preferences: Partial<NotificationPreferences>,
-  activeRole: string
+  activeRole: string,
 ): Promise<ApiResponse<NotificationPreferences>> {
   // Use buyer endpoint if user is active as buyer
   if (activeRole === "buyer") {
@@ -197,7 +200,7 @@ export async function updateUserNotificationPreferences(
  */
 export async function updateUserPrivacySettings(
   settings: Partial<PrivacySettings>,
-  activeRole: string
+  activeRole: string,
 ): Promise<ApiResponse<PrivacySettings>> {
   // Use buyer endpoint if user is active as buyer
   if (activeRole === "buyer") {

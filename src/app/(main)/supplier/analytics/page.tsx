@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { BarChart3, TrendingUp, Clock } from "lucide-react";
 import { supplierService } from "@/services/supplier.service";
 import { useAuth } from "@/contexts/AuthContext";
+import { formatPrice } from "@/utils/currency.utils";
 
 interface AnalyticsData {
   overview: {
@@ -47,7 +48,7 @@ interface AnalyticsData {
 }
 
 export default function SupplierAnalytics() {
-  const { user } = useAuth();
+  const { user, currency } = useAuth();
   const [analyticsData, setAnalyticsData] = useState<AnalyticsData | null>(
     null,
   );
@@ -179,7 +180,7 @@ export default function SupplierAnalytics() {
               Total Revenue
             </p>
             <p className="text-2xl sm:text-3xl md:text-[34px] lg:text-[23px] font-semibold text-[#2aae7a] mb-4 sm:mb-5 md:mb-6 lg:mb-4">
-              ₹{(overview.total_revenue || 0).toLocaleString()}
+              {formatPrice(overview.total_revenue || 0, currency)}
             </p>
             <p className="text-xs sm:text-sm lg:text-[9px] font-medium text-[#9c9c9c]">
               via traditional procurement
@@ -251,7 +252,7 @@ export default function SupplierAnalytics() {
                   </div>
                   <div className="w-full sm:w-[80px] md:w-[90px] lg:w-[60px] text-left sm:text-right">
                     <p className="text-base sm:text-lg lg:text-xs font-semibold text-[#0d1b2a]">
-                      ₹{(item.revenue || 0).toLocaleString()}
+                      {formatPrice(item.revenue || 0, currency)}
                     </p>
                   </div>
                 </div>

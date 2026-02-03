@@ -24,11 +24,9 @@ export default function BuyerDashboardPage() {
         setIsLoading(true);
         setError(null);
 
-        // Fetch user profile for name
         const token =
           localStorage.getItem("zeerostock_access_token") ||
           localStorage.getItem("token");
-        console.log("Auth token found:", token ? "Yes" : "No");
 
         const apiBaseUrl =
           process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000/api";
@@ -41,55 +39,56 @@ export default function BuyerDashboardPage() {
           headers["Authorization"] = `Bearer ${token}`;
         }
 
-        const profileResponse = await fetch(`${apiBaseUrl}/buyer/profile`, {
-          credentials: "include",
-          headers,
-        });
-
-        console.log("Profile response status:", profileResponse.status);
-
-        if (profileResponse.ok) {
-          const profileData = await profileResponse.json();
-          console.log("Profile data received:", profileData);
-
-          if (profileData.success && profileData.data) {
-            const name =
-              profileData.data.firstName || profileData.data.first_name || "";
-            console.log("Setting userName to:", name);
-            setUserName(name);
+        // Define profile fetch promise
+        const fetchProfile = async () => {
+          try {
+            const response = await fetch(`${apiBaseUrl}/buyer/profile`, {
+              credentials: "include",
+              headers,
+            });
+            if (response.ok) {
+              const data = await response.json();
+              if (data.success && data.data) {
+                return data.data.firstName || data.data.first_name || "";
+              }
+            }
+          } catch (e) {
+            console.error("Profile fetch error", e);
           }
-        } else {
-          console.error("Profile fetch failed:", profileResponse.status);
-          // Try to get from localStorage as fallback
+          // Fallback to local storage
           const userStr = localStorage.getItem("user");
           if (userStr) {
             try {
               const user = JSON.parse(userStr);
-              const name = user.firstName || user.first_name || user.name || "";
-              console.log("Using localStorage name:", name);
-              setUserName(name);
+              return user.firstName || user.first_name || user.name || "";
             } catch (e) {
-              console.error("Failed to parse user from localStorage");
+              return "";
             }
           }
+          return "";
+        };
+
+        // Execute all requests in parallel
+        const [profileName, statsRes, rfqRes, quoteRes] = await Promise.all([
+          fetchProfile(),
+          buyerService.getOrderStats(),
+          getRFQStats(),
+          getQuoteStats(),
+        ]);
+
+        // Set state
+        setUserName(profileName);
+
+        if (statsRes.success && statsRes.data) {
+          setOrderStats(statsRes.data);
         }
 
-        // Fetch order statistics
-        const statsResponse = await buyerService.getOrderStats();
-        if (statsResponse.success && statsResponse.data) {
-          setOrderStats(statsResponse.data);
+        if (rfqRes.success && rfqRes.data) {
+          setRfqStats(rfqRes.data);
         }
 
-        // Fetch RFQ statistics
-        const rfqResponse = await getRFQStats();
-        if (rfqResponse.success && rfqResponse.data) {
-          setRfqStats(rfqResponse.data);
-        }
-
-        // Fetch Quote statistics
-        const quoteResponse = await getQuoteStats();
-        if (quoteResponse.success && quoteResponse.data) {
-          setQuoteStats(quoteResponse.data);
+        if (quoteRes.success && quoteRes.data) {
+          setQuoteStats(quoteRes.data);
         }
       } catch (err) {
         console.error("Error fetching dashboard data:", err);

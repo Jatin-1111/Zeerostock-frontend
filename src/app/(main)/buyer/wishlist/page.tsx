@@ -6,10 +6,13 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { buyerService } from "@/services/buyer.service";
 import { cartService } from "@/services/cart.service";
+import { useAuth } from "@/contexts/AuthContext";
+import { formatPrice } from "@/utils/currency.utils";
 import type { WatchlistItem } from "@/types/buyer.types";
 
 export default function WishlistPage() {
   const router = useRouter();
+  const { currency } = useAuth();
   const [items, setItems] = useState<WatchlistItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -50,7 +53,7 @@ export default function WishlistPage() {
       const response = await buyerService.removeFromWatchlist(productId);
       if (response.success) {
         setItems((prev) =>
-          prev.filter((item) => item.product?.id !== productId)
+          prev.filter((item) => item.product?.id !== productId),
         );
       }
     } catch (err) {
@@ -63,7 +66,7 @@ export default function WishlistPage() {
 
   const clearUnavailableItems = async () => {
     const unavailable = items.filter(
-      (item) => item.product?.status !== "active"
+      (item) => item.product?.status !== "active",
     );
     if (unavailable.length === 0) {
       alert("No unavailable items to clear");
@@ -291,7 +294,7 @@ export default function WishlistPage() {
                     <div className="mb-1.5 sm:mb-1.75 md:mb-2">
                       <div className="flex items-center gap-0.75 sm:gap-0.875 md:gap-1 mb-0.5 flex-wrap">
                         <span className="text-[11px] sm:text-[12px] md:text-[13px] font-bold text-[#1e3a8a]">
-                          ₹{item.product.priceAfter?.toLocaleString()}
+                          {formatPrice(item.product.priceAfter, currency)}
                         </span>
                       </div>
 
@@ -310,8 +313,9 @@ export default function WishlistPage() {
                       {item.priceAtAdd && (
                         <p className="text-[6.5px] sm:text-[6.75px] md:text-[7px] text-[#9c9c9c] m-0 mb-0.75 sm:mb-0.875 md:mb-1">
                           <span>Price alerts </span>
-                          <span className="font-bold">₹</span>
-                          {item.priceAtAdd.toLocaleString()}
+                          <span className="font-bold">
+                            {formatPrice(item.priceAtAdd, currency)}
+                          </span>
                         </p>
                       )}
                       {/* Time Remaining */}

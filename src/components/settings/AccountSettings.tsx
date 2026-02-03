@@ -65,57 +65,78 @@ export default function AccountSettings() {
 
       console.log("[AccountSettings] Loading with activeRole:", activeRole);
 
-      // Use role-based service
-      const response = await getUserSettings(activeRole);
+      if (activeRole === "supplier") {
+        // OPTIMIZED: For suppliers, fetch everything in one call
+        const supplierResponse = await getSupplierSettings();
 
-      if (response.success && response.data) {
-        // Ensure all required fields have default values
-        setFormData({
-          firstName: response.data.account.firstName || "",
-          lastName: response.data.account.lastName || "",
-          email: response.data.account.email || "",
-          phone: response.data.account.phone || "",
-          companyName: response.data.account.companyName || "",
-          gstNumber: "",
-          bio: response.data.account.bio || "",
-          street: response.data.account.street || "",
-          city: response.data.account.city || "",
-          state: response.data.account.state || "",
-          zip: response.data.account.zip || "",
-        });
+        if (supplierResponse.success && supplierResponse.data) {
+          // 1. Set Personal/Account Data
+          setFormData({
+            firstName: supplierResponse.data.account.firstName,
+            lastName: supplierResponse.data.account.lastName,
+            email: supplierResponse.data.account.email,
+            phone: supplierResponse.data.account.phone,
+            companyName: supplierResponse.data.account.companyName,
+            gstNumber: "", // GST is handled in business info for suppliers
+            bio: supplierResponse.data.account.bio || "",
+            street: supplierResponse.data.account.street || "",
+            city: supplierResponse.data.account.city || "",
+            state: supplierResponse.data.account.state || "",
+            zip: supplierResponse.data.account.zip || "",
+          });
 
-        // Load additional supplier data if user is a supplier
-        if (currentRole === "supplier" || (hasSupplierRole && !hasBuyerRole)) {
-          const supplierResponse = await getSupplierSettings();
-          if (supplierResponse.success && supplierResponse.data) {
-            if (supplierResponse.data.business) {
-              setBusinessData({
-                businessLegalName:
-                  supplierResponse.data.business.businessLegalName || "",
-                businessRegistrationNumber:
-                  supplierResponse.data.business.businessRegistrationNumber ||
-                  "",
-                gstNumber: supplierResponse.data.business.gstNumber || "",
-                businessType:
-                  supplierResponse.data.business.businessType ||
-                  "Limited Liability Company",
-                yearEstablished:
-                  supplierResponse.data.business.yearEstablished || "",
-              });
-            }
-            if (supplierResponse.data.verificationStatus) {
-              const status = supplierResponse.data.verificationStatus.status;
-              setKycProgress({
-                ...supplierResponse.data.verificationStatus,
-                status: (status === "Completed" || status === "Pending"
-                  ? status
-                  : "In Progress") as "In Progress" | "Completed" | "Pending",
-              });
-            }
+          // 2. Set Business Data
+          if (supplierResponse.data.business) {
+            setBusinessData({
+              businessLegalName:
+                supplierResponse.data.business.businessLegalName || "",
+              businessRegistrationNumber:
+                supplierResponse.data.business.businessRegistrationNumber || "",
+              gstNumber: supplierResponse.data.business.gstNumber || "",
+              businessType:
+                supplierResponse.data.business.businessType ||
+                "Limited Liability Company",
+              yearEstablished:
+                supplierResponse.data.business.yearEstablished || "",
+            });
           }
+
+          // 3. Set KYC Progress
+          if (supplierResponse.data.verificationStatus) {
+            const status = supplierResponse.data.verificationStatus.status;
+            setKycProgress({
+              ...supplierResponse.data.verificationStatus,
+              status: (status === "Completed" || status === "Pending"
+                ? status
+                : "In Progress") as "In Progress" | "Completed" | "Pending",
+            });
+          }
+        } else {
+          throw new Error(
+            supplierResponse.message || "Failed to load supplier settings",
+          );
         }
       } else {
-        throw new Error(response.message || "Failed to load settings");
+        // Buyer Flow: Use standard user settings
+        const response = await getUserSettings(activeRole);
+
+        if (response.success && response.data) {
+          setFormData({
+            firstName: response.data.account.firstName || "",
+            lastName: response.data.account.lastName || "",
+            email: response.data.account.email || "",
+            phone: response.data.account.phone || "",
+            companyName: response.data.account.companyName || "",
+            gstNumber: response.data.account.gstNumber || "",
+            bio: response.data.account.bio || "",
+            street: response.data.account.street || "",
+            city: response.data.account.city || "",
+            state: response.data.account.state || "",
+            zip: response.data.account.zip || "",
+          });
+        } else {
+          throw new Error(response.message || "Failed to load settings");
+        }
       }
     } catch (err) {
       console.error("Failed to load settings:", err);

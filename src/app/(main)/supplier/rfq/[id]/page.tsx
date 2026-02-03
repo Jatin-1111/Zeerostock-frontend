@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { supplierService } from "@/services/supplier.service";
 import { useAuth } from "@/contexts/AuthContext";
+import { formatPrice } from "@/utils/currency.utils";
 import { toast } from "sonner";
 
 interface RFQDetail {
@@ -48,7 +49,7 @@ interface RFQDetail {
 export default function RFQDetailPage() {
   const params = useParams();
   const router = useRouter();
-  const { user } = useAuth();
+  const { user, currency } = useAuth();
   const [rfq, setRfq] = useState<RFQDetail | null>(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
@@ -143,7 +144,7 @@ export default function RFQDetailPage() {
 
   const formatCurrency = (amount: number | null) => {
     if (!amount) return "Not specified";
-    return `₹${amount.toLocaleString()}`;
+    return formatPrice(amount, currency);
   };
 
   if (loading) {
@@ -288,7 +289,7 @@ export default function RFQDetailPage() {
                   <p className="text-lg font-semibold text-gray-900">
                     {rfq.budget_min && rfq.budget_max
                       ? `${formatCurrency(rfq.budget_min)} - ${formatCurrency(
-                          rfq.budget_max
+                          rfq.budget_max,
                         )}`
                       : "Negotiable"}
                   </p>
@@ -419,7 +420,8 @@ export default function RFQDetailPage() {
                   <div className="space-y-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Quote Price (₹)<span className="text-red-600">*</span>
+                        Quote Price ({currency})
+                        <span className="text-red-600">*</span>
                       </label>
                       <input
                         type="number"

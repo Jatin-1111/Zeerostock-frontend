@@ -109,13 +109,13 @@ export default function Footer() {
               <h3 className="text-[20px] sm:text-[15px] leading-normal font-medium text-white">
                 Join Our Network
               </h3>
-              <div className="flex md:flex-col gap-3">
+              <div className="flex flex-row lg:flex-col gap-3">
                 <input
                   type="email"
                   placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full h-[52px] sm:h-[37.5px] bg-[#1f2937] border-[0.5px] sm:border border-[#8f8f8f] rounded-xl px-3 sm:px-3 text-[15px] sm:text-[11.25px] leading-[22px] text-[#696969] placeholder:text-[#696969] focus:outline-none focus:border-[#2aae7a] flex-3"
+                  className="flex-1 min-w-0 w-full h-[52px] sm:h-[40px] bg-[#1f2937] border-[0.5px] sm:border border-[#8f8f8f] rounded-xl px-3 sm:px-3 text-[15px] sm:text-[11.25px] leading-[22px] text-[#696969] placeholder:text-[#696969] focus:outline-none focus:border-[#2aae7a] py-3"
                 />
                 <button
                   onClick={() => {
@@ -126,10 +126,10 @@ export default function Footer() {
                       setEmail("");
                     }
                   }}
-                  className="w-full h-[52px] sm:h-[37.5px] bg-[#2aae7a] text-white text-[13.5px] sm:text-[13.5px] leading-[22px] font-medium rounded-xl hover:bg-[#2aae7a]/90 transition-colors flex items-center justify-center flex-1"
+                  className="shrink-0 w-[52px] sm:w-auto h-[52px] sm:h-[40px] px-0 sm:px-6 bg-[#2aae7a] text-white text-[13.5px] sm:text-[13.5px] leading-[22px] font-medium rounded-xl hover:bg-[#2aae7a]/90 transition-colors flex items-center justify-center"
                 >
                   <svg
-                    className="w-[30px] h-[30px] sm:hidden"
+                    className="w-[24px] h-[24px] sm:hidden"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"

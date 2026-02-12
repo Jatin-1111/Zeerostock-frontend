@@ -49,14 +49,14 @@ export default function HeroSection() {
         <Image
           alt=""
           fill
-          className="object-contain object-right"
+          className="object-cover"
           src="https://zeerostock-assets.s3.ap-south-1.amazonaws.com/Assets/About us.jpg"
           priority
         />
       </div>
 
       {/* Desktop - Content Overlay */}
-      <div className="relative z-10 hidden sm:flex flex-col justify-center items-start h-full px-6 md:px-8 lg:px-12 xl:px-16 gap-3 md:gap-4 lg:gap-5 max-w-[520px]">
+      <div className="relative z-10 hidden sm:flex flex-col justify-center items-start h-full px-6 md:px-8 lg:px-12 xl:px-16 gap-3 md:gap-4 lg:gap-5 max-w-[550px]">
         <h1 className="font-semibold text-[36px] md:text-[42px] lg:text-[40px] leading-[32px] md:leading-[37px] lg:leading-[44px] xl:leading-[51px] text-[#0d1b2a]">
           Transforming <span className="text-[#2ec096]">Global Surplus</span>{" "}
           Trade

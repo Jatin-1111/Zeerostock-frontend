@@ -33,44 +33,44 @@ export default function CategoriesSection() {
   ];
 
   return (
-    <div className="w-full bg-[#EEFBF6] px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-8 md:py-[50px]">
+    <div className="w-full bg-[#EEFBF6] px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-6 sm:py-8 md:py-[50px]">
       {/* Content Container */}
       <div className="max-w-[1080px] mx-auto">
         {/* Heading Section */}
-        <div className="text-center mb-[57px]">
-          <h2 className="text-[22px] md:text-[26px] leading-tight md:leading-[35px] font-medium text-[#0d1b2a] mb-[7px]">
+        <div className="text-center mb-6 sm:mb-8 md:mb-[57px]">
+          <h2 className="text-[20px] sm:text-[22px] md:text-[26px] leading-tight md:leading-[35px] font-medium text-[#0d1b2a] mb-2 sm:mb-[7px]">
             <span className="text-[#2ec096]">High Demand</span> Inventory
             Categories
           </h2>
-          <p className="text-[11px] md:text-[12px] font-semibold text-[#9c9c9c]">
+          <p className="text-[11px] md:text-[12px] font-semibold text-[#9c9c9c] px-2 sm:px-0">
             Our platform has active buyers seeking these types of surplus
             inventory right now.
           </p>
         </div>
 
         {/* Categories Grid */}
-        <div className="grid grid-cols-2 gap-4 md:gap-x-[59px] md:gap-y-[60px]">
+        <div className="grid grid-cols-2 gap-3 sm:gap-5 md:gap-x-[59px] md:gap-y-[60px]">
           {categories.map((category, index) => (
             <div
               key={index}
-              className="bg-[#eeffef] rounded-[20px] shadow-[0px_0px_10px_0px_rgba(24,181,34,0.5)] p-5 relative overflow-visible"
+              className="bg-[#eeffef] rounded-[12px] sm:rounded-[20px] shadow-[0px_0px_10px_0px_rgba(24,181,34,0.5)] p-3 sm:p-5 relative overflow-visible"
             >
-              <div className="flex flex-col lg:flex-row justify-start lg:justify-between items-start mb-[12px] gap-2">
+              <div className="flex flex-col lg:flex-row justify-start lg:justify-between items-start mb-2 sm:mb-[12px] gap-1.5 sm:gap-2">
                 {/* Category Title */}
-                <h3 className="text-[13px] md:text-[15px] leading-normal font-semibold text-[#022778]">
+                <h3 className="text-[12px] sm:text-[13px] md:text-[15px] leading-tight sm:leading-normal font-semibold text-[#022778]">
                   {category.name}
                 </h3>
 
                 {/* Demand Badge */}
-                <div className="bg-[#2aae7a] rounded-[40px] px-[6px] py-[1px] shrink-0">
-                  <p className="text-[10px] md:text-xs leading-normal font-medium text-white whitespace-nowrap">
+                <div className="bg-[#2aae7a] rounded-[40px] px-[6px] sm:px-[6px] py-[1px] sm:py-[1px] shrink-0">
+                  <p className="text-[8px] sm:text-[10px] md:text-xs leading-normal font-medium text-white whitespace-nowrap">
                     {category.demand}
                   </p>
                 </div>
               </div>
 
               {/* Description Text */}
-              <p className="text-[10px] md:text-[11px] lg:text-xs leading-normal font-medium text-[#727272]">
+              <p className="text-[9px] sm:text-[10px] md:text-[11px] lg:text-xs leading-relaxed sm:leading-normal font-medium text-[#727272]">
                 <span className="inline">{category.subtitle}</span>{" "}
                 <span className="inline">{category.description}</span>
               </p>
